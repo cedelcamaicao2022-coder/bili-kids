@@ -176,41 +176,57 @@
 
     .bouncing-star-indicator {
       position: absolute;
-      top: 18px;
-      font-size: 1.8rem;
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-      filter: drop-shadow(0 0 10px #facc15);
+      font-size: 2.2rem;
+      pointer-events: none;
+      z-index: 20;
+      filter: drop-shadow(0 0 14px #facc15);
       opacity: 0;
+      will-change: transform, left, top;
     }
 
     .bouncing-star-indicator.active {
       opacity: 1;
-      animation: star-hop 0.8s infinite ease-in-out;
-    }
-
-    @keyframes star-hop {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
     }
 
     .current-line-box {
       font-family: var(--font-display);
-      font-size: 2.25rem;
+      font-size: 2.3rem;
       font-weight: 700;
-      color: #facc15;
-      text-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
-      line-height: 1.35;
-      transition: all 0.3s ease;
-      min-height: 70px;
+      line-height: 1.4;
+      min-height: 75px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .k-word {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.65);
+      padding: 0.1rem 0.35rem;
+      border-radius: 8px;
+      transition: color 0.15s ease, transform 0.15s ease, text-shadow 0.15s ease;
+    }
+
+    .k-word.active {
+      color: #facc15;
+      text-shadow: 0 0 18px rgba(250, 204, 21, 0.9), 0 0 35px rgba(236, 72, 153, 0.6);
+      transform: scale(1.15);
+    }
+
+    .k-word.sung {
+      color: #fbbf24;
+      text-shadow: 0 0 10px rgba(250, 204, 21, 0.45);
     }
 
     .upcoming-line-box {
       font-size: 1.05rem;
       color: #64748b;
-      margin-top: 1rem;
+      margin-top: 1.25rem;
       font-weight: 600;
       transition: all 0.3s ease;
     }
@@ -247,7 +263,6 @@
       background: linear-gradient(90deg, #ec4899, #a855f7, #38bdf8);
       border-radius: 999px;
       box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
-      transition: width 0.1s linear;
     }
 
     /* CONTROLS BAR */
@@ -361,7 +376,12 @@
       <div class="screen-teleprompter" id="teleprompter">
         <div class="bouncing-star-indicator" id="starIndicator">⭐</div>
         <div class="current-line-box" id="currentLine">
-          ¡Presiona Play para cantar juntos! 🎵
+          <span class="k-word">¡Presiona</span>
+          <span class="k-word">Play</span>
+          <span class="k-word">para</span>
+          <span class="k-word">cantar</span>
+          <span class="k-word">juntos!</span>
+          <span class="k-word">🎵</span>
         </div>
         <div class="upcoming-line-box" id="upcomingLine">
           Siguiente: "Hey myself, look at me..."
@@ -403,61 +423,62 @@
   <audio id="anthemAudio" src="assets/audio/bilikids_anthem.mp3" preload="auto"></audio>
 
   <script>
-    // Timestamped Synced Lyrics matching the official Bilikids anthem
+    // Timestamped Synced Lyrics with start and end times for word interpolation
     const lyricsData = [
-      { time: 0.0,   line: "🎵 Instrumental Intro... ¡Prepárate! 🎵" },
-      { time: 3.5,   line: "Hey myself, look at me ✨" },
-      { time: 10.5,  line: "You are more than you can see 🌟" },
-      { time: 17.0,  line: "Here at Bilikids you belong 💖" },
-      { time: 21.0,  line: "You are loved, you are strong! 💪" },
-      { time: 25.0,  line: "Ohhh, ohhh... 🎶" },
-      { time: 30.5,  line: "Some days the sun won't shine so bright ☁️" },
-      { time: 34.0,  line: "Some days you hide what's deep inside" },
-      { time: 37.5,  line: "It's okay to cry, it's okay to feel 💧" },
-      { time: 41.0,  line: "You don't have to hide what's real" },
-      { time: 45.2,  line: "If your heart feels tired and blue 💙" },
-      { time: 48.8,  line: "There is someone here for you" },
-      { time: 52.5,  line: "Take my hand let's talk awhile 🤝" },
-      { time: 56.0,  line: "You don't have to fake a smile 😊" },
-      { time: 61.0,  line: "You are not alone, alone, alone! 🌈" },
-      { time: 65.0,  line: "At Bilikids you found a home 🏡" },
-      { time: 68.5,  line: "You are enough just as you are ⭐" },
-      { time: 72.0,  line: "A precious life, a shining star! ✨" },
-      { time: 76.0,  line: "Hand in hand we'll help you through 🤝" },
-      { time: 79.5,  line: "There's a friend who cares for you 💖" },
-      { time: 83.0,  line: "Bilikids, together we stand! 🏆" },
-      { time: 86.8,  line: "There's always a friend to hold your hand 🌟" },
-      { time: 91.0,  line: "Ohhh... to hold your hand! 🎶" },
-      { time: 104.0, line: "Every voice deserves to be heard 🗣️" },
-      { time: 108.0, line: "Every heart deserves kind words ❤️" },
-      { time: 111.0, line: "Teachers, friends, we're here to care 🎒" },
-      { time: 114.5, line: "You can talk, we'll always hear 👂" },
-      { time: 118.0, line: "You don't need to be brave each day" },
-      { time: 121.5, line: "You can ask for help along the way" },
-      { time: 125.0, line: "There's no shame in saying 'I'm not okay' 🫂" },
-      { time: 128.5, line: "We'll listen to what you have to say 💬" },
-      { time: 134.0, line: "If you're falling we'll reach out 🤲" },
-      { time: 137.5, line: "If you're hurting talk it out" },
-      { time: 141.0, line: "One small step, one hand to hold 👣" },
-      { time: 144.5, line: "You are precious more than you know 💎" },
-      { time: 148.0, line: "Your story matters! 📖" },
-      { time: 151.0, line: "Your dreams matter! 🚀" },
-      { time: 154.0, line: "YOU MATTER, YOU MATTER! 🌟" },
-      { time: 159.0, line: "You are not alone, alone, alone! 🌈" },
-      { time: 162.5, line: "At Bilikids you found a home 🏡" },
-      { time: 166.0, line: "You are enough just as you are ⭐" },
-      { time: 169.5, line: "A precious life, a shining star! ✨" },
-      { time: 173.0, line: "Hand in hand we'll help you through 🤝" },
-      { time: 176.5, line: "There's a friend who cares for you 💖" },
-      { time: 180.0, line: "Bilikids, together we stand! 🏆" },
-      { time: 183.5, line: "There's always a friend to hold your hand 🌟" },
-      { time: 193.0, line: "You matter! You belong! 💫" },
-      { time: 202.0, line: "At Bilikids, you're never alone... 🏡💖✨" }
+      { start: 0.0,   end: 3.5,   line: "🎵 Instrumental Intro... ¡Prepárate! 🎵" },
+      { start: 3.5,   end: 9.8,   line: "Hey myself, look at me ✨" },
+      { start: 10.0,  end: 16.5,  line: "You are more than you can see 🌟" },
+      { start: 16.5,  end: 20.8,  line: "Here at Bilikids you belong 💖" },
+      { start: 20.8,  end: 25.0,  line: "You are loved, you are strong! 💪" },
+      { start: 25.0,  end: 30.0,  line: "Ohhh, ohhh... 🎶" },
+      { start: 30.0,  end: 33.8,  line: "Some days the sun won't shine so bright ☁️" },
+      { start: 33.8,  end: 37.2,  line: "Some days you hide what's deep inside" },
+      { start: 37.2,  end: 40.8,  line: "It's okay to cry, it's okay to feel 💧" },
+      { start: 40.8,  end: 45.0,  line: "You don't have to hide what's real" },
+      { start: 45.0,  end: 48.5,  line: "If your heart feels tired and blue 💙" },
+      { start: 48.5,  end: 52.2,  line: "There is someone here for you" },
+      { start: 52.2,  end: 55.8,  line: "Take my hand let's talk awhile 🤝" },
+      { start: 55.8,  end: 60.5,  line: "You don't have to fake a smile 😊" },
+      { start: 60.5,  end: 64.5,  line: "You are not alone, alone, alone! 🌈" },
+      { start: 64.5,  end: 68.2,  line: "At Bilikids you found a home 🏡" },
+      { start: 68.2,  end: 71.8,  line: "You are enough just as you are ⭐" },
+      { start: 71.8,  end: 75.8,  line: "A precious life, a shining star! ✨" },
+      { start: 75.8,  end: 79.2,  line: "Hand in hand we'll help you through 🤝" },
+      { start: 79.2,  end: 82.8,  line: "There's a friend who cares for you 💖" },
+      { start: 82.8,  end: 86.5,  line: "Bilikids, together we stand! 🏆" },
+      { start: 86.5,  end: 91.0,  line: "There's always a friend to hold your hand 🌟" },
+      { start: 91.0,  end: 103.5, line: "Ohhh... to hold your hand! 🎶" },
+      { start: 103.5, end: 107.5, line: "Every voice deserves to be heard 🗣️" },
+      { start: 107.5, end: 110.8, line: "Every heart deserves kind words ❤️" },
+      { start: 110.8, end: 114.2, line: "Teachers, friends, we're here to care 🎒" },
+      { start: 114.2, end: 117.8, line: "You can talk, we'll always hear 👂" },
+      { start: 117.8, end: 121.2, line: "You don't need to be brave each day" },
+      { start: 121.2, end: 124.8, line: "You can ask for help along the way" },
+      { start: 124.8, end: 128.2, line: "There's no shame in saying 'I'm not okay' 🫂" },
+      { start: 128.2, end: 133.5, line: "We'll listen to what you have to say 💬" },
+      { start: 133.5, end: 137.2, line: "If you're falling we'll reach out 🤲" },
+      { start: 137.2, end: 140.8, line: "If you're hurting talk it out" },
+      { start: 140.8, end: 144.2, line: "One small step, one hand to hold 👣" },
+      { start: 144.2, end: 147.8, line: "You are precious more than you know 💎" },
+      { start: 147.8, end: 150.8, line: "Your story matters! 📖" },
+      { start: 150.8, end: 153.8, line: "Your dreams matter! 🚀" },
+      { start: 153.8, end: 158.5, line: "YOU MATTER, YOU MATTER! 🌟" },
+      { start: 158.5, end: 162.2, line: "You are not alone, alone, alone! 🌈" },
+      { start: 162.2, end: 165.8, line: "At Bilikids you found a home 🏡" },
+      { start: 165.8, end: 169.2, line: "You are enough just as you are ⭐" },
+      { start: 169.2, end: 172.8, line: "A precious life, a shining star! ✨" },
+      { start: 172.8, end: 176.2, line: "Hand in hand we'll help you through 🤝" },
+      { start: 176.2, end: 179.8, line: "There's a friend who cares for you 💖" },
+      { start: 179.8, end: 183.2, line: "Bilikids, together we stand! 🏆" },
+      { start: 183.2, end: 191.0, line: "There's always a friend to hold your hand 🌟" },
+      { start: 191.0, end: 201.0, line: "You matter! You belong! 💫" },
+      { start: 201.0, end: 215.0, line: "At Bilikids, you're never alone... 🏡💖✨" }
     ];
 
     const audio = document.getElementById('anthemAudio');
     const btnPlayPause = document.getElementById('btnPlayPause');
     const micBadge = document.getElementById('micBadge');
+    const teleprompter = document.getElementById('teleprompter');
     const starIndicator = document.getElementById('starIndicator');
     const currentLineEl = document.getElementById('currentLine');
     const upcomingLineEl = document.getElementById('upcomingLine');
@@ -467,11 +488,25 @@
     const scoreBadge = document.getElementById('scoreBadge');
     const btnMute = document.getElementById('btnMute');
 
+    let currentRenderedLineIdx = -1;
+
     function formatTime(secs) {
       if (isNaN(secs)) return '0:00';
       const m = Math.floor(secs / 60);
       const s = Math.floor(secs % 60);
       return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function renderLineWords(lineStr) {
+      currentLineEl.innerHTML = '';
+      const words = lineStr.split(' ');
+      words.forEach((w, idx) => {
+        const span = document.createElement('span');
+        span.className = 'k-word';
+        span.id = 'kword_' + idx;
+        span.textContent = w;
+        currentLineEl.appendChild(span);
+      });
     }
 
     function togglePlayAudio() {
@@ -485,12 +520,12 @@
         audio.pause();
         btnPlayPause.textContent = '▶';
         micBadge.classList.remove('pulsing');
-        starIndicator.classList.remove('active');
       }
     }
 
     function restartAudio() {
       audio.currentTime = 0;
+      currentRenderedLineIdx = -1;
       if (audio.paused) togglePlayAudio();
     }
 
@@ -508,40 +543,97 @@
       const clickPos = (e.clientX - rect.left) / rect.width;
       if (audio.duration) {
         audio.currentTime = clickPos * audio.duration;
+        currentRenderedLineIdx = -1;
       }
     }
 
-    // Update synced lyrics in real-time
-    audio.addEventListener('timeupdate', () => {
-      const cur = audio.currentTime;
-      const dur = audio.duration || 215;
+    // High-performance 60fps word & star tracking animation
+    function updateKaraokeFrame() {
+      if (!audio.paused && !audio.ended) {
+        const cur = audio.currentTime;
+        const dur = audio.duration || 215;
 
-      // Update progress bar
-      const pct = (cur / dur) * 100;
-      progressBarFill.style.width = pct + '%';
-      currentTimeLabel.textContent = formatTime(cur);
+        // Progress bar
+        const pct = (cur / dur) * 100;
+        progressBarFill.style.width = pct + '%';
+        currentTimeLabel.textContent = formatTime(cur);
 
-      // Find current lyric index
-      let activeIdx = 0;
-      for (let i = 0; i < lyricsData.length; i++) {
-        if (cur >= lyricsData[i].time) {
-          activeIdx = i;
-        } else {
-          break;
+        // Find active line
+        let activeLineIdx = 0;
+        for (let i = 0; i < lyricsData.length; i++) {
+          if (cur >= lyricsData[i].start && cur < lyricsData[i].end) {
+            activeLineIdx = i;
+            break;
+          } else if (cur >= lyricsData[i].end) {
+            activeLineIdx = i;
+          }
         }
+
+        const currentLineData = lyricsData[activeLineIdx];
+
+        // Re-render line words if line changed
+        if (currentRenderedLineIdx !== activeLineIdx) {
+          currentRenderedLineIdx = activeLineIdx;
+          renderLineWords(currentLineData.line);
+          
+          if (activeLineIdx + 1 < lyricsData.length) {
+            upcomingLineEl.textContent = 'Siguiente: "' + lyricsData[activeLineIdx + 1].line.replace(/[\u{1F300}-\u{1F6FF}]/gu, '').trim() + '"';
+          } else {
+            upcomingLineEl.textContent = '🎉 ¡Increíble canto! ¡Eres una estrella!';
+          }
+        }
+
+        // Word tracking within current line
+        const words = currentLineData.line.split(' ');
+        const lineDuration = Math.max(0.1, currentLineData.end - currentLineData.start);
+        const lineProgress = Math.max(0, Math.min(1, (cur - currentLineData.start) / lineDuration));
+        
+        const activeWordIdx = Math.min(words.length - 1, Math.floor(lineProgress * words.length));
+        const wordProgress = (lineProgress * words.length) - activeWordIdx;
+
+        // Update word highlights
+        for (let w = 0; w < words.length; w++) {
+          const wordEl = document.getElementById('kword_' + w);
+          if (wordEl) {
+            if (w < activeWordIdx) {
+              wordEl.className = 'k-word sung';
+            } else if (w === activeWordIdx) {
+              wordEl.className = 'k-word active';
+            } else {
+              wordEl.className = 'k-word';
+            }
+          }
+        }
+
+        // Position bouncing star over active word
+        const targetWordEl = document.getElementById('kword_' + activeWordIdx);
+        if (targetWordEl && starIndicator) {
+          const wordRect = targetWordEl.getBoundingClientRect();
+          const parentRect = teleprompter.getBoundingClientRect();
+
+          // Calculate horizontal center of the target word relative to teleprompter
+          const starX = (wordRect.left - parentRect.left) + (wordRect.width / 2);
+          
+          // Parabolic hop: jumps up mid-word and lands right on top
+          const jumpArc = -Math.sin(wordProgress * Math.PI) * 22;
+          const starY = (wordRect.top - parentRect.top) - 30 + jumpArc;
+
+          starIndicator.style.left = starX + 'px';
+          starIndicator.style.top = starY + 'px';
+          starIndicator.style.transform = `translate(-50%, 0) rotate(${wordProgress * 180}deg)`;
+          starIndicator.classList.add('active');
+        }
+
+        // Score update
+        const score = Math.min(1000, Math.floor(cur * 4.5) + 100);
+        scoreBadge.textContent = `Puntaje: ${score} Pts`;
       }
 
-      currentLineEl.textContent = lyricsData[activeIdx].line;
-      if (activeIdx + 1 < lyricsData.length) {
-        upcomingLineEl.textContent = 'Siguiente: "' + lyricsData[activeIdx + 1].line.replace(/[\u{1F300}-\u{1F6FF}]/gu, '') + '"';
-      } else {
-        upcomingLineEl.textContent = '🎉 ¡Increíble canto! ¡Eres una estrella!';
-      }
+      requestAnimationFrame(updateKaraokeFrame);
+    }
 
-      // Dynamic score
-      const score = Math.min(1000, Math.floor(cur * 4.5) + 100);
-      scoreBadge.textContent = `Puntaje: ${score} Pts`;
-    });
+    // Start 60fps tracking loop
+    requestAnimationFrame(updateKaraokeFrame);
 
     audio.addEventListener('loadedmetadata', () => {
       durationLabel.textContent = formatTime(audio.duration);
@@ -551,7 +643,7 @@
       btnPlayPause.textContent = '▶';
       micBadge.classList.remove('pulsing');
       starIndicator.classList.remove('active');
-      currentLineEl.textContent = '🌟 ¡Felicidades! Completaste el Himno de Bilikids 🌟';
+      currentLineEl.innerHTML = '<span class="k-word active">🌟 ¡Felicidades! Completaste el Himno de Bilikids 🌟</span>';
       upcomingLineEl.textContent = '¡Presiona Play para cantar de nuevo!';
     });
   </script>
