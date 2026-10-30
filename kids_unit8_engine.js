@@ -374,7 +374,7 @@ const ObbyStages = [
     terminalY: 260,
     terminalTargetWord: "MUCH",
     terminalPromptEn: "Type the missing word: How _______ is this video game?",
-    terminalPromptEs: "Escribe la palabra que falta para preguntar el precio ('much').",
+    terminalPromptEs: "Completa la pregunta para consultar el precio del videojuego.",
     platforms: [
       { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
       { x: 235, y: 300, w: 120, h: 20, type: 'normal' },
@@ -445,8 +445,8 @@ const ObbyStages = [
     terminalX: 980,
     terminalY: 260,
     terminalTargetWord: "SHOP",
-    terminalPromptEn: "Type the secret word: We are having fun in the toy _______!",
-    terminalPromptEs: "Escribe la palabra de tienda en inglés: 'S H O P'.",
+    terminalPromptEn: "Type the missing word: We are having fun in the toy _______!",
+    terminalPromptEs: "Completa la oración con la palabra de tienda en inglés.",
     platforms: [
       { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
       { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
