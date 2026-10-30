@@ -122,6 +122,36 @@
         <!-- Canvas del Videojuego 2D -->
         <div class="obby-canvas-wrapper">
           <canvas id="obbyCanvas" width="800" height="400"></canvas>
+
+          <!-- Modal de Terminal de Contraseña / Escritura en el Nivel -->
+          <div id="obbyTerminalModal" class="obby-terminal-modal" style="display:none;">
+            <div class="terminal-card">
+              <div style="font-size:2rem; margin-bottom:8px;">💻🔒</div>
+              <h3 id="terminalTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#f472b6; margin-bottom:4px;">
+                Mall Security Keypad Terminal
+              </h3>
+              <p id="terminalPromptEn" style="font-size:1.05rem; font-weight:700; color:#e0e7ff; margin-bottom:4px;">
+                "Type the missing word: How _______ is this jacket?"
+              </p>
+              <p id="terminalPromptEs" style="font-size:0.85rem; color:#a5b4fc; font-style:italic; margin-bottom:12px;">
+                Escribe la palabra que falta en inglés para desbloquear el portón.
+              </p>
+
+              <div class="terminal-input-display" id="terminalInputDisplay">_ _ _ _</div>
+
+              <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px;">
+                <input type="text" id="terminalPhysicalInput" placeholder="Escribe aquí con tu teclado..." style="background:#0f172a; border:1px solid #6366f1; border-radius:8px; padding:8px 12px; color:#ffffff; font-size:0.95rem; width:260px; text-align:center;" onkeyup="handleTerminalInputKey(event)">
+                <button class="terminal-key key-action" onclick="submitTerminalWord()">ENTER ↵</button>
+              </div>
+
+              <!-- Teclado en pantalla interactivo para Tablets -->
+              <div class="terminal-keypad" id="terminalKeypadContainer">
+                <!-- Inyectado dinámicamente: Letras A-Z + Borrar -->
+              </div>
+
+              <div id="terminalFeedbackMsg" style="margin-top:10px; font-weight:700; font-size:0.9rem;"></div>
+            </div>
+          </div>
         </div>
 
         <!-- Misión Pedagógica del Nivel -->

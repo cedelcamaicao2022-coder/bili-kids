@@ -290,105 +290,184 @@ function switchTab(tabId, btnElement) {
 const ObbyStages = [
   {
     id: 0,
-    title: "Stage 1 • The Sneaker & Fashion Boutique 👟",
-    desc: "Salta cajas de zapatos y percheros. Colecciona los artículos de moda usando demostrativos.",
-    promptEn: "Find THIS blue jacket and THESE white boots to unlock the fashion gate!",
-    promptEs: "¡Encuentra ESTA chaqueta azul y ESTAS botas blancas para abrir la puerta de moda!",
-    requiredItems: ["blue_jacket", "white_boots"],
-    gateTextEn: "Fashion Gate Locked! Jump and collect both items.",
+    title: "Stage 1 • The Sneaker Boutique (This vs These) 👟",
+    desc: "Salta cajas de zapatos y percheros. Elige el puente correcto: si caes en el puente incorrecto, colapsará.",
+    promptEn: "Find THIS blue jacket and choose the correct bridge to cross!",
+    promptEs: "¡Encuentra ESTA chaqueta azul y elige el puente gramaticalmente correcto para cruzar!",
+    requiredItems: ["blue_jacket"],
     checkpointX: 40,
     finishX: 1350,
     bgColor: "#312e81",
+    hasTerminal: false,
     platforms: [
       { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
       { x: 235, y: 300, w: 120, h: 20, type: 'shoe_box' },
       { x: 385, y: 260, w: 130, h: 20, type: 'shoe_box' },
-      { x: 545, y: 280, w: 75, h: 18, type: 'jelly' }, // Trampolín de gelatina
-      { x: 650, y: 170, w: 160, h: 20, type: 'normal' },
-      { x: 840, y: 220, w: 120, h: 20, type: 'normal' },
-      { x: 990, y: 270, w: 120, h: 20, type: 'normal' },
-      { x: 1140, y: 320, w: 260, h: 80, type: 'normal' }
+      // Plataforma de aproximación a los dos puentes
+      { x: 545, y: 280, w: 100, h: 20, type: 'normal' },
+      // Dos puentes misteriosos (sin pistas ✅ ni ❌)
+      { x: 675, y: 215, w: 250, h: 24, type: 'dual_bridge_solid', label: "These white sneakers are new." },
+      { x: 675, y: 310, w: 250, h: 24, type: 'dual_bridge_wrong', label: "This white sneakers are new." },
+      // Plataforma de aterrizaje post-puente
+      { x: 955, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1105, y: 300, w: 75, h: 18, type: 'jelly' },
+      { x: 1210, y: 320, w: 240, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "blue_jacket", x: 435, y: 210, name: "This Blue Jacket", icon: "🧥", collected: false },
-      { id: "white_boots", x: 710, y: 120, name: "These White Boots", icon: "👢", collected: false }
+      { id: "blue_jacket", x: 420, y: 210, name: "This Blue Jacket", icon: "🧥", collected: false }
     ],
     coins: [
       { x: 280, y: 260, collected: false },
-      { x: 580, y: 180, collected: false },
-      { x: 890, y: 180, collected: false },
-      { x: 1040, y: 230, collected: false }
+      { x: 580, y: 230, collected: false },
+      { x: 1010, y: 210, collected: false },
+      { x: 1140, y: 200, collected: false }
     ],
-    gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+    gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
   },
   {
     id: 1,
-    title: "Stage 2 • The Food Court Conveyor Rush 🛒",
-    desc: "Cintas transportadoras en movimiento y carritos rodantes. Pregunta precios en inglés.",
-    promptEn: "How much are these red apples? They are only two dollars!",
-    promptEs: "¿Cuánto cuestan estas manzanas rojas? ¡Cuestan solo dos dólares!",
-    requiredItems: ["red_apples", "orange_juice"],
-    gateTextEn: "Food Court Gate! Collect the groceries.",
+    title: "Stage 2 • The Food Court Conveyor Rush (Some vs A/An) 🛒",
+    desc: "Cintas transportadoras en movimiento. Distingue sustantivos contables e incontables en los puentes.",
+    promptEn: "Collect THESE red apples and step on the bridge with correct food grammar!",
+    promptEs: "¡Recoge ESTAS manzanas rojas y pisa el puente con la gramática correcta de comida!",
+    requiredItems: ["red_apples"],
     checkpointX: 40,
-    finishX: 1420,
+    finishX: 1400,
     bgColor: "#0f766e",
+    hasTerminal: false,
     platforms: [
       { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
       { x: 215, y: 300, w: 160, h: 20, type: 'conveyor_right', speed: 1.4 },
       { x: 405, y: 270, w: 120, h: 20, type: 'normal' },
-      { x: 555, y: 280, w: 75, h: 18, type: 'jelly' },
-      { x: 660, y: 170, w: 180, h: 20, type: 'conveyor_left', speed: -1.2 },
-      { x: 870, y: 220, w: 130, h: 20, type: 'normal' },
-      { x: 1030, y: 270, w: 120, h: 20, type: 'normal' },
-      { x: 1180, y: 320, w: 260, h: 80, type: 'normal' }
+      { x: 555, y: 270, w: 100, h: 20, type: 'normal' },
+      // Dos puentes de alimentos (sin pistas)
+      { x: 685, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "We need some milk and three apples." },
+      { x: 685, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "We need a milk and three breads." },
+      // Plataforma receptora con cinta transportadora en reversa
+      { x: 975, y: 250, w: 160, h: 20, type: 'conveyor_left', speed: -1.2 },
+      { x: 1165, y: 280, w: 75, h: 18, type: 'jelly' },
+      { x: 1270, y: 320, w: 240, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "red_apples", x: 280, y: 250, name: "These Red Apples", icon: "🍎", collected: false },
-      { id: "orange_juice", x: 730, y: 120, name: "That Orange Juice", icon: "🧃", collected: false }
+      { id: "red_apples", x: 280, y: 250, name: "These Red Apples", icon: "🍎", collected: false }
     ],
     coins: [
       { x: 450, y: 225, collected: false },
-      { x: 590, y: 160, collected: false },
-      { x: 920, y: 175, collected: false },
-      { x: 1080, y: 225, collected: false }
+      { x: 600, y: 220, collected: false },
+      { x: 1030, y: 200, collected: false },
+      { x: 1200, y: 190, collected: false }
     ],
-    gate: { x: 1300, y: 220, w: 30, h: 100, unlocked: false }
+    gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
   },
   {
     id: 2,
-    title: "Stage 3 • The Toy Store Castle (Block Drop) 🏆",
-    desc: "Mecánica estilo Roblox: elige el puente gramaticalmente correcto para alcanzar la llave dorada.",
-    promptEn: "Step on the correct bridge: 'I would like to buy that new video game.'",
-    promptEs: "Pisa el puente correcto: 'Me gustaría comprar ese videojuego nuevo.'",
-    requiredItems: ["golden_key"],
-    gateTextEn: "Trophy Vault Gate!",
+    title: "Stage 3 • The Keypad Security Vault (Typing Challenge) 💻🔒",
+    desc: "¡Nivel de escritura interactiva! Acércate a la terminal y escribe la palabra en inglés que falta.",
+    promptEn: "Approach the security keypad terminal and type the missing question word!",
+    promptEs: "¡Acércate a la terminal de seguridad y escribe la palabra en inglés que falta para desbloquear!",
+    requiredItems: [],
     checkpointX: 40,
     finishX: 1300,
-    bgColor: "#831843",
+    bgColor: "#1e1b4b",
+    hasTerminal: true,
+    terminalX: 740,
+    terminalY: 260,
+    terminalTargetWord: "MUCH",
+    terminalPromptEn: "Type the missing word: How _______ is this video game?",
+    terminalPromptEs: "Escribe la palabra que falta para preguntar el precio ('much').",
     platforms: [
-      { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
-      { x: 210, y: 310, w: 110, h: 20, type: 'normal' },
-      // Puente Superior Correcto (Sólido, con la Llave Dorada)
-      { x: 350, y: 230, w: 240, h: 24, type: 'block_drop_solid', label: "✅ I would like to buy that game" },
-      // Puente Inferior Falso (Nube que se desvanece con colchón de rebote abajo)
-      { x: 350, y: 330, w: 240, h: 24, type: 'block_drop_fake', label: "❌ I wants buyed game" },
-      { x: 380, y: 375, w: 180, h: 16, type: 'jelly', label: "Trampolín de Rescate" },
-      // Continuación hacia la meta
-      { x: 620, y: 240, w: 75, h: 18, type: 'jelly' },
-      { x: 725, y: 170, w: 160, h: 20, type: 'normal' },
-      { x: 915, y: 230, w: 130, h: 20, type: 'normal' },
-      { x: 1075, y: 310, w: 260, h: 80, type: 'normal' }
+      { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
+      { x: 235, y: 300, w: 120, h: 20, type: 'normal' },
+      { x: 385, y: 270, w: 75, h: 18, type: 'jelly' },
+      { x: 495, y: 190, w: 140, h: 20, type: 'normal' },
+      // Plataforma de la terminal interactiva
+      { x: 675, y: 270, w: 170, h: 20, type: 'normal' },
+      // Plataformas post-terminal hacia el portón de salida
+      { x: 885, y: 240, w: 120, h: 20, type: 'normal' },
+      { x: 1035, y: 280, w: 75, h: 18, type: 'jelly' },
+      { x: 1145, y: 320, w: 250, h: 80, type: 'normal' }
+    ],
+    items: [],
+    coins: [
+      { x: 280, y: 250, collected: false },
+      { x: 550, y: 140, collected: false },
+      { x: 930, y: 190, collected: false },
+      { x: 1070, y: 190, collected: false }
+    ],
+    gate: { x: 1200, y: 220, w: 30, h: 100, unlocked: false }
+  },
+  {
+    id: 3,
+    title: "Stage 4 • The Winter Fashion Department (How Much Is/Are) 🧥❄️",
+    desc: "Concordancia de preguntas de precio en singular y plural. ¡Descubre el puente sólido!",
+    promptEn: "Find THIS warm scarf and choose the bridge with correct singular price grammar!",
+    promptEs: "¡Encuentra ESTA bufanda abrigada y elige el puente con la pregunta de precio correcta!",
+    requiredItems: ["warm_scarf"],
+    checkpointX: 40,
+    finishX: 1350,
+    bgColor: "#0369a1",
+    hasTerminal: false,
+    platforms: [
+      { x: 0, y: 340, w: 190, h: 60, type: 'normal' },
+      { x: 225, y: 290, w: 110, h: 20, type: 'shoe_box' },
+      { x: 365, y: 250, w: 120, h: 20, type: 'shoe_box' },
+      { x: 515, y: 280, w: 100, h: 20, type: 'normal' },
+      // Dos puentes de concordancia singular/plural
+      { x: 645, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "How much is this warm coat?" },
+      { x: 645, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "How much are this warm coat?" },
+      // Plataforma de llegada
+      { x: 935, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1085, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1195, y: 320, w: 250, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "golden_key", x: 450, y: 180, name: "Golden Cash Register Key", icon: "🔑", collected: false }
+      { id: "warm_scarf", x: 410, y: 200, name: "This Wool Scarf", icon: "🧣", collected: false }
     ],
     coins: [
-      { x: 260, y: 270, collected: false },
-      { x: 530, y: 180, collected: false },
-      { x: 655, y: 140, collected: false },
-      { x: 800, y: 120, collected: false }
+      { x: 270, y: 240, collected: false },
+      { x: 550, y: 230, collected: false },
+      { x: 980, y: 210, collected: false },
+      { x: 1120, y: 200, collected: false }
     ],
-    gate: { x: 1180, y: 210, w: 30, h: 100, unlocked: false }
+    gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+  },
+  {
+    id: 4,
+    title: "Stage 5 • The Toy Store Castle & Secret Password 🏆👑",
+    desc: "¡El gran reto final! Elige el puente de cortesía (would like to) y escribe la contraseña final en la caja registradora.",
+    promptEn: "Cross the polite bridge and type the secret password to win the Golden Trophy!",
+    promptEs: "¡Cruza el puente educado ('would like to') y escribe la palabra secreta para ganar el Trofeo!",
+    requiredItems: [],
+    checkpointX: 40,
+    finishX: 1400,
+    bgColor: "#831843",
+    hasTerminal: true,
+    terminalX: 980,
+    terminalY: 260,
+    terminalTargetWord: "SHOP",
+    terminalPromptEn: "Type the secret word: We are having fun in the toy _______!",
+    terminalPromptEs: "Escribe la palabra de tienda en inglés: 'S H O P'.",
+    platforms: [
+      { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
+      { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
+      { x: 350, y: 270, w: 75, h: 18, type: 'jelly' },
+      { x: 455, y: 280, w: 100, h: 20, type: 'normal' },
+      // Dos puentes de cortesía 'would like to'
+      { x: 585, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "I would like to buy that toy robot." },
+      { x: 585, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "I would like buy that toy robot." },
+      // Plataforma de la terminal final
+      { x: 875, y: 260, w: 190, h: 20, type: 'normal' },
+      { x: 1095, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1205, y: 320, w: 260, h: 80, type: 'normal' }
+    ],
+    items: [],
+    coins: [
+      { x: 250, y: 250, collected: false },
+      { x: 490, y: 230, collected: false },
+      { x: 920, y: 210, collected: false },
+      { x: 1130, y: 200, collected: false }
+    ],
+    gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
   }
 ];
 
@@ -426,6 +505,10 @@ let obbyParticles = [];
 let obbyBannerMessage = "";
 let obbyBannerTimer = 0;
 
+// Variables de la Terminal de Escritura Interactiva
+let currentTerminalWord = "";
+let targetTerminalAnswer = "";
+
 function startObbyEngine() {
   const canvas = document.getElementById('obbyCanvas');
   if (!canvas) return;
@@ -461,6 +544,10 @@ function loadObbyStage(index) {
   stage.coins.forEach(c => c.collected = false);
   stage.gate.unlocked = false;
 
+  // Cerrar terminal si estaba abierta
+  const termModal = document.getElementById('obbyTerminalModal');
+  if (termModal) termModal.style.display = 'none';
+
   document.getElementById('obbyStageTitle').textContent = stage.title;
   document.getElementById('obbyGatePromptEn').textContent = `🎯 Mission: "${stage.promptEn}"`;
   document.getElementById('obbyGatePromptEs').textContent = stage.promptEs;
@@ -480,26 +567,29 @@ function updateObbyHudChecklist() {
   const stepGateEl = document.getElementById('stepChipGate');
 
   if (checklistEl) {
-    checklistEl.innerHTML = stage.items.map(it => `
-      <span style="${it.collected ? 'color:#10b981; font-weight:800;' : 'color:#fef08a;'}">
-        ${it.collected ? '✅' : '⬜'} ${it.icon} ${it.name}
-      </span>
-    `).join(' &nbsp;|&nbsp; ');
+    if (stage.hasTerminal) {
+      checklistEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">💻 Terminal: ${stage.gate.unlocked ? '✅ Desbloqueada' : '🔒 Requiere Contraseña'}</span>`;
+    } else {
+      checklistEl.innerHTML = stage.items.map(it => `
+        <span style="${it.collected ? 'color:#10b981; font-weight:800;' : 'color:#fef08a;'}">
+          ${it.collected ? '✅' : '⬜'} ${it.icon} ${it.name}
+        </span>
+      `).join(' &nbsp;|&nbsp; ');
+    }
   }
 
-  const collectedCount = stage.items.filter(it => it.collected).length;
-  const totalCount = stage.items.length;
+  const isUnlocked = stage.gate.unlocked;
 
   if (gateBadgeEl) {
-    if (stage.gate.unlocked) {
+    if (isUnlocked) {
       gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Puerta: ¡ABIERTA! Corre a la meta 🏁</span>`;
     } else {
-      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Puerta: CERRADA (${collectedCount}/${totalCount})</span>`;
+      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Puerta: CERRADA</span>`;
     }
   }
 
   if (stepCollectEl && stepGateEl) {
-    if (collectedCount === totalCount) {
+    if (isUnlocked) {
       stepCollectEl.classList.add('completed');
       stepGateEl.classList.add('active');
     } else {
@@ -529,6 +619,10 @@ function tryPlayerJump() {
 function setupObbyEventListeners() {
   // Controles de teclado
   window.addEventListener('keydown', (e) => {
+    // Si la terminal modal está abierta, no mover a Barnaby
+    const modal = document.getElementById('obbyTerminalModal');
+    if (modal && modal.style.display === 'flex') return;
+
     if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
       ObbyControls.left = true;
     }
@@ -569,6 +663,105 @@ function setupObbyEventListeners() {
       tryPlayerJump();
       ObbyControls.jump = true;
     }, () => ObbyControls.jump = false);
+  }
+}
+
+// ============================================================================
+// GESTIÓN DE LA TERMINAL DE ESCRITURA EN INGLÉS
+// ============================================================================
+function openTerminalGate(targetWord, promptEn, promptEs) {
+  currentTerminalWord = "";
+  targetTerminalAnswer = targetWord.toUpperCase();
+
+  const modal = document.getElementById('obbyTerminalModal');
+  if (!modal) return;
+
+  document.getElementById('terminalPromptEn').textContent = `"${promptEn}"`;
+  document.getElementById('terminalPromptEs').textContent = promptEs;
+  document.getElementById('terminalInputDisplay').textContent = "_ ".repeat(targetWord.length).trim();
+  document.getElementById('terminalFeedbackMsg').innerHTML = '';
+
+  const physInput = document.getElementById('terminalPhysicalInput');
+  if (physInput) {
+    physInput.value = '';
+    setTimeout(() => physInput.focus(), 100);
+  }
+
+  renderTerminalKeypad();
+  modal.style.display = 'flex';
+  sfx.playLaserBeep();
+  speakEnglish(promptEn, 'guide');
+}
+
+function renderTerminalKeypad() {
+  const container = document.getElementById('terminalKeypadContainer');
+  if (!container) return;
+
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  container.innerHTML = letters.map(char => `
+    <button class="terminal-key" onclick="pressTerminalKey('${char}')">${char}</button>
+  `).join('') + `
+    <button class="terminal-key key-del" onclick="pressTerminalDelete()">⌫ BORRAR</button>
+  `;
+}
+
+function pressTerminalKey(char) {
+  sfx.playPop();
+  if (currentTerminalWord.length < targetTerminalAnswer.length) {
+    currentTerminalWord += char;
+    updateTerminalDisplay();
+  }
+}
+
+function pressTerminalDelete() {
+  sfx.playPop();
+  currentTerminalWord = currentTerminalWord.slice(0, -1);
+  updateTerminalDisplay();
+}
+
+function handleTerminalInputKey(e) {
+  const physInput = document.getElementById('terminalPhysicalInput');
+  if (physInput) {
+    currentTerminalWord = physInput.value.toUpperCase();
+    updateTerminalDisplay();
+    if (e.key === 'Enter') {
+      submitTerminalWord();
+    }
+  }
+}
+
+function updateTerminalDisplay() {
+  const display = document.getElementById('terminalInputDisplay');
+  if (!display) return;
+  const remaining = Math.max(0, targetTerminalAnswer.length - currentTerminalWord.length);
+  const text = currentTerminalWord.split('').join(' ') + ' ' + '_ '.repeat(remaining);
+  display.textContent = text.trim();
+}
+
+function submitTerminalWord() {
+  const feedback = document.getElementById('terminalFeedbackMsg');
+  const stage = ObbyStages[currentObbyStageIndex];
+
+  if (currentTerminalWord.trim() === targetTerminalAnswer) {
+    sfx.playLaserBeep();
+    sfx.playSuccess();
+    feedback.innerHTML = `<span style="color:#10b981;">✅ ¡ACCESO AUTORIZADO! Portón de seguridad desbloqueado (+25 pts)</span>`;
+    AppState.addStars(25);
+
+    stage.gate.unlocked = true;
+    updateObbyHudChecklist();
+    showObbyFloatingBanner("🔓 ¡PORTÓN DESBLOQUEADO! ¡CRUZA LA META! ➔➔➔", 220);
+
+    setTimeout(() => {
+      const modal = document.getElementById('obbyTerminalModal');
+      if (modal) modal.style.display = 'none';
+    }, 1100);
+
+  } else {
+    sfx.playError();
+    feedback.innerHTML = `<span style="color:#ef4444;">⚠️ Palabra incorrecta. Inténtalo de nuevo.</span>`;
+    currentTerminalWord = "";
+    updateTerminalDisplay();
   }
 }
 
@@ -630,15 +823,39 @@ function obbyGameLoop() {
   // Colisión con plataformas
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
-    // Si es un Block Drop falso, wobbles y cae
-    if (p.type === 'block_drop_fake') {
+    // Si es un puente dual incorrecto, colapsa y devuelve a Barnaby al inicio del nivel
+    if (p.type === 'dual_bridge_wrong') {
       if (
         Player.x + Player.w > p.x &&
         Player.x < p.x + p.w &&
         Player.y + Player.h >= p.y &&
-        Player.y + Player.h <= p.y + p.h + Player.vy
+        Player.y + Player.h <= p.y + p.h + Math.max(8, Player.vy) &&
+        Player.vy >= 0
       ) {
-        p.wobble = true;
+        sfx.playError();
+        Player.x = stage.checkpointX;
+        Player.y = 260;
+        Player.vx = 0;
+        Player.vy = 0;
+        Player.jumpsLeft = Player.maxJumps;
+        showObbyFloatingBanner("💥 ¡Ese puente era gramaticalmente incorrecto y colapsó! Regresando al inicio del nivel...", 180);
+        return;
+      }
+    }
+
+    // Puentes duales sólidos (Gramática correcta)
+    if (p.type === 'dual_bridge_solid') {
+      if (
+        Player.x + Player.w > p.x &&
+        Player.x < p.x + p.w &&
+        Player.y + Player.h >= p.y &&
+        Player.y + Player.h <= p.y + p.h + Math.max(8, Player.vy) &&
+        Player.vy >= 0
+      ) {
+        Player.y = p.y - Player.h;
+        Player.vy = 0;
+        Player.isGrounded = true;
+        Player.jumpsLeft = Player.maxJumps;
       }
       return;
     }
@@ -672,6 +889,16 @@ function obbyGameLoop() {
       }
     }
   });
+
+  // Detección de proximidad con Terminal de Escritura
+  if (stage.hasTerminal && !stage.gate.unlocked) {
+    if (Math.abs(Player.x - stage.terminalX) < 45 && Math.abs(Player.y - stage.terminalY) < 60) {
+      const modal = document.getElementById('obbyTerminalModal');
+      if (modal && modal.style.display !== 'flex') {
+        openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, stage.terminalPromptEs);
+      }
+    }
+  }
 
   // Colisión con objetos requeridos
   stage.items.forEach(it => {
@@ -805,22 +1032,19 @@ function obbyGameLoop() {
       ctx.font = "bold 11px sans-serif";
       const arrow = p.type === 'conveyor_right' ? '➔➔➔' : '⬅⬅⬅';
       ctx.fillText(arrow, rx + p.w / 2 - 18, p.y + 14);
-    } else if (p.type === 'block_drop_fake') {
-      // Plataforma trampa de nubes
-      ctx.fillStyle = "rgba(236, 72, 153, 0.85)";
+    } else if (p.type === 'dual_bridge_solid' || p.type === 'dual_bridge_wrong') {
+      // Dibujar ambos puentes IDÉNTICOS (estilo Roblox Obby: madera morada brillante con texto blanco limpio, SIN SPOILERS)
+      ctx.fillStyle = "#312e81";
       ctx.fillRect(rx, p.y, p.w, p.h);
+      ctx.fillStyle = "#6366f1";
+      ctx.fillRect(rx, p.y, p.w, 3);
+      // Texto neutral con la oración en inglés
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 11px Outfit, sans-serif";
-      ctx.fillText(p.label || "False", rx + 8, p.y + 16);
-    } else if (p.type === 'block_drop_solid') {
-      // Plataforma sólida correcta
-      ctx.fillStyle = "#059669";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#34d399";
-      ctx.fillRect(rx, p.y, p.w, 4);
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 11px Outfit, sans-serif";
-      ctx.fillText(p.label || "Correct", rx + 8, p.y + 16);
+      ctx.fillText(p.label, rx + 12, p.y + 16);
+      // Icono decorativo de puente
+      ctx.font = "12px sans-serif";
+      ctx.fillText("🌉", rx + p.w - 24, p.y + 16);
     } else {
       // Plataforma normal
       ctx.fillStyle = "#475569";
@@ -829,6 +1053,29 @@ function obbyGameLoop() {
       ctx.fillRect(rx, p.y, p.w, 4);
     }
   });
+
+  // Dibujar Terminal de Escritura Interactiva si la etapa la incluye
+  if (stage.hasTerminal) {
+    const tx = stage.terminalX - cameraX;
+    const ty = stage.terminalY - 36;
+    ctx.fillStyle = "#1e1b4b";
+    ctx.roundRect(tx - 30, ty, 60, 36, 8);
+    ctx.fill();
+    ctx.strokeStyle = stage.gate.unlocked ? "#10b981" : "#38bdf8";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.font = "20px sans-serif";
+    ctx.fillText("💻", tx - 10, ty + 24);
+
+    // Letrero flotante sobre la terminal
+    ctx.fillStyle = stage.gate.unlocked ? "rgba(16, 185, 129, 0.9)" : "rgba(56, 189, 248, 0.9)";
+    ctx.roundRect(tx - 65, ty - 22, 130, 18, 6);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 9px Outfit, sans-serif";
+    ctx.fillText(stage.gate.unlocked ? "✅ CLAVE CORRECTA" : "⌨️ ESCRIBE LA CLAVE", tx - 56, ty - 10);
+  }
 
   // Dibujar artículos de misión con etiquetas de texto y flechas flotantes
   stage.items.forEach(it => {
