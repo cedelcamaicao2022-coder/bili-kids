@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 4: Everyday Life | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit4_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 4 • A1-A2</span>
+        <h1 class="unit-name-head">Everyday Life</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">140 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('clock', this)">
+        <span>⏰</span>
+        <span>Reloj & Timeline 24H</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('planner', this)">
+        <span>🗓️</span>
+        <span>Planificador Semanal</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('scale', this)">
+        <span>⚖️</span>
+        <span>Balanza de Verbos (-S)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('vlog', this)">
+        <span>📹</span>
+        <span>My Morning Vlog</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: RELOJ & TIMELINE 24H (ROUTINE CLOCK)
+         ==================================================================== -->
+    <section id="view-clock" class="activity-view active-view">
+      <div class="clock-container">
+        
+        <div class="clock-header-row">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>⏰</span> Línea de Tiempo de Rutinas Diarias (24H Timeline)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Explora las horas del día, escucha la narración y escoge la acción correcta en inglés.
+            </div>
+          </div>
+          <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextClockSlot()">
+            <span>Siguiente Hora ➔</span>
+          </button>
+        </div>
+
+        <!-- Línea horizontal de horas (Timeline track) -->
+        <div class="timeline-track-wrap" id="clockTimelineTrack">
+          <!-- Generado dinámicamente con las 10 horas -->
+        </div>
+
+        <!-- Tarjeta de Escenario Central (Dial + Prompt) -->
+        <div class="clock-stage-card">
+          <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+            <!-- Visual Dial -->
+            <div class="dial-visual">
+              <span class="dial-icon" id="dialIconDisplay">⏰</span>
+              <span class="dial-time" id="dialTimeDisplay">7:00 AM</span>
+            </div>
+
+            <div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span class="unit-tag-pill" id="clockTag">Slot 1/10 • Morning Awakening</span>
+              </div>
+              <div id="clockPromptEn" style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a; margin-bottom:4px;">
+                "The alarm clock rings! It is 7:00 AM."
+              </div>
+              <div id="clockPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
+                ¡Suena el despertador! Son las 7:00 AM.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenClockPrompt()">
+              🔊 Escuchar Hora
+            </button>
+          </div>
+        </div>
+
+        <!-- Opciones de Rutina (Aleatorizadas dinámicamente) -->
+        <div class="clock-options-grid" id="clockOptionsGrid">
+          <!-- Botones de opciones inyectados por JS -->
+        </div>
+
+        <!-- Caja de Retroalimentación -->
+        <div id="clockFeedbackBox" style="margin-top:18px; text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: WEEKLY MISSION PLANNER (CALENDARIO DE 7 DÍAS)
+         ==================================================================== -->
+    <section id="view-planner" class="activity-view">
+      <div class="planner-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🗓️</span> Planificador Semanal de Misiones (Weekly Habits)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Lee o escucha la pista, escoge el sticker de hábito en la barra inferior y asígnalo al día correspondiente.
+            </div>
+          </div>
+          <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextPlannerMission()">
+            <span>Siguiente Misión ➔</span>
+          </button>
+        </div>
+
+        <!-- Tarjeta de Misión Semanal Actual -->
+        <div style="background:linear-gradient(135deg, #fffbeb, #ffffff); border:2px solid #fde68a; border-radius:18px; padding:18px; margin-bottom:20px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="unit-tag-pill" id="plannerMissionBadge">Misión 1 de 6</span>
+              <strong id="plannerMissionTitle" style="color:#0f172a; font-family:var(--font-display); font-size:1.05rem;">
+                Swimming Practice 🏊‍♂️
+              </strong>
+            </div>
+            <div id="plannerClueEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
+              "On Wednesdays, Leo always goes to swimming practice after school at 4 PM."
+            </div>
+            <div id="plannerClueEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
+              Los miércoles, Leo siempre va a práctica de natación después de clases a las 4 PM.
+            </div>
+          </div>
+          <div>
+            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenPlannerClue()">
+              🔊 Escuchar Pista
+            </button>
+          </div>
+        </div>
+
+        <!-- Tablero de los 7 días (Lunes a Domingo) -->
+        <div class="days-board-grid" id="daysBoardGrid">
+          <!-- 7 columnas de días inyectadas por JS -->
+        </div>
+
+        <!-- Pool de Stickers de Hábitos -->
+        <div style="text-align:center; margin-top:16px;">
+          <div style="font-family:var(--font-display); font-weight:700; font-size:0.95rem; color:#92400e; margin-bottom:8px;">
+            🏷️ Elige un sticker de hábito para colocar en el calendario:
+          </div>
+          <div class="habits-pool-bar" id="habitsPoolBar">
+            <!-- Stickers inyectados por JS -->
+          </div>
+        </div>
+
+        <!-- Caja de retroalimentación -->
+        <div id="plannerFeedbackBox" style="margin-top:16px; text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: LA BALANZA DE VERBOS (-S BALANCE SCALE)
+         ==================================================================== -->
+    <section id="view-scale" class="activity-view">
+      <div class="scale-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div style="text-align:left;">
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>⚖️</span> La Balanza Gramatical de Verbos (-S / Base Form)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Equilibra la balanza: escoge la forma verbal que corresponde al sujeto singular o plural.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="scaleCaseNum">Reto 1 de 20</span>
+            <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextScaleChallenge()">
+              <span>Siguiente ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Gráfico de Balanza con Platos -->
+        <div class="scale-balance-graphic" id="scaleBalanceGraphic">
+          <!-- Plato Izquierdo: Singular Rule -->
+          <div class="scale-pan pan-singular">
+            <div style="font-size:1.8rem; margin-bottom:4px;">👤 He / She / It</div>
+            <div class="scale-pan-title">3ra Persona Singular</div>
+            <div class="scale-pan-rule">Agrega <strong>-s / -es / -ies</strong><br>(plays, watches, flies)</div>
+          </div>
+
+          <!-- Pivot Central -->
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0;">
+            <div style="font-size:2.4rem;">⚖️</div>
+            <div style="font-family:var(--font-display); font-size:0.75rem; font-weight:700; color:#92400e; margin-top:4px;">EQUILIBRIO</div>
+          </div>
+
+          <!-- Plato Derecho: Plural / Base Rule -->
+          <div class="scale-pan pan-plural">
+            <div style="font-size:1.8rem; margin-bottom:4px;">👥 They / We / I / You</div>
+            <div class="scale-pan-title">Plurales & 1ra/2da Persona</div>
+            <div class="scale-pan-rule">Usa la <strong>forma base</strong><br>(play, watch, fly)</div>
+          </div>
+        </div>
+
+        <!-- Oración Objetivo -->
+        <div class="scale-target-sentence" id="scaleTargetSentence">
+          He [ ? ] soccer in the afternoon.
+        </div>
+
+        <!-- Botones de Elección de Verbos (Aleatorizados) -->
+        <div class="scale-verb-buttons-row" id="scaleVerbButtonsRow">
+          <!-- Inyectados por JS -->
+        </div>
+
+        <!-- Retroalimentación de la Balanza -->
+        <div id="scaleFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: MY MORNING VLOG (SIMULADOR DE VLOG EN VIVO)
+         ==================================================================== -->
+    <section id="view-vlog" class="activity-view">
+      <div class="vlog-container">
+        
+        <div class="vlog-viewfinder">
+          
+          <!-- Top Bar de la Cámara del Streamer -->
+          <div class="vlog-top-bar">
+            <div class="vlog-rec-badge">
+              <span class="rec-pulse-dot"></span>
+              <span>LIVE • REC</span>
+            </div>
+            <div>
+              <span id="vlogEpisodeNum">Episodio 1 de 8</span> • 4K 60FPS
+            </div>
+            <div>
+              <span>AUDIO: STEREO 🎙️</span>
+            </div>
+          </div>
+
+          <!-- Centro del Viewfinder: Escena y Frase -->
+          <div class="vlog-prompt-center">
+            <span class="vlog-scene-tag" id="vlogSceneTag">Scene 1 • Morning Wake Up ☀️</span>
+            <div class="vlog-phrase-target" id="vlogPhraseTarget">
+              "Good morning guys! I wake up at seven o'clock."
+            </div>
+            <div class="vlog-phrase-es" id="vlogPhraseEs">
+              ¡Buenos días chicos! Me despierto a las siete en punto.
+            </div>
+
+            <!-- Botón para escuchar al streamer -->
+            <div>
+              <button class="btn-back-map" style="background:rgba(255,255,255,0.15); color:#ffffff; border-color:rgba(255,255,255,0.3); cursor:pointer;" onclick="listenVlogPhrase()">
+                🔊 Escuchar Frase del Vlog
+              </button>
+            </div>
+          </div>
+
+          <!-- Acción del Micrófono -->
+          <div class="vlog-mic-action">
+            <button class="btn-vlog-mic" id="vlogMicBtn" onclick="toggleVlogMic()" title="Grabar tu frase en vivo">
+              🎙️
+            </button>
+            <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
+              Toca el micrófono y lee tu frase frente a la cámara
+            </div>
+          </div>
+
+          <!-- Chat en Vivo Simulado -->
+          <div id="vlogChatBox" style="text-align:center; padding:8px; background:rgba(0,0,0,0.3); border-radius:12px; margin-top:14px;">
+            <span style="color:#94a3b8; font-size:0.85rem;">💬 Chat en Vivo: 10K viewers connected! 🔥</span>
+          </div>
+
+          <!-- Retroalimentación de la Grabación -->
+          <div id="vlogFeedback" style="text-align:center; margin-top:12px;"></div>
+
+          <!-- Footer con controles del Vlog -->
+          <div class="vlog-stats-footer">
+            <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextVlogEpisode()">
+              Siguiente Escena del Stream ➔
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit4_engine.js?v=1.0"></script>
+</body>
+</html>
