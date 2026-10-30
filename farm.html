@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Leo's Farm Adventure | Bilikids - Animales de la Granja en Inglés</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="farm_styles.css?v=2.6">
+</head>
+<body>
+  <!-- Background Animated Farm Sunny Sky & Hills -->
+  <div class="farm-background">
+    <div class="sky-sun"></div>
+    <div class="cloud farm-cloud-1"></div>
+    <div class="cloud farm-cloud-2"></div>
+    <div class="green-hill-back"></div>
+    <div class="green-hill-front"></div>
+    <div class="wooden-fence"></div>
+  </div>
+
+  <div id="farmApp" class="game-container">
+    <!-- Top Header Bar with Bilikids Logo & Adventure Switcher -->
+    <header class="game-header">
+      <div class="header-left">
+        <button id="btnHome" class="header-btn" title="Ir al Menú de la Granja">
+          <span class="btn-icon">🌾</span>
+          <span class="btn-label">Inicio</span>
+        </button>
+
+        <a href="index.html" class="header-game-switcher" title="Cambiar al Juego de Colores con Bili">
+          <span>🎨</span>
+          <span class="switcher-text">Bili</span>
+        </a>
+        <a href="house.html" class="header-game-switcher" title="Cambiar a Lugares de la Casa con Luna">
+          <span>🐰</span>
+          <span class="switcher-text">Casa</span>
+        </a>
+        <a href="stories.html" class="header-game-switcher" title="Bili Kids Library">
+          <span>📚</span>
+          <span class="switcher-text">Library</span>
+        </a>
+        <a href="lab.html" class="header-game-switcher" title="Laboratorio Científico">
+          <span>🧪</span>
+          <span class="switcher-text">Lab</span>
+        </a>
+        <a href="writing.html" class="header-game-switcher" title="Práctica de Escritura">
+          <span>✏️</span>
+          <span class="switcher-text">Writing</span>
+        </a>
+
+        <div class="header-brand">
+          <img src="assets/bilikids_logo.png" alt="Bilikids" class="header-logo-img">
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="header-level-badge" id="levelBadge">
+          <span id="levelBadgeText">Nivel 1</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="header-stars" id="headerStars">
+          <span class="star-icon">⭐</span>
+          <span id="totalStarsCount">0</span>
+        </div>
+
+        <div class="header-controls">
+          <button id="btnSoundToggle" class="header-btn icon-only" title="Sonido">
+            <span id="soundIcon">🔊</span>
+          </button>
+          <button id="btnFullscreen" class="header-btn icon-only" title="Pantalla Completa">
+            <span>⛶</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Screens -->
+    <main class="game-main">
+      <!-- SCREEN: HOME / STAGE SELECT -->
+      <section id="screenHome" class="screen active">
+        <div class="home-hero">
+          
+          <!-- Bilikids Brand Logo Prominent at Top -->
+          <div class="home-brand-header">
+            <img src="assets/bilikids_logo.png" alt="Bilikids ¡Learning together!" class="home-main-logo pulse-subtle">
+          </div>
+
+          <!-- Leo Character FULL BODY with Speech Bubble -->
+          <div class="leo-hero-showcase">
+            <div class="leo-fullbody-wrapper">
+              <img src="assets/leo/leo_transparent.png" alt="Leo el Leoncito" class="leo-fullbody-hero-img wave-bounce" id="leoHeroImg">
+              <div class="leo-ground-shadow"></div>
+            </div>
+
+            <div class="leo-speech-bubble-hero">
+              <p class="bubble-text" id="welcomeSpeech">¡Hi friends! I'm Leo! Let's explore the farm together! 🦁🚜</p>
+              <button class="speech-replay-btn" id="btnRepeatWelcome" title="Escuchar de nuevo">🔊</button>
+            </div>
+          </div>
+
+          <h1 class="game-title">
+            <span class="title-word color-orange">Leo's</span>
+            <span class="title-word color-green">Farm</span>
+            <span class="title-word color-yellow">Adventure!</span>
+          </h1>
+          <p class="game-subtitle">Juego educativo interactivo de animales en inglés (3 a 5 años)</p>
+
+          <button id="btnStartGame" class="btn-big-play pulse">
+            <span class="play-icon">▶</span>
+            <span>¡JUGAR AHORA!</span>
+          </button>
+        </div>
+
+        <!-- Stages & Level Selection -->
+        <div class="level-map-container">
+          <div class="stage-tabs-row">
+            <button class="stage-tab-btn active" id="btnStage1Tab">
+              <span class="stage-tab-title">🚜 Etapa 1: Pequeños Granjeros</span>
+              <span class="stage-status-badge">Niveles 1 a 5</span>
+            </button>
+            <button class="stage-tab-btn locked" id="btnStage2Tab">
+              <span class="stage-tab-title">🦁 Etapa 2: Super Exploradores</span>
+              <span class="stage-status-badge" id="stage2LockBadge">🔒 Supera la Etapa 1</span>
+            </button>
+          </div>
+
+          <!-- STAGE 1 (LEVELS 1 - 5) -->
+          <div class="level-cards-grid stage-grid active" id="stage1Grid">
+            
+            <div class="level-card unlocked" data-level="1">
+              <div class="level-num">1</div>
+              <div class="level-art">🚪</div>
+              <div class="level-info">
+                <h3>Barn Peek-a-boo</h3>
+                <p>¿Quién está escondido en el granero?</p>
+                <div class="card-stars" id="cardStars1">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="2">
+              <div class="level-num">2</div>
+              <div class="level-art">🥕</div>
+              <div class="level-info">
+                <h3>Feed the Animals</h3>
+                <p>Dale su comida favorita a cada animal</p>
+                <div class="card-stars" id="cardStars2">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="3">
+              <div class="level-num">3</div>
+              <div class="level-art">🎵</div>
+              <div class="level-info">
+                <h3>Sound Detective</h3>
+                <p>Escucha el sonido y encuentra al animal</p>
+                <div class="card-stars" id="cardStars3">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="4">
+              <div class="level-num">4</div>
+              <div class="level-art">🦆</div>
+              <div class="level-info">
+                <h3>Duck Pond</h3>
+                <p>Atrapa a los patitos nadando en el estanque</p>
+                <div class="card-stars" id="cardStars4">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="5">
+              <div class="level-num">5</div>
+              <div class="level-art">🎉</div>
+              <div class="level-info">
+                <h3>Barnyard Party!</h3>
+                <p>Baila con Leo y gana tu Diploma de Granjero</p>
+                <div class="card-stars" id="cardStars5">☆☆☆</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- STAGE 2 (LEVELS 6 - 10) -->
+          <div class="level-cards-grid stage-grid" id="stage2Grid" style="display: none;">
+            
+            <div class="level-card" data-level="6">
+              <div class="level-num">6</div>
+              <div class="level-art">🔦</div>
+              <div class="level-info">
+                <h3>Shadow Safari</h3>
+                <p>Descubre la silueta misteriosa del animal</p>
+                <div class="card-stars" id="cardStars6">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="7">
+              <div class="level-num">7</div>
+              <div class="level-art">🐥</div>
+              <div class="level-info">
+                <h3>Animal Families</h3>
+                <p>Une a los bebés con su mamá granjera</p>
+                <div class="card-stars" id="cardStars7">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="8">
+              <div class="level-num">8</div>
+              <div class="level-art">🎈</div>
+              <div class="level-info">
+                <h3>Balloon Pop!</h3>
+                <p>Revienta los globos de animalitos</p>
+                <div class="card-stars" id="cardStars8">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="9">
+              <div class="level-num">9</div>
+              <div class="level-art">🧺</div>
+              <div class="level-info">
+                <h3>Farm Harvest</h3>
+                <p>Recolecta huevos y lana en la cesta de Leo</p>
+                <div class="card-stars" id="cardStars9">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="10">
+              <div class="level-num">10</div>
+              <div class="level-art">🏆</div>
+              <div class="level-info">
+                <h3>Grand Farm Parade!</h3>
+                <p>El desfile musical y la Gran Copa Safari</p>
+                <div class="card-stars" id="cardStars10">☆☆☆</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 1 (BARN PEEK-A-BOO) -->
+      <section id="screenLevel1" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel1">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Touch: </span>
+              <strong class="animal-prompt-word" id="promptAnimalL1">COW</strong>
+              <span class="spanish-hint" id="spanishHintL1">(Vaca)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL1" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL1" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL1">Ronda 1 de 4</div>
+        </div>
+
+        <div class="barn-peek-arena" id="barnPeekArena">
+          <!-- Barn doors with hiding animals -->
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 2 (FEED THE ANIMALS) -->
+      <section id="screenLevel2" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel2">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Feed: </span>
+              <strong class="animal-prompt-word" id="promptAnimalL2">CARROT 🥕</strong>
+              <span class="spanish-hint" id="spanishHintL2">(Zanahoria)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL2" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL2" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL2">Ronda 1 de 4</div>
+        </div>
+
+        <div class="feeding-stage">
+          <div class="feeding-target-animal" id="feedingAnimalContainer">
+            <!-- Hungry animal waiting for food -->
+          </div>
+          <div class="food-trough-row" id="foodTroughRow">
+            <!-- 3 foods to choose from (Hay, Carrot, Corn, Bone, etc.) -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 3 (SOUND DETECTIVE) -->
+      <section id="screenLevel3" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel3">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Listen: </span>
+              <strong class="animal-prompt-word shadow-q-badge" id="promptAnimalL3">❓ ANIMAL</strong>
+              <span class="spanish-hint" id="spanishHintL3">(¡Escucha el sonido!)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL3" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL3" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL3">Ronda 1 de 4</div>
+        </div>
+
+        <div class="sound-detective-stage">
+          <div class="listening-speaker-box">
+            <button class="mega-speaker-pulse" id="btnPlaySoundDetective" title="Escuchar sonido">
+              <span class="sound-wave-anim">📢</span>
+              <span class="sound-onomatopoeia" id="soundOnomatopoeiaText">"Baa! Baa!"</span>
+            </button>
+          </div>
+          <div class="animals-cards-lineup" id="soundAnimalChoices">
+            <!-- Animal cards to tap -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 4 (DUCK POND) -->
+      <section id="screenLevel4" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel4">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Catch: </span>
+              <span id="ducksRemainingCount" class="ducks-count-badge">2</span>
+              <strong id="pondPromptWord" class="animal-prompt-word">DUCKS</strong>
+              <span id="spanishHintL4" class="spanish-hint">(Patos en el agua)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL4" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL4" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL4">Ronda 1 de 2</div>
+        </div>
+
+        <div class="duck-pond-arena" id="duckPondArena">
+          <!-- Swimming interactive ducklings and lily pads -->
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 5 (BARNYARD DANCE & JUNIOR DIPLOMA) -->
+      <section id="screenLevel5" class="screen">
+        <div class="barn-dance-stage">
+          <div class="barn-leo-hero">
+            <div class="leo-stage-avatar">
+              <img src="assets/leo/leo_transparent.png" alt="Leo Bailando" class="leo-dancer-img dancer">
+              <div class="leo-stage-shadow"></div>
+            </div>
+            <div class="barn-party-speech">
+              <h2>🎉 Barnyard Dance! 🎉</h2>
+              <p>Dance: <strong id="promptAnimalL5" class="animal-prompt-word">PIG</strong> <span class="spanish-hint">(¡A bailar!)</span></p>
+              <button class="voice-btn-round" id="btnSpeakPromptL5" title="Escuchar">🔊</button>
+            </div>
+          </div>
+
+          <div class="hay-bales-grid" id="hayBalesGrid">
+            <!-- Dancing animals on hay bales -->
+          </div>
+
+          <div class="dance-score-bar">
+            <span>Animalitos en la fiesta: </span>
+            <span id="barnDanceCounter" class="badge-steps">0 / 4</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 6 (SHADOW SAFARI) -->
+      <section id="screenLevel6" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel6">
+            <img src="assets/leo/leo_transparent.png" alt="Leo Safari" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Shadow: </span>
+              <strong class="animal-prompt-word shadow-q-badge" id="promptAnimalL6">❓ MYSTERY</strong>
+              <span class="spanish-hint" id="spanishHintL6">(¿Quién es?)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL6" title="Escuchar pista de sonido">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL6" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL6">Silueta 1 de 3</div>
+        </div>
+
+        <div class="shadow-stage">
+          <div class="mystery-shadow-box" id="mysteryShadowBox">
+            <div class="shadow-spotlight"></div>
+            <div class="shadow-figure is-shadow" id="mysteryShadowFigure">🐴</div>
+          </div>
+          <div class="shadow-hint-bar">
+            <span>👇 ¡Toca al animal de la silueta! 👇</span>
+          </div>
+          <div class="animal-candidates-row" id="shadowAnimalCandidates">
+            <!-- Animal choices to match the shadow -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 7 (MAMA & BABY ANIMAL FAMILIES) -->
+      <section id="screenLevel7" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel7">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Mama: </span>
+              <strong class="animal-prompt-word" id="promptAnimalL7">HEN 🐔</strong>
+              <strong class="baby-prompt-word" id="promptBabyL7" style="display: none;">CHICK 🐣</strong>
+              <span class="spanish-hint" id="spanishHintL7">(Encuentra a su bebé)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL7" title="Escuchar">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL7" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL7">Familia 1 de 3</div>
+        </div>
+
+        <div class="family-match-stage">
+          <div class="mama-animal-nest" id="mamaAnimalCard">
+            <!-- Mama animal waiting for baby -->
+          </div>
+          <div class="family-callout-text">
+            <span>❤️ ¡Toca al bebé para llevarlo a su nido! ❤️</span>
+          </div>
+          <div class="baby-animals-row" id="babyAnimalsRow">
+            <!-- Cute baby animals in nests -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 8 (ANIMAL BALLOON POP) -->
+      <section id="screenLevel8" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel8">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Pop: </span>
+              <strong class="animal-prompt-word" id="promptAnimalL8">PIG</strong>
+              <span class="spanish-hint" id="spanishHintL8">(Revienta el globo)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL8" title="Escuchar">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL8" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL8">Globo 1 de 3</div>
+        </div>
+
+        <div class="balloon-sky-stage">
+          <div class="balloon-hint-bar">
+            <span>🎈 ¡Toca el globo correcto para reventarlo! 🎈</span>
+          </div>
+          <div class="balloons-row" id="balloonsContainer">
+            <!-- 3 Floating Animal Balloons -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 9 (FARM HARVEST) -->
+      <section id="screenLevel9" class="screen">
+        <div class="leo-sidekick-box">
+          <div class="leo-companion-wrapper" id="leoCharLevel9">
+            <img src="assets/leo/leo_transparent.png" alt="Leo" class="leo-companion-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span id="harvestIntroText" class="speech-intro">Gives: </span>
+              <strong class="harvest-product-word" id="promptHarvestProduct">MILK 🥛</strong>
+              <strong class="animal-prompt-word" id="promptAnimalL9" style="display: none;">COW</strong>
+              <span class="spanish-hint" id="spanishHintL9">(¿Quién nos da leche?)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL9" title="Escuchar">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL9" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL9">Cosecha 1 de 4</div>
+        </div>
+
+        <div class="harvest-stage">
+          <div class="harvest-item-showcase" id="harvestItemShowcase">
+            <div class="showcase-icon" id="showcaseProductIcon">🥛</div>
+            <div class="showcase-label" id="showcaseProductLabel">FRESH MILK</div>
+          </div>
+          <div class="harvest-candidates-label">
+            <span>🌾 ¿Quién nos da este producto? 🌾</span>
+          </div>
+          <div class="harvest-animals-row" id="harvestAnimalCandidates">
+            <!-- Animals to choose from -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 10 (GRAND FARM PARADE & DIPLOMA) -->
+      <section id="screenLevel10" class="screen">
+        <div class="parade-stage" id="paradeStageL10">
+          <div class="tractor-leader">
+            <div class="tractor-driver">
+              <img src="assets/leo/leo_transparent.png" alt="Leo Tractor" class="leo-tractor-driver wave-bounce">
+              <span class="tractor-emoji">🚜</span>
+            </div>
+            <div class="parade-speech">
+              <h2>🎺 ¡The Farm Parade! 🎺</h2>
+              <p>Parade: <strong id="promptAnimalL10" class="animal-prompt-word">ROOSTER 🐓</strong> <span class="spanish-hint">(Sube al tractor)</span></p>
+              <button class="voice-btn-round" id="btnSpeakPromptL10" title="Escuchar">🔊</button>
+            </div>
+          </div>
+
+          <!-- Parade Musical Wagons attached to tractor -->
+          <div class="parade-wagons-train" id="paradeWagonsTrain">
+            <div class="wagon-cart" id="wagonCart1">
+              <div class="wagon-seat-label">🎺 Trompeta</div>
+              <div class="wagon-occupant" id="wagonOccupant1">❓</div>
+            </div>
+            <div class="wagon-cart" id="wagonCart2">
+              <div class="wagon-seat-label">🥁 Tambor</div>
+              <div class="wagon-occupant" id="wagonOccupant2">❓</div>
+            </div>
+            <div class="wagon-cart" id="wagonCart3">
+              <div class="wagon-seat-label">🔔 Campana</div>
+              <div class="wagon-occupant" id="wagonOccupant3">❓</div>
+            </div>
+          </div>
+
+          <div class="parade-pick-label">
+            <span>🎶 ¡Toca al animal invitado para subirlo al vagón musical! 🎶</span>
+          </div>
+
+          <div class="parade-lineup-grid" id="paradeLineupGrid">
+            <!-- Animals waiting to join the parade wagons -->
+          </div>
+
+          <div class="parade-counter-bar">
+            <span>Músicos en el desfile: </span>
+            <span id="paradeCounter" class="badge-steps">0 / 3</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: FARM DIPLOMA CELEBRATION -->
+      <section id="screenCelebration" class="screen">
+        <div class="diploma-card farm-diploma">
+          <div class="diploma-ribbon farm-ribbon">🏆 ¡GRAN EXPLORADOR DE LA GRANJA! 🏆</div>
+
+          <div class="diploma-header">
+            <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
+            <div class="diploma-titles">
+              <h2>SUPER FARM EXPLORER</h2>
+              <p>Certificado Oficial de Animales Bilikids</p>
+            </div>
+          </div>
+
+          <div class="diploma-body">
+            <div class="diploma-center-layout">
+              <div class="diploma-leo-fullbody-container">
+                <img src="assets/leo/leo_transparent.png" alt="Leo el Leoncito" class="diploma-leo-img wave-bounce">
+              </div>
+              <div class="diploma-text-content">
+                <p class="awarded-to-text">Otorgado a un increíble explorador de 3 a 5 años por dominar todos los animales de la granja en inglés:</p>
+                
+                <div class="child-name-wrapper">
+                  <label for="childNameInput">Nombre del Pequeño Granjero:</label>
+                  <input type="text" id="childNameInput" value="Pequeño Granjero" maxlength="24">
+                </div>
+
+                <div class="animals-learned-badges">
+                  <span class="a-tag">COW 🐮</span>
+                  <span class="a-tag">PIG 🐷</span>
+                  <span class="a-tag">SHEEP 🐑</span>
+                  <span class="a-tag">HORSE 🐴</span>
+                  <span class="a-tag">DUCK 🦆</span>
+                  <span class="a-tag">HEN 🐔</span>
+                  <span class="a-tag">ROOSTER 🐓</span>
+                  <span class="a-tag">RABBIT 🐰</span>
+                </div>
+
+                <div class="diploma-stars-row">
+                  ⭐⭐⭐⭐⭐
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="diploma-actions">
+            <button id="btnContinueStage2" class="btn-action-diploma btn-stage2-continue" style="display: none;">
+              <span>⭐</span> ¡Continuar a la Etapa 2! 🦁
+            </button>
+            <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
+              <span>🖨️</span> Imprimir Diploma
+            </button>
+            <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
+              <span>🔄</span> Jugar de Nuevo
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Celebration Popup Overlay -->
+    <div id="roundSuccessOverlay" class="success-overlay hidden">
+      <div class="success-popup farm-success-pop pop-in">
+        <div class="success-leo-wrap">
+          <img src="assets/leo/leo_transparent.png" alt="Leo Celebrando" class="leo-success-img celebrate-jump">
+        </div>
+        <div class="success-content">
+          <h2 id="successTitle">¡AWESOME!</h2>
+          <p id="successMessage">¡You found the <span id="successAnimal">COW</span>!</p>
+          <div class="success-stars">⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <script src="farm_game.js?v=3.6"></script>
+</body>
+</html>

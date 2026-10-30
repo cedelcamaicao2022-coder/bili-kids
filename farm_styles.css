@@ -1,0 +1,2296 @@
+/* ===================================================
+   LEO'S FARM ADVENTURE - BILIKIDS FARM EDITION
+   Designed for Children Ages 3 to 5
+   =================================================== */
+
+:root {
+  --farm-green: #2ecc71;
+  --farm-orange: #f39c12;
+  --farm-yellow: #f1c40f;
+  --farm-red: #e74c3c;
+  --farm-brown: #8d5b4c;
+  --sky-blue: #74b9ff;
+  --font-kids: 'Fredoka', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  --border-radius-card: 28px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-kids);
+  background: linear-gradient(180deg, #81ecec 0%, #a8e6cf 50%, #dcedc1 100%);
+  color: #2c3e50;
+  position: relative;
+}
+
+/* Farm Background with Hills and Sun */
+.farm-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sky-sun {
+  position: absolute;
+  top: -40px;
+  right: 50px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, #ffeaa7 0%, #fdcb6e 70%, rgba(253, 203, 110, 0) 100%);
+  border-radius: 50%;
+  animation: sunGlow 4s infinite alternate ease-in-out;
+}
+
+@keyframes sunGlow {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.08); filter: brightness(1.2); }
+}
+
+.farm-cloud-1 {
+  position: absolute;
+  top: 8%;
+  left: -180px;
+  width: 160px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  animation: floatCloudFarm 35s linear infinite;
+}
+
+.farm-cloud-2 {
+  position: absolute;
+  top: 18%;
+  left: -220px;
+  width: 200px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  animation: floatCloudFarm 42s linear infinite 14s;
+}
+
+@keyframes floatCloudFarm {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+.green-hill-back {
+  position: absolute;
+  bottom: -40px;
+  left: -10%;
+  width: 120%;
+  height: 200px;
+  background: #a8e6cf;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.7;
+}
+
+.green-hill-front {
+  position: absolute;
+  bottom: -60px;
+  left: -5%;
+  width: 110%;
+  height: 160px;
+  background: #55efc4;
+  border-radius: 40% 60% 0 0;
+}
+
+.wooden-fence {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: repeating-linear-gradient(90deg, #d35400 0, #d35400 15px, transparent 15px, transparent 35px);
+  opacity: 0.4;
+}
+
+/* ===================================================
+   MAIN LAYOUT & HEADER
+   =================================================== */
+
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.game-header {
+  height: 68px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+  z-index: 20;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: #ffffff;
+  border-radius: 20px;
+  font-family: var(--font-kids);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b35400;
+  transition: transform 0.1s ease;
+}
+
+.header-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #b35400;
+}
+
+.header-btn.icon-only {
+  padding: 8px 14px;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #f39c12;
+  color: #d35400;
+}
+
+.header-game-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f4fd;
+  color: #2980b9;
+  border: 2px dashed #3498db;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+}
+
+.header-game-switcher:hover {
+  transform: scale(1.05);
+}
+
+.header-level-badge {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #1e8449;
+}
+
+.header-stars {
+  background: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 2px solid #f1c40f;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #d35400;
+}
+
+/* ===================================================
+   MAIN SCREEN & LEO HERO
+   =================================================== */
+
+.game-main {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px 0 15px;
+}
+
+.home-brand-header {
+  margin-bottom: 6px;
+}
+
+.home-main-logo {
+  max-width: 310px;
+  width: 75vw;
+  height: auto;
+  object-fit: contain;
+}
+
+.leo-hero-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0 10px;
+  gap: 20px;
+}
+
+.leo-fullbody-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leo-fullbody-hero-img {
+  height: 235px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  cursor: pointer;
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.leo-ground-shadow {
+  width: 140px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 75%);
+  border-radius: 50%;
+  margin-top: -8px;
+  z-index: 1;
+}
+
+.leo-speech-bubble-hero {
+  position: relative;
+  background: #ffffff;
+  border: 4px solid #f39c12;
+  border-radius: 26px;
+  padding: 14px 20px;
+  max-width: 320px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.leo-speech-bubble-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  transform: translateY(-50%);
+  border-width: 10px 14px 10px 0;
+  border-style: solid;
+  border-color: transparent #f39c12 transparent transparent;
+}
+
+.speech-replay-btn {
+  background: #f1c40f;
+  border: none;
+  font-size: 1.4rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d4ac0d;
+  flex-shrink: 0;
+}
+.speech-replay-btn:active {
+  transform: translateY(2px);
+}
+
+.game-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  margin: 5px 0 2px;
+  text-shadow: 3px 3px 0 #ffffff, 5px 5px 0 rgba(0,0,0,0.06);
+}
+
+.title-word.color-orange { color: #e67e22; }
+.title-word.color-green { color: #27ae60; }
+.title-word.color-yellow { color: #f39c12; }
+
+.game-subtitle {
+  font-size: 1.2rem;
+  color: #576574;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.btn-big-play {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.7rem;
+  font-weight: 800;
+  padding: 16px 44px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #a04000, 0 15px 25px rgba(230, 126, 34, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.15s ease;
+}
+
+.btn-big-play:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #a04000;
+}
+
+/* ===================================================
+   STAGES & LEVEL SELECTOR
+   =================================================== */
+
+.level-map-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 10px 10px 35px;
+}
+
+.stage-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stage-tab-btn {
+  flex: 1;
+  max-width: 320px;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 4px solid #dcdde1;
+  border-radius: 24px;
+  padding: 12px 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-kids);
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+}
+
+.stage-tab-btn.active {
+  border-color: #27ae60;
+  background: #ffffff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(39, 174, 96, 0.25);
+}
+
+.stage-tab-btn.locked {
+  opacity: 0.7;
+}
+
+.stage-tab-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.stage-status-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: #f1f2f6;
+  color: #747d8c;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+
+.stage-tab-btn.active .stage-status-badge {
+  background: #e8f8f5;
+  color: #117a65;
+}
+
+.stage-tab-btn.locked .stage-status-badge {
+  background: #ffeaa7;
+  color: #d35400;
+}
+
+.level-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+.level-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: var(--border-radius-card);
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  cursor: pointer;
+  position: relative;
+  border: 4px solid #dcdde1;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-card.unlocked {
+  border-color: #2ecc71;
+  background: #ffffff;
+}
+
+.level-card.unlocked:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 28px rgba(46, 204, 113, 0.3);
+}
+
+.level-card:not(.unlocked) {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+.level-card .level-num {
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  background: #e67e22;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-art {
+  font-size: 3.2rem;
+  margin: 6px 0;
+}
+
+.level-info h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.level-info p {
+  font-size: 0.85rem;
+  color: #747d8c;
+  line-height: 1.2;
+}
+
+.card-stars {
+  font-size: 1.3rem;
+  color: #f1c40f;
+  margin-top: 6px;
+}
+
+/* ===================================================
+   SHARED GAMEPLAY SCREEN WITH LEO COMPANION
+   =================================================== */
+
+.leo-sidekick-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #f39c12;
+  border-radius: 28px;
+  padding: 8px 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+}
+
+.leo-companion-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.leo-companion-img {
+  height: 115px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.18));
+  cursor: pointer;
+}
+
+.instruction-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.speech-target {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2f3542;
+}
+
+.animal-prompt-word {
+  display: inline-block;
+  padding: 3px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.65rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #e67e22;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.spanish-hint {
+  font-size: 1.15rem;
+  color: #747d8c;
+  margin-left: 8px;
+}
+
+.voice-btn-round {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b7950b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.round-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid white;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f39c12, #2ecc71);
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+.round-counter {
+  font-weight: 700;
+  color: #2f3542;
+  font-size: 1.05rem;
+}
+
+/* ===================================================
+   LEVEL 1: BARN PEEK-A-BOO
+   =================================================== */
+
+/* ===================================================
+   LEVEL 1: BARN PEEK-A-BOO (Real 3D Hinged Barn Doors)
+   =================================================== */
+
+.barn-peek-arena {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 15px;
+  perspective: 1000px;
+}
+
+.barn-door-card {
+  width: 145px;
+  height: 195px;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.barn-door-card:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+.barn-door-interior {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, #fff7d6 0%, #fdeaa8 100%);
+  border: 5px solid #e67e22;
+  border-radius: 24px;
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.barn-door-leaf {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #c0392b, #962d22);
+  border: 5px solid #6b1406;
+  border-radius: 24px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.barn-door-card.open .barn-door-leaf {
+  transform: rotateY(-118deg);
+  box-shadow: -8px 10px 20px rgba(0,0,0,0.3);
+}
+
+.barn-door-wood-beams {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.barn-door-question {
+  font-size: 3.4rem;
+  color: #ffd32a;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.35);
+  animation: pulseSubtle 2.5s infinite ease-in-out;
+}
+
+.barn-door-knob {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #f1c40f;
+  border: 2px solid #b7950b;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.barn-peek-animal-icon {
+  font-size: 4.8rem;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.barn-door-card.open .barn-peek-animal-icon {
+  animation: popIn 0.4s ease-out;
+}
+
+.barn-door-label {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-top: 4px;
+  font-family: var(--font-kids);
+}
+
+/* ===================================================
+   LEVEL 2: FEED THE ANIMALS
+   =================================================== */
+
+.feeding-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.feeding-target-animal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  border: 5px solid #2ecc71;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+}
+
+.feeding-target-animal.chewing {
+  animation: animalChew 0.35s 3 alternate ease-in-out;
+  border-color: #f1c40f;
+}
+
+@keyframes animalChew {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15) translateY(-8px); }
+}
+
+.eating-heart {
+  position: absolute;
+  top: 10px;
+  font-size: 2.5rem;
+  animation: floatHeart 0.9s forwards ease-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes floatHeart {
+  0% { opacity: 1; transform: translateY(0) scale(0.6); }
+  100% { opacity: 0; transform: translateY(-60px) scale(1.4); }
+}
+
+.feeding-animal-avatar {
+  font-size: 6.5rem;
+}
+
+.feeding-animal-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #27ae60;
+  margin-top: 4px;
+}
+
+.food-trough-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.food-card-btn {
+  width: 100px;
+  height: 110px;
+  background: white;
+  border-radius: 22px;
+  border: 4px solid #f39c12;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  transition: transform 0.15s ease;
+}
+
+.food-card-btn:hover {
+  transform: translateY(-5px) scale(1.08);
+}
+
+/* ===================================================
+   LEVEL 3: SOUND DETECTIVE
+   =================================================== */
+
+.sound-detective-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.listening-speaker-box {
+  display: flex;
+  justify-content: center;
+}
+
+.mega-speaker-pulse {
+  background: linear-gradient(135deg, #f1c40f, #e67e22);
+  border: 6px solid white;
+  border-radius: 35px;
+  padding: 18px 36px;
+  box-shadow: 0 12px 30px rgba(230, 126, 34, 0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.sound-wave-anim {
+  font-size: 3.5rem;
+}
+
+.sound-onomatopoeia {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+
+.animals-cards-lineup {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sound-animal-card {
+  width: 110px;
+  height: 130px;
+  background: white;
+  border-radius: 24px;
+  border: 4px solid #dcdde1;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  transition: transform 0.15s ease;
+}
+
+.sound-animal-card:hover {
+  transform: translateY(-6px) scale(1.08);
+  border-color: #2ecc71;
+}
+
+.sound-animal-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+/* ===================================================
+   LEVEL 4: DUCK POND
+   =================================================== */
+
+.ducks-count-badge {
+  display: inline-block;
+  background: #f39c12;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.duck-pond-arena {
+  flex: 1;
+  position: relative;
+  background: radial-gradient(ellipse at center, #74b9ff 0%, #0984e3 100%);
+  border-radius: 30px;
+  border: 4px solid white;
+  overflow: hidden;
+  box-shadow: inset 0 0 35px rgba(0,0,0,0.25), 0 8px 24px rgba(9, 132, 227, 0.25);
+  min-height: 320px;
+}
+
+.pond-duck-item {
+  position: absolute;
+  font-size: 4rem;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: swimDuck 3.2s infinite alternate ease-in-out;
+  z-index: 5;
+}
+
+.pond-duck-item:hover {
+  transform: scale(1.22) translateY(-4px);
+}
+
+.pond-duck-item:active {
+  transform: scale(0.9);
+}
+
+.pond-lily-pad {
+  position: absolute;
+  font-size: 2.8rem;
+  opacity: 0.75;
+  pointer-events: none;
+  user-select: none;
+  animation: floatLily 5s infinite alternate ease-in-out;
+  z-index: 1;
+}
+
+@keyframes swimDuck {
+  0% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+  100% { transform: translateY(-16px) rotate(5deg); }
+}
+
+@keyframes floatLily {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-6px) rotate(8deg); }
+}
+
+/* ===================================================
+   LEVEL 5: BARNYARD DANCE
+   =================================================== */
+
+.barn-dance-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.barn-leo-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 4px solid #f39c12;
+}
+
+.leo-stage-avatar {
+  position: relative;
+}
+
+.leo-dancer-img {
+  height: 135px;
+  width: auto;
+  object-fit: contain;
+}
+
+.dancer {
+  animation: danceLeo 0.75s infinite alternate ease-in-out;
+}
+
+@keyframes danceLeo {
+  0% { transform: translateY(0) rotate(-6deg) scale(1); }
+  100% { transform: translateY(-14px) rotate(6deg) scale(1.06); }
+}
+
+.hay-bales-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.hay-bale-tile {
+  height: 95px;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  border-radius: 24px;
+  border: 4px solid white;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  transition: transform 0.15s ease;
+}
+
+.hay-bale-tile.dancing {
+  animation: danceAnimal 0.5s infinite alternate ease-in-out;
+  border-color: #2ecc71;
+  box-shadow: 0 0 25px rgba(46, 204, 113, 0.6);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+@keyframes danceAnimal {
+  0% { transform: translateY(0) rotate(-12deg) scale(1.15); }
+  100% { transform: translateY(-18px) rotate(12deg) scale(1.25); }
+}
+
+.hay-bale-tile:hover {
+  transform: scale(1.05);
+}
+
+.dance-score-bar {
+  background: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* ===================================================
+   STAGE 2 (LEVELS 6 - 10)
+   =================================================== */
+
+.shadow-stage, .family-match-stage, .balloon-sky-stage, .harvest-stage, .parade-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- LEVEL 6: SHADOW SAFARI --- */
+.shadow-q-badge {
+  background: #2c3e50;
+  color: #f1c40f;
+  padding: 4px 14px;
+  border-radius: 14px;
+  letter-spacing: 0.5px;
+}
+
+.mystery-shadow-box {
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, #fff9e6 30%, #fed330 100%);
+  border-radius: 36px;
+  border: 7px solid #e67e22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 30px rgba(230, 126, 34, 0.28), inset 0 0 25px rgba(255,255,255,0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.shadow-spotlight {
+  position: absolute;
+  top: -20px;
+  left: 20%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 80%);
+  pointer-events: none;
+  transform: rotate(15deg);
+}
+
+.shadow-figure {
+  font-size: 6.5rem;
+  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+
+.shadow-figure.is-shadow {
+  filter: brightness(0) contrast(150%) drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+  transform: scale(1);
+}
+
+.shadow-figure.revealed {
+  filter: brightness(1) drop-shadow(0 10px 22px rgba(241, 196, 15, 0.65));
+  transform: scale(1.15) rotate(4deg);
+  animation: celebrateHopLeo 0.4s ease-in-out infinite alternate;
+}
+
+.shadow-hint-bar {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 18px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7f8c8d;
+  margin: 6px 0;
+}
+
+.animal-candidates-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.shadow-animal-btn {
+  background: #ffffff;
+  border: 4px solid #f39c12;
+  border-radius: 22px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(243, 156, 18, 0.22);
+  transition: transform 0.18s, box-shadow 0.18s;
+  min-width: 95px;
+}
+
+.shadow-animal-btn:hover {
+  transform: translateY(-5px) scale(1.06);
+  box-shadow: 0 12px 24px rgba(243, 156, 18, 0.35);
+}
+
+.shadow-animal-btn .sa-icon { font-size: 3.2rem; }
+.shadow-animal-btn .sa-name {
+  font-family: var(--font-kids);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #d35400;
+}
+
+/* --- LEVEL 7: MAMA & BABY FAMILIES --- */
+.mama-animal-nest {
+  background: #ffffff;
+  padding: 16px 36px;
+  border-radius: 32px;
+  border: 6px solid #f39c12;
+  box-shadow: 0 10px 25px rgba(243, 156, 18, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  animation: waveBounceLeo 3s ease-in-out infinite alternate;
+}
+
+.mama-icon-huge { font-size: 5.2rem; }
+.mama-nest-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.mama-title-word {
+  font-family: var(--font-kids);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #e67e22;
+}
+.mama-subtitle-hint {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7f8c8d;
+}
+
+.family-callout-text {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 18px;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #27ae60;
+  margin: 6px 0;
+}
+
+.baby-animals-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.baby-nest-card {
+  background: #ffffff;
+  border: 4px solid #2ecc71;
+  border-radius: 24px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(46, 204, 113, 0.2);
+  transition: transform 0.18s, box-shadow 0.18s;
+  min-width: 95px;
+}
+
+.baby-nest-card:hover {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 14px 28px rgba(46, 204, 113, 0.35);
+}
+
+.baby-icon-big { font-size: 3.2rem; }
+.baby-card-title {
+  font-family: var(--font-kids);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #27ae60;
+}
+.baby-card-parent {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7f8c8d;
+}
+
+/* --- LEVEL 8: ANIMAL BALLOON POP --- */
+.balloon-hint-bar {
+  background: rgba(255, 255, 255, 0.94);
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #e67e22;
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.15);
+  margin-bottom: 12px;
+}
+
+.balloons-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 26px;
+  width: 100%;
+  max-width: 660px;
+  margin: 12px 0 20px;
+  flex-wrap: wrap;
+}
+
+.animal-balloon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: floatBob 3s ease-in-out infinite alternate;
+  user-select: none;
+}
+
+.animal-balloon-item:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.animal-balloon-item:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.animal-balloon-item:hover {
+  transform: translateY(-8px) scale(1.06);
+}
+
+.balloon-bubble {
+  width: 135px;
+  height: 155px;
+  border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: inset -10px -10px 18px rgba(0,0,0,0.14), inset 8px 8px 16px rgba(255,255,255,0.45), 0 12px 26px rgba(0,0,0,0.18);
+  border: 3px solid rgba(255,255,255,0.65);
+  transition: transform 0.2s;
+}
+
+.balloon-bubble.red { background: linear-gradient(135deg, #ff7675, #d63031); }
+.balloon-bubble.blue { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+.balloon-bubble.yellow { background: linear-gradient(135deg, #ffeaa7, #f39c12); }
+.balloon-bubble.green { background: linear-gradient(135deg, #55efc4, #00b894); }
+.balloon-bubble.purple { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+
+.balloon-knot {
+  width: 14px;
+  height: 10px;
+  background: inherit;
+  border-radius: 2px 2px 4px 4px;
+  margin-top: -3px;
+  filter: brightness(0.85);
+}
+
+.balloon-string {
+  width: 2px;
+  height: 40px;
+  background: #bdc3c7;
+  border-radius: 1px;
+}
+
+.balloon-animal-icon {
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  line-height: 1;
+}
+
+.balloon-animal-name {
+  font-family: var(--font-kids);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  margin-top: 4px;
+}
+
+.balloon-bubble.popping {
+  animation: popBalloon 0.25s ease-out forwards;
+}
+
+@keyframes popBalloon {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes floatBob {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+/* --- LEVEL 9: FARM HARVEST --- */
+.harvest-product-word {
+  color: #e67e22;
+  font-weight: 800;
+}
+
+.harvest-item-showcase {
+  background: #ffffff;
+  border: 6px solid #f39c12;
+  border-radius: 30px;
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 12px 28px rgba(243, 156, 18, 0.25);
+  animation: waveBounceLeo 3s ease-in-out infinite alternate;
+}
+
+.showcase-icon { font-size: 4.5rem; }
+.showcase-label {
+  font-family: var(--font-kids);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #d35400;
+  letter-spacing: 0.5px;
+}
+
+.harvest-candidates-label {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 18px;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #7f8c8d;
+  margin: 6px 0;
+}
+
+.harvest-animals-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.harvest-animal-card {
+  background: #ffffff;
+  border: 4px solid #2ecc71;
+  border-radius: 24px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(46, 204, 113, 0.2);
+  transition: transform 0.18s, box-shadow 0.18s;
+  min-width: 100px;
+}
+
+.harvest-animal-card:hover {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 14px 28px rgba(46, 204, 113, 0.35);
+}
+
+.harvest-animal-card .ha-icon { font-size: 3.5rem; }
+.harvest-animal-card .ha-name {
+  font-family: var(--font-kids);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #27ae60;
+}
+
+/* --- LEVEL 10: GRAND FARM PARADE --- */
+.tractor-leader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 4px solid #27ae60;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.tractor-emoji { font-size: 4.5rem; }
+.leo-tractor-driver { height: 90px; width: auto; }
+
+.parade-wagons-train {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.wagon-cart {
+  background: #ffffff;
+  border: 4px dashed #f39c12;
+  border-radius: 22px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  min-height: 95px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+}
+
+.wagon-cart.filled {
+  border-style: solid;
+  border-color: #2ecc71;
+  background: #f0fdf4;
+  animation: popIn 0.4s ease-out;
+}
+
+.wagon-seat-label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #e67e22;
+  margin-bottom: 4px;
+}
+
+.wagon-cart.filled .wagon-seat-label {
+  color: #27ae60;
+}
+
+.wagon-occupant {
+  font-size: 3rem;
+}
+
+.parade-pick-label {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 18px;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #2980b9;
+  margin: 4px 0;
+}
+
+.parade-lineup-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.parade-animal-btn {
+  background: #ffffff;
+  border: 4px solid #3498db;
+  border-radius: 22px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(52, 152, 219, 0.2);
+  transition: transform 0.15s;
+  min-width: 95px;
+  min-height: 95px;
+  justify-content: center;
+}
+
+.parade-animal-btn:hover {
+  transform: translateY(-5px) scale(1.08);
+}
+
+.parade-animal-btn .pa-icon { font-size: 3.2rem; }
+.parade-animal-btn .pa-name {
+  font-family: var(--font-kids);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #2980b9;
+}
+
+/* ===================================================
+   SCREEN: CELEBRATION & LEO FARM DIPLOMA
+   =================================================== */
+
+#screenCelebration {
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+  overflow-y: auto;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+#screenCelebration.active {
+  display: flex;
+}
+
+.diploma-card {
+  position: relative;
+  width: 100%;
+  max-width: 660px;
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 28px 24px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.farm-diploma {
+  border: 10px solid #2ecc71;
+  box-shadow: 0 20px 45px rgba(46, 204, 113, 0.28);
+}
+
+.diploma-ribbon {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 6px 26px;
+  border-radius: 20px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.farm-ribbon {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  box-shadow: 0 4px 14px rgba(39, 174, 96, 0.45);
+}
+
+.diploma-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+.diploma-brand-logo {
+  height: 52px;
+  max-height: 52px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+}
+
+.diploma-titles h2 {
+  font-size: 1.65rem;
+  color: #27ae60;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.diploma-titles p {
+  color: #7f8c8d;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin: 3px 0 0;
+}
+
+.diploma-body {
+  margin-bottom: 10px;
+}
+
+.diploma-center-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: left;
+}
+
+.diploma-leo-fullbody-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diploma-leo-img {
+  height: 175px;
+  width: auto;
+  max-width: 145px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.16));
+}
+
+.diploma-text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.awarded-to-text {
+  font-size: 0.95rem;
+  color: #576574;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.child-name-wrapper {
+  margin-bottom: 10px;
+}
+
+.child-name-wrapper label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #7f8c8d;
+  margin-bottom: 4px;
+}
+
+.child-name-wrapper input {
+  font-family: var(--font-kids);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #27ae60;
+  text-align: center;
+  border: 3px dashed #2ecc71;
+  border-radius: 14px;
+  padding: 6px 14px;
+  outline: none;
+  background: #f0fdf4;
+  width: 100%;
+  max-width: 280px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.child-name-wrapper input:focus {
+  border-color: #f39c12;
+  background: #ffffff;
+}
+
+.animals-learned-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.a-tag {
+  background: #e8f8f5;
+  color: #117a65;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border: 1px solid #a3e4d7;
+}
+
+.diploma-stars-row {
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+.diploma-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.parade-stage {
+  transition: transform 0.3s ease;
+}
+
+.parade-stage.driving {
+  animation: tractorDriveAcross 2.8s forwards cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@keyframes tractorDriveAcross {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(25px); }
+  100% { transform: translateX(115vw); }
+}
+
+.btn-action-diploma.btn-stage2-continue {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  box-shadow: 0 6px 0 #b35400, 0 10px 22px rgba(243, 156, 18, 0.4);
+  font-size: 1.25rem;
+  padding: 14px 28px;
+  animation: pulseSubtle 2s infinite ease-in-out;
+}
+
+.btn-action-diploma.btn-stage2-continue:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.btn-action-diploma {
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-action-diploma:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btn-action-diploma:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-print { background: #27ae60; color: white; }
+.btn-replay { background: #f39c12; color: white; }
+
+/* Responsive adjustments for mobile / small screens */
+@media (max-width: 620px) {
+  .diploma-card {
+    padding: 22px 14px 16px;
+    border-width: 7px;
+  }
+  .diploma-ribbon {
+    font-size: 0.95rem;
+    padding: 5px 18px;
+    top: -15px;
+  }
+  .diploma-header {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+  }
+  .diploma-brand-logo {
+    height: 42px;
+  }
+  .diploma-titles h2 {
+    font-size: 1.35rem;
+  }
+  .diploma-titles p {
+    font-size: 0.85rem;
+  }
+  .diploma-center-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .diploma-leo-img {
+    height: 140px;
+  }
+  .animals-learned-badges {
+    justify-content: center;
+  }
+  .diploma-actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .btn-action-diploma {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Print styles for diploma */
+@media print {
+  body {
+    background: white !important;
+  }
+  .farm-background, .game-header, .diploma-actions, #confettiCanvas, #roundSuccessOverlay {
+    display: none !important;
+  }
+  .game-container, .game-main, #screenCelebration {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+  .diploma-card {
+    border: 8px solid #2ecc71 !important;
+    box-shadow: none !important;
+    margin: 20px auto !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Success Popup */
+.success-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+.success-overlay.hidden { display: none; }
+
+.farm-success-pop {
+  background: white;
+  border-radius: 30px;
+  border: 6px solid #2ecc71;
+  padding: 20px 25px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  width: 85%;
+}
+
+.leo-success-img {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+#confettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.wave-bounce {
+  animation: waveBounceLeo 3s ease-in-out infinite alternate;
+}
+
+@keyframes waveBounceLeo {
+  0% { transform: translateY(0px) rotate(0deg); }
+  30% { transform: translateY(-8px) rotate(-2deg); }
+  70% { transform: translateY(-4px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.celebrate-jump {
+  animation: celebrateHopLeo 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
+}
+
+@keyframes celebrateHopLeo {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-16px) scale(1.08) rotate(3deg); }
+}
+
+
+/* Leo welcome video replaces the former static mascot and speech bubble. */
+.leo-video-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0 10px;
+  min-height: 322px;
+}
+.leo-intro-video {
+  display: block;
+  width: min(74vw, 560px);
+  height: clamp(252px, 44.8vh, 378px);
+  object-fit: contain;
+  border-radius: 28px;
+  filter: drop-shadow(0 12px 18px rgba(26, 91, 78, .2));
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  outline-offset: 5px;
+}
+/* ===================================================
+   FARM HOME POLISH & HARMONY (MATCHING BILI'S ORDER)
+   =================================================== */
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4px 0 8px;
+}
+
+.home-brand-header {
+  margin-bottom: 4px;
+}
+
+.home-main-logo {
+  max-width: 280px;
+  width: 70vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 14px rgba(46, 125, 50, .18));
+}
+
+.leo-hero-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 0 8px;
+  gap: 18px;
+}
+
+.leo-fullbody-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leo-fullbody-hero-img {
+  height: 205px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 16px rgba(40, 70, 30, .2));
+  cursor: pointer;
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.leo-ground-shadow {
+  width: 125px;
+  height: 16px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 75%);
+  border-radius: 50%;
+  margin-top: -6px;
+  z-index: 1;
+}
+
+.leo-speech-bubble-hero {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,250,240,.94));
+  border: 2px solid rgba(243, 156, 18, .55);
+  border-radius: 24px;
+  padding: 12px 18px;
+  max-width: 310px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  box-shadow: 0 12px 24px rgba(160, 90, 20, .14), inset 0 1px 0 #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leo-speech-bubble-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  transform: translateY(-50%);
+  border-width: 8px 12px 8px 0;
+  border-style: solid;
+  border-color: transparent rgba(243, 156, 18, .6) transparent transparent;
+}
+
+.speech-replay-btn {
+  background: #f1c40f;
+  border: none;
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d4ac0d;
+  flex-shrink: 0;
+  transition: transform 0.1s ease;
+}
+
+.speech-replay-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #d4ac0d;
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 4px 0 2px;
+  text-shadow: 3px 3px 0 #ffffff, 5px 5px 0 rgba(0,0,0,0.06);
+  letter-spacing: 1px;
+  filter: drop-shadow(0 5px 0 rgba(255,255,255,.7));
+}
+
+.title-word.color-orange { color: #e67e22; }
+.title-word.color-green { color: #27ae60; }
+.title-word.color-yellow { color: #f39c12; }
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: #4b6584;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.btn-big-play {
+  background: linear-gradient(135deg, #2ed573, #10ac84);
+  color: white;
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.65rem;
+  font-weight: 800;
+  padding: 13px 44px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #0b8e6b, 0 15px 25px rgba(46, 213, 115, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-big-play:hover {
+  transform: translateY(-2px);
+}
+
+.btn-big-play:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #0b8e6b, 0 8px 15px rgba(46, 213, 115, 0.4);
+}
+
+.level-map-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 6px 10px 20px;
+}
+
+.stage-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.stage-tab-btn {
+  flex: 1;
+  max-width: 310px;
+  min-width: 190px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 8px 20px rgba(37, 91, 55, .12), inset 0 1px 0 rgba(255,255,255,.9);
+  border-radius: 22px;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-kids);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stage-tab-btn.active {
+  border-color: #2ecc71;
+  background: #ffffff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(46, 204, 113, 0.25);
+}
+
+.level-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .level-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+}
+
+.level-card {
+  background: linear-gradient(155deg, rgba(255,255,255,.98), rgba(245,255,248,.92));
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: var(--border-radius-card);
+  padding: 13px 10px;
+  text-align: center;
+  box-shadow: 0 10px 22px rgba(37, 91, 55, .11), inset 0 1px 0 #fff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-card.unlocked {
+  outline: 2px solid rgba(46, 204, 113, .38);
+  border-color: #2ecc71;
+}
+
+.level-card.unlocked:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 14px 28px rgba(46, 204, 113, 0.3);
+}
+
+.level-card:not(.unlocked) {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+.level-card .level-num {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #e67e22;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 #b35400;
+}
+
+.level-card .level-art {
+  font-size: 2.8rem;
+  margin: 4px 0;
+  filter: drop-shadow(0 6px 5px rgba(22, 68, 35, .15));
+  transform: translateZ(0);
+}
+
+.level-info h3 {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 3px;
+}
+
+.level-info p {
+  font-size: 0.82rem;
+  color: #747d8c;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.card-stars {
+  font-size: 1.2rem;
+  color: #f1c40f;
+  letter-spacing: 2px;
+}
+
+/* Leo Character Idle Animation (matching Bili's smooth sway) */
+.leo-fullbody-hero-img.wave-bounce {
+  animation: leoHeroIdle 4.8s cubic-bezier(.45, 0, .55, 1) infinite;
+  transform-origin: 50% 94%;
+  will-change: transform;
+}
+
+.leo-ground-shadow {
+  animation: leoShadowBreath 4.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes leoHeroIdle {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1, 1); }
+  22% { transform: translate3d(0, -3px, 0) rotate(-.7deg) scale(1.006, .997); }
+  52% { transform: translate3d(0, -8px, 0) rotate(.45deg) scale(1.012, .99); }
+  76% { transform: translate3d(0, -4px, 0) rotate(.7deg) scale(1.006, .997); }
+}
+
+@keyframes leoShadowBreath {
+  0%, 100% { transform: scaleX(1); opacity: .82; }
+  52% { transform: scaleX(.86); opacity: .56; }
+}
+
+@media (max-width: 700px) {
+  .leo-hero-showcase {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .leo-speech-bubble-hero::before {
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10px 12px 10px;
+    border-color: transparent transparent rgba(243, 156, 18, .6) transparent;
+  }
+}

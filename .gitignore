@@ -1,0 +1,16 @@
+# Local secrets written by `elevenlabs onboard`
+/.env.local
+.env
+.env.*
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# System & Cache
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+*.pyo
+

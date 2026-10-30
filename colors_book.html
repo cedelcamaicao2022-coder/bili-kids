@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bili Kids - The Rainbow of Colors | Animated Video Storybook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="colors_book_styles.css">
+</head>
+<body>
+  <!-- Ambient Audio Elements -->
+  <audio id="pageFlipSfx" preload="auto"></audio>
+  <audio id="wordAudio" preload="auto"></audio>
+
+  <!-- Global Header Bar -->
+  <header class="colors-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <a href="index.html" class="home-logo-link" title="Bili Kids Home">
+          <img src="assets/bilikids_logo.png" alt="Bili Kids Logo" class="brand-logo" onerror="this.style.display='none'">
+          <span class="logo-text">Bili<span class="highlight">Kids</span> <span class="badge-tag">📚 Library</span></span>
+        </a>
+      </div>
+
+      <!-- Suite Switcher Navigation -->
+      <nav class="suite-switcher">
+        <a href="index.html" class="nav-pill" title="Colors Adventure Game">
+          <span class="pill-icon">🎨</span>
+          <span class="pill-text">Colors</span>
+        </a>
+        <a href="farm.html" class="nav-pill" title="Leo's Farm">
+          <span class="pill-icon">🚜</span>
+          <span class="pill-text">Farm</span>
+        </a>
+        <a href="house.html" class="nav-pill" title="Luna's House">
+          <span class="pill-icon">🏠</span>
+          <span class="pill-text">House</span>
+        </a>
+        <a href="stories.html" class="nav-pill active" title="Bili Kids Library">
+          <span class="pill-icon">📚</span>
+          <span class="pill-text">Library</span>
+        </a>
+        <a href="lab.html" class="nav-pill" title="Junior Science Lab">
+          <span class="pill-icon">🧪</span>
+          <span class="pill-text">Lab</span>
+        </a>
+        <a href="writing.html" class="nav-pill" title="Writing Practice">
+          <span class="pill-icon">✏️</span>
+          <span class="pill-text">Writing</span>
+        </a>
+      </nav>
+
+      <!-- Audio & Action Controls -->
+      <div class="header-actions">
+        <a href="stories.html" class="action-btn back-library-btn" title="Back to Library Bookshelf">
+          <span class="btn-icon">📚</span>
+          <span class="btn-label">Library</span>
+        </a>
+        <button id="toggleSoundBtn" class="action-btn" title="Toggle Video Sound">
+          <span class="btn-icon">🔊</span>
+          <span class="btn-label">Sound ON</span>
+        </button>
+        <button id="fullscreenBtn" class="action-btn" title="Fullscreen Mode">
+          <span class="btn-icon">⛶</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Story Theater Container -->
+  <main class="colors-main">
+    <div class="theater-stage">
+      
+      <!-- Realistic Book Container -->
+      <div class="storybook-frame" id="storybookFrame">
+        
+        <!-- Book Header Banner -->
+        <div class="story-banner">
+          <div class="banner-title-group">
+            <div class="banner-tag-row">
+              <span class="colors-badge">🌈 THE RAINBOW OF COLORS</span>
+              <a href="stories.html" class="back-to-library-pill" title="Return to Bookshelf">📚 Bookshelf</a>
+            </div>
+            <h1 class="story-page-title" id="storyPageTitle">Sweet Red Apples & Strawberries</h1>
+          </div>
+          <div class="page-counter-badge" id="pageCounter">Page 1 of 8</div>
+        </div>
+
+        <!-- Book Stage (Video & Story Columns) -->
+        <div class="book-content-grid" id="tapReplayArea" title="Tap anywhere on the page to repeat the video!">
+          
+          <!-- Left Column: Video Stage -->
+          <div class="video-container">
+            <div class="video-wrapper">
+              <video 
+                id="colorsVideo" 
+                playsinline 
+                preload="auto" 
+                poster="assets/stories/colors_videos/colors_p1_red.png">
+                <source id="videoSource" src="assets/stories/colors_videos/colors_p1_red.mp4" type="video/mp4">
+                Your browser does not support video playback.
+              </video>
+              
+              <!-- Floating Tap to Replay Hint Overlay -->
+              <div class="replay-overlay-badge" id="replayBadge">
+                <span class="replay-icon">🔄</span>
+                <span class="replay-text">Tap to Replay Video!</span>
+              </div>
+            </div>
+
+            <!-- Video Controls Bar -->
+            <div class="video-control-row">
+              <button class="replay-video-btn" id="replayVideoBtn" title="Play Video Again">
+                <span class="icon">🔄</span> Play Video Again
+              </button>
+              <div class="video-progress-bar">
+                <div class="video-progress-fill" id="videoProgress"></div>
+              </div>
+              <button class="video-sound-toggle" id="videoSoundBtn" title="Toggle Sound">
+                <span id="videoSoundIcon">🔊</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Story Page -->
+          <div class="story-text-container">
+            <div class="story-card">
+              
+              <!-- Color Badge / Vocabulary Pill -->
+              <div class="color-pill-wrapper">
+                <div class="color-vocab-pill" id="colorVocabPill" title="Tap to hear color name!">
+                  <span class="color-icon" id="colorIcon">🍎</span>
+                  <span class="color-name" id="colorName">RED</span>
+                  <span class="listen-bubble">🗣️ Listen</span>
+                </div>
+              </div>
+
+              <!-- Main Story Text -->
+              <div class="story-narrative" id="storyText">
+                <!-- Dynamically populated -->
+              </div>
+
+              <!-- Toddler Interactive Prompt -->
+              <div class="toddler-prompt-box" id="toddlerPromptBox">
+                <span class="prompt-icon">⭐</span>
+                <span class="prompt-text" id="toddlerPrompt">Can you touch something red around you?</span>
+              </div>
+
+              <!-- Video Replay Actions -->
+              <div class="story-actions-row">
+                <button class="repeat-action-btn" id="repeatPageBtn" title="Play Video Again">
+                  <span class="icon">🔄</span> Play Video Again
+                </button>
+                <div class="tap-hint-pill">
+                  <span>👆 Tap anywhere on page to replay!</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="book-nav-bar">
+          <button class="nav-turn-btn prev-btn" id="prevPageBtn" title="Previous Page">
+            <span class="arrow">◀</span>
+            <span class="text">Back</span>
+          </button>
+
+          <!-- Interactive Color Page Thumbnails / Dots -->
+          <div class="page-dots-track" id="pageDotsTrack">
+            <!-- 8 interactive buttons generated by JS -->
+          </div>
+
+          <button class="nav-turn-btn next-btn" id="nextPageBtn" title="Next Page">
+            <span class="text">Next</span>
+            <span class="arrow">▶</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Celebration Modal for Last Page -->
+  <div class="celebration-modal" id="celebrationModal">
+    <div class="modal-card">
+      <div class="diploma-icon">🎉</div>
+      <h2 class="modal-title">Hooray! Rainbow Master!</h2>
+      <p class="modal-subtitle">You learned all the wonderful colors with our animal friends!</p>
+      
+      <div class="colors-diploma-badge">
+        <div class="badge-emblem">🍎 🍌 🐦 🐸 🍊 🍇 🌸 🌈</div>
+        <div class="badge-title">Official Color Champion</div>
+        <div class="badge-cert">Bili Kids Creative Arts</div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn primary-btn" id="readAgainBtn">
+          <span>🔄 Read Book Again</span>
+        </button>
+        <a href="stories.html" class="modal-btn secondary-btn">
+          <span>📚 Back to Library</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="colors_book_engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,2324 @@
+{
+  "project": "Bilikids Adventure - Babies Baseline",
+  "created_at": "2026-10-30",
+  "total_files": 460,
+  "total_bytes": 187314823,
+  "categories": {
+    "html": [
+      "cards_20.html",
+      "index.html",
+      "farm.html",
+      "writing.html",
+      "colors_book.html",
+      "stories.html",
+      "safari.html",
+      "house.html",
+      "lab.html",
+      "assets/luna/extract_luna.html"
+    ],
+    "javascript": [
+      "colors_book_engine.js",
+      "game.js",
+      "safari_engine.js",
+      "writing_engine.js",
+      "elevenlabs_client.js",
+      "generate_stories_audio.js",
+      "generate_luna_audio.js",
+      "house_game.js",
+      "stories_engine.js",
+      "generate_missing_house_audio.js",
+      "lab_engine.js",
+      "stories_books2d_data.js",
+      "farm_game.js"
+    ],
+    "css": [
+      "styles.css",
+      "farm_styles.css",
+      "lab_styles.css",
+      "colors_book_styles.css",
+      "writing_styles.css",
+      "stories_styles.css",
+      "house_styles.css",
+      "safari_styles.css"
+    ],
+    "audio": [
+      "assets/luna/audio/strawberry.mp3",
+      "assets/luna/audio/guitar.mp3",
+      "assets/luna/audio/act_yellow_door.m4a",
+      "assets/luna/audio/act_clock.mp3",
+      "assets/luna/audio/plate.mp3",
+      "assets/luna/audio/inst_brush_teeth.mp3",
+      "assets/luna/audio/bicycle.mp3",
+      "assets/luna/audio/inst_blender.mp3",
+      "assets/luna/audio/soap.mp3",
+      "assets/luna/audio/kitchen.mp3",
+      "assets/luna/audio/act_book.mp3",
+      "assets/luna/audio/banana.mp3",
+      "assets/luna/audio/garage.mp3",
+      "assets/luna/audio/juice.mp3",
+      "assets/luna/audio/fork.mp3",
+      "assets/luna/audio/lamp.mp3",
+      "assets/luna/audio/level_complete.mp3",
+      "assets/luna/audio/pants.mp3",
+      "assets/luna/audio/teddy.mp3",
+      "assets/luna/audio/inst_attic.mp3",
+      "assets/luna/audio/act_party_music_box.mp3",
+      "assets/luna/audio/shampoo.mp3",
+      "assets/luna/audio/table.mp3",
+      "assets/luna/audio/act_party_cake.mp3",
+      "assets/luna/audio/act_apple.mp3",
+      "assets/luna/audio/balloons.mp3",
+      "assets/luna/audio/act_shadow_safari.mp3",
+      "assets/luna/audio/act_train.m4a",
+      "assets/luna/audio/diploma_congrats.mp3",
+      "assets/luna/audio/act_teddy.mp3",
+      "assets/luna/audio/act_pants.mp3",
+      "assets/luna/audio/inst_shadow_safari.mp3",
+      "assets/luna/audio/cheer_awesome.mp3",
+      "assets/luna/audio/fridge.mp3",
+      "assets/luna/audio/cheese.mp3",
+      "assets/luna/audio/cup.mp3",
+      "assets/luna/audio/window.mp3",
+      "assets/luna/audio/act_toothbrush.mp3",
+      "assets/luna/audio/cheer_great_job.mp3",
+      "assets/luna/audio/act_juice.mp3",
+      "assets/luna/audio/orange.mp3",
+      "assets/luna/audio/inst_light_off.mp3",
+      "assets/luna/audio/act_shampoo.mp3",
+      "assets/luna/audio/act_blue_door.m4a",
+      "assets/luna/audio/luna_hello.mp3",
+      "assets/luna/audio/sofa.mp3",
+      "assets/luna/audio/act_brush_toothbrush.mp3",
+      "assets/luna/audio/apple.mp3",
+      "assets/luna/audio/inst_dining_table.mp3",
+      "assets/luna/audio/inst_laundry.mp3",
+      "assets/luna/audio/inst_sound_detective.mp3",
+      "assets/luna/audio/red_flower.mp3",
+      "assets/luna/audio/act_table.mp3",
+      "assets/luna/audio/red_door.mp3",
+      "assets/luna/audio/flower.mp3",
+      "assets/luna/audio/act_milk.mp3",
+      "assets/luna/audio/inst_where_belong.mp3",
+      "assets/luna/audio/car.mp3",
+      "assets/luna/audio/cheer_super.mp3",
+      "assets/luna/audio/act_bed.mp3",
+      "assets/luna/audio/clock.mp3",
+      "assets/luna/audio/cheer_you_did_it.mp3",
+      "assets/luna/audio/helmet.mp3",
+      "assets/luna/audio/act_tv.mp3",
+      "assets/luna/audio/inst_living_room.mp3",
+      "assets/luna/audio/act_bicycle.mp3",
+      "assets/luna/audio/knocking.mp3",
+      "assets/luna/audio/oops_try_again.mp3",
+      "assets/luna/audio/toothpaste.mp3",
+      "assets/luna/audio/robot.mp3",
+      "assets/luna/audio/water_cup.mp3",
+      "assets/luna/audio/tree.mp3",
+      "assets/luna/audio/door.mp3",
+      "assets/luna/audio/act_sound_detective.mp3",
+      "assets/luna/audio/shirt.mp3",
+      "assets/luna/audio/act_bathtub.mp3",
+      "assets/luna/audio/act_water_yellow_flower.mp3",
+      "assets/luna/audio/music_box.mp3",
+      "assets/luna/audio/act_sofa.mp3",
+      "assets/luna/audio/living_room.mp3",
+      "assets/luna/audio/television.mp3",
+      "assets/luna/audio/inst_bath_bubbles.mp3",
+      "assets/luna/audio/act_cup.mp3",
+      "assets/luna/audio/act_cheese.mp3",
+      "assets/luna/audio/yellow_door.mp3",
+      "assets/luna/audio/act_window.mp3",
+      "assets/luna/audio/bird.mp3",
+      "assets/luna/audio/inst_fridge.mp3",
+      "assets/luna/audio/act_orange.mp3",
+      "assets/luna/audio/inst_garden.mp3",
+      "assets/luna/audio/inst_flower_pots.mp3",
+      "assets/luna/audio/act_red_door.m4a",
+      "assets/luna/audio/toothbrush.mp3",
+      "assets/luna/audio/act_car.mp3",
+      "assets/luna/audio/bed.mp3",
+      "assets/luna/audio/bathroom.mp3",
+      "assets/luna/audio/act_flower.mp3",
+      "assets/luna/audio/socks.mp3",
+      "assets/luna/audio/purple_flower.mp3",
+      "assets/luna/audio/luna_welcome.mp3",
+      "assets/luna/audio/act_helmet.mp3",
+      "assets/luna/audio/act_tree.mp3",
+      "assets/luna/audio/butterfly.mp3",
+      "assets/luna/audio/doorbell.mp3",
+      "assets/luna/audio/water_tap.mp3",
+      "assets/luna/audio/milk.mp3",
+      "assets/luna/audio/act_butterfly.mp3",
+      "assets/luna/audio/act_spoon.mp3",
+      "assets/luna/audio/act_water_red_flower.mp3",
+      "assets/luna/audio/act_brush_toothpaste.mp3",
+      "assets/luna/audio/blue_door.mp3",
+      "assets/luna/audio/act_guitar.mp3",
+      "assets/luna/audio/plant.mp3",
+      "assets/luna/audio/act_socks.mp3",
+      "assets/luna/audio/inst_balcony.mp3",
+      "assets/luna/audio/act_soap.mp3",
+      "assets/luna/audio/book.mp3",
+      "assets/luna/audio/train.mp3",
+      "assets/luna/audio/inst_knock_door.mp3",
+      "assets/luna/audio/act_party_balloons.mp3",
+      "assets/luna/audio/yellow_flower.mp3",
+      "assets/luna/audio/act_strawberry.mp3",
+      "assets/luna/audio/spoon.mp3",
+      "assets/luna/audio/dining_room.mp3",
+      "assets/luna/audio/act_banana.mp3",
+      "assets/luna/audio/inst_bedroom.mp3",
+      "assets/luna/audio/party_cake.mp3",
+      "assets/luna/audio/bathtub.mp3",
+      "assets/luna/audio/inst_light_on.mp3",
+      "assets/luna/audio/inst_garage.mp3",
+      "assets/luna/audio/sun_sunday_backup.mp3",
+      "assets/luna/audio/act_brush_water_cup.mp3",
+      "assets/luna/audio/act_shirt.mp3",
+      "assets/luna/audio/inst_house_party.mp3",
+      "assets/luna/audio/act_robot.m4a",
+      "assets/luna/audio/ball.mp3",
+      "assets/luna/audio/act_fork.mp3",
+      "assets/luna/audio/act_lamp.mp3",
+      "assets/luna/audio/inst_tidy_toys.mp3",
+      "assets/luna/audio/act_water_purple_flower.mp3",
+      "assets/luna/audio/bedroom.mp3",
+      "assets/stories/colors_audio/word_pink.m4a",
+      "assets/stories/colors_audio/word_blue.m4a",
+      "assets/stories/colors_audio/word_yellow.m4a",
+      "assets/stories/colors_audio/word_orange.m4a",
+      "assets/stories/colors_audio/word_red.m4a",
+      "assets/stories/colors_audio/word_green.m4a",
+      "assets/stories/colors_audio/word_rainbow.m4a",
+      "assets/stories/colors_audio/word_purple.m4a",
+      "assets/stories/audio/bili_p1.mp3",
+      "assets/stories/audio/friends_p9.mp3",
+      "assets/stories/audio/friends_p8.mp3",
+      "assets/stories/audio/bili_p2.mp3",
+      "assets/stories/audio/bili_p3.mp3",
+      "assets/stories/audio/bili_p7.mp3",
+      "assets/stories/audio/bili_p6.mp3",
+      "assets/stories/audio/bili_p4.mp3",
+      "assets/stories/audio/bili_p5.mp3",
+      "assets/stories/audio/test_alice.mp3",
+      "assets/stories/audio/luna_p3.mp3",
+      "assets/stories/audio/luna_p2.mp3",
+      "assets/stories/audio/luna_p10.mp3",
+      "assets/stories/audio/luna_p1.mp3",
+      "assets/stories/audio/leo_p9.mp3",
+      "assets/stories/audio/luna_p5.mp3",
+      "assets/stories/audio/luna_p4.mp3",
+      "assets/stories/audio/leo_p8.mp3",
+      "assets/stories/audio/luna_p6.mp3",
+      "assets/stories/audio/luna_p7.mp3",
+      "assets/stories/audio/leo_p6.mp3",
+      "assets/stories/audio/leo_p7.mp3",
+      "assets/stories/audio/leo_p5.mp3",
+      "assets/stories/audio/luna_p9.mp3",
+      "assets/stories/audio/luna_p8.mp3",
+      "assets/stories/audio/bili_p10.mp3",
+      "assets/stories/audio/leo_p4.mp3",
+      "assets/stories/audio/friends_p10.mp3",
+      "assets/stories/audio/leo_p1.mp3",
+      "assets/stories/audio/leo_p3.mp3",
+      "assets/stories/audio/leo_p2.mp3",
+      "assets/stories/audio/bili_p8.mp3",
+      "assets/stories/audio/friends_p1.mp3",
+      "assets/stories/audio/bili_p9.mp3",
+      "assets/stories/audio/friends_p3.mp3",
+      "assets/stories/audio/friends_p2.mp3",
+      "assets/stories/audio/friends_p6.mp3",
+      "assets/stories/audio/friends_p7.mp3",
+      "assets/stories/audio/friends_p5.mp3",
+      "assets/stories/audio/leo_p10.mp3",
+      "assets/stories/audio/friends_p4.mp3",
+      "assets/stories/safari_audio/word_zebra.m4a",
+      "assets/stories/safari_audio/word_hippo.m4a",
+      "assets/stories/safari_audio/word_safari.m4a",
+      "assets/stories/safari_audio/safari_p4_narration.m4a",
+      "assets/stories/safari_audio/word_cheetah.m4a",
+      "assets/stories/safari_audio/word_ostrich.m4a",
+      "assets/stories/safari_audio/safari_p7_narration.m4a",
+      "assets/stories/safari_audio/safari_p3_narration.m4a",
+      "assets/stories/safari_audio/safari_p2_narration.m4a",
+      "assets/stories/safari_audio/safari_p6_narration.m4a",
+      "assets/stories/safari_audio/safari_p1_narration.m4a",
+      "assets/stories/safari_audio/safari_p5_narration.m4a",
+      "assets/stories/safari_audio/word_snake.m4a",
+      "assets/stories/safari_audio/word_meerkat.m4a",
+      "assets/stories/safari_audio/safari_p8_narration.m4a",
+      "assets/stories/safari_audio/word_giraffe.m4a",
+      "assets/audio/dance_on_blue.mp3",
+      "assets/audio/brown.mp3",
+      "assets/audio/inst_l1_yellow.mp3",
+      "assets/audio/inst_l1_red.mp3",
+      "assets/audio/bili_hello.mp3",
+      "assets/audio/level_complete.mp3",
+      "assets/audio/red.mp3",
+      "assets/audio/purple.mp3",
+      "assets/audio/catch_orange_bubbles.mp3",
+      "assets/audio/welcome.mp3",
+      "assets/audio/catch_green_bubbles.mp3",
+      "assets/audio/dance_on_green.mp3",
+      "assets/audio/inst_l2_orange.mp3",
+      "assets/audio/catch_purple_bubbles.mp3",
+      "assets/audio/inst_l2_purple.mp3",
+      "assets/audio/paint_grapes_purple.mp3",
+      "assets/audio/diploma_congrats.mp3",
+      "assets/audio/inst_l2_red.mp3",
+      "assets/audio/paint_donut_pink.mp3",
+      "assets/audio/cheer_awesome.mp3",
+      "assets/audio/cheer_great_job.mp3",
+      "assets/audio/dance_on_yellow.mp3",
+      "assets/audio/green.mp3",
+      "assets/audio/inst_l1_blue.mp3",
+      "assets/audio/orange.mp3",
+      "assets/audio/paint_frog_green.mp3",
+      "assets/audio/pink.m4a",
+      "assets/audio/blue.m4a",
+      "assets/audio/cheer_super.mp3",
+      "assets/audio/cheer_you_did_it.mp3",
+      "assets/audio/yellow.m4a",
+      "assets/audio/paint_carrot_orange.mp3",
+      "assets/audio/oops_try_again.mp3",
+      "assets/audio/inst_l2_green.mp3",
+      "assets/audio/pink.mp3",
+      "assets/audio/blue.mp3",
+      "assets/audio/cheer_super.m4a",
+      "assets/audio/cheer_you_did_it.m4a",
+      "assets/audio/paint_bear_brown.mp3",
+      "assets/audio/paint_sun_yellow.mp3",
+      "assets/audio/dance_on_orange.mp3",
+      "assets/audio/yellow.mp3",
+      "assets/audio/oops_try_again.m4a",
+      "assets/audio/one_left.mp3",
+      "assets/audio/cheer_awesome.m4a",
+      "assets/audio/cheer_great_job.m4a",
+      "assets/audio/green.m4a",
+      "assets/audio/inst_l1_green.mp3",
+      "assets/audio/orange.m4a",
+      "assets/audio/dance_on_red.mp3",
+      "assets/audio/catch_red_bubbles.mp3",
+      "assets/audio/purple.m4a",
+      "assets/audio/catch_yellow_bubbles.mp3",
+      "assets/audio/welcome.m4a",
+      "assets/audio/red.m4a",
+      "assets/audio/catch_blue_bubbles.mp3",
+      "assets/audio/two_left.mp3",
+      "assets/audio/brown.m4a",
+      "assets/audio/dance_on_purple.mp3",
+      "assets/audio/paint_strawberry_red.mp3",
+      "assets/audio/paint_dolphin_blue.mp3",
+      "assets/audio/inst_l2_yellow.mp3",
+      "assets/audio/inst_l2_pink.mp3",
+      "assets/leo/audio/inst_pop_balloon.mp3",
+      "assets/leo/audio/lamb.mp3",
+      "assets/leo/audio/chick.mp3",
+      "assets/leo/audio/level_complete.mp3",
+      "assets/leo/audio/inst_find_horse.mp3",
+      "assets/leo/audio/pig.mp3",
+      "assets/leo/audio/diploma_congrats.mp3",
+      "assets/leo/audio/inst_find_pig.mp3",
+      "assets/leo/audio/cat.mp3",
+      "assets/leo/audio/cheer_awesome.mp3",
+      "assets/leo/audio/cheer_great_job.mp3",
+      "assets/leo/audio/piglet.mp3",
+      "assets/leo/audio/inst_sound_detective.mp3",
+      "assets/leo/audio/rooster.mp3",
+      "assets/leo/audio/cheer_super.mp3",
+      "assets/leo/audio/cheer_you_did_it.mp3",
+      "assets/leo/audio/oops_try_again.mp3",
+      "assets/leo/audio/inst_find_sheep.mp3",
+      "assets/leo/audio/sheep.mp3",
+      "assets/leo/audio/leo_hello.mp3",
+      "assets/leo/audio/cow.mp3",
+      "assets/leo/audio/one_left.mp3",
+      "assets/leo/audio/leo_welcome.mp3",
+      "assets/leo/audio/inst_find_duck.mp3",
+      "assets/leo/audio/hen.mp3",
+      "assets/leo/audio/calf.mp3",
+      "assets/leo/audio/inst_feed_animals.mp3",
+      "assets/leo/audio/horse.mp3",
+      "assets/leo/audio/duck.mp3",
+      "assets/leo/audio/dog.mp3",
+      "assets/leo/audio/rabbit.mp3",
+      "assets/leo/audio/two_left.mp3",
+      "assets/leo/audio/inst_catch_ducks.mp3",
+      "assets/leo/audio/inst_find_cow.mp3"
+    ],
+    "images": [
+      "assets/bili_monster_transparent.png",
+      "assets/bilikids_logo.png",
+      "assets/bili.jpg",
+      "assets/bili.png",
+      "assets/bili_monster_crop.jpg",
+      "assets/bili_fullbody.png",
+      "assets/bili_monster_clean.png",
+      "assets/luna/luna_transparent.png",
+      "assets/luna/luna_raw.jpg",
+      "assets/stories/safari_videos/safari_p7_hippo.png",
+      "assets/stories/safari_videos/safari_p8_celebration.png",
+      "assets/stories/safari_videos/safari_p2_giraffe.png",
+      "assets/stories/safari_videos/safari_p6_snake.png",
+      "assets/stories/safari_videos/safari_p3_ostrich.png",
+      "assets/stories/safari_videos/safari_p4_zebra.png",
+      "assets/stories/safari_videos/safari_p1_meerkat.png",
+      "assets/stories/safari_videos/safari_p5_cheetah.png",
+      "assets/stories/books2d/bear_barnaby/cover.jpg",
+      "assets/stories/books2d/bunny_pip/p10.jpg",
+      "assets/stories/books2d/bunny_pip/p9.jpg",
+      "assets/stories/books2d/bunny_pip/p8.jpg",
+      "assets/stories/books2d/bunny_pip/p3.jpg",
+      "assets/stories/books2d/bunny_pip/p2.jpg",
+      "assets/stories/books2d/bunny_pip/p1.jpg",
+      "assets/stories/books2d/bunny_pip/p5.jpg",
+      "assets/stories/books2d/bunny_pip/p4.jpg",
+      "assets/stories/books2d/bunny_pip/cover.jpg",
+      "assets/stories/books2d/bunny_pip/p6.jpg",
+      "assets/stories/books2d/bunny_pip/p7.jpg",
+      "assets/stories/books2d/tito/p8.jpg",
+      "assets/stories/books2d/tito/p3.jpg",
+      "assets/stories/books2d/tito/p2.jpg",
+      "assets/stories/books2d/tito/p1.jpg",
+      "assets/stories/books2d/tito/p5.jpg",
+      "assets/stories/books2d/tito/p4.jpg",
+      "assets/stories/books2d/tito/cover.jpg",
+      "assets/stories/books2d/tito/p6.jpg",
+      "assets/stories/books2d/tito/p7.jpg",
+      "assets/stories/colors_videos/colors_p5_orange.png",
+      "assets/stories/colors_videos/colors_p7_pink.png",
+      "assets/stories/colors_videos/colors_p3_blue.png",
+      "assets/stories/colors_videos/colors_p4_green.png",
+      "assets/stories/colors_videos/colors_p6_purple.png",
+      "assets/stories/colors_videos/colors_p2_yellow.png",
+      "assets/stories/colors_videos/colors_p8_rainbow.png",
+      "assets/stories/colors_videos/colors_p1_red.png",
+      "assets/stories/images/friends_p3.jpg",
+      "assets/stories/images/friends_p2.jpg",
+      "assets/stories/images/bili_p8.png",
+      "assets/stories/images/bili_p8.jpg",
+      "assets/stories/images/bili_p9.jpg",
+      "assets/stories/images/bili_p9.png",
+      "assets/stories/images/friends_p1.jpg",
+      "assets/stories/images/leo_p10.jpg",
+      "assets/stories/images/friends_p5.jpg",
+      "assets/stories/images/friends_p4.jpg",
+      "assets/stories/images/friends_p6.jpg",
+      "assets/stories/images/friends_p7.jpg",
+      "assets/stories/images/luna_p9.jpg",
+      "assets/stories/images/leo_p5.jpg",
+      "assets/stories/images/friends_p10.jpg",
+      "assets/stories/images/leo_p4.jpg",
+      "assets/stories/images/bili_p10.jpg",
+      "assets/stories/images/luna_p8.jpg",
+      "assets/stories/images/bili_p10.png",
+      "assets/stories/images/leo_p6.jpg",
+      "assets/stories/images/leo_p7.jpg",
+      "assets/stories/images/leo_p3.jpg",
+      "assets/stories/images/leo_p2.jpg",
+      "assets/stories/images/leo_p1.jpg",
+      "assets/stories/images/luna_p1.jpg",
+      "assets/stories/images/luna_p3.jpg",
+      "assets/stories/images/luna_p10.jpg",
+      "assets/stories/images/luna_p2.jpg",
+      "assets/stories/images/luna_p6.jpg",
+      "assets/stories/images/luna_p7.jpg",
+      "assets/stories/images/luna_p5.jpg",
+      "assets/stories/images/leo_p9.jpg",
+      "assets/stories/images/leo_p8.jpg",
+      "assets/stories/images/luna_p4.jpg",
+      "assets/stories/images/bili_p2.png",
+      "assets/stories/images/bili_p2.jpg",
+      "assets/stories/images/bili_p3.jpg",
+      "assets/stories/images/bili_p3.png",
+      "assets/stories/images/bili_p1.png",
+      "assets/stories/images/friends_p9.jpg",
+      "assets/stories/images/bili_p1.jpg",
+      "assets/stories/images/friends_p8.jpg",
+      "assets/stories/images/bili_p4.png",
+      "assets/stories/images/bili_p4.jpg",
+      "assets/stories/images/bili_p5.jpg",
+      "assets/stories/images/bili_p5.png",
+      "assets/stories/images/bili_p7.png",
+      "assets/stories/images/bili_p7.jpg",
+      "assets/stories/images/bili_p6.jpg",
+      "assets/stories/images/bili_p6.png",
+      "assets/leo/leo.png",
+      "assets/leo/leo_raw.jpg",
+      "assets/leo/leo_transparent.png"
+    ],
+    "videos": [
+      "assets/stories/safari_videos/safari_p5_cheetah.mp4",
+      "assets/stories/safari_videos/safari_p6_snake.mp4",
+      "assets/stories/safari_videos/safari_p2_giraffe.mp4",
+      "assets/stories/safari_videos/safari_p1_meerkat.mp4",
+      "assets/stories/safari_videos/safari_p3_ostrich.mp4",
+      "assets/stories/safari_videos/safari_p4_zebra.mp4",
+      "assets/stories/safari_videos/safari_p8_celebration.mp4",
+      "assets/stories/safari_videos/safari_p7_hippo.mp4",
+      "assets/stories/colors_videos/colors_p1_red.mp4",
+      "assets/stories/colors_videos/colors_p8_rainbow.mp4",
+      "assets/stories/colors_videos/colors_p6_purple.mp4",
+      "assets/stories/colors_videos/colors_p3_blue.mp4",
+      "assets/stories/colors_videos/colors_p4_green.mp4",
+      "assets/stories/colors_videos/colors_p2_yellow.mp4",
+      "assets/stories/colors_videos/colors_p7_pink.mp4",
+      "assets/stories/colors_videos/colors_p5_orange.mp4",
+      "assets/leo/leo_intro.mp4"
+    ],
+    "other": [
+      "update_engine.py",
+      "build_20_books.py",
+      ".env.local",
+      "scratch_build_books.py",
+      "README.md",
+      ".gitignore",
+      "package-lock.json",
+      "package.json",
+      "generate_scene_art.py",
+      "abrir_juego.command"
+    ]
+  },
+  "files": {
+    "cards_20.html": {
+      "size": 26184,
+      "md5": "fbfceba8a033c8a3349217b3072ebf72"
+    },
+    "colors_book_engine.js": {
+      "size": 20844,
+      "md5": "6b44d55036f0d0e8d55519a029074c37"
+    },
+    "game.js": {
+      "size": 66617,
+      "md5": "0428b93fa93dc07d57c6c0f384520a71"
+    },
+    "update_engine.py": {
+      "size": 8349,
+      "md5": "3dc5b65501c00b4cf14a0cfd81c37dbc"
+    },
+    "build_20_books.py": {
+      "size": 102001,
+      "md5": "6e589923b1cc42f50377c72dc076f156"
+    },
+    "index.html": {
+      "size": 30201,
+      "md5": "9a55cbafff893b5c09655da2238e24e2"
+    },
+    "farm.html": {
+      "size": 28357,
+      "md5": "98c86bfc66445715b997bbb7d7dc82cc"
+    },
+    "safari_engine.js": {
+      "size": 19969,
+      "md5": "0cf9b12407151971772ccc37ca8656b8"
+    },
+    ".env.local": {
+      "size": 71,
+      "md5": "c9ae74b2328d180861ab431df48d2646"
+    },
+    "styles.css": {
+      "size": 49883,
+      "md5": "ba90948b933d7b0ff1dd7ba8abda066d"
+    },
+    "scratch_build_books.py": {
+      "size": 25087,
+      "md5": "de31240823a9ec422ec7d9d40f9e8013"
+    },
+    "farm_styles.css": {
+      "size": 47586,
+      "md5": "b61412c00adf5c915809d7134ed9a4ca"
+    },
+    "writing_engine.js": {
+      "size": 30014,
+      "md5": "3ffc72b101942d1a3546005afeb8fec4"
+    },
+    "elevenlabs_client.js": {
+      "size": 278,
+      "md5": "7e6cf31b8bac8aaa5af389f0e1b3c61f"
+    },
+    "generate_stories_audio.js": {
+      "size": 7324,
+      "md5": "348cdda466e930080662e46851538216"
+    },
+    "writing.html": {
+      "size": 7927,
+      "md5": "d5a53fb4bb854d2ca93c59f3a2fbb1e6"
+    },
+    "generate_luna_audio.js": {
+      "size": 6027,
+      "md5": "a50080efddff6b9bd4828bb2635580db"
+    },
+    "house_game.js": {
+      "size": 83555,
+      "md5": "3298439c8c862e0bc8cab8d8c1de4e47"
+    },
+    "lab_styles.css": {
+      "size": 42241,
+      "md5": "b990d20af01cee1517b3b5513bc0e7e0"
+    },
+    "colors_book_styles.css": {
+      "size": 18675,
+      "md5": "efd9af413e06f361e14e9c52c5d46a63"
+    },
+    "README.md": {
+      "size": 2785,
+      "md5": "0abe5f82d7aac0527a2def52d009c062"
+    },
+    "stories_engine.js": {
+      "size": 61495,
+      "md5": "6d887c803c50e10014fc1657cea01f1e"
+    },
+    "writing_styles.css": {
+      "size": 13088,
+      "md5": "6844225149ccfdece2a32c9d9a07a2be"
+    },
+    "colors_book.html": {
+      "size": 8682,
+      "md5": "0270a8b029a2944548b2c80bafaf377a"
+    },
+    "stories.html": {
+      "size": 48908,
+      "md5": "b5f1fd8c9394ee1c7b144767074d6496"
+    },
+    ".gitignore": {
+      "size": 184,
+      "md5": "e1aec7ddd3983a732453191c0fa69da8"
+    },
+    "package-lock.json": {
+      "size": 3759,
+      "md5": "c05949fbaee9cb3b1c293f15729d8f08"
+    },
+    "package.json": {
+      "size": 372,
+      "md5": "08a12633f6c6049caddba8a54d5abdfe"
+    },
+    "safari.html": {
+      "size": 8656,
+      "md5": "ebc0154cb72302edb46cc4ec5c25eb19"
+    },
+    "generate_missing_house_audio.js": {
+      "size": 9355,
+      "md5": "c7df8685f9e9ef8cef1864b79ac4841f"
+    },
+    "generate_scene_art.py": {
+      "size": 36702,
+      "md5": "f211525403de80d39d6cfc0cc6905682"
+    },
+    "lab_engine.js": {
+      "size": 56044,
+      "md5": "2c0981b656e37d9fdafc9b1ef71c2a0a"
+    },
+    "stories_styles.css": {
+      "size": 30891,
+      "md5": "bf9b3a92adaef52f92c70e84c35fd081"
+    },
+    "house.html": {
+      "size": 15571,
+      "md5": "beee427d5d37e13b2a5690d09560baed"
+    },
+    "abrir_juego.command": {
+      "size": 107,
+      "md5": "2888118eba64a2f9d4e7d95cd3f7207a"
+    },
+    "stories_books2d_data.js": {
+      "size": 137987,
+      "md5": "50eb365196808823e5fadc5d95433242"
+    },
+    "farm_game.js": {
+      "size": 66475,
+      "md5": "69b2efb8c53f969596e11bd7bb27173f"
+    },
+    "lab.html": {
+      "size": 39763,
+      "md5": "a592b29c876df25fb00cc77e0d72a781"
+    },
+    "house_styles.css": {
+      "size": 22014,
+      "md5": "cd13aae1ffbe09990c57e5b96df98708"
+    },
+    "safari_styles.css": {
+      "size": 17106,
+      "md5": "7de6526074959440083e67389aee3012"
+    },
+    "assets/bili_monster_transparent.png": {
+      "size": 391389,
+      "md5": "f847d4a4bac6627057f6afdaef5af362"
+    },
+    "assets/bilikids_logo.png": {
+      "size": 275683,
+      "md5": "7837a837a263c7d964ffc6196f983295"
+    },
+    "assets/bili.jpg": {
+      "size": 153786,
+      "md5": "dd512e2197bb701daf6296c3d3d9d7e3"
+    },
+    "assets/bili.png": {
+      "size": 846461,
+      "md5": "36cb12f7d86a55daebf0845ad5885167"
+    },
+    "assets/bili_monster_crop.jpg": {
+      "size": 80686,
+      "md5": "3226169d92d9c997338dd9f1b69e7b2d"
+    },
+    "assets/bili_fullbody.png": {
+      "size": 1115709,
+      "md5": "97618bfa73199cb07feb9821c109d857"
+    },
+    "assets/bili_monster_clean.png": {
+      "size": 286150,
+      "md5": "428a299b33461d2a2e845c7f56922478"
+    },
+    "assets/luna/extract_luna.html": {
+      "size": 3374,
+      "md5": "f05da34180eb97a3dbc1d043d13f984f"
+    },
+    "assets/luna/luna_transparent.png": {
+      "size": 1106423,
+      "md5": "cc3fa305a2544d801031f971158540f9"
+    },
+    "assets/luna/luna_raw.jpg": {
+      "size": 497568,
+      "md5": "85076cc05997217cbb8eca95f39378b4"
+    },
+    "assets/luna/audio/strawberry.mp3": {
+      "size": 17597,
+      "md5": "eb23e5bb4914ea93cb817b3f16c526dd"
+    },
+    "assets/luna/audio/guitar.mp3": {
+      "size": 16343,
+      "md5": "350bad1f6d0f99156dc49d24176bc9ae"
+    },
+    "assets/luna/audio/act_yellow_door.m4a": {
+      "size": 13865,
+      "md5": "db0456d64a04905cbb26d551d970f786"
+    },
+    "assets/luna/audio/act_clock.mp3": {
+      "size": 24284,
+      "md5": "886947989d94ac77006c48e504d13d98"
+    },
+    "assets/luna/audio/plate.mp3": {
+      "size": 13835,
+      "md5": "f93f166d9c593b3e15d35cce0dfb0cf9"
+    },
+    "assets/luna/audio/inst_brush_teeth.mp3": {
+      "size": 69006,
+      "md5": "eb2ffeb1c87de7d083f28073654790de"
+    },
+    "assets/luna/audio/bicycle.mp3": {
+      "size": 16343,
+      "md5": "6b1fadcd3c2e7bfe2c14fdd366865083"
+    },
+    "assets/luna/audio/inst_blender.mp3": {
+      "size": 66498,
+      "md5": "cd406245e0ce51ec15bb97c0dc55560e"
+    },
+    "assets/luna/audio/soap.mp3": {
+      "size": 15089,
+      "md5": "9f1922a44cedea52fd79ba1844208e95"
+    },
+    "assets/luna/audio/kitchen.mp3": {
+      "size": 13835,
+      "md5": "8f201976ccfa7d0418899f65ec0fd7c3"
+    },
+    "assets/luna/audio/act_book.mp3": {
+      "size": 46018,
+      "md5": "2c323ba76202079a43c91528f0e08df7"
+    },
+    "assets/luna/audio/banana.mp3": {
+      "size": 16343,
+      "md5": "96d483c4092d2f4839e791672de74aa1"
+    },
+    "assets/luna/audio/garage.mp3": {
+      "size": 16343,
+      "md5": "46354e98b836cb624008e3db2abd8f03"
+    },
+    "assets/luna/audio/juice.mp3": {
+      "size": 15089,
+      "md5": "b9f9718781aee76b85334085c141015d"
+    },
+    "assets/luna/audio/fork.mp3": {
+      "size": 15089,
+      "md5": "7d611389dbaf37dcedf47347ad535259"
+    },
+    "assets/luna/audio/lamp.mp3": {
+      "size": 15089,
+      "md5": "195be92ab16dc52e11da14fa3a9aa835"
+    },
+    "assets/luna/audio/level_complete.mp3": {
+      "size": 69006,
+      "md5": "0d0bbe0edbe97a901f9baa42235dffb5"
+    },
+    "assets/luna/audio/pants.mp3": {
+      "size": 16343,
+      "md5": "0616b17c19f4471c3f6b4aef309ddfc6"
+    },
+    "assets/luna/audio/teddy.mp3": {
+      "size": 15089,
+      "md5": "4cda2a0ded2da4bb2fb3d55ccf8f677f"
+    },
+    "assets/luna/audio/inst_attic.mp3": {
+      "size": 65244,
+      "md5": "8aa3a3a7913278c4d85eb83a7108ee45"
+    },
+    "assets/luna/audio/act_party_music_box.mp3": {
+      "size": 43510,
+      "md5": "cdb32943f31dce6f9b4fbe44c5ab3887"
+    },
+    "assets/luna/audio/shampoo.mp3": {
+      "size": 16343,
+      "md5": "181c508fd41bd364b79f8ca0f5b50194"
+    },
+    "assets/luna/audio/table.mp3": {
+      "size": 12581,
+      "md5": "c6dcbb1bd8cb2ad8973c3489e5d9c791"
+    },
+    "assets/luna/audio/act_party_cake.mp3": {
+      "size": 49780,
+      "md5": "94cb3ee32cae15c7b4a99d2edb6ec077"
+    },
+    "assets/luna/audio/act_apple.mp3": {
+      "size": 40585,
+      "md5": "0d04ce1d860a7057a6b44b4df561dc6c"
+    },
+    "assets/luna/audio/balloons.mp3": {
+      "size": 18851,
+      "md5": "f23c7490fcccd09581ab7d4705e727f3"
+    },
+    "assets/luna/audio/act_shadow_safari.mp3": {
+      "size": 66498,
+      "md5": "8bc2b5d8c59c98601cb7401791d99697"
+    },
+    "assets/luna/audio/act_train.m4a": {
+      "size": 15739,
+      "md5": "da7ddbd5f47e3882db980c85f7943df6"
+    },
+    "assets/luna/audio/diploma_congrats.mp3": {
+      "size": 100771,
+      "md5": "22103646375eba53f2ad9f0e5bc709ce"
+    },
+    "assets/luna/audio/act_teddy.mp3": {
+      "size": 46018,
+      "md5": "f853e6f13fb99fe05759432020d8ada2"
+    },
+    "assets/luna/audio/act_pants.mp3": {
+      "size": 47272,
+      "md5": "55b1a85c06571f4cd1ae80b68919a7dc"
+    },
+    "assets/luna/audio/inst_shadow_safari.mp3": {
+      "size": 69006,
+      "md5": "c023ffacb1e1057f51dd1a298bf11076"
+    },
+    "assets/luna/audio/cheer_awesome.mp3": {
+      "size": 35569,
+      "md5": "82622bbdc674a31b7a7f41c1348a1407"
+    },
+    "assets/luna/audio/fridge.mp3": {
+      "size": 16343,
+      "md5": "3ec747b39e2f72424bd8367deea4480a"
+    },
+    "assets/luna/audio/cheese.mp3": {
+      "size": 15089,
+      "md5": "289967a07b2b4ecb539c90f75092faf6"
+    },
+    "assets/luna/audio/cup.mp3": {
+      "size": 13835,
+      "md5": "9a67b88dde23663eb3e38c328ea892cc"
+    },
+    "assets/luna/audio/window.mp3": {
+      "size": 16343,
+      "md5": "e6b95841c4cfd5b9c81d9766131c91fd"
+    },
+    "assets/luna/audio/act_toothbrush.mp3": {
+      "size": 41838,
+      "md5": "fe1c0f2e6d7f1e39bf98465ce65d0c92"
+    },
+    "assets/luna/audio/cheer_great_job.mp3": {
+      "size": 51034,
+      "md5": "bf03c872e60add60b014d193db682440"
+    },
+    "assets/luna/audio/act_juice.mp3": {
+      "size": 40585,
+      "md5": "0aa1cae693e3f5fc79317db43377a323"
+    },
+    "assets/luna/audio/orange.mp3": {
+      "size": 15089,
+      "md5": "319933a3e4bd99d4f6403abe8f355c4b"
+    },
+    "assets/luna/audio/inst_light_off.mp3": {
+      "size": 43510,
+      "md5": "73d272d17b5af38567dcf8e019d2cc31"
+    },
+    "assets/luna/audio/act_shampoo.mp3": {
+      "size": 41838,
+      "md5": "7fbd1b74998f891fb656269f91847c7f"
+    },
+    "assets/luna/audio/act_blue_door.m4a": {
+      "size": 13527,
+      "md5": "2bbb0b9b1397ed0bb79d0698097c22a2"
+    },
+    "assets/luna/audio/luna_hello.mp3": {
+      "size": 71514,
+      "md5": "dfe7d376fc1405223541a2647cb76a95"
+    },
+    "assets/luna/audio/sofa.mp3": {
+      "size": 13835,
+      "md5": "7b1fcbfe226812e6bcb07d1c8752cb3e"
+    },
+    "assets/luna/audio/act_brush_toothbrush.mp3": {
+      "size": 46018,
+      "md5": "52ee6758ec00dd71aff454e0a9d887c7"
+    },
+    "assets/luna/audio/apple.mp3": {
+      "size": 12581,
+      "md5": "e539f79cfa2866227893c3feaea33429"
+    },
+    "assets/luna/audio/inst_dining_table.mp3": {
+      "size": 54795,
+      "md5": "4ea65011d73a9711fab6a459582843f4"
+    },
+    "assets/luna/audio/inst_laundry.mp3": {
+      "size": 57303,
+      "md5": "b50c836351daeca8da14dd34411ecae7"
+    },
+    "assets/luna/audio/inst_sound_detective.mp3": {
+      "size": 79037,
+      "md5": "46f2b047c8ba639bd900f1db4d7f5e9c"
+    },
+    "assets/luna/audio/red_flower.mp3": {
+      "size": 21358,
+      "md5": "72f6d8c13b67e1a01cc72002e8938032"
+    },
+    "assets/luna/audio/act_table.mp3": {
+      "size": 24284,
+      "md5": "385ae483e6706e4b1b8ddba8eb69bf45"
+    },
+    "assets/luna/audio/red_door.mp3": {
+      "size": 16343,
+      "md5": "50efe9bea97b79eae8efb0e38b2c8499"
+    },
+    "assets/luna/audio/flower.mp3": {
+      "size": 15089,
+      "md5": "e12877368c2e4a6568f75d6e2de16e03"
+    },
+    "assets/luna/audio/act_milk.mp3": {
+      "size": 38077,
+      "md5": "8f9022633a66feaa3ca4cdeda3779bd8"
+    },
+    "assets/luna/audio/inst_where_belong.mp3": {
+      "size": 53541,
+      "md5": "3766e605b2a3f35eeb12b5a840b13aca"
+    },
+    "assets/luna/audio/car.mp3": {
+      "size": 13835,
+      "md5": "6103956ad1dbf22a9405e36228c619d0"
+    },
+    "assets/luna/audio/cheer_super.mp3": {
+      "size": 41838,
+      "md5": "da86b7ea23037c53d7e8b0933057559a"
+    },
+    "assets/luna/audio/act_bed.mp3": {
+      "size": 36823,
+      "md5": "498d0b804e3f84bf28acb6978a19cfab"
+    },
+    "assets/luna/audio/clock.mp3": {
+      "size": 13835,
+      "md5": "de7e72674a90c0717d6d94c1f9fbe69c"
+    },
+    "assets/luna/audio/cheer_you_did_it.mp3": {
+      "size": 49780,
+      "md5": "599212fb3eb1488f70ac4f491f6c467e"
+    },
+    "assets/luna/audio/helmet.mp3": {
+      "size": 15089,
+      "md5": "c4a118022afb9995cce3636e9ef59f57"
+    },
+    "assets/luna/audio/act_tv.mp3": {
+      "size": 28046,
+      "md5": "ec5e1a12f6dbdd4c2675f60ecfaab246"
+    },
+    "assets/luna/audio/inst_living_room.mp3": {
+      "size": 54795,
+      "md5": "b9b3458d6b2205a89babfaabba82fb00"
+    },
+    "assets/luna/audio/act_bicycle.mp3": {
+      "size": 44764,
+      "md5": "86ec911357b97b329833d628fa24bda8"
+    },
+    "assets/luna/audio/knocking.mp3": {
+      "size": 16343,
+      "md5": "14647ffb823c94be5950368217e7d97a"
+    },
+    "assets/luna/audio/oops_try_again.mp3": {
+      "size": 41838,
+      "md5": "5a25c586dc0d88fdbbb83df4822c5cd9"
+    },
+    "assets/luna/audio/toothpaste.mp3": {
+      "size": 17597,
+      "md5": "f5f6cdc5f0583995f97316ec3b4287f7"
+    },
+    "assets/luna/audio/robot.mp3": {
+      "size": 16343,
+      "md5": "7450a46783353f43665b20c30d6c03cf"
+    },
+    "assets/luna/audio/water_cup.mp3": {
+      "size": 15089,
+      "md5": "7dc804ede88714f85de417694db70754"
+    },
+    "assets/luna/audio/tree.mp3": {
+      "size": 15089,
+      "md5": "e38054ed913f175a8cc7c50efe67f232"
+    },
+    "assets/luna/audio/door.mp3": {
+      "size": 12581,
+      "md5": "bfae1d0bbc76d69b42d70030203511a7"
+    },
+    "assets/luna/audio/act_sound_detective.mp3": {
+      "size": 54795,
+      "md5": "2b7198798fccda11558bb95b2f868f7b"
+    },
+    "assets/luna/audio/shirt.mp3": {
+      "size": 16343,
+      "md5": "d7b77c59e4cf0dbd6297250c9cc364e4"
+    },
+    "assets/luna/audio/act_bathtub.mp3": {
+      "size": 41838,
+      "md5": "75d8f75da6c9ddb4b6ad50aef3466c90"
+    },
+    "assets/luna/audio/act_water_yellow_flower.mp3": {
+      "size": 53541,
+      "md5": "05ba2963e54f4157d00e476c19b1e9c3"
+    },
+    "assets/luna/audio/music_box.mp3": {
+      "size": 20105,
+      "md5": "06843bd1c374207c64f688c3cb2ec6d0"
+    },
+    "assets/luna/audio/act_sofa.mp3": {
+      "size": 24284,
+      "md5": "4a4681ceb554a34e5326594b33ab8bf2"
+    },
+    "assets/luna/audio/living_room.mp3": {
+      "size": 16343,
+      "md5": "d9b59dc80e9fefb5f9c6fcca11219288"
+    },
+    "assets/luna/audio/television.mp3": {
+      "size": 16343,
+      "md5": "ca26ef492d2227c5261b0512ddd82845"
+    },
+    "assets/luna/audio/inst_bath_bubbles.mp3": {
+      "size": 69006,
+      "md5": "75e3a558f92e9b5a5876d08ce51e913e"
+    },
+    "assets/luna/audio/act_cup.mp3": {
+      "size": 36823,
+      "md5": "6570962f5d62c41916f5ea5a98f8b65e"
+    },
+    "assets/luna/audio/act_cheese.mp3": {
+      "size": 41838,
+      "md5": "54c49377f0674b146f43ab9fd3b2b227"
+    },
+    "assets/luna/audio/yellow_door.mp3": {
+      "size": 17597,
+      "md5": "ebba90ea5a06142e5a8481150e8c3984"
+    },
+    "assets/luna/audio/act_window.mp3": {
+      "size": 24284,
+      "md5": "b6c7267d75ff716200c11bcec78619bc"
+    },
+    "assets/luna/audio/bird.mp3": {
+      "size": 15089,
+      "md5": "802024407e2b7e188c3ca78e091cad0a"
+    },
+    "assets/luna/audio/inst_fridge.mp3": {
+      "size": 62318,
+      "md5": "b3f92d4a312fbfc75666617bdd22c054"
+    },
+    "assets/luna/audio/act_orange.mp3": {
+      "size": 52287,
+      "md5": "c6f3a358c7983fa3cc37b3eb756c2718"
+    },
+    "assets/luna/audio/inst_garden.mp3": {
+      "size": 71514,
+      "md5": "06c979f845f371d8c6b8825a207a9f17"
+    },
+    "assets/luna/audio/inst_flower_pots.mp3": {
+      "size": 40585,
+      "md5": "1ecc2a2af24f736e4343d59fa3caf9ea"
+    },
+    "assets/luna/audio/act_red_door.m4a": {
+      "size": 13313,
+      "md5": "e37569544f6b91f0b2f7859bed876a3f"
+    },
+    "assets/luna/audio/toothbrush.mp3": {
+      "size": 17597,
+      "md5": "5bb3d1380c7bb412c74b6327460cc100"
+    },
+    "assets/luna/audio/act_car.mp3": {
+      "size": 38077,
+      "md5": "d1b73f0849cb83b3ed9252fbc550c36f"
+    },
+    "assets/luna/audio/bed.mp3": {
+      "size": 13835,
+      "md5": "3ab3013041ab04910b1b0f374e290be0"
+    },
+    "assets/luna/audio/bathroom.mp3": {
+      "size": 15089,
+      "md5": "e1e7fe01ef0a2f53fce3f5723ba6d3a7"
+    },
+    "assets/luna/audio/act_flower.mp3": {
+      "size": 40585,
+      "md5": "56597fe12fffe2fb25410e9a60da3f8e"
+    },
+    "assets/luna/audio/socks.mp3": {
+      "size": 17597,
+      "md5": "7c003ed32bd9614574d8355ae01a74b4"
+    },
+    "assets/luna/audio/purple_flower.mp3": {
+      "size": 21358,
+      "md5": "2458574194b73816270f2d508404f934"
+    },
+    "assets/luna/audio/luna_welcome.mp3": {
+      "size": 98263,
+      "md5": "dc7a7e3337c76dd6a1e7a3d8302e03d4"
+    },
+    "assets/luna/audio/act_helmet.mp3": {
+      "size": 36823,
+      "md5": "b46a186d35595f0864db081974c920ed"
+    },
+    "assets/luna/audio/act_tree.mp3": {
+      "size": 47272,
+      "md5": "385c22b1089bd535f71d435a9b1fd0e5"
+    },
+    "assets/luna/audio/butterfly.mp3": {
+      "size": 17597,
+      "md5": "550decdab99bd9c55c06824355ece22f"
+    },
+    "assets/luna/audio/doorbell.mp3": {
+      "size": 15089,
+      "md5": "4a09aef94668dc2bf4ad1236e97c115a"
+    },
+    "assets/luna/audio/water_tap.mp3": {
+      "size": 17597,
+      "md5": "c730da398f87e28283cdf9047de452e8"
+    },
+    "assets/luna/audio/milk.mp3": {
+      "size": 16343,
+      "md5": "6c51d070fa43949fbb51c4f52ff37c4a"
+    },
+    "assets/luna/audio/act_butterfly.mp3": {
+      "size": 46018,
+      "md5": "a73c6290304e7f8c767c5c0e849d8e59"
+    },
+    "assets/luna/audio/act_spoon.mp3": {
+      "size": 39331,
+      "md5": "726cb0ca04d135d3eb444dff420b9cf9"
+    },
+    "assets/luna/audio/act_water_red_flower.mp3": {
+      "size": 53541,
+      "md5": "305f9cfca472db381751eb32d568f2cf"
+    },
+    "assets/luna/audio/act_brush_toothpaste.mp3": {
+      "size": 44764,
+      "md5": "5ddbd3879bc36942243ee6aa6640d38c"
+    },
+    "assets/luna/audio/blue_door.mp3": {
+      "size": 16343,
+      "md5": "76b420c9b578e376d336a5acfb190233"
+    },
+    "assets/luna/audio/act_guitar.mp3": {
+      "size": 44764,
+      "md5": "db7d821ffcedec8ce9239dec04d523c0"
+    },
+    "assets/luna/audio/plant.mp3": {
+      "size": 15089,
+      "md5": "60f16f2d7998391df38348e8152d40b1"
+    },
+    "assets/luna/audio/act_socks.mp3": {
+      "size": 47272,
+      "md5": "b54d1148dd661c63ddd70f0517bd3676"
+    },
+    "assets/luna/audio/inst_balcony.mp3": {
+      "size": 76529,
+      "md5": "231e36a6f9ef08bdc45cb9f7662fd50c"
+    },
+    "assets/luna/audio/act_soap.mp3": {
+      "size": 36823,
+      "md5": "e39b86ec6c43b1d3be430f876c22c3f2"
+    },
+    "assets/luna/audio/book.mp3": {
+      "size": 13835,
+      "md5": "b9a5175dcef4c544209802b08a84f1d7"
+    },
+    "assets/luna/audio/train.mp3": {
+      "size": 16343,
+      "md5": "6e641ada474736a8216fa834423893ce"
+    },
+    "assets/luna/audio/inst_knock_door.mp3": {
+      "size": 59811,
+      "md5": "6556872276c312cd972285e28991bc89"
+    },
+    "assets/luna/audio/act_party_balloons.mp3": {
+      "size": 43510,
+      "md5": "6c8616aa5bed768a0cbdfaf99ac87450"
+    },
+    "assets/luna/audio/yellow_flower.mp3": {
+      "size": 20105,
+      "md5": "2e6d81346d027ddf346766c4d7b246e5"
+    },
+    "assets/luna/audio/act_strawberry.mp3": {
+      "size": 51034,
+      "md5": "5c59d120566281a6f498f4299318a6d6"
+    },
+    "assets/luna/audio/spoon.mp3": {
+      "size": 16343,
+      "md5": "e318ee6bd22bd1d44af8ef13d1e3e8da"
+    },
+    "assets/luna/audio/dining_room.mp3": {
+      "size": 17597,
+      "md5": "4906d9658bdaddda57f3014059b741c7"
+    },
+    "assets/luna/audio/act_banana.mp3": {
+      "size": 49780,
+      "md5": "944a9552186e268c9bc6123cd9e838be"
+    },
+    "assets/luna/audio/inst_bedroom.mp3": {
+      "size": 56049,
+      "md5": "3af11f070da756042b5fbaa2b9794776"
+    },
+    "assets/luna/audio/party_cake.mp3": {
+      "size": 17597,
+      "md5": "9e92849809ad0600ceeda165675e499e"
+    },
+    "assets/luna/audio/bathtub.mp3": {
+      "size": 20105,
+      "md5": "ac4d89da53d8128ebf94e394950bd839"
+    },
+    "assets/luna/audio/inst_light_on.mp3": {
+      "size": 43510,
+      "md5": "0ae7d6952c12e22af663c2dc25def440"
+    },
+    "assets/luna/audio/inst_garage.mp3": {
+      "size": 51034,
+      "md5": "c8e71864839aae47cd7b8c2495b51c1c"
+    },
+    "assets/luna/audio/sun_sunday_backup.mp3": {
+      "size": 16343,
+      "md5": "8806fdad89d70216fb1b665cfb7e9280"
+    },
+    "assets/luna/audio/act_brush_water_cup.mp3": {
+      "size": 43510,
+      "md5": "0a67754941840714e2e30b31f984d565"
+    },
+    "assets/luna/audio/act_shirt.mp3": {
+      "size": 43510,
+      "md5": "a799193516f8a42401bb771ed1935c73"
+    },
+    "assets/luna/audio/inst_house_party.mp3": {
+      "size": 77783,
+      "md5": "70143056a584730bd69a50a7f5a778a4"
+    },
+    "assets/luna/audio/act_robot.m4a": {
+      "size": 16300,
+      "md5": "8ba25d3b4e313977cde5e5c08591c23a"
+    },
+    "assets/luna/audio/ball.mp3": {
+      "size": 15089,
+      "md5": "a14058045a965340c715d9d157a2bb03"
+    },
+    "assets/luna/audio/act_fork.mp3": {
+      "size": 40585,
+      "md5": "65a7d14134eaed262b47d64cbbe0a341"
+    },
+    "assets/luna/audio/act_lamp.mp3": {
+      "size": 24284,
+      "md5": "8942a1560d3a82a1061f89d0f5b6e17a"
+    },
+    "assets/luna/audio/inst_tidy_toys.mp3": {
+      "size": 51034,
+      "md5": "babc0db228f7a1529a7cc9fd7e9f59f0"
+    },
+    "assets/luna/audio/act_water_purple_flower.mp3": {
+      "size": 56049,
+      "md5": "29e5efe52bf050574e6c6d16918e9a70"
+    },
+    "assets/luna/audio/bedroom.mp3": {
+      "size": 15089,
+      "md5": "1d90e5a8cd5add94e803e0edb5842e60"
+    },
+    "assets/stories/safari_videos/safari_p5_cheetah.mp4": {
+      "size": 5388387,
+      "md5": "0da88600d03a6112e66315c83e6840fa"
+    },
+    "assets/stories/safari_videos/safari_p6_snake.mp4": {
+      "size": 5145818,
+      "md5": "a14f43d59262eb911173a536ca54c86d"
+    },
+    "assets/stories/safari_videos/safari_p7_hippo.png": {
+      "size": 729383,
+      "md5": "f5bea706d84c2c1516dbced5ed8b84f5"
+    },
+    "assets/stories/safari_videos/safari_p8_celebration.png": {
+      "size": 808109,
+      "md5": "e81dc49a3db2a142a24f969b6c1b05e2"
+    },
+    "assets/stories/safari_videos/safari_p2_giraffe.mp4": {
+      "size": 6017103,
+      "md5": "a06bb4324cc670b2f589cd8a26be758f"
+    },
+    "assets/stories/safari_videos/safari_p1_meerkat.mp4": {
+      "size": 4950279,
+      "md5": "e15e023d3ebb405d882d1748400fd055"
+    },
+    "assets/stories/safari_videos/safari_p3_ostrich.mp4": {
+      "size": 6942912,
+      "md5": "a749853a503ebf5f9b3d8b76d187af50"
+    },
+    "assets/stories/safari_videos/safari_p4_zebra.mp4": {
+      "size": 6723620,
+      "md5": "29ccedb16e69f27589659aa147c2d2dd"
+    },
+    "assets/stories/safari_videos/safari_p8_celebration.mp4": {
+      "size": 8130340,
+      "md5": "c6ef2884e98a323db618624da4c22863"
+    },
+    "assets/stories/safari_videos/safari_p2_giraffe.png": {
+      "size": 758433,
+      "md5": "899745e53007c9d2bbff92d833435ca9"
+    },
+    "assets/stories/safari_videos/safari_p7_hippo.mp4": {
+      "size": 5990861,
+      "md5": "162f63a4895dfe5d8c4cb8fea1c5d1dc"
+    },
+    "assets/stories/safari_videos/safari_p6_snake.png": {
+      "size": 776772,
+      "md5": "224b91b4a76537bd9aa633b1fbcc10c2"
+    },
+    "assets/stories/safari_videos/safari_p3_ostrich.png": {
+      "size": 813977,
+      "md5": "98a6e8657227b336e8c847729feafa11"
+    },
+    "assets/stories/safari_videos/safari_p4_zebra.png": {
+      "size": 701289,
+      "md5": "6743649cf3ec43ff8bcba88583374595"
+    },
+    "assets/stories/safari_videos/safari_p1_meerkat.png": {
+      "size": 741724,
+      "md5": "dc515d6682fecb2b90b81cfb1c8ec3d9"
+    },
+    "assets/stories/safari_videos/safari_p5_cheetah.png": {
+      "size": 757327,
+      "md5": "939f65e754e9eb5985978d823fa64a20"
+    },
+    "assets/stories/books2d/bear_barnaby/cover.jpg": {
+      "size": 1033113,
+      "md5": "9f875bb6f5bc8b4d5a72738a8978305a"
+    },
+    "assets/stories/books2d/bunny_pip/p10.jpg": {
+      "size": 1012332,
+      "md5": "5d5861049b68e2e0f8a0ac719fa00e8b"
+    },
+    "assets/stories/books2d/bunny_pip/p9.jpg": {
+      "size": 959826,
+      "md5": "9a8aa4a25824cce07830f8bf4876fc50"
+    },
+    "assets/stories/books2d/bunny_pip/p8.jpg": {
+      "size": 892360,
+      "md5": "35322b9b79d13bc0ea0b6c9da6cc00ea"
+    },
+    "assets/stories/books2d/bunny_pip/p3.jpg": {
+      "size": 1215859,
+      "md5": "46e23d8becb807b953506919ea7d0eda"
+    },
+    "assets/stories/books2d/bunny_pip/p2.jpg": {
+      "size": 972800,
+      "md5": "85af2e66cd48bcccb123a08b273ac3f0"
+    },
+    "assets/stories/books2d/bunny_pip/p1.jpg": {
+      "size": 948949,
+      "md5": "6572dfecca076252355baa1e54139bd9"
+    },
+    "assets/stories/books2d/bunny_pip/p5.jpg": {
+      "size": 983450,
+      "md5": "2797bb5ba904c1ecd2986e5b2fe18251"
+    },
+    "assets/stories/books2d/bunny_pip/p4.jpg": {
+      "size": 1097952,
+      "md5": "2101cad625ec8572a510153698d926c5"
+    },
+    "assets/stories/books2d/bunny_pip/cover.jpg": {
+      "size": 1045153,
+      "md5": "ab0372fec3a7f4672b37f6285d2c8668"
+    },
+    "assets/stories/books2d/bunny_pip/p6.jpg": {
+      "size": 996582,
+      "md5": "f6cd05bc68b7dfd4e32108a5a4783be2"
+    },
+    "assets/stories/books2d/bunny_pip/p7.jpg": {
+      "size": 904083,
+      "md5": "dc82c6c082454418c88e29521e1254de"
+    },
+    "assets/stories/books2d/tito/p8.jpg": {
+      "size": 391445,
+      "md5": "cd37f620e54af203ce02875671259a23"
+    },
+    "assets/stories/books2d/tito/p3.jpg": {
+      "size": 344388,
+      "md5": "6be6402d4a8f4021e745af7ef7284735"
+    },
+    "assets/stories/books2d/tito/p2.jpg": {
+      "size": 396294,
+      "md5": "55363e3f6dbd0202368455ce00d23361"
+    },
+    "assets/stories/books2d/tito/p1.jpg": {
+      "size": 366429,
+      "md5": "9bdc1f1063ccc201c050e49513e46465"
+    },
+    "assets/stories/books2d/tito/p5.jpg": {
+      "size": 332473,
+      "md5": "516b6e61d69b9c8cb2c64596782ebceb"
+    },
+    "assets/stories/books2d/tito/p4.jpg": {
+      "size": 315302,
+      "md5": "4845577650c95fb6c43f2a55e0d8d42d"
+    },
+    "assets/stories/books2d/tito/cover.jpg": {
+      "size": 163185,
+      "md5": "05267b68f4586f20495a65b83c7e27d2"
+    },
+    "assets/stories/books2d/tito/p6.jpg": {
+      "size": 353518,
+      "md5": "4ce990b5b2501d8d76e3a021b5909be3"
+    },
+    "assets/stories/books2d/tito/p7.jpg": {
+      "size": 382970,
+      "md5": "208942e5927afe591afd973d4e880c7d"
+    },
+    "assets/stories/colors_videos/colors_p5_orange.png": {
+      "size": 716879,
+      "md5": "16d6f8c012fdfa5486d1d7df4f02350f"
+    },
+    "assets/stories/colors_videos/colors_p1_red.mp4": {
+      "size": 6347655,
+      "md5": "4e847669c1dc262b74975cbdcd9f8427"
+    },
+    "assets/stories/colors_videos/colors_p8_rainbow.mp4": {
+      "size": 8469591,
+      "md5": "400f7137f7b5385505a0b902b1bf78b3"
+    },
+    "assets/stories/colors_videos/colors_p6_purple.mp4": {
+      "size": 7379703,
+      "md5": "3e590938e0b822f2452e6f5886ad1103"
+    },
+    "assets/stories/colors_videos/colors_p3_blue.mp4": {
+      "size": 4693268,
+      "md5": "2b8daeaa0c4a46bcf2bde39fb9e3f39a"
+    },
+    "assets/stories/colors_videos/colors_p7_pink.png": {
+      "size": 633047,
+      "md5": "687fedcd7e480ee22d174e1712367d40"
+    },
+    "assets/stories/colors_videos/colors_p4_green.mp4": {
+      "size": 3856579,
+      "md5": "33d3741918092eb933e02ba0e79159fe"
+    },
+    "assets/stories/colors_videos/colors_p2_yellow.mp4": {
+      "size": 5425914,
+      "md5": "fb5bf2042f2a37a84f276a215cdb85c0"
+    },
+    "assets/stories/colors_videos/colors_p7_pink.mp4": {
+      "size": 5023575,
+      "md5": "5b0ed29ffeec7b7aa235c81ba7ab00b6"
+    },
+    "assets/stories/colors_videos/colors_p3_blue.png": {
+      "size": 618574,
+      "md5": "cdd41df6d18659b74c41e305fde726bd"
+    },
+    "assets/stories/colors_videos/colors_p4_green.png": {
+      "size": 698996,
+      "md5": "757221b3325fb7409c7ffe12f7a99ab3"
+    },
+    "assets/stories/colors_videos/colors_p6_purple.png": {
+      "size": 746581,
+      "md5": "07c3a23c1b6c9fc9c71ceb196630ee47"
+    },
+    "assets/stories/colors_videos/colors_p2_yellow.png": {
+      "size": 610652,
+      "md5": "61f587bf2bef195f2e2ec07a3f4cb4de"
+    },
+    "assets/stories/colors_videos/colors_p8_rainbow.png": {
+      "size": 839620,
+      "md5": "23d91a7dd049aaa92b2d1750a9b99cd5"
+    },
+    "assets/stories/colors_videos/colors_p1_red.png": {
+      "size": 638454,
+      "md5": "bd8a564e8067955c837f8a11982dbbf3"
+    },
+    "assets/stories/colors_videos/colors_p5_orange.mp4": {
+      "size": 5784657,
+      "md5": "17048922c07eb561651a23fcbe6d7a55"
+    },
+    "assets/stories/images/friends_p3.jpg": {
+      "size": 180975,
+      "md5": "78abd004348300413dca96ea6cec7638"
+    },
+    "assets/stories/images/friends_p2.jpg": {
+      "size": 202019,
+      "md5": "50093b32a0cb12d661f271a4ebcf6fc7"
+    },
+    "assets/stories/images/bili_p8.png": {
+      "size": 2566476,
+      "md5": "2fa3cb81a24bd1db6627576b16dec540"
+    },
+    "assets/stories/images/bili_p8.jpg": {
+      "size": 629880,
+      "md5": "f9a6541b6de5e5f6d420431836805dfd"
+    },
+    "assets/stories/images/bili_p9.jpg": {
+      "size": 643770,
+      "md5": "3299dfb867186c2606cf0fd4ab2ec13e"
+    },
+    "assets/stories/images/bili_p9.png": {
+      "size": 2580907,
+      "md5": "61b7c9821b1c63d04978afdf140f0c89"
+    },
+    "assets/stories/images/friends_p1.jpg": {
+      "size": 943731,
+      "md5": "7869c80aef9ff6e8b8d4f88c3b7f8994"
+    },
+    "assets/stories/images/leo_p10.jpg": {
+      "size": 139503,
+      "md5": "832835a5fe315eb754e5507b915e9d6e"
+    },
+    "assets/stories/images/friends_p5.jpg": {
+      "size": 203442,
+      "md5": "fb86b437a6716e90a821b5e7e79a4e47"
+    },
+    "assets/stories/images/friends_p4.jpg": {
+      "size": 186606,
+      "md5": "f34292ae1d7b21a0800f8a16b4fe3ddc"
+    },
+    "assets/stories/images/friends_p6.jpg": {
+      "size": 198394,
+      "md5": "38b929ffd2f6d045ea2a9b4b51353f78"
+    },
+    "assets/stories/images/friends_p7.jpg": {
+      "size": 183889,
+      "md5": "70766481a0b008b555c58090933580e6"
+    },
+    "assets/stories/images/luna_p9.jpg": {
+      "size": 133938,
+      "md5": "61b286e476cf950fcd7c78ed00cfbaf6"
+    },
+    "assets/stories/images/leo_p5.jpg": {
+      "size": 152561,
+      "md5": "82ac06495a260c3810827c83b0ccb7be"
+    },
+    "assets/stories/images/friends_p10.jpg": {
+      "size": 222738,
+      "md5": "aa5695ac3d370d5ac72339d85d16c3c6"
+    },
+    "assets/stories/images/leo_p4.jpg": {
+      "size": 847742,
+      "md5": "5f0bbc29549efdeec9186e6fb80c84b4"
+    },
+    "assets/stories/images/bili_p10.jpg": {
+      "size": 625488,
+      "md5": "98b284677b4fcbe2de83a4c59e9e40ab"
+    },
+    "assets/stories/images/luna_p8.jpg": {
+      "size": 766953,
+      "md5": "dbc3d23e1fc3b48f3e183a104f35dd0a"
+    },
+    "assets/stories/images/bili_p10.png": {
+      "size": 2518129,
+      "md5": "6b3121f3d2fdc4fdaa785dbacaa46900"
+    },
+    "assets/stories/images/leo_p6.jpg": {
+      "size": 157347,
+      "md5": "71ecdd7f592c2c54cf84321d472c3a07"
+    },
+    "assets/stories/images/leo_p7.jpg": {
+      "size": 154370,
+      "md5": "72de4d64c23419ff5d39ae5328886d8a"
+    },
+    "assets/stories/images/leo_p3.jpg": {
+      "size": 155029,
+      "md5": "3fdcbc4793b1cc3ff41f91ac63286567"
+    },
+    "assets/stories/images/leo_p2.jpg": {
+      "size": 153833,
+      "md5": "27faed348ba7c49668b7b0499b70b9c6"
+    },
+    "assets/stories/images/leo_p1.jpg": {
+      "size": 802876,
+      "md5": "914e0daab0c4817ae739efe54bbaa91f"
+    },
+    "assets/stories/images/luna_p1.jpg": {
+      "size": 825497,
+      "md5": "695bb3096f796c3c0f52d25d7132fd07"
+    },
+    "assets/stories/images/luna_p3.jpg": {
+      "size": 138525,
+      "md5": "2b0016781002591fda31d5557db04609"
+    },
+    "assets/stories/images/luna_p10.jpg": {
+      "size": 128827,
+      "md5": "dc249679ca84daab5bc12ebb4ca12b11"
+    },
+    "assets/stories/images/luna_p2.jpg": {
+      "size": 153865,
+      "md5": "b830bdbe2b3c914320ee93bd0472a316"
+    },
+    "assets/stories/images/luna_p6.jpg": {
+      "size": 163221,
+      "md5": "bdff5bb1190d06bd925c8a88ce12e848"
+    },
+    "assets/stories/images/luna_p7.jpg": {
+      "size": 124303,
+      "md5": "bcea00b39ef145d0eae6d5605c749df1"
+    },
+    "assets/stories/images/luna_p5.jpg": {
+      "size": 151537,
+      "md5": "957d6bded0d670cbc58cf4463dfd2243"
+    },
+    "assets/stories/images/leo_p9.jpg": {
+      "size": 141844,
+      "md5": "5fdd0114d9e8c5e7a9688ae47f2488a3"
+    },
+    "assets/stories/images/leo_p8.jpg": {
+      "size": 154456,
+      "md5": "54daf9288c8e3b3b20fe927fd4f9d8a3"
+    },
+    "assets/stories/images/luna_p4.jpg": {
+      "size": 145491,
+      "md5": "854ddd3542250fc1911438a4497d4fc0"
+    },
+    "assets/stories/images/bili_p2.png": {
+      "size": 2476449,
+      "md5": "a0ef9cdd2cf3fd87b16dd0698a6db896"
+    },
+    "assets/stories/images/bili_p2.jpg": {
+      "size": 551673,
+      "md5": "b4efe6fe24d07d0571ca970a97417b45"
+    },
+    "assets/stories/images/bili_p3.jpg": {
+      "size": 614377,
+      "md5": "61a6e0e1bec51187b072db494815c804"
+    },
+    "assets/stories/images/bili_p3.png": {
+      "size": 2548108,
+      "md5": "70bdafda1f4e207e1eeef8320a210e36"
+    },
+    "assets/stories/images/bili_p1.png": {
+      "size": 1405798,
+      "md5": "0f5a598097589cb2932c15c86e170eeb"
+    },
+    "assets/stories/images/friends_p9.jpg": {
+      "size": 239691,
+      "md5": "9d778203ca1ba7b870e216ea465f2f4a"
+    },
+    "assets/stories/images/bili_p1.jpg": {
+      "size": 370241,
+      "md5": "c9569d36882fabdd62209b03ff32daef"
+    },
+    "assets/stories/images/friends_p8.jpg": {
+      "size": 1030048,
+      "md5": "f803ace3775de28b5594d5f1f16e57c6"
+    },
+    "assets/stories/images/bili_p4.png": {
+      "size": 2670040,
+      "md5": "53a563bc4647f7450f45d895e220f3b8"
+    },
+    "assets/stories/images/bili_p4.jpg": {
+      "size": 674480,
+      "md5": "5502eb0d5b41190469303e91da37c12b"
+    },
+    "assets/stories/images/bili_p5.jpg": {
+      "size": 691757,
+      "md5": "57091fa7d765bcc48455f097f9f088b2"
+    },
+    "assets/stories/images/bili_p5.png": {
+      "size": 2740332,
+      "md5": "98dd7f947fe674bbad1532eb65acf0c2"
+    },
+    "assets/stories/images/bili_p7.png": {
+      "size": 2518398,
+      "md5": "e2572913f334ab07e4401fc27fc569c6"
+    },
+    "assets/stories/images/bili_p7.jpg": {
+      "size": 614549,
+      "md5": "f0540ca7fe9bf02f8a8ba3b51bed4c5e"
+    },
+    "assets/stories/images/bili_p6.jpg": {
+      "size": 789257,
+      "md5": "958f97b51e83106d53cc31aed0260af8"
+    },
+    "assets/stories/images/bili_p6.png": {
+      "size": 2952250,
+      "md5": "b98496fe56f0bc7c0f3f196650d5deb0"
+    },
+    "assets/stories/colors_audio/word_pink.m4a": {
+      "size": 6355,
+      "md5": "195d09307bbbc8ecfdf41bd4f89bdd23"
+    },
+    "assets/stories/colors_audio/word_blue.m4a": {
+      "size": 5831,
+      "md5": "6c78a5c2be2b2bb094a50c842cdf28f1"
+    },
+    "assets/stories/colors_audio/word_yellow.m4a": {
+      "size": 6417,
+      "md5": "61ae6520ef163b2a0f743d499db4103c"
+    },
+    "assets/stories/colors_audio/word_orange.m4a": {
+      "size": 6693,
+      "md5": "b8e2088b16784836ee68e34e4b304dbd"
+    },
+    "assets/stories/colors_audio/word_red.m4a": {
+      "size": 6066,
+      "md5": "131155d9120797d8a9c57d604290fc27"
+    },
+    "assets/stories/colors_audio/word_green.m4a": {
+      "size": 6309,
+      "md5": "b96f3b0caf10b9b88649f585fa0ce905"
+    },
+    "assets/stories/colors_audio/word_rainbow.m4a": {
+      "size": 9603,
+      "md5": "54e3193c1d517eac4eb03ac54ef0e3b2"
+    },
+    "assets/stories/colors_audio/word_purple.m4a": {
+      "size": 6161,
+      "md5": "442f5e70b08901949c0be0a8a45d19db"
+    },
+    "assets/stories/audio/bili_p1.mp3": {
+      "size": 103278,
+      "md5": "962f637798245126f05bae290109c38e"
+    },
+    "assets/stories/audio/friends_p9.mp3": {
+      "size": 107458,
+      "md5": "807dcfa1a3401c51db521240684a2748"
+    },
+    "assets/stories/audio/friends_p8.mp3": {
+      "size": 109966,
+      "md5": "bf88b79c8dec7f8626f9807b7815e658"
+    },
+    "assets/stories/audio/bili_p2.mp3": {
+      "size": 104950,
+      "md5": "4763c431a5437c29ef6e7e22d4042dde"
+    },
+    "assets/stories/audio/bili_p3.mp3": {
+      "size": 108712,
+      "md5": "22df590f777b0593fe8015727b305283"
+    },
+    "assets/stories/audio/bili_p7.mp3": {
+      "size": 102025,
+      "md5": "5d87495e4122d422749d889766f45132"
+    },
+    "assets/stories/audio/bili_p6.mp3": {
+      "size": 80291,
+      "md5": "b7c4b31cde4693679f9f2d33ea842e41"
+    },
+    "assets/stories/audio/bili_p4.mp3": {
+      "size": 98263,
+      "md5": "f4cf184349114f92db55ccd424d5e06d"
+    },
+    "assets/stories/audio/bili_p5.mp3": {
+      "size": 97009,
+      "md5": "16cda57ce1cbad5866d265aad75b7de4"
+    },
+    "assets/stories/audio/test_alice.mp3": {
+      "size": 72767,
+      "md5": "e749c7079f0da980d66c129578deda05"
+    },
+    "assets/stories/audio/luna_p3.mp3": {
+      "size": 90740,
+      "md5": "03cf4317e8442dded69db859ac285c14"
+    },
+    "assets/stories/audio/luna_p2.mp3": {
+      "size": 86978,
+      "md5": "fa7866058eeea0b75b5f3f3de78aeadf"
+    },
+    "assets/stories/audio/luna_p10.mp3": {
+      "size": 100771,
+      "md5": "0c174cb5d9fe00c8d89f0c4f0af0a5d1"
+    },
+    "assets/stories/audio/luna_p1.mp3": {
+      "size": 102025,
+      "md5": "84921272347b91446a353b33ecb4a1ba"
+    },
+    "assets/stories/audio/leo_p9.mp3": {
+      "size": 89486,
+      "md5": "ffd4e411efa56f21a8b1b2b82dbbeec0"
+    },
+    "assets/stories/audio/luna_p5.mp3": {
+      "size": 93247,
+      "md5": "fb9da6251fad969f8ba311c3b38daa1d"
+    },
+    "assets/stories/audio/luna_p4.mp3": {
+      "size": 90740,
+      "md5": "020572e4c966bc32610069e0b9ec3c04"
+    },
+    "assets/stories/audio/leo_p8.mp3": {
+      "size": 104950,
+      "md5": "361605d8e5c722e338d2127141c317b8"
+    },
+    "assets/stories/audio/luna_p6.mp3": {
+      "size": 86978,
+      "md5": "fc3afcbb381a14b81fcf2f66f7bc7547"
+    },
+    "assets/stories/audio/luna_p7.mp3": {
+      "size": 107458,
+      "md5": "36d6f2b31ae7e6054904cccd3a98f006"
+    },
+    "assets/stories/audio/leo_p6.mp3": {
+      "size": 99517,
+      "md5": "cd88f88f826b6e00c0a376c74ef9d518"
+    },
+    "assets/stories/audio/leo_p7.mp3": {
+      "size": 104950,
+      "md5": "ed34f4b419637d6d32cb70a66f11a91b"
+    },
+    "assets/stories/audio/leo_p5.mp3": {
+      "size": 97009,
+      "md5": "c6b5cad15d39778d5bbe23e9b973c459"
+    },
+    "assets/stories/audio/luna_p9.mp3": {
+      "size": 85724,
+      "md5": "1df1e841d2540bb6755c03781d329113"
+    },
+    "assets/stories/audio/luna_p8.mp3": {
+      "size": 98263,
+      "md5": "ac90bcb71eb89b356693df13fb278eb7"
+    },
+    "assets/stories/audio/bili_p10.mp3": {
+      "size": 102025,
+      "md5": "965d20135a60d89859f2934565ab799a"
+    },
+    "assets/stories/audio/leo_p4.mp3": {
+      "size": 107458,
+      "md5": "68c7a4b7cc24c86671f7f8e0ea645569"
+    },
+    "assets/stories/audio/friends_p10.mp3": {
+      "size": 107458,
+      "md5": "b7322faaab94d07d7798abfd1a4290cf"
+    },
+    "assets/stories/audio/leo_p1.mp3": {
+      "size": 108712,
+      "md5": "f34f63679cafe55065406b296a22db2c"
+    },
+    "assets/stories/audio/leo_p3.mp3": {
+      "size": 103278,
+      "md5": "20154b1ecec78cdf4a1e0bf798a49bef"
+    },
+    "assets/stories/audio/leo_p2.mp3": {
+      "size": 97009,
+      "md5": "eb3b1511b516634fd524f0add547a3f4"
+    },
+    "assets/stories/audio/bili_p8.mp3": {
+      "size": 81545,
+      "md5": "59e3787210a6bd985979b839c74afc7b"
+    },
+    "assets/stories/audio/friends_p1.mp3": {
+      "size": 90740,
+      "md5": "6225a2be822f1234b95dc637568bb1d6"
+    },
+    "assets/stories/audio/bili_p9.mp3": {
+      "size": 103278,
+      "md5": "7d84ddf34172cfa0f67d27f85259d2dc"
+    },
+    "assets/stories/audio/friends_p3.mp3": {
+      "size": 97009,
+      "md5": "384afb54e6c0772919947096de3d27dc"
+    },
+    "assets/stories/audio/friends_p2.mp3": {
+      "size": 102025,
+      "md5": "44971c295daef6ac29fb16ef7e077cbf"
+    },
+    "assets/stories/audio/friends_p6.mp3": {
+      "size": 94501,
+      "md5": "20a8f15edceb4606510ffe6cf2f0ef02"
+    },
+    "assets/stories/audio/friends_p7.mp3": {
+      "size": 88232,
+      "md5": "443b02453aa84eeb98fe1ec6262f47cf"
+    },
+    "assets/stories/audio/friends_p5.mp3": {
+      "size": 91994,
+      "md5": "a4e2813970e065faf80e5704406d16d6"
+    },
+    "assets/stories/audio/leo_p10.mp3": {
+      "size": 118743,
+      "md5": "b957b375e424eff0d486ffceb3da0fa4"
+    },
+    "assets/stories/audio/friends_p4.mp3": {
+      "size": 106204,
+      "md5": "9534fbcba376b628aa2ff71df3bc1ccf"
+    },
+    "assets/stories/safari_audio/word_zebra.m4a": {
+      "size": 6879,
+      "md5": "3c4a76ff4722c25c396b06698ed06766"
+    },
+    "assets/stories/safari_audio/word_hippo.m4a": {
+      "size": 6000,
+      "md5": "55da8f0fb0380aad648f3b5794008be6"
+    },
+    "assets/stories/safari_audio/word_safari.m4a": {
+      "size": 7397,
+      "md5": "34366c2a0e231938e14e21968b3875da"
+    },
+    "assets/stories/safari_audio/safari_p4_narration.m4a": {
+      "size": 60421,
+      "md5": "6d177769b7d59a033896417d759ddff8"
+    },
+    "assets/stories/safari_audio/word_cheetah.m4a": {
+      "size": 6119,
+      "md5": "d2505d36d814acf79b4086042b4bc6c0"
+    },
+    "assets/stories/safari_audio/word_ostrich.m4a": {
+      "size": 7555,
+      "md5": "1a998b173688ba06cbf64ef4cfc03c31"
+    },
+    "assets/stories/safari_audio/safari_p7_narration.m4a": {
+      "size": 51224,
+      "md5": "da2f0d0b10de42894f437bc43bb633c6"
+    },
+    "assets/stories/safari_audio/safari_p3_narration.m4a": {
+      "size": 53687,
+      "md5": "5a9bfcb16564aa0d3e6ce8f98bb0809b"
+    },
+    "assets/stories/safari_audio/safari_p2_narration.m4a": {
+      "size": 58006,
+      "md5": "8ed92439fb2ee978875dea9dec48e2fe"
+    },
+    "assets/stories/safari_audio/safari_p6_narration.m4a": {
+      "size": 55822,
+      "md5": "e14e4f9669e702b37d7009be5fb1b4c3"
+    },
+    "assets/stories/safari_audio/safari_p1_narration.m4a": {
+      "size": 59984,
+      "md5": "55b9a4a126d09b75f876f2b6beeee2b2"
+    },
+    "assets/stories/safari_audio/safari_p5_narration.m4a": {
+      "size": 53972,
+      "md5": "84a47d804b8343c781be852014fa874e"
+    },
+    "assets/stories/safari_audio/word_snake.m4a": {
+      "size": 6696,
+      "md5": "fe5ff8987adc378a272813057a77a414"
+    },
+    "assets/stories/safari_audio/word_meerkat.m4a": {
+      "size": 7641,
+      "md5": "fdeed6ee1db9590c1aaba9606a8d82b9"
+    },
+    "assets/stories/safari_audio/safari_p8_narration.m4a": {
+      "size": 50064,
+      "md5": "025a7da4b8325441672d7d9afe22a0d3"
+    },
+    "assets/stories/safari_audio/word_giraffe.m4a": {
+      "size": 6625,
+      "md5": "6cebb863f35c604d269824d5e48a058a"
+    },
+    "assets/audio/dance_on_blue.mp3": {
+      "size": 61240,
+      "md5": "5111f706004fba6e7b832713f315721a"
+    },
+    "assets/audio/brown.mp3": {
+      "size": 34073,
+      "md5": "c5ebf2bb60e4159c95a39ecc9fc4ee9e"
+    },
+    "assets/audio/inst_l1_yellow.mp3": {
+      "size": 44522,
+      "md5": "d7b87422d0ad9686dcef622420377881"
+    },
+    "assets/audio/inst_l1_red.mp3": {
+      "size": 59986,
+      "md5": "b42b9f7feaad8eaa70a010010b98ba0d"
+    },
+    "assets/audio/bili_hello.mp3": {
+      "size": 65002,
+      "md5": "b570c53e79eb26d8aee1988369c99abd"
+    },
+    "assets/audio/level_complete.mp3": {
+      "size": 114739,
+      "md5": "12433331457f9e5c367b823501f564c0"
+    },
+    "assets/audio/red.mp3": {
+      "size": 48283,
+      "md5": "e58c0a3d75618e37e6f37dd11782496f"
+    },
+    "assets/audio/purple.mp3": {
+      "size": 36581,
+      "md5": "207f67d19f9c36fa8195451b0b8acd0c"
+    },
+    "assets/audio/catch_orange_bubbles.mp3": {
+      "size": 45776,
+      "md5": "205a3f21f7ed155ee2e174e560c6e278"
+    },
+    "assets/audio/welcome.mp3": {
+      "size": 113485,
+      "md5": "f5f8c33a569547d72474811c4eed7c91"
+    },
+    "assets/audio/catch_green_bubbles.mp3": {
+      "size": 44522,
+      "md5": "338ece6d969b6ad79a2fc2b02c7cd44a"
+    },
+    "assets/audio/dance_on_green.mp3": {
+      "size": 48283,
+      "md5": "850b799ba365c8f84d9539845669504a"
+    },
+    "assets/audio/inst_l2_orange.mp3": {
+      "size": 55807,
+      "md5": "9fd3182466d0dd9ef3137527a18746f0"
+    },
+    "assets/audio/catch_purple_bubbles.mp3": {
+      "size": 47030,
+      "md5": "5840faf70fe203fa5580613228ccd640"
+    },
+    "assets/audio/inst_l2_purple.mp3": {
+      "size": 59986,
+      "md5": "cfae5d2336d7d48b95d917ed375d958d"
+    },
+    "assets/audio/paint_grapes_purple.mp3": {
+      "size": 50791,
+      "md5": "9fca3ab5a4f65c9bea1e819cd0bb993a"
+    },
+    "assets/audio/diploma_congrats.mp3": {
+      "size": 114739,
+      "md5": "48e00a2869fbe869c8a966d92506888b"
+    },
+    "assets/audio/inst_l2_red.mp3": {
+      "size": 57061,
+      "md5": "0e0204bb8e05e4ff56fe547efe5bee0d"
+    },
+    "assets/audio/paint_donut_pink.mp3": {
+      "size": 63748,
+      "md5": "c59a56724b465edb0303396f476c10f1"
+    },
+    "assets/audio/cheer_awesome.mp3": {
+      "size": 68763,
+      "md5": "96462e0fcf7a18aaef6b25398a970f78"
+    },
+    "assets/audio/cheer_great_job.mp3": {
+      "size": 57061,
+      "md5": "e67ffec4242e160e4a70fd1b2ff052b9"
+    },
+    "assets/audio/dance_on_yellow.mp3": {
+      "size": 48283,
+      "md5": "6fb9662179f99c42252113c85c8b5b55"
+    },
+    "assets/audio/green.mp3": {
+      "size": 50791,
+      "md5": "3b5d575413083e35522819972b5ea34f"
+    },
+    "assets/audio/inst_l1_blue.mp3": {
+      "size": 47030,
+      "md5": "2bbeca232cf59ae47bea6a6301a2403f"
+    },
+    "assets/audio/orange.mp3": {
+      "size": 53299,
+      "md5": "c25316f0bd408bca463481d5120e00a0"
+    },
+    "assets/audio/paint_frog_green.mp3": {
+      "size": 68763,
+      "md5": "ec4be0f1fbcb9e82c21fd320c4dd273e"
+    },
+    "assets/audio/pink.m4a": {
+      "size": 6158,
+      "md5": "b852532d83ebd5687000682d7a91ce5a"
+    },
+    "assets/audio/blue.m4a": {
+      "size": 5794,
+      "md5": "7ca814456787de2d240fa6f3b6b5d5cf"
+    },
+    "assets/audio/cheer_super.mp3": {
+      "size": 52045,
+      "md5": "2e4d1820f8f678da6755ca33d9ecf64c"
+    },
+    "assets/audio/cheer_you_did_it.mp3": {
+      "size": 54553,
+      "md5": "6c928757b350fc96f3453f66354712d6"
+    },
+    "assets/audio/yellow.m4a": {
+      "size": 6569,
+      "md5": "49724be0fd262659a5c01be5599b640e"
+    },
+    "assets/audio/paint_carrot_orange.mp3": {
+      "size": 50791,
+      "md5": "92bc82afde03394563ab3d31dfed660f"
+    },
+    "assets/audio/oops_try_again.mp3": {
+      "size": 70017,
+      "md5": "a371fc1ac7b7b430bfbff5012954ad10"
+    },
+    "assets/audio/inst_l2_green.mp3": {
+      "size": 57061,
+      "md5": "e0e6260e3deec154f7f333eab4c68dbe"
+    },
+    "assets/audio/pink.mp3": {
+      "size": 36581,
+      "md5": "f9671cbeb22e053c1f04bd08aa62e9d3"
+    },
+    "assets/audio/blue.mp3": {
+      "size": 50791,
+      "md5": "fb6c2334d424a73dc9a1f7d036543274"
+    },
+    "assets/audio/cheer_super.m4a": {
+      "size": 6795,
+      "md5": "aa40c52eb2aaa4a3d8f7326f60ddb250"
+    },
+    "assets/audio/cheer_you_did_it.m4a": {
+      "size": 6878,
+      "md5": "4b129c83fcbbaf210ea8947cf1cb81cd"
+    },
+    "assets/audio/paint_bear_brown.mp3": {
+      "size": 49537,
+      "md5": "69aa5a766e39be0de6b6bbcca8929fcb"
+    },
+    "assets/audio/paint_sun_yellow.mp3": {
+      "size": 49537,
+      "md5": "7752fd08d4af4318afa151358dfc8405"
+    },
+    "assets/audio/dance_on_orange.mp3": {
+      "size": 59986,
+      "md5": "f06b23a68e9f9f87b0444946bd4f946d"
+    },
+    "assets/audio/yellow.mp3": {
+      "size": 43268,
+      "md5": "3764826361ce6e16106256b5b40dc610"
+    },
+    "assets/audio/oops_try_again.m4a": {
+      "size": 10892,
+      "md5": "425df16b477e9bd2d14db9adc40bf69c"
+    },
+    "assets/audio/one_left.mp3": {
+      "size": 58314,
+      "md5": "ebca065fac8c9e1674edebf5b9cc8147"
+    },
+    "assets/audio/cheer_awesome.m4a": {
+      "size": 6566,
+      "md5": "e991e1ae6b5048c1798c3327f332dddd"
+    },
+    "assets/audio/cheer_great_job.m4a": {
+      "size": 7359,
+      "md5": "92b4a0ac5859557ef0d37002c47ca6d4"
+    },
+    "assets/audio/green.m4a": {
+      "size": 6155,
+      "md5": "de1ef07d1c7011cb0bb59ebf3363b75d"
+    },
+    "assets/audio/inst_l1_green.mp3": {
+      "size": 45776,
+      "md5": "d5ab3ef061aba77307a29f4c42133251"
+    },
+    "assets/audio/orange.m4a": {
+      "size": 6741,
+      "md5": "77ae5e23275d771e37370eed25c5bc6d"
+    },
+    "assets/audio/dance_on_red.mp3": {
+      "size": 59986,
+      "md5": "06b2390c0fce8d636e072e86d823ace9"
+    },
+    "assets/audio/catch_red_bubbles.mp3": {
+      "size": 44522,
+      "md5": "8bf4a93f7ee177d6e74f5401e0da406b"
+    },
+    "assets/audio/purple.m4a": {
+      "size": 6337,
+      "md5": "665db89d015b1a89789f266eb6f5115f"
+    },
+    "assets/audio/catch_yellow_bubbles.mp3": {
+      "size": 44522,
+      "md5": "23e1bdcb186974554b4afdf20706f339"
+    },
+    "assets/audio/welcome.m4a": {
+      "size": 19513,
+      "md5": "107f4556ea04b9fd78152ef38c298680"
+    },
+    "assets/audio/red.m4a": {
+      "size": 6721,
+      "md5": "ea2028c02d2b554ac9650814dbfb0c71"
+    },
+    "assets/audio/catch_blue_bubbles.mp3": {
+      "size": 44522,
+      "md5": "2f596202ffb9b123be58d1ce0765dd07"
+    },
+    "assets/audio/two_left.mp3": {
+      "size": 50791,
+      "md5": "511e00eacee30b5b8eacae71ef5a0c7f"
+    },
+    "assets/audio/brown.m4a": {
+      "size": 6347,
+      "md5": "fe1412d749161510dee6191a7b8f8d82"
+    },
+    "assets/audio/dance_on_purple.mp3": {
+      "size": 48283,
+      "md5": "9370da0ff60af1ce8ddf917ce619eec9"
+    },
+    "assets/audio/paint_strawberry_red.mp3": {
+      "size": 52045,
+      "md5": "6d8d5ccfa8c0aacfddbe201467de7650"
+    },
+    "assets/audio/paint_dolphin_blue.mp3": {
+      "size": 49537,
+      "md5": "deb702e5ae147a1167f51c466c4053fc"
+    },
+    "assets/audio/inst_l2_yellow.mp3": {
+      "size": 59986,
+      "md5": "73dfc0f4917aa1b5d7531494d487f65e"
+    },
+    "assets/audio/inst_l2_pink.mp3": {
+      "size": 55807,
+      "md5": "85dae104542bee2823037ed8e95ce16b"
+    },
+    "assets/leo/leo.png": {
+      "size": 1147829,
+      "md5": "aa00bbc0af10e2521e7af7391915cc7b"
+    },
+    "assets/leo/leo_intro.mp4": {
+      "size": 1053014,
+      "md5": "6573d16f6969af20d844bf4ea0f7eabb"
+    },
+    "assets/leo/leo_raw.jpg": {
+      "size": 443348,
+      "md5": "b466916a628090f0f90b51759e4c2ed2"
+    },
+    "assets/leo/leo_transparent.png": {
+      "size": 1219616,
+      "md5": "7bef980af1a50da4d64eaf6d8175c0c6"
+    },
+    "assets/leo/audio/inst_pop_balloon.mp3": {
+      "size": 40760,
+      "md5": "07321b828b69191b8c2ab9dab5355fda"
+    },
+    "assets/leo/audio/lamb.mp3": {
+      "size": 55807,
+      "md5": "5bac24cf236cda93d85b671fd1ac1746"
+    },
+    "assets/leo/audio/chick.mp3": {
+      "size": 68763,
+      "md5": "c81c3b9e233dbe1ad7b935f85633de7e"
+    },
+    "assets/leo/audio/level_complete.mp3": {
+      "size": 73779,
+      "md5": "a4e86d86fe6c50b94a71833086939879"
+    },
+    "assets/leo/audio/inst_find_horse.mp3": {
+      "size": 57061,
+      "md5": "a87dcb4db896488b9a9efacc6d631278"
+    },
+    "assets/leo/audio/pig.mp3": {
+      "size": 61240,
+      "md5": "8ec778af3e2de64858bd664d9c83c2d4"
+    },
+    "assets/leo/audio/diploma_congrats.mp3": {
+      "size": 123934,
+      "md5": "e18caeafbeacacaee567803efa9c7db2"
+    },
+    "assets/leo/audio/inst_find_pig.mp3": {
+      "size": 50791,
+      "md5": "94c9530f487d8a462830039bf4a893b6"
+    },
+    "assets/leo/audio/cat.mp3": {
+      "size": 48283,
+      "md5": "71892cdfe30034ea17cf26aff44085ba"
+    },
+    "assets/leo/audio/cheer_awesome.mp3": {
+      "size": 36581,
+      "md5": "31f63e00145597e2a34453ec69001a6c"
+    },
+    "assets/leo/audio/cheer_great_job.mp3": {
+      "size": 42014,
+      "md5": "041b42a546163dafa505fded090fc212"
+    },
+    "assets/leo/audio/piglet.mp3": {
+      "size": 53299,
+      "md5": "99126caccb823bffd8fc65663dc9586f"
+    },
+    "assets/leo/audio/inst_sound_detective.mp3": {
+      "size": 43268,
+      "md5": "ec4dd3a213df636f4076230a98d30127"
+    },
+    "assets/leo/audio/rooster.mp3": {
+      "size": 58314,
+      "md5": "c137493d5005db9c8175bc3c366c9eeb"
+    },
+    "assets/leo/audio/cheer_super.mp3": {
+      "size": 55807,
+      "md5": "50b68f3bf77e058f1e7bf170a00a1813"
+    },
+    "assets/leo/audio/cheer_you_did_it.mp3": {
+      "size": 58314,
+      "md5": "638e35eaeafcd17658a6cdf8bb90ce92"
+    },
+    "assets/leo/audio/oops_try_again.mp3": {
+      "size": 61240,
+      "md5": "44b2e6c6e0713f5ba66904ee9e905a1c"
+    },
+    "assets/leo/audio/inst_find_sheep.mp3": {
+      "size": 57061,
+      "md5": "ee3d9d39c1011dede3b545aaddeb848b"
+    },
+    "assets/leo/audio/sheep.mp3": {
+      "size": 54553,
+      "md5": "2911e807bd06a16f2f703745e7641e97"
+    },
+    "assets/leo/audio/leo_hello.mp3": {
+      "size": 82974,
+      "md5": "d57a9043f9cd7043c8f8d10793251a56"
+    },
+    "assets/leo/audio/cow.mp3": {
+      "size": 53299,
+      "md5": "ec931baa6e707df3114135a92e74296a"
+    },
+    "assets/leo/audio/one_left.mp3": {
+      "size": 40760,
+      "md5": "2eedaf22ca92e61ce5ff0adc1785c4c9"
+    },
+    "assets/leo/audio/leo_welcome.mp3": {
+      "size": 118501,
+      "md5": "fa6d0034b58981ff9501bdc6a0d1ff82"
+    },
+    "assets/leo/audio/inst_find_duck.mp3": {
+      "size": 50791,
+      "md5": "661beceeb89a9fb1ad6b59cf2df93de1"
+    },
+    "assets/leo/audio/hen.mp3": {
+      "size": 48283,
+      "md5": "f57f1696fe5add1ed46a9b0b72601eac"
+    },
+    "assets/leo/audio/calf.mp3": {
+      "size": 54553,
+      "md5": "295ef410fff7f1e02e02148a97fce077"
+    },
+    "assets/leo/audio/inst_feed_animals.mp3": {
+      "size": 48283,
+      "md5": "1d509d0cb3b41bc9c2976e52885accba"
+    },
+    "assets/leo/audio/horse.mp3": {
+      "size": 47030,
+      "md5": "774953ac002a670951daa84906db0c1e"
+    },
+    "assets/leo/audio/duck.mp3": {
+      "size": 65002,
+      "md5": "bf4407779c1de7d7ae6843942d49bf6e"
+    },
+    "assets/leo/audio/dog.mp3": {
+      "size": 47030,
+      "md5": "34c71e5c0157a2f129671c03a1de87af"
+    },
+    "assets/leo/audio/rabbit.mp3": {
+      "size": 47030,
+      "md5": "a6f25584cd23035bead5a0ad003532b8"
+    },
+    "assets/leo/audio/two_left.mp3": {
+      "size": 35327,
+      "md5": "19690e83945754a4112327d4e412d631"
+    },
+    "assets/leo/audio/inst_catch_ducks.mp3": {
+      "size": 65002,
+      "md5": "40709e0b0b535042a0cf0f5f6e260a69"
+    },
+    "assets/leo/audio/inst_find_cow.mp3": {
+      "size": 58314,
+      "md5": "d95f6af4f1277e1dbefc9c93ef8c0565"
+    }
+  }
+}

@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bili Kids - Library | 3D Storybooks & Video Books</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stories_styles.css">
+</head>
+<body>
+  <!-- Ambient Audio Elements -->
+  <audio id="pageFlipSfx" preload="auto"></audio>
+
+  <!-- Global Header Bar -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <a href="index.html" class="home-logo-link" title="Ir al Inicio">
+          <img src="assets/bilikids_logo.png" alt="Bili Kids Logo" class="brand-logo" onerror="this.style.display='none'">
+          <span class="logo-text">Bili<span class="highlight">Kids</span> <span class="badge-tag">📚 Library</span></span>
+        </a>
+      </div>
+
+      <!-- Theme Switcher Navigation -->
+      <nav class="suite-switcher">
+        <a href="index.html" class="nav-pill" title="Aventura de Colores con Bili">
+          <span class="pill-icon">🎨</span>
+          <span class="pill-text">Colores</span>
+        </a>
+        <a href="farm.html" class="nav-pill" title="La Granja de Leo">
+          <span class="pill-icon">🚜</span>
+          <span class="pill-text">Granja</span>
+        </a>
+        <a href="house.html" class="nav-pill" title="La Casa de Luna">
+          <span class="pill-icon">🏠</span>
+          <span class="pill-text">Casa</span>
+        </a>
+        <a href="stories.html" class="nav-pill active" title="Bili Kids Library">
+          <span class="pill-icon">📚</span>
+          <span class="pill-text">Library</span>
+        </a>
+        <a href="lab.html" class="nav-pill" title="Laboratorio Científico">
+          <span class="pill-icon">🧪</span>
+          <span class="pill-text">Lab</span>
+        </a>
+        <a href="writing.html" class="nav-pill" title="Práctica de Escritura">
+          <span class="pill-icon">✏️</span>
+          <span class="pill-text">Writing</span>
+        </a>
+      </nav>
+
+      <!-- Utility Controls -->
+      <div class="header-actions">
+        <button id="btnSoundToggle" class="icon-circle-btn" title="Silenciar / Activar Sonido">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button id="btnLangToggle" class="pill-lang-btn" title="Cambiar Idioma de Texto">
+          <span id="langFlag">🇺🇸</span> <span id="langLabel">EN / ES</span>
+        </button>
+        <button id="btnFullscreen" class="icon-circle-btn" title="Pantalla Completa">
+          <span>⛶</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ============================================== -->
+    <!-- SCREEN 1: 3D BOOKSHELF / STORY SELECTOR         -->
+    <!-- ============================================== -->
+    <section id="screenShelf" class="screen active">
+      <div class="shelf-hero-banner">
+        <div class="hero-badge">✨ 3D STORYBOOKS & VIDEO BOOKS ✨</div>
+        <h1 class="shelf-title">Bili Kids Library</h1>
+        <p class="shelf-subtitle">Interactive 3D Pixar-style stories and animated video books to learn English and explore together.</p>
+      </div>
+
+      <!-- Interactive Category Filter Tabs -->
+      <div class="shelf-filter-tabs">
+        <button class="filter-tab active" data-filter="all">
+          <span class="tab-icon">✨</span>
+          <span class="tab-text">Todos los Libros (27)</span>
+        </button>
+        <button class="filter-tab" data-filter="2d">
+          <span class="tab-icon">📖</span>
+          <span class="tab-text">2D Book (21)</span>
+        </button>
+        <button class="filter-tab" data-filter="video">
+          <span class="tab-icon">🎥</span>
+          <span class="tab-text">Video Libros Animados (2)</span>
+        </button>
+        <button class="filter-tab" data-filter="classic">
+          <span class="tab-icon">📚</span>
+          <span class="tab-text">Cuentos 3D Ilustrados (4)</span>
+        </button>
+      </div>
+
+      <!-- Wooden 3D Bookshelf Display (Separated by Categories) -->
+      <div class="bookshelf-scene">
+
+        <!-- TIER 1: VIDEO LIBROS ANIMADOS -->
+        <div class="shelf-tier-container" id="tierVideoBooks">
+          <div class="shelf-tier-header">
+            <div class="tier-badge-title">
+              <span class="tier-pill-badge tier-badge-video">🎥 COLECCIÓN VIDEO LIBROS 3D</span>
+              <h2 class="tier-title">Video Libros Animados Interactivos</h2>
+            </div>
+            <p class="tier-subtitle">Escenas animadas en 3D con música, personajes en movimiento y repetición táctil.</p>
+          </div>
+
+          <div class="wooden-shelf-rack">
+            <div class="books-gallery video-books-gallery">
+
+              <!-- Video Book 1: African Safari Adventure -->
+              <div class="book-card-item book-card-safari" onclick="window.location.href='safari.html'" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-safari" style="background: linear-gradient(145deg, #b9770e, #d35400, #e67e22); border-color: #f39c12;">
+                    <div class="cover-spine" style="background: #7e5109;"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/safari_videos/safari_p8_celebration.png" alt="African Safari Adventure" class="cover-thumb-img">
+                      </div>
+                      <span class="book-tag-badge highlight-gold" style="background: #27ae60; color: #fff;">🎥 Video Libro</span>
+                      <h2 class="book-cover-title">African Safari Adventure</h2>
+                      <p class="book-cover-sub">Animal Friends in Africa</p>
+                      <div class="book-cover-star">★ 8 Videos Interactivos</div>
+                    </div>
+                  </div>
+                </div>
+                <a href="safari.html" class="btn-read-book" style="background: linear-gradient(135deg, #e67e22, #f39c12); text-decoration: none; justify-content: center;">
+                  <span>🦒 Abrir Video Libro</span>
+                </a>
+              </div>
+
+              <!-- Video Book 2: The Rainbow of Colors -->
+              <div class="book-card-item book-card-colors" onclick="window.location.href='colors_book.html'" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-colors" style="background: linear-gradient(145deg, #c0392b, #e67e22, #f1c40f, #27ae60, #2980b9, #8e44ad); border-color: #f1c40f;">
+                    <div class="cover-spine" style="background: #962d22;"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/colors_videos/colors_p8_rainbow.png" alt="The Rainbow of Colors" class="cover-thumb-img">
+                      </div>
+                      <span class="book-tag-badge highlight-gold" style="background: #e74c3c; color: #fff;">🎥 Video Libro</span>
+                      <h2 class="book-cover-title">The Rainbow of Colors</h2>
+                      <p class="book-cover-sub">Music & Animal Friends</p>
+                      <div class="book-cover-star">★ 8 Videos Musicales</div>
+                    </div>
+                  </div>
+                </div>
+                <a href="colors_book.html" class="btn-read-book" style="background: linear-gradient(135deg, #e74c3c, #f1c40f); text-decoration: none; justify-content: center;">
+                  <span>🌈 Abrir Video Libro</span>
+                </a>
+              </div>
+
+            </div>
+            <div class="wooden-shelf-bar"></div>
+          </div>
+        </div>
+
+        <!-- TIER 2: CUENTOS 3D ILUSTRADOS -->
+        <div class="shelf-tier-container" id="tierClassicBooks">
+          <div class="shelf-tier-header">
+            <div class="tier-badge-title">
+              <span class="tier-pill-badge tier-badge-classic">📖 COLECCIÓN CUENTOS CLÁSICOS</span>
+              <h2 class="tier-title">Cuentos 3D Ilustrados para Hojear</h2>
+            </div>
+            <p class="tier-subtitle">Historias de 10 páginas para pasar hoja por hoja como un libro real, con narración pausada de ElevenLabs.</p>
+          </div>
+
+          <div class="wooden-shelf-rack">
+            <div class="books-gallery classic-books-gallery">
+
+              <!-- Book 1: Bili -->
+              <div class="book-card-item" data-story="bili">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-bili">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/images/bili_p1.jpg" alt="Bili en el Bosque" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge">Libro 1</span>
+                      <h2 class="book-cover-title">Bili & the Rainbow Forest</h2>
+                      <p class="book-cover-sub">El Bosque de los Colores</p>
+                      <div class="book-cover-star">★ 10 Páginas 3D</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book btn-read-bili">
+                  <span>📖 Abrir Cuento</span>
+                </button>
+              </div>
+
+              <!-- Book 2: Leo -->
+              <div class="book-card-item" data-story="leo">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-leo">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/images/leo_p1.jpg" alt="Leo en la Granja" class="cover-thumb-img" onerror="this.src='assets/leo/leo_transparent.png'">
+                      </div>
+                      <span class="book-tag-badge">Libro 2</span>
+                      <h2 class="book-cover-title">Leo's Sunshine Farm</h2>
+                      <p class="book-cover-sub">La Granja Soleada de Leo</p>
+                      <div class="book-cover-star">★ 10 Páginas 3D</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book btn-read-leo">
+                  <span>📖 Abrir Cuento</span>
+                </button>
+              </div>
+
+              <!-- Book 3: Luna -->
+              <div class="book-card-item" data-story="luna">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-luna">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/images/luna_p1.jpg" alt="Luna en la Casa" class="cover-thumb-img" onerror="this.src='assets/luna/luna_transparent.png'">
+                      </div>
+                      <span class="book-tag-badge">Libro 3</span>
+                      <h2 class="book-cover-title">Luna's House Quest</h2>
+                      <p class="book-cover-sub">La Aventura Casera de Luna</p>
+                      <div class="book-cover-star">★ 10 Páginas 3D</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book btn-read-luna">
+                  <span>📖 Abrir Cuento</span>
+                </button>
+              </div>
+
+              <!-- Book 4: The 3 Friends Together (Finale) -->
+              <div class="book-card-item book-card-ensemble" data-story="friends">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-friends">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/images/friends_p1.jpg" alt="Los Tres Amigos" class="cover-thumb-img" onerror="this.src='assets/bilikids_logo.png'">
+                      </div>
+                      <span class="book-tag-badge highlight-gold">✨ Gran Final ✨</span>
+                      <h2 class="book-cover-title">The Three Best Friends</h2>
+                      <p class="book-cover-sub">El Árbol de las Estrellas</p>
+                      <div class="book-cover-star">★ Bili, Leo y Luna juntos</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book btn-read-friends">
+                  <span>🌟 Gran Aventura</span>
+                </button>
+              </div>
+
+            </div>
+            <div class="wooden-shelf-bar"></div>
+          </div>
+        </div>
+
+        <!-- TIER 3: COLECCIÓN 2D BOOKS (IMAGEN Y TEXTO SEPARADOS) -->
+        <div class="shelf-tier-container" id="tier2dBooks">
+          <div class="shelf-tier-header">
+            <div class="tier-badge-title">
+              <span class="tier-pill-badge tier-badge-2d">📖 COLECCIÓN 2D BOOK</span>
+              <h2 class="tier-title">Libro 2D Ilustrado para Leer</h2>
+            </div>
+            <p class="tier-subtitle">Cuento ilustrado en alta definición con arte en una página, texto y fonética en la otra, y efecto de pasar hoja.</p>
+          </div>
+
+          <div class="wooden-shelf-rack">
+            <div class="books-gallery books-2d-gallery" style="justify-content: center;">
+
+              <!-- 2D Book: Tito the Fox -->
+              <div class="book-card-item book-card-2d book-card-tito" data-story="tito" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d book-cover-tito" style="background: linear-gradient(145deg, #ea580c, #c2410c, #7c2d12); border-color: #fb923c;">
+                    <div class="cover-spine" style="background: #431407;"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/tito/cover.jpg" alt="Tito the Fox" class="cover-thumb-img">
+                      </div>
+                      <span class="book-tag-badge" style="background: #ea580c; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Tito the Fox</h2>
+                      <p class="book-cover-sub">The Little Fox Who Explored</p>
+                      <div class="book-cover-star">★ 8 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book btn-read-tito" style="background: linear-gradient(135deg, #ea580c, #fb923c);">
+                  <span>🦊 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Pip the Little Bunny -->
+              <div class="book-card-item book-card-2d book-card-bunny_pip" data-story="bunny_pip" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #16a34a, #15803d, #14532d);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/bunny_pip/cover.jpg" alt="Pip the Little Bunny" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #16a34a; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Pip the Little Bunny</h2>
+                      <p class="book-cover-sub">A Colorful Garden Adventure</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #16a34a;">
+                  <span>🐰 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Barnaby the Gentle Bear -->
+              <div class="book-card-item book-card-2d book-card-bear_barnaby" data-story="bear_barnaby" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #854d0e, #713f12, #451a03);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/bear_barnaby/cover.jpg" alt="Barnaby the Gentle Bear" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #854d0e; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Barnaby the Gentle Bear</h2>
+                      <p class="book-cover-sub">A Peaceful Day in the Woods</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #854d0e;">
+                  <span>🐻 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Pippa the Yellow Duckling -->
+              <div class="book-card-item book-card-2d book-card-duck_pippa" data-story="duck_pippa" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #0284c7, #0369a1, #0c4a6e);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/duck_pippa/cover.jpg" alt="Pippa the Yellow Duckling" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #0284c7; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Pippa the Yellow Duckling</h2>
+                      <p class="book-cover-sub">Splashing in the Blue Pond</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #0284c7;">
+                  <span>🦆 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Milo the Curious Kitten -->
+              <div class="book-card-item book-card-2d book-card-cat_milo" data-story="cat_milo" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #d97706, #b45309, #78350f);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/cat_milo/cover.jpg" alt="Milo the Curious Kitten" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #d97706; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Milo the Curious Kitten</h2>
+                      <p class="book-cover-sub">A Little Paw Adventure</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #d97706;">
+                  <span>🐱 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Ollie the Sleepy Owl -->
+              <div class="book-card-item book-card-2d book-card-owl_ollie" data-story="owl_ollie" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #312e81, #1e1b4b, #0f172a);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/owl_ollie/cover.jpg" alt="Ollie the Sleepy Owl" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #312e81; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Ollie the Sleepy Owl</h2>
+                      <p class="book-cover-sub">A Night Under the Moon</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #312e81;">
+                  <span>🦉 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Ella the Kind Elephant -->
+              <div class="book-card-item book-card-2d book-card-elephant_ella" data-story="elephant_ella" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #475569, #334155, #1e293b);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/elephant_ella/cover.jpg" alt="Ella the Kind Elephant" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #475569; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Ella the Kind Elephant</h2>
+                      <p class="book-cover-sub">A Big Heart in the Savanna</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #475569;">
+                  <span>🐘 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Toby the Patient Turtle -->
+              <div class="book-card-item book-card-2d book-card-turtle_toby" data-story="turtle_toby" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #059669, #047857, #064e3b);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/turtle_toby/cover.jpg" alt="Toby the Patient Turtle" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #059669; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Toby the Patient Turtle</h2>
+                      <p class="book-cover-sub">One Little Step at a Time</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #059669;">
+                  <span>🐢 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Penny the Playful Penguin -->
+              <div class="book-card-item book-card-2d book-card-penguin_penny" data-story="penguin_penny" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #0891b2, #0e7490, #164e63);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/penguin_penny/cover.jpg" alt="Penny the Playful Penguin" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #0891b2; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Penny the Playful Penguin</h2>
+                      <p class="book-cover-sub">Sliding on the Sparkling Ice</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #0891b2;">
+                  <span>🐧 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Rusty the Happy Puppy -->
+              <div class="book-card-item book-card-2d book-card-puppy_rusty" data-story="puppy_rusty" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #e11d48, #be123c, #881337);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/puppy_rusty/cover.jpg" alt="Rusty the Happy Puppy" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #e11d48; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Rusty the Happy Puppy</h2>
+                      <p class="book-cover-sub">A Tail-Wagging Day</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #e11d48;">
+                  <span>🐶 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Hazel the Helpful Hedgehog -->
+              <div class="book-card-item book-card-2d book-card-hedgehog_hazel" data-story="hedgehog_hazel" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #c2410c, #9a3412, #431407);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/hedgehog_hazel/cover.jpg" alt="Hazel the Helpful Hedgehog" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #c2410c; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Hazel the Helpful Hedgehog</h2>
+                      <p class="book-cover-sub">Autumn in the Whispering Woods</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #c2410c;">
+                  <span>🦔 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Mia and Her Magic Brush -->
+              <div class="book-card-item book-card-2d book-card-mia_paint" data-story="mia_paint" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #9333ea, #7e22ce, #581c87);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/mia_paint/cover.jpg" alt="Mia and Her Magic Brush" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #9333ea; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Mia and Her Magic Brush</h2>
+                      <p class="book-cover-sub">Mixing Colors of Joy</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #9333ea;">
+                  <span>🎨 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Leo the Little Gardener -->
+              <div class="book-card-item book-card-2d book-card-leo_garden" data-story="leo_garden" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #65a30d, #4d7c0f, #365314);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/leo_garden/cover.jpg" alt="Leo the Little Gardener" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #65a30d; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Leo the Little Gardener</h2>
+                      <p class="book-cover-sub">Watching Sunflowers Bloom</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #65a30d;">
+                  <span>🌻 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Emma's Red Balloon -->
+              <div class="book-card-item book-card-2d book-card-emma_balloon" data-story="emma_balloon" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #dc2626, #b91c1c, #7f1d1d);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/emma_balloon/cover.jpg" alt="Emma's Red Balloon" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #dc2626; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Emma's Red Balloon</h2>
+                      <p class="book-cover-sub">Floating Up, Up, and Away</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #dc2626;">
+                  <span>🎈 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Noah Bakes Apple Bread -->
+              <div class="book-card-item book-card-2d book-card-noah_baker" data-story="noah_baker" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #b45309, #92400e, #451a03);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/noah_baker/cover.jpg" alt="Noah Bakes Apple Bread" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #b45309; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Noah Bakes Apple Bread</h2>
+                      <p class="book-cover-sub">Sweet Kitchen Helpers</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #b45309;">
+                  <span>🍞 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Maya's Yellow Rain Boots -->
+              <div class="book-card-item book-card-2d book-card-maya_rain" data-story="maya_rain" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #ca8a04, #a16207, #713f12);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/maya_rain/cover.jpg" alt="Maya's Yellow Rain Boots" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #ca8a04; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Maya's Yellow Rain Boots</h2>
+                      <p class="book-cover-sub">Puddle Splashing Adventure</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #ca8a04;">
+                  <span>🌧️ Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Lucas Gets Ready for Bed -->
+              <div class="book-card-item book-card-2d book-card-lucas_bed" data-story="lucas_bed" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #4f46e5, #4338ca, #312e81);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/lucas_bed/cover.jpg" alt="Lucas Gets Ready for Bed" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #4f46e5; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Lucas Gets Ready for Bed</h2>
+                      <p class="book-cover-sub">A Calming Night Routine</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #4f46e5;">
+                  <span>🌙 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Lily Says Good Morning -->
+              <div class="book-card-item book-card-2d book-card-lily_sun" data-story="lily_sun" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #ea580c, #c2410c, #9a3412);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/lily_sun/cover.jpg" alt="Lily Says Good Morning" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #ea580c; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Lily Says Good Morning</h2>
+                      <p class="book-cover-sub">A Bright Day of Hello</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #ea580c;">
+                  <span>☀️ Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Sam Builds a Tall Tower -->
+              <div class="book-card-item book-card-2d book-card-sam_blocks" data-story="sam_blocks" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #2563eb, #1d4ed8, #1e40af);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/sam_blocks/cover.jpg" alt="Sam Builds a Tall Tower" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #2563eb; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Sam Builds a Tall Tower</h2>
+                      <p class="book-cover-sub">Trying Again with a Smile</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #2563eb;">
+                  <span>🏰 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Sofia's Magic Words -->
+              <div class="book-card-item book-card-2d book-card-sofia_smile" data-story="sofia_smile" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #db2777, #be185d, #831843);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/sofia_smile/cover.jpg" alt="Sofia's Magic Words" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #db2777; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Sofia's Magic Words</h2>
+                      <p class="book-cover-sub">Please, Thank You, and Kindness</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #db2777;">
+                  <span>💖 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+              <!-- 2D Book: Liam and His Cozy Blanket -->
+              <div class="book-card-item book-card-2d book-card-liam_blanket" data-story="liam_blanket" style="cursor: pointer;">
+                <div class="book-3d-wrapper">
+                  <div class="book-cover-3d" style="background: linear-gradient(145deg, #0284c7, #0369a1, #075985);">
+                    <div class="cover-spine"></div>
+                    <div class="cover-emboss-border">
+                      <div class="cover-character-preview">
+                        <img src="assets/stories/books2d/liam_blanket/cover.jpg" alt="Liam and His Cozy Blanket" class="cover-thumb-img" onerror="this.src='assets/bili.png'">
+                      </div>
+                      <span class="book-tag-badge" style="background: #0284c7; color: #fff;">📖 2D Book</span>
+                      <h2 class="book-cover-title">Liam and His Cozy Blanket</h2>
+                      <p class="book-cover-sub">Adventures of a Little Dreamer</p>
+                      <div class="book-cover-star">★ 10 Páginas HD</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-read-book" style="background: #0284c7;">
+                  <span>🧸 Leer Cuento 2D</span>
+                </button>
+              </div>
+
+            </div>
+            <div class="wooden-shelf-bar"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SCREEN 2: REALISTIC 3D FLIPBOOK READER         -->
+    <!-- ============================================== -->
+    <section id="screenReader" class="screen hidden">
+      <div class="reader-top-bar">
+        <button id="btnBackToShelf" class="btn-reader-action">
+          <span>📚 Biblioteca</span>
+        </button>
+
+        <div class="reader-story-info">
+          <span id="readerStoryBadge" class="story-mini-badge">Libro 1</span>
+          <h2 id="readerStoryTitle" class="reader-header-title">Bili & the Rainbow Forest</h2>
+        </div>
+
+        <div class="reader-playback-controls">
+          <button id="btnPlayNarration" class="btn-voice-narrator" title="Escuchar narración de ElevenLabs">
+            <span id="voicePlayIcon">▶️</span>
+            <span id="voicePlayText">Narrar</span>
+          </button>
+          <button id="btnAutoTurn" class="btn-auto-turn" title="Pasar página automáticamente al terminar de leer">
+            <span id="autoTurnIcon">🔄</span>
+            <span class="auto-turn-label">Auto-pasar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- The Real 3D Book Container -->
+      <div class="book-stage">
+        <div class="book-3d-chassis" id="bookChassis">
+          
+          <!-- Realistic Book Spine & Bookmark Ribbon -->
+          <div class="book-spine-hinge"></div>
+          <div class="book-ribbon-bookmark"></div>
+
+          <!-- Left Page: 3D Pixar Illustration -->
+          <div class="book-page book-page-left" id="leftPage">
+            <div class="page-inner">
+              <div class="illustration-frame" id="illustrationFrame">
+                <img id="sceneImage" src="" alt="Ilustración 3D Pixar" class="pixar-scene-art">
+                <div id="sceneActionLayer" class="scene-action-layer"></div>
+                <canvas id="ambientCanvas" class="ambient-particles-canvas"></canvas>
+                <div class="scene-vignette-shadow"></div>
+                <div class="page-badge-number" id="leftPageNum">Pág. 1</div>
+              </div>
+            </div>
+            <!-- Dynamic Inner Spine Shadow -->
+            <div class="page-spine-shadow left"></div>
+          </div>
+
+          <!-- Realistic Turning Leaf (Flip Animation Layer) -->
+          <div class="book-turning-leaf" id="turningLeaf">
+            <div class="leaf-front" id="leafFront">
+              <div class="leaf-shadow-overlay"></div>
+            </div>
+            <div class="leaf-back" id="leafBack">
+              <div class="leaf-shadow-overlay"></div>
+            </div>
+          </div>
+
+          <!-- Right Page: Elegant Story Text & Interaction -->
+          <div class="book-page book-page-right" id="rightPage">
+            <div class="page-inner page-text-layout">
+              <div class="story-header-ornament">
+                <span class="ornament-leaf">🍃</span>
+                <span class="ornament-divider">✦ ✦ ✦</span>
+                <span class="ornament-leaf">🍃</span>
+              </div>
+
+              <!-- Main English Text -->
+              <div class="story-text-body">
+                <p id="storyTextEn" class="text-story-english">
+                  Once upon a time, deep in the Rainbow Forest, lived Bili.
+                </p>
+              </div>
+
+              <!-- Phonetic Pronunciation Card -->
+              <div class="story-phonetic-card" id="phoneticCard" style="display: none;">
+                <span class="phonetic-tag">🗣️ Pronunciación</span>
+                <p id="storyTextPhonetic" class="text-story-phonetic">
+                  (Pronunciación fonética)
+                </p>
+              </div>
+
+              <!-- Spanish Translation Card -->
+              <div class="story-spanish-card" id="spanishCard">
+                <span class="spanish-tag">🇪🇸 Español</span>
+                <p id="storyTextEs" class="text-story-spanish">
+                  Había una vez, en lo profundo del Bosque Arcoíris, vivía Bili.
+                </p>
+              </div>
+
+              <!-- Highlight Vocabulary Pills -->
+              <div class="story-key-words" id="keyWordsArea">
+                <!-- Dynamically generated word badges -->
+              </div>
+
+              <!-- Page Footer & Audio Controls -->
+              <div class="page-footer-row">
+                <button id="btnRepeatPageAudio" class="btn-page-speaker" title="Repetir audio de esta página">
+                  <span>🔊 Repetir Locución</span>
+                </button>
+                <button id="btnToggleSpanish2d" class="btn-toggle-spanish-2d" title="Mostrar u ocultar traducción" style="display: none;">
+                  <span>🇪🇸 Ver en Español</span>
+                </button>
+                <span class="page-number-label" id="rightPageNum">Pág. 1 de 10</span>
+              </div>
+            </div>
+            <!-- Dynamic Inner Spine Shadow -->
+            <div class="page-spine-shadow right"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigation Arrows for Turning Pages -->
+      <div class="reader-bottom-nav">
+        <button id="btnPrevPage" class="btn-turn-page prev" title="Página Anterior">
+          <span class="arrow-icon">⮜</span>
+          <span class="turn-label">Anterior</span>
+        </button>
+
+        <div class="page-dots-indicator" id="pageDotsContainer">
+          <!-- 10 dots generated dynamically -->
+        </div>
+
+        <button id="btnNextPage" class="btn-turn-page next" title="Página Siguiente">
+          <span class="turn-label">Siguiente</span>
+          <span class="arrow-icon">⮞</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SCREEN 3: DIPLOMA / STORY COMPLETION CELEBRATION-->
+    <!-- ============================================== -->
+    <section id="screenCelebration" class="screen hidden">
+      <div class="celebration-diploma-card">
+        <div class="diploma-ribbon-badge">🏅 Lector de Cuentos Mágicos 🏅</div>
+        <h1 class="diploma-title">¡Felicitaciones, Pequeño Lector!</h1>
+        <p class="diploma-msg">Has leído todas las páginas de <strong id="diplomaBookName">Bili & the Rainbow Forest</strong> con la narración de ElevenLabs.</p>
+
+        <div class="diploma-mascot-award">
+          <img id="diplomaMascotImg" src="assets/bili.png" alt="Mascota" class="diploma-hero-mascot">
+        </div>
+
+        <div class="diploma-action-row">
+          <button id="btnDiplomaReplay" class="btn-primary-fun">
+            <span>🔄 Leer de Nuevo</span>
+          </button>
+          <button id="btnDiplomaShelf" class="btn-secondary-fun">
+            <span>📚 Elegir Otro Cuento</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <script src="stories_books2d_data.js"></script>
+  <script src="stories_engine.js"></script>
+</body>
+</html>

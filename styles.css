@@ -1,0 +1,2337 @@
+/* ===================================================
+   BILI'S COLOR ADVENTURE - BILIKIDS EDITION
+   Designed for Children Ages 3 to 5
+   =================================================== */
+
+:root {
+  --primary-blue: #22a6b3;
+  --bili-blue: #00bcd4;
+  --bili-pink: #ff3385;
+  --bili-yellow: #f1c40f;
+  --bili-orange: #f39c12;
+  --pastel-bg: #e8f5e9;
+  --font-kids: 'Fredoka', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.12);
+  --shadow-button: 0 8px 0 rgba(0,0,0,0.18);
+  --border-radius-card: 28px;
+  --border-radius-btn: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-kids);
+  background: linear-gradient(180deg, #6fd3ff 0%, #b2ebf2 40%, #c8e6c9 100%);
+  color: #2c3e50;
+  position: relative;
+}
+
+/* Background animated clouds */
+.sky-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 100px;
+  filter: blur(1px);
+}
+
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 180px;
+  height: 55px;
+  top: 10%;
+  left: -200px;
+  animation: floatCloud 32s linear infinite;
+}
+.cloud-1::before {
+  width: 70px;
+  height: 70px;
+  top: -35px;
+  left: 30px;
+}
+.cloud-1::after {
+  width: 85px;
+  height: 85px;
+  top: -45px;
+  left: 75px;
+}
+
+.cloud-2 {
+  width: 240px;
+  height: 70px;
+  top: 22%;
+  left: -260px;
+  animation: floatCloud 45s linear infinite 12s;
+  opacity: 0.85;
+}
+.cloud-2::before {
+  width: 90px;
+  height: 90px;
+  top: -45px;
+  left: 40px;
+}
+.cloud-2::after {
+  width: 110px;
+  height: 110px;
+  top: -55px;
+  left: 100px;
+}
+
+.cloud-3 {
+  width: 140px;
+  height: 45px;
+  top: 5%;
+  left: -150px;
+  animation: floatCloud 28s linear infinite 5s;
+  opacity: 0.6;
+}
+
+@keyframes floatCloud {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 350px)); }
+}
+
+.sun-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 234, 167, 0.95) 0%, rgba(255, 209, 102, 0) 70%);
+  border-radius: 50%;
+}
+
+/* ===================================================
+   MAIN LAYOUT & CONTAINER
+   =================================================== */
+
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header bar */
+.game-header {
+  height: 68px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+  z-index: 20;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-game-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef9e7;
+  color: #d35400;
+  border: 2px dashed #f39c12;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+}
+
+.header-game-switcher:hover {
+  transform: scale(1.05);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  background: linear-gradient(135deg, #00d2d3, #01a3a4);
+  color: #ffffff;
+  border-radius: 20px;
+  font-family: var(--font-kids);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #007a7a;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.header-btn.icon-only {
+  padding: 8px 14px;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #00d2d3;
+  color: #00a8a8;
+}
+
+.header-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #007a7a;
+}
+
+.header-level-badge {
+  background: linear-gradient(135deg, #ff3385, #ff6b81);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #c41857;
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-stars {
+  background: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 2px solid #ffd32a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #d35400;
+}
+
+.header-controls {
+  display: flex;
+  gap: 8px;
+}
+
+/* ===================================================
+   SCREENS NAVIGATION
+   =================================================== */
+
+.game-main {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===================================================
+   HOME SCREEN / HERO & FULL-BODY BILI
+   =================================================== */
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px 0 15px;
+}
+
+.home-brand-header {
+  margin-bottom: 6px;
+}
+
+.home-main-logo {
+  max-width: 320px;
+  width: 75vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 188, 212, 0.25));
+}
+
+.bili-hero-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0 10px;
+  gap: 20px;
+}
+
+.bili-fullbody-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bili-fullbody-hero-img {
+  height: 230px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.18));
+  cursor: pointer;
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.bili-ground-shadow {
+  width: 130px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 75%);
+  border-radius: 50%;
+  margin-top: -8px;
+  z-index: 1;
+}
+
+.bili-speech-bubble-hero {
+  position: relative;
+  background: #ffffff;
+  border: 4px solid #00d2d3;
+  border-radius: 26px;
+  padding: 14px 20px;
+  max-width: 310px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bili-speech-bubble-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  transform: translateY(-50%);
+  border-width: 10px 14px 10px 0;
+  border-style: solid;
+  border-color: transparent #00d2d3 transparent transparent;
+}
+
+.speech-replay-btn {
+  background: #ffd32a;
+  border: none;
+  font-size: 1.4rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #e1a700;
+  flex-shrink: 0;
+  transition: transform 0.1s ease;
+}
+.speech-replay-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #e1a700;
+}
+
+.game-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  margin: 5px 0 2px;
+  text-shadow: 3px 3px 0 #ffffff, 5px 5px 0 rgba(0,0,0,0.06);
+  letter-spacing: 1px;
+}
+
+.title-word.color-red { color: #ff3385; }
+.title-word.color-blue { color: #00bcd4; }
+.title-word.color-yellow { color: #ffa502; }
+
+.game-subtitle {
+  font-size: 1.2rem;
+  color: #4b6584;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.btn-big-play {
+  background: linear-gradient(135deg, #2ed573, #10ac84);
+  color: white;
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.8rem;
+  font-weight: 800;
+  padding: 16px 48px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #0b8e6b, 0 15px 25px rgba(46, 213, 115, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-big-play:hover {
+  transform: translateY(-2px);
+}
+
+.btn-big-play:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #0b8e6b, 0 8px 15px rgba(46, 213, 115, 0.4);
+}
+
+/* Animations */
+.pulse {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.pulse-subtle {
+  animation: pulseSubtle 3s infinite ease-in-out;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.wave-bounce {
+  animation: waveBounce 3s ease-in-out infinite alternate;
+}
+
+@keyframes waveBounce {
+  0% { transform: translateY(0px) rotate(0deg); }
+  30% { transform: translateY(-8px) rotate(-2deg); }
+  70% { transform: translateY(-4px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* ===================================================
+   LEVEL SELECTION MAP
+   =================================================== */
+
+.level-map-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 10px 10px 35px;
+}
+
+.map-heading {
+  font-size: 1.45rem;
+  color: #2f3542;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.level-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+.level-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius-card);
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  position: relative;
+  border: 4px solid #dcdde1;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-card.unlocked {
+  border-color: #00d2d3;
+  background: #ffffff;
+}
+
+.level-card.unlocked:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 28px rgba(0, 210, 211, 0.3);
+  border-color: #00bcd4;
+}
+
+.level-card:not(.unlocked) {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+.level-card .level-num {
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  background: #ff3385;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 #d91b68;
+}
+
+.level-art {
+  font-size: 3.2rem;
+  margin: 6px 0;
+}
+
+.level-info h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.level-info p {
+  font-size: 0.85rem;
+  color: #747d8c;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.card-stars {
+  font-size: 1.3rem;
+  color: #f1c40f;
+  letter-spacing: 2px;
+}
+
+/* ===================================================
+   GAMEPLAY SCREEN WITH FULL-BODY COMPANION BILI
+   =================================================== */
+
+.bili-sidekick-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #00d2d3;
+  border-radius: 28px;
+  padding: 8px 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.bili-companion-fullbody-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bili-companion-fullbody-img {
+  height: 115px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.18));
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bili-companion-fullbody-img:active {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.instruction-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.speech-target {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #2f3542;
+}
+
+.color-prompt-word {
+  display: inline-block;
+  padding: 3px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.65rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.spanish-hint {
+  font-size: 1.15rem;
+  color: #747d8c;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.voice-btn-round {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd32a, #ff9f1a);
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #cc8e35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.1s ease;
+}
+.voice-btn-round:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #cc8e35;
+}
+
+/* Round Progress Bar */
+.round-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff3385, #00d2d3, #2ed573);
+  border-radius: 20px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.round-counter {
+  font-weight: 700;
+  color: #2f3542;
+  font-size: 1.05rem;
+}
+
+/* ===================================================
+   LEVEL 1: BALLOONS ARENA
+   =================================================== */
+
+.balloons-arena {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.balloon-item {
+  width: 140px;
+  height: 175px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.18), inset 12px 12px 25px rgba(255,255,255,0.4), 0 15px 25px rgba(0,0,0,0.15);
+  animation: floatBalloon 3.5s ease-in-out infinite alternate;
+  transition: transform 0.15s ease;
+}
+
+.balloon-item:nth-child(2) { animation-delay: 0.6s; }
+.balloon-item:nth-child(3) { animation-delay: 1.2s; }
+.balloon-item:nth-child(4) { animation-delay: 1.8s; }
+
+@keyframes floatBalloon {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  100% { transform: translateY(-16px) rotate(3deg); }
+}
+
+.balloon-item::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid inherit;
+}
+
+.balloon-string {
+  position: absolute;
+  bottom: -45px;
+  left: 50%;
+  width: 2px;
+  height: 45px;
+  background: rgba(100, 100, 100, 0.4);
+  transform-origin: top center;
+  animation: stringWiggle 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes stringWiggle {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+.balloon-color-label {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+.balloon-shine {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  width: 26px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+.balloon-item.popping {
+  animation: popSplice 0.25s forwards !important;
+}
+
+@keyframes popSplice {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; }
+  100% { transform: scale(0.1); opacity: 0; }
+}
+
+/* ===================================================
+   LEVEL 2: BACKPACK GAMEPLAY
+   =================================================== */
+
+.backpack-gameplay {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 15px;
+}
+
+.items-shelves {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding: 10px;
+}
+
+.toy-card {
+  width: 110px;
+  height: 125px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  border: 4px solid #f1f2f6;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toy-card:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.toy-card:active {
+  cursor: grabbing;
+}
+
+.toy-icon {
+  font-size: 3.2rem;
+  margin-bottom: 2px;
+}
+
+.toy-color-badge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.backpack-target-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+
+.backpack-visual {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(135deg, #ffffff, #f0f7ff);
+  border: 4px dashed #00bcd4;
+  border-radius: 28px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 188, 212, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backpack-visual.drag-over {
+  background: #dff9fb;
+  border-color: #2ed573;
+  transform: scale(1.04);
+}
+
+.backpack-badge {
+  font-size: 4rem;
+  margin-bottom: 4px;
+}
+
+.backpack-label {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #00bcd4;
+}
+
+.drop-hint-text {
+  font-size: 1.1rem;
+  color: #576574;
+  margin-top: 4px;
+}
+
+/* ===================================================
+   LEVEL 3: MAGIC PAINT
+   =================================================== */
+
+.paint-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.canvas-art-card {
+  width: 250px;
+  height: 230px;
+  background: white;
+  border-radius: 30px;
+  border: 6px solid #ff9f43;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.drawing-display {
+  font-size: 7.5rem;
+  filter: grayscale(1) opacity(0.35);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.drawing-display.painted {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.12);
+}
+
+.paint-buckets-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.paint-splat-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+  position: relative;
+}
+
+.paint-splat-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.paint-splat-btn:active {
+  transform: translateY(3px) scale(0.95);
+}
+
+.splat-icon {
+  font-size: 2.2rem;
+}
+
+.splat-name {
+  position: absolute;
+  bottom: -22px;
+  background: #fff;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  color: #2c3e50;
+}
+
+/* ===================================================
+   LEVEL 4: BUBBLE STARS
+   =================================================== */
+
+.bubbles-count-badge {
+  display: inline-block;
+  background: #ff3385;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.bubbles-pond {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 30px;
+  border: 3px solid rgba(255,255,255,0.6);
+  min-height: 300px;
+}
+
+.game-bubble {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.8), 0 8px 18px rgba(0, 0, 0, 0.12);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+  transition: transform 0.1s ease;
+  animation: floatBubble 5s ease-in-out infinite alternate;
+}
+
+.game-bubble:active {
+  transform: scale(0.9);
+}
+
+@keyframes floatBubble {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(-5deg); }
+}
+
+/* ===================================================
+   LEVEL 5: DISCO DANCE & TROPHY
+   =================================================== */
+
+.disco-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.disco-bili-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 4px solid #f368e0;
+  box-shadow: 0 8px 25px rgba(243, 104, 224, 0.3);
+}
+
+.bili-stage-fullbody-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bili-disco-fullbody-img {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(243, 104, 224, 0.4));
+  transform-origin: bottom center;
+}
+
+.bili-disco-fullbody-img.dancer {
+  animation: danceBeat 0.75s infinite alternate ease-in-out;
+}
+
+@keyframes danceBeat {
+  0% { transform: translateY(0) rotate(-7deg) scale(1); }
+  100% { transform: translateY(-16px) rotate(7deg) scale(1.08); }
+}
+
+.disco-floor-shadow {
+  width: 90px;
+  height: 14px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 75%);
+  border-radius: 50%;
+  margin-top: -6px;
+}
+
+.disco-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.disco-tile {
+  height: 100px;
+  border-radius: 24px;
+  border: 5px solid white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.disco-tile:hover {
+  transform: scale(1.03);
+}
+
+.disco-tile:active {
+  transform: scale(0.95);
+}
+
+.disco-tile.flash {
+  animation: flashTile 0.4s ease;
+}
+
+@keyframes flashTile {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.7); transform: scale(1.08); }
+}
+
+.disco-score-bar {
+  background: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.badge-steps {
+  color: #ff3385;
+  font-weight: 800;
+}
+
+/* ===================================================
+   SCREEN: CELEBRATION & BILIKIDS DIPLOMA
+   =================================================== */
+
+#screenCelebration {
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  overflow-y: auto;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.diploma-card {
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  border-radius: 32px;
+  border: 10px solid #ffd32a;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.diploma-ribbon {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff3385, #ff6b81);
+  color: white;
+  padding: 6px 24px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(255, 51, 133, 0.4);
+}
+
+.diploma-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.diploma-brand-logo {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
+.diploma-titles h2 {
+  font-size: 1.7rem;
+  color: #00bcd4;
+  font-weight: 800;
+}
+
+.diploma-titles p {
+  color: #8395a7;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.diploma-center-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.diploma-bili-fullbody-container {
+  flex-shrink: 0;
+}
+
+.diploma-bili-fullbody-img {
+  height: 190px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18));
+}
+
+.diploma-text-content {
+  flex: 1;
+}
+
+.awarded-to-text {
+  font-size: 1.05rem;
+  color: #576574;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.child-name-wrapper {
+  margin-bottom: 12px;
+}
+
+.child-name-wrapper label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #8395a7;
+  margin-bottom: 4px;
+}
+
+.child-name-wrapper input {
+  font-family: var(--font-kids);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ff3385;
+  text-align: center;
+  border: 3px dashed #00d2d3;
+  border-radius: 16px;
+  padding: 6px 14px;
+  outline: none;
+  background: #f0fdfd;
+  max-width: 280px;
+  width: 90%;
+}
+
+.child-name-wrapper input:focus {
+  border-color: #2ed573;
+  background: #ffffff;
+}
+
+.colors-learned-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.c-tag {
+  color: white;
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+.tag-red { background: #ff4757; }
+.tag-blue { background: #2e86de; }
+.tag-yellow { background: #ffa502; }
+.tag-green { background: #2ed573; }
+.tag-orange { background: #ff7f50; }
+.tag-purple { background: #9b59b6; }
+.tag-pink { background: #ff6b81; }
+.tag-brown { background: #8d5b4c; }
+
+.diploma-stars-row {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.diploma-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-action-diploma {
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+  transition: transform 0.1s ease;
+}
+
+.btn-action-diploma:active {
+  transform: translateY(3px);
+}
+
+.btn-print {
+  background: #2ed573;
+  color: white;
+}
+
+.btn-replay {
+  background: #00d2d3;
+  color: white;
+}
+
+/* ===================================================
+   SETTINGS MODAL (VOICE & AUDIO)
+   =================================================== */
+
+.settings-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  backdrop-filter: blur(4px);
+}
+
+.settings-modal.hidden {
+  display: none;
+}
+
+.settings-content {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 5px solid #00d2d3;
+  padding: 24px;
+  width: 90%;
+  max-width: 440px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 10px;
+}
+
+.settings-header h3 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  font-weight: 800;
+}
+
+.btn-close-settings {
+  background: #ff4757;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.settings-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #2f3542;
+  margin-bottom: 6px;
+}
+
+.settings-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 2px solid #ced6e0;
+  font-family: var(--font-kids);
+  font-size: 1rem;
+  color: #2f3542;
+  outline: none;
+  background: #f8f9fa;
+}
+
+.settings-select:focus {
+  border-color: #00d2d3;
+}
+
+.range-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.range-wrapper input {
+  flex: 1;
+  accent-color: #00d2d3;
+}
+
+#speedValueLabel {
+  font-weight: 700;
+  color: #57606f;
+  font-size: 0.95rem;
+  min-width: 130px;
+}
+
+.settings-test-row {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-test-voice {
+  background: linear-gradient(135deg, #2ed573, #10ac84);
+  color: white;
+  border: none;
+  font-family: var(--font-kids);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0b8e6b;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-test-voice:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #0b8e6b;
+}
+
+/* ===================================================
+   ROUND SUCCESS OVERLAY WITH JUMPING FULL-BODY BILI
+   =================================================== */
+
+.success-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+.success-overlay.hidden {
+  display: none;
+}
+
+.success-popup {
+  background: white;
+  border-radius: 30px;
+  border: 6px solid #2ed573;
+  padding: 20px 25px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  width: 85%;
+}
+
+.success-bili-fullbody-wrap {
+  margin-bottom: 5px;
+}
+
+.bili-success-fullbody-img {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.2));
+}
+
+.celebrate-jump {
+  animation: celebrateHop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
+}
+
+@keyframes celebrateHop {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-18px) scale(1.08) rotate(3deg); }
+}
+
+.success-content h2 {
+  font-size: 2.2rem;
+  color: #2ed573;
+  font-weight: 800;
+}
+
+.success-content p {
+  font-size: 1.35rem;
+  color: #2f3542;
+  font-weight: 700;
+  margin: 6px 0 12px;
+}
+
+.success-stars {
+  font-size: 1.8rem;
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ===================================================
+   PRINT STYLES FOR DIPLOMA
+   =================================================== */
+
+@media print {
+  body {
+    background: white;
+  }
+  .sky-background, .game-header, .bili-sidekick-box, .round-progress, .diploma-actions, #confettiCanvas {
+    display: none !important;
+  }
+  .game-container, .game-main, #screenCelebration {
+    display: block !important;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+  }
+  .diploma-card {
+    border: 8px solid #ffd32a;
+    box-shadow: none;
+    margin: 20px auto;
+  }
+}
+
+/* ===================================================
+   STAGE TABS & SELECTOR (ETAPA 1 vs ETAPA 2)
+   =================================================== */
+
+.stage-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stage-tab-btn {
+  flex: 1;
+  max-width: 320px;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 4px solid #dcdde1;
+  border-radius: 24px;
+  padding: 12px 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-kids);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+}
+
+.stage-tab-btn.active {
+  border-color: #00bcd4;
+  background: #ffffff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(0, 188, 212, 0.25);
+}
+
+.stage-tab-btn.locked {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.stage-tab-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.stage-status-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: #f1f2f6;
+  color: #747d8c;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+
+.stage-tab-btn.active .stage-status-badge {
+  background: #e0f7fa;
+  color: #00838f;
+}
+
+.stage-tab-btn.locked .stage-status-badge {
+  background: #ffeaa7;
+  color: #d35400;
+}
+
+/* ===================================================
+   LEVEL 6: BILI'S COLOR TRAIN
+   =================================================== */
+
+.train-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.train-track-view {
+  width: 100%;
+  max-width: 550px;
+  background: #f0f3f6;
+  border-bottom: 8px solid #7f8c8d;
+  border-radius: 20px 20px 0 0;
+  padding: 20px 10px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.train-composition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.locomotive {
+  font-size: 5rem;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+  animation: trainChug 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes trainChug {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+.wagon-waiting {
+  width: 150px;
+  height: 90px;
+  background: #ffffff;
+  border: 4px dashed #00bcd4;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.wagon-waiting.loaded {
+  border-style: solid;
+  border-width: 5px;
+  transform: scale(1.08);
+}
+
+.wagon-placeholder {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #747d8c;
+}
+
+.train-crates-platform {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.train-crate {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  border: 4px solid white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  transition: transform 0.15s ease;
+  position: relative;
+}
+
+.train-crate:hover {
+  transform: translateY(-6px) scale(1.08);
+}
+
+.train-crate:active {
+  transform: scale(0.92);
+}
+
+.crate-label {
+  position: absolute;
+  bottom: -20px;
+  background: white;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #2c3e50;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===================================================
+   LEVEL 7: FLASHLIGHT SAFARI
+   =================================================== */
+
+.safari-night-arena {
+  flex: 1;
+  position: relative;
+  background: #1e272e;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+  cursor: crosshair;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.safari-flashlight-beam {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 241, 118, 0.45) 0%, rgba(255, 238, 88, 0.15) 55%, transparent 75%);
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 5;
+}
+
+.safari-animals-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.safari-animal-card {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  cursor: pointer;
+  filter: brightness(0.2) blur(1px);
+  transition: filter 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.safari-animal-card.revealed {
+  filter: brightness(1) blur(0);
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+.safari-hint-bar {
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffd32a;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  z-index: 10;
+}
+
+/* ===================================================
+   LEVEL 8: ICE CREAM TOWER
+   =================================================== */
+
+.icecream-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.icecream-display-stand {
+  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.icecream-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.icecream-cone {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.icecream-scoop-stacked {
+  width: 90px;
+  height: 70px;
+  border-radius: 50% 50% 35% 35%;
+  border: 4px solid white;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  margin-bottom: -15px;
+  z-index: 2;
+  animation: scoopDrop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scoopDrop {
+  0% { transform: translateY(-40px) scale(0.6); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.icecream-flavors-palette {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.flavor-scoop-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.flavor-scoop-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.flavor-scoop-btn:active {
+  transform: scale(0.92);
+}
+
+/* ===================================================
+   LEVEL 9: RAINBOW BRIDGE
+   =================================================== */
+
+.rainbow-bridge-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.bridge-clouds-scene {
+  width: 100%;
+  max-width: 540px;
+  height: 160px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bridge-arch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 14px 20px;
+  border-radius: 40px;
+  border: 4px dashed #00bcd4;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.bridge-stone-slot {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #dfe4ea;
+  border: 3px solid #ced6e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bridge-stone-slot.placed {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  color: white;
+  border-color: white;
+}
+
+.bridge-walker-bili {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  transition: left 0.5s ease;
+  z-index: 10;
+}
+
+.bili-mini-walker {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+}
+
+.rainbow-stones-picker {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rainbow-stone-btn {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 4px solid white;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 800;
+  transition: transform 0.15s ease;
+}
+
+.rainbow-stone-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.rainbow-stone-btn:active {
+  transform: scale(0.92);
+}
+
+/* ===================================================
+   LEVEL 10: GALAXY ROCKET
+   =================================================== */
+
+.galaxy-space-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+}
+
+.rocket-traveler {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.8s ease;
+}
+
+.rocket-bili-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rocket-bili-sprite {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+.rocket-ship {
+  font-size: 5rem;
+  position: absolute;
+  bottom: -20px;
+  right: -25px;
+  filter: drop-shadow(0 0 15px #ff7675);
+  animation: rocketHover 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes rocketHover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+.rocket-traveler.blastoff {
+  animation: rocketFly 1.5s forwards ease-in;
+}
+
+@keyframes rocketFly {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-600px) scale(1.8); opacity: 0; }
+}
+
+.galaxy-planets-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.galaxy-planet-btn {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.galaxy-planet-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+.galaxy-planet-btn:active {
+  transform: scale(0.92);
+}
+
+/* ===================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   =================================================== */
+
+@media (max-width: 600px) {
+  .game-title {
+    font-size: 2rem;
+  }
+  .home-main-logo {
+    max-width: 250px;
+  }
+  .bili-fullbody-hero-img {
+    height: 180px;
+  }
+  .bili-speech-bubble-hero {
+    max-width: 220px;
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+  .bili-companion-fullbody-img {
+    height: 90px;
+  }
+  .balloon-item {
+    width: 105px;
+    height: 135px;
+  }
+  .speech-target {
+    font-size: 1.15rem;
+  }
+  .color-prompt-word {
+    font-size: 1.25rem;
+  }
+  .diploma-center-layout {
+    flex-direction: column;
+  }
+  .diploma-bili-fullbody-img {
+    height: 130px;
+  }
+}
+
+/* ===================================================
+   VISUAL POLISH — layered storybook finish
+   Presentation-only overrides; game logic and hit targets stay intact.
+   =================================================== */
+:root {
+  --ink: #183b56;
+  --glass: rgba(255, 255, 255, .86);
+  --lift: 0 14px 34px rgba(31, 74, 112, .14);
+}
+
+html, body {
+  background:
+    radial-gradient(ellipse at 82% 13%, rgba(255, 248, 193, .9) 0 5%, transparent 22%),
+    linear-gradient(180deg, #77d9ff 0%, #c7f1f8 48%, #e5f8d9 100%);
+  color: var(--ink);
+}
+
+.sky-background::after {
+  content: '';
+  position: absolute;
+  inset: auto -5% -42px;
+  height: 110px;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(180deg, rgba(154, 224, 139, .34), rgba(101, 193, 128, .18));
+}
+
+.game-header {
+  background: rgba(255, 255, 255, .78);
+  border-bottom: 1px solid rgba(255, 255, 255, .92);
+  box-shadow: 0 8px 26px rgba(42, 91, 125, .12);
+}
+
+.header-btn, .header-level-badge, .header-stars,
+.bili-speech-bubble-hero, .instruction-box, .round-progress,
+.disco-score-bar, .safari-hint-bar {
+  backdrop-filter: blur(12px);
+}
+
+.home-hero { padding-top: 12px; }
+.home-main-logo { filter: drop-shadow(0 12px 15px rgba(30, 120, 160, .18)); }
+.bili-fullbody-hero-img {
+  filter: drop-shadow(0 17px 16px rgba(29, 76, 98, .2));
+}
+.bili-speech-bubble-hero {
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(238,252,255,.92));
+  border: 2px solid rgba(0, 188, 212, .55);
+  box-shadow: 0 14px 28px rgba(27, 111, 143, .16), inset 0 1px 0 #fff;
+}
+.game-title { filter: drop-shadow(0 5px 0 rgba(255,255,255,.7)); }
+
+.level-map-container { max-width: 1050px; }
+.level-card {
+  background: linear-gradient(155deg, rgba(255,255,255,.98), rgba(239,250,255,.9));
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow: 0 12px 25px rgba(37, 91, 122, .13), inset 0 1px 0 #fff;
+}
+.level-card.unlocked { outline: 2px solid rgba(0, 188, 212, .38); }
+.level-card .level-art {
+  filter: drop-shadow(0 7px 5px rgba(22, 68, 91, .15));
+  transform: translateZ(0);
+}
+.stage-tab-btn {
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 8px 20px rgba(37, 91, 122, .12), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* Shared level panels now read as soft, tactile play spaces. */
+.bili-sidekick-box {
+  border-radius: 26px;
+  background: linear-gradient(115deg, rgba(255,255,255,.82), rgba(246,253,255,.65));
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 9px 24px rgba(36, 83, 110, .1), inset 0 1px 0 #fff;
+}
+.bili-companion-fullbody-img, .bili-mini-walker, .rocket-bili-sprite {
+  filter: drop-shadow(0 10px 9px rgba(12, 40, 58, .22));
+}
+.instruction-box { border-radius: 22px; }
+.speech-target { color: #20445d; }
+.round-progress {
+  border-radius: 22px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 8px 20px rgba(36, 83, 110, .09), inset 0 1px 0 #fff;
+}
+.progress-track { box-shadow: inset 0 2px 5px rgba(26, 75, 99, .14); }
+.progress-bar-fill { box-shadow: 0 0 12px rgba(0, 188, 212, .35); }
+
+/* Stage 2 gets a distinct, cinematic palette while retaining all existing DOM. */
+#screenLevel6 .train-track-view {
+  background: linear-gradient(180deg, #d9f4ff 0%, #b9e9f6 68%, #a6d694 69%, #8cc47d 100%);
+  border-bottom-color: #7d6954;
+  box-shadow: inset 0 -11px 0 rgba(89, 76, 58, .16), 0 16px 24px rgba(39, 87, 99, .15);
+}
+#screenLevel6 .wagon-waiting {
+  background: linear-gradient(145deg, #fff, #e8faff);
+  box-shadow: inset 0 4px 12px rgba(24, 123, 153, .08), 0 8px 14px rgba(24, 73, 90, .12);
+}
+#screenLevel6 .train-crate,
+#screenLevel8 .flavor-scoop-btn,
+#screenLevel9 .rainbow-stone-btn,
+#screenLevel10 .galaxy-planet-btn {
+  box-shadow: 0 10px 18px rgba(20, 56, 77, .2), inset 0 3px 5px rgba(255,255,255,.45), inset 0 -5px 8px rgba(21, 45, 62, .1);
+}
+
+#screenLevel7 .safari-night-arena {
+  background:
+    radial-gradient(ellipse at 20% 90%, rgba(55, 134, 105, .65), transparent 38%),
+    radial-gradient(ellipse at 82% 82%, rgba(65, 117, 97, .56), transparent 35%),
+    radial-gradient(circle at 78% 14%, rgba(255, 247, 184, .2) 0 2px, transparent 3px),
+    radial-gradient(circle at 64% 27%, rgba(255, 247, 184, .2) 0 2px, transparent 3px),
+    linear-gradient(180deg, #15233f 0%, #253e50 58%, #203e3c 100%);
+  border: 2px solid rgba(174, 221, 195, .45);
+  box-shadow: inset 0 0 55px rgba(0,0,0,.62), 0 15px 30px rgba(20, 47, 64, .22);
+}
+#screenLevel7 .safari-flashlight-beam {
+  background: radial-gradient(circle, rgba(255, 249, 199, .62) 0%, rgba(255, 236, 132, .24) 48%, transparent 73%);
+  filter: blur(2px);
+}
+
+#screenLevel8 .icecream-stage {
+  border-radius: 30px;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, .76), transparent 58%),
+    linear-gradient(180deg, rgba(255,240,248,.7), rgba(255,255,255,.28));
+  border: 1px solid rgba(255,255,255,.8);
+}
+#screenLevel8 .icecream-display-stand {
+  filter: drop-shadow(0 16px 12px rgba(92, 65, 86, .15));
+}
+#screenLevel8 .icecream-scoop-stacked { box-shadow: inset 0 8px 12px rgba(255,255,255,.4), 0 7px 12px rgba(72, 49, 63, .18); }
+
+#screenLevel9 .bridge-clouds-scene {
+  border-radius: 32px;
+  background:
+    radial-gradient(ellipse at 18% 100%, rgba(255,255,255,.9) 0 12%, transparent 38%),
+    radial-gradient(ellipse at 85% 100%, rgba(255,255,255,.84) 0 14%, transparent 40%),
+    linear-gradient(180deg, rgba(130, 218, 255, .3), rgba(255,255,255,.12));
+  box-shadow: inset 0 -18px 24px rgba(255,255,255,.24);
+}
+#screenLevel9 .bridge-arch {
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(237,249,255,.78));
+  box-shadow: 0 12px 22px rgba(44, 111, 145, .13), inset 0 2px 0 #fff;
+}
+
+#screenLevel10 .galaxy-space-stage {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,.85) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 31%, rgba(255,255,255,.78) 0 1px, transparent 2px),
+    radial-gradient(circle at 63% 72%, rgba(177, 161, 255, .9) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 50% 110%, #293765 0%, #171d43 43%, #090d22 100%);
+  border: 1px solid rgba(182, 188, 255, .38);
+  box-shadow: inset 0 0 65px rgba(7, 9, 31, .8), 0 16px 30px rgba(25, 24, 68, .24);
+}
+#screenLevel10 .rocket-ship { filter: drop-shadow(0 0 12px rgba(255, 126, 161, .82)); }
+
+@media (max-width: 700px) {
+  .bili-sidekick-box { border-radius: 20px; }
+  .level-card { box-shadow: 0 8px 18px rgba(37, 91, 122, .12), inset 0 1px 0 #fff; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud, .wave-bounce, .pulse, .pulse-subtle { animation-duration: 12s !important; }
+}
+
+/* Bili's idle acting: a slow, cushioned sway with a gentle breathing lift. */
+.bili-fullbody-hero-img.wave-bounce {
+  animation: biliHeroIdle 4.8s cubic-bezier(.45, 0, .55, 1) infinite;
+  transform-origin: 50% 94%;
+  will-change: transform;
+}
+.bili-companion-fullbody-img.wave-bounce {
+  animation: biliCompanionIdle 5.4s cubic-bezier(.45, 0, .55, 1) infinite;
+  transform-origin: 50% 94%;
+  will-change: transform;
+}
+.bili-ground-shadow {
+  animation: biliShadowBreath 4.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes biliHeroIdle {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1, 1); }
+  22% { transform: translate3d(0, -3px, 0) rotate(-.7deg) scale(1.006, .997); }
+  52% { transform: translate3d(0, -8px, 0) rotate(.45deg) scale(1.012, .99); }
+  76% { transform: translate3d(0, -4px, 0) rotate(.7deg) scale(1.006, .997); }
+}
+@keyframes biliCompanionIdle {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1, 1); }
+  24% { transform: translate3d(0, -2px, 0) rotate(-.6deg) scale(1.005, .998); }
+  54% { transform: translate3d(0, -6px, 0) rotate(.4deg) scale(1.01, .993); }
+  78% { transform: translate3d(0, -3px, 0) rotate(.55deg) scale(1.004, .998); }
+}
+@keyframes biliShadowBreath {
+  0%, 100% { transform: scaleX(1); opacity: .82; }
+  52% { transform: scaleX(.86); opacity: .56; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bili-fullbody-hero-img.wave-bounce,
+  .bili-companion-fullbody-img.wave-bounce,
+  .bili-ground-shadow { animation: none !important; }
+}
+
+

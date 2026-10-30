@@ -1,0 +1,13 @@
+{
+  "name": "bili_color_adventure",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Un juego web interactivo diseñado especialmente para niñas y niños de 3 a 5 años.",
+  "scripts": {
+    "generate-audio": "node --env-file=.env.local generate_luna_audio.js"
+  },
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.74.0",
+    "dotenv": "^18.0.9"
+  }
+}

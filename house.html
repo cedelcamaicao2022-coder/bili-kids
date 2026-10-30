@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Luna's House Adventure | Bilikids - Places in the House</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="house_styles.css?v=2.0">
+</head>
+<body>
+  <!-- Background Animated Atmosphere -->
+  <div class="house-background">
+    <div class="house-sun"></div>
+    <div class="house-cloud house-cloud-1"></div>
+    <div class="house-cloud house-cloud-2"></div>
+    <div class="cozy-wallpaper-pattern"></div>
+    <div class="wooden-floor-base"></div>
+  </div>
+
+  <div id="houseApp" class="game-container">
+    <!-- Top Header Bar with Bilikids Logo & Adventure Switcher -->
+    <header class="game-header">
+      <div class="header-left">
+        <button id="btnHome" class="header-btn" title="Go to House Menu">
+          <span class="btn-icon">🏠</span>
+          <span class="btn-label">Home</span>
+        </button>
+
+        <a href="index.html" class="header-game-switcher" title="Play Colors with Bili">
+          <span>🎨</span>
+          <span>Bili</span>
+        </a>
+        <a href="farm.html" class="header-game-switcher" title="Play Farm with Leo">
+          <span>🦁</span>
+          <span>Leo</span>
+        </a>
+        <a href="stories.html" class="header-game-switcher" title="Bili Kids Library">
+          <span>📚</span>
+          <span>Library</span>
+        </a>
+        <a href="lab.html" class="header-game-switcher" title="Science Lab">
+          <span>🧪</span>
+          <span>Lab</span>
+        </a>
+        <a href="writing.html" class="header-game-switcher" title="Writing Practice">
+          <span>✏️</span>
+          <span>Writing</span>
+        </a>
+
+        <div class="bilikids-mini-logo">Bili<span>kids</span></div>
+      </div>
+
+      <div class="header-level-badge" id="levelBadge">
+        <span id="levelBadgeText">House</span>
+      </div>
+
+      <div class="header-right">
+        <div class="header-stars" id="headerStars">
+          <span class="star-icon">⭐</span>
+          <span id="totalStarsCount">0</span>
+        </div>
+
+        <button id="btnSoundToggle" class="header-btn icon-only" title="Sound">
+          <span id="soundIcon">🔊</span>
+        </button>
+
+        <button id="btnFullscreen" class="header-btn icon-only" title="Fullscreen">
+          <span>⛶</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <main class="game-main">
+      <!-- SCREEN: HOME / LEVEL SELECT -->
+      <section id="screenHome" class="screen active">
+        <div class="home-hero-card">
+          <div class="home-hero-content">
+            <div class="luna-hero-wrapper" id="btnRepeatWelcome" title="Tap me to listen!">
+              <img src="assets/luna/luna_transparent.png" alt="Luna Bunny Explorer" class="luna-fullbody-hero-img" id="lunaHeroImg">
+            </div>
+
+            <div class="home-speech-bubble">
+              <h1>Welcome to <span>Luna's House!</span> 🐰🏡</h1>
+              <p>Hello little friend! I am <strong>Luna</strong> the bunny explorer. Let's explore every room in the house and learn in English!</p>
+              <button id="btnStartGame" class="btn-start-adventure">
+                <span>▶</span> PLAY NOW!
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage Tabs -->
+        <div class="stage-tabs-container">
+          <button id="btnStage1Tab" class="btn-stage-tab active">
+            <div class="tab-info-text">
+              <span class="tab-title">🏡 Stage 1: Rooms of the House</span>
+              <span class="tab-subtitle">10 games: Rooms & furniture</span>
+            </div>
+            <span class="tab-badge unlocked">⭐ Levels 1 to 10</span>
+          </button>
+
+          <button id="btnStage2Tab" class="btn-stage-tab locked">
+            <div class="tab-info-text">
+              <span class="tab-title">🌟 Stage 2: Quests & Routines</span>
+              <span class="tab-subtitle">10 games: Routines, sounds & shapes</span>
+            </div>
+            <span id="stage2LockBadge" class="tab-badge locked-badge">🔒 Complete Stage 1</span>
+          </button>
+        </div>
+
+        <!-- Stage 1 Grid (10 Levels) -->
+        <div id="stage1Grid" class="stage-grid-wrapper">
+          <div class="levels-grid">
+            <div class="level-card unlocked" data-level="1">
+              <div class="level-num">1</div>
+              <div class="level-art">🛋️</div>
+              <div class="level-info">
+                <h3>Living Room</h3>
+                <p>Sofa, lamp, TV & table</p>
+                <div class="card-stars" id="cardStars1">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="2">
+              <div class="level-num">2</div>
+              <div class="level-art">🧊</div>
+              <div class="level-info">
+                <h3>Kitchen Fridge</h3>
+                <p>Open fridge for yummy snacks</p>
+                <div class="card-stars" id="cardStars2">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="3">
+              <div class="level-num">3</div>
+              <div class="level-art">🛏️</div>
+              <div class="level-info">
+                <h3>Bedroom</h3>
+                <p>Bed, lamp, window & clock</p>
+                <div class="card-stars" id="cardStars3">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="4">
+              <div class="level-num">4</div>
+              <div class="level-art">🛁</div>
+              <div class="level-info">
+                <h3>Bathroom Bubbles</h3>
+                <p>Soap, bathtub & bubbles</p>
+                <div class="card-stars" id="cardStars4">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="5">
+              <div class="level-num">5</div>
+              <div class="level-art">🍽️</div>
+              <div class="level-info">
+                <h3>Dining Room</h3>
+                <p>Set table with cup, spoon & fork</p>
+                <div class="card-stars" id="cardStars5">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="6">
+              <div class="level-num">6</div>
+              <div class="level-art">🌸</div>
+              <div class="level-info">
+                <h3>Garden & Patio</h3>
+                <p>Water the colorful flowers</p>
+                <div class="card-stars" id="cardStars6">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="7">
+              <div class="level-num">7</div>
+              <div class="level-art">🧺</div>
+              <div class="level-info">
+                <h3>Laundry Room</h3>
+                <p>Wash shirt, socks & pants</p>
+                <div class="card-stars" id="cardStars7">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="8">
+              <div class="level-num">8</div>
+              <div class="level-art">🚗</div>
+              <div class="level-info">
+                <h3>Garage</h3>
+                <p>Park car, bicycle & helmet</p>
+                <div class="card-stars" id="cardStars8">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="9">
+              <div class="level-num">9</div>
+              <div class="level-art">📦</div>
+              <div class="level-info">
+                <h3>Attic Treasures</h3>
+                <p>Teddy bear, guitar & book</p>
+                <div class="card-stars" id="cardStars9">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="10">
+              <div class="level-num">10</div>
+              <div class="level-art">🪴</div>
+              <div class="level-info">
+                <h3>Sunny Balcony</h3>
+                <p>Plant, bird & fresh breeze</p>
+                <div class="card-stars" id="cardStars10">☆☆☆</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2 Grid (10 Levels) -->
+        <div id="stage2Grid" class="stage-grid-wrapper" style="display: none;">
+          <div class="levels-grid">
+            <div class="level-card" data-level="11">
+              <div class="level-num">11</div>
+              <div class="level-art">🚪</div>
+              <div class="level-info">
+                <h3>Where Does It Belong?</h3>
+                <p>Sort items into each room</p>
+                <div class="card-stars" id="cardStars11">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="12">
+              <div class="level-num">12</div>
+              <div class="level-art">💡</div>
+              <div class="level-info">
+                <h3>Light Switch</h3>
+                <p>Turn the light on and off</p>
+                <div class="card-stars" id="cardStars12">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="13">
+              <div class="level-num">13</div>
+              <div class="level-art">🧸</div>
+              <div class="level-info">
+                <h3>Tidy Up Toys!</h3>
+                <p>Put toys inside the toy box</p>
+                <div class="card-stars" id="cardStars13">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="14">
+              <div class="level-num">14</div>
+              <div class="level-art">✊</div>
+              <div class="level-info">
+                <h3>Knock Knock!</h3>
+                <p>Knock on door to say hello</p>
+                <div class="card-stars" id="cardStars14">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="15">
+              <div class="level-num">15</div>
+              <div class="level-art">🍓</div>
+              <div class="level-info">
+                <h3>Fruit Smoothie</h3>
+                <p>Blend sweet yummy fruit</p>
+                <div class="card-stars" id="cardStars15">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="16">
+              <div class="level-num">16</div>
+              <div class="level-art">🔔</div>
+              <div class="level-info">
+                <h3>Home Sounds</h3>
+                <p>Listen closely to sounds</p>
+                <div class="card-stars" id="cardStars16">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="17">
+              <div class="level-num">17</div>
+              <div class="level-art">👥</div>
+              <div class="level-info">
+                <h3>Shadow Safari</h3>
+                <p>Match the mystery shape</p>
+                <div class="card-stars" id="cardStars17">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="18">
+              <div class="level-num">18</div>
+              <div class="level-art">🪥</div>
+              <div class="level-info">
+                <h3>Brush Your Teeth!</h3>
+                <p>Clean Luna's sparkling teeth</p>
+                <div class="card-stars" id="cardStars18">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="19">
+              <div class="level-num">19</div>
+              <div class="level-art">🌷</div>
+              <div class="level-info">
+                <h3>Flower Pots</h3>
+                <p>Water the flower pots</p>
+                <div class="card-stars" id="cardStars19">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="20">
+              <div class="level-num">20</div>
+              <div class="level-art">🏆</div>
+              <div class="level-info">
+                <h3>Grand House Party!</h3>
+                <p>Celebrate & earn diploma</p>
+                <div class="card-stars" id="cardStars20">☆☆☆</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEVEL SCREENS 1 TO 20 WILL BE RENDERED INTO THIS DYNAMIC PLAY GROUND CONTAINER -->
+      <section id="screenLevelPlay" class="screen">
+        <div class="luna-sidekick-box">
+          <div class="luna-companion-wrapper">
+            <img src="assets/luna/luna_transparent.png" alt="Luna" class="luna-companion-img" id="lunaPlayCompanion">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro" id="playIntroText">Find: </span>
+              <strong class="target-word" id="promptMainWord">SOFA 🛋️</strong>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPrompt" title="Listen again">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="playProgressFill" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="playRoundCounter">Round 1 of 3</div>
+        </div>
+
+        <div class="play-arena" id="playArenaContent">
+          <!-- Dynamic Mini-Game Arena Loaded by house_game.js -->
+        </div>
+      </section>
+
+      <!-- SCREEN: CELEBRATION & DIPLOMA -->
+      <section id="screenCelebration" class="screen">
+        <div class="diploma-card">
+          <div class="diploma-header">🏆 SUPER HOUSE EXPLORER 🏆</div>
+          <div class="luna-hero-wrapper">
+            <img src="assets/luna/luna_transparent.png" alt="Luna Graduation" class="luna-fullbody-hero-img">
+          </div>
+          <div class="diploma-body">
+            <h2 id="diplomaRecipient">Congratulations, Explorer!</h2>
+            <p>You explored every room in the house with <strong>Luna</strong> and learned all household objects in English!</p>
+            <div class="success-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="diploma-actions">
+            <button id="btnPrintDiploma" class="btn-action-diploma print">🖨️ Print Diploma</button>
+            <button id="btnContinueStage2" class="btn-action-diploma" style="display: none; background: #27ae60;">⭐ Continue to Stage 2!</button>
+            <button id="btnPlayAgain" class="btn-action-diploma">🔄 Level Menu</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Celebration Popup Overlay -->
+    <div id="roundSuccessOverlay" class="success-overlay hidden">
+      <div class="success-popup">
+        <img src="assets/luna/luna_transparent.png" alt="Luna Celebrating" class="luna-success-img">
+        <h2 id="successTitle">AWESOME!</h2>
+        <p id="successMessage">You found the <strong>SOFA</strong>!</p>
+        <div class="success-stars">⭐⭐⭐</div>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <script src="house_game.js?v=2.0"></script>
+</body>
+</html>

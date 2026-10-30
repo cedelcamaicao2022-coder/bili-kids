@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BiliKids Writing Practice ✏️📝 | Handwriting & Tracing</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="writing_styles.css">
+</head>
+<body>
+  <div class="writing-app-container">
+    <!-- Header Navigation -->
+    <header class="app-header">
+      <div class="brand">
+        <a href="index.html" class="logo-link">
+          <span class="logo-icon">✏️</span>
+          <span class="logo-text">Bili<span class="highlight">Kids</span> <span class="badge-tag">📝 Writing Studio</span></span>
+        </a>
+      </div>
+
+      <!-- Suite Switcher Navigation -->
+      <nav class="suite-switcher">
+        <a href="index.html" class="nav-pill" title="Aventura de Colores con Bili">
+          <span class="pill-icon">🎨</span>
+          <span class="pill-text">Colores</span>
+        </a>
+        <a href="farm.html" class="nav-pill" title="La Granja de Leo">
+          <span class="pill-icon">🚜</span>
+          <span class="pill-text">Granja</span>
+        </a>
+        <a href="house.html" class="nav-pill" title="La Casa de Luna">
+          <span class="pill-icon">🏠</span>
+          <span class="pill-text">Casa</span>
+        </a>
+        <a href="stories.html" class="nav-pill" title="Bili Kids Library">
+          <span class="pill-icon">📚</span>
+          <span class="pill-text">Library</span>
+        </a>
+        <a href="lab.html" class="nav-pill" title="Laboratorio Científico">
+          <span class="pill-icon">🧪</span>
+          <span class="pill-text">Lab</span>
+        </a>
+        <a href="writing.html" class="nav-pill active" title="Práctica de Escritura">
+          <span class="pill-icon">✏️</span>
+          <span class="pill-text">Writing</span>
+        </a>
+      </nav>
+
+      <!-- Utility Controls -->
+      <div class="header-actions">
+        <div class="stars-counter" title="Total Stars Earned">
+          <span class="star-icon">⭐</span>
+          <span id="starsCount">0</span>
+        </div>
+        <button id="btnSoundToggle" class="icon-circle-btn" title="Sound On / Off">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button id="btnFullscreen" class="icon-circle-btn" title="Fullscreen">
+          <span>⛶</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Word Category / Difficulty Tabs -->
+    <div class="level-tabs-bar">
+      <div class="level-tabs">
+        <button class="lvl-tab active" data-level="1">
+          <span class="lvl-badge">Level 1</span>
+          <span class="lvl-title">3-Letter Words</span>
+        </button>
+        <button class="lvl-tab" data-level="2">
+          <span class="lvl-badge">Level 2</span>
+          <span class="lvl-title">4-Letter Words</span>
+        </button>
+        <button class="lvl-tab" data-level="3">
+          <span class="lvl-badge">Level 3</span>
+          <span class="lvl-title">5-Letter Words</span>
+        </button>
+      </div>
+
+      <!-- Mode Selector: Script vs Cursive -->
+      <div class="font-style-toggle">
+        <span class="toggle-desc">Style:</span>
+        <button id="btnModeScript" class="mode-btn active" title="Print / Script Letters">
+          <span>🔤 Script</span>
+        </button>
+        <button id="btnModeCursive" class="mode-btn" title="Connected Cursive Letters">
+          <span>✍️ Cursive</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="writing-stage">
+      
+      <!-- Top Target Word Card -->
+      <section class="word-card-banner">
+        <button id="btnPrevWord" class="word-nav-arrow" title="Previous Word">◀</button>
+        
+        <div class="word-info">
+          <span class="word-emoji" id="currentEmoji">🐱</span>
+          <div class="word-text-wrapper">
+            <h1 class="target-word" id="targetWordText">CAT</h1>
+            <span class="word-sub-hint" id="wordSubHint">Listen and write the word!</span>
+          </div>
+          <button id="btnSpeakWord" class="speaker-bubble-btn" title="Hear Word Audio">
+            <span>🔊</span>
+            <span class="speak-label">Hear Word</span>
+          </button>
+        </div>
+
+        <button id="btnNextWord" class="word-nav-arrow" title="Next Word">▶</button>
+      </section>
+
+      <!-- Handwriting Paper / Drawing Canvas Stage -->
+      <div class="handwriting-workspace">
+        <div class="canvas-outer-frame">
+          
+          <!-- Lined Paper Guides (Kindergarten Ruled Lines) -->
+          <div class="paper-rules">
+            <div class="rule-line headline"></div>
+            <div class="rule-line midline"></div>
+            <div class="rule-line baseline"></div>
+            <div class="rule-line descender"></div>
+          </div>
+
+          <!-- Dashed Guideline Path Layer (Opacified Tracing Guide) -->
+          <div class="dashed-guide-overlay" id="dashedGuideOverlay">
+            <span class="guide-text script-guide" id="guideText">CAT</span>
+          </div>
+
+          <!-- Interactive Drawing Canvas -->
+          <canvas id="writingCanvas" width="900" height="340"></canvas>
+
+          <!-- Status / Encouragement Message Banner -->
+          <div class="feedback-banner" id="feedbackBanner">
+            <span id="feedbackText">✏️ Use your finger or stylus to write!</span>
+          </div>
+        </div>
+
+        <!-- Canvas Toolbar & Color Palette -->
+        <div class="writing-toolbar">
+          <!-- Drawing Tools -->
+          <div class="tool-group">
+            <button id="btnToolPen" class="tool-btn active" title="Pen Tool">
+              <span>✏️ Pen</span>
+            </button>
+            <button id="btnToolEraser" class="tool-btn" title="Eraser Tool">
+              <span>🧹 Eraser</span>
+            </button>
+          </div>
+
+          <!-- Color Swatches -->
+          <div class="color-palette">
+            <button class="color-dot active" data-color="#1e3a8a" style="background: #1e3a8a;" title="Navy Blue"></button>
+            <button class="color-dot" data-color="#dc2626" style="background: #dc2626;" title="Red"></button>
+            <button class="color-dot" data-color="#16a34a" style="background: #16a34a;" title="Green"></button>
+            <button class="color-dot" data-color="#9333ea" style="background: #9333ea;" title="Purple"></button>
+            <button class="color-dot" data-color="#ea580c" style="background: #ea580c;" title="Orange"></button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="tool-group actions-group">
+            <button id="btnToggleGuide" class="tool-btn guide-btn" title="Show / Hide Dashed Tracing Line">
+              <span>👁️ Guide Lines</span>
+            </button>
+            <button id="btnClearCanvas" class="tool-btn" title="Clear Canvas">
+              <span>🔄 Clear</span>
+            </button>
+            <button id="btnCheckWriting" class="tool-btn check-btn" title="Validate Writing">
+              <span>✨ Check!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Word Selector Ribbon -->
+      <section class="word-ribbon-container">
+        <span class="ribbon-label">Word Bank:</span>
+        <div class="word-ribbon" id="wordRibbon"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Confetti Canvas for Celebrations -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <script src="writing_engine.js"></script>
+</body>
+</html>

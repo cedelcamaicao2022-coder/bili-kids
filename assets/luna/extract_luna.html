@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+window.onload = async () => {
+  const img = new Image();
+  img.src = 'luna_raw.jpg';
+  await img.decode();
+  
+  const w = img.width;
+  const h = img.height;
+  const c = document.getElementById('c');
+  c.width = w;
+  c.height = h;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  
+  const idata = ctx.getImageData(0, 0, w, h);
+  const data = idata.data;
+  
+  const visited = new Uint8Array(w * h);
+  const queue = [];
+  
+  function isBgPixel(r, g, b) {
+    const maxDiff = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
+    const minVal = Math.min(r, g, b);
+    return maxDiff <= 25 && minVal >= 160;
+  }
+  
+  // Seed from borders
+  for (let x = 0; x < w; x++) {
+    let topIdx = x * 4;
+    if (isBgPixel(data[topIdx], data[topIdx+1], data[topIdx+2])) {
+      visited[x] = 1;
+      queue.push(x);
+    }
+    let btmIdx = ((h - 1) * w + x) * 4;
+    if (isBgPixel(data[btmIdx], data[btmIdx+1], data[btmIdx+2])) {
+      visited[(h - 1) * w + x] = 1;
+      queue.push((h - 1) * w + x);
+    }
+  }
+  for (let y = 0; y < h; y++) {
+    let lIdx = (y * w) * 4;
+    if (isBgPixel(data[lIdx], data[lIdx+1], data[lIdx+2])) {
+      visited[y * w] = 1;
+      queue.push(y * w);
+    }
+    let rIdx = (y * w + (w - 1)) * 4;
+    if (isBgPixel(data[rIdx], data[rIdx+1], data[rIdx+2])) {
+      visited[y * w + (w - 1)] = 1;
+      queue.push(y * w + (w - 1));
+    }
+  }
+  
+  // Cavity specific seeds (only the background checkerboard between ear and hat, and cheek and map)
+  const cavitySeeds = [
+    {x: 600, y: 180},
+    {x: 720, y: 550},
+    {x: 730, y: 560}
+  ];
+  cavitySeeds.forEach(pt => {
+    const idx = (pt.y * w + pt.x) * 4;
+    if (isBgPixel(data[idx], data[idx+1], data[idx+2])) {
+      visited[pt.y * w + pt.x] = 1;
+      queue.push(pt.y * w + pt.x);
+    }
+  });
+  
+  let head = 0;
+  while (head < queue.length) {
+    const pos = queue[head++];
+    const px = pos % w;
+    const py = Math.floor(pos / w);
+    
+    const neighbors = [
+      px > 0 ? pos - 1 : -1,
+      px < w - 1 ? pos + 1 : -1,
+      py > 0 ? pos - w : -1,
+      py < h - 1 ? pos + w : -1
+    ];
+    
+    for (const n of neighbors) {
+      if (n !== -1 && !visited[n]) {
+        const dIdx = n * 4;
+        if (isBgPixel(data[dIdx], data[dIdx+1], data[dIdx+2])) {
+          visited[n] = 1;
+          queue.push(n);
+        }
+      }
+    }
+  }
+  
+  for (let i = 0; i < visited.length; i++) {
+    if (visited[i]) {
+      data[i * 4 + 3] = 0;
+    }
+  }
+  
+  // Clean single stray speckles
+  for (let y = 1; y < h - 1; y++) {
+    for (let x = 1; x < w - 1; x++) {
+      const idx = y * w + x;
+      if (data[idx * 4 + 3] > 0) {
+        const neighborsTrans = 
+          (data[(idx - 1) * 4 + 3] === 0 ? 1 : 0) +
+          (data[(idx + 1) * 4 + 3] === 0 ? 1 : 0) +
+          (data[(idx - w) * 4 + 3] === 0 ? 1 : 0) +
+          (data[(idx + w) * 4 + 3] === 0 ? 1 : 0);
+        if (neighborsTrans >= 3 && isBgPixel(data[idx * 4], data[idx * 4 + 1], data[idx * 4 + 2])) {
+          data[idx * 4 + 3] = 0;
+        }
+      }
+    }
+  }
+  
+  ctx.putImageData(idata, 0, 0);
+  document.title = 'READY';
+};
+</script>
+</body>
+</html>
