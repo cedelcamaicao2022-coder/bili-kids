@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 5: Free Time | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit5_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 5 • A1-A2</span>
+        <h1 class="unit-name-head">Free Time</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">160 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('arcade', this)">
+        <span>🎯</span>
+        <span>Hobby Arcade Wh-</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('dj', this)">
+        <span>🎚️</span>
+        <span>Frequency DJ Mixer</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('magnet', this)">
+        <span>🧪</span>
+        <span>Verb -ING Lab</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('talent', this)">
+        <span>🏆</span>
+        <span>Talent Show Stage</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: HOBBY ARCADE & WH- TARGET (LASER DE PREGUNTAS)
+         ==================================================================== -->
+    <section id="view-arcade" class="activity-view active-view">
+      <div class="arcade-container">
+        
+        <div class="arcade-screen-header">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#f8fafc;">
+              <span>🎯</span> Hobby Arcade: Wh- Question Laser
+            </h2>
+            <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
+              Lee la oración, identifica qué información está destacada y dispara la palabra de pregunta (Wh-) correcta.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="arcade-badge" id="arcadeStageBadge">Nivel 1 de 10</span>
+            <button class="btn-back-map" style="background:rgba(255,255,255,0.1); color:#38bdf8; border-color:rgba(56,189,248,0.4); cursor:pointer;" onclick="nextArcadeStage()">
+              <span>Siguiente Nivel ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pantalla Arcade Central -->
+        <div class="arcade-screen-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+            <span style="font-family:monospace; font-size:0.8rem; color:#38bdf8; letter-spacing:1px;">ARCADE MISSION • TARGET ACQUIRED</span>
+            <button class="btn-back-map" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:#38bdf8; cursor:pointer;" onclick="listenArcadeStory()">
+              🔊 Escuchar Oración
+            </button>
+          </div>
+
+          <div class="arcade-story-sentence" id="arcadeStoryEn">
+            Leo plays basketball <span style="color:#38bdf8; text-decoration:underline;">at the sports center</span> on Saturdays.
+          </div>
+          <div class="arcade-story-es" id="arcadeStoryEs">
+            Leo juega baloncesto en el polideportivo los sábados.
+          </div>
+
+          <div class="arcade-target-mission" id="arcadeTargetMission">
+            🎯 <strong>Misión Láser:</strong> Target info: 'at the sports center' (Lugar / Location)
+          </div>
+        </div>
+
+        <!-- Pregunta Explícita del Arcade -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#67e8f9; margin:16px 0 10px; display:flex; align-items:center; gap:6px;">
+          <span>⚡</span>
+          <span>Which Wh- question word asks for the highlighted information? / ¿Qué pregunta corresponde a lo destacado?:</span>
+        </div>
+
+        <!-- Botones Láser de Preguntas Wh- (Aleatorizados) -->
+        <div class="arcade-laser-grid" id="arcadeLaserGrid">
+          <!-- Inyectados por JS -->
+        </div>
+
+        <!-- Caja de Retroalimentación -->
+        <div id="arcadeFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: FREQUENCY DJ MIXER (EQUALIZADOR DE ADVERBIOS)
+         ==================================================================== -->
+    <section id="view-dj" class="activity-view">
+      <div class="dj-container">
+
+        <div class="dj-mixer-header">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🎚️</span> Frequency DJ Mixer: Always to Never (0% a 100%)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Revisa con qué frecuencia se realiza la actividad en el calendario semanal y gradúa el fader del DJ.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="djTrackBadge">Pista 1 de 10</span>
+            <button class="btn-back-map" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0; cursor:pointer;" onclick="nextDJTrack()">
+              <span>Siguiente Pista ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Pista y Calendario -->
+        <div class="dj-turntable-card">
+          <div style="flex-grow:1;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="unit-tag-pill">🎧 NOW PLAYING</span>
+              <strong id="djTrackTitle" style="color:#0f172a; font-family:var(--font-display); font-size:1.1rem;">
+                The Daily Gamer 🎮
+              </strong>
+            </div>
+
+            <div id="djRoutineEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
+              "Max plays video games on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday."
+            </div>
+            <div id="djRoutineEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
+              Max juega videojuegos los 7 días de la semana (Lunes a Domingo).
+            </div>
+
+            <!-- Calendario visual de frecuencia -->
+            <div style="margin-top:12px;">
+              <div style="font-size:0.8rem; font-weight:700; color:#065f46; margin-bottom:4px;">📅 Días de actividad en la semana:</div>
+              <div class="dj-calendar-frequency-bar" id="djCalendarFrequencyBar">
+                <!-- Chips de días inyectados por JS -->
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenDJRoutine()">
+              🔊 Escuchar Rutina
+            </button>
+          </div>
+        </div>
+
+        <!-- Pregunta Explícita del Mixer -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#065f46; margin:16px 0 10px; text-align:center;">
+          🎚️ How often does this person do the activity? / ¿Con qué frecuencia realiza la actividad?:
+        </div>
+
+        <!-- Faders del DJ Mixer (Never, Sometimes, Often, Usually, Always) -->
+        <div class="dj-faders-track" id="djFadersTrack">
+          <!-- Inyectados por JS -->
+        </div>
+
+        <!-- Caja de Retroalimentación -->
+        <div id="djFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: VERB-ING MAGNET FUSION LAB (LABORATORIO -ING)
+         ==================================================================== -->
+    <section id="view-magnet" class="activity-view">
+      <div class="magnet-container">
+
+        <div class="magnet-lab-header">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🧪</span> Laboratorio de Fusión Ortográfica: Verbos con -ING
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Después de <em>like, love, enjoy, hate, prefer</em> usamos la forma <strong>-ING</strong>. ¡Aplica la regla ortográfica correcta!
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="magnetCaseBadge">Fusión 1 de 15</span>
+            <button class="btn-back-map" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0; cursor:pointer;" onclick="nextMagnetChallenge()">
+              <span>Siguiente ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cámara de Fusión Magnética -->
+        <div class="magnet-chamber">
+          <div style="font-family:monospace; font-size:0.8rem; color:#7c3aed; letter-spacing:1px; margin-bottom:4px;">
+            MAGNETIC ATTRACTION • LIKE / LOVE / ENJOY + VERB-ING
+          </div>
+
+          <div class="magnet-sentence-display" id="magnetSentenceDisplay">
+            I love <span id="magnetBlankSlot" class="magnet-blank-pill">[ ? ]</span> soccer with my friends in the park.
+          </div>
+
+          <div class="magnet-rule-clue" id="magnetRuleClue">
+            🧲 Verbo Base: <strong>play</strong>
+          </div>
+        </div>
+
+        <!-- Pregunta Explícita -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#6b21a8; margin:16px 0 6px; text-align:center;">
+          🧪 Which is the correct spelling for the -ING verb? / ¿Cuál es la ortografía correcta?:
+        </div>
+
+        <!-- Botones de Fusión Magnética (Aleatorizados) -->
+        <div class="magnet-options-row" id="magnetOptionsRow">
+          <!-- Inyectados por JS -->
+        </div>
+
+        <!-- Retroalimentación del Laboratorio -->
+        <div id="magnetFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: TALENT SHOW AUDITION ("YES, I CAN!" TALENT STAGE)
+         ==================================================================== -->
+    <section id="view-talent" class="activity-view">
+      <div class="talent-container">
+        
+        <div class="talent-stage-lights"></div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <div style="text-align:left;">
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#ffffff;">
+              <span>🏆</span> Bilikids Talent Stage: "Yes, I can!"
+            </h2>
+            <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
+              El jurado evalúa tus habilidades. Responde con fluidez frente al micrófono para ganar el Golden Buzzer.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="talentEpisodeNum" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid #f59e0b;">Audición 1 de 8</span>
+            <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextTalentAudition()">
+              <span>Siguiente Audición ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel de Jueces y Buzzers -->
+        <div class="talent-judges-row">
+          <div class="judge-buzzer-card buzzer-gold">
+            <span>⭐</span>
+            <span>Judge Simon</span>
+          </div>
+          <div class="judge-buzzer-card buzzer-gold">
+            <span>⭐</span>
+            <span>Judge Paula</span>
+          </div>
+          <div class="judge-buzzer-card buzzer-gold">
+            <span>⭐</span>
+            <span>Judge David</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Audición Central -->
+        <div class="talent-target-card">
+          <span class="unit-tag-pill" id="talentSceneTag" style="background:rgba(56,189,248,0.2); color:#38bdf8; margin-bottom:8px;">
+            Audition 1 • Acoustic Guitar 🎸
+          </span>
+
+          <div class="talent-judge-question" id="talentJudgeQuestion">
+            Judge asks: "Can you play the acoustic guitar?"
+          </div>
+          <div id="talentJudgeQuestionEs" style="font-size:0.88rem; color:#94a3b8; font-style:italic; margin-bottom:14px;">
+            ¿Puedes tocar la guitarra acústica?
+          </div>
+
+          <div style="margin:12px 0;">
+            <button class="btn-back-map" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:#38bdf8; cursor:pointer; font-size:0.85rem;" onclick="listenJudgeQuestion()">
+              🔊 Escuchar Pregunta del Juez
+            </button>
+          </div>
+
+          <div style="font-family:var(--font-display); font-size:0.95rem; font-weight:700; color:#fbbf24; margin:16px 0 4px;">
+            🎤 Your Talent Answer / Tu Respuesta de Talento:
+          </div>
+
+          <div class="talent-candidate-answer" id="talentCandidateAnswer">
+            "Yes, I can play the guitar very well!"
+          </div>
+          <div id="talentCandidateAnswerEs" style="font-size:0.88rem; color:#cbd5e1; font-style:italic; margin-bottom:16px;">
+            ¡Sí, puedo tocar la guitarra muy bien!
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:#10b981; cursor:pointer; font-size:0.85rem;" onclick="listenCandidateAnswer()">
+              🔊 Escuchar Modelo de Respuesta
+            </button>
+          </div>
+        </div>
+
+        <!-- Botón de Micrófono para Audición -->
+        <div style="margin:20px 0;">
+          <button class="btn-talent-mic" id="talentMicBtn" onclick="toggleTalentMic()" title="Responder al jurado">
+            🎙️
+          </button>
+          <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
+            Toca el micrófono y responde con tu talento al jurado
+          </div>
+        </div>
+
+        <!-- Veredicto del Jurado -->
+        <div id="talentJudgeBox" style="text-align:center; padding:10px; background:rgba(0,0,0,0.3); border-radius:12px; margin-top:14px;">
+          <span style="color:#fbbf24; font-size:0.9rem;">⭐ Panel del Jurado: ¡Esperando tu audición!</span>
+        </div>
+
+        <!-- Retroalimentación de la Audición -->
+        <div id="talentFeedback" style="text-align:center; margin-top:12px;"></div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit5_engine.js?v=1.0"></script>
+</body>
+</html>
