@@ -1,0 +1,634 @@
+/* ==========================================================================
+   BILIKIDS KIDS CLUB - UNIT 3: FAVORITE PEOPLE (7 A 10 AÑOS)
+   Tema: Family, Best Friends, Personalities, Possessive Adjectives
+   Nuevas Actividades: Árbol Genealógico Interactivo, Match & Link,
+   Sentence Doctor (Caza-Errores), Talk Show Podcast Simulator
+   ========================================================================== */
+
+:root {
+  --font-display: 'Fredoka', cursive, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --unit3-primary: #ec4899;
+  --unit3-primary-dark: #db2777;
+  --unit3-secondary: #f59e0b;
+  --unit3-accent: #8b5cf6;
+  --unit3-success: #10b981;
+  --unit3-danger: #ef4444;
+
+  --card-bg: #ffffff;
+  --border-subtle: #fce7f3;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --shadow-card: 0 10px 30px rgba(236, 72, 153, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #fff1f2 0%, #fdf2f8 50%, #faf5ff 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Navigation */
+.unit-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #fbcfe8;
+  padding: 10px 20px;
+}
+
+.unit-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.btn-back-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fdf2f8;
+  color: #9d174d;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #fbcfe8;
+  transition: all 0.2s;
+}
+
+.btn-back-map:hover {
+  background: #fce7f3;
+  transform: translateX(-2px);
+}
+
+.unit-title-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.unit-tag-pill {
+  background: #fce7f3;
+  color: #db2777;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.unit-name-head {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.unit-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef3c7;
+  color: #92400e;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid #fde68a;
+}
+
+/* Tabs Bar */
+.activity-tabs-bar {
+  max-width: 1100px;
+  margin: 18px auto 8px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.tabs-track {
+  display: flex;
+  gap: 8px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid #fbcfe8;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.05);
+  overflow-x: auto;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 140px;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: #fff1f2;
+  color: #db2777;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);
+}
+
+/* Main Workspace */
+.unit-workspace {
+  max-width: 1100px;
+  margin: 12px auto 40px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.activity-view {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.activity-view.active-view {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   NUEVA ACTIVIDAD 1: ÁRBOL GENEALÓGICO & DETECTIVE "WHO'S WHO"
+   -------------------------------------------------------------------------- */
+.family-tree-box {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid #fbcfe8;
+}
+
+.tree-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tree-clue-card {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fff1f2 100%);
+  border: 2px solid #f472b6;
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.1);
+}
+
+.clue-badge {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #db2777;
+  background: #ffffff;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.clue-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.clue-sub {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* Grid del Árbol Genealógico */
+.family-tree-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .family-tree-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .family-tree-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.person-card {
+  background: #fdfefe;
+  border: 2px solid #f1f5f9;
+  border-radius: 20px;
+  padding: 18px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.person-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: #ec4899;
+  box-shadow: 0 10px 24px rgba(236, 72, 153, 0.18);
+  background: #ffffff;
+}
+
+.person-card.correct-target {
+  border-color: #10b981;
+  background: #ecfdf5;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.person-card.wrong-target {
+  border-color: #ef4444;
+  background: #fef2f2;
+  animation: shakeBtn 0.3s;
+}
+
+.person-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: #fdf2f8;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.person-role {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.person-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #db2777;
+  margin-bottom: 4px;
+}
+
+.person-trait-pill {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   NUEVA ACTIVIDAD 2: MATCH & LINK (CONEXIONES Y POSESIVOS)
+   -------------------------------------------------------------------------- */
+.match-link-box {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid #fbcfe8;
+}
+
+.match-columns-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+@media (max-width: 680px) {
+  .match-columns-container { grid-template-columns: 1fr; }
+}
+
+.match-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-item-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.match-item-card:hover {
+  border-color: #ec4899;
+  background: #ffffff;
+  transform: translateX(3px);
+}
+
+.match-item-card.selected {
+  border-color: #ec4899;
+  background: #fdf2f8;
+  color: #db2777;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+}
+
+.match-item-card.matched {
+  border-color: #10b981;
+  background: #ecfdf5;
+  color: #065f46;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   NUEVA ACTIVIDAD 3: SENTENCE DOCTOR (CAZA-ERRORES GRAMATICAL)
+   -------------------------------------------------------------------------- */
+.doctor-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid #fbcfe8;
+  text-align: center;
+}
+
+.doctor-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.doctor-sentence-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.doctor-word-chip {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.doctor-word-chip:hover {
+  border-color: #ec4899;
+  background: #fdf2f8;
+  transform: translateY(-2px);
+}
+
+.doctor-word-chip.wrong-spotted {
+  border-color: #ef4444;
+  background: #fee2e2;
+  color: #dc2626;
+  text-decoration: line-through;
+}
+
+.doctor-word-chip.fixed-chip {
+  border-color: #10b981;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.doctor-correction-panel {
+  display: none;
+  background: #fff1f2;
+  border: 2px solid #fbcfe8;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.doctor-options-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.doctor-fix-btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 2px solid #f472b6;
+  background: #ffffff;
+  color: #db2777;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.doctor-fix-btn:hover {
+  background: #db2777;
+  color: #ffffff;
+  transform: scale(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   NUEVA ACTIVIDAD 4: TALK SHOW PODCAST SIMULATOR
+   -------------------------------------------------------------------------- */
+.podcast-box {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid #fbcfe8;
+  text-align: center;
+}
+
+.podcast-stage {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.podcast-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dc2626;
+  animation: pulseDot 1s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+.podcast-host-card {
+  background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
+  border: 2px solid #fbcfe8;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.podcast-host-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fce7f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.podcast-question-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.podcast-question-es {
+  font-size: 0.88rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.podcast-response-guide {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.podcast-response-target {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 6px;
+}
+
+.btn-podcast-mic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  color: #ffffff;
+  font-size: 2.3rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-podcast-mic:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px rgba(236, 72, 153, 0.5);
+}
+
+.btn-podcast-mic.recording {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  animation: pulseMic 1.2s infinite;
+}
+
+@keyframes pulseMic {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

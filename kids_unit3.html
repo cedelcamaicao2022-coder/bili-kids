@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 3: Favorite People | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit3_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 3 • A1</span>
+        <h1 class="unit-name-head">Favorite People</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">120 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('tree', this)">
+        <span>🌳</span>
+        <span>Árbol & Detective</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('match', this)">
+        <span>⚡</span>
+        <span>Match & Link</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('doctor', this)">
+        <span>🩺</span>
+        <span>Doctor de Oraciones</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('podcast', this)">
+        <span>🎙️</span>
+        <span>Talk Show Podcast</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: ÁRBOL GENEALÓGICO & DETECTIVE "WHO'S WHO"
+         ==================================================================== -->
+    <section id="view-tree" class="activity-view active-view">
+      <div class="family-tree-box">
+        
+        <div class="tree-header-row">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a;">
+              <span>🌳</span> Family & Friends Tree
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Toca a cualquier persona para escuchar su voz o resuelve los misterios del detective.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Pista del Detective -->
+        <div class="tree-clue-card">
+          <div>
+            <span class="clue-badge" id="clueBadgeNum">Misterio 1 de 8</span>
+            <div class="clue-text" id="clueTextEn">"She is Carlos's mother and Maya's grandmother."</div>
+            <div class="clue-sub" id="clueTextEs">Ella es la madre de Carlos y abuela de Maya.</div>
+          </div>
+          <div>
+            <button class="chat-listen-btn" style="padding:8px 14px; font-size:0.85rem;" onclick="speakEnglish(document.getElementById('clueTextEn').textContent, 'host')">
+              🔊 Repetir Pista
+            </button>
+          </div>
+        </div>
+
+        <div id="clueFeedback" style="min-height:28px; margin-bottom:14px; text-align:center;"></div>
+
+        <!-- Cuadrícula interactiva de personajes de la familia y amigos -->
+        <div class="family-tree-grid" id="familyTreeGrid">
+          <!-- Personajes inyectados dinámicamente -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: MATCH & LINK (LABORATORIO DE CONEXIONES)
+         ==================================================================== -->
+    <section id="view-match" class="activity-view">
+      <div class="match-link-box">
+        
+        <div style="text-align:center; margin-bottom:16px;">
+          <h2 style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a;" id="matchRoundTitle">
+            Round 1: Subject Pronoun ➔ Possessive Adjective
+          </h2>
+          <p style="font-size:0.9rem; color:#64748b; margin-top:2px;" id="matchRoundSub">
+            Selecciona un elemento de la izquierda y conéctalo con su pareja correcta de la derecha.
+          </p>
+        </div>
+
+        <div id="matchFeedback" style="text-align:center; min-height:28px; margin-bottom:12px;"></div>
+
+        <!-- Columnas interactivas para conectar -->
+        <div class="match-columns-container">
+          <div class="match-column" id="matchLeftCol">
+            <!-- Items columna izquierda -->
+          </div>
+          <div class="match-column" id="matchRightCol">
+            <!-- Items columna derecha -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: SENTENCE DOCTOR (CAZA-ERRORES GRAMATICAL)
+         ==================================================================== -->
+    <section id="view-doctor" class="activity-view">
+      <div class="doctor-container">
+        
+        <div class="doctor-badge-status" id="doctorCaseCounter">
+          <span>🩺</span>
+          <span>Caso Clínico 1 de 15</span>
+        </div>
+
+        <h2 style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a; margin-bottom:6px;">
+          ¡Esta oración tiene una palabra infectada de error!
+        </h2>
+        <p style="font-size:0.92rem; color:#64748b; margin-bottom:18px;">
+          Toca la palabra incorrecta para diagnosticarla y recetarle su forma correcta en inglés.
+        </p>
+
+        <div style="font-size:1.1rem; font-weight:600; color:#475569; margin-bottom:14px;" id="doctorSentenceEs">
+          "Él está jugando con su perro."
+        </div>
+
+        <!-- Envoltorio de la oración con chips interactivos -->
+        <div class="doctor-sentence-wrap" id="doctorSentenceWrap">
+          <!-- Palabras como chips interactivos -->
+        </div>
+
+        <!-- Panel de Curación / Medicamento -->
+        <div class="doctor-correction-panel" id="doctorCorrectionPanel">
+          <div style="font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:#db2777;" id="doctorPrescriptionDesc">
+            ¿Con qué palabra correcta curamos el error?
+          </div>
+          <div class="doctor-options-row" id="doctorOptionsRow">
+            <!-- Botones con medicamentos gramaticales -->
+          </div>
+        </div>
+
+        <div id="doctorFeedback" style="min-height:30px; font-size:0.95rem;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: TALK SHOW PODCAST SIMULATOR
+         ==================================================================== -->
+    <section id="view-podcast" class="activity-view">
+      <div class="podcast-box">
+        
+        <div class="podcast-stage">
+          
+          <div class="podcast-live-badge">
+            <span class="live-dot"></span>
+            <span id="podcastEpisodeNum">Entrevista 1 de 6 • ON AIR</span>
+          </div>
+
+          <!-- Tarjeta del Presentador / Host -->
+          <div class="podcast-host-card">
+            <div class="podcast-host-avatar">🎙️</div>
+            <div>
+              <div style="font-family:var(--font-display); font-size:0.85rem; font-weight:700; color:#db2777;">Chloe (Podcast Host)</div>
+              <div class="podcast-question-text" id="podcastHostQuestion">
+                "Welcome to Bilikids Talk Show! Tell our audience: who is your favorite person in your family?"
+              </div>
+              <div class="podcast-question-es" id="podcastHostQuestionEs">
+                ¡Bienvenidos al Talk Show! Cuéntanos: ¿quién es tu persona favorita en tu familia?
+              </div>
+              <div style="margin-top:8px;">
+                <button class="chat-listen-btn" onclick="listenHostQuestion()">
+                  🔊 Escuchar al Presentador
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guía de Respuesta para el Invitado (El Niño) -->
+          <div class="podcast-response-guide">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:#1e293b;">💡 Guía de Respuesta para tu turno:</span>
+              <button class="chat-listen-btn" onclick="listenAnswerSample()">
+                🔊 Escuchar Modelo
+              </button>
+            </div>
+            <div class="podcast-response-target" id="podcastTargetPhrase">
+              "My mother is my favorite person. Her name is Sofia and she is very kind."
+            </div>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:4px;" id="podcastTargetEs">
+              Mi madre es mi persona favorita. Su nombre es Sofia y es muy amable.
+            </div>
+          </div>
+
+          <!-- Micrófono para Hablar al Aire -->
+          <div style="margin:20px 0;">
+            <button class="btn-podcast-mic" id="podcastMicBtn" onclick="togglePodcastMic()" title="Habla al aire en el podcast">
+              🎤
+            </button>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:8px;">
+              Presiona el micrófono y responde al aire en inglés
+            </div>
+          </div>
+
+          <div id="podcastFeedback" style="min-height:50px;"></div>
+
+          <div style="margin-top:20px;">
+            <button class="btn-back-map" style="background:#fce7f3; font-size:0.95rem; padding:8px 20px;" onclick="nextPodcastInterview()">
+              <span>Siguiente Pregunta del Talk Show ➔</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit3_engine.js?v=1.0"></script>
+</body>
+</html>
