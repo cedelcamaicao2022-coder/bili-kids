@@ -60,24 +60,58 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: DIÁLOGO INTERACTIVO (HISTORIA CON DECISIONES TIPO DUOLINGO STORIES)
+         ACTIVIDAD 1: DIÁLOGO INTERACTIVO (ESCENARIOS DE LA VIDA REAL)
          ==================================================================== -->
     <section id="view-comic" class="activity-view active-view">
       <div class="story-container">
+
+        <!-- Selector de Escenarios de la Vida Real -->
+        <div class="scenarios-selector-wrap">
+          <div class="scenarios-label">
+            <span>🎭 Elige un Escenario de Conversación:</span>
+            <span style="font-size:0.75rem; color:#6366f1; text-transform:none;">10 a 14 turnos por diálogo</span>
+          </div>
+          <div class="scenarios-chips-row">
+            <button class="scenario-chip-btn active" onclick="switchScenario('school', this)">
+              <span>🏫</span>
+              <span>1. Primer Día en la Escuela</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('shopping', this)">
+              <span>🛍️</span>
+              <span>2. De Compras</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('cinema', this)">
+              <span>🎬</span>
+              <span>3. En el Cine</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('airport', this)">
+              <span>✈️</span>
+              <span>4. En el Aeropuerto</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('pizza', this)">
+              <span>🍕</span>
+              <span>5. En la Pizzería</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('hobbies', this)">
+              <span>🎮</span>
+              <span>6. Gustos y Hobbies</span>
+            </button>
+          </div>
+        </div>
         
         <!-- Header de la Historia -->
         <div class="story-header">
           <div class="story-title-wrap">
-            <span class="story-badge">Story 1 • A1</span>
+            <span class="story-badge" id="storyLevelBadge">Mission • A1</span>
             <div>
-              <h2 class="story-heading">First Day at Bilikids Club</h2>
-              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">Escucha a Alex y ayuda a Maya a responder en inglés.</div>
+              <h2 class="story-heading" id="storySceneHeading">First Day at Bilikids Club</h2>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;" id="storySceneSubtitle">Escucha y participa en el diálogo en inglés de la vida real.</div>
             </div>
           </div>
           <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
-            <span style="font-size:0.8rem; color:#64748b; font-weight:700;" id="storyStepLabel">Paso 1 de 4</span>
+            <span style="font-size:0.8rem; color:#64748b; font-weight:700;" id="storyStepLabel">Turno 1 de 12</span>
             <div class="story-progress-track">
-              <div class="story-progress-fill" id="storyProgressBar" style="width: 25%;"></div>
+              <div class="story-progress-fill" id="storyProgressBar" style="width: 10%;"></div>
             </div>
           </div>
         </div>

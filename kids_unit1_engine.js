@@ -89,37 +89,55 @@ class SoundEffects {
 const sfx = new SoundEffects();
 
 // ============================================================================
-// NATIVE SPEECH SYNTHESIS ENGINE (Natural English pronunciation)
+// NATIVE SPEECH SYNTHESIS ENGINE (Natural English pronunciation con Fallback Seguro)
 // ============================================================================
 function speakEnglish(text, voiceType = 'kid', callback) {
+  let called = false;
+  const finish = () => {
+    if (!called) {
+      called = true;
+      if (callback) callback();
+    }
+  };
+
   if (!('speechSynthesis' in window)) {
-    if (callback) callback();
+    finish();
     return;
   }
 
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
-  utterance.rate = 0.88; // Clear & friendly for 7-10 learners
-  utterance.pitch = voiceType === 'maya' ? 1.25 : voiceType === 'alex' ? 1.15 : 1.05;
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.88;
+    utterance.pitch = voiceType === 'maya' ? 1.25 : voiceType === 'clerk' ? 0.95 : voiceType === 'alex' ? 1.15 : 1.05;
 
-  const voices = window.speechSynthesis.getVoices();
-  const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Karen'))) 
-                    || voices.find(v => v.lang.startsWith('en'));
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Karen'))) 
+                      || voices.find(v => v.lang.startsWith('en'));
 
-  if (englishVoice) {
-    utterance.voice = englishVoice;
+    if (englishVoice) {
+      utterance.voice = englishVoice;
+    }
+
+    // Temporizador de seguridad: si el navegador no dispara onend, avanzamos de todos modos
+    const safeTimer = setTimeout(finish, Math.max(1400, text.length * 75));
+
+    utterance.onend = () => {
+      clearTimeout(safeTimer);
+      finish();
+    };
+
+    utterance.onerror = () => {
+      clearTimeout(safeTimer);
+      finish();
+    };
+
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {
+    console.warn("TTS Error:", err);
+    finish();
   }
-
-  utterance.onend = () => {
-    if (callback) callback();
-  };
-
-  utterance.onerror = () => {
-    if (callback) callback();
-  };
-
-  window.speechSynthesis.speak(utterance);
 }
 
 // Load voices proactively
@@ -156,62 +174,485 @@ function switchTab(tabKey, btn) {
 }
 
 // ============================================================================
-// ACTIVITY 1: DIÁLOGO INTERACTIVO (DUOLINGO STORIES STYLE)
+// ACTIVIDAD 1: DIÁLOGOS DE LA VIDA REAL (6 ESCENARIOS EXTENSOS)
 // ============================================================================
-const storySteps = [
-  {
-    // Paso 1
-    speaker: 'alex',
-    name: 'Alex',
-    avatar: '👦',
-    text: "Hello! Welcome to Bilikids Club.",
-    es: "¡Hola! Bienvenido al Club Bilikids.",
-    question: "¿Qué debe responder Maya para presentarse?",
-    choices: [
-      { text: "Hi! My name is Maya. What's your name?", es: "¡Hola! Mi nombre es Maya. ¿Cuál es tu nombre?", correct: true },
-      { text: "Goodbye! See you next year.", es: "¡Adiós! Nos vemos el próximo año.", correct: false },
-      { text: "I have a blue backpack.", es: "Tengo una mochila azul.", correct: false }
-    ],
-    hint: "La respuesta cordial para saludar y decir tu nombre empieza con 'Hi! My name is...'"
+const RealWorldScenarios = {
+  // 1. PRIMER DÍA EN LA ESCUELA (10 intercambios)
+  school: {
+    title: "First Day at School",
+    badge: "School • A1",
+    subtitle: "Conociendo a tus compañeros y ubicando tu salón de clases.",
+    steps: [
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Hello! Good morning. Welcome to Bilikids School!",
+        es: "¡Hola! Buenos días. ¡Bienvenido a la Escuela Bilikids!",
+        question: "¿Cómo debe responder Maya cordialmente?",
+        choices: [
+          { text: "Good morning! My name is Maya.", es: "¡Buenos días! Mi nombre es Maya.", correct: true },
+          { text: "Good night, I am sleeping.", es: "Buenas noches, estoy durmiendo.", correct: false },
+          { text: "I want an ice cream.", es: "Quiero un helado.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Nice to meet you, Maya! Are you a new student here?",
+        es: "¡Mucho gusto, Maya! ¿Eres una nueva estudiante aquí?",
+        question: "Maya confirma que sí es nueva alumna. ¿Qué dice?",
+        choices: [
+          { text: "Yes, I am! Today is my first day.", es: "¡Sí, lo soy! Hoy es mi primer día.", correct: true },
+          { text: "No, I am the teacher.", es: "No, yo soy la profesora.", correct: false },
+          { text: "My pencil is red.", es: "Mi lápiz es rojo.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "I am ten years old. How old are you, Maya?",
+        es: "Yo tengo diez años. ¿Cuántos años tienes tú, Maya?",
+        question: "Maya tiene 9 años. ¿Cómo dice su edad correctamente?",
+        choices: [
+          { text: "I have nine years.", es: "Tengo nueve años (error común en inglés)", correct: false },
+          { text: "I am nine years old.", es: "Tengo nueve años (usando el verbo be)", correct: true },
+          { text: "Nine o'clock in the morning.", es: "Las nueve en punto de la mañana.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Which grade are you in? Are we in fourth grade?",
+        es: "¿En qué grado estás? ¿Estamos en cuarto grado?",
+        question: "¿Cómo responde Maya que están en el mismo grado?",
+        choices: [
+          { text: "Yes, we are in fourth grade together!", es: "¡Sí, estamos en cuarto grado juntos!", correct: true },
+          { text: "No, we are at the beach.", es: "No, estamos en la playa.", correct: false },
+          { text: "I like bananas.", es: "Me gustan los plátanos.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "The bell is ringing! Where is our classroom?",
+        es: "¡Está sonando el timbre! ¿Dónde está nuestro salón?",
+        question: "Maya señala el salón número 5. ¿Qué debe decir?",
+        choices: [
+          { text: "It is room number five, next to the library.", es: "Es el salón número cinco, al lado de la biblioteca.", correct: true },
+          { text: "The airplane is flying high.", es: "El avión está volando alto.", correct: false },
+          { text: "My shoes are black.", es: "Mis zapatos son negros.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Great! Let's walk to class. We are a great team!",
+        es: "¡Genial! Vamos al salón. ¡Somos un gran equipo!",
+        question: "¿Cómo celebra Maya entusiasmada?",
+        choices: [
+          { text: "Yes, let's go! I am ready to learn.", es: "¡Sí, vamos! Estoy lista para aprender.", correct: true },
+          { text: "I am tired, goodbye.", es: "Estoy cansada, adiós.", correct: false },
+          { text: "Zero, one, two, three.", es: "Cero, uno, dos, tres.", correct: false }
+        ]
+      }
+    ]
   },
-  {
-    // Paso 2
-    speaker: 'alex',
-    name: 'Alex',
-    avatar: '👦',
-    text: "I'm Alex! I am ten years old. How old are you?",
-    es: "¡Soy Alex! Tengo diez años. ¿Cuántos años tienes?",
-    question: "Maya tiene 9 años. ¿Cómo le dice su edad a Alex?",
-    choices: [
-      { text: "I have nine years.", es: "Tengo nueve años (error común en inglés)", correct: false },
-      { text: "I am nine years old.", es: "Tengo nueve años (usando el verbo be)", correct: true },
-      { text: "Nine is my dog's name.", es: "Nueve es el nombre de mi perro.", correct: false }
-    ],
-    hint: "Recuerda que en inglés la edad se dice con 'I am', no con 'I have'."
-  },
-  {
-    // Paso 3
-    speaker: 'alex',
-    name: 'Alex',
-    avatar: '👦',
-    text: "Awesome! Are you ready for the adventure?",
-    es: "¡Genial! ¿Estás lista para la aventura?",
-    question: "¿Cómo responde Maya que sí está lista para el equipo?",
-    choices: [
-      { text: "Yes, I am! We are a great team.", es: "¡Sí, lo estoy! Somos un gran equipo.", correct: true },
-      { text: "No, I am sleeping now.", es: "No, estoy durmiendo ahora.", correct: false },
-      { text: "Where is the exit door?", es: "¿Dónde está la puerta de salida?", correct: false }
-    ],
-    hint: "La respuesta afirmativa con el verbo be es 'Yes, I am!'"
-  }
-];
 
+  // 2. DE COMPRAS EN EL CENTRO COMERCIAL (10 intercambios)
+  shopping: {
+    title: "Shopping at the Mall",
+    badge: "Shopping • A2",
+    subtitle: "Comprando ropa, preguntando precios y eligiendo tallas.",
+    steps: [
+      {
+        speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
+        text: "Hello! Welcome to Fashion Kids. Can I help you?",
+        es: "¡Hola! Bienvenidos a Fashion Kids. ¿Puedo ayudarles?",
+        question: "Maya busca una camiseta azul. ¿Qué debe responder?",
+        choices: [
+          { text: "Yes, please. I am looking for a blue T-shirt.", es: "Sí, por favor. Estoy buscando una camiseta azul.", correct: true },
+          { text: "No, I am eating a burger.", es: "No, estoy comiendo una hamburguesa.", correct: false },
+          { text: "My dog is sleeping.", es: "Mi perro está durmiendo.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
+        text: "Sure! What size do you need? Small or medium?",
+        es: "¡Por supuesto! ¿Qué talla necesitas? ¿Pequeña o mediana?",
+        question: "Maya necesita talla mediana. ¿Cómo lo dice?",
+        choices: [
+          { text: "I need size medium, please.", es: "Necesito talla mediana, por favor.", correct: true },
+          { text: "I need a football ball.", es: "Necesito un balón de fútbol.", correct: false },
+          { text: "Today is Monday.", es: "Hoy es lunes.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
+        text: "Here is a nice blue T-shirt. Would you like to try it on?",
+        es: "Aquí tienes una linda camiseta azul. ¿Te gustaría probártela?",
+        question: "Maya pregunta dónde está el probador. ¿Qué dice?",
+        choices: [
+          { text: "Yes, thank you! Where is the fitting room?", es: "¡Sí, gracias! ¿Dónde está el probador?", correct: true },
+          { text: "Where is the swimming pool?", es: "¿Dónde está la piscina?", correct: false },
+          { text: "I don't like homework.", es: "No me gustan las tareas.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "It looks very cool on you, Maya! How much is it?",
+        es: "¡Te queda genial, Maya! ¿Cuánto cuesta?",
+        question: "Maya mira la etiqueta de 15 dólares. ¿Cómo responde?",
+        choices: [
+          { text: "It is fifteen dollars. That is a great price!", es: "Cuesta quince dólares. ¡Es un buen precio!", correct: true },
+          { text: "It is fifteen kilometers.", es: "Son quince kilómetros.", correct: false },
+          { text: "My sister is fifteen years old.", es: "Mi hermana tiene quince años.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
+        text: "Are you paying with cash or credit card?",
+        es: "¿Pagas en efectivo o con tarjeta de crédito?",
+        question: "Maya tiene dinero en efectivo. ¿Qué responde?",
+        choices: [
+          { text: "I am paying with cash. Here is twenty dollars.", es: "Pago en efectivo. Aquí tiene veinte dólares.", correct: true },
+          { text: "I am paying with an apple.", es: "Pago con una manzana.", correct: false },
+          { text: "My cat is happy.", es: "Mi gato está feliz.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
+        text: "Here is your five dollars change and the receipt. Have a great day!",
+        es: "Aquí está su cambio de cinco dólares y el recibo. ¡Que tenga un buen día!",
+        question: "¿Cómo se despide Maya educadamente?",
+        choices: [
+          { text: "Thank you very much! Have a nice day, goodbye!", es: "¡Muchas gracias! ¡Tenga un buen día, adiós!", correct: true },
+          { text: "No problem, I don't care.", es: "Sin problema, no me importa.", correct: false },
+          { text: "It is raining outside.", es: "Está lloviendo afuera.", correct: false }
+        ]
+      }
+    ]
+  },
+
+  // 3. EN EL CINE CON AMIGOS (10 intercambios)
+  cinema: {
+    title: "At the Movie Theater",
+    badge: "Cinema • A1-A2",
+    subtitle: "Comprando entradas de cine, palomitas y buscando asientos.",
+    steps: [
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "We are at the cinema! Which movie do you want to see?",
+        es: "¡Estamos en el cine! ¿Qué película quieres ver?",
+        question: "Maya quiere ver la película espacial. ¿Qué responde?",
+        choices: [
+          { text: "I want to see the new Space Adventure movie!", es: "¡Quiero ver la nueva película de Aventuras Espaciales!", correct: true },
+          { text: "I want to cook dinner.", es: "Quiero cocinar la cena.", correct: false },
+          { text: "My bike is broken.", es: "Mi bicicleta está rota.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Ticket Clerk', avatar: '🎟️',
+        text: "Hello! Welcome to CineStar. How many tickets do you need?",
+        es: "¡Hola! Bienvenidos a CineStar. ¿Cuántos boletos necesitan?",
+        question: "Son 2 boletos para niños. ¿Qué debe pedir Alex?",
+        choices: [
+          { text: "Two tickets for kids, please. Space Adventure at 4 PM.", es: "Dos boletos para niños, por favor. Aventura Espacial a las 4 PM.", correct: true },
+          { text: "Ten adult tickets for tomorrow.", es: "Diez boletos de adulto para mañana.", correct: false },
+          { text: "I don't like movies.", es: "No me gustan las películas.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Ticket Clerk', avatar: '🎟️',
+        text: "That is twelve dollars in total. Here are your tickets for row D.",
+        es: "Son doce dólares en total. Aquí tienen sus boletos para la fila D.",
+        question: "¿Qué responde Maya para agradecer?",
+        choices: [
+          { text: "Thank you! Row D is perfect.", es: "¡Gracias! La fila D es perfecta.", correct: true },
+          { text: "Good night teacher.", es: "Buenas noches profesora.", correct: false },
+          { text: "My dog can run fast.", es: "Mi perro puede correr rápido.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Now let's go to the candy bar. Do you want popcorn or nachos?",
+        es: "Ahora vamos a la dulcería. ¿Quieres palomitas o nachos?",
+        question: "Maya prefiere palomitas con queso. ¿Qué dice?",
+        choices: [
+          { text: "I would like a large popcorn with cheese, please!", es: "¡Me gustaría palomitas grandes con queso, por favor!", correct: true },
+          { text: "I don't eat breakfast.", es: "No desayuno.", correct: false },
+          { text: "My favorite color is green.", es: "Mi color favorito es el verde.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "And what would you like to drink? Juice or water?",
+        es: "¿Y qué te gustaría tomar? ¿Jugo o agua?",
+        question: "Maya pide un jugo de manzana natural. ¿Cómo lo dice?",
+        choices: [
+          { text: "An apple juice for me, please.", es: "Un jugo de manzana para mí, por favor.", correct: true },
+          { text: "I drink hot soup.", es: "Tomo sopa caliente.", correct: false },
+          { text: "Water is running in the river.", es: "El agua corre en el río.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "The movie is starting now! Seats D4 and D5 are here.",
+        es: "¡La película está empezando! Los asientos D4 y D5 están aquí.",
+        question: "¿Cómo expresa Maya que está emocionada por la película?",
+        choices: [
+          { text: "Awesome! Let's silence our phones and enjoy the movie!", es: "¡Genial! ¡Silenciemos los teléfonos y disfrutemos la película!", correct: true },
+          { text: "I want to go home right now.", es: "Quiero ir a casa ahora mismo.", correct: false },
+          { text: "Zero plus two equals two.", es: "Cero más dos es igual a dos.", correct: false }
+        ]
+      }
+    ]
+  },
+
+  // 4. EN EL AEROPUERTO & VIAJE (10 intercambios)
+  airport: {
+    title: "At the Airport & Travel",
+    badge: "Travel • A2",
+    subtitle: "Check-in, pasaportes, equipaje y abordando el avión.",
+    steps: [
+      {
+        speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
+        text: "Good morning! Welcome to SkyAir. Where are you flying today?",
+        es: "¡Buenos días! Bienvenidos a SkyAir. ¿A dónde vuelan hoy?",
+        question: "Alex y Maya vuelan a Londres. ¿Qué deben responder?",
+        choices: [
+          { text: "Good morning! We are flying to London today.", es: "¡Buenos días! Volamos a Londres hoy.", correct: true },
+          { text: "We are walking to the supermarket.", es: "Estamos caminando al supermercado.", correct: false },
+          { text: "My name is not London.", es: "Mi nombre no es Londres.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
+        text: "Wonderful! May I please see your passports and tickets?",
+        es: "¡Maravilloso! ¿Puedo ver sus pasaportes y boletos por favor?",
+        question: "Maya entrega los documentos educadamente. ¿Qué dice?",
+        choices: [
+          { text: "Here they are, officer. Two passports.", es: "Aquí los tiene, oficial. Dos pasaportes.", correct: true },
+          { text: "I lost my shoes in the park.", es: "Perdí mis zapatos en el parque.", correct: false },
+          { text: "Tomorrow is Sunday.", es: "Mañana es domingo.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
+        text: "Thank you. Do you have any luggage to check in?",
+        es: "Gracias. ¿Tienen algún equipaje para registrar?",
+        question: "Alex tiene una maleta y una mochila de mano. ¿Qué responde?",
+        choices: [
+          { text: "Yes, we have one big suitcase and one backpack.", es: "Sí, tenemos una maleta grande y una mochila.", correct: true },
+          { text: "We have five elephants.", es: "Tenemos cinco elefantes.", correct: false },
+          { text: "No, I am wearing a hat.", es: "No, estoy usando un sombrero.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
+        text: "Please put your suitcase on the scale. It weighs 18 kilos. Perfect!",
+        es: "Por favor pongan su maleta en la báscula. Pesa 18 kilos. ¡Perfecto!",
+        question: "Maya pregunta por la puerta de embarque. ¿Qué dice?",
+        choices: [
+          { text: "Thank you! Which gate is our flight departing from?", es: "¡Gracias! ¿De qué puerta sale nuestro vuelo?", correct: true },
+          { text: "Where is my bedroom?", es: "¿Dónde está mi habitación?", correct: false },
+          { text: "The sky is blue today.", es: "El cielo está azul hoy.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
+        text: "Your flight is boarding at Gate 14 at 10:30 AM. Here are your boarding passes.",
+        es: "Su vuelo aborda en la Puerta 14 a las 10:30 AM. Aquí tienen sus pases de abordar.",
+        question: "¿Cómo agradece Alex por la atención recibida?",
+        choices: [
+          { text: "Thank you very much for your help! Have a great day.", es: "¡Muchas gracias por su ayuda! Que tenga un gran día.", correct: true },
+          { text: "I don't want to fly anymore.", es: "Ya no quiero volar.", correct: false },
+          { text: "Eight plus eight is sixteen.", es: "Ocho más ocho es dieciséis.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Gate 14 is right over there. Are you excited for London, Maya?",
+        es: "La Puerta 14 está justo allá. ¿Estás emocionada por Londres, Maya?",
+        question: "¿Qué responde Maya con alegría sobre el viaje?",
+        choices: [
+          { text: "Yes, I am super excited! London is an amazing city.", es: "¡Sí, estoy súper emocionada! Londres es una ciudad increíble.", correct: true },
+          { text: "No, I forgot my homework at school.", es: "No, olvidé mi tarea en la escuela.", correct: false },
+          { text: "I need to buy a bicycle.", es: "Necesito comprar una bicicleta.", correct: false }
+        ]
+      }
+    ]
+  },
+
+  // 5. EN LA PIZZERÍA / RESTAURANTE (10 intercambios)
+  pizza: {
+    title: "At the Pizzeria",
+    badge: "Food • A1-A2",
+    subtitle: "Pidiendo comida, bebidas e interactuando con el mesero.",
+    steps: [
+      {
+        speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
+        text: "Good afternoon! Welcome to Bella Pizza. Table for two?",
+        es: "¡Buenas tardes! Bienvenidos a Bella Pizza. ¿Mesa para dos?",
+        question: "¿Cómo responde Maya confirmando la mesa?",
+        choices: [
+          { text: "Yes, please! Table for two near the window.", es: "¡Sí, por favor! Mesa para dos cerca de la ventana.", correct: true },
+          { text: "No, I am playing soccer.", es: "No, estoy jugando fútbol.", correct: false },
+          { text: "Ten, twenty, thirty.", es: "Diez, veinte, treinta.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
+        text: "Right this way. Here is the menu. What would you like to drink first?",
+        es: "Por aquí. Aquí está el menú. ¿Qué les gustaría tomar primero?",
+        question: "Alex pide limonada fría para ambos. ¿Cómo lo formula?",
+        choices: [
+          { text: "We would like two cold lemonades, please.", es: "Nos gustaría dos limonadas frías, por favor.", correct: true },
+          { text: "We want two hot coffees.", es: "Queremos dos cafés calientes.", correct: false },
+          { text: "I have five blue pencils.", es: "Tengo cinco lápices azules.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
+        text: "Two lemonades, perfect. And what pizza would you like today?",
+        es: "Dos limonadas, perfecto. ¿Y qué pizza les gustaría hoy?",
+        question: "Maya quiere ordenar pizza de queso y champiñones. ¿Qué dice?",
+        choices: [
+          { text: "Can we have a medium cheese and mushroom pizza, please?", es: "¿Nos puede dar una pizza mediana de queso y champiñones, por favor?", correct: true },
+          { text: "I want an ice cream sandwich.", es: "Quiero un sándwich de helado.", correct: false },
+          { text: "The moon is round.", es: "La luna es redonda.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
+        text: "Excellent choice! That is our specialty. Would you like extra cheese?",
+        es: "¡Excelente elección! Es nuestra especialidad. ¿Desean queso extra?",
+        question: "¿Cómo responde Alex diciendo que sí, por favor?",
+        choices: [
+          { text: "Yes, extra cheese sounds delicious! Thank you.", es: "¡Sí, queso extra suena delicioso! Gracias.", correct: true },
+          { text: "No, I don't like food.", es: "No, no me gusta la comida.", correct: false },
+          { text: "My shoe is under the table.", es: "Mi zapato está debajo de la mesa.", correct: false }
+        ]
+      },
+      {
+        speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
+        text: "Here is your hot pizza and drinks! Enjoy your meal.",
+        es: "¡Aquí tienen su pizza caliente y bebidas! Buen provecho.",
+        question: "¿Qué dicen Alex y Maya al mesero?",
+        choices: [
+          { text: "Thank you so much! It smells wonderful.", es: "¡Muchas gracias! Huele maravilloso.", correct: true },
+          { text: "Where is my pencil case?", es: "¿Dónde está mi cartuchera?", correct: false },
+          { text: "Goodbye yesterday.", es: "Adiós ayer.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "That was the most delicious pizza ever! Let's ask for the bill.",
+        es: "¡Fue la pizza más rica del mundo! Pidamos la cuenta.",
+        question: "Maya llama al mesero para pedir la cuenta. ¿Cómo se dice en inglés?",
+        choices: [
+          { text: "Excuse me, could we have the bill, please?", es: "Disculpe, ¿nos podría traer la cuenta, por favor?", correct: true },
+          { text: "Excuse me, where is the cinema?", es: "Disculpe, ¿dónde está el cine?", correct: false },
+          { text: "I have twelve years old.", es: "Tengo doce años (incorrecto).", correct: false }
+        ]
+      }
+    ]
+  },
+
+  // 6. GUSTOS, HOBBIES Y AMIGOS (10 intercambios)
+  hobbies: {
+    title: "Hobbies & Free Time",
+    badge: "Hobbies • A1-A2",
+    subtitle: "Hablando de lo que te gusta hacer, deportes, música y juegos.",
+    steps: [
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Hey Maya! What do you like to do in your free time?",
+        es: "¡Hola Maya! ¿Qué te gusta hacer en tu tiempo libre?",
+        question: "Maya dice que le encanta dibujar y andar en bicicleta. ¿Qué responde?",
+        choices: [
+          { text: "I love drawing pictures and riding my bicycle!", es: "¡Me encanta dibujar dibujos y andar en mi bicicleta!", correct: true },
+          { text: "I love sleeping at school.", es: "Me encanta dormir en la escuela.", correct: false },
+          { text: "Two plus three is five.", es: "Dos más tres son cinco.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "That's awesome! Do you play any sports on the weekends?",
+        es: "¡Eso es genial! ¿Practicas algún deporte los fines de semana?",
+        question: "Maya juega al fútbol los sábados por la mañana. ¿Cómo lo dice?",
+        choices: [
+          { text: "Yes, I play soccer every Saturday morning with my friends.", es: "Sí, juego al fútbol todos los sábados por la mañana con mis amigos.", correct: true },
+          { text: "I play video games 24 hours a day.", es: "Juego videojuegos 24 horas al día.", correct: false },
+          { text: "My winter jacket is red.", es: "Mi chaqueta de invierno es roja.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "I play basketball! And do you play any musical instrument?",
+        es: "¡Yo juego al básquetbol! ¿Y tocas algún instrumento musical?",
+        question: "Maya toca el piano. ¿Qué responde ella?",
+        choices: [
+          { text: "Yes, I practice the piano three days a week.", es: "Sí, practico el piano tres días a la semana.", correct: true },
+          { text: "I have a big piano in my pocket.", es: "Tengo un gran piano en mi bolsillo.", correct: false },
+          { text: "The guitar is drinking water.", es: "La guitarra está tomando agua.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "That is so cool. What kind of music is your favorite?",
+        es: "Eso es genial. ¿Qué tipo de música es tu favorita?",
+        question: "Maya dice que le gusta la música pop y las canciones alegres.",
+        choices: [
+          { text: "I really like pop music and energetic songs!", es: "¡Me gusta mucho la música pop y las canciones alegres!", correct: true },
+          { text: "I don't like listening to sounds.", es: "No me gusta escuchar sonidos.", correct: false },
+          { text: "My brother is seven years old.", es: "Mi hermano tiene siete años.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Do you want to play a video game together this afternoon?",
+        es: "¿Quieres jugar a un videojuego juntos esta tarde?",
+        question: "¿Cómo responde Maya aceptando la invitación?",
+        choices: [
+          { text: "Yes, I'd love to! We can play the new adventure quest.", es: "¡Sí, me encantaría! Podemos jugar la nueva aventura.", correct: true },
+          { text: "No, tomorrow was yesterday.", es: "No, mañana fue ayer.", correct: false },
+          { text: "I lost my shoes again.", es: "Perdí mis zapatos otra vez.", correct: false }
+        ]
+      },
+      {
+        speaker: 'alex', name: 'Alex', avatar: '👦',
+        text: "Great! Let's meet at 4 o'clock at my house. See you later!",
+        es: "¡Genial! Nos vemos a las 4 en punto en mi casa. ¡Hasta luego!",
+        question: "¿Cómo se despide Maya confirmando la hora?",
+        choices: [
+          { text: "Perfect! See you at 4 PM. Have a great day, Alex!", es: "¡Perfecto! Nos vemos a las 4 PM. ¡Que tengas un buen día, Alex!", correct: true },
+          { text: "Goodbye, I am sleeping now.", es: "Adiós, estoy durmiendo ahora.", correct: false },
+          { text: "Ten minus five is five.", es: "Diez menos cinco son cinco.", correct: false }
+        ]
+      }
+    ]
+  }
+};
+
+let currentScenarioKey = 'school';
 let currentStoryStep = 0;
-let storyChatHistory = [];
+
+function switchScenario(scenarioKey, btnEl) {
+  sfx.playPop();
+  currentScenarioKey = scenarioKey;
+  currentStoryStep = 0;
+
+  document.querySelectorAll('.scenario-chip-btn').forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+
+  const sc = RealWorldScenarios[scenarioKey];
+  document.getElementById('storySceneHeading').textContent = sc.title;
+  document.getElementById('storySceneSubtitle').textContent = sc.subtitle;
+  document.getElementById('storyLevelBadge').textContent = sc.badge;
+
+  const chatFlow = document.getElementById('storyChatFlow');
+  if (chatFlow) chatFlow.innerHTML = '';
+
+  renderStoryCurrentStep();
+}
 
 function initInteractiveStory() {
+  currentScenarioKey = 'school';
   currentStoryStep = 0;
-  storyChatHistory = [];
   
   const chatFlow = document.getElementById('storyChatFlow');
   if (chatFlow) chatFlow.innerHTML = '';
@@ -220,32 +661,35 @@ function initInteractiveStory() {
 }
 
 function renderStoryCurrentStep() {
-  const step = storySteps[currentStoryStep];
+  const sc = RealWorldScenarios[currentScenarioKey];
+  const step = sc.steps[currentStoryStep];
+  const totalSteps = sc.steps.length;
+
   const progressBar = document.getElementById('storyProgressBar');
   const stepLabel = document.getElementById('storyStepLabel');
   const decisionContainer = document.getElementById('storyDecisionContainer');
 
-  if (stepLabel) stepLabel.textContent = `Paso ${currentStoryStep + 1} de ${storySteps.length}`;
-  if (progressBar) progressBar.style.width = `${((currentStoryStep + 1) / storySteps.length) * 100}%`;
+  if (stepLabel) stepLabel.textContent = `Intercambio ${currentStoryStep + 1} de ${totalSteps}`;
+  if (progressBar) progressBar.style.width = `${((currentStoryStep + 1) / totalSteps) * 100}%`;
 
-  // Añadir la frase de Alex al chat flow
-  appendStoryChatMessage('alex', 'Alex', '👦', step.text, step.es);
+  // Añadir la frase del interlocutor (Alex, Mesero, Agente, etc.)
+  appendStoryChatMessage(step.speaker, step.name, step.avatar, step.text, step.es);
 
-  // Reproducir la voz de Alex con animación
-  speakEnglish(step.text, 'alex');
+  // Reproducir audio automáticamente
+  speakEnglish(step.text, step.speaker);
 
-  // Renderizar la pregunta y las opciones para el alumno
+  // Renderizar la pregunta y las 3 opciones interactivas para el alumno
   if (decisionContainer) {
     decisionContainer.innerHTML = `
       <div class="story-prompt-card">
-        <span class="prompt-badge">🤔 Tu turno • Ayuda a Maya</span>
+        <span class="prompt-badge">🤔 Tu turno • Elige la respuesta correcta</span>
         <h3 class="prompt-question">${step.question}</h3>
         <div class="prompt-options-list">
           ${step.choices.map((choice, idx) => `
             <button class="prompt-option-btn" onclick="selectStoryChoice(${idx}, this)">
               <div>
                 <div>${choice.text}</div>
-                <div style="font-size:0.8rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
+                <div style="font-size:0.78rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
               </div>
               <span style="font-size:1.1rem; opacity:0.6;">👉</span>
             </button>
@@ -260,15 +704,16 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
   const chatFlow = document.getElementById('storyChatFlow');
   if (!chatFlow) return;
 
-  const msgId = `msg-${Date.now()}`;
+  const msgId = `msg-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   const isMaya = charKey === 'maya';
+  const isClerk = charKey === 'clerk';
 
   const row = document.createElement('div');
-  row.className = `chat-bubble-row ${isMaya ? 'from-maya' : 'from-alex'}`;
+  row.className = `chat-bubble-row ${isMaya ? 'from-maya' : isClerk ? 'from-clerk' : 'from-alex'}`;
   row.id = msgId;
 
   row.innerHTML = `
-    <div class="character-avatar-bubble ${isMaya ? 'maya' : ''}" id="avatar-${msgId}">
+    <div class="character-avatar-bubble ${isMaya ? 'maya' : isClerk ? 'clerk' : ''}" id="avatar-${msgId}">
       ${charAvatar}
     </div>
     <div class="chat-message-bubble">
@@ -284,7 +729,7 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
   `;
 
   chatFlow.appendChild(row);
-  row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  chatFlow.scrollTop = chatFlow.scrollHeight;
 }
 
 function replayChatAudio(text, charKey, avatarId) {
@@ -297,32 +742,27 @@ function replayChatAudio(text, charKey, avatarId) {
 }
 
 function selectStoryChoice(choiceIdx, btnEl) {
-  const step = storySteps[currentStoryStep];
+  const sc = RealWorldScenarios[currentScenarioKey];
+  const step = sc.steps[currentStoryStep];
   const choice = step.choices[choiceIdx];
 
   if (choice.correct) {
     sfx.playSuccess();
     btnEl.classList.add('correct-choice');
 
-    // Deshabilitar todos los botones de opciones
+    // Deshabilitar todos los botones para evitar doble clic
     document.querySelectorAll('.prompt-option-btn').forEach(b => b.style.pointerEvents = 'none');
 
-    // Maya dice la respuesta en el chat
+    // Maya dice su respuesta en el chat
     setTimeout(() => {
       appendStoryChatMessage('maya', 'Maya', '👧', choice.text, choice.es);
+      
+      // Reproducir con callback seguro que NUNCA se queda trabado
       speakEnglish(choice.text, 'maya', () => {
-        // Pasar al siguiente paso o completar
-        setTimeout(() => {
-          if (currentStoryStep < storySteps.length - 1) {
-            currentStoryStep++;
-            renderStoryCurrentStep();
-          } else {
-            finishStoryCelebration();
-          }
-        }, 800);
+        advanceStoryStep();
       });
       AppState.addStars(10);
-    }, 400);
+    }, 300);
 
   } else {
     sfx.playError();
@@ -331,34 +771,48 @@ function selectStoryChoice(choiceIdx, btnEl) {
   }
 }
 
+function advanceStoryStep() {
+  const sc = RealWorldScenarios[currentScenarioKey];
+  if (currentStoryStep < sc.steps.length - 1) {
+    currentStoryStep++;
+    setTimeout(() => {
+      renderStoryCurrentStep();
+    }, 400);
+  } else {
+    finishStoryCelebration();
+  }
+}
+
 function finishStoryCelebration() {
   sfx.playFanfare();
-  AppState.addStars(20);
+  AppState.addStars(25);
 
   const decisionContainer = document.getElementById('storyDecisionContainer');
   const progressBar = document.getElementById('storyProgressBar');
   if (progressBar) progressBar.style.width = '100%';
 
+  const sc = RealWorldScenarios[currentScenarioKey];
+
   if (decisionContainer) {
     decisionContainer.innerHTML = `
       <div class="story-completed-box">
-        <div class="story-complete-icon">🎉</div>
-        <h3 class="story-complete-title">¡Conversación Completada!</h3>
+        <div class="story-complete-icon">🌟</div>
+        <h3 class="story-complete-title">¡Diálogo "${sc.title}" Completado!</h3>
         <p class="story-complete-desc">
-          ¡Excelente trabajo! Ayudaste a Maya a conversar con Alex y aprendiste a saludar, decir tu nombre y tu edad en inglés real.
+          ¡Increíble fluidez! Has completado todos los turnos de conversación de este escenario con éxito.
         </p>
-        <div style="display:inline-flex; align-items:center; gap:8px; background:#fef3c7; color:#92400e; font-weight:700; padding:8px 18px; border-radius:999px; margin-bottom:20px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:#fef3c7; color:#92400e; font-weight:700; padding:8px 18px; border-radius:999px; margin-bottom:18px;">
           <span>⭐</span>
-          <span>+30 Estrellas Ganadas</span>
+          <span>+35 Estrellas Ganadas</span>
         </div>
         <div class="story-actions-row">
           <button class="btn-builder btn-builder-reset" onclick="initInteractiveStory()">
             <span>🔄</span>
-            <span>Repetir Diálogo</span>
+            <span>Repetir este Escenario</span>
           </button>
-          <button class="btn-builder btn-builder-check" onclick="switchTab('builder', document.querySelectorAll('.tab-btn')[2])">
-            <span>🧩</span>
-            <span>Ir al Sentence Builder ➔</span>
+          <button class="btn-builder btn-builder-check" onclick="switchScenario('shopping', document.querySelectorAll('.scenario-chip-btn')[1])">
+            <span>🛍️</span>
+            <span>Siguiente Escenario: De Compras ➔</span>
           </button>
         </div>
       </div>
