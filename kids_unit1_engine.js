@@ -678,15 +678,18 @@ function renderStoryCurrentStep() {
   // Reproducir audio automáticamente
   speakEnglish(step.text, step.speaker);
 
-  // Renderizar la pregunta y las 3 opciones interactivas para el alumno
+  // Barajar las opciones aleatoriamente para que la respuesta correcta NUNCA esté en una posición fija
+  const shuffledChoices = [...step.choices].sort(() => Math.random() - 0.5);
+
+  // Renderizar la pregunta y las 3 opciones interactivas aleatorizadas
   if (decisionContainer) {
     decisionContainer.innerHTML = `
       <div class="story-prompt-card">
-        <span class="prompt-badge">🤔 Tu turno • Elige la respuesta correcta</span>
+        <span class="prompt-badge">🤔 Tu turno • Lee con atención y elige</span>
         <h3 class="prompt-question">${step.question}</h3>
         <div class="prompt-options-list">
-          ${step.choices.map((choice, idx) => `
-            <button class="prompt-option-btn" onclick="selectStoryChoice(${idx}, this)">
+          ${shuffledChoices.map((choice) => `
+            <button class="prompt-option-btn" onclick="selectShuffledChoice(${choice.correct}, this, '${choice.text.replace(/'/g, "\\'")}', '${choice.es.replace(/'/g, "\\'")}')">
               <div>
                 <div>${choice.text}</div>
                 <div style="font-size:0.78rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
@@ -741,12 +744,8 @@ function replayChatAudio(text, charKey, avatarId) {
   });
 }
 
-function selectStoryChoice(choiceIdx, btnEl) {
-  const sc = RealWorldScenarios[currentScenarioKey];
-  const step = sc.steps[currentStoryStep];
-  const choice = step.choices[choiceIdx];
-
-  if (choice.correct) {
+function selectShuffledChoice(isCorrect, btnEl, textEn, textEs) {
+  if (isCorrect) {
     sfx.playSuccess();
     btnEl.classList.add('correct-choice');
 
@@ -755,10 +754,10 @@ function selectStoryChoice(choiceIdx, btnEl) {
 
     // Maya dice su respuesta en el chat
     setTimeout(() => {
-      appendStoryChatMessage('maya', 'Maya', '👧', choice.text, choice.es);
+      appendStoryChatMessage('maya', 'Maya', '👧', textEn, textEs);
       
       // Reproducir con callback seguro que NUNCA se queda trabado
-      speakEnglish(choice.text, 'maya', () => {
+      speakEnglish(textEn, 'maya', () => {
         advanceStoryStep();
       });
       AppState.addStars(10);
