@@ -1,9 +1,9 @@
 /**
  * BILIKIDS KIDS CLUB - UNIT 5 ENGINE: FREE TIME
  * Age: 7-10 years (Cambridge Starters / Movers A1-A2)
- * Innovative Activities:
- * 1. 🎯 Hobby Arcade & Wh- Target (Laser de Preguntas Wh-)
- * 2. 🎚️ Frequency DJ Mixer (Equalizador de Adverbios de Frecuencia)
+ * Innovative, Highly Distinct Activities:
+ * 1. 🎒 The Hobby Gear Locker (Casillero de Equipamiento de Hobbies)
+ * 2. 🎚️ Tactile Frequency DJ Mixer (Consola con Fader Deslizante & Scratch)
  * 3. 🧪 Verb-ING Magnet Fusion Lab (Laboratorio Ortográfico -ING)
  * 4. 🏆 Talent Show Audition ("Yes, I can!" Talent Stage & Golden Buzzer)
  */
@@ -59,19 +59,52 @@ class SoundEffects {
     osc.stop(this.ctx.currentTime + 0.08);
   }
 
-  playLaser() {
+  playPackGear() {
     this.init();
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(950, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.15);
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(640, this.ctx.currentTime + 0.12);
     gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.14);
+  }
+
+  playScratch() {
+    this.init();
+    // Emulate realistic vinyl scratch
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(280, this.ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(850, this.ctx.currentTime + 0.07);
+    osc.frequency.linearRampToValueAtTime(350, this.ctx.currentTime + 0.14);
+    gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     osc.start();
     osc.stop(this.ctx.currentTime + 0.15);
+  }
+
+  playBeatDrop() {
+    this.init();
+    // Punchy electronic bass drop
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + 0.4);
+    gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.4);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.4);
   }
 
   playSuccess() {
@@ -97,35 +130,18 @@ class SoundEffects {
     const gain = this.ctx.createGain();
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(220, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(140, this.ctx.currentTime + 0.2);
+    osc.frequency.exponentialRampToValueAtTime(130, this.ctx.currentTime + 0.22);
     gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     osc.start();
-    osc.stop(this.ctx.currentTime + 0.2);
-  }
-
-  playBeatDrop() {
-    this.init();
-    // Low punchy bass drop for DJ mixer
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(180, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + 0.35);
-    gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.35);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 0.35);
+    osc.stop(this.ctx.currentTime + 0.22);
   }
 
   playBuzzerGold() {
     this.init();
-    // Grand Golden Buzzer fanfare
-    const notes = [440, 554.37, 659.25, 880, 1108.73]; // A major fanfare
+    const notes = [440, 554.37, 659.25, 880, 1108.73];
     notes.forEach((f, i) => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
@@ -185,9 +201,9 @@ function speakEnglish(text, voiceType = 'kid', onComplete = null) {
   if (voiceType === 'judge') {
     utterance.pitch = 0.95;
     utterance.rate = 0.95;
-  } else if (voiceType === 'arcade') {
-    utterance.pitch = 1.25;
-    utterance.rate = 1.05;
+  } else if (voiceType === 'dj') {
+    utterance.pitch = 1.15;
+    utterance.rate = 1.0;
   } else {
     utterance.pitch = 1.2;
     utterance.rate = 0.98;
@@ -250,378 +266,388 @@ function switchTab(tabId, btnElement) {
 }
 
 // ============================================================================
-// ACTIVIDAD 1: HOBBY ARCADE & WH- TARGET
-// 10 retos de preguntas Wh- sobre actividades de tiempo libre
+// ACTIVIDAD 1: THE HOBBY GEAR LOCKER (CASILLERO DE EQUIPAMIENTO)
+// 8 misiones de preparación de equipamiento deportivo y hobbies
 // ============================================================================
-const arcadeWhData = [
+const lockerMissionsData = [
   {
     id: 0,
-    tag: "Arcade Stage 1 • Location",
-    storySentence: "Leo plays basketball <span style='color:#38bdf8; text-decoration:underline;'>at the sports center</span> on Saturdays.",
-    storyPlain: "Leo plays basketball at the sports center on Saturdays.",
-    storyEs: "Leo juega baloncesto en el polideportivo los sábados.",
-    missionClue: "Target info: 'at the sports center' (Lugar / Location)",
-    targetWh: "Where?",
-    ruleReason: "Where asks about places and locations! ➔ 'Where does Leo play basketball?'",
-    options: [
-      { text: "Where?", meaning: "Dónde", isCorrect: true, icon: "📍" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "Why?", meaning: "Por qué", isCorrect: false, icon: "❓" }
+    member: "Leo the Skateboarder",
+    hobby: "Skateboarding",
+    avatar: "🛹",
+    promptEn: "Leo is packing his gear bag to go skateboarding at the skatepark this afternoon.",
+    promptEs: "Leo está empacando su maletín para montar patineta en el skatepark esta tarde.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "skate", name: "Skateboard", icon: "🛹", isCorrect: true, es: "Patineta" },
+      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "Casco de seguridad" },
+      { id: "kneepads", name: "Knee Pads", icon: "🛡️", isCorrect: true, es: "Rodilleras de protección" },
+      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "Sartén (¡No pertenece!)" },
+      { id: "snorkel", name: "Snorkel Mask", icon: "🤿", isCorrect: false, es: "Máscara de buceo" }
     ]
   },
   {
     id: 1,
-    tag: "Arcade Stage 2 • Time & Day",
-    storySentence: "Maya practices the violin <span style='color:#38bdf8; text-decoration:underline;'>every Tuesday afternoon</span>.",
-    storyPlain: "Maya practices the violin every Tuesday afternoon.",
-    storyEs: "Maya practica el violín todos los martes por la tarde.",
-    missionClue: "Target info: 'every Tuesday afternoon' (Tiempo / Time)",
-    targetWh: "When?",
-    ruleReason: "When asks about times, days and moments! ➔ 'When does Maya practice violin?'",
-    options: [
-      { text: "When?", meaning: "Cuándo", isCorrect: true, icon: "⏰" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "What?", meaning: "Qué", isCorrect: false, icon: "🎯" },
-      { text: "How?", meaning: "Cómo", isCorrect: false, icon: "💡" }
+    member: "Maya the Watercolor Artist",
+    hobby: "Painting",
+    avatar: "🎨",
+    promptEn: "Maya is organizing her studio locker for watercolor painting class.",
+    promptEs: "Maya está organizando su casillero para la clase de pintura en acuarela.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "palette", name: "Color Palette", icon: "🎨", isCorrect: true, es: "Paleta de colores" },
+      { id: "brushes", name: "Paint Brushes", icon: "🖌️", isCorrect: true, es: "Pinceles" },
+      { id: "canvas", name: "Canvas Easel", icon: "🖼️", isCorrect: true, es: "Lienzo de pintura" },
+      { id: "ball", name: "Soccer Ball", icon: "⚽", isCorrect: false, es: "Balón de fútbol" },
+      { id: "brush", name: "Toothbrush", icon: "🪥", isCorrect: false, es: "Cepillo de dientes" }
     ]
   },
   {
     id: 2,
-    tag: "Arcade Stage 3 • Companions",
-    storySentence: "Tom goes skateboarding <span style='color:#38bdf8; text-decoration:underline;'>with his best friend Jack</span>.",
-    storyPlain: "Tom goes skateboarding with his best friend Jack.",
-    storyEs: "Tom va a montar en patineta con su mejor amigo Jack.",
-    missionClue: "Target info: 'with his best friend Jack' (Persona / People)",
-    targetWh: "Who?",
-    ruleReason: "Who asks about people and friends! ➔ 'Who does Tom skateboard with?'",
-    options: [
-      { text: "Who?", meaning: "Quién", isCorrect: true, icon: "👤" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" },
-      { text: "Why?", meaning: "Por qué", isCorrect: false, icon: "❓" }
+    member: "Lucas the Rock Guitarist",
+    hobby: "Playing Guitar",
+    avatar: "🎸",
+    promptEn: "Lucas is getting ready for rock band rehearsal in the music room.",
+    promptEs: "Lucas se prepara para el ensayo de su banda de rock en el salón de música.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "guitar", name: "Electric Guitar", icon: "🎸", isCorrect: true, es: "Guitarra eléctrica" },
+      { id: "amp", name: "Sound Amplifier", icon: "🔊", isCorrect: true, es: "Amplificador de sonido" },
+      { id: "picks", name: "Guitar Picks", icon: "🎵", isCorrect: true, es: "Púas de guitarra" },
+      { id: "bball", name: "Basketball", icon: "🏀", isCorrect: false, es: "Balón de baloncesto" },
+      { id: "goggles", name: "Swim Goggles", icon: "🏊‍♂️", isCorrect: false, es: "Gafas de natación" }
     ]
   },
   {
     id: 3,
-    tag: "Arcade Stage 4 • Activity & Object",
-    storySentence: "In her free time, Sarah loves to paint <span style='color:#38bdf8; text-decoration:underline;'>colorful watercolor animals</span>.",
-    storyPlain: "In her free time, Sarah loves to paint colorful watercolor animals.",
-    storyEs: "En su tiempo libre, a Sarah le encanta pintar animales coloridos con acuarelas.",
-    missionClue: "Target info: 'colorful watercolor animals' (Objeto / Actividad)",
-    targetWh: "What?",
-    ruleReason: "What asks about activities, things and objects! ➔ 'What does Sarah love to paint?'",
-    options: [
-      { text: "What?", meaning: "Qué", isCorrect: true, icon: "🎯" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" }
+    member: "Chloe the Swimmer",
+    hobby: "Swimming",
+    avatar: "🏊‍♀️",
+    promptEn: "Chloe is packing her sports backpack for swimming practice at the heated pool.",
+    promptEs: "Chloe empaca su mochila deportiva para la práctica de natación en la piscina climatizada.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "swimsuit", name: "Swimsuit", icon: "🩱", isCorrect: true, es: "Traje de baño" },
+      { id: "goggles", name: "Swimming Goggles", icon: "🤿", isCorrect: true, es: "Gafas de natación" },
+      { id: "cap", name: "Silicone Swim Cap", icon: "🧢", isCorrect: true, es: "Gorro de natación" },
+      { id: "roller", name: "Rollerblade", icon: "🛼", isCorrect: false, es: "Patín en línea" },
+      { id: "book", name: "Dictionary", icon: "📖", isCorrect: false, es: "Diccionario escolar" }
     ]
   },
   {
     id: 4,
-    tag: "Arcade Stage 5 • Frequency",
-    storySentence: "Ben plays online chess with his grandfather <span style='color:#38bdf8; text-decoration:underline;'>three times a week</span>.",
-    storyPlain: "Ben plays online chess with his grandfather three times a week.",
-    storyEs: "Ben juega ajedrez en línea con su abuelo tres veces por semana.",
-    missionClue: "Target info: 'three times a week' (Frecuencia de repetición)",
-    targetWh: "How often?",
-    ruleReason: "How often asks about frequency! ➔ 'How often does Ben play chess?'",
-    options: [
-      { text: "How often?", meaning: "Con qué frecuencia", isCorrect: true, icon: "🔁" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "Why?", meaning: "Por qué", isCorrect: false, icon: "❓" }
+    member: "Ben the Chess Master",
+    hobby: "Playing Chess",
+    avatar: "♟️",
+    promptEn: "Ben is preparing his tactical equipment for the school chess tournament.",
+    promptEs: "Ben prepara su equipamiento táctico para el torneo escolar de ajedrez.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "board", name: "Chess Board", icon: "♟️", isCorrect: true, es: "Tablero y piezas de ajedrez" },
+      { id: "clock", name: "Chess Digital Clock", icon: "⏱️", isCorrect: true, es: "Reloj cronómetro de ajedrez" },
+      { id: "notebook", name: "Score Notebook", icon: "📝", isCorrect: true, es: "Libreta de jugadas" },
+      { id: "boxing", name: "Boxing Gloves", icon: "🥊", isCorrect: false, es: "Guantes de boxeo" },
+      { id: "skis", name: "Snow Skis", icon: "🎿", isCorrect: false, es: "Esquís de nieve" }
     ]
   },
   {
     id: 5,
-    tag: "Arcade Stage 6 • Reason & Purpose",
-    storySentence: "Emma rides her bike to school <span style='color:#38bdf8; text-decoration:underline;'>because she loves fresh air</span>.",
-    storyPlain: "Emma rides her bike to school because she loves fresh air.",
-    storyEs: "Emma va en bicicleta a la escuela porque le encanta el aire fresco.",
-    missionClue: "Target info: 'because she loves fresh air' (Razón / Motivo)",
-    targetWh: "Why?",
-    ruleReason: "Why asks for reasons and explanations with 'because'! ➔ 'Why does Emma ride her bike?'",
-    options: [
-      { text: "Why?", meaning: "Por qué", isCorrect: true, icon: "❓" },
-      { text: "What?", meaning: "Qué", isCorrect: false, icon: "🎯" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" }
+    member: "Sarah the Tennis Player",
+    hobby: "Playing Tennis",
+    avatar: "🎾",
+    promptEn: "Sarah is checking her locker before her tennis match on the clay court.",
+    promptEs: "Sarah revisa su casillero antes de su partido de tenis en la cancha de arcilla.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "racket", name: "Tennis Racket", icon: "🎾", isCorrect: true, es: "Raqueta de tenis" },
+      { id: "balls", name: "Tennis Balls Can", icon: "🟡", isCorrect: true, es: "Tubo de pelotas de tenis" },
+      { id: "visor", name: "Sun Visor Cap", icon: "🧢", isCorrect: true, es: "Visera para el sol" },
+      { id: "pan", name: "Cooking Pan", icon: "🍳", isCorrect: false, es: "Sartén de cocina" },
+      { id: "guitar", name: "Acoustic Guitar", icon: "🎸", isCorrect: false, es: "Guitarra acústica" }
     ]
   },
   {
     id: 6,
-    tag: "Arcade Stage 7 • Transportation & Method",
-    storySentence: "The family travels to the sunny beach <span style='color:#38bdf8; text-decoration:underline;'>by blue train</span>.",
-    storyPlain: "The family travels to the sunny beach by blue train.",
-    storyEs: "La familia viaja a la playa soleada en tren azul.",
-    missionClue: "Target info: 'by blue train' (Medio de transporte / Método)",
-    targetWh: "How?",
-    ruleReason: "How asks about the way or method! ➔ 'How does the family travel to the beach?'",
-    options: [
-      { text: "How?", meaning: "Cómo", isCorrect: true, icon: "🚆" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "What?", meaning: "Qué", isCorrect: false, icon: "🎯" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" }
+    member: "Oliver the Wildlife Photographer",
+    hobby: "Photography",
+    avatar: "📷",
+    promptEn: "Oliver is packing his equipment bag to take wildlife photos of birds in the forest.",
+    promptEs: "Oliver empaca su bolso para tomar fotografías de aves silvestres en el bosque.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "camera", name: "Digital Camera", icon: "📷", isCorrect: true, es: "Cámara digital" },
+      { id: "lens", name: "Telephoto Zoom Lens", icon: "🔭", isCorrect: true, es: "Lente teleobjetivo" },
+      { id: "tripod", name: "Camera Tripod", icon: "📐", isCorrect: true, es: "Trípode para cámara" },
+      { id: "soccer", name: "Soccer Cleats", icon: "👟", isCorrect: false, es: "Guayos de fútbol" },
+      { id: "mic", name: "Stage Microphone", icon: "🎤", isCorrect: false, es: "Micrófono de escenario" }
     ]
   },
   {
     id: 7,
-    tag: "Arcade Stage 8 • Location",
-    storySentence: "We build tall sandcastles <span style='color:#38bdf8; text-decoration:underline;'>near the sea waves</span>.",
-    storyPlain: "We build tall sandcastles near the sea waves.",
-    storyEs: "Construimos altos castillos de arena cerca de las olas del mar.",
-    missionClue: "Target info: 'near the sea waves' (Lugar / Location)",
-    targetWh: "Where?",
-    ruleReason: "Where asks about place! ➔ 'Where do you build sandcastles?'",
-    options: [
-      { text: "Where?", meaning: "Dónde", isCorrect: true, icon: "📍" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "How often?", meaning: "Con qué frecuencia", isCorrect: false, icon: "🔁" }
-    ]
-  },
-  {
-    id: 8,
-    tag: "Arcade Stage 9 • Exact Time",
-    storySentence: "The animated movie starts <span style='color:#38bdf8; text-decoration:underline;'>at five o'clock</span>.",
-    storyPlain: "The animated movie starts at five o'clock.",
-    storyEs: "La película animada empieza a las cinco en punto.",
-    missionClue: "Target info: 'at five o'clock' (Hora exacta / Time)",
-    targetWh: "What time?",
-    ruleReason: "What time asks for specific clock hours! ➔ 'What time does the movie start?'",
-    options: [
-      { text: "What time?", meaning: "A qué hora", isCorrect: true, icon: "⏰" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" },
-      { text: "Why?", meaning: "Por qué", isCorrect: false, icon: "❓" }
-    ]
-  },
-  {
-    id: 9,
-    tag: "Arcade Stage 10 • Hobby Choice",
-    storySentence: "On rainy Sundays, my brother prefers to read <span style='color:#38bdf8; text-decoration:underline;'>comic books</span>.",
-    storyPlain: "On rainy Sundays, my brother prefers to read comic books.",
-    storyEs: "En los domingos lluviosos, mi hermano prefiere leer cómics.",
-    missionClue: "Target info: 'comic books' (Cosa / Objeto)",
-    targetWh: "What?",
-    ruleReason: "What asks about things! ➔ 'What does your brother prefer to read?'",
-    options: [
-      { text: "What?", meaning: "Qué", isCorrect: true, icon: "🎯" },
-      { text: "Where?", meaning: "Dónde", isCorrect: false, icon: "📍" },
-      { text: "When?", meaning: "Cuándo", isCorrect: false, icon: "⏰" },
-      { text: "Who?", meaning: "Quién", isCorrect: false, icon: "👤" }
+    member: "Sofia the Rollerblader",
+    hobby: "Rollerblading",
+    avatar: "🛼",
+    promptEn: "Sofia is getting her protective gear ready to rollerblade along the sunny beach promenade.",
+    promptEs: "Sofía alista su equipo de protección para patinar por el paseo marítimo soleado.",
+    requiredCount: 3,
+    itemsPool: [
+      { id: "roller", name: "Rollerblades", icon: "🛼", isCorrect: true, es: "Patines en línea" },
+      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "Casco de patinaje" },
+      { id: "guards", name: "Wrist Guards", icon: "🧤", isCorrect: true, es: "Muñequeras de protección" },
+      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "Sartén de cocina" },
+      { id: "chess", name: "Chess Clock", icon: "⏱️", isCorrect: false, es: "Reloj de ajedrez" }
     ]
   }
 ];
 
-let currentArcadeIndex = 0;
+let currentLockerMission = 0;
+let packedLockerItems = []; // Array of packed item objects
 
-function loadArcadeStage(index) {
-  currentArcadeIndex = index;
-  const stage = arcadeWhData[index];
+function loadLockerMission(index) {
+  currentLockerMission = index;
+  packedLockerItems = [];
+  const m = lockerMissionsData[index];
 
-  document.getElementById('arcadeStageBadge').textContent = `Nivel ${index + 1} de ${arcadeWhData.length}`;
-  document.getElementById('arcadeStoryEn').innerHTML = stage.storySentence;
-  document.getElementById('arcadeStoryEs').textContent = stage.storyEs;
-  document.getElementById('arcadeTargetMission').innerHTML = `🎯 <strong>Misión Láser:</strong> ${stage.missionClue}`;
+  document.getElementById('lockerMissionBadge').textContent = `Misión ${index + 1} de ${lockerMissionsData.length}`;
+  document.getElementById('lockerMemberName').textContent = `${m.avatar} ${m.member} (${m.hobby})`;
+  document.getElementById('lockerPromptEn').textContent = `"${m.promptEn}"`;
+  document.getElementById('lockerPromptEs').textContent = m.promptEs;
 
-  // Speak sentence
-  speakEnglish(stage.storyPlain, 'arcade');
+  speakEnglish(m.promptEn, 'narrator');
 
-  // Randomize laser button positions every time
-  const shuffledOptions = [...stage.options].sort(() => Math.random() - 0.5);
-
-  const laserGrid = document.getElementById('arcadeLaserGrid');
-  laserGrid.innerHTML = shuffledOptions.map(opt => `
-    <button class="arcade-laser-btn" onclick="shootLaserWh(this, ${opt.isCorrect}, '${opt.text}', '${stage.ruleReason.replace(/'/g, "\\'")}')">
-      <span style="font-size:1.8rem;">${opt.icon}</span>
-      <span style="font-family:var(--font-display); font-size:1.15rem; font-weight:700;">${opt.text}</span>
-      <span style="font-size:0.75rem; color:#94a3b8;">${opt.meaning}</span>
-    </button>
-  `).join('');
-
-  document.getElementById('arcadeFeedbackBox').innerHTML = '';
+  renderLockerSlotsTray();
+  renderGearItemsPool();
+  document.getElementById('lockerFeedbackBox').innerHTML = '';
 }
 
-function listenArcadeStory() {
-  sfx.playLaser();
-  const stage = arcadeWhData[currentArcadeIndex];
-  speakEnglish(stage.storyPlain, 'arcade');
+function listenLockerPrompt() {
+  sfx.playPop();
+  const m = lockerMissionsData[currentLockerMission];
+  speakEnglish(m.promptEn, 'narrator');
 }
 
-function shootLaserWh(btnEl, isCorrect, chosenText, ruleReason) {
-  const feedback = document.getElementById('arcadeFeedbackBox');
+function renderLockerSlotsTray() {
+  const tray = document.getElementById('lockerSlotsTray');
+  if (!tray) return;
 
-  if (isCorrect) {
-    sfx.playLaser();
-    sfx.playSuccess();
-    btnEl.classList.add('correct');
+  const slots = [0, 1, 2];
+  tray.innerHTML = slots.map(i => {
+    const item = packedLockerItems[i];
+    if (item) {
+      return `
+        <div class="locker-slot-box filled">
+          <div style="font-size:2.2rem; margin-bottom:4px;">${item.icon}</div>
+          <div style="font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:#34d399;">${item.name}</div>
+          <div style="font-size:0.75rem; color:#a7f3d0;">Empacado ✅</div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="locker-slot-box">
+          <div style="font-size:2rem; opacity:0.3; margin-bottom:4px;">📦</div>
+          <div style="font-family:var(--font-display); font-size:0.95rem; font-weight:700;">Espacio Vacío ${i + 1}</div>
+          <div style="font-size:0.75rem; color:#64748b;">Selecciona un artículo abajo</div>
+        </div>
+      `;
+    }
+  }).join('');
+}
 
-    feedback.innerHTML = `
-      <div style="background:rgba(16, 185, 129, 0.2); border:1px solid #10b981; border-radius:14px; padding:12px 18px; color:#34d399; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🎯 ¡DISPARO DIRECTO AL BLANCO! (+20 pts)</div>
-        <div style="color:#ffffff;">Disparaste: <strong>${chosenText}</strong></div>
-        <div style="font-size:0.85rem; color:#a7f3d0; margin-top:6px;">💡 ${ruleReason}</div>
+function renderGearItemsPool() {
+  const poolContainer = document.getElementById('gearPoolGrid');
+  if (!poolContainer) return;
+
+  const m = lockerMissionsData[currentLockerMission];
+  // Randomize pool order every time
+  const shuffled = [...m.itemsPool].sort(() => Math.random() - 0.5);
+
+  poolContainer.innerHTML = shuffled.map(item => {
+    const isAlreadyPacked = packedLockerItems.some(p => p.id === item.id);
+    return `
+      <div class="gear-item-card ${isAlreadyPacked ? 'packed' : ''}" 
+           onclick="handleGearItemClick(this, '${item.id}', ${item.isCorrect}, '${item.name.replace(/'/g, "\\'")}', '${item.icon}')">
+        <span style="font-size:2.2rem;">${item.icon}</span>
+        <strong style="font-family:var(--font-display); font-size:0.95rem; color:#0f172a;">${item.name}</strong>
+        <span style="font-size:0.75rem; color:#64748b;">${item.es}</span>
       </div>
     `;
-    AppState.addStars(20);
-    speakEnglish(`Correct! ${chosenText}`, 'kid');
+  }).join('');
+}
 
-    setTimeout(() => {
-      if (currentArcadeIndex < arcadeWhData.length - 1) {
-        loadArcadeStage(currentArcadeIndex + 1);
-      }
-    }, 1800);
+function handleGearItemClick(cardEl, itemId, isCorrect, itemName, itemIcon) {
+  const feedback = document.getElementById('lockerFeedbackBox');
+
+  if (isCorrect) {
+    sfx.playPackGear();
+    cardEl.classList.add('packed');
+    packedLockerItems.push({ id: itemId, name: itemName, icon: itemIcon });
+    renderLockerSlotsTray();
+
+    speakEnglish(itemName, 'kid');
+
+    if (packedLockerItems.length === 3) {
+      // Mission Complete!
+      sfx.playSuccess();
+      feedback.innerHTML = `
+        <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px;">
+          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🔒 ¡CASILLERO COMPLETO Y ASEGURADO! (+25 pts)</div>
+          <div>Empacaste todo el equipamiento necesario para este deporte. ¡Excelente vocabulario!</div>
+        </div>
+      `;
+      AppState.addStars(25);
+
+      setTimeout(() => {
+        if (currentLockerMission < lockerMissionsData.length - 1) {
+          loadLockerMission(currentLockerMission + 1);
+        }
+      }, 2000);
+    } else {
+      feedback.innerHTML = `
+        <div style="color:#059669; font-weight:700; font-size:0.95rem; margin-top:10px;">
+          🎒 ¡${itemIcon} ${itemName} empacado! Llevas ${packedLockerItems.length} de 3 artículos.
+        </div>
+      `;
+    }
 
   } else {
-    sfx.playLaser();
     sfx.playError();
-    btnEl.classList.add('wrong');
-    setTimeout(() => btnEl.classList.remove('wrong'), 450);
+    cardEl.classList.add('wrong');
+    setTimeout(() => cardEl.classList.remove('wrong'), 450);
 
     feedback.innerHTML = `
-      <div style="background:rgba(239, 68, 68, 0.2); border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#f87171; font-weight:700; margin-top:16px;">
-        ⚡ ¡Láser desviado! Revisa si la pista pide lugar (Where), tiempo (When), persona (Who) o frecuencia (How often).
+      <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
+        ⚠️ ¡${itemName} no pertenece a este deporte o hobby! Elige el equipamiento adecuado.
       </div>
     `;
   }
 }
 
-function nextArcadeStage() {
+function nextLockerMission() {
   sfx.playPop();
-  currentArcadeIndex = (currentArcadeIndex + 1) % arcadeWhData.length;
-  loadArcadeStage(currentArcadeIndex);
+  currentLockerMission = (currentLockerMission + 1) % lockerMissionsData.length;
+  loadLockerMission(currentLockerMission);
 }
 
 // ============================================================================
-// ACTIVIDAD 2: FREQUENCY DJ MIXER
-// 10 pistas musicales graduando adverbios de frecuencia (Never a Always)
+// ACTIVIDAD 2: TACTILE FREQUENCY DJ MIXER (CONSOLA CON CROSSFADER Y SCRATCH)
+// 10 pistas musicales con control deslizante de 0% a 100% y scratch interactivo
 // ============================================================================
-const djTracksData = [
+const djMixerTracksData = [
   {
     id: 0,
-    title: "DJ Track 1 • The Daily Gamer 🎮",
+    title: "Track 1 • The Daily Gamer 🎮",
     routineEn: "Max plays video games on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.",
-    routineEs: "Max juega videojuegos los 7 días de la semana (Lunes a Domingo).",
-    activeDays: [1, 2, 3, 4, 5, 6, 7], // 7/7 days
-    correctAdverb: "always",
-    percentage: "100%",
+    routineEs: "Max juega videojuegos los 7 días de la semana (Lunes a Domingo sin falta).",
+    activeDays: [1, 2, 3, 4, 5, 6, 7], // 7/7
+    targetPercentage: 100,
+    targetAdverb: "always",
     explanation: "7 de 7 días ➔ 100% de frecuencia es ALWAYS (siempre)!"
   },
   {
     id: 1,
-    title: "DJ Track 2 • Zero Skateboarding 🛹",
+    title: "Track 2 • Zero Skateboarding 🛹",
     routineEn: "Emma doesn't have a skateboard and she has never tried it in her life (0 days).",
     routineEs: "Emma no tiene patineta y jamás la ha probado en su vida (0 días).",
-    activeDays: [], // 0 days
-    correctAdverb: "never",
-    percentage: "0%",
+    activeDays: [], // 0/7
+    targetPercentage: 0,
+    targetAdverb: "never",
     explanation: "0 veces ➔ 0% de frecuencia es NEVER (nunca)!"
   },
   {
     id: 2,
-    title: "DJ Track 3 • Casual Acoustic Guitar 🎸",
+    title: "Track 3 • Casual Acoustic Guitar 🎸",
     routineEn: "Lucas plays the acoustic guitar only on Saturday afternoons (1 or 2 times a month).",
-    routineEs: "Lucas toca la guitarra acústica solo a veces (1 o 2 veces al mes).",
-    activeDays: [6], // 1 day
-    correctAdverb: "sometimes",
-    percentage: "25%",
+    routineEs: "Lucas toca la guitarra acústica solo de vez en cuando (1 o 2 veces al mes).",
+    activeDays: [6],
+    targetPercentage: 25,
+    targetAdverb: "sometimes",
     explanation: "Ocasionalmente ➔ Alrededor del 25% es SOMETIMES (a veces)!"
   },
   {
     id: 3,
-    title: "DJ Track 4 • Regular Swimmer 🏊‍♂️",
+    title: "Track 4 • Regular Swimmer 🏊‍♂️",
     routineEn: "Chloe swims at the heated pool on Monday, Wednesday, Friday, and Saturday (4 days a week).",
     routineEs: "Chloe nada en la piscina 4 días por semana con regularidad.",
-    activeDays: [1, 3, 5, 6], // 4 days
-    correctAdverb: "often",
-    percentage: "50%",
+    activeDays: [1, 3, 5, 6],
+    targetPercentage: 50,
+    targetAdverb: "often",
     explanation: "Con bastante regularidad (4 días) ➔ 50% es OFTEN (a menudo)!"
   },
   {
     id: 4,
-    title: "DJ Track 5 • School Bus Traveler 🚌",
+    title: "Track 5 • School Bus Traveler 🚌",
     routineEn: "David rides the yellow bus from Monday through Friday (almost every day).",
     routineEs: "David toma el autobús escolar casi todos los días (5 días por semana).",
-    activeDays: [1, 2, 3, 4, 5], // 5 days
-    correctAdverb: "usually",
-    percentage: "75%",
-    explanation: "Casi todos los días (5 días) ➔ 75% es USUALLY (usualmente)!"
+    activeDays: [1, 2, 3, 4, 5],
+    targetPercentage: 75,
+    targetAdverb: "usually",
+    explanation: "Casi toda la semana (5 días) ➔ 75% es USUALLY (usualmente)!"
   },
   {
     id: 5,
-    title: "DJ Track 6 • Toothbrush Master 🪥",
-    routineEn: "Sofia brushes her teeth every morning and every evening without exception (every single day).",
+    title: "Track 6 • Toothbrush Champion 🪥",
+    routineEn: "Sofia brushes her teeth every morning and evening without exception (every single day).",
     routineEs: "Sofía se cepilla los dientes todos los días sin falta.",
-    activeDays: [1, 2, 3, 4, 5, 6, 7], // 7/7 days
-    correctAdverb: "always",
-    percentage: "100%",
+    activeDays: [1, 2, 3, 4, 5, 6, 7],
+    targetPercentage: 100,
+    targetAdverb: "always",
     explanation: "Todos los días sin excepción ➔ 100% es ALWAYS!"
   },
   {
     id: 6,
-    title: "DJ Track 7 • No Coffee Kid ☕",
+    title: "Track 7 • No Coffee Kid ☕",
     routineEn: "Kids don't drink black coffee. Liam drinks warm milk or juice (0 times coffee).",
     routineEs: "Los niños no toman café negro. Liam toma leche o jugo (0 veces café).",
-    activeDays: [], // 0 days
-    correctAdverb: "never",
-    percentage: "0%",
+    activeDays: [],
+    targetPercentage: 0,
+    targetAdverb: "never",
     explanation: "Cero veces ➔ 0% es NEVER!"
   },
   {
     id: 7,
-    title: "DJ Track 8 • Weekend Cyclist 🚲",
+    title: "Track 8 • Weekend Cyclist 🚲",
     routineEn: "On sunny Saturdays and Sundays, Sarah and her dad ride bicycles in the park.",
     routineEs: "Los fines de semana soleados, Sarah y su papá montan bicicleta.",
-    activeDays: [6, 7], // 2 days
-    correctAdverb: "sometimes",
-    percentage: "25%",
+    activeDays: [6, 7],
+    targetPercentage: 25,
+    targetAdverb: "sometimes",
     explanation: "Solo los fines de semana ➔ 25% es SOMETIMES!"
   },
   {
     id: 8,
-    title: "DJ Track 9 • Comic Book Reader 📚",
+    title: "Track 9 • Comic Book Reader 📚",
     routineEn: "Leo reads superhero comic books on Monday, Tuesday, Thursday, and Sunday evening.",
     routineEs: "Leo lee cómics de superhéroes 4 días a la semana frecuentemente.",
-    activeDays: [1, 2, 4, 7], // 4 days
-    correctAdverb: "often",
-    percentage: "50%",
-    explanation: "Frecuentemente ➔ 50% es OFTEN!"
+    activeDays: [1, 2, 4, 7],
+    targetPercentage: 50,
+    targetAdverb: "often",
+    explanation: "Frecuentemente (4 días) ➔ 50% es OFTEN!"
   },
   {
     id: 9,
-    title: "DJ Track 10 • Homework Champion 📝",
+    title: "Track 10 • Homework Champion 📝",
     routineEn: "Oliver finishes his homework from Monday to Friday right after arriving home.",
     routineEs: "Oliver hace sus tareas de lunes a viernes en cuanto llega a casa.",
-    activeDays: [1, 2, 3, 4, 5], // 5 days
-    correctAdverb: "usually",
-    percentage: "75%",
-    explanation: "Casi toda la semana ➔ 75% es USUALLY!"
+    activeDays: [1, 2, 3, 4, 5],
+    targetPercentage: 75,
+    targetAdverb: "usually",
+    explanation: "Casi toda la semana (5 días) ➔ 75% es USUALLY!"
   }
 ];
 
-const djAdverbsList = [
-  { adverb: "never", display: "Never", icon: "❌", level: "0%", es: "Nunca" },
-  { adverb: "sometimes", display: "Sometimes", icon: "🟨", level: "25%", es: "A veces" },
-  { adverb: "often", display: "Often", icon: "🟩", level: "50%", es: "A menudo" },
-  { adverb: "usually", display: "Usually", icon: "🟦", level: "75%", es: "Usualmente" },
-  { adverb: "always", display: "Always", icon: "🟪", level: "100%", es: "Siempre" }
-];
-
 let currentDJIndex = 0;
+let currentSliderValue = 50;
 
 function loadDJTrack(index) {
   currentDJIndex = index;
-  const track = djTracksData[index];
+  const track = djMixerTracksData[index];
 
-  document.getElementById('djTrackBadge').textContent = `Pista ${index + 1} de ${djTracksData.length}`;
+  document.getElementById('djTrackBadge').textContent = `Pista ${index + 1} de ${djMixerTracksData.length}`;
   document.getElementById('djTrackTitle').textContent = track.title;
   document.getElementById('djRoutineEn').textContent = `"${track.routineEn}"`;
   document.getElementById('djRoutineEs').textContent = track.routineEs;
 
-  // Render weekly active calendar chips
+  // Active weekly days display
   const dayNames = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
   const calBar = document.getElementById('djCalendarFrequencyBar');
   calBar.innerHTML = dayNames.map((d, i) => {
@@ -629,61 +655,120 @@ function loadDJTrack(index) {
     return `<span class="dj-day-chip ${isActive ? 'active-day' : ''}">${d} ${isActive ? '✅' : '▫️'}</span>`;
   }).join('');
 
-  speakEnglish(track.routineEn, 'narrator');
+  // Reset fader to center (50%)
+  const slider = document.getElementById('crossfaderInput');
+  if (slider) {
+    slider.value = 50;
+    currentSliderValue = 50;
+    updateVUMeters(50);
+  }
 
-  // Randomize fader order or keep graduated order
-  // For DJ faders, showing the scale from Never to Always is educationally superior,
-  // but let's ensure the user must think about the percentage!
-  const fadersContainer = document.getElementById('djFadersTrack');
-  fadersContainer.innerHTML = djAdverbsList.map(item => `
-    <button class="dj-fader-btn" onclick="checkDJFrequency(this, '${item.adverb}', '${track.correctAdverb}', '${track.explanation.replace(/'/g, "\\'")}')">
-      <span class="dj-fader-level">${item.level}</span>
-      <span style="font-size:1.6rem;">${item.icon}</span>
-      <span style="font-family:var(--font-display); font-size:1.1rem; font-weight:700;">${item.display}</span>
-      <span style="font-size:0.75rem; color:#64748b;">${item.es}</span>
-    </button>
-  `).join('');
-
+  speakEnglish(track.routineEn, 'dj');
   document.getElementById('djFeedbackBox').innerHTML = '';
 }
 
 function listenDJRoutine() {
-  sfx.playBeatDrop();
-  const track = djTracksData[currentDJIndex];
-  speakEnglish(track.routineEn, 'narrator');
+  sfx.playScratch();
+  const track = djMixerTracksData[currentDJIndex];
+  speakEnglish(track.routineEn, 'dj');
 }
 
-function checkDJFrequency(btnEl, chosenAdverb, correctAdverb, explanation) {
-  const feedback = document.getElementById('djFeedbackBox');
+function handleVinylScratch() {
+  sfx.playScratch();
+  const disc = document.getElementById('vinylDisc');
+  if (disc) {
+    disc.classList.add('spinning');
+    setTimeout(() => disc.classList.remove('spinning'), 1200);
+  }
+}
 
-  if (chosenAdverb === correctAdverb) {
-    sfx.playBeatDrop();
-    sfx.playSuccess();
-    btnEl.classList.add('correct');
+function handleCrossfaderChange(val) {
+  currentSliderValue = parseInt(val, 10);
+  sfx.playPop();
+  updateVUMeters(currentSliderValue);
+}
+
+function updateVUMeters(val) {
+  // Update LEDs (1 to 5)
+  const leds = [
+    document.getElementById('vuLed1'),
+    document.getElementById('vuLed2'),
+    document.getElementById('vuLed3'),
+    document.getElementById('vuLed4'),
+    document.getElementById('vuLed5')
+  ];
+
+  leds.forEach(l => {
+    if (l) l.className = 'vu-led-bar';
+  });
+
+  const levelText = document.getElementById('djLiveFaderDisplay');
+
+  if (val === 0) {
+    if (leds[0]) leds[0].classList.add('active-led-1');
+    if (levelText) levelText.innerHTML = `<span style="color:#ef4444;">0% • NEVER (Nunca) ❌</span>`;
+  } else if (val === 25) {
+    if (leds[0]) leds[0].classList.add('active-led-1');
+    if (leds[1]) leds[1].classList.add('active-led-2');
+    if (levelText) levelText.innerHTML = `<span style="color:#f59e0b;">25% • SOMETIMES (A veces) 🟨</span>`;
+  } else if (val === 50) {
+    if (leds[0]) leds[0].classList.add('active-led-1');
+    if (leds[1]) leds[1].classList.add('active-led-2');
+    if (leds[2]) leds[2].classList.add('active-led-3');
+    if (levelText) levelText.innerHTML = `<span style="color:#10b981;">50% • OFTEN (A menudo) 🟩</span>`;
+  } else if (val === 75) {
+    if (leds[0]) leds[0].classList.add('active-led-1');
+    if (leds[1]) leds[1].classList.add('active-led-2');
+    if (leds[2]) leds[2].classList.add('active-led-3');
+    if (leds[3]) leds[3].classList.add('active-led-4');
+    if (levelText) levelText.innerHTML = `<span style="color:#06b6d4;">75% • USUALLY (Usualmente) 🟦</span>`;
+  } else if (val === 100) {
+    leds.forEach((l, i) => {
+      if (l) l.classList.add(`active-led-${i + 1}`);
+    });
+    if (levelText) levelText.innerHTML = `<span style="color:#a855f7;">100% • ALWAYS (Siempre) 🟪</span>`;
+  }
+}
+
+function dropTheDJBeat() {
+  const track = djMixerTracksData[currentDJIndex];
+  const feedback = document.getElementById('djFeedbackBox');
+  const disc = document.getElementById('vinylDisc');
+
+  if (currentSliderValue === track.targetPercentage) {
+    // CORRECT BEAT DROP!
+    sfx.playScratch();
+    setTimeout(() => sfx.playBeatDrop(), 180);
+    setTimeout(() => sfx.playSuccess(), 450);
+
+    if (disc) {
+      disc.classList.add('spinning');
+      setTimeout(() => disc.classList.remove('spinning'), 3000);
+    }
 
     feedback.innerHTML = `
-      <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px 18px; color:#065f46; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🎧 ¡BEAT PERFECTO! Frecuencia calzada (+20 pts)</div>
-        <div style="font-size:0.9rem;">💡 ${explanation}</div>
+      <div style="background:rgba(16, 185, 129, 0.2); border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#34d399; margin-top:16px;">
+        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎧 ¡BEAT DROP PERFECTO! Fader en ${track.targetPercentage}% (+20 pts)</div>
+        <div style="font-size:0.95rem; color:#ffffff;">"${track.targetAdverb.toUpperCase()}" calza exactamente con la rutina.</div>
+        <div style="font-size:0.85rem; color:#a7f3d0; margin-top:4px;">💡 ${track.explanation}</div>
       </div>
     `;
     AppState.addStars(20);
-    speakEnglish(`Correct! ${chosenAdverb}`, 'kid');
+    speakEnglish(`Drop the beat! ${track.targetAdverb}`, 'dj');
 
     setTimeout(() => {
-      if (currentDJIndex < djTracksData.length - 1) {
+      if (currentDJIndex < djMixerTracksData.length - 1) {
         loadDJTrack(currentDJIndex + 1);
       }
-    }, 1800);
+    }, 2200);
 
   } else {
+    sfx.playScratch();
     sfx.playError();
-    btnEl.classList.add('wrong');
-    setTimeout(() => btnEl.classList.remove('wrong'), 450);
 
     feedback.innerHTML = `
-      <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:16px;">
-        ⚠️ Ese nivel no coincide con los días marcados. Mira cuántos días de la semana están iluminados en verde.
+      <div style="background:rgba(239, 68, 68, 0.2); border:1px solid #ef4444; border-radius:14px; padding:12px 18px; color:#f87171; font-weight:700; margin-top:16px;">
+        ⚠️ ¡El beat no calza! Tu fader está en ${currentSliderValue}%. Revisa cuántos días marcados en verde tiene el calendario arriba.
       </div>
     `;
   }
@@ -691,7 +776,7 @@ function checkDJFrequency(btnEl, chosenAdverb, correctAdverb, explanation) {
 
 function nextDJTrack() {
   sfx.playPop();
-  currentDJIndex = (currentDJIndex + 1) % djTracksData.length;
+  currentDJIndex = (currentDJIndex + 1) % djMixerTracksData.length;
   loadDJTrack(currentDJIndex);
 }
 
@@ -1025,7 +1110,6 @@ function loadTalentAudition(index) {
   `;
   document.getElementById('talentFeedback').innerHTML = '';
 
-  // Speak judge question
   speakEnglish(audition.judgeQuestion, 'judge');
 }
 
@@ -1116,10 +1200,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');
   if (starEl) starEl.textContent = `${AppState.stars} pts`;
 
-  // 1. Hobby Arcade
-  loadArcadeStage(0);
+  // 1. Hobby Gear Locker
+  loadLockerMission(0);
 
-  // 2. Frequency DJ Mixer
+  // 2. Tactile Frequency DJ Mixer
   loadDJTrack(0);
 
   // 3. Verb-ING Magnet Fusion Lab

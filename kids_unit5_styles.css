@@ -1,10 +1,10 @@
 /* ==========================================================================
    BILIKIDS KIDS CLUB - UNIT 5: FREE TIME (7 A 10 AÑOS)
    Tema: Hobbies, Sports, Instruments, Like/Love + -ING, Can/Can't, Frequency
-   Actividades Innovadoras:
-   1. 🎯 Hobby Arcade & Wh- Target (Laser de Preguntas Wh-)
-   2. 🎚️ Frequency DJ Mixer (Equalizador de Adverbios de Frecuencia)
-   3. 🧪 Verb-ING Magnet Fusion Lab (Laboratorio de Fusión Ortográfica -ING)
+   Actividades con Máxima Personalidad e Interactividad:
+   1. 🎒 The Hobby Gear Locker (Casillero de Equipamiento de Hobbies & Deportes)
+   2. 🎚️ Tactile Frequency DJ Mixer (Mesa de DJ con Fader Deslizante & Scratch)
+   3. 🧪 Verb-ING Magnet Fusion Lab (Laboratorio Ortográfico -ING)
    4. 🏆 Talent Show Audition ("Yes, I can!" Talent Stage & Golden Buzzer)
    ========================================================================== */
 
@@ -198,136 +198,17 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   ACTIVIDAD 1: HOBBY ARCADE & WH- TARGET (LASER DE PREGUNTAS)
+   ACTIVIDAD 1: THE HOBBY GEAR LOCKER (CASILLERO DE EQUIPAMIENTO)
    -------------------------------------------------------------------------- */
-.arcade-container {
-  background: #0f172a;
-  color: #ffffff;
-  border-radius: 24px;
-  padding: 26px;
-  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.25);
-  border: 2px solid #334155;
-  position: relative;
-  overflow: hidden;
-}
-
-.arcade-screen-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.arcade-badge {
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid #10b981;
-  color: #34d399;
-  font-family: monospace;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 8px;
-}
-
-.arcade-screen-card {
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-  border: 2px solid #38bdf8;
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 22px;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
-  position: relative;
-}
-
-.arcade-story-sentence {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: #f8fafc;
-  line-height: 1.4;
-  margin-bottom: 6px;
-}
-
-.arcade-story-es {
-  font-size: 0.88rem;
-  color: #94a3b8;
-  margin-bottom: 16px;
-}
-
-.arcade-target-mission {
-  background: rgba(6, 182, 212, 0.15);
-  border-left: 4px solid #06b6d4;
-  padding: 10px 14px;
-  border-radius: 0 10px 10px 0;
-  font-size: 0.95rem;
-  color: #67e8f9;
-}
-
-.arcade-laser-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-  .arcade-laser-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.arcade-laser-btn {
-  background: #1e293b;
-  border: 2px solid #475569;
-  border-radius: 16px;
-  padding: 16px 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #ffffff;
-}
-
-.arcade-laser-btn:hover {
-  border-color: #38bdf8;
-  background: #334155;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.3);
-}
-
-.arcade-laser-btn.correct {
-  border-color: #10b981;
-  background: rgba(16, 185, 129, 0.3);
-  color: #34d399;
-}
-
-.arcade-laser-btn.wrong {
-  border-color: #ef4444;
-  background: rgba(239, 68, 68, 0.3);
-  color: #f87171;
-  animation: shakeBtn 0.3s;
-}
-
-@keyframes shakeBtn {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
-}
-
-/* --------------------------------------------------------------------------
-   ACTIVIDAD 2: FREQUENCY DJ MIXER (EQUALIZADOR DE ADVERBIOS)
-   -------------------------------------------------------------------------- */
-.dj-container {
+.locker-container {
   background: #ffffff;
   border-radius: 24px;
   padding: 26px;
   box-shadow: var(--shadow-card);
-  border: 1px solid #a7f3d0;
+  border: 2px solid #a7f3d0;
 }
 
-.dj-mixer-header {
+.locker-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -336,11 +217,11 @@ body {
   gap: 12px;
 }
 
-.dj-turntable-card {
-  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-  border: 2px solid #a7f3d0;
+.locker-profile-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+  border: 2px solid #6ee7b7;
   border-radius: 20px;
-  padding: 22px;
+  padding: 20px 24px;
   margin-bottom: 22px;
   display: flex;
   align-items: center;
@@ -349,86 +230,271 @@ body {
   flex-wrap: wrap;
 }
 
-.dj-calendar-frequency-bar {
+.locker-slots-tray {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  background: #0f172a;
+  border: 3px solid #334155;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 4px 12px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 650px) {
+  .locker-slots-tray { grid-template-columns: 1fr; }
+}
+
+.locker-slot-box {
+  background: #1e293b;
+  border: 2px dashed #475569;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 120px;
   display: flex;
-  gap: 6px;
-  margin: 12px 0;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #94a3b8;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dj-day-chip {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #64748b;
-}
-
-.dj-day-chip.active-day {
-  background: #10b981;
+.locker-slot-box.filled {
+  border: 2px solid #10b981;
+  background: rgba(16, 185, 129, 0.15);
   color: #ffffff;
-  border-color: #059669;
 }
 
-.dj-faders-track {
+.gear-pool-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 @media (max-width: 768px) {
-  .dj-faders-track { grid-template-columns: repeat(2, 1fr); }
+  .gear-pool-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .gear-pool-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.dj-fader-btn {
+.gear-item-card {
   background: #ffffff;
   border: 2px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 18px 12px;
-  cursor: pointer;
+  border-radius: 16px;
+  padding: 14px 10px;
   text-align: center;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
-.dj-fader-btn:hover {
-  transform: translateY(-4px);
+.gear-item-card:hover {
+  transform: translateY(-4px) scale(1.04);
   border-color: #10b981;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
 }
 
-.dj-fader-btn.correct {
-  background: #ecfdf5;
-  border-color: #10b981;
-  color: #065f46;
+.gear-item-card.packed {
+  opacity: 0.35;
+  pointer-events: none;
+  border-style: dashed;
 }
 
-.dj-fader-btn.wrong {
-  background: #fef2f2;
+.gear-item-card.wrong {
+  animation: shakeBtn 0.35s;
   border-color: #ef4444;
-  color: #991b1b;
-  animation: shakeBtn 0.3s;
-}
-
-.dj-fader-level {
-  font-family: monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 6px;
-  background: #f1f5f9;
-  color: #475569;
+  background: #fef2f2;
 }
 
 /* --------------------------------------------------------------------------
-   ACTIVIDAD 3: VERB-ING MAGNET FUSION LAB (LABORATORIO -ING)
+   ACTIVIDAD 2: TACTILE FREQUENCY DJ MIXER (CONSOLA DE DJ & CROSSFADER)
+   -------------------------------------------------------------------------- */
+.dj-console-container {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+  border: 2px solid #334155;
+}
+
+.dj-console-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dj-deck-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: center;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #38bdf8;
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.12);
+}
+
+@media (max-width: 768px) {
+  .dj-deck-layout { grid-template-columns: 1fr; text-align: center; }
+}
+
+/* Vinyl Turntable */
+.vinyl-turntable-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.vinyl-disc {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0f172a 18%, #1e293b 22%, #0f172a 45%, #334155 48%, #0f172a 75%, #1e293b 80%, #020617 100%);
+  border: 6px solid #475569;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.1);
+  position: relative;
+  cursor: grab;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-disc.spinning {
+  animation: spinVinyl 3s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-center-label {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* Master Crossfader Area */
+.crossfader-console {
+  background: #1e293b;
+  border: 2px solid #475569;
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+}
+
+.vu-meters-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.vu-led-bar {
+  width: 28px;
+  height: 12px;
+  border-radius: 4px;
+  background: #334155;
+  transition: all 0.15s ease;
+}
+
+.vu-led-bar.active-led-1 { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+.vu-led-bar.active-led-2 { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+.vu-led-bar.active-led-3 { background: #10b981; box-shadow: 0 0 8px #10b981; }
+.vu-led-bar.active-led-4 { background: #06b6d4; box-shadow: 0 0 8px #06b6d4; }
+.vu-led-bar.active-led-5 { background: #a855f7; box-shadow: 0 0 8px #a855f7; }
+
+.crossfader-slider-wrap {
+  position: relative;
+  margin: 20px 10px;
+}
+
+.crossfader-input {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 12px;
+  border-radius: 6px;
+  background: #0f172a;
+  outline: none;
+  border: 1px solid #475569;
+}
+
+.crossfader-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+  transition: transform 0.1s;
+}
+
+.crossfader-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.crossfader-stops-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.btn-drop-beat {
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-drop-beat:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   ACTIVIDAD 3: VERB-ING MAGNET FUSION LAB
    -------------------------------------------------------------------------- */
 .magnet-container {
   background: #ffffff;
@@ -638,4 +704,10 @@ body {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
   70% { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes shakeBtn {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
 }

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="kids_unit5_styles.css?v=1.0">
+  <link rel="stylesheet" href="kids_unit5_styles.css?v=2.0">
 </head>
 <body>
 
@@ -37,13 +37,13 @@
   <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
-      <button class="tab-btn active" onclick="switchTab('arcade', this)">
-        <span>🎯</span>
-        <span>Hobby Arcade Wh-</span>
+      <button class="tab-btn active" onclick="switchTab('locker', this)">
+        <span>🎒</span>
+        <span>Casillero de Hobbies</span>
       </button>
       <button class="tab-btn" onclick="switchTab('dj', this)">
         <span>🎚️</span>
-        <span>Frequency DJ Mixer</span>
+        <span>DJ Mixer & Fader</span>
       </button>
       <button class="tab-btn" onclick="switchTab('magnet', this)">
         <span>🧪</span>
@@ -60,133 +60,185 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: HOBBY ARCADE & WH- TARGET (LASER DE PREGUNTAS)
+         ACTIVIDAD 1: THE HOBBY GEAR LOCKER (CASILLERO DE EQUIPAMIENTO)
          ==================================================================== -->
-    <section id="view-arcade" class="activity-view active-view">
-      <div class="arcade-container">
+    <section id="view-locker" class="activity-view active-view">
+      <div class="locker-container">
         
-        <div class="arcade-screen-header">
+        <div class="locker-header-row">
           <div>
-            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#f8fafc;">
-              <span>🎯</span> Hobby Arcade: Wh- Question Laser
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🎒</span> Casillero del Club de Hobbies (Gear Locker)
             </h2>
-            <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
-              Lee la oración, identifica qué información está destacada y dispara la palabra de pregunta (Wh-) correcta.
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Lee el perfil del deportista o artista. Empaca en el casillero los 3 artículos de equipamiento correctos.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="arcade-badge" id="arcadeStageBadge">Nivel 1 de 10</span>
-            <button class="btn-back-map" style="background:rgba(255,255,255,0.1); color:#38bdf8; border-color:rgba(56,189,248,0.4); cursor:pointer;" onclick="nextArcadeStage()">
-              <span>Siguiente Nivel ➔</span>
+            <span class="unit-tag-pill" id="lockerMissionBadge">Misión 1 de 8</span>
+            <button class="btn-back-map" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0; cursor:pointer;" onclick="nextLockerMission()">
+              <span>Siguiente Casillero ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Pantalla Arcade Central -->
-        <div class="arcade-screen-card">
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
-            <span style="font-family:monospace; font-size:0.8rem; color:#38bdf8; letter-spacing:1px;">ARCADE MISSION • TARGET ACQUIRED</span>
-            <button class="btn-back-map" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:#38bdf8; cursor:pointer;" onclick="listenArcadeStory()">
-              🔊 Escuchar Oración
+        <!-- Tarjeta de Perfil del Miembro del Club -->
+        <div class="locker-profile-card">
+          <div style="flex-grow:1;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="unit-tag-pill" style="background:#d1fae5; color:#047857;">CLUB MEMBER</span>
+              <strong id="lockerMemberName" style="color:#0f172a; font-family:var(--font-display); font-size:1.15rem;">
+                🛹 Leo the Skateboarder (Skateboarding)
+              </strong>
+            </div>
+
+            <div id="lockerPromptEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
+              "Leo is packing his gear bag to go skateboarding at the skatepark this afternoon."
+            </div>
+            <div id="lockerPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
+              Leo está empacando su maletín para montar patineta en el skatepark esta tarde.
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenLockerPrompt()">
+              🔊 Escuchar Perfil
             </button>
           </div>
-
-          <div class="arcade-story-sentence" id="arcadeStoryEn">
-            Leo plays basketball <span style="color:#38bdf8; text-decoration:underline;">at the sports center</span> on Saturdays.
-          </div>
-          <div class="arcade-story-es" id="arcadeStoryEs">
-            Leo juega baloncesto en el polideportivo los sábados.
-          </div>
-
-          <div class="arcade-target-mission" id="arcadeTargetMission">
-            🎯 <strong>Misión Láser:</strong> Target info: 'at the sports center' (Lugar / Location)
-          </div>
         </div>
 
-        <!-- Pregunta Explícita del Arcade -->
-        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#67e8f9; margin:16px 0 10px; display:flex; align-items:center; gap:6px;">
-          <span>⚡</span>
-          <span>Which Wh- question word asks for the highlighted information? / ¿Qué pregunta corresponde a lo destacado?:</span>
+        <!-- Bandeja de los 3 Espacios del Casillero -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1rem; color:#065f46; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>📦</span>
+          <span>Artículos requeridos en el casillero (3 espacios):</span>
+        </div>
+        <div class="locker-slots-tray" id="lockerSlotsTray">
+          <!-- Inyectados por JS -->
         </div>
 
-        <!-- Botones Láser de Preguntas Wh- (Aleatorizados) -->
-        <div class="arcade-laser-grid" id="arcadeLaserGrid">
+        <!-- Pool de Equipamiento Disponible -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1rem; color:#0f172a; margin:16px 0 8px;">
+          🏷️ Selecciona el equipamiento correcto para empacar:
+        </div>
+        <div class="gear-pool-grid" id="gearPoolGrid">
           <!-- Inyectados por JS -->
         </div>
 
         <!-- Caja de Retroalimentación -->
-        <div id="arcadeFeedbackBox" style="text-align:center;"></div>
+        <div id="lockerFeedbackBox" style="text-align:center;"></div>
 
       </div>
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: FREQUENCY DJ MIXER (EQUALIZADOR DE ADVERBIOS)
+         ACTIVIDAD 2: TACTILE FREQUENCY DJ MIXER (CONSOLA CON CROSSFADER Y SCRATCH)
          ==================================================================== -->
     <section id="view-dj" class="activity-view">
-      <div class="dj-container">
+      <div class="dj-console-container">
 
-        <div class="dj-mixer-header">
+        <div class="dj-console-top-row">
           <div>
-            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🎚️</span> Frequency DJ Mixer: Always to Never (0% a 100%)
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#ffffff;">
+              <span>🎚️</span> Master DJ Console: Scratch & Frequency Fader
             </h2>
-            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Revisa con qué frecuencia se realiza la actividad en el calendario semanal y gradúa el fader del DJ.
+            <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
+              Revisa la rutina en el calendario semanal, desliza el crossfader al porcentaje correcto y presiona Drop the Beat.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="djTrackBadge">Pista 1 de 10</span>
-            <button class="btn-back-map" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0; cursor:pointer;" onclick="nextDJTrack()">
+            <span class="unit-tag-pill" id="djTrackBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Pista 1 de 10</span>
+            <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextDJTrack()">
               <span>Siguiente Pista ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Tarjeta de Pista y Calendario -->
-        <div class="dj-turntable-card">
-          <div style="flex-grow:1;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="unit-tag-pill">🎧 NOW PLAYING</span>
-              <strong id="djTrackTitle" style="color:#0f172a; font-family:var(--font-display); font-size:1.1rem;">
-                The Daily Gamer 🎮
-              </strong>
-            </div>
-
-            <div id="djRoutineEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
-              "Max plays video games on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday."
-            </div>
-            <div id="djRoutineEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
-              Max juega videojuegos los 7 días de la semana (Lunes a Domingo).
-            </div>
-
-            <!-- Calendario visual de frecuencia -->
-            <div style="margin-top:12px;">
-              <div style="font-size:0.8rem; font-weight:700; color:#065f46; margin-bottom:4px;">📅 Días de actividad en la semana:</div>
-              <div class="dj-calendar-frequency-bar" id="djCalendarFrequencyBar">
-                <!-- Chips de días inyectados por JS -->
+        <!-- Layout de la Mesa de DJ (Vinilo + Consola de Control) -->
+        <div class="dj-deck-layout">
+          
+          <!-- Plato de Vinilo Interactivo para Scratch -->
+          <div class="vinyl-turntable-box">
+            <div class="vinyl-disc" id="vinylDisc" onclick="handleVinylScratch()" title="¡Toca para hacer Scratch!">
+              <div class="vinyl-center-label">
+                🎧
               </div>
             </div>
+            <div style="font-family:var(--font-display); font-size:0.8rem; color:#38bdf8; cursor:pointer;" onclick="handleVinylScratch()">
+              ✋ ¡Toca el vinilo para hacer Scratch!
+            </div>
           </div>
 
+          <!-- Consola Central con Rutina y Fader -->
           <div>
-            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenDJRoutine()">
-              🔊 Escuchar Rutina
-            </button>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+              <span style="font-family:monospace; font-size:0.8rem; color:#34d399; letter-spacing:1px;">ON AIR • FREQUENCY EQUALIZER</span>
+              <button class="btn-back-map" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:#38bdf8; font-size:0.82rem; cursor:pointer;" onclick="listenDJRoutine()">
+                🔊 Escuchar Rutina
+              </button>
+            </div>
+
+            <strong id="djTrackTitle" style="color:#ffffff; font-family:var(--font-display); font-size:1.15rem; display:block; margin-bottom:4px;">
+              Track 1 • The Daily Gamer 🎮
+            </strong>
+
+            <div id="djRoutineEn" style="font-family:var(--font-display); font-size:1.25rem; color:#f8fafc; margin-bottom:4px;">
+              "Max plays video games on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday."
+            </div>
+            <div id="djRoutineEs" style="font-size:0.88rem; color:#94a3b8; font-style:italic;">
+              Max juega videojuegos los 7 días de la semana (Lunes a Domingo sin falta).
+            </div>
+
+            <!-- Calendario visual semanal -->
+            <div style="margin-top:12px;">
+              <div style="font-size:0.8rem; font-weight:700; color:#34d399; margin-bottom:4px;">📅 Días activos en la semana:</div>
+              <div class="dj-calendar-frequency-bar" id="djCalendarFrequencyBar">
+                <!-- Chips inyectados por JS -->
+              </div>
+            </div>
+
+            <!-- Fader Físico Deslizante (Crossfader) -->
+            <div class="crossfader-console" style="margin-top:16px;">
+              <div style="font-family:var(--font-display); font-weight:700; font-size:0.92rem; color:#cbd5e1; margin-bottom:6px;">
+                🎚️ Desliza el Fader hacia el adverbio de frecuencia correcto:
+              </div>
+
+              <!-- Medidor LED VU Meter -->
+              <div class="vu-meters-row">
+                <div class="vu-led-bar" id="vuLed1"></div>
+                <div class="vu-led-bar" id="vuLed2"></div>
+                <div class="vu-led-bar" id="vuLed3"></div>
+                <div class="vu-led-bar" id="vuLed4"></div>
+                <div class="vu-led-bar" id="vuLed5"></div>
+              </div>
+
+              <!-- Indicador en vivo del porcentaje seleccionado -->
+              <div id="djLiveFaderDisplay" style="font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:6px 0;">
+                <span style="color:#10b981;">50% • OFTEN (A menudo) 🟩</span>
+              </div>
+
+              <div class="crossfader-slider-wrap">
+                <input type="range" class="crossfader-input" id="crossfaderInput" min="0" max="100" step="25" value="50" oninput="handleCrossfaderChange(this.value)">
+                <div class="crossfader-stops-labels">
+                  <span>0% Never</span>
+                  <span>25% Sometimes</span>
+                  <span>50% Often</span>
+                  <span>75% Usually</span>
+                  <span>100% Always</span>
+                </div>
+              </div>
+
+              <!-- Botón de Drop the Beat -->
+              <button class="btn-drop-beat" onclick="dropTheDJBeat()">
+                <span>▶️</span>
+                <span>DROP THE BEAT 🎧</span>
+              </button>
+            </div>
+
           </div>
+
         </div>
 
-        <!-- Pregunta Explícita del Mixer -->
-        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#065f46; margin:16px 0 10px; text-align:center;">
-          🎚️ How often does this person do the activity? / ¿Con qué frecuencia realiza la actividad?:
-        </div>
-
-        <!-- Faders del DJ Mixer (Never, Sometimes, Often, Usually, Always) -->
-        <div class="dj-faders-track" id="djFadersTrack">
-          <!-- Inyectados por JS -->
-        </div>
-
-        <!-- Caja de Retroalimentación -->
+        <!-- Caja de Retroalimentación del DJ -->
         <div id="djFeedbackBox" style="text-align:center;"></div>
 
       </div>
@@ -347,6 +399,6 @@
 
   </main>
 
-  <script src="kids_unit5_engine.js?v=1.0"></script>
+  <script src="kids_unit5_engine.js?v=2.0"></script>
 </body>
 </html>
