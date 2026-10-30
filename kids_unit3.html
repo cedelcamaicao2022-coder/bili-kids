@@ -77,15 +77,24 @@
         </div>
 
         <!-- Tarjeta de Pista del Detective -->
-        <div class="tree-clue-card">
-          <div>
-            <span class="clue-badge" id="clueBadgeNum">Misterio 1 de 8</span>
-            <div class="clue-text" id="clueTextEn">"She is Carlos's mother and Maya's grandmother."</div>
-            <div class="clue-sub" id="clueTextEs">Ella es la madre de Carlos y abuela de Maya.</div>
+        <div class="tree-clue-card" style="align-items:flex-start;">
+          <div style="flex-grow:1;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+              <span class="clue-badge" id="clueBadgeNum">Caso 1 de 8</span>
+              <span id="clueCaseTitle" style="font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:#0f172a;">
+                The Mystery of the Vanished Cookies 🍪
+              </span>
+            </div>
+            <div class="clue-text" id="clueTextEn" style="font-size:1.05rem; line-height:1.45; margin-bottom:4px;">
+              "Someone ate grandmother's chocolate cookies in the kitchen! The suspect has a dark beard and left an electric guitar pick."
+            </div>
+            <div class="clue-sub" id="clueTextEs" style="font-size:0.85rem; color:#64748b; font-style:italic;">
+              ¡Alguien se comió las galletas en la cocina! Pistas: el sospechoso tiene barba oscura y toca la guitarra eléctrica.
+            </div>
           </div>
           <div>
-            <button class="chat-listen-btn" style="padding:8px 14px; font-size:0.85rem;" onclick="speakEnglish(document.getElementById('clueTextEn').textContent, 'host')">
-              🔊 Repetir Pista
+            <button class="chat-listen-btn" style="padding:8px 14px; font-size:0.85rem; white-space:nowrap;" onclick="speakEnglish(document.getElementById('clueTextEn').textContent, 'host')">
+              🔊 Escuchar Pistas
             </button>
           </div>
         </div>

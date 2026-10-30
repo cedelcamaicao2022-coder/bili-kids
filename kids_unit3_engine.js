@@ -270,52 +270,60 @@ const familyMembersData = [
 
 const detectiveClues = [
   {
-    targetId: 'grandmother',
-    clueEn: "She is Carlos's mother and Maya's grandmother. She loves baking cookies.",
-    clueEs: "Ella es la madre de Carlos y abuela de Maya. Le encanta hornear galletas.",
-    hint: "Busca la tarjeta con la descripción: 'Carlos's mother... loves baking warm cookies.'"
-  },
-  {
     targetId: 'uncle',
-    clueEn: "He is Maya's uncle. He has a beard and plays the electric guitar.",
-    clueEs: "Él es el tío de Maya. Tiene barba y toca la guitarra eléctrica.",
-    hint: "Busca la tarjeta: 'Carlos's brother... plays the electric guitar.'"
+    title: "Caso 1: The Mystery of the Vanished Cookies 🍪",
+    clueEn: "Someone ate grandmother's chocolate cookies in the kitchen! The suspect has a dark beard and left an electric guitar pick on the table. Who is the cookie thief?",
+    clueEs: "¡Alguien se comió las galletas de chocolate en la cocina! Pistas: el sospechoso tiene barba oscura y dejó una púa de guitarra eléctrica en la mesa.",
+    hint: "Busca la tarjeta con: 'Carlos's brother... has a dark beard and plays the electric guitar.'"
   },
   {
     targetId: 'brother',
-    clueEn: "He is Maya's little brother. He is seven years old and loves dinosaurs.",
-    clueEs: "Él es el hermanito de Maya. Tiene 7 años y ama los dinosaurios.",
-    hint: "Busca la tarjeta: 'Maya's younger brother... seven years old.'"
-  },
-  {
-    targetId: 'mother',
-    clueEn: "She is Maya's mother. She is forty years old and works as a doctor.",
-    clueEs: "Ella es la madre de Maya. Tiene 40 años y trabaja como médica.",
-    hint: "Busca la tarjeta: 'Maya's mother... kind doctor at the hospital.'"
+    title: "Caso 2: The Green Dinosaur Footprint 🦕",
+    clueEn: "A bright green footprint was painted on the living room wall! The suspect is very energetic, loves dinosaurs, and is Carlos's young seven-year-old son. Who left the footprint?",
+    clueEs: "¡Apareció una huella verde en la pared de la sala! Pistas: el sospechoso es enérgico, ama los dinosaurios y tiene 7 años.",
+    hint: "Busca la tarjeta con: 'Maya's younger brother... seven years old, loves dinosaurs.'"
   },
   {
     targetId: 'grandfather',
-    clueEn: "He is seventy-two years old and Maya's grandfather. He wears glasses.",
-    clueEs: "Tiene 72 años y es el abuelo de Maya. Usa lentes.",
-    hint: "Busca la tarjeta: 'Carlos's father... seventy-two years old, wears glasses.'"
+    title: "Caso 3: The Forgotten Silver Glasses 👓",
+    clueEn: "A pair of reading glasses was left on the history encyclopedia. The suspect is seventy-two years old, has silver hair, and loves telling stories to his grandchildren. Who lost the glasses?",
+    clueEs: "¡Unos lentes de lectura quedaron sobre la enciclopedia! Pistas: el sospechoso tiene 72 años, cabello plateado y le encanta contar historias.",
+    hint: "Busca la tarjeta con: 'Carlos's father... seventy-two years old, wears glasses.'"
+  },
+  {
+    targetId: 'mother',
+    title: "Caso 4: The Emergency Medical Bag 🩺",
+    clueEn: "Someone rushed out early in the morning and took the medical bag to the children's hospital. The suspect is forty years old, very kind, and Carlos's wife. Who is the doctor?",
+    clueEs: "¡Alguien salió temprano con el maletín médico hacia el hospital infantil! Pistas: tiene 40 años, es muy amable y es la esposa de Carlos.",
+    hint: "Busca la tarjeta con: 'Maya's mother... forty years old and works as a kind doctor.'"
   },
   {
     targetId: 'friend_boy',
-    clueEn: "He is Maya's best friend at school. He is ten years old and plays basketball.",
-    clueEs: "Es el mejor amigo de Maya en la escuela. Tiene 10 años y juega básquetbol.",
-    hint: "Busca la tarjeta: 'Maya's classmate... plays basketball.'"
+    title: "Caso 5: The Basketball in the Flowers 🏀",
+    clueEn: "An orange basketball bounced into the garden and knocked down a flower pot! The suspect is ten years old, Maya's funny classmate, and plays basketball after school. Who threw the ball?",
+    clueEs: "¡Un balón de básquetbol cayó en las flores del jardín! Pistas: el sospechoso tiene 10 años, es un compañero chistoso de Maya y juega básquetbol.",
+    hint: "Busca la tarjeta con: 'Maya's classmate... ten years old, funny, and plays basketball.'"
   },
   {
     targetId: 'aunt',
-    clueEn: "She is Maya's aunt with reddish hair. She is a friendly painter.",
-    clueEs: "Ella es la tía de Maya con cabello rojizo. Es una pintora amigable.",
-    hint: "Busca la tarjeta: 'Carlos's sister... creative landscape painter.'"
+    title: "Caso 6: The Sunset Painting on the Balcony 🎨",
+    clueEn: "A fresh watercolor painting was left drying on the balcony with red paint drops. The suspect is Carlos's sister, thirty-six years old, and a creative landscape painter. Who is the artist?",
+    clueEs: "¡Una pintura de acuarela fresca quedó secándose en el balcón! Pistas: la sospechosa es la hermana de Carlos, tiene 36 años y es pintora de paisajes.",
+    hint: "Busca la tarjeta con: 'Carlos's sister... reddish hair and creative landscape painter.'"
   },
   {
-    targetId: 'baby',
-    clueEn: "He is only one year old and he is the youngest in the family.",
-    clueEs: "Tiene solo 1 año de edad y es el más pequeño de la familia.",
-    hint: "Busca la tarjeta: 'The youngest family member... one year old.'"
+    targetId: 'cousin',
+    title: "Caso 7: The Treehouse Gymnastics Ribbon 🤸‍♀️",
+    clueEn: "A shiny gymnastics ribbon was found tangled in the treehouse branch. The suspect is ten years old, David's daughter, and practices gymnastics every day. Who is the gymnast?",
+    clueEs: "¡Una cinta de gimnasia brillante quedó en la casa del árbol! Pistas: la sospechosa tiene 10 años, es la hija de David y hace gimnasia todos los días.",
+    hint: "Busca la tarjeta con: 'David's daughter... ten years old and practices gymnastics.'"
+  },
+  {
+    targetId: 'grandmother',
+    title: "Caso 8: The Secret Cinnamon Cake Recipe 🍰",
+    clueEn: "A handwritten cake recipe with cinnamon sugar was found on the counter. The suspect is Carlos's mother, seventy years old, and Maya's loving grandmother. Who wrote the secret recipe?",
+    clueEs: "¡Una receta de pastel con canela quedó en la cocina! Pistas: la sospechosa es la madre de Carlos, tiene 70 años y es la abuela de Maya.",
+    hint: "Busca la tarjeta con: 'Carlos's mother... seventy years old, loves baking warm cookies.'"
   }
 ];
 
@@ -356,9 +364,22 @@ function renderFamilyTree() {
 
 function flipDetectiveCard(personId) {
   sfx.playPop();
-  const card = document.getElementById(`card-${personId}`);
-  if (card) {
-    card.classList.toggle('is-flipped');
+  const targetCard = document.getElementById(`card-${personId}`);
+  if (!targetCard) return;
+
+  const isAlreadyFlipped = targetCard.classList.contains('is-flipped');
+
+  // Cerrar automáticamente cualquier otra tarjeta que esté abierta
+  document.querySelectorAll('.mystery-flip-card').forEach(c => {
+    if (c !== targetCard) {
+      c.classList.remove('is-flipped');
+    }
+  });
+
+  if (!isAlreadyFlipped) {
+    targetCard.classList.add('is-flipped');
+  } else {
+    targetCard.classList.remove('is-flipped');
   }
 }
 
@@ -366,7 +387,10 @@ function loadDetectiveClue(index) {
   currentClueIndex = index;
   const clue = detectiveClues[index];
 
-  document.getElementById('clueBadgeNum').textContent = `Misterio ${index + 1} de ${detectiveClues.length}`;
+  const caseTitleEl = document.getElementById('clueCaseTitle');
+  if (caseTitleEl) caseTitleEl.textContent = clue.title;
+
+  document.getElementById('clueBadgeNum').textContent = `Caso ${index + 1} de ${detectiveClues.length}`;
   document.getElementById('clueTextEn').textContent = `"${clue.clueEn}"`;
   document.getElementById('clueTextEs').textContent = clue.clueEs;
   document.getElementById('clueFeedback').textContent = '';
@@ -391,17 +415,17 @@ function confirmDetectiveTarget(personId) {
 
     const person = familyMembersData.find(p => p.id === personId);
     document.getElementById('clueFeedback').innerHTML = `
-      <span style="color:#15803d; font-weight:700;">🌟 ¡Caso Resuelto! Es ${person.name} (${person.role}). +20 pts</span>
+      <span style="color:#15803d; font-weight:700;">🌟 ¡Caso Resuelto! El culpable es ${person.name} (${person.role}). +20 pts</span>
     `;
 
-    speakEnglish(`Case solved! That is ${person.name}, the ${person.role}.`, 'host', () => {
+    speakEnglish(`Case solved! The suspect is ${person.name}, the ${person.role}.`, 'host', () => {
       setTimeout(() => {
         if (currentClueIndex < detectiveClues.length - 1) {
           loadDetectiveClue(currentClueIndex + 1);
         } else {
           sfx.playFanfare();
           document.getElementById('clueFeedback').innerHTML = `
-            <span style="color:#7c3aed; font-weight:700;">🎉 ¡Felicitaciones Detective! Descifraste todos los expedientes secretos.</span>
+            <span style="color:#7c3aed; font-weight:700;">🎉 ¡Felicitaciones Detective! Resolviste todos los casos misteriosos.</span>
           `;
         }
       }, 1400);
@@ -410,9 +434,14 @@ function confirmDetectiveTarget(personId) {
   } else {
     sfx.playError();
     card.classList.add('wrong-target');
-    setTimeout(() => card.classList.remove('wrong-target'), 600);
+    
+    // Si no es el sospechoso, voltear automáticamente la tarjeta de nuevo tras la animación
+    setTimeout(() => {
+      card.classList.remove('wrong-target', 'is-flipped');
+    }, 700);
+
     document.getElementById('clueFeedback').innerHTML = `
-      <span style="color:#dc2626; font-weight:600;">No coincide con la pista. Lee con atención la descripción del reverso.</span>
+      <span style="color:#dc2626; font-weight:600;">❌ No coincide con las pistas del caso. Revisa otro expediente.</span>
     `;
   }
 }
