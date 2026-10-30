@@ -1,7 +1,8 @@
 /**
  * BILIKIDS HOME ENGINE
- * Handles interactive navigation, Web Audio sound effects,
- * modal dialogs, and smooth transitions.
+ * Handles interactive Web Audio sound effects,
+ * quick search modal, notifications, and profile drawer.
+ * (Direct link navigation is preserved on all category & resource cards!)
  */
 
 // Web Audio Sound Synthesizer (Zero external dependencies)
@@ -97,86 +98,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Videos Click
-  const resVideos = document.getElementById('resVideos');
-  if (resVideos) {
-    resVideos.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal('🎬 Bilikids Videos', `
-        <div style="text-align: center; display: flex; flex-direction: column; gap: 1rem;">
-          <div style="background: #0f172a; border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🐻📺</div>
-            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem;">Barnaby's Adventure Show</h3>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.5rem;">Aprende pronunciación y nuevo vocabulario con Barnaby y sus amigos en capítulos animados.</p>
-            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-              <button onclick="window.location.href='kids_unit8.html'" style="background: #06b6d4; color: #fff; border:none; padding: 0.7rem 1.4rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Episodio 1: At The Mall</button>
-              <button onclick="window.location.href='house.html'" style="background: #3b82f6; color: #fff; border:none; padding: 0.7rem 1.4rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Episodio 2: In The House</button>
-            </div>
-          </div>
-        </div>
-      `);
-    });
-  }
-
-  // Canciones Click
-  const resCanciones = document.getElementById('resCanciones');
-  if (resCanciones) {
-    resCanciones.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal('🎵 Bilikids Canciones en Inglés', `
-        <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <p style="color: #cbd5e1;">Escucha y canta las canciones interactivas para practicar tu inglés:</p>
-          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 0.85rem 1.25rem; border-radius: 12px;">
-              <div>
-                <strong style="color: #facc15;">1. The Color Song</strong>
-                <div style="font-size: 0.82rem; color: #94a3b8;">Red, blue, yellow, green!</div>
-              </div>
-              <button onclick="window.location.href='colors_book.html'" style="background: #f59e0b; color: #fff; border:none; padding: 0.45rem 1rem; border-radius: 15px; font-weight:700; cursor:pointer;">▶ Escuchar</button>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 0.85rem 1.25rem; border-radius: 12px;">
-              <div>
-                <strong style="color: #38bdf8;">2. Old MacDonald's Farm</strong>
-                <div style="font-size: 0.82rem; color: #94a3b8;">Animals & nature sounds</div>
-              </div>
-              <button onclick="window.location.href='farm.html'" style="background: #0284c7; color: #fff; border:none; padding: 0.45rem 1rem; border-radius: 15px; font-weight:700; cursor:pointer;">▶ Escuchar</button>
-            </div>
-          </div>
-        </div>
-      `);
-    });
-  }
-
-  // Karaoke Click
-  const resKaraoke = document.getElementById('resKaraoke');
-  if (resKaraoke) {
-    resKaraoke.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal('🎤 Karaoke Sing Together!', `
-        <div style="text-align: center; padding: 1rem 0;">
-          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🌟🎙️✨</div>
-          <h3 style="color: #a855f7; font-size: 1.35rem; margin-bottom: 0.5rem;">¡Estudio de Karaoke Bilikids!</h3>
-          <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Canta con la letra en pantalla y recibe estrellas por tu pronunciación en inglés.</p>
-          <button onclick="window.location.href='kids_unit3.html'" style="background: linear-gradient(90deg, #a855f7, #ec4899); color: #fff; border:none; padding: 0.75rem 2rem; border-radius: 25px; font-weight: 700; font-size: 1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(168,85,247,0.4);">Entrar al Estudio de Canto</button>
-        </div>
-      `);
-    });
-  }
-
   // Search Button
   const btnSearch = document.getElementById('btnSearch');
   if (btnSearch) {
     btnSearch.addEventListener('click', () => {
       openModal('🔍 Buscar en Bilikids', `
         <div>
-          <input type="text" placeholder="Escribe un tema (ej: animales, números, colores, shopping)..." 
+          <input type="text" placeholder="Escribe un tema (ej: animales, compras, granja, juegos)..." 
                  style="width: 100%; padding: 0.85rem 1.25rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; color: #fff; font-size: 1rem; outline: none; margin-bottom: 1rem;" 
                  autofocus />
           <div style="font-size: 0.85rem; color: #94a3b8;">
-            Sugerencias populares: 
-            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline; margin-right: 8px;" onclick="window.location.href='kids_unit8.html'">Shopping Mall</span>
-            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline; margin-right: 8px;" onclick="window.location.href='kids_unit7.html'">Frog Pond</span>
-            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline;" onclick="window.location.href='farm.html'">Farm Animals</span>
+            Accesos directos rápidos: 
+            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline; margin-right: 8px;" onclick="window.location.href='juegos.html'">Zona de Juegos 2D</span>
+            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline; margin-right: 8px;" onclick="window.location.href='kids_unit8.html'">Shopping Mall Obby</span>
+            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline; margin-right: 8px;" onclick="window.location.href='stories.html'">Cuentos 3D</span>
+            <span style="color: #38bdf8; cursor: pointer; text-decoration: underline;" onclick="window.location.href='farm.html'">Granja de Leo</span>
           </div>
         </div>
       `);

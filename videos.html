@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Videos | Episodios Animados en Inglés</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0c1322;
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --accent-cyan: #06b6d4;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 45%);
+      color: #ffffff;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .videos-header {
+      background: rgba(19, 28, 49, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      transform: translateX(-3px);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .videos-layout {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 900px) {
+      .videos-layout { grid-template-columns: 1fr; }
+    }
+
+    .player-card {
+      background: rgba(26, 38, 64, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen-container {
+      position: relative;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay-play {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      background: rgba(6, 182, 212, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+      transition: transform 0.2s;
+    }
+
+    .video-overlay-play:hover {
+      transform: scale(1.1);
+    }
+
+    .subtitles-box {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .player-info {
+      padding: 1.5rem;
+    }
+
+    .video-headline {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-meta {
+      display: flex;
+      gap: 1rem;
+      color: var(--accent-cyan);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .video-text {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .playlist-card {
+      background: rgba(26, 38, 64, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .playlist-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    .episode-item {
+      display: flex;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.75rem;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      align-items: center;
+    }
+
+    .episode-item:hover, .episode-item.active {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateX(4px);
+    }
+
+    .episode-thumb {
+      width: 72px;
+      height: 48px;
+      border-radius: 8px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .episode-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+
+    .episode-time {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="videos-header">
+    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
+      ← Volver al Inicio
+    </a>
+    <div class="brand-title">
+      📺 Bilikids <span style="color: #38bdf8;">Videos</span>
+    </div>
+  </header>
+
+  <main class="videos-layout">
+    <!-- Main Player -->
+    <section class="player-card">
+      <div class="screen-container" id="videoScreen">
+        <img src="assets/home/hero_banner_illustration_2x.png" alt="Barnaby Video" class="screen-img">
+        <div class="video-overlay-play" id="btnPlayVideo" onclick="togglePlayVideo()">▶</div>
+        <div class="subtitles-box" id="subtitlesBox">"Hello everyone! Welcome to Bilikids English!"</div>
+      </div>
+      <div class="player-info">
+        <h1 class="video-headline" id="videoTitle">Episodio 1: Barnaby & Friends at the Shopping Mall</h1>
+        <div class="video-meta">
+          <span>⏱ Duración: 4:15 min</span>
+          <span>🎯 Nivel: A1 Cambridge</span>
+          <span>🗣 Audio: Inglés Nativo</span>
+        </div>
+        <p class="video-text" id="videoDesc">
+          Acompaña a Barnaby en su divertida visita al centro comercial. Aprende vocabulario sobre tiendas de ropa, jugueterías, la zona de comidas y cómo preguntar precios en inglés.
+        </p>
+      </div>
+    </section>
+
+    <!-- Playlist -->
+    <aside class="playlist-card">
+      <h2 class="playlist-title">Episodios Disponibles</h2>
+
+      <div class="episode-item active" onclick="loadEpisode(1)">
+        <div class="episode-thumb">🛍️</div>
+        <div>
+          <div class="episode-name">1. Barnaby at the Mall</div>
+          <div class="episode-time">4:15 min • Vocabulario & Tiendas</div>
+        </div>
+      </div>
+
+      <div class="episode-item" onclick="loadEpisode(2)">
+        <div class="episode-thumb">🚜</div>
+        <div>
+          <div class="episode-name">2. A Day at Leo's Farm</div>
+          <div class="episode-time">3:40 min • Animales & Canción</div>
+        </div>
+      </div>
+
+      <div class="episode-item" onclick="loadEpisode(3)">
+        <div class="episode-thumb">🏠</div>
+        <div>
+          <div class="episode-name">3. Colors in Luna's House</div>
+          <div class="episode-time">4:05 min • Objetos & Colores</div>
+        </div>
+      </div>
+
+      <div class="episode-item" onclick="loadEpisode(4)">
+        <div class="episode-thumb">⏰</div>
+        <div>
+          <div class="episode-name">4. Daily Routines with Matías</div>
+          <div class="episode-time">5:10 min • Hábitos & Horas</div>
+        </div>
+      </div>
+
+      <div class="episode-item" onclick="loadEpisode(5)">
+        <div class="episode-thumb">🚀</div>
+        <div>
+          <div class="episode-name">5. Space Explorer Mission</div>
+          <div class="episode-time">4:50 min • El Sistema Solar</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const episodes = {
+      1: {
+        title: "Episodio 1: Barnaby & Friends at the Shopping Mall",
+        sub: '"Hello everyone! Welcome to Bilikids English!"',
+        desc: "Acompaña a Barnaby en su divertida visita al centro comercial. Aprende vocabulario sobre tiendas de ropa, jugueterías, la zona de comidas y cómo preguntar precios en inglés."
+      },
+      2: {
+        title: "Episodio 2: A Day at Leo's Farm",
+        sub: '"Look at that friendly cow! Can you say Mooo?"',
+        desc: "Explora la granja con Leo el perrito. Descubre los nombres de los animales de campo, los tractores y canta la clásica canción infantil."
+      },
+      3: {
+        title: "Episodio 3: Colors in Luna's House",
+        sub: '"Where is the yellow toy? It is under the bed!"',
+        desc: "Luna busca sus juguetes favoritos en su habitación. Aprende las preposiciones de lugar (in, on, under) y repasa los colores brillantes."
+      },
+      4: {
+        title: "Episodio 4: Daily Routines with Matías",
+        sub: '"First I brush my teeth, then I eat breakfast!"',
+        desc: "Sigue la rutina matutina de Matías antes de ir al colegio. Aprende a describir tus actividades diarias en presente simple."
+      },
+      5: {
+        title: "Episodio 5: Space Explorer Mission",
+        sub: '"3, 2, 1... Blast off to the stars!"',
+        desc: "Viaja al espacio exterior en un cohete supersónico. Descubre los planetas, estrellas y vocabulario astronómico en inglés."
+      }
+    };
+
+    let isPlaying = false;
+    function togglePlayVideo() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('btnPlayVideo');
+      btn.textContent = isPlaying ? '⏸' : '▶';
+    }
+
+    function loadEpisode(id) {
+      document.querySelectorAll('.episode-item').forEach((el, idx) => {
+        el.classList.toggle('active', idx + 1 === id);
+      });
+      const ep = episodes[id];
+      document.getElementById('videoTitle').textContent = ep.title;
+      document.getElementById('subtitlesBox').textContent = ep.sub;
+      document.getElementById('videoDesc').textContent = ep.desc;
+      isPlaying = true;
+      document.getElementById('btnPlayVideo').textContent = '⏸';
+    }
+  </script>
+</body>
+</html>

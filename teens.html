@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Teens (12 - 16 años) | Cambridge B1-B2 & Fluency Hub</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0c1322;
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --accent-teen: #a855f7;
+      --accent-teen-hover: #9333ea;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%);
+      color: #ffffff;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .teens-header {
+      background: rgba(19, 28, 49, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: var(--accent-teen);
+      border-color: var(--accent-teen);
+      transform: translateX(-3px);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-age {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .teens-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    .hero-box {
+      background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: #c084fc;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-desc {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .activities-grid { grid-template-columns: 1fr; }
+      .hero-box { flex-direction: column; text-align: center; }
+    }
+
+    .activity-card {
+      background: rgba(26, 38, 64, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 14px 32px rgba(168, 85, 247, 0.2);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .btn-card-action {
+      background: var(--accent-teen);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .activity-card:hover .btn-card-action {
+      background: var(--accent-teen-hover);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="teens-header">
+    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
+      ← Volver al Inicio
+    </a>
+    <div class="brand-title">
+      ⚡ Bilikids <span style="color: #c084fc;">Teens</span>
+      <span class="badge-age">12 a 16 años</span>
+    </div>
+  </header>
+
+  <main class="teens-container">
+    <section class="hero-box">
+      <div>
+        <h1 class="hero-title">Bilikids Teens Academy 🚀</h1>
+        <p class="hero-desc">
+          Preparación para certificaciones Cambridge A2-B1, debates reales, lectura crítica, redacción estructurada y fluidez comunicativa en inglés.
+        </p>
+      </div>
+      <div style="font-size: 4.5rem;">🎧💡</div>
+    </section>
+
+    <section class="activities-grid">
+      <!-- 1. Cambridge Preliminary Test Prep -->
+      <a href="kids.html" class="activity-card">
+        <div>
+          <div class="card-icon">🎯</div>
+          <h2 class="card-title">Retos Cambridge A2-B1</h2>
+          <p class="card-desc">12 Módulos con comprensión auditiva avanzada, construcción gramatical y misiones interactivas.</p>
+        </div>
+        <div class="btn-card-action">Entrar a los Retos ➔</div>
+      </a>
+
+      <!-- 2. Writing Workshop -->
+      <a href="writing.html" class="activity-card">
+        <div>
+          <div class="card-icon">✍️</div>
+          <h2 class="card-title">Taller de Escritura (Writing)</h2>
+          <p class="card-desc">Redacción de párrafos, conectores lógicos, ortografía y estructura de ideas en inglés formal e informal.</p>
+        </div>
+        <div class="btn-card-action">Iniciar Taller ➔</div>
+      </a>
+
+      <!-- 3. Advanced Stories -->
+      <a href="stories.html" class="activity-card">
+        <div>
+          <div class="card-icon">📖</div>
+          <h2 class="card-title">Lecturas Globales (Reading)</h2>
+          <p class="card-desc">Artículos sobre ciencia, historia, tecnología y cultura juvenil con audio en inglés británico y americano.</p>
+        </div>
+        <div class="btn-card-action">Explorar Artículos ➔</div>
+      </a>
+
+      <!-- 4. Vocabulary & Syntax Lab -->
+      <a href="lab.html" class="activity-card">
+        <div>
+          <div class="card-icon">🔬</div>
+          <h2 class="card-title">Laboratorio de Sintaxis</h2>
+          <p class="card-desc">Desafíos de gramática, pares de palabras, tiempos verbales y modismos cotidianos.</p>
+        </div>
+        <div class="btn-card-action">Abrir Laboratorio ➔</div>
+      </a>
+
+      <!-- 5. Flashcards 20 -->
+      <a href="cards_20.html" class="activity-card">
+        <div>
+          <div class="card-icon">🃏</div>
+          <h2 class="card-title">Flashcards de Vocabulario</h2>
+          <p class="card-desc">Tarjetas de memoria de alta frecuencia, pronunciación fonética y repaso espaciado.</p>
+        </div>
+        <div class="btn-card-action">Practicar Tarjetas ➔</div>
+      </a>
+
+      <!-- 6. Safari Adventure -->
+      <a href="safari.html" class="activity-card">
+        <div>
+          <div class="card-icon">🌍</div>
+          <h2 class="card-title">Exploración de Biomas</h2>
+          <p class="card-desc">Expedición sobre biodiversidad mundial, hábitats naturales y ecología en inglés.</p>
+        </div>
+        <div class="btn-card-action">Iniciar Expedición ➔</div>
+      </a>
+    </section>
+  </main>
+
+</body>
+</html>

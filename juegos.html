@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Juegos | Sala de Videojuegos y Aventuras 2D</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0c1322;
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --accent-green: #22c55e;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+      color: #ffffff;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .games-header {
+      background: rgba(19, 28, 49, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+      transform: translateX(-3px);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .games-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    .games-hero {
+      background: linear-gradient(135deg, #14532d 0%, #064e3b 50%, #0f172a 100%);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .games-hero-title {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      color: #4ade80;
+      margin-bottom: 0.4rem;
+    }
+
+    .games-hero-desc {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 960px) {
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .games-grid { grid-template-columns: 1fr; }
+      .games-hero { flex-direction: column; text-align: center; }
+    }
+
+    .game-card {
+      background: rgba(26, 38, 64, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(34, 197, 94, 0.5);
+      box-shadow: 0 14px 35px rgba(34, 197, 94, 0.25);
+    }
+
+    .game-badge-new {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: linear-gradient(90deg, #ec4899, #f43f5e);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      box-shadow: 0 2px 10px rgba(236, 72, 153, 0.5);
+    }
+
+    .game-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .game-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-desc {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .btn-play-game {
+      background: var(--accent-green);
+      color: #0b1710;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .game-card:hover .btn-play-game {
+      background: #4ade80;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="games-header">
+    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
+      ← Volver al Inicio
+    </a>
+    <div class="brand-title">
+      🎮 Bilikids <span style="color: #4ade80;">Juegos Arcade</span>
+    </div>
+  </header>
+
+  <main class="games-container">
+    <section class="games-hero">
+      <div>
+        <h1 class="games-hero-title">Zona Arcade de Videojuegos 🕹️</h1>
+        <p class="games-hero-desc">
+          Aprende inglés jugando con videojuegos 2D de plataformas, saltos de rana, exploración espacial y aventuras interactivas de compras.
+        </p>
+      </div>
+      <div style="font-size: 4.5rem;">👾⭐</div>
+    </section>
+
+    <section class="games-grid">
+      <!-- 1. Mall Obby Run 2D (Unidad 8) -->
+      <a href="kids_unit8.html" class="game-card">
+        <span class="game-badge-new">¡NUEVO 2D!</span>
+        <div>
+          <div class="game-icon">🛍️</div>
+          <h2 class="game-name">Shopping Mall Obby Run 2D</h2>
+          <p class="game-desc">Videojuego de plataformas con doble salto, dos puentes, teclado secreto, cofre de oro y estudio de Barnaby.</p>
+        </div>
+        <div class="btn-play-game">¡Jugar Ahora! ➔</div>
+      </a>
+
+      <!-- 2. Frog Pond Jump (Unidad 7) -->
+      <a href="kids_unit7.html" class="game-card">
+        <div>
+          <div class="game-icon">🐸</div>
+          <h2 class="game-name">Frog Pond Leap</h2>
+          <p class="game-desc">Ayuda a la ranita a saltar de lirio en lirio ordenando correctamente las oraciones en inglés hasta la isla dorada.</p>
+        </div>
+        <div class="btn-play-game">¡Saltar al Estanque! ➔</div>
+      </a>
+
+      <!-- 3. Space Explorer 2D (Unidad 6) -->
+      <a href="kids_unit6.html" class="game-card">
+        <div>
+          <div class="game-icon">🚀</div>
+          <h2 class="game-name">Space Explorer 2D</h2>
+          <p class="game-desc">Pilota la nave espacial por la galaxia, esquiva asteroides y recolecta las estrellas con palabras espaciales.</p>
+        </div>
+        <div class="btn-play-game">¡Despegar! ➔</div>
+      </a>
+
+      <!-- 4. La Granja de Leo -->
+      <a href="farm.html" class="game-card">
+        <div>
+          <div class="game-icon">🚜</div>
+          <h2 class="game-name">La Granja de Leo</h2>
+          <p class="game-desc">Cuida a las vacas, ovejas y patos en una granja interactiva con retos de audio y vocabulario rural.</p>
+        </div>
+        <div class="btn-play-game">¡Entrar a la Granja! ➔</div>
+      </a>
+
+      <!-- 5. La Casa de Luna -->
+      <a href="house.html" class="game-card">
+        <div>
+          <div class="game-icon">🏠</div>
+          <h2 class="game-name">Encuentra los Objetos en Casa</h2>
+          <p class="game-desc">Explora la sala, cocina y habitación en busca de los juguetes perdidos usando preposiciones en inglés.</p>
+        </div>
+        <div class="btn-play-game">¡Explorar Casa! ➔</div>
+      </a>
+
+      <!-- 6. Cambridge Kids Campaña Completa -->
+      <a href="kids.html" class="game-card">
+        <div>
+          <div class="game-icon">🏆</div>
+          <h2 class="game-name">Aventura Kids: 12 Unidades</h2>
+          <p class="game-desc">El mapa completo de retos Cambridge con insignias, cómics, laboratorio de oraciones y trofeos.</p>
+        </div>
+        <div class="btn-play-game">¡Ver Todas las Unidades! ➔</div>
+      </a>
+    </section>
+  </main>
+
+</body>
+</html>

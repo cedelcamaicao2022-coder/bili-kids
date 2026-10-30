@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Toddlers (6 - 8 años) | Fonética y Primeras Aventuras</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0c1322;
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --accent-toddler: #f59e0b;
+      --accent-toddler-hover: #d97706;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 40%);
+      color: #ffffff;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toddlers-header {
+      background: rgba(19, 28, 49, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: var(--accent-toddler);
+      border-color: var(--accent-toddler);
+      transform: translateX(-3px);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-age {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .toddlers-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    .hero-box {
+      background: linear-gradient(135deg, #1e293b 0%, #1e1b4b 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-desc {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .activities-grid { grid-template-columns: 1fr; }
+      .hero-box { flex-direction: column; text-align: center; }
+    }
+
+    .activity-card {
+      background: rgba(26, 38, 64, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 158, 11, 0.5);
+      box-shadow: 0 14px 32px rgba(245, 158, 11, 0.2);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .btn-card-action {
+      background: var(--accent-toddler);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .activity-card:hover .btn-card-action {
+      background: var(--accent-toddler-hover);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="toddlers-header">
+    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
+      ← Volver al Inicio
+    </a>
+    <div class="brand-title">
+      🦁 Bilikids <span style="color: #fbbf24;">Toddlers</span>
+      <span class="badge-age">6 a 8 años</span>
+    </div>
+  </header>
+
+  <main class="toddlers-container">
+    <section class="hero-box">
+      <div>
+        <h1 class="hero-title">¡Bienvenido al Mundo Toddlers! 🎈</h1>
+        <p class="hero-desc">
+          Aquí exploramos las primeras lecturas, fonética interactiva, sonidos de la naturaleza, vocabulario de la casa y juegos dinámicos en inglés.
+        </p>
+      </div>
+      <div style="font-size: 4.5rem;">🎒✨</div>
+    </section>
+
+    <section class="activities-grid">
+      <!-- 1. Granja de Leo -->
+      <a href="farm.html" class="activity-card">
+        <div>
+          <div class="card-icon">🚜</div>
+          <h2 class="card-title">La Granja de Leo</h2>
+          <p class="card-desc">Conoce a los animales de la granja, imita sus sonidos y aprende sus nombres en inglés con canciones.</p>
+        </div>
+        <div class="btn-card-action">Explorar Granja ➔</div>
+      </a>
+
+      <!-- 2. Casa de Luna -->
+      <a href="house.html" class="activity-card">
+        <div>
+          <div class="card-icon">🏠</div>
+          <h2 class="card-title">La Casa de Luna</h2>
+          <p class="card-desc">Encuentra los objetos de cada habitación, aprende los colores y descubre sorpresas escondidas.</p>
+        </div>
+        <div class="btn-card-action">Entrar a la Casa ➔</div>
+      </a>
+
+      <!-- 3. Safari de Animales -->
+      <a href="safari.html" class="activity-card">
+        <div>
+          <div class="card-icon">🦒</div>
+          <h2 class="card-title">Safari de Animales</h2>
+          <p class="card-desc">Viaja por la sabana africana, escucha a los leones, elefantes y jirafas, y practica su pronunciación.</p>
+        </div>
+        <div class="btn-card-action">Ir al Safari ➔</div>
+      </a>
+
+      <!-- 4. Cuentos Ilustrados -->
+      <a href="stories.html" class="activity-card">
+        <div>
+          <div class="card-icon">📚</div>
+          <h2 class="card-title">Biblioteca de Cuentos</h2>
+          <p class="card-desc">Libros con ilustraciones 3D y narración de voz nativa para aprender a leer paso a paso.</p>
+        </div>
+        <div class="btn-card-action">Leer Cuentos ➔</div>
+      </a>
+
+      <!-- 5. Laboratorio de Colores y Formas -->
+      <a href="lab.html" class="activity-card">
+        <div>
+          <div class="card-icon">🎨</div>
+          <h2 class="card-title">Laboratorio Creativo</h2>
+          <p class="card-desc">Pinta, mezcla colores, descubre figuras geométricas y pon a prueba tu memoria visual.</p>
+        </div>
+        <div class="btn-card-action">Crear y Colorear ➔</div>
+      </a>
+
+      <!-- 6. Pizarra de Primeras Palabras -->
+      <a href="writing.html" class="activity-card">
+        <div>
+          <div class="card-icon">✏️</div>
+          <h2 class="card-title">Pizarra de Escritura</h2>
+          <p class="card-desc">Traza letras del abecedario, asocia imágenes y deletrea tus primeras palabras en inglés.</p>
+        </div>
+        <div class="btn-card-action">Practicar Trazos ➔</div>
+      </a>
+    </section>
+  </main>
+
+</body>
+</html>
