@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bili's Color Adventure | Bilikids - Aprende los Colores en Inglés</title>
+  
+  <!-- Google Fonts for Friendly Preschool Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css?v=4.1">
+</head>
+<body>
+  <!-- Background Floating Clouds & Bubbles -->
+  <div class="sky-background">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="sun-glow"></div>
+  </div>
+
+  <div id="app" class="game-container">
+    <!-- Top Header Bar with Bilikids Logo -->
+    <header class="game-header">
+      <div class="header-left">
+        <a href="inicio.html" class="header-btn" title="Volver a la selección de grupos (Babies, Toddlers, Kids, Teens)" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 0 #047857; text-decoration: none;">
+          <span class="btn-icon">←</span>
+          <span class="btn-label">Grupos</span>
+        </a>
+
+        <button id="btnHome" class="header-btn" title="Ir al Menú">
+          <span class="btn-icon">🏠</span>
+          <span class="btn-label">Inicio</span>
+        </button>
+
+        <a href="farm.html" class="header-game-switcher" title="Jugar Granja de Animales con Leo">
+          <span>🚜</span>
+          <span class="switcher-text">Granja</span>
+        </a>
+        <a href="house.html" class="header-game-switcher" title="Jugar Lugares de la Casa con Luna">
+          <span>🐰</span>
+          <span class="switcher-text">Casa</span>
+        </a>
+        <a href="stories.html" class="header-game-switcher" title="Bili Kids Library">
+          <span>📚</span>
+          <span class="switcher-text">Library</span>
+        </a>
+        <a href="lab.html" class="header-game-switcher" title="Laboratorio Científico">
+          <span>🧪</span>
+          <span class="switcher-text">Lab</span>
+        </a>
+        <a href="writing.html" class="header-game-switcher" title="Práctica de Escritura">
+          <span>✏️</span>
+          <span class="switcher-text">Writing</span>
+        </a>
+
+        <div class="header-brand">
+          <img src="assets/bilikids_logo.png" alt="Bilikids" class="header-logo-img">
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="header-level-badge" id="levelBadge">
+          <span id="levelBadgeText">Nivel 1</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="header-stars" id="headerStars">
+          <span class="star-icon">⭐</span>
+          <span id="totalStarsCount">0</span>
+        </div>
+
+        <div class="header-controls">
+          <button id="btnSettings" class="header-btn icon-only" title="Configurar Voz y Audio">
+            <span>⚙️</span>
+          </button>
+          <button id="btnSoundToggle" class="header-btn icon-only" title="Música y Sonido">
+            <span id="soundIcon">🔊</span>
+          </button>
+          <button id="btnFullscreen" class="header-btn icon-only" title="Pantalla Completa">
+            <span>⛶</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <main class="game-main">
+      <!-- SCREEN: HOME / LEVEL SELECT -->
+      <section id="screenHome" class="screen active">
+        <div class="home-hero">
+          
+          <!-- Bilikids Brand Logo Prominent at Top -->
+          <div class="home-brand-header">
+            <img src="assets/bilikids_logo.png" alt="Bilikids ¡Learning together!" class="home-main-logo pulse-subtle">
+          </div>
+
+          <!-- Bili Character FULL BODY with Speech Bubble -->
+          <div class="bili-hero-showcase">
+            <div class="bili-fullbody-wrapper">
+              <img src="assets/bili_fullbody.png" alt="Bili el Osito" class="bili-fullbody-hero-img wave-bounce">
+              <div class="bili-ground-shadow"></div>
+            </div>
+
+            <div class="bili-speech-bubble-hero">
+              <p class="bubble-text" id="welcomeSpeech">¡Hi friends! I'm Bili! Let's explore colors together! 🐻🎨</p>
+              <button class="speech-replay-btn" id="btnRepeatWelcome" title="Escuchar de nuevo">🔊</button>
+            </div>
+          </div>
+          
+          <h1 class="game-title">
+            <span class="title-word color-red">Bili's</span>
+            <span class="title-word color-blue">Color</span>
+            <span class="title-word color-yellow">Adventure!</span>
+          </h1>
+          <p class="game-subtitle">Juego educativo interactivo de colores en inglés (3 a 5 años)</p>
+
+          <button id="btnStartGame" class="btn-big-play pulse">
+            <span class="play-icon">▶</span>
+            <span>¡JUGAR AHORA!</span>
+          </button>
+        </div>
+
+        <!-- Level Selection Map with Stages -->
+        <div class="level-map-container">
+          <div class="stage-tabs-row">
+            <button class="stage-tab-btn active" id="btnStage1Tab">
+              <span class="stage-tab-title">🌱 Etapa 1: Exploradores</span>
+              <span class="stage-status-badge">Niveles 1 a 5</span>
+            </button>
+            <button class="stage-tab-btn locked" id="btnStage2Tab">
+              <span class="stage-tab-title">⭐ Etapa 2: Grandes Maestros</span>
+              <span class="stage-status-badge" id="stage2LockBadge">🔒 Supera la Etapa 1</span>
+            </button>
+          </div>
+
+          <!-- STAGE 1 CARDS (LEVELS 1 - 5) -->
+          <div class="level-cards-grid stage-grid active" id="stage1Grid">
+            
+            <div class="level-card unlocked" data-level="1">
+              <div class="level-num">1</div>
+              <div class="level-art">🎈</div>
+              <div class="level-info">
+                <h3>Balloon Pop!</h3>
+                <p>Revienta los globos del color correcto</p>
+                <div class="card-stars" id="cardStars1">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="2">
+              <div class="level-num">2</div>
+              <div class="level-art">🎒</div>
+              <div class="level-info">
+                <h3>Bili's Backpack</h3>
+                <p>Guarda juguetes y frutas por color</p>
+                <div class="card-stars" id="cardStars2">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="3">
+              <div class="level-num">3</div>
+              <div class="level-art">🎨</div>
+              <div class="level-info">
+                <h3>Magic Paint!</h3>
+                <p>Pinta cosas increíbles con pintura mágica</p>
+                <div class="card-stars" id="cardStars3">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="4">
+              <div class="level-num">4</div>
+              <div class="level-art">🫧</div>
+              <div class="level-info">
+                <h3>Bubble Stars</h3>
+                <p>Atrapa las burbujas antes de que suban</p>
+                <div class="card-stars" id="cardStars4">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="5">
+              <div class="level-num">5</div>
+              <div class="level-art">🏆</div>
+              <div class="level-info">
+                <h3>Color Disco & Trophy!</h3>
+                <p>Baila con Bili y obtén tu Diploma Bilikids</p>
+                <div class="card-stars" id="cardStars5">☆☆☆</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- STAGE 2 CARDS (LEVELS 6 - 10) -->
+          <div class="level-cards-grid stage-grid" id="stage2Grid" style="display: none;">
+            
+            <div class="level-card" data-level="6">
+              <div class="level-num">6</div>
+              <div class="level-art">🚂</div>
+              <div class="level-info">
+                <h3>Bili's Train</h3>
+                <p>Carga los vagones con cajas de color</p>
+                <div class="card-stars" id="cardStars6">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="7">
+              <div class="level-num">7</div>
+              <div class="level-art">🔦</div>
+              <div class="level-info">
+                <h3>Flashlight Safari</h3>
+                <p>Alumbra y encuentra animalitos escondidos</p>
+                <div class="card-stars" id="cardStars7">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="8">
+              <div class="level-num">8</div>
+              <div class="level-art">🧁</div>
+              <div class="level-info">
+                <h3>Ice Cream Tower</h3>
+                <p>Apila bolas de helado deliciosas</p>
+                <div class="card-stars" id="cardStars8">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="9">
+              <div class="level-num">9</div>
+              <div class="level-art">🌈</div>
+              <div class="level-info">
+                <h3>Rainbow Bridge</h3>
+                <p>Construye el puente para cruzar con Bili</p>
+                <div class="card-stars" id="cardStars9">☆☆☆</div>
+              </div>
+            </div>
+
+            <div class="level-card" data-level="10">
+              <div class="level-num">10</div>
+              <div class="level-art">🚀</div>
+              <div class="level-info">
+                <h3>Galaxy Rocket</h3>
+                <p>Viaja por planetas y gana la Copa Galáctica</p>
+                <div class="card-stars" id="cardStars10">☆☆☆</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 1 (BALLOON POP) -->
+      <section id="screenLevel1" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel1">
+            <img src="assets/bili_fullbody.png" alt="Bili" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Bili dice: "Pop the </span>
+              <strong class="color-prompt-word" id="promptColorL1">RED</strong>
+              <span class="speech-intro"> balloon!"</span>
+              <span class="spanish-hint" id="spanishHintL1">(Rojo)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL1" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL1" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL1">Ronda 1 de 5</div>
+        </div>
+
+        <div class="balloons-arena" id="balloonsArena">
+          <!-- Balloons injected dynamically -->
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 2 (BILI'S BACKPACK) -->
+      <section id="screenLevel2" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel2">
+            <img src="assets/bili_fullbody.png" alt="Bili" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Bili wants: </span>
+              <strong class="color-prompt-word" id="promptColorL2">PURPLE</strong>
+              <span class="spanish-hint" id="spanishHintL2">(Morado)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL2" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL2" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL2">Ronda 1 de 5</div>
+        </div>
+
+        <div class="backpack-gameplay">
+          <!-- The items to sort/tap -->
+          <div class="items-shelves" id="backpackItemsContainer">
+            <!-- Injected dynamically: cute toys/fruits with colors -->
+          </div>
+
+          <!-- Bili's Target Backpack Zone -->
+          <div class="backpack-target-zone" id="backpackDropZone">
+            <div class="backpack-visual bounce-subtle">
+              <div class="backpack-badge">🎒</div>
+              <div class="backpack-label">Bili's Backpack</div>
+              <p class="drop-hint-text">¡Toca o arrastra aquí el objeto <span id="backpackTargetColorName">PURPLE</span>!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 3 (MAGIC PAINT) -->
+      <section id="screenLevel3" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel3">
+            <img src="assets/bili_fullbody.png" alt="Bili" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Paint the </span>
+              <span id="canvasTargetObjectName" class="object-highlight">Sun</span>
+              <span class="speech-intro"> with </span>
+              <strong class="color-prompt-word" id="promptColorL3">YELLOW</strong>!
+              <span class="spanish-hint" id="spanishHintL3">(Amarillo)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL3" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL3" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL3">Ronda 1 de 5</div>
+        </div>
+
+        <div class="paint-stage">
+          <!-- Big coloring canvas card -->
+          <div class="canvas-art-card" id="canvasArtCard">
+            <div class="drawing-display" id="drawingDisplay">
+              <!-- Animated SVG or big icon illustration that gets filled -->
+            </div>
+          </div>
+
+          <!-- Color Splash Buckets -->
+          <div class="paint-buckets-row" id="paintBucketsRow">
+            <!-- Injected dynamically: colorful splats child can tap -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 4 (BUBBLE STARS) -->
+      <section id="screenLevel4" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel4">
+            <img src="assets/bili_fullbody.png" alt="Bili" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Catch </span>
+              <span id="bubblesRemainingCount" class="bubbles-count-badge">3</span>
+              <strong class="color-prompt-word" id="promptColorL4">GREEN</strong>
+              <span class="speech-intro"> bubbles!</span>
+              <span class="spanish-hint" id="spanishHintL4">(Verde)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL4" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL4" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL4">Ronda 1 de 4</div>
+        </div>
+
+        <div class="bubbles-pond" id="bubblesPond">
+          <!-- Floating interactive bubbles -->
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 5 (DISCO & DIPLOMA) -->
+      <section id="screenLevel5" class="screen">
+        <div class="disco-stage">
+          <div class="disco-bili-hero">
+            <div class="bili-stage-fullbody-box">
+              <img src="assets/bili_fullbody.png" alt="Bili Bailarín" class="bili-disco-fullbody-img dancer">
+              <div class="disco-floor-shadow"></div>
+              <div class="disco-glow-effect"></div>
+            </div>
+            <div class="disco-speech">
+              <h2 id="discoBiliPrompt">🎉 ¡Color Disco Party! 🎉</h2>
+              <p id="discoInstruction">¡Toca la baldosa de color <span id="promptColorL5" class="color-prompt-word">ORANGE</span>!</p>
+              <button class="voice-btn-round" id="btnSpeakPromptL5" title="Escuchar">🔊</button>
+            </div>
+          </div>
+
+          <div class="disco-tiles-grid" id="discoTilesGrid">
+            <!-- 4 glowing rhythmic dance tiles -->
+          </div>
+
+          <div class="disco-score-bar">
+            <span>Pasos de baile acertados: </span>
+            <span id="discoRoundsCounter" class="badge-steps">0 / 4</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 6 (BILI'S COLOR TRAIN) -->
+      <section id="screenLevel6" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel6">
+            <img src="assets/bili_fullbody.png" alt="Bili Maquinista" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Load the </span>
+              <strong class="color-prompt-word" id="promptColorL6">BLUE</strong>
+              <span class="speech-intro"> crate on the train!</span>
+              <span class="spanish-hint" id="spanishHintL6">(Azul)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL6" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL6" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL6">Vagón 1 de 4</div>
+        </div>
+
+        <div class="train-stage">
+          <div class="train-track-view">
+            <div class="train-composition" id="trainComposition">
+              <div class="locomotive">🚂</div>
+              <div class="wagon-waiting" id="trainWagonWaiting">
+                <span class="wagon-placeholder">📦 ¡Pon la carga aquí!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="train-crates-platform" id="trainCratesPlatform">
+            <!-- 3 or 4 colored crates to load -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 7 (FLASHLIGHT SAFARI) -->
+      <section id="screenLevel7" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel7">
+            <img src="assets/bili_fullbody.png" alt="Bili Safari" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Shine & find: </span>
+              <strong class="color-prompt-word" id="promptColorL7">YELLOW</strong>
+              <span class="speech-intro">!</span>
+              <span class="spanish-hint" id="spanishHintL7">(Amarillo)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL7" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL7" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL7">Animal 1 de 4</div>
+        </div>
+
+        <div class="safari-night-arena" id="safariArena">
+          <div class="safari-flashlight-beam" id="safariBeam"></div>
+          <div class="safari-animals-container" id="safariAnimalsContainer">
+            <!-- Animals hiding in the safari -->
+          </div>
+          <div class="safari-hint-bar">🔦 ¡Mueve tu dedo o ratón para alumbrar y toca el animal correcto!</div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 8 (ICE CREAM TOWER) -->
+      <section id="screenLevel8" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel8">
+            <img src="assets/bili_fullbody.png" alt="Bili Chef" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Add the </span>
+              <strong class="color-prompt-word" id="promptColorL8">PINK</strong>
+              <span class="speech-intro"> scoop!</span>
+              <span class="spanish-hint" id="spanishHintL8">(Rosa)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL8" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL8" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL8">Helado 1 de 4</div>
+        </div>
+
+        <div class="icecream-stage">
+          <div class="icecream-display-stand">
+            <div class="icecream-stack" id="icecreamStack">
+              <div class="icecream-cone">🍦</div>
+            </div>
+          </div>
+
+          <div class="icecream-flavors-palette" id="icecreamFlavors">
+            <!-- Ice cream scoops to tap -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 9 (RAINBOW BRIDGE) -->
+      <section id="screenLevel9" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel9">
+            <img src="assets/bili_fullbody.png" alt="Bili Puente" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Next rainbow bridge color: </span>
+              <strong class="color-prompt-word" id="promptColorL9">RED</strong>
+              <span class="spanish-hint" id="spanishHintL9">(Rojo)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL9" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL9" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL9">Paso 1 de 6</div>
+        </div>
+
+        <div class="rainbow-bridge-stage">
+          <div class="bridge-clouds-scene">
+            <div class="bridge-arch" id="bridgeArch">
+              <!-- Stepping stones filled progressively -->
+            </div>
+            <div class="bridge-walker-bili" id="bridgeWalkerBili">
+              <img src="assets/bili_fullbody.png" alt="Bili Cruzando" class="bili-mini-walker">
+            </div>
+          </div>
+
+          <div class="rainbow-stones-picker" id="rainbowStonesPicker">
+            <!-- Stones child chooses from -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEVEL 10 (GALAXY ROCKET & FINAL TROPHY) -->
+      <section id="screenLevel10" class="screen">
+        <div class="bili-sidekick-box">
+          <div class="bili-companion-fullbody-wrapper" id="biliCharLevel10">
+            <img src="assets/bili_fullbody.png" alt="Bili Astronauta" class="bili-companion-fullbody-img wave-bounce">
+          </div>
+          <div class="instruction-box">
+            <div class="speech-target">
+              <span class="speech-intro">Fly to the </span>
+              <strong class="color-prompt-word" id="promptColorL10">PURPLE</strong>
+              <span class="speech-intro"> planet!</span>
+              <span class="spanish-hint" id="spanishHintL10">(Morado)</span>
+            </div>
+            <button class="voice-btn-round" id="btnSpeakPromptL10" title="Escuchar de nuevo">🔊</button>
+          </div>
+        </div>
+
+        <div class="round-progress">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFillL10" style="width: 0%;"></div>
+          </div>
+          <div class="round-counter" id="roundCounterL10">Planeta 1 de 4</div>
+        </div>
+
+        <div class="galaxy-space-stage" id="galaxyStage">
+          <div class="rocket-traveler" id="rocketTraveler">
+            <div class="rocket-bili-avatar">
+              <img src="assets/bili_fullbody.png" alt="Bili Rocket" class="rocket-bili-sprite">
+              <span class="rocket-ship">🚀</span>
+            </div>
+          </div>
+
+          <div class="galaxy-planets-row" id="galaxyPlanetsRow">
+            <!-- Orbiting colorful planets -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: CELEBRATION / CERTIFICATE MODAL -->
+      <section id="screenCelebration" class="screen">
+        <div class="diploma-card">
+          <div class="diploma-ribbon">🏆 ¡FELICITACIONES! 🏆</div>
+
+          <div class="diploma-header">
+            <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
+            <div class="diploma-titles">
+              <h2>SUPER COLOR CHAMPION</h2>
+              <p>Certificado Oficial de Colores Bilikids</p>
+            </div>
+          </div>
+
+          <div class="diploma-body">
+            <div class="diploma-center-layout">
+              <div class="diploma-bili-fullbody-container">
+                <img src="assets/bili_fullbody.png" alt="Bili" class="diploma-bili-fullbody-img wave-bounce">
+              </div>
+              <div class="diploma-text-content">
+                <p class="awarded-to-text">Otorgado a un increíble explorador de 3 a 5 años por dominar todos los colores en inglés:</p>
+                
+                <div class="child-name-wrapper">
+                  <label for="childNameInput">Nombre del Pequeño:</label>
+                  <input type="text" id="childNameInput" value="Pequeño Campeón" maxlength="24">
+                </div>
+
+                <div class="colors-learned-badges">
+                  <span class="c-tag tag-red">RED</span>
+                  <span class="c-tag tag-blue">BLUE</span>
+                  <span class="c-tag tag-yellow">YELLOW</span>
+                  <span class="c-tag tag-green">GREEN</span>
+                  <span class="c-tag tag-orange">ORANGE</span>
+                  <span class="c-tag tag-purple">PURPLE</span>
+                  <span class="c-tag tag-pink">PINK</span>
+                  <span class="c-tag tag-brown">BROWN</span>
+                </div>
+
+                <div class="diploma-stars-row">
+                  ⭐⭐⭐⭐⭐
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="diploma-actions">
+            <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
+              <span>🖨️</span> Imprimir Diploma
+            </button>
+            <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
+              <span>🔄</span> Jugar de Nuevo
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Settings Modal for Voice & Audio -->
+    <div id="settingsModal" class="settings-modal hidden">
+      <div class="settings-content pop-in">
+        <div class="settings-header">
+          <h3>⚙️ Ajustes de Voz de Bili</h3>
+          <button id="btnCloseSettings" class="btn-close-settings">✖</button>
+        </div>
+
+        <div class="settings-body">
+          <div class="settings-group">
+            <label for="selectVoice">Voz en Inglés:</label>
+            <select id="selectVoice" class="settings-select">
+              <!-- Populated dynamically with high-quality voices -->
+            </select>
+          </div>
+
+          <div class="settings-group">
+            <label for="selectAudioMode">Modo de Voz:</label>
+            <select id="selectAudioMode" class="settings-select">
+              <option value="hybrid">✨ Híbrido (Clips de Estudio + Voz Natural)</option>
+              <option value="audio_only">🎧 Solo Grabaciones de Estudio (M4A/MP3)</option>
+              <option value="speech_only">🗣️ Solo Sintetizador del Navegador</option>
+            </select>
+          </div>
+
+          <div class="settings-group">
+            <label for="rangeSpeed">Velocidad de habla:</label>
+            <div class="range-wrapper">
+              <input type="range" id="rangeSpeed" min="0.7" max="1.1" step="0.05" value="0.88">
+              <span id="speedValueLabel">0.88x (Pausado)</span>
+            </div>
+          </div>
+
+          <div class="settings-test-row">
+            <button id="btnTestVoice" class="btn-test-voice">
+              <span>🔊</span> Probar Voz ("Red! Great job!")
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Celebration Overlay for round victories -->
+    <div id="roundSuccessOverlay" class="success-overlay hidden">
+      <div class="success-popup pop-in">
+        <div class="success-bili-fullbody-wrap">
+          <img src="assets/bili_fullbody.png" alt="Bili Celebrando" class="bili-success-fullbody-img celebrate-jump">
+        </div>
+        <div class="success-content">
+          <h2 id="successTitle">¡SUPER!</h2>
+          <p id="successMessage">¡You found <span id="successColor">RED</span>!</p>
+          <div class="success-stars">⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti & Sparkles -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <script src="game.js?v=4.0"></script>
+</body>
+</html>
