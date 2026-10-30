@@ -191,21 +191,81 @@ function switchTab(tabKey, btn) {
 }
 
 // ============================================================================
-// ACTIVIDAD 1: ÁRBOL GENEALÓGICO & DETECTIVE "WHO'S WHO"
+// ACTIVIDAD 1: ÁRBOL GENEALÓGICO & DETECTIVE "WHO'S WHO" (TARJETAS VOLTEADAS)
 // ============================================================================
 const familyMembersData = [
-  { id: 'grandfather', role: 'Grandfather', name: 'Robert', avatar: '👴', trait: 'Wise & Kind (72)', intro: "Hello! I am Robert, Maya's grandfather. I am seventy-two years old." },
-  { id: 'grandmother', role: 'Grandmother', name: 'Elena', avatar: '👵', trait: 'Sweet & Loving (70)', intro: "Hello sweetie! I am Elena, Maya's grandmother. I love baking cookies." },
-  { id: 'father', role: 'Father', name: 'Carlos', avatar: '👨', trait: 'Smart Architect (42)', intro: "Hi! I am Carlos, Maya's father. I design houses and buildings." },
-  { id: 'mother', role: 'Mother', name: 'Sofia', avatar: '👩', trait: 'Creative Doctor (40)', intro: "Hello! I am Sofia, Maya's mother. I am a doctor at the children's hospital." },
-  { id: 'brother', role: 'Brother', name: 'Leo', avatar: '👦', trait: 'Energetic (7)', intro: "Hey! I am Leo, Maya's little brother. I love dinosaurs and soccer!" },
-  { id: 'sister', role: 'Sister', name: 'Maya', avatar: '👧', trait: 'Curious Student (9)', intro: "Hi! I am Maya. Welcome to my family and friends tree!" },
-  { id: 'baby', role: 'Baby Brother', name: 'Lucas', avatar: '👶', trait: 'Cute & Playful (1)', intro: "Goo-goo! I am baby Lucas. I have two teeth." },
-  { id: 'uncle', role: 'Uncle', name: 'David', avatar: '🧔', trait: 'Funny Musician (38)', intro: "What's up! I am Uncle David. I play the electric guitar." },
-  { id: 'aunt', role: 'Aunt', name: 'Laura', avatar: '👩‍🦰', trait: 'Friendly Painter (36)', intro: "Hello! I am Aunt Laura. Painting landscapes is my passion." },
-  { id: 'cousin', role: 'Cousin', name: 'Mia', avatar: '🧒', trait: 'Active Gymnast (10)', intro: "Hi! I am Mia, Maya's cousin. I practice gymnastics every day." },
-  { id: 'friend_boy', role: 'Best Friend', name: 'Alex', avatar: '👦', trait: 'Funny & Loyal (10)', intro: "Hey there! I am Alex, Maya's best friend from English class." },
-  { id: 'friend_girl', role: 'Best Friend', name: 'Lily', avatar: '👧', trait: 'Smart Reader (9)', intro: "Hi! I am Lily, Maya's friend. I love reading science fiction books." }
+  {
+    id: 'grandfather', role: 'Grandfather', name: 'Robert', avatar: '👴',
+    desc: "Carlos's father. He is seventy-two years old, wears glasses, and tells wonderful stories.",
+    descEs: "Padre de Carlos. Tiene 72 años, usa lentes y cuenta historias.",
+    intro: "Hello! I am Robert, Maya's grandfather."
+  },
+  {
+    id: 'grandmother', role: 'Grandmother', name: 'Elena', avatar: '👵',
+    desc: "Carlos's mother. She has silver hair, is seventy years old, and loves baking warm cookies.",
+    descEs: "Madre de Carlos. Tiene 70 años y le encanta hornear galletas.",
+    intro: "Hello! I am Elena, Maya's grandmother."
+  },
+  {
+    id: 'father', role: 'Father', name: 'Carlos', avatar: '👨',
+    desc: "Maya's father. He is forty-two, works as a smart architect, and designs modern houses.",
+    descEs: "Padre de Maya. Tiene 42 años y trabaja como arquitecto.",
+    intro: "Hi! I am Carlos, Maya's father."
+  },
+  {
+    id: 'mother', role: 'Mother', name: 'Sofia', avatar: '👩',
+    desc: "Maya's mother. She is forty years old and works as a kind doctor at the hospital.",
+    descEs: "Madre de Maya. Tiene 40 años y es médica de niños.",
+    intro: "Hello! I am Sofia, Maya's mother."
+  },
+  {
+    id: 'brother', role: 'Brother', name: 'Leo', avatar: '👦',
+    desc: "Maya's younger brother. He is seven years old, very energetic, and loves dinosaurs.",
+    descEs: "Hermano menor de Maya. Tiene 7 años y ama los dinosaurios.",
+    intro: "Hey! I am Leo, Maya's brother."
+  },
+  {
+    id: 'sister', role: 'Sister', name: 'Maya', avatar: '👧',
+    desc: "The main club explorer. She is nine years old and in fourth grade.",
+    descEs: "La protagonista. Tiene 9 años y está en cuarto grado.",
+    intro: "Hi! I am Maya. Welcome to my family tree!"
+  },
+  {
+    id: 'baby', role: 'Baby Brother', name: 'Lucas', avatar: '👶',
+    desc: "The youngest family member. He is only one year old and very playful.",
+    descEs: "El más pequeño. Tiene solo 1 año de edad.",
+    intro: "Goo-goo! I am baby Lucas."
+  },
+  {
+    id: 'uncle', role: 'Uncle', name: 'David', avatar: '🧔',
+    desc: "Carlos's brother. He has a dark beard and plays the electric guitar.",
+    descEs: "Hermano de Carlos. Tiene barba y toca la guitarra.",
+    intro: "What's up! I am Uncle David."
+  },
+  {
+    id: 'aunt', role: 'Aunt', name: 'Laura', avatar: '👩‍🦰',
+    desc: "Carlos's sister. She has reddish hair and is a creative landscape painter.",
+    descEs: "Hermana de Carlos. Tiene cabello rojizo y es pintora.",
+    intro: "Hello! I am Aunt Laura."
+  },
+  {
+    id: 'cousin', role: 'Cousin', name: 'Mia', avatar: '🧒',
+    desc: "David's daughter. She is ten years old and practices gymnastics every day.",
+    descEs: "Hija de David. Tiene 10 años y hace gimnasia.",
+    intro: "Hi! I am Mia, Maya's cousin."
+  },
+  {
+    id: 'friend_boy', role: 'Best Friend', name: 'Alex', avatar: '👦',
+    desc: "Maya's classmate. He is ten years old, funny, and plays basketball.",
+    descEs: "Compañero de clase de Maya. Tiene 10 años y juega básquetbol.",
+    intro: "Hey there! I am Alex."
+  },
+  {
+    id: 'friend_girl', role: 'Best Friend', name: 'Lily', avatar: '👧',
+    desc: "Maya's friend. She is nine years old, smart, and reads science fiction books.",
+    descEs: "Amiga de Maya. Tiene 9 años y lee ciencia ficción.",
+    intro: "Hi! I am Lily, Maya's friend."
+  }
 ];
 
 const detectiveClues = [
@@ -213,49 +273,49 @@ const detectiveClues = [
     targetId: 'grandmother',
     clueEn: "She is Carlos's mother and Maya's grandmother. She loves baking cookies.",
     clueEs: "Ella es la madre de Carlos y abuela de Maya. Le encanta hornear galletas.",
-    hint: "Busca a: Grandmother (Elena)"
+    hint: "Busca la tarjeta con la descripción: 'Carlos's mother... loves baking warm cookies.'"
   },
   {
     targetId: 'uncle',
     clueEn: "He is Maya's uncle. He has a beard and plays the electric guitar.",
     clueEs: "Él es el tío de Maya. Tiene barba y toca la guitarra eléctrica.",
-    hint: "Busca a: Uncle (David)"
+    hint: "Busca la tarjeta: 'Carlos's brother... plays the electric guitar.'"
   },
   {
     targetId: 'brother',
     clueEn: "He is Maya's little brother. He is seven years old and loves dinosaurs.",
     clueEs: "Él es el hermanito de Maya. Tiene 7 años y ama los dinosaurios.",
-    hint: "Busca a: Brother (Leo)"
+    hint: "Busca la tarjeta: 'Maya's younger brother... seven years old.'"
   },
   {
     targetId: 'mother',
     clueEn: "She is Maya's mother. She is forty years old and works as a doctor.",
     clueEs: "Ella es la madre de Maya. Tiene 40 años y trabaja como médica.",
-    hint: "Busca a: Mother (Sofia)"
+    hint: "Busca la tarjeta: 'Maya's mother... kind doctor at the hospital.'"
   },
   {
     targetId: 'grandfather',
     clueEn: "He is seventy-two years old and Maya's grandfather. He wears glasses.",
     clueEs: "Tiene 72 años y es el abuelo de Maya. Usa lentes.",
-    hint: "Busca a: Grandfather (Robert)"
+    hint: "Busca la tarjeta: 'Carlos's father... seventy-two years old, wears glasses.'"
   },
   {
     targetId: 'friend_boy',
     clueEn: "He is Maya's best friend at school. He is ten years old and plays basketball.",
     clueEs: "Es el mejor amigo de Maya en la escuela. Tiene 10 años y juega básquetbol.",
-    hint: "Busca a: Best Friend (Alex)"
+    hint: "Busca la tarjeta: 'Maya's classmate... plays basketball.'"
   },
   {
     targetId: 'aunt',
     clueEn: "She is Maya's aunt with reddish hair. She is a friendly painter.",
     clueEs: "Ella es la tía de Maya con cabello rojizo. Es una pintora amigable.",
-    hint: "Busca a: Aunt (Laura)"
+    hint: "Busca la tarjeta: 'Carlos's sister... creative landscape painter.'"
   },
   {
     targetId: 'baby',
     clueEn: "He is only one year old and he is the youngest in the family.",
     clueEs: "Tiene solo 1 año de edad y es el más pequeño de la familia.",
-    hint: "Busca a: Baby Brother (Lucas)"
+    hint: "Busca la tarjeta: 'The youngest family member... one year old.'"
   }
 ];
 
@@ -265,19 +325,41 @@ function renderFamilyTree() {
   const grid = document.getElementById('familyTreeGrid');
   if (!grid) return;
 
-  grid.innerHTML = familyMembersData.map(person => `
-    <div class="person-card" id="card-${person.id}" onclick="selectPersonCard('${person.id}')">
-      <div class="person-avatar">${person.avatar}</div>
-      <div class="person-role">${person.role}</div>
-      <div class="person-name">${person.name}</div>
-      <span class="person-trait-pill">${person.trait}</span>
-      <div style="margin-top:8px;">
-        <button class="chat-listen-btn" onclick="event.stopPropagation(); speakEnglish('${person.intro.replace(/'/g, "\\'")}', 'kid')">
-          🔊 Escuchar
-        </button>
+  grid.innerHTML = familyMembersData.map((person, idx) => `
+    <div class="mystery-flip-card" id="card-${person.id}">
+      <div class="mystery-card-inner">
+        
+        <!-- FRENTE: CARTA OCULTA / EXPEDIENTE MISTERIOSO -->
+        <div class="mystery-card-face mystery-card-front" onclick="flipDetectiveCard('${person.id}')">
+          <span class="case-file-badge">📁 FILE #${idx + 1}</span>
+          <div class="mystery-silhouette-avatar">🕵️‍♂️</div>
+          <div class="mystery-question-title">Sospechoso #${idx + 1}</div>
+          <span class="mystery-tap-hint">Toca para voltear y leer perfil 🔄</span>
+        </div>
+
+        <!-- REVERSO: PERFIL DESCRIPTIVO EN INGLÉS -->
+        <div class="mystery-card-face mystery-card-back">
+          <div class="back-avatar">${person.avatar}</div>
+          <div class="back-name">${person.name}</div>
+          <div class="back-desc-en">"${person.desc}"</div>
+          <div class="back-desc-es">${person.descEs}</div>
+          <div class="back-actions">
+            <button class="btn-flip-back" onclick="flipDetectiveCard('${person.id}')">🔄 Voltear</button>
+            <button class="btn-solve-detective" onclick="confirmDetectiveTarget('${person.id}')">🎯 ¡Es él/ella!</button>
+          </div>
+        </div>
+
       </div>
     </div>
   `).join('');
+}
+
+function flipDetectiveCard(personId) {
+  sfx.playPop();
+  const card = document.getElementById(`card-${personId}`);
+  if (card) {
+    card.classList.toggle('is-flipped');
+  }
 }
 
 function loadDetectiveClue(index) {
@@ -289,14 +371,15 @@ function loadDetectiveClue(index) {
   document.getElementById('clueTextEs').textContent = clue.clueEs;
   document.getElementById('clueFeedback').textContent = '';
 
-  document.querySelectorAll('.person-card').forEach(c => {
-    c.classList.remove('correct-target', 'wrong-target');
+  // Voltear todas las cartas al frente para el nuevo misterio
+  document.querySelectorAll('.mystery-flip-card').forEach(c => {
+    c.classList.remove('is-flipped', 'correct-target', 'wrong-target');
   });
 
   speakEnglish(clue.clueEn, 'host');
 }
 
-function selectPersonCard(personId) {
+function confirmDetectiveTarget(personId) {
   sfx.playPop();
   const clue = detectiveClues[currentClueIndex];
   const card = document.getElementById(`card-${personId}`);
@@ -304,24 +387,24 @@ function selectPersonCard(personId) {
   if (personId === clue.targetId) {
     sfx.playSuccess();
     card.classList.add('correct-target');
-    AppState.addStars(15);
+    AppState.addStars(20);
 
     const person = familyMembersData.find(p => p.id === personId);
     document.getElementById('clueFeedback').innerHTML = `
-      <span style="color:#15803d; font-weight:700;">🌟 ¡Correcto! Es ${person.role} (${person.name}). +15 pts</span>
+      <span style="color:#15803d; font-weight:700;">🌟 ¡Caso Resuelto! Es ${person.name} (${person.role}). +20 pts</span>
     `;
 
-    speakEnglish(`Correct! That is ${person.name}, the ${person.role}.`, 'host', () => {
+    speakEnglish(`Case solved! That is ${person.name}, the ${person.role}.`, 'host', () => {
       setTimeout(() => {
         if (currentClueIndex < detectiveClues.length - 1) {
           loadDetectiveClue(currentClueIndex + 1);
         } else {
           sfx.playFanfare();
           document.getElementById('clueFeedback').innerHTML = `
-            <span style="color:#7c3aed; font-weight:700;">🎉 ¡Resolviste todos los misterios del árbol familiar!</span>
+            <span style="color:#7c3aed; font-weight:700;">🎉 ¡Felicitaciones Detective! Descifraste todos los expedientes secretos.</span>
           `;
         }
-      }, 1200);
+      }, 1400);
     });
 
   } else {
@@ -329,7 +412,7 @@ function selectPersonCard(personId) {
     card.classList.add('wrong-target');
     setTimeout(() => card.classList.remove('wrong-target'), 600);
     document.getElementById('clueFeedback').innerHTML = `
-      <span style="color:#dc2626; font-weight:600;">Pista: ${clue.hint}</span>
+      <span style="color:#dc2626; font-weight:600;">No coincide con la pista. Lee con atención la descripción del reverso.</span>
     `;
   }
 }
