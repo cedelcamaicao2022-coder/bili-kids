@@ -791,6 +791,21 @@ function finishStoryCelebration() {
   if (progressBar) progressBar.style.width = '100%';
 
   const sc = RealWorldScenarios[currentScenarioKey];
+  const scenarioKeys = ['school', 'shopping', 'cinema', 'airport', 'pizza', 'hobbies'];
+  const currentIndex = scenarioKeys.indexOf(currentScenarioKey);
+  const isLast = currentIndex === scenarioKeys.length - 1;
+  const nextIndex = isLast ? 0 : currentIndex + 1;
+  const nextKey = scenarioKeys[nextIndex];
+  const nextSc = RealWorldScenarios[nextKey];
+
+  const scenarioIcons = {
+    school: '🏫',
+    shopping: '🛍️',
+    cinema: '🎬',
+    airport: '✈️',
+    pizza: '🍕',
+    hobbies: '🎮'
+  };
 
   if (decisionContainer) {
     decisionContainer.innerHTML = `
@@ -809,9 +824,9 @@ function finishStoryCelebration() {
             <span>🔄</span>
             <span>Repetir este Escenario</span>
           </button>
-          <button class="btn-builder btn-builder-check" onclick="switchScenario('shopping', document.querySelectorAll('.scenario-chip-btn')[1])">
-            <span>🛍️</span>
-            <span>Siguiente Escenario: De Compras ➔</span>
+          <button class="btn-builder btn-builder-check" onclick="switchScenario('${nextKey}', document.querySelectorAll('.scenario-chip-btn')[${nextIndex}])">
+            <span>${scenarioIcons[nextKey] || '➔'}</span>
+            <span>${isLast ? 'Reiniciar Ciclo: Escuela ➔' : `Siguiente: ${nextSc.title} ➔`}</span>
           </button>
         </div>
       </div>
