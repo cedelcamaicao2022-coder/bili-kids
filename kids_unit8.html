@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=no">
+  <title>Bilikids • Unit 8: Shopping & The Mall Obby Run (Movers A2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kids_unit8_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <header class="unit-top-navbar">
+    <a href="kids.html" class="btn-back-map">
+      <span>⬅</span>
+      <span>Mapa de Misiones</span>
+    </a>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="unit-tag-pill">Unit 8 • Movers A2</span>
+      <div class="unit-stars-pill">
+        <span>⭐</span>
+        <span id="unitStarsCount">0 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO DE LA UNIDAD 8 -->
+  <section class="unit-hero">
+    <div class="unit-hero-content">
+      <div class="unit-hero-subtitle">Misión de Nivel A2 • Cambridge Young Learners</div>
+      <h1 class="unit-hero-title">🛍️ Shopping & The Mall Obby Run</h1>
+      <p class="unit-hero-desc">
+        ¡Explora el gran centro comercial con Barnaby! Juega el videojuego de plataformas Obby 2D en tiempo real, asalta los cofres de oro estilo Blooket, atiende a los clientes en la caja registradora táctil y graba tu transmisión de compras en vivo.
+      </p>
+    </div>
+  </section>
+
+  <!-- BARRA DE PESTAÑAS (TAB SELECTOR) -->
+  <nav class="activity-tabs-bar">
+    <div class="activity-tabs-container">
+      <button class="tab-btn active" onclick="switchTab('obby', this)">
+        <span>🏃‍♂️</span>
+        <span>Mall Obby 2D</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('goldquest', this)">
+        <span>💎</span>
+        <span>Blooket Gold Quest</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('cashier', this)">
+        <span>🛒</span>
+        <span>Cajero Táctil POS</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('vlogger', this)">
+        <span>🎙️</span>
+        <span>Mall Vlogger Studio</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL DE ACTIVIDADES -->
+  <main class="unit-main-container">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (VIDEOJUEGO CANVAS)
+         ==================================================================== -->
+    <section id="view-obby" class="activity-view active-view">
+      <div class="obby-game-container">
+
+        <div class="obby-stage-header">
+          <div>
+            <h2 id="obbyStageTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#4c1d95;">
+              Stage 1 • The Sneaker & Fashion Boutique 👟
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Usa las flechas del teclado o los botones táctiles para saltar plataformas, esquivar obstáculos y recolectar ropa.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="btn-back-map" style="background:#f5f3ff; color:#7c3aed; border-color:#ddd6fe; cursor:pointer;" onclick="restartObbyStage()">
+              <span>🔄 Reiniciar Nivel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra HUD del Obby -->
+        <div class="obby-hud-bar">
+          <div class="obby-hud-item">
+            <span>🐻 Jugador: <strong>Barnaby</strong></span>
+          </div>
+          <div class="obby-hud-item" id="obbyCoinsBadge">
+            🪙 Monedas: 0
+          </div>
+          <div class="obby-hud-item">
+            <span>🏁 Meta: Desbloquear Puerta</span>
+          </div>
+        </div>
+
+        <!-- Canvas del Videojuego 2D -->
+        <div class="obby-canvas-wrapper">
+          <canvas id="obbyCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <!-- Misión Pedagógica del Nivel -->
+        <div class="obby-gate-challenge-box">
+          <div style="flex-grow:1;">
+            <div id="obbyGatePromptEn" class="obby-gate-prompt-en">
+              🎯 Mission: "Find THIS blue jacket and THESE white boots to unlock the fashion gate!"
+            </div>
+            <div id="obbyGatePromptEs" class="obby-gate-prompt-es">
+              ¡Encuentra ESTA chaqueta azul y ESTAS botas blancas para abrir la puerta de moda!
+            </div>
+          </div>
+          <div>
+            <button class="btn-back-map" style="background:#7c3aed; color:#ffffff; border-color:#7c3aed; cursor:pointer;" onclick="listenObbyPrompt()">
+              🔊 Escuchar Misión
+            </button>
+          </div>
+        </div>
+
+        <!-- Controles Táctiles Virtuales en Pantalla -->
+        <div class="obby-touch-controls">
+          <div class="touch-dpad">
+            <button class="touch-btn" id="touchBtnLeft" title="Mover Izquierda">◀</button>
+            <button class="touch-btn" id="touchBtnRight" title="Mover Derecha">▶</button>
+          </div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; text-align:center;">
+            Controles: Flechas o A/D para moverte • Espacio para saltar
+          </div>
+          <div>
+            <button class="touch-btn touch-btn-jump" id="touchBtnJump" title="Saltar">⬆ SALTO</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
+         ==================================================================== -->
+    <section id="view-goldquest" class="activity-view">
+      <div class="gold-quest-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#78350f;">
+              <span>💎</span> Blooket Gold Quest: Incursión en los Cofres del Mall
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Responde correctamente en inglés para ganar la llave y abrir uno de los 3 cofres misteriosos con oro.
+            </div>
+          </div>
+          <div>
+            <span class="unit-tag-pill" id="goldRoundBadge" style="background:linear-gradient(135deg, #d97706, #f59e0b);">
+              Ronda 1 de 8
+            </span>
+          </div>
+        </div>
+
+        <!-- Marcador de Oro estilo Blooket -->
+        <div class="gold-scoreboard">
+          <div>
+            <span style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:#fde68a;">Tu Botín de Oro:</span>
+            <div id="goldTotalCounter" style="font-family:var(--font-display); font-size:1.8rem; font-weight:900;">0 🪙</div>
+          </div>
+          <div style="text-align:right;">
+            <span style="background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px; font-size:0.85rem;">
+              👑 Blooket Mode Active
+            </span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Pregunta en Inglés -->
+        <div id="goldQuestionContainer" style="background:#fefce8; border:2px solid #fef08a; border-radius:20px; padding:22px; margin-bottom:20px;">
+          <div id="goldQuestionPromptEn" style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:#713f12; margin-bottom:6px;">
+            ❓ Look at the sweater in my hands! How do we describe it?
+          </div>
+          <div id="goldQuestionPromptEs" style="font-size:0.92rem; color:#854d0e; font-style:italic; margin-bottom:16px;">
+            ¡Mira el suéter en mis manos! ¿Cómo lo describimos?
+          </div>
+
+          <div class="lilypads-grid" id="goldOptionsGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;">
+            <!-- Opciones inyectadas por JS -->
+          </div>
+          <div id="goldFeedbackBox"></div>
+        </div>
+
+        <!-- Campo de Cofres Misteriosos (se activa al acertar) -->
+        <div id="goldChestsPlayfield" style="display:none; text-align:center;">
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:800; color:#78350f; margin-bottom:6px;">
+            🎁 ¡Elige 1 Cofre Misterioso para Revelar tu Premio!
+          </h3>
+          <p style="font-size:0.9rem; color:#92400e; margin-bottom:16px;">
+            ¿Habrá monedas de oro, tarjeta diamante o multiplicador 2X? ¡Toca con sabiduría!
+          </p>
+
+          <div class="gold-chests-grid" id="mysteryChestsGrid">
+            <!-- 3 cofres inyectados por JS -->
+          </div>
+          <div id="chestResultFeedback"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: 🛒 TACTILE CASHIER SCANNER & BAGGING CONVEYOR
+         ==================================================================== -->
+    <section id="view-cashier" class="activity-view">
+      <div class="cashier-sim-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0369a1;">
+              <span>🛒</span> Cajero Táctil POS: Supermarket Scanner & Checkout
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Escucha el pedido del cliente en inglés, toca los artículos correspondientes en la cinta transportadora y calcula el total.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="cashierOrderBadge" style="background:linear-gradient(135deg, #0284c7, #06b6d4);">
+              Cliente 1 de 6
+            </span>
+            <button class="btn-back-map" style="background:#f0f9ff; color:#0369a1; border-color:#bae6fd; cursor:pointer;" onclick="nextCashierOrder()">
+              <span>Siguiente Cliente ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bocadillo del Cliente -->
+        <div style="background:#e0f2fe; border:2px solid #7dd3fc; border-radius:18px; padding:18px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+          <div style="flex-grow:1;">
+            <div id="cashierCustomerPromptEn" style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:#0369a1;">
+              "Hello! I would like to buy this green shirt and that blue watch, please."
+            </div>
+            <div id="cashierCustomerPromptEs" style="font-size:0.9rem; color:#0284c7; font-style:italic; margin-top:4px;">
+              Emma 👧: ¡Hola! Me gustaría comprar esta camisa verde y ese reloj azul, por favor.
+            </div>
+          </div>
+          <div>
+            <button class="btn-back-map" style="background:#0284c7; color:#ffffff; border-color:#0284c7; cursor:pointer;" onclick="listenCashierCustomer()">
+              🔊 Escuchar Pedido
+            </button>
+          </div>
+        </div>
+
+        <!-- Pantalla Digital de la Caja Registradora -->
+        <div class="cashier-register-screen" id="cashierScreenText">
+          <div>>> BILIKIDS SUPERMARKET POS SYSTEM <<</div>
+          <div>ITEMS SCANNED: 0</div>
+          <div style="color:#f59e0b; font-size:1.25rem; font-weight:800; margin-top:6px;">TOTAL AMOUNT: $0.00 USD</div>
+        </div>
+
+        <div class="barcode-laser-line"></div>
+
+        <!-- Cinta Transportadora de Artículos -->
+        <div style="font-family:var(--font-display); font-size:0.92rem; font-weight:700; color:#334155; margin-bottom:8px;">
+          🏷️ Toca los artículos en la cinta transportadora para escanearlos con el láser:
+        </div>
+        <div class="cashier-conveyor-belt" id="cashierBeltContainer">
+          <!-- Artículos inyectados por JS -->
+        </div>
+
+        <div id="cashierFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: 🎙️ MALL VLOGGER & SHOPPING INFLUENCER STUDIO
+         ==================================================================== -->
+    <section id="view-vlogger" class="activity-view">
+      <div class="vlogger-studio-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#831843;">
+              <span>🎙️</span> Mall Vlogger: Transmisión en Vivo de Compras (Speaking Quest)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              ¡Eres un influencer de compras en el mall! Lee tu guion frente a miles de espectadores en vivo para ganar rating.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="vloggerHaulBadge" style="background:linear-gradient(135deg, #ec4899, #db2777);">
+              Video 1 de 6
+            </span>
+            <button class="btn-back-map" style="background:#fdf2f8; color:#be185d; border-color:#fbcfe8; cursor:pointer;" onclick="nextVloggerScript()">
+              <span>Siguiente Video ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Estudio con Teleprompter -->
+        <div class="vlogger-live-card">
+          <div class="vlogger-live-badge">
+            <span>●</span>
+            <span>LIVE NOW</span>
+          </div>
+
+          <div id="vloggerLiveViewers" style="font-family:monospace; font-size:0.95rem; font-weight:700; color:#f472b6; letter-spacing:1px; margin-bottom:12px;">
+            120K Viewers Live 🔥
+          </div>
+
+          <div class="vlogger-teleprompter" id="vloggerTeleprompterText">
+            "Hey everyone! Look at these awesome white sneakers I bought today! They are super comfortable."
+          </div>
+          <div id="vloggerTeleprompterEs" style="font-size:0.95rem; color:#fbcfe8; font-style:italic; margin-bottom:18px;">
+            ¡Hola a todos! ¡Miren estas increíbles zapatillas blancas que compré hoy! Son supercómodas.
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="background:rgba(236,72,153,0.25); color:#ffffff; border-color:#ffffff; cursor:pointer;" onclick="listenVloggerModel()">
+              🔊 Escuchar Modelo del Influencer
+            </button>
+          </div>
+
+          <!-- Botón de Micrófono -->
+          <div style="margin:24px 0 10px;">
+            <button class="btn-vlogger-mic" id="vloggerMicBtn" onclick="toggleVloggerMic()" title="Grabar tu reseña en vivo">
+              🎙️
+            </button>
+            <div style="font-size:0.85rem; color:#fbcfe8; margin-top:10px;">
+              Toca el micrófono y lee el guion en voz alta en inglés
+            </div>
+          </div>
+
+          <div id="vloggerFeedbackBox" style="margin-top:14px;"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit8_engine.js?v=1.0"></script>
+</body>
+</html>

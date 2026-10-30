@@ -1,0 +1,607 @@
+/* ============================================================================
+   BILIKIDS KIDS CLUB - UNIDAD 8: SHOPPING & THE MALL OBBY RUN
+   Estilos vibrantes inspirados en Roblox Obbies, Stumble Guys y Blooket Gold Quest
+   ============================================================================ */
+
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --mall-purple: #8b5cf6;
+  --mall-purple-dark: #6d28d9;
+  --mall-pink: #ec4899;
+  --mall-gold: #f59e0b;
+  --mall-cyan: #06b6d4;
+  --mall-emerald: #10b981;
+  --mall-bg: #0f172a;
+  --mall-card-bg: #ffffff;
+  
+  --shadow-obby: 0 12px 32px rgba(139, 92, 246, 0.25);
+  --shadow-neon: 0 0 20px rgba(236, 72, 153, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #f8fafc;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   NAVBAR SUPERIOR Y CONTADOR DE ESTRELLAS
+   -------------------------------------------------------------------------- */
+.unit-top-navbar {
+  background: #ffffff;
+  border-bottom: 2px solid #ede9fe;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.btn-back-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f3ff;
+  color: var(--mall-purple-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid #ddd6fe;
+  transition: all 0.2s ease;
+}
+
+.btn-back-map:hover {
+  background: #ede9fe;
+  transform: translateX(-3px);
+}
+
+.unit-tag-pill {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.unit-stars-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.unit-stars-pill.pulse-star {
+  animation: pulseStar 0.6s ease;
+}
+
+@keyframes pulseStar {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); background: #fef08a; }
+  100% { transform: scale(1); }
+}
+
+/* --------------------------------------------------------------------------
+   HERO BANNER DE LA UNIDAD 8
+   -------------------------------------------------------------------------- */
+.unit-hero {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+  color: #ffffff;
+  padding: 32px 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.unit-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.unit-hero-content {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.unit-hero-subtitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f5d0fe;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.unit-hero-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.unit-hero-desc {
+  font-size: 1.05rem;
+  color: #fae8ff;
+  max-width: 720px;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   PESTAÑAS DE ACTIVIDADES (TAB SELECTOR)
+   -------------------------------------------------------------------------- */
+.activity-tabs-bar {
+  background: #ffffff;
+  border-bottom: 2px solid #ede9fe;
+  padding: 8px 24px;
+}
+
+.activity-tabs-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.activity-tabs-container::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  color: #64748b;
+  border: 2px solid transparent;
+  padding: 10px 18px;
+  border-radius: 16px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: #f5f3ff;
+  color: var(--mall-purple-dark);
+  border-color: #c4b5fd;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   CONTENEDOR PRINCIPAL DE VISTAS
+   -------------------------------------------------------------------------- */
+.unit-main-container {
+  max-width: 1040px;
+  margin: 28px auto 40px;
+  padding: 0 20px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.activity-view {
+  display: none;
+  animation: fadeInView 0.3s ease;
+}
+
+.activity-view.active-view {
+  display: block;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   ACTIVIDAD 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (HTML5 CANVAS VIDEO GAME)
+   ========================================================================== */
+.obby-game-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-obby);
+  border: 2px solid #ddd6fe;
+}
+
+.obby-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.obby-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1e1b4b;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 16px 16px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.obby-hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Contenedor del Canvas de Juego */
+.obby-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  background: #0f172a;
+  border: 3px solid #6d28d9;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: inset 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+#obbyCanvas {
+  display: block;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+  image-rendering: pixelated;
+}
+
+/* Banner de misión pedagógica dentro del Obby */
+.obby-gate-challenge-box {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  border: 2px solid #c084fc;
+  border-radius: 16px;
+  padding: 14px 20px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.obby-gate-prompt-en {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #6b21a8;
+}
+
+.obby-gate-prompt-es {
+  font-size: 0.88rem;
+  color: #7e22ce;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Controles en Pantalla para Tablets y Celulares */
+.obby-touch-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 10px 16px;
+  background: #f1f5f9;
+  border-radius: 18px;
+  border: 1px solid #cbd5e1;
+}
+
+.touch-dpad {
+  display: flex;
+  gap: 12px;
+}
+
+.touch-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #ffffff;
+  font-size: 1.5rem;
+  border: 2px solid #a78bfa;
+  box-shadow: 0 6px 14px rgba(109, 40, 217, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s;
+}
+
+.touch-btn:active {
+  transform: scale(0.92);
+  background: #5b21b6;
+}
+
+.touch-btn-jump {
+  width: 100px;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  border-color: #f472b6;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   ACTIVIDAD 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
+   ========================================================================== */
+.gold-quest-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-obby);
+  border: 2px solid #fed7aa;
+}
+
+.gold-scoreboard {
+  background: linear-gradient(135deg, #78350f 0%, #b45309 100%);
+  border: 3px solid #f59e0b;
+  border-radius: 18px;
+  padding: 14px 22px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+.gold-chest-card {
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  border: 3px solid #f59e0b;
+  border-radius: 20px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
+  user-select: none;
+}
+
+.gold-chest-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 14px 30px rgba(245, 158, 11, 0.35);
+  border-color: #d97706;
+}
+
+.gold-chest-icon {
+  font-size: 3.5rem;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gold-chest-card:hover .gold-chest-icon {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.gold-chests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .gold-chests-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   ACTIVIDAD 3: 🛒 TACTILE CASHIER SCANNER & BAGGING CONVEYOR
+   ========================================================================== */
+.cashier-sim-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-obby);
+  border: 2px solid #bae6fd;
+}
+
+.cashier-register-screen {
+  background: #0f172a;
+  border: 4px solid #0284c7;
+  border-radius: 18px;
+  padding: 16px 22px;
+  color: #38bdf8;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 20px rgba(2, 132, 199, 0.4);
+}
+
+.cashier-conveyor-belt {
+  background: repeating-linear-gradient(90deg, #334155, #334155 30px, #1e293b 30px, #1e293b 60px);
+  border: 3px solid #475569;
+  border-radius: 16px;
+  padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.market-item-card {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 110px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  user-select: none;
+}
+
+.market-item-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: #0284c7;
+  box-shadow: 0 10px 22px rgba(2, 132, 199, 0.25);
+}
+
+.market-item-card.scanned {
+  border-color: #10b981;
+  background: #ecfdf5;
+  opacity: 0.6;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.barcode-laser-line {
+  height: 3px;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+  animation: laserSweep 1.5s ease-in-out infinite alternate;
+  margin: 8px 0;
+}
+
+@keyframes laserSweep {
+  0% { transform: scaleX(0.4); opacity: 0.5; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   ACTIVIDAD 4: 🎙️ MALL VLOGGER & SHOPPING INFLUENCER STUDIO
+   ========================================================================== */
+.vlogger-studio-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-obby);
+  border: 2px solid #fbcfe8;
+}
+
+.vlogger-live-card {
+  background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%);
+  border: 3px solid #ec4899;
+  border-radius: 22px;
+  padding: 26px 20px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-neon);
+}
+
+.vlogger-live-badge {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  background: #ef4444;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: pulseLive 1.2s infinite;
+}
+
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.vlogger-teleprompter {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #fdf2f8;
+  max-width: 680px;
+  margin: 20px auto 8px;
+}
+
+.btn-vlogger-mic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  border: 4px solid #ffffff;
+  color: #ffffff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-vlogger-mic:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(236, 72, 153, 0.55);
+}
+
+.btn-vlogger-mic.recording {
+  background: #ef4444;
+  animation: pulseMic 0.8s infinite alternate;
+}
+
+@keyframes pulseMic {
+  0% { transform: scale(1); box-shadow: 0 0 12px #ef4444; }
+  100% { transform: scale(1.15); box-shadow: 0 0 28px #ef4444; }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
