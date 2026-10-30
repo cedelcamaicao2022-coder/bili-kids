@@ -271,9 +271,10 @@ function speakWordCard(text, cardEl) {
 }
 
 // ============================================================================
-// ACTIVITY 3: SENTENCE BUILDER (Grammar Lab)
+// ACTIVITY 3: SENTENCE BUILDER (Grammar Lab - 25 Retos Curriculares)
 // ============================================================================
 const sentenceChallenges = [
+  // 1-5: Saludos e Identidad básica con Verbo Be
   {
     es: "Hola, yo soy Maya.",
     target: ["Hello,", "I", "am", "Maya."],
@@ -303,6 +304,134 @@ const sentenceChallenges = [
     target: ["Nice", "to", "meet", "you,", "Alex!"],
     pool: ["Nice", "you,", "meet", "to", "Alex!", "Good"],
     tip: "Expresión común para saludar a alguien por primera vez."
+  },
+
+  // 6-10: Nombres, edades y saludos cotidianos
+  {
+    es: "Mi nombre es David.",
+    target: ["My", "name", "is", "David."],
+    pool: ["My", "name", "is", "David.", "are", "am"],
+    tip: "Para 'My name' (tercera persona singular) usamos 'is'."
+  },
+  {
+    es: "Tengo nueve años.",
+    target: ["I", "am", "nine", "years", "old."],
+    pool: ["I", "am", "nine", "years", "old.", "have", "is"],
+    tip: "En inglés la edad se dice con 'am' (verbo be), no con 'have'."
+  },
+  {
+    es: "¡Buenos días, profesora!",
+    target: ["Good", "morning,", "teacher!"],
+    pool: ["Good", "morning,", "teacher!", "night,", "afternoon,"],
+    tip: "'Good morning' se usa por las mañanas."
+  },
+  {
+    es: "¿Cómo estás hoy?",
+    target: ["How", "are", "you", "today?"],
+    pool: ["How", "are", "you", "today?", "is", "am"],
+    tip: "Pregunta típica de saludo: How + are + you + today?"
+  },
+  {
+    es: "Estoy muy bien, gracias.",
+    target: ["I", "am", "very", "good,", "thank", "you."],
+    pool: ["I", "am", "very", "good,", "thank", "you.", "are", "bad,"],
+    tip: "Respuesta positiva cordial a 'How are you?'."
+  },
+
+  // 11-15: Preguntas Sí/No, respuestas cortas y datos personales
+  {
+    es: "¿Eres un estudiante nuevo?",
+    target: ["Are", "you", "a", "new", "student?"],
+    pool: ["Are", "you", "a", "new", "student?", "is", "an"],
+    tip: "En preguntas de Sí/No el verbo 'Are' va primero."
+  },
+  {
+    es: "Sí, yo soy.",
+    target: ["Yes,", "I", "am."],
+    pool: ["Yes,", "I", "am.", "are.", "is."],
+    tip: "Respuesta corta afirmativa formal."
+  },
+  {
+    es: "No, no lo soy.",
+    target: ["No,", "I", "am", "not."],
+    pool: ["No,", "I", "am", "not.", "are", "is"],
+    tip: "Para negar en presente usamos 'am not'."
+  },
+  {
+    es: "¿Cuál es tu primer nombre?",
+    target: ["What", "is", "your", "first", "name?"],
+    pool: ["What", "is", "your", "first", "name?", "are", "last"],
+    tip: "'First name' se refiere al nombre de pila."
+  },
+  {
+    es: "Mi apellido es Gómez.",
+    target: ["My", "last", "name", "is", "Gomez."],
+    pool: ["My", "last", "name", "is", "Gomez.", "are", "first"],
+    tip: "'Last name' es el apellido familiar."
+  },
+
+  // 16-20: Amigos, números de contacto y despedidas
+  {
+    es: "Nosotros somos buenos amigos.",
+    target: ["We", "are", "good", "friends."],
+    pool: ["We", "are", "good", "friends.", "is", "am"],
+    tip: "Sujeto plural 'We' siempre se combina con 'are'."
+  },
+  {
+    es: "¿Cuál es tu número de teléfono?",
+    target: ["What", "is", "your", "phone", "number?"],
+    pool: ["What", "is", "your", "phone", "number?", "are", "my"],
+    tip: "Pregunta informativa para pedir contacto."
+  },
+  {
+    es: "Es cinco, cuatro, tres, dos, uno.",
+    target: ["It", "is", "five,", "four,", "three,", "two,", "one."],
+    pool: ["It", "is", "five,", "four,", "three,", "two,", "one.", "are"],
+    tip: "En números de teléfono decimos dígito por dígito con 'It is'."
+  },
+  {
+    es: "¡Hasta luego, amigo!",
+    target: ["See", "you", "later,", "friend!"],
+    pool: ["See", "you", "later,", "friend!", "Good", "tomorrow,"],
+    tip: "Despedida informal para ver a alguien después."
+  },
+  {
+    es: "¡Adiós, que tengas un buen día!",
+    target: ["Goodbye,", "have", "a", "nice", "day!"],
+    pool: ["Goodbye,", "have", "a", "nice", "day!", "night!", "week!"],
+    tip: "Despedida amigable y respetuosa."
+  },
+
+  // 21-25: Clase escolar, edades y bienvenida
+  {
+    es: "Tú estás en mi clase de inglés.",
+    target: ["You", "are", "in", "my", "English", "class."],
+    pool: ["You", "are", "in", "my", "English", "class.", "is", "am"],
+    tip: "'You' siempre se conjuga con 'are'."
+  },
+  {
+    es: "¿Estamos listos para la escuela?",
+    target: ["Are", "we", "ready", "for", "school?"],
+    pool: ["Are", "we", "ready", "for", "school?", "is", "am"],
+    tip: "Pregunta en plural con 'we': 'Are we...?'"
+  },
+  {
+    es: "¡Sí, nosotros estamos listos!",
+    target: ["Yes,", "we", "are", "ready!"],
+    pool: ["Yes,", "we", "are", "ready!", "is", "am"],
+    tip: "'We are' expresa la primera persona plural."
+  },
+  {
+    es: "Tengo ocho años.",
+    target: ["I", "am", "eight", "years", "old."],
+    pool: ["I", "am", "eight", "years", "old.", "seven", "is"],
+    tip: "Recuerda: 'I am' + número + 'years old'."
+  },
+  {
+    es: "¡Bienvenido a nuestra escuela!",
+    target: ["Welcome", "to", "our", "school!"],
+    pool: ["Welcome", "to", "our", "school!", "in", "at"],
+    tip: "Expresión de bienvenida: 'Welcome to...'."
   }
 ];
 
