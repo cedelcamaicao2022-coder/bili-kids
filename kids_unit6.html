@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 6: Neighborhoods | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit6_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 6 • A1-A2</span>
+        <h1 class="unit-name-head">Neighborhoods</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">180 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('map', this)">
+        <span>🗺️</span>
+        <span>Mapa de la Ciudad</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('inspector', this)">
+        <span>🏢</span>
+        <span>Sello del Inspector</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('gps', this)">
+        <span>🧭</span>
+        <span>Brújula GPS</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tour', this)">
+        <span>🚌</span>
+        <span>Tour Bus Guide</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: INTERACTIVE CITY MAP (NAVEGANTE DEL MAPA DE LA CIUDAD)
+         ==================================================================== -->
+    <section id="view-map" class="activity-view active-view">
+      <div class="city-map-container">
+        
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🗺️</span> Navegante del Mapa de la Ciudad (Places in Town)
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Lee la necesidad del residente del barrio, escucha el audio y toca el pin del lugar correcto en el mapa.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="cityMissionBadge">Misión 1 de 8</span>
+            <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextCityMission()">
+              <span>Siguiente Misión ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Misión del Residente -->
+        <div class="city-mission-card">
+          <div style="flex-grow:1;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="unit-tag-pill">TOWN RESIDENT CALL 📞</span>
+              <strong id="cityMissionTitle" style="color:#0f172a; font-family:var(--font-display); font-size:1.15rem;">
+                The Scent of Warm Bread 🥖
+              </strong>
+            </div>
+
+            <div id="cityPromptEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
+              "I want to buy fresh warm bread and chocolate croissants for breakfast."
+            </div>
+            <div id="cityPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic; margin-bottom:8px;">
+              Quiero comprar pan caliente fresco y cruasanes de chocolate para el desayuno.
+            </div>
+
+            <div id="cityMissionClue" style="font-size:0.9rem; color:#0369a1; background:rgba(2,132,199,0.1); padding:6px 14px; border-radius:10px; display:inline-block;">
+              💡 <strong>Pista de Navegación:</strong> ¿Dónde se compra pan recién horneado y pasteles?
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenCityPrompt()">
+              🔊 Escuchar Petición
+            </button>
+          </div>
+        </div>
+
+        <!-- Pregunta Explícita del Mapa -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#0369a1; margin:16px 0 8px; display:flex; align-items:center; gap:6px;">
+          <span>📍</span>
+          <span>Where should the resident go? / ¿A qué lugar debe dirigirse el residente?:</span>
+        </div>
+
+        <!-- Grid de Pines de Lugares en la Ciudad -->
+        <div class="city-map-grid" id="cityMapGrid">
+          <!-- Inyectados por JS -->
+        </div>
+
+        <!-- Caja de Retroalimentación -->
+        <div id="cityFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: THERE IS / THERE ARE BUILDING INSPECTOR (SELLO MUNICIPAL)
+         ==================================================================== -->
+    <section id="view-inspector" class="activity-view">
+      <div class="inspector-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🏢</span> Inspector Municipal: There is vs There are
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Evalúa los permisos de construcción urbana. Aplica el sello correcto: <strong>There is</strong> (singular/incontable) o <strong>There are</strong> (plural).
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="inspectorCaseNum">Permiso 1 de 15</span>
+            <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextInspectorPermit()">
+              <span>Siguiente Permiso ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta Oficial de Permiso de Construcción -->
+        <div class="permit-document-card">
+          <div class="permit-official-stamp">OFFICIAL PERMIT</div>
+          <div style="font-family:monospace; font-size:0.82rem; color:#92400e; letter-spacing:1px; margin-bottom:6px;">
+            CITY PLANNING DEPARTMENT • CERTIFICATE OF EXISTENCE
+          </div>
+
+          <div class="permit-sentence-target" id="permitSentenceTarget">
+            <span id="permitBlankSlot" class="permit-blank-slot">[ ? ]</span> a green public park with a water fountain.
+          </div>
+          <div id="permitSentenceEs" style="font-size:0.95rem; color:#78350f; font-style:italic;">
+            Hay un parque público verde con una fuente de agua.
+          </div>
+
+          <!-- Pregunta Explícita -->
+          <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:20px 0 6px;">
+            ⚖️ Select the official stamp to approve / Selecciona el sello oficial para aprobar:
+          </div>
+
+          <!-- Botones de Sellos Oficiales (Aleatorizados) -->
+          <div class="inspector-stamps-row" id="inspectorStampsRow">
+            <!-- Inyectados por JS -->
+          </div>
+        </div>
+
+        <!-- Retroalimentación del Inspector -->
+        <div id="inspectorFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: PREPOSITION COMPASS GPS (BRÚJULA GPS DE POSICIONES)
+         ==================================================================== -->
+    <section id="view-gps" class="activity-view">
+      <div class="gps-container">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#ffffff;">
+              <span>🧭</span> Preposition Compass: GPS Street Directions
+            </h2>
+            <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
+              Observa la posición de los edificios en la pantalla GPS y elige la preposición de lugar correcta.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="gpsStageBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Ubicación 1 de 10</span>
+            <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextGPSChallenge()">
+              <span>Siguiente Ubicación ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pantalla de Navegación GPS -->
+        <div class="gps-street-view">
+          <span class="unit-tag-pill" id="gpsSceneTag" style="background:rgba(56,189,248,0.2); color:#38bdf8; margin-bottom:8px;">
+            Street Corner A • Main Avenue
+          </span>
+
+          <!-- Vista gráfica de los edificios de la calle -->
+          <div class="gps-buildings-scene" id="gpsBuildingsScene">
+            <!-- Inyectados por JS -->
+          </div>
+
+          <div class="gps-target-prompt" id="gpsTargetPrompt">
+            The Toy Store is <span id="gpsBlankSlot" style="display:inline-block; min-width:90px; padding:2px 12px; background:#0284c7; border-radius:6px; color:#ffffff; font-weight:700;">[ ? ]</span> the Bakery and the Library.
+          </div>
+          <div id="gpsTargetPromptEs" style="font-size:0.88rem; color:#94a3b8; font-style:italic;">
+            La juguetería está entre la panadería y la biblioteca.
+          </div>
+
+          <!-- Pregunta Explícita -->
+          <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#38bdf8; margin:18px 0 8px;">
+            🧭 Choose the correct GPS preposition / Elige la preposición de posición correcta:
+          </div>
+
+          <!-- Botones de Preposiciones (Aleatorizados) -->
+          <div class="gps-preposition-grid" id="gpsPrepositionGrid">
+            <!-- Inyectados por JS -->
+          </div>
+        </div>
+
+        <!-- Retroalimentación del GPS -->
+        <div id="gpsFeedbackBox" style="text-align:center;"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: "LET'S GO!" TOWN TOUR GUIDE (GUÍA TURÍSTICO CON MICRÓFONO)
+         ==================================================================== -->
+    <section id="view-tour" class="activity-view">
+      <div class="tour-container">
+        
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+          <div style="text-align:left;">
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
+              <span>🚌</span> Double-Decker Tour Guide: "Let's Go!"
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Eres el guía oficial del autobús turístico de dos pisos. Haz sugerencias con <strong>"Let's..."</strong> frente al micrófono.
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="unit-tag-pill" id="tourStopBadge">Parada 1 de 8</span>
+            <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextTourPrompt()">
+              <span>Siguiente Parada ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta del Autobús Turístico -->
+        <div class="tour-bus-card">
+          <div class="tour-megaph-badge">
+            <span>📢</span>
+            <span>TOUR BUS MEGAPHONE • LET'S + VERB</span>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <span class="unit-tag-pill" id="tourSceneTag" style="background:#e0f2fe; color:#0369a1;">
+              Tour Stop 1 • Central Park 🌳
+            </span>
+          </div>
+
+          <div class="tour-guide-phrase" id="tourGuidePhrase">
+            "It is sunny today! Let's ride our bicycles in the park."
+          </div>
+          <div id="tourGuidePhraseEs" style="font-size:0.95rem; color:#64748b; font-style:italic; margin-bottom:16px;">
+            ¡Está soleado hoy! Paseemos en bicicleta en el parque.
+          </div>
+
+          <div>
+            <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer; font-size:0.88rem;" onclick="listenTourPhrase()">
+              🔊 Escuchar Sugerencia del Guía
+            </button>
+          </div>
+        </div>
+
+        <!-- Acción del Micrófono -->
+        <div style="margin:20px 0;">
+          <button class="btn-tour-mic" id="tourMicBtn" onclick="toggleTourMic()" title="Anunciar sugerencia">
+            🎙️
+          </button>
+          <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">
+            Toca el micrófono y pronuncia tu sugerencia con "Let's..." a los turistas
+          </div>
+        </div>
+
+        <!-- Reacción de los Pasajeros -->
+        <div id="touristCheerBox" style="text-align:center; padding:10px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:12px; margin-top:14px;">
+          <span style="color:#0369a1; font-weight:600; font-size:0.9rem;">📢 Pasajeros del Bus: ¡Esperando la sugerencia del guía!</span>
+        </div>
+
+        <!-- Retroalimentación de la Locución -->
+        <div id="tourFeedback" style="text-align:center; margin-top:12px;"></div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit6_engine.js?v=1.0"></script>
+</body>
+</html>

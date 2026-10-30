@@ -1,0 +1,559 @@
+/* ==========================================================================
+   BILIKIDS KIDS CLUB - UNIT 6: NEIGHBORHOODS (7 A 10 AÑOS)
+   Tema: Places in Town, There is / There are, Prepositions of Place, Let's
+   Actividades con Máxima Variedad & Personalidad:
+   1. 🗺️ Interactive City Map (Navegante del Mapa de la Ciudad)
+   2. 🏢 Inspector Stamp: There is vs There are (Sello del Inspector Municipal)
+   3. 🧭 Preposition Compass GPS (Brújula GPS de Posiciones: next to, between)
+   4. 🚌 "Let's Go!" Town Tour Guide (Guía del Autobús Turístico con Micrófono)
+   ========================================================================== */
+
+:root {
+  --font-display: 'Fredoka', cursive, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --unit6-primary: #0284c7;
+  --unit6-primary-dark: #0369a1;
+  --unit6-secondary: #0ea5e9;
+  --unit6-accent: #f59e0b;
+  --unit6-success: #10b981;
+  --unit6-danger: #ef4444;
+
+  --card-bg: #ffffff;
+  --border-subtle: #e0f2fe;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --shadow-card: 0 10px 30px rgba(2, 132, 199, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 45%, #f8fafc 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Navigation */
+.unit-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #bae6fd;
+  padding: 10px 20px;
+}
+
+.unit-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.btn-back-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0f9ff;
+  color: #0369a1;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #bae6fd;
+  transition: all 0.2s;
+}
+
+.btn-back-map:hover {
+  background: #e0f2fe;
+  transform: translateX(-2px);
+}
+
+.unit-title-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.unit-tag-pill {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.unit-name-head {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.unit-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e0f2fe;
+  color: #075985;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid #bae6fd;
+  transition: transform 0.2s;
+}
+
+.unit-score-pill.pulse-star {
+  transform: scale(1.15);
+  background: #fef08a;
+  color: #854d0e;
+}
+
+/* Tabs Bar */
+.activity-tabs-bar {
+  max-width: 1100px;
+  margin: 18px auto 8px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.tabs-track {
+  display: flex;
+  gap: 8px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid #bae6fd;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.05);
+  overflow-x: auto;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 140px;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+}
+
+/* Main Workspace */
+.unit-workspace {
+  max-width: 1100px;
+  margin: 12px auto 40px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.activity-view {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.activity-view.active-view {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   ACTIVIDAD 1: INTERACTIVE CITY MAP (NAVEGANTE DEL MAPA DE LA CIUDAD)
+   -------------------------------------------------------------------------- */
+.city-map-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-card);
+  border: 2px solid #bae6fd;
+}
+
+.city-mission-card {
+  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+  border: 2px solid #7dd3fc;
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.city-map-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  background: #f8fafc;
+  border: 2px dashed #93c5fd;
+  border-radius: 22px;
+  padding: 22px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .city-map-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.city-place-pin {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.city-place-pin:hover {
+  transform: translateY(-5px) scale(1.04);
+  border-color: #0284c7;
+  box-shadow: 0 10px 22px rgba(2, 132, 199, 0.2);
+}
+
+.city-place-pin.correct {
+  border-color: #10b981;
+  background: #ecfdf5;
+  animation: pulsePin 0.6s ease;
+}
+
+@keyframes pulsePin {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.04); }
+}
+
+.city-place-pin.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+  animation: shakeBtn 0.35s;
+}
+
+/* --------------------------------------------------------------------------
+   ACTIVIDAD 2: THERE IS / THERE ARE BUILDING INSPECTOR (SELLO MUNICIPAL)
+   -------------------------------------------------------------------------- */
+.inspector-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-card);
+  border: 2px solid #bae6fd;
+}
+
+.permit-document-card {
+  background: #fffbeb;
+  border: 3px solid #fde68a;
+  border-radius: 22px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.08);
+  position: relative;
+  text-align: center;
+}
+
+.permit-official-stamp {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  border: 3px dashed #b45309;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #b45309;
+  text-transform: uppercase;
+  transform: rotate(5deg);
+}
+
+.permit-sentence-target {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: #0f172a;
+  margin: 18px 0 6px;
+  line-height: 1.4;
+}
+
+.permit-blank-slot {
+  display: inline-block;
+  min-width: 140px;
+  padding: 4px 16px;
+  background: #ffffff;
+  border: 2px dashed #0284c7;
+  border-radius: 10px;
+  color: #0284c7;
+  font-weight: 700;
+}
+
+.inspector-stamps-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-stamp-action {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 18px;
+  border: 3px solid;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.btn-stamp-singular {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.btn-stamp-singular:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.3);
+}
+
+.btn-stamp-plural {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #047857;
+}
+
+.btn-stamp-plural:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   ACTIVIDAD 3: PREPOSITION COMPASS GPS (BRÚJULA GPS DE POSICIONES)
+   -------------------------------------------------------------------------- */
+.gps-container {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+  border: 2px solid #38bdf8;
+}
+
+.gps-street-view {
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #0284c7;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 18px 0;
+  position: relative;
+  text-align: center;
+}
+
+.gps-buildings-scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 18px 0;
+  flex-wrap: wrap;
+}
+
+.gps-building-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 14px 18px;
+  min-width: 130px;
+  text-align: center;
+}
+
+.gps-building-card.target-building {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.3);
+}
+
+.gps-target-prompt {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #f8fafc;
+  margin: 12px 0 4px;
+}
+
+.gps-preposition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .gps-preposition-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.gps-prep-btn {
+  background: #1e293b;
+  border: 2px solid #475569;
+  border-radius: 16px;
+  padding: 14px 10px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gps-prep-btn:hover {
+  border-color: #38bdf8;
+  background: #334155;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+}
+
+.gps-prep-btn.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+.gps-prep-btn.wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+  animation: shakeBtn 0.35s;
+}
+
+/* --------------------------------------------------------------------------
+   ACTIVIDAD 4: "LET'S GO!" TOWN TOUR GUIDE (GUÍA TURÍSTICO)
+   -------------------------------------------------------------------------- */
+.tour-container {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-card);
+  border: 2px solid #bae6fd;
+  text-align: center;
+}
+
+.tour-bus-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+  border: 2px solid #93c5fd;
+  border-radius: 22px;
+  padding: 26px;
+  margin-bottom: 22px;
+}
+
+.tour-megaph-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef3c7;
+  color: #b45309;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.tour-guide-phrase {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  color: #0f172a;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.btn-tour-mic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: #ffffff;
+  font-size: 2.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-tour-mic:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.5);
+}
+
+.btn-tour-mic.recording {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  animation: pulseMic 1.2s infinite;
+}
+
+@keyframes pulseMic {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes shakeBtn {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
