@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 2: In Class | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit2_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 2 • A1</span>
+        <h1 class="unit-name-head">In Class</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">120 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES INTEGRservice -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('comic', this)">
+        <span>💬</span>
+        <span>Diálogo Interactivo</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('words', this)">
+        <span>📚</span>
+        <span>Palabras Clave</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('builder', this)">
+        <span>🧩</span>
+        <span>Sentence Builder</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('speaking', this)">
+        <span>🎙️</span>
+        <span>Speaking Quest</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: DIÁLOGO INTERACTIVO (6 ESCENARIOS EN EL COLEGIO)
+         ==================================================================== -->
+    <section id="view-comic" class="activity-view active-view">
+      <div class="story-container">
+
+        <!-- Selector de Escenarios Escolares -->
+        <div class="scenarios-selector-wrap">
+          <div class="scenarios-label">
+            <span>🎒 Elige un Escenario de la Vida Escolar:</span>
+            <span style="font-size:0.75rem; color:#0284c7; text-transform:none;">10 a 14 intercambios por diálogo</span>
+          </div>
+          <div class="scenarios-chips-row">
+            <button class="scenario-chip-btn active" onclick="switchScenario('supplies', this)">
+              <span>🎒</span>
+              <span>1. Útiles Escolares</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('lab', this)">
+              <span>🔬</span>
+              <span>2. Laboratorio de Ciencias</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('library', this)">
+              <span>📖</span>
+              <span>3. En la Biblioteca</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('art', this)">
+              <span>🎨</span>
+              <span>4. Salón de Arte</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('lost', this)">
+              <span>📋</span>
+              <span>5. Objetos Perdidos</span>
+            </button>
+            <button class="scenario-chip-btn" onclick="switchScenario('tech', this)">
+              <span>💻</span>
+              <span>6. Sala de Cómputo</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Header de la Historia -->
+        <div class="story-header">
+          <div class="story-title-wrap">
+            <span class="story-badge" id="storyLevelBadge">Classroom • A1</span>
+            <div>
+              <h2 class="story-heading" id="storySceneHeading">Borrowing School Supplies</h2>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;" id="storySceneSubtitle">Prestando útiles escolares, preguntando de quién son y dónde están.</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+            <span style="font-size:0.8rem; color:#64748b; font-weight:700;" id="storyStepLabel">Intercambio 1 de 6</span>
+            <div class="story-progress-track">
+              <div class="story-progress-fill" id="storyProgressBar" style="width: 16%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flujo del Diálogo Vivo -->
+        <div class="story-chat-flow" id="storyChatFlow">
+          <!-- Mensajes dinámicos -->
+        </div>
+
+        <!-- Contenedor del Quiz con opciones aleatorias -->
+        <div id="storyDecisionContainer"></div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: PALABRAS CLAVE (24 FLASHCARDS CON FONÉTICA Y AUDIO)
+         ==================================================================== -->
+    <section id="view-words" class="activity-view">
+      <div class="words-container">
+        
+        <div class="activity-intro" style="margin-bottom:20px;">
+          <h2 class="intro-title" style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a;">
+            <span>📚</span> Word Explorer • Unit 2: In Class
+          </h2>
+          <p class="intro-desc" style="font-size:0.92rem; color:#64748b; margin-top:2px;">
+            Aprende los objetos del aula, mobiliario, artículos (a / an) y preposiciones de lugar con pronunciación nativa.
+          </p>
+        </div>
+
+        <div class="category-filter-chips">
+          <button class="category-chip active" onclick="filterWordCards('all', this)">Todas las palabras (24)</button>
+          <button class="category-chip" onclick="filterWordCards('supplies', this)">🎒 Útiles Escolares</button>
+          <button class="category-chip" onclick="filterWordCards('furniture', this)">🪑 Aula & Mobiliario</button>
+          <button class="category-chip" onclick="filterWordCards('prepositions', this)">📍 Preposiciones de Lugar</button>
+          <button class="category-chip" onclick="filterWordCards('grammar', this)">🔤 This / That / These / Those</button>
+        </div>
+
+        <div class="words-grid" id="wordsGridContainer">
+          <!-- Tarjetas renderizadas dinámicamente -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: SENTENCE BUILDER (25 RETOS GRAMATICALES)
+         ==================================================================== -->
+    <section id="view-builder" class="activity-view">
+      <div class="sentence-builder-box">
+        
+        <span class="challenge-counter" id="challengeNum">Reto 1 de 25</span>
+        <h2 class="prompt-translation" id="promptTranslation">"Este es un cuaderno azul."</h2>
+        <p class="grammar-tip" id="grammarTip">💡 Pista gramatical: Usa el artículo 'a' antes de sonidos consonánticos (blue notebook).</p>
+
+        <!-- Zona donde se forman las oraciones -->
+        <div class="dropzone-target" id="sentenceDropzone">
+          <span style="color:#94a3b8; font-size:0.9rem;">Toca las palabras abajo para colocarlas aquí en orden...</span>
+        </div>
+
+        <!-- Banco de palabras barajado aleatoriamente -->
+        <div class="word-bank" id="wordBankContainer">
+          <!-- Palabras dinámicas -->
+        </div>
+
+        <!-- Controles -->
+        <div class="builder-controls">
+          <button class="btn-builder btn-builder-reset" onclick="resetCurrentSentence()">
+            <span>🔄</span>
+            <span>Reiniciar</span>
+          </button>
+          <button class="btn-builder btn-builder-check" id="btnCheckSentence" onclick="checkSentence()">
+            <span>✅</span>
+            <span>Comprobar Oración</span>
+          </button>
+          <button class="btn-builder btn-builder-next" id="btnNextSentence" onclick="nextSentenceChallenge()">
+            <span>Siguiente Reto ➔</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: SPEAKING QUEST (PRONUNCIACIÓN CON RECONOCIMIENTO)
+         ==================================================================== -->
+    <section id="view-speaking" class="activity-view">
+      <div class="speaking-container">
+        
+        <div class="speaking-card">
+          <span class="hero-tag" style="background:#e0f2fe; color:#0369a1; border:none; padding:4px 12px; border-radius:999px; font-weight:700; font-size:0.8rem;">
+            🎙️ Pronunciation Lab • In Class
+          </span>
+
+          <h2 class="speaking-target-phrase" id="speakingTarget">"This is a blue notebook."</h2>
+          <p class="speaking-spanish-hint" id="speakingHint">Este es un cuaderno azul.</p>
+
+          <button class="listen-sample-btn" onclick="listenSpeakingSample()">
+            <span>🔊</span>
+            <span>Escuchar Ejemplo Nativo</span>
+          </button>
+
+          <div class="mic-action-box" style="margin:20px 0;">
+            <button class="btn-record-mic" id="micRecordBtn" onclick="toggleVoiceRecord()" title="Presiona para hablar">
+              🎤
+            </button>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">Presiona el micrófono y pronuncia la frase en inglés</div>
+          </div>
+
+          <div class="speaking-feedback-area" id="speakingFeedback"></div>
+
+          <div style="margin-top:24px;">
+            <button class="btn-builder btn-builder-reset" onclick="nextSpeakingPrompt()">
+              <span>Siguiente Frase ➔</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit2_engine.js?v=1.0"></script>
+</body>
+</html>
