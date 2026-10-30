@@ -371,8 +371,10 @@ const froggyStagesData = [
 ];
 
 let currentFrogStage = 0;
+let isFrogAdvancing = false;
 
 function loadFroggyStage(index) {
+  isFrogAdvancing = false;
   currentFrogStage = index;
   const stage = froggyStagesData[index];
 
@@ -428,27 +430,63 @@ function listenRiverWeather() {
 }
 
 function handleLilypadJump(btnEl, isCorrect, sentenceText) {
+  if (isFrogAdvancing) return;
   const feedback = document.getElementById('riverFeedbackBox');
 
   if (isCorrect) {
+    isFrogAdvancing = true;
     sfx.playSplash();
     sfx.playSuccess();
     btnEl.classList.add('correct');
 
+    // Deshabilitar todos los lirios para prevenir clics repetidos
+    document.querySelectorAll('.lilypad-card').forEach(b => {
+      b.style.pointerEvents = 'none';
+      if (b !== btnEl) {
+        b.style.opacity = '0.55';
+      }
+    });
+
+    // Salto visual inmediato en las piedras de progreso
+    const dotsContainer = document.getElementById('riverPathProgress');
+    if (dotsContainer) {
+      const allDots = dotsContainer.querySelectorAll('.river-step-dot');
+      if (allDots[currentFrogStage]) {
+        allDots[currentFrogStage].className = 'river-step-dot completed-step';
+        allDots[currentFrogStage].textContent = '✓';
+      }
+      if (currentFrogStage + 1 < froggyStagesData.length && allDots[currentFrogStage + 1]) {
+        allDots[currentFrogStage + 1].className = 'river-step-dot active-step leaping';
+        allDots[currentFrogStage + 1].textContent = '🐸';
+      }
+    }
+
+    const isFinalStage = currentFrogStage >= froggyStagesData.length - 1;
     feedback.innerHTML = `
-      <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🐸💦 ¡SALTO SEGURO AL LIRIO ACUÁTICO! (+20 pts)</div>
-        <div style="font-size:1.05rem;">"${sentenceText}"</div>
+      <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px; box-shadow:0 6px 20px rgba(16,185,129,0.25);">
+        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <span>🐸💦</span>
+          <span>¡SALTO SEGURO AL LIRIO ACUÁTICO! (+20 pts)</span>
+        </div>
+        <div style="font-size:1.05rem; font-weight:600; margin:6px 0;">"${sentenceText}"</div>
+        <div style="font-size:0.88rem; color:#059669; font-weight:700; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:6px;">
+          <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>
+          <span>${!isFinalStage ? 'Avanzando a la siguiente piedra del río...' : '¡Llegando a la Isla Dorada Final!...'}</span>
+        </div>
       </div>
     `;
     AppState.addStars(20);
     speakEnglish(sentenceText, 'frog');
 
+    // Transición fluida y automática garantizada
     setTimeout(() => {
+      isFrogAdvancing = false;
       if (currentFrogStage < froggyStagesData.length - 1) {
         loadFroggyStage(currentFrogStage + 1);
+      } else {
+        showFroggyGoldenIslandVictory();
       }
-    }, 2200);
+    }, 1200);
 
   } else {
     sfx.playError();
@@ -457,10 +495,47 @@ function handleLilypadJump(btnEl, isCorrect, sentenceText) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡Cuidado, ese lirio se hunde! Esa acción no coincide con el clima actual.
+        ⚠️ ¡Cuidado, ese lirio se hunde! Esa acción no coincide con el clima actual. ¡Intenta de nuevo con otro lirio!
       </div>
     `;
   }
+}
+
+function showFroggyGoldenIslandVictory() {
+  sfx.playApplause();
+  AppState.addStars(50);
+
+  const padsGrid = document.getElementById('lilypadsGrid');
+  const questionPrompt = document.getElementById('froggyQuestionPrompt');
+  const feedback = document.getElementById('riverFeedbackBox');
+
+  if (questionPrompt) {
+    questionPrompt.innerHTML = `🏆 <strong>¡ISLA DORADA ALCANZADA CON ÉXITO!</strong>`;
+  }
+
+  if (padsGrid) {
+    padsGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; background:linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border:3px solid #f59e0b; border-radius:24px; padding:28px 20px; text-align:center; color:#92400e; box-shadow:0 12px 32px rgba(245, 158, 11, 0.35);">
+        <div style="font-size:3.5rem; margin-bottom:8px; animation:frogJumpSplash 0.8s ease infinite alternate;">🏝️🐸👑</div>
+        <h3 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:#78350f; margin-bottom:8px;">
+          ¡FELICITACIONES! ¡CRUZASTE TODO EL RÍO CLIMÁTICO!
+        </h3>
+        <p style="font-size:1.05rem; max-width:620px; margin:0 auto 18px; color:#92400e; line-height:1.5;">
+          ¡Barnaby y Froggy dominaron el Presente Continuo y los estados del clima de Movers A2! Ganaste <strong>+50 pts de bonificación</strong> de gran explorador.
+        </p>
+        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+          <button class="btn-back-map" style="background:#0284c7; color:#ffffff; border-color:#0284c7; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('balloon', document.querySelectorAll('.tab-btn')[1])">
+            🎈 Siguiente Actividad: Globos de Nubes ➔
+          </button>
+          <button class="btn-back-map" style="background:#ffffff; color:#b45309; border-color:#f59e0b; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="loadFroggyStage(0)">
+            🔄 Volver a Cruzar el Río
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  if (feedback) feedback.innerHTML = '';
 }
 
 function nextFroggyStage() {
@@ -549,8 +624,10 @@ const balloonSentencesData = [
 let currentBalloonIndex = 0;
 let collectedTokens = [];
 let availableBalloonTokens = [];
+let isBalloonAdvancing = false;
 
 function loadBalloonChallenge(index) {
+  isBalloonAdvancing = false;
   currentBalloonIndex = index;
   collectedTokens = [];
   const b = balloonSentencesData[index];
@@ -592,6 +669,7 @@ function renderCloudBalloons() {
 }
 
 function popCloudBalloon(btnEl, tokenText, tokenIndex) {
+  if (isBalloonAdvancing) return;
   const b = balloonSentencesData[currentBalloonIndex];
   const expectedNextToken = b.correctTokens[collectedTokens.length];
 
@@ -599,27 +677,46 @@ function popCloudBalloon(btnEl, tokenText, tokenIndex) {
     // CORRECT STEP!
     sfx.playBalloonBurst();
     btnEl.classList.add('popped');
+    btnEl.style.pointerEvents = 'none';
     collectedTokens.push(tokenText);
     renderSentenceCollector();
 
     if (collectedTokens.length === b.correctTokens.length) {
       // Completed sentence!
+      isBalloonAdvancing = true;
       sfx.playSuccess();
+
+      // Deshabilitar todos los globos restantes
+      document.querySelectorAll('.cloud-balloon-btn').forEach(btn => {
+        btn.style.pointerEvents = 'none';
+      });
+
+      const isFinalMission = currentBalloonIndex >= balloonSentencesData.length - 1;
       const feedback = document.getElementById('balloonFeedbackBox');
       feedback.innerHTML = `
-        <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:14px;">
-          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎈💥 ¡ORACIÓN COMPLETA EXPLOTADA CON ÉXITO! (+20 pts)</div>
-          <div>"${b.targetSentence}"</div>
+        <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:14px; box-shadow:0 6px 20px rgba(16,185,129,0.25);">
+          <div style="font-weight:700; font-size:1.18rem; margin-bottom:4px; display:flex; align-items:center; justify-content:center; gap:8px;">
+            <span>🎈💥</span>
+            <span>¡ORACIÓN COMPLETA EXPLOTADA CON ÉXITO! (+20 pts)</span>
+          </div>
+          <div style="font-size:1.05rem; font-weight:600; margin:6px 0;">"${b.targetSentence}"</div>
+          <div style="font-size:0.88rem; color:#059669; font-weight:700; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:6px;">
+            <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>
+            <span>${!isFinalMission ? 'Avanzando a la siguiente oración de globos...' : '¡Completando todas las misiones aéreas!...'}</span>
+          </div>
         </div>
       `;
       AppState.addStars(20);
       speakEnglish(b.targetSentence, 'guide');
 
       setTimeout(() => {
+        isBalloonAdvancing = false;
         if (currentBalloonIndex < balloonSentencesData.length - 1) {
           loadBalloonChallenge(currentBalloonIndex + 1);
+        } else {
+          showBalloonVictory();
         }
-      }, 2200);
+      }, 1200);
     }
 
   } else {
@@ -637,7 +734,45 @@ function popCloudBalloon(btnEl, tokenText, tokenIndex) {
   }
 }
 
+function showBalloonVictory() {
+  sfx.playApplause();
+  AppState.addStars(50);
+
+  const cloudsRow = document.getElementById('balloonCloudsRow');
+  const targetEs = document.getElementById('balloonTargetSentenceEs');
+  const feedback = document.getElementById('balloonFeedbackBox');
+
+  if (targetEs) {
+    targetEs.innerHTML = `🏆 <strong>¡TODAS LAS ORACIONES COMPLETADAS! (+50 pts bonus)</strong>`;
+  }
+
+  if (cloudsRow) {
+    cloudsRow.innerHTML = `
+      <div style="width:100%; background:linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border:3px solid #3b82f6; border-radius:24px; padding:28px 20px; text-align:center; color:#1e40af; box-shadow:0 12px 32px rgba(59, 130, 246, 0.25);">
+        <div style="font-size:3.5rem; margin-bottom:8px; animation:frogJumpSplash 0.8s ease infinite alternate;">🎈🌈⭐</div>
+        <h3 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:#1e3a8a; margin-bottom:8px;">
+          ¡MAESTRO DEL PRESENTE CONTINUO EN EL AIRE!
+        </h3>
+        <p style="font-size:1.05rem; max-width:620px; margin:0 auto 18px; color:#1e40af; line-height:1.5;">
+          ¡Explotaste exitosamente las 10 oraciones en el orden gramatical perfecto! Ganaste <strong>+50 pts extra</strong>.
+        </p>
+        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+          <button class="btn-back-map" style="background:#2563eb; color:#ffffff; border-color:#2563eb; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('fortune', document.querySelectorAll('.tab-btn')[2])">
+            🎡 Siguiente Actividad: Rueda de Guardarropa ➔
+          </button>
+          <button class="btn-back-map" style="background:#ffffff; color:#1d4ed8; border-color:#93c5fd; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="loadBalloonChallenge(0)">
+            🔄 Volver a Jugar Globos
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  if (feedback) feedback.innerHTML = '';
+}
+
 function removeLastCollectedToken(index) {
+  if (isBalloonAdvancing) return;
   // Allow tapping to remove if needed
   sfx.playPop();
   const removed = collectedTokens.splice(index);
