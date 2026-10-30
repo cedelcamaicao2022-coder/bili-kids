@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Adventure | Bienvenido - Selecciona tu Grupo</title>
+  
+  <!-- Tipografía amigable original de Bilikids -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css?v=4.2">
+  <style>
+    /* Estilos propios de la pantalla de bienvenida de grupos */
+    .groups-hero {
+      text-align: center;
+      padding: 30px 20px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      max-width: 900px;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+    }
+    @media (max-width: 640px) {
+      .groups-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+    .group-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 3px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    .group-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Grupo Babies (Activo y destacado) */
+    .group-card.group-babies {
+      border-color: #10b981;
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+    }
+    .group-card.group-babies:hover {
+      border-color: #059669;
+    }
+
+    /* Grupos siguientes */
+    .group-card.group-toddlers {
+      border-color: #0284c7;
+      background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+    }
+    .group-card.group-kids {
+      border-color: #8b5cf6;
+      background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+    }
+    .group-card.group-teens {
+      border-color: #4f46e5;
+      background: linear-gradient(180deg, #ffffff 0%, #eef2ff 100%);
+    }
+
+    .group-icon-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    }
+    .group-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .group-age-pill {
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .group-desc {
+      font-size: 0.92rem;
+      color: #475569;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .group-btn-action {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: none;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .group-status-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo animado original con nubes y sol -->
+  <div class="sky-background">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="sun-glow"></div>
+  </div>
+
+  <div class="game-container" style="min-height: 100vh; display: flex; flex-direction: column;">
+    
+    <!-- Hero Principal de Entrada -->
+    <div class="groups-hero">
+      <div class="home-brand-header">
+        <img src="assets/bilikids_logo.png" alt="Bilikids ¡Learning together!" class="home-main-logo pulse-subtle" style="max-height: 85px;">
+      </div>
+
+      <h1 class="game-title" style="margin-top: 12px; margin-bottom: 6px;">
+        <span class="title-word color-red">Bilikids</span>
+        <span class="title-word color-blue">Adventure!</span>
+      </h1>
+      <p class="game-subtitle" style="font-size: 1.15rem; color: #334155;">
+        Selecciona tu grupo de aprendizaje de inglés:
+      </p>
+    </div>
+
+    <!-- Las 4 Opciones de Entrada: Babies, Toddlers, Kids y Teens -->
+    <div class="groups-grid">
+      
+      <!-- 1. BABIES (Todos los recursos existentes activos aquí) -->
+      <a href="index.html" class="group-card group-babies">
+        <span class="group-status-tag" style="background: #dcfce7; color: #166534;">
+          ✨ Disponible ahora
+        </span>
+        <div class="group-icon-circle" style="background: #d1fae5;">🌱</div>
+        <h2 class="group-title" style="color: #065f46;">Babies</h2>
+        <span class="group-age-pill" style="background: #a7f3d0; color: #065f46;">3 a 5 años</span>
+        <p class="group-desc">
+          Juegos de colores con Bili, la granja de Leo, la casa de Luna, cuentos bilingües, safari y pizarra mágica.
+        </p>
+        <button class="group-btn-action" style="background: #10b981; color: #ffffff;">
+          <span>▶ ¡Entrar a Babies!</span>
+        </button>
+      </a>
+
+      <!-- 2. TODDLERS -->
+      <div class="group-card group-toddlers" style="cursor: default;">
+        <span class="group-status-tag" style="background: #e0f2fe; color: #0369a1;">
+          ⏳ Próximamente
+        </span>
+        <div class="group-icon-circle" style="background: #e0f2fe;">🎈</div>
+        <h2 class="group-title" style="color: #075985;">Toddlers</h2>
+        <span class="group-age-pill" style="background: #bae6fd; color: #075985;">6 a 8 años</span>
+        <p class="group-desc">
+          Fonética divertida, primeras palabras, canciones infantiles y retos interactivos de pronunciación.
+        </p>
+        <button class="group-btn-action" style="background: #94a3b8; color: #ffffff; cursor: default;">
+          <span>🔒 En preparación</span>
+        </button>
+      </div>
+
+      <!-- 3. KIDS -->
+      <div class="group-card group-kids" style="cursor: default;">
+        <span class="group-status-tag" style="background: #f3e8ff; color: #6b21a8;">
+          ⏳ Próximamente
+        </span>
+        <div class="group-icon-circle" style="background: #f3e8ff;">⭐</div>
+        <h2 class="group-title" style="color: #581c87;">Kids</h2>
+        <span class="group-age-pill" style="background: #e9d5ff; color: #581c87;">9 a 11 años</span>
+        <p class="group-desc">
+          Historias capitulares en inglés, desafíos de gramática, vocabulario y talleres de escritura.
+        </p>
+        <button class="group-btn-action" style="background: #94a3b8; color: #ffffff; cursor: default;">
+          <span>🔒 En preparación</span>
+        </button>
+      </div>
+
+      <!-- 4. TEENS -->
+      <div class="group-card group-teens" style="cursor: default;">
+        <span class="group-status-tag" style="background: #e0e7ff; color: #3730a3;">
+          ⏳ Próximamente
+        </span>
+        <div class="group-icon-circle" style="background: #e0e7ff;">🚀</div>
+        <h2 class="group-title" style="color: #312e81;">Teens</h2>
+        <span class="group-age-pill" style="background: #c7d2fe; color: #312e81;">12 a 16 años</span>
+        <p class="group-desc">
+          Lecturas de actualidad, modismos reales, canciones urbanas y debates para hablar inglés con soltura.
+        </p>
+        <button class="group-btn-action" style="background: #94a3b8; color: #ffffff; cursor: default;">
+          <span>🔒 En preparación</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Pie de página amigable -->
+    <footer style="text-align: center; padding: 16px; color: #64748b; font-size: 0.85rem; margin-top: auto;">
+      Bilikids Adventure © 2026 • Aprende y diviértete en inglés
+    </footer>
+
+  </div>
+
+</body>
+</html>
