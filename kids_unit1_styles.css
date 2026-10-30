@@ -187,65 +187,299 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   ACTIVIDAD 1: COMIC DIALOGUE & ROLEPLAY
+   ACTIVIDAD 1: DIÁLOGO INTERACTIVO (ESTILO DUOLINGO STORIES / ROLEPLAY)
    -------------------------------------------------------------------------- */
-.comic-container {
+.story-container {
   background: #ffffff;
   border-radius: 24px;
-  padding: 28px;
+  padding: 28px 24px;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-subtle);
+  max-width: 820px;
+  margin: 0 auto;
 }
 
-.activity-intro {
-  margin-bottom: 24px;
+.story-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.story-title-wrap {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.intro-title {
+.story-badge {
+  background: #ede9fe;
+  color: #7c3aed;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.story-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   color: #0f172a;
+}
+
+.story-progress-track {
+  width: 140px;
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  width: 20%;
+  transition: width 0.3s ease;
+}
+
+/* Área de conversación / Chat interactivo */
+.story-chat-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 280px;
+  margin-bottom: 24px;
+}
+
+.chat-bubble-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  animation: slideInChat 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chat-bubble-row.from-maya {
+  flex-direction: row-reverse;
+}
+
+@keyframes slideInChat {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.character-avatar-bubble {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: #ede9fe;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.character-avatar-bubble.maya {
+  background: #fce7f3;
+}
+
+.character-avatar-bubble.talking {
+  animation: pulseAvatar 1s infinite;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+}
+
+@keyframes pulseAvatar {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.chat-message-bubble {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 14px 18px;
+  max-width: 75%;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.from-alex .chat-message-bubble {
+  border-top-left-radius: 4px;
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.from-maya .chat-message-bubble {
+  border-top-right-radius: 4px;
+  background: #faf5ff;
+  border-color: #d8b4fe;
+}
+
+.chat-sender-name {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
 }
 
-.intro-desc {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  margin-top: 2px;
+.from-maya .chat-sender-name {
+  color: #db2777;
 }
 
-.comic-autoplay-btn {
-  background: #eef2ff;
-  border: 1px solid #c7d2fe;
-  color: #4f46e5;
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+.chat-text-en {
+  font-size: 1.05rem;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 10px;
+  color: #0f172a;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.chat-text-es {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.chat-listen-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: #475569;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
+  gap: 4px;
+  transition: all 0.15s;
 }
 
-.comic-autoplay-btn:hover {
-  background: #e0e7ff;
-  transform: translateY(-1px);
+.chat-listen-btn:hover {
+  background: #ede9fe;
+  color: #6d28d9;
 }
 
-.comic-strip-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+/* Caja de Decisión / Quiz para el Alumno */
+.story-prompt-card {
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  border: 2px solid #86efac;
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 10px;
+  animation: slideInChat 0.3s ease;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
+}
+
+.prompt-badge {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 4px 12px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.prompt-question {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.prompt-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prompt-option-btn {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 16px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prompt-option-btn:hover {
+  border-color: #6366f1;
+  background: #f5f3ff;
+  transform: translateX(4px);
+}
+
+.prompt-option-btn.correct-choice {
+  border-color: #10b981;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.prompt-option-btn.wrong-choice {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #991b1b;
+  animation: shakeBtn 0.3s;
+}
+
+@keyframes shakeBtn {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Pantalla Final de la Historia */
+.story-completed-box {
+  text-align: center;
+  padding: 32px 20px;
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  border: 2px solid #e9d5ff;
+  border-radius: 20px;
+}
+
+.story-complete-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.story-complete-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.story-complete-desc {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.story-actions-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {

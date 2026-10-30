@@ -39,7 +39,7 @@
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('comic', this)">
         <span>💬</span>
-        <span>Cómic & Diálogo</span>
+        <span>Diálogo Interactivo</span>
       </button>
       <button class="tab-btn" onclick="switchTab('words', this)">
         <span>📚</span>
@@ -60,131 +60,35 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: CÓMIC Y DIÁLOGO
+         ACTIVIDAD 1: DIÁLOGO INTERACTIVO (HISTORIA CON DECISIONES TIPO DUOLINGO STORIES)
          ==================================================================== -->
     <section id="view-comic" class="activity-view active-view">
-      <div class="comic-container">
+      <div class="story-container">
         
-        <div class="activity-intro">
-          <div>
-            <h2 class="intro-title">
-              <span>💬</span> First Day at Bilikids Club
-            </h2>
-            <p class="intro-desc">Toca cada bocadillo para escuchar la pronunciación en inglés o escucha toda la historia.</p>
+        <!-- Header de la Historia -->
+        <div class="story-header">
+          <div class="story-title-wrap">
+            <span class="story-badge">Story 1 • A1</span>
+            <div>
+              <h2 class="story-heading">First Day at Bilikids Club</h2>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">Escucha a Alex y ayuda a Maya a responder en inglés.</div>
+            </div>
           </div>
-          <button class="comic-autoplay-btn" onclick="autoplayEntireComic()">
-            <span>▶️</span>
-            <span>Escuchar Cómic Completo</span>
-          </button>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+            <span style="font-size:0.8rem; color:#64748b; font-weight:700;" id="storyStepLabel">Paso 1 de 4</span>
+            <div class="story-progress-track">
+              <div class="story-progress-fill" id="storyProgressBar" style="width: 25%;"></div>
+            </div>
+          </div>
         </div>
 
-        <div class="comic-strip-grid">
-          
-          <!-- Panel 1 -->
-          <article class="comic-panel" id="panel-1">
-            <div class="panel-header">
-              <span class="panel-num">Panel 1</span>
-              <span class="scene-context-badge">School Entrance</span>
-            </div>
-            
-            <div class="speech-bubble" onclick="playComicLine(0)">
-              <div class="bubble-en">
-                <span>"Hello! Welcome to Bilikids Club."</span>
-                <span class="listen-icon">🔊</span>
-              </div>
-              <div class="bubble-es">¡Hola! Bienvenido al Club Bilikids.</div>
-            </div>
-
-            <div class="dialogue-characters">
-              <div class="character-card">
-                <div class="char-avatar">👦</div>
-                <div class="char-info">
-                  <div class="char-name">Alex</div>
-                  <div class="char-role">10 years old</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Panel 2 -->
-          <article class="comic-panel" id="panel-2">
-            <div class="panel-header">
-              <span class="panel-num">Panel 2</span>
-              <span class="scene-context-badge">Introductions</span>
-            </div>
-
-            <div class="speech-bubble" onclick="playComicLine(1)">
-              <div class="bubble-en">
-                <span>"Hi! My name is Maya. What's your name?"</span>
-                <span class="listen-icon">🔊</span>
-              </div>
-              <div class="bubble-es">¡Hola! Mi nombre es Maya. ¿Cuál es tu nombre?</div>
-            </div>
-
-            <div class="dialogue-characters">
-              <div class="character-card">
-                <div class="char-avatar maya">👧</div>
-                <div class="char-info">
-                  <div class="char-name">Maya</div>
-                  <div class="char-role">9 years old</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Panel 3 -->
-          <article class="comic-panel" id="panel-3">
-            <div class="panel-header">
-              <span class="panel-num">Panel 3</span>
-              <span class="scene-context-badge">Getting Ready</span>
-            </div>
-
-            <div class="speech-bubble" onclick="playComicLine(2)">
-              <div class="bubble-en">
-                <span>"I'm Alex! Are you ready for the adventure?"</span>
-                <span class="listen-icon">🔊</span>
-              </div>
-              <div class="bubble-es">¡Soy Alex! ¿Estás lista para la aventura?</div>
-            </div>
-
-            <div class="dialogue-characters">
-              <div class="character-card">
-                <div class="char-avatar">👦</div>
-                <div class="char-info">
-                  <div class="char-name">Alex</div>
-                  <div class="char-role">10 years old</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Panel 4 -->
-          <article class="comic-panel" id="panel-4">
-            <div class="panel-header">
-              <span class="panel-num">Panel 4</span>
-              <span class="scene-context-badge">Team Spirit</span>
-            </div>
-
-            <div class="speech-bubble" onclick="playComicLine(3)">
-              <div class="bubble-en">
-                <span>"Yes, I am! We are a great team."</span>
-                <span class="listen-icon">🔊</span>
-              </div>
-              <div class="bubble-es">¡Sí, lo estoy! Somos un gran equipo.</div>
-            </div>
-
-            <div class="dialogue-characters">
-              <div class="character-card">
-                <div class="char-avatar maya">👧</div>
-                <div class="char-info">
-                  <div class="char-name">Maya</div>
-                  <div class="char-role">9 years old</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
+        <!-- Flujo del Diálogo Vivo -->
+        <div class="story-chat-flow" id="storyChatFlow">
+          <!-- Se inyecta dinámicamente con animaciones y audio -->
         </div>
+
+        <!-- Contenedor del Quiz / Pregunta de decisión para el estudiante -->
+        <div id="storyDecisionContainer"></div>
 
       </div>
     </section>

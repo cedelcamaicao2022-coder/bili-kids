@@ -156,55 +156,214 @@ function switchTab(tabKey, btn) {
 }
 
 // ============================================================================
-// ACTIVITY 1: COMIC DIALOGUE
+// ACTIVITY 1: DIÁLOGO INTERACTIVO (DUOLINGO STORIES STYLE)
 // ============================================================================
-const comicLines = [
-  { panelId: 'panel-1', char: 'alex', text: "Hello! Welcome to Bilikids Club.", es: "¡Hola! Bienvenido al Club Bilikids." },
-  { panelId: 'panel-2', char: 'maya', text: "Hi! My name is Maya. What's your name?", es: "¡Hola! Mi nombre es Maya. ¿Cuál es tu nombre?" },
-  { panelId: 'panel-3', char: 'alex', text: "I'm Alex! Are you ready for the adventure?", es: "¡Soy Alex! ¿Estás lista para la aventura?" },
-  { panelId: 'panel-4', char: 'maya', text: "Yes, I am! We are a great team.", es: "¡Sí, lo estoy! Somos un gran equipo." }
+const storySteps = [
+  {
+    // Paso 1
+    speaker: 'alex',
+    name: 'Alex',
+    avatar: '👦',
+    text: "Hello! Welcome to Bilikids Club.",
+    es: "¡Hola! Bienvenido al Club Bilikids.",
+    question: "¿Qué debe responder Maya para presentarse?",
+    choices: [
+      { text: "Hi! My name is Maya. What's your name?", es: "¡Hola! Mi nombre es Maya. ¿Cuál es tu nombre?", correct: true },
+      { text: "Goodbye! See you next year.", es: "¡Adiós! Nos vemos el próximo año.", correct: false },
+      { text: "I have a blue backpack.", es: "Tengo una mochila azul.", correct: false }
+    ],
+    hint: "La respuesta cordial para saludar y decir tu nombre empieza con 'Hi! My name is...'"
+  },
+  {
+    // Paso 2
+    speaker: 'alex',
+    name: 'Alex',
+    avatar: '👦',
+    text: "I'm Alex! I am ten years old. How old are you?",
+    es: "¡Soy Alex! Tengo diez años. ¿Cuántos años tienes?",
+    question: "Maya tiene 9 años. ¿Cómo le dice su edad a Alex?",
+    choices: [
+      { text: "I have nine years.", es: "Tengo nueve años (error común en inglés)", correct: false },
+      { text: "I am nine years old.", es: "Tengo nueve años (usando el verbo be)", correct: true },
+      { text: "Nine is my dog's name.", es: "Nueve es el nombre de mi perro.", correct: false }
+    ],
+    hint: "Recuerda que en inglés la edad se dice con 'I am', no con 'I have'."
+  },
+  {
+    // Paso 3
+    speaker: 'alex',
+    name: 'Alex',
+    avatar: '👦',
+    text: "Awesome! Are you ready for the adventure?",
+    es: "¡Genial! ¿Estás lista para la aventura?",
+    question: "¿Cómo responde Maya que sí está lista para el equipo?",
+    choices: [
+      { text: "Yes, I am! We are a great team.", es: "¡Sí, lo estoy! Somos un gran equipo.", correct: true },
+      { text: "No, I am sleeping now.", es: "No, estoy durmiendo ahora.", correct: false },
+      { text: "Where is the exit door?", es: "¿Dónde está la puerta de salida?", correct: false }
+    ],
+    hint: "La respuesta afirmativa con el verbo be es 'Yes, I am!'"
+  }
 ];
 
-let isComicPlaying = false;
+let currentStoryStep = 0;
+let storyChatHistory = [];
 
-function playComicLine(index) {
-  sfx.playPop();
-  const line = comicLines[index];
-  const panel = document.getElementById(line.panelId);
+function initInteractiveStory() {
+  currentStoryStep = 0;
+  storyChatHistory = [];
   
-  document.querySelectorAll('.comic-panel').forEach(p => p.classList.remove('talking-now'));
-  if (panel) panel.classList.add('talking-now');
+  const chatFlow = document.getElementById('storyChatFlow');
+  if (chatFlow) chatFlow.innerHTML = '';
+  
+  renderStoryCurrentStep();
+}
 
-  speakEnglish(line.text, line.char, () => {
-    if (panel) panel.classList.remove('talking-now');
+function renderStoryCurrentStep() {
+  const step = storySteps[currentStoryStep];
+  const progressBar = document.getElementById('storyProgressBar');
+  const stepLabel = document.getElementById('storyStepLabel');
+  const decisionContainer = document.getElementById('storyDecisionContainer');
+
+  if (stepLabel) stepLabel.textContent = `Paso ${currentStoryStep + 1} de ${storySteps.length}`;
+  if (progressBar) progressBar.style.width = `${((currentStoryStep + 1) / storySteps.length) * 100}%`;
+
+  // Añadir la frase de Alex al chat flow
+  appendStoryChatMessage('alex', 'Alex', '👦', step.text, step.es);
+
+  // Reproducir la voz de Alex con animación
+  speakEnglish(step.text, 'alex');
+
+  // Renderizar la pregunta y las opciones para el alumno
+  if (decisionContainer) {
+    decisionContainer.innerHTML = `
+      <div class="story-prompt-card">
+        <span class="prompt-badge">🤔 Tu turno • Ayuda a Maya</span>
+        <h3 class="prompt-question">${step.question}</h3>
+        <div class="prompt-options-list">
+          ${step.choices.map((choice, idx) => `
+            <button class="prompt-option-btn" onclick="selectStoryChoice(${idx}, this)">
+              <div>
+                <div>${choice.text}</div>
+                <div style="font-size:0.8rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
+              </div>
+              <span style="font-size:1.1rem; opacity:0.6;">👉</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+}
+
+function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
+  const chatFlow = document.getElementById('storyChatFlow');
+  if (!chatFlow) return;
+
+  const msgId = `msg-${Date.now()}`;
+  const isMaya = charKey === 'maya';
+
+  const row = document.createElement('div');
+  row.className = `chat-bubble-row ${isMaya ? 'from-maya' : 'from-alex'}`;
+  row.id = msgId;
+
+  row.innerHTML = `
+    <div class="character-avatar-bubble ${isMaya ? 'maya' : ''}" id="avatar-${msgId}">
+      ${charAvatar}
+    </div>
+    <div class="chat-message-bubble">
+      <div class="chat-sender-name">
+        <span>${charName}</span>
+        <button class="chat-listen-btn" onclick="replayChatAudio('${textEn.replace(/'/g, "\\'")}', '${charKey}', 'avatar-${msgId}')">
+          🔊 Escuchar
+        </button>
+      </div>
+      <div class="chat-text-en">"${textEn}"</div>
+      <div class="chat-text-es">${textEs}</div>
+    </div>
+  `;
+
+  chatFlow.appendChild(row);
+  row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function replayChatAudio(text, charKey, avatarId) {
+  sfx.playPop();
+  const avatar = document.getElementById(avatarId);
+  if (avatar) avatar.classList.add('talking');
+  speakEnglish(text, charKey, () => {
+    if (avatar) avatar.classList.remove('talking');
   });
 }
 
-function autoplayEntireComic() {
-  if (isComicPlaying) return;
-  isComicPlaying = true;
-  sfx.playPop();
-  
-  const playStep = (step) => {
-    if (step >= comicLines.length) {
-      isComicPlaying = false;
-      document.querySelectorAll('.comic-panel').forEach(p => p.classList.remove('talking-now'));
-      sfx.playSuccess();
-      AppState.addStars(5);
-      return;
-    }
+function selectStoryChoice(choiceIdx, btnEl) {
+  const step = storySteps[currentStoryStep];
+  const choice = step.choices[choiceIdx];
 
-    const line = comicLines[step];
-    const panel = document.getElementById(line.panelId);
-    document.querySelectorAll('.comic-panel').forEach(p => p.classList.remove('talking-now'));
-    if (panel) panel.classList.add('talking-now');
+  if (choice.correct) {
+    sfx.playSuccess();
+    btnEl.classList.add('correct-choice');
 
-    speakEnglish(line.text, line.char, () => {
-      setTimeout(() => playStep(step + 1), 600);
-    });
-  };
+    // Deshabilitar todos los botones de opciones
+    document.querySelectorAll('.prompt-option-btn').forEach(b => b.style.pointerEvents = 'none');
 
-  playStep(0);
+    // Maya dice la respuesta en el chat
+    setTimeout(() => {
+      appendStoryChatMessage('maya', 'Maya', '👧', choice.text, choice.es);
+      speakEnglish(choice.text, 'maya', () => {
+        // Pasar al siguiente paso o completar
+        setTimeout(() => {
+          if (currentStoryStep < storySteps.length - 1) {
+            currentStoryStep++;
+            renderStoryCurrentStep();
+          } else {
+            finishStoryCelebration();
+          }
+        }, 800);
+      });
+      AppState.addStars(10);
+    }, 400);
+
+  } else {
+    sfx.playError();
+    btnEl.classList.add('wrong-choice');
+    setTimeout(() => btnEl.classList.remove('wrong-choice'), 600);
+  }
+}
+
+function finishStoryCelebration() {
+  sfx.playFanfare();
+  AppState.addStars(20);
+
+  const decisionContainer = document.getElementById('storyDecisionContainer');
+  const progressBar = document.getElementById('storyProgressBar');
+  if (progressBar) progressBar.style.width = '100%';
+
+  if (decisionContainer) {
+    decisionContainer.innerHTML = `
+      <div class="story-completed-box">
+        <div class="story-complete-icon">🎉</div>
+        <h3 class="story-complete-title">¡Conversación Completada!</h3>
+        <p class="story-complete-desc">
+          ¡Excelente trabajo! Ayudaste a Maya a conversar con Alex y aprendiste a saludar, decir tu nombre y tu edad en inglés real.
+        </p>
+        <div style="display:inline-flex; align-items:center; gap:8px; background:#fef3c7; color:#92400e; font-weight:700; padding:8px 18px; border-radius:999px; margin-bottom:20px;">
+          <span>⭐</span>
+          <span>+30 Estrellas Ganadas</span>
+        </div>
+        <div class="story-actions-row">
+          <button class="btn-builder btn-builder-reset" onclick="initInteractiveStory()">
+            <span>🔄</span>
+            <span>Repetir Diálogo</span>
+          </button>
+          <button class="btn-builder btn-builder-check" onclick="switchTab('builder', document.querySelectorAll('.tab-btn')[2])">
+            <span>🧩</span>
+            <span>Ir al Sentence Builder ➔</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }
 }
 
 // ============================================================================
@@ -671,6 +830,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar estrellas
   const starEl = document.getElementById('unitStarsCount');
   if (starEl) starEl.textContent = `${AppState.stars} pts`;
+
+  // Inicializar Diálogo Interactivo (Opción 2 - Duolingo Stories)
+  initInteractiveStory();
 
   // Renderizar vocabulario
   renderWordCards('all');
