@@ -114,6 +114,10 @@
         </div>
 
         <!-- Opciones de Rutina (Aleatorizadas dinámicamente) -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:18px 0 10px; display:flex; align-items:center; gap:6px;">
+          <span>❓</span>
+          <span>What routine happens at this time? / ¿Qué rutina corresponde a esta hora?:</span>
+        </div>
         <div class="clock-options-grid" id="clockOptionsGrid">
           <!-- Botones de opciones inyectados por JS -->
         </div>
@@ -174,8 +178,8 @@
 
         <!-- Pool de Stickers de Hábitos -->
         <div style="text-align:center; margin-top:16px;">
-          <div style="font-family:var(--font-display); font-weight:700; font-size:0.95rem; color:#92400e; margin-bottom:8px;">
-            🏷️ Elige un sticker de hábito para colocar en el calendario:
+          <div style="font-family:var(--font-display); font-weight:700; font-size:0.98rem; color:#92400e; margin-bottom:8px;">
+            🏷️ Paso 1: Elige el sticker del hábito ➔ Paso 2: Toca el día de la semana arriba:
           </div>
           <div class="habits-pool-bar" id="habitsPoolBar">
             <!-- Stickers inyectados por JS -->
@@ -239,6 +243,11 @@
           He [ ? ] soccer in the afternoon.
         </div>
 
+        <!-- Pregunta Explícita -->
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:14px 0 6px;">
+          ⚖️ Which verb form completes the sentence? / ¿Qué forma del verbo equilibra la oración?:
+        </div>
+
         <!-- Botones de Elección de Verbos (Aleatorizados) -->
         <div class="scale-verb-buttons-row" id="scaleVerbButtonsRow">
           <!-- Inyectados por JS -->
@@ -275,6 +284,9 @@
           <!-- Centro del Viewfinder: Escena y Frase -->
           <div class="vlog-prompt-center">
             <span class="vlog-scene-tag" id="vlogSceneTag">Scene 1 • Morning Wake Up ☀️</span>
+            <div style="font-family:var(--font-display); font-size:0.92rem; font-weight:700; color:#fbbf24; margin-bottom:6px;">
+              🎙️ Streamer Challenge • Read aloud into the microphone / Lee en voz alta al micrófono:
+            </div>
             <div class="vlog-phrase-target" id="vlogPhraseTarget">
               "Good morning guys! I wake up at seven o'clock."
             </div>
