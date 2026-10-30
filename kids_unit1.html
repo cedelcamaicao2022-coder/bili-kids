@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 1: All About You | Bilikids Kids Club</title>
+
+  <!-- Tipografías modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="kids_unit1_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Mapa Kids</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 1 • A1</span>
+        <h1 class="unit-name-head">All About You</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Tus puntos de misión">
+        <span>⭐</span>
+        <span id="unitStarsCount">120 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PESTAÑAS DE ACTIVIDADES (ECOSISTEMA INTEGRADO) -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('comic', this)">
+        <span>💬</span>
+        <span>Cómic & Diálogo</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('words', this)">
+        <span>📚</span>
+        <span>Palabras Clave</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('builder', this)">
+        <span>🧩</span>
+        <span>Sentence Builder</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('speaking', this)">
+        <span>🎙️</span>
+        <span>Speaking Quest</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <main class="unit-workspace">
+
+    <!-- ====================================================================
+         ACTIVIDAD 1: CÓMIC Y DIÁLOGO
+         ==================================================================== -->
+    <section id="view-comic" class="activity-view active-view">
+      <div class="comic-container">
+        
+        <div class="activity-intro">
+          <div>
+            <h2 class="intro-title">
+              <span>💬</span> First Day at Bilikids Club
+            </h2>
+            <p class="intro-desc">Toca cada bocadillo para escuchar la pronunciación en inglés o escucha toda la historia.</p>
+          </div>
+          <button class="comic-autoplay-btn" onclick="autoplayEntireComic()">
+            <span>▶️</span>
+            <span>Escuchar Cómic Completo</span>
+          </button>
+        </div>
+
+        <div class="comic-strip-grid">
+          
+          <!-- Panel 1 -->
+          <article class="comic-panel" id="panel-1">
+            <div class="panel-header">
+              <span class="panel-num">Panel 1</span>
+              <span class="scene-context-badge">School Entrance</span>
+            </div>
+            
+            <div class="speech-bubble" onclick="playComicLine(0)">
+              <div class="bubble-en">
+                <span>"Hello! Welcome to Bilikids Club."</span>
+                <span class="listen-icon">🔊</span>
+              </div>
+              <div class="bubble-es">¡Hola! Bienvenido al Club Bilikids.</div>
+            </div>
+
+            <div class="dialogue-characters">
+              <div class="character-card">
+                <div class="char-avatar">👦</div>
+                <div class="char-info">
+                  <div class="char-name">Alex</div>
+                  <div class="char-role">10 years old</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Panel 2 -->
+          <article class="comic-panel" id="panel-2">
+            <div class="panel-header">
+              <span class="panel-num">Panel 2</span>
+              <span class="scene-context-badge">Introductions</span>
+            </div>
+
+            <div class="speech-bubble" onclick="playComicLine(1)">
+              <div class="bubble-en">
+                <span>"Hi! My name is Maya. What's your name?"</span>
+                <span class="listen-icon">🔊</span>
+              </div>
+              <div class="bubble-es">¡Hola! Mi nombre es Maya. ¿Cuál es tu nombre?</div>
+            </div>
+
+            <div class="dialogue-characters">
+              <div class="character-card">
+                <div class="char-avatar maya">👧</div>
+                <div class="char-info">
+                  <div class="char-name">Maya</div>
+                  <div class="char-role">9 years old</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Panel 3 -->
+          <article class="comic-panel" id="panel-3">
+            <div class="panel-header">
+              <span class="panel-num">Panel 3</span>
+              <span class="scene-context-badge">Getting Ready</span>
+            </div>
+
+            <div class="speech-bubble" onclick="playComicLine(2)">
+              <div class="bubble-en">
+                <span>"I'm Alex! Are you ready for the adventure?"</span>
+                <span class="listen-icon">🔊</span>
+              </div>
+              <div class="bubble-es">¡Soy Alex! ¿Estás lista para la aventura?</div>
+            </div>
+
+            <div class="dialogue-characters">
+              <div class="character-card">
+                <div class="char-avatar">👦</div>
+                <div class="char-info">
+                  <div class="char-name">Alex</div>
+                  <div class="char-role">10 years old</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Panel 4 -->
+          <article class="comic-panel" id="panel-4">
+            <div class="panel-header">
+              <span class="panel-num">Panel 4</span>
+              <span class="scene-context-badge">Team Spirit</span>
+            </div>
+
+            <div class="speech-bubble" onclick="playComicLine(3)">
+              <div class="bubble-en">
+                <span>"Yes, I am! We are a great team."</span>
+                <span class="listen-icon">🔊</span>
+              </div>
+              <div class="bubble-es">¡Sí, lo estoy! Somos un gran equipo.</div>
+            </div>
+
+            <div class="dialogue-characters">
+              <div class="character-card">
+                <div class="char-avatar maya">👧</div>
+                <div class="char-info">
+                  <div class="char-name">Maya</div>
+                  <div class="char-role">9 years old</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 2: PALABRAS CLAVE (FLASHCARDS CON FONÉTICA)
+         ==================================================================== -->
+    <section id="view-words" class="activity-view">
+      <div class="words-container">
+        
+        <div class="activity-intro">
+          <div>
+            <h2 class="intro-title">
+              <span>📚</span> Word Explorer • Unit 1
+            </h2>
+            <p class="intro-desc">Toca cada tarjeta para escuchar su pronunciación nativa y aprender su significado.</p>
+          </div>
+        </div>
+
+        <div class="category-filter-chips">
+          <button class="category-chip active" onclick="filterWordCards('all', this)">Todas las palabras</button>
+          <button class="category-chip" onclick="filterWordCards('greetings', this)">👋 Saludos</button>
+          <button class="category-chip" onclick="filterWordCards('personal', this)">🏷️ Datos Personales</button>
+          <button class="category-chip" onclick="filterWordCards('numbers', this)">🔢 Números 0–10</button>
+        </div>
+
+        <div class="words-grid" id="wordsGridContainer">
+          <!-- Tarjetas renderizadas dinámicamente -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 3: SENTENCE BUILDER (GRAMMAR LAB)
+         ==================================================================== -->
+    <section id="view-builder" class="activity-view">
+      <div class="sentence-builder-box">
+        
+        <span class="challenge-counter" id="challengeNum">Reto 1 de 5</span>
+        <h2 class="prompt-translation" id="promptTranslation">"Hola, yo soy Maya."</h2>
+        <p class="grammar-tip" id="grammarTip">💡 Pista gramatical: Usa el pronombre 'I' con el verbo 'am'.</p>
+
+        <!-- Zona donde se forman las oraciones -->
+        <div class="dropzone-target" id="sentenceDropzone">
+          <span style="color:#94a3b8; font-size:0.9rem;">Toca las palabras abajo para colocarlas aquí en orden...</span>
+        </div>
+
+        <!-- Banco de palabras -->
+        <div class="word-bank" id="wordBankContainer">
+          <!-- Palabras generadas dinámicamente -->
+        </div>
+
+        <!-- Botones de control -->
+        <div class="builder-controls">
+          <button class="btn-builder btn-builder-reset" onclick="resetCurrentSentence()">
+            <span>🔄</span>
+            <span>Reiniciar</span>
+          </button>
+          <button class="btn-builder btn-builder-check" id="btnCheckSentence" onclick="checkSentence()">
+            <span>✅</span>
+            <span>Comprobar Oración</span>
+          </button>
+          <button class="btn-builder btn-builder-next" id="btnNextSentence" onclick="nextSentenceChallenge()">
+            <span>Siguiente Reto ➔</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACTIVIDAD 4: SPEAKING QUEST (RECONOCIMIENTO DE VOZ)
+         ==================================================================== -->
+    <section id="view-speaking" class="activity-view">
+      <div class="speaking-container">
+        
+        <div class="speaking-card">
+          <span class="hero-tag" style="background:#ede9fe; color:#6d28d9; border:none; padding:4px 12px; border-radius:999px; font-weight:700; font-size:0.8rem;">
+            🎙️ Pronunciation Lab
+          </span>
+
+          <h2 class="speaking-target-phrase" id="speakingTarget">"Hello! My name is Alex."</h2>
+          <p class="speaking-spanish-hint" id="speakingHint">¡Hola! Mi nombre es Alex.</p>
+
+          <button class="listen-sample-btn" onclick="listenSpeakingSample()">
+            <span>🔊</span>
+            <span>Escuchar Ejemplo Nativo</span>
+          </button>
+
+          <div class="mic-action-box">
+            <button class="btn-record-mic" id="micRecordBtn" onclick="toggleVoiceRecord()" title="Presiona para hablar">
+              🎤
+            </button>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">Presiona el micrófono y pronuncia la frase en inglés</div>
+          </div>
+
+          <div class="speaking-feedback-area" id="speakingFeedback"></div>
+
+          <div style="margin-top:24px;">
+            <button class="btn-builder btn-builder-reset" onclick="nextSpeakingPrompt()">
+              <span>Siguiente Frase ➔</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_unit1_engine.js?v=1.0"></script>
+</body>
+</html>
