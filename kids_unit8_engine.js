@@ -300,24 +300,24 @@ const ObbyStages = [
     finishX: 1350,
     bgColor: "#312e81",
     platforms: [
-      { x: 0, y: 340, w: 220, h: 60, type: 'normal' },
-      { x: 260, y: 290, w: 100, h: 20, type: 'shoe_box' },
-      { x: 410, y: 240, w: 120, h: 20, type: 'shoe_box' },
-      { x: 580, y: 210, w: 60, h: 15, type: 'jelly' }, // Trampolín de gelatina
-      { x: 690, y: 160, w: 140, h: 20, type: 'normal' },
-      { x: 880, y: 220, w: 130, h: 20, type: 'normal' },
-      { x: 1060, y: 270, w: 110, h: 20, type: 'normal' },
-      { x: 1220, y: 320, w: 240, h: 80, type: 'normal' }
+      { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
+      { x: 235, y: 300, w: 120, h: 20, type: 'shoe_box' },
+      { x: 385, y: 260, w: 130, h: 20, type: 'shoe_box' },
+      { x: 545, y: 280, w: 75, h: 18, type: 'jelly' }, // Trampolín de gelatina
+      { x: 650, y: 170, w: 160, h: 20, type: 'normal' },
+      { x: 840, y: 220, w: 120, h: 20, type: 'normal' },
+      { x: 990, y: 270, w: 120, h: 20, type: 'normal' },
+      { x: 1140, y: 320, w: 260, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "blue_jacket", x: 450, y: 190, name: "This Blue Jacket", icon: "🧥", collected: false },
-      { id: "white_boots", x: 740, y: 110, name: "These White Boots", icon: "👢", collected: false }
+      { id: "blue_jacket", x: 435, y: 210, name: "This Blue Jacket", icon: "🧥", collected: false },
+      { id: "white_boots", x: 710, y: 120, name: "These White Boots", icon: "👢", collected: false }
     ],
     coins: [
-      { x: 290, y: 250, collected: false },
-      { x: 610, y: 110, collected: false },
-      { x: 920, y: 170, collected: false },
-      { x: 1100, y: 220, collected: false }
+      { x: 280, y: 260, collected: false },
+      { x: 580, y: 180, collected: false },
+      { x: 890, y: 180, collected: false },
+      { x: 1040, y: 230, collected: false }
     ],
     gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
   },
@@ -333,31 +333,31 @@ const ObbyStages = [
     finishX: 1420,
     bgColor: "#0f766e",
     platforms: [
-      { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
-      { x: 250, y: 300, w: 160, h: 20, type: 'conveyor_right', speed: 1.8 }, // Cinta rápida
-      { x: 460, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 630, y: 280, w: 70, h: 15, type: 'jelly' },
-      { x: 750, y: 180, w: 180, h: 20, type: 'conveyor_left', speed: -1.8 },
-      { x: 980, y: 230, w: 120, h: 20, type: 'normal' },
-      { x: 1150, y: 280, w: 90, h: 20, type: 'normal' },
-      { x: 1290, y: 330, w: 220, h: 70, type: 'normal' }
+      { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
+      { x: 215, y: 300, w: 160, h: 20, type: 'conveyor_right', speed: 1.4 },
+      { x: 405, y: 270, w: 120, h: 20, type: 'normal' },
+      { x: 555, y: 280, w: 75, h: 18, type: 'jelly' },
+      { x: 660, y: 170, w: 180, h: 20, type: 'conveyor_left', speed: -1.2 },
+      { x: 870, y: 220, w: 130, h: 20, type: 'normal' },
+      { x: 1030, y: 270, w: 120, h: 20, type: 'normal' },
+      { x: 1180, y: 320, w: 260, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "red_apples", x: 320, y: 250, name: "These Red Apples", icon: "🍎", collected: false },
-      { id: "orange_juice", x: 820, y: 130, name: "That Orange Juice", icon: "🧃", collected: false }
+      { id: "red_apples", x: 280, y: 250, name: "These Red Apples", icon: "🍎", collected: false },
+      { id: "orange_juice", x: 730, y: 120, name: "That Orange Juice", icon: "🧃", collected: false }
     ],
     coins: [
-      { x: 500, y: 210, collected: false },
-      { x: 660, y: 120, collected: false },
-      { x: 1020, y: 180, collected: false },
-      { x: 1200, y: 230, collected: false }
+      { x: 450, y: 225, collected: false },
+      { x: 590, y: 160, collected: false },
+      { x: 920, y: 175, collected: false },
+      { x: 1080, y: 225, collected: false }
     ],
-    gate: { x: 1340, y: 230, w: 30, h: 100, unlocked: false }
+    gate: { x: 1300, y: 220, w: 30, h: 100, unlocked: false }
   },
   {
     id: 2,
     title: "Stage 3 • The Toy Store Castle (Block Drop) 🏆",
-    desc: "Mecánica estilo Roblox: 3 plataformas con oraciones. Solo la gramaticalmente correcta es sólida.",
+    desc: "Mecánica estilo Roblox: elige el puente gramaticalmente correcto para alcanzar la llave dorada.",
     promptEn: "Step on the correct bridge: 'I would like to buy that new video game.'",
     promptEs: "Pisa el puente correcto: 'Me gustaría comprar ese videojuego nuevo.'",
     requiredItems: ["golden_key"],
@@ -367,24 +367,28 @@ const ObbyStages = [
     bgColor: "#831843",
     platforms: [
       { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
-      // 3 puentes de oraciones (Block Drop)
-      { x: 230, y: 280, w: 150, h: 24, type: 'block_drop_fake', label: "I wants buy..." },
-      { x: 420, y: 250, w: 170, h: 24, type: 'block_drop_solid', label: "I would like to buy..." },
-      { x: 630, y: 280, w: 150, h: 24, type: 'block_drop_fake', label: "He buyed..." },
-      // Plataforma de gelatina y meta
-      { x: 840, y: 240, w: 70, h: 15, type: 'jelly' },
-      { x: 960, y: 160, w: 140, h: 20, type: 'normal' },
-      { x: 1150, y: 320, w: 220, h: 80, type: 'normal' }
+      { x: 210, y: 310, w: 110, h: 20, type: 'normal' },
+      // Puente Superior Correcto (Sólido, con la Llave Dorada)
+      { x: 350, y: 230, w: 240, h: 24, type: 'block_drop_solid', label: "✅ I would like to buy that game" },
+      // Puente Inferior Falso (Nube que se desvanece con colchón de rebote abajo)
+      { x: 350, y: 330, w: 240, h: 24, type: 'block_drop_fake', label: "❌ I wants buyed game" },
+      { x: 380, y: 375, w: 180, h: 16, type: 'jelly', label: "Trampolín de Rescate" },
+      // Continuación hacia la meta
+      { x: 620, y: 240, w: 75, h: 18, type: 'jelly' },
+      { x: 725, y: 170, w: 160, h: 20, type: 'normal' },
+      { x: 915, y: 230, w: 130, h: 20, type: 'normal' },
+      { x: 1075, y: 310, w: 260, h: 80, type: 'normal' }
     ],
     items: [
-      { id: "golden_key", x: 1020, y: 110, name: "Golden Cash Register Key", icon: "🔑", collected: false }
+      { id: "golden_key", x: 450, y: 180, name: "Golden Cash Register Key", icon: "🔑", collected: false }
     ],
     coins: [
-      { x: 490, y: 200, collected: false },
-      { x: 870, y: 110, collected: false },
-      { x: 1200, y: 260, collected: false }
+      { x: 260, y: 270, collected: false },
+      { x: 530, y: 180, collected: false },
+      { x: 655, y: 140, collected: false },
+      { x: 800, y: 120, collected: false }
     ],
-    gate: { x: 1220, y: 220, w: 30, h: 100, unlocked: false }
+    gate: { x: 1180, y: 210, w: 30, h: 100, unlocked: false }
   }
 ];
 
@@ -392,7 +396,7 @@ let currentObbyStageIndex = 0;
 let obbyEngineRunning = false;
 let obbyAnimationId = null;
 
-// Objeto del Jugador (Barnaby)
+// Objeto del Jugador (Barnaby) con DOBLE SALTO
 const Player = {
   x: 40,
   y: 280,
@@ -400,9 +404,11 @@ const Player = {
   vy: 0,
   w: 32,
   h: 42,
-  speed: 4.5,
-  jumpPower: -11.5,
+  speed: 5.0,
+  jumpPower: -12.2,
   isGrounded: false,
+  jumpsLeft: 2, // 2 saltos disponibles
+  maxJumps: 2,
   facing: 'right',
   respawnX: 40,
   respawnY: 280,
@@ -417,6 +423,8 @@ const ObbyControls = {
 
 let cameraX = 0;
 let obbyParticles = [];
+let obbyBannerMessage = "";
+let obbyBannerTimer = 0;
 
 function startObbyEngine() {
   const canvas = document.getElementById('obbyCanvas');
@@ -443,6 +451,7 @@ function loadObbyStage(index) {
   Player.y = 260;
   Player.vx = 0;
   Player.vy = 0;
+  Player.jumpsLeft = Player.maxJumps;
   Player.respawnX = stage.checkpointX;
   Player.respawnY = 260;
   cameraX = 0;
@@ -457,7 +466,64 @@ function loadObbyStage(index) {
   document.getElementById('obbyGatePromptEs').textContent = stage.promptEs;
   document.getElementById('obbyCoinsBadge').textContent = `🪙 Monedas: ${Player.coinsCollected}`;
 
+  updateObbyHudChecklist();
+  showObbyFloatingBanner(`🎯 MISIÓN: ${stage.promptEs}`, 200);
+
   speakEnglish(stage.promptEn, 'guide');
+}
+
+function updateObbyHudChecklist() {
+  const stage = ObbyStages[currentObbyStageIndex];
+  const checklistEl = document.getElementById('obbyItemsChecklist');
+  const gateBadgeEl = document.getElementById('obbyGateStatusBadge');
+  const stepCollectEl = document.getElementById('stepChipCollect');
+  const stepGateEl = document.getElementById('stepChipGate');
+
+  if (checklistEl) {
+    checklistEl.innerHTML = stage.items.map(it => `
+      <span style="${it.collected ? 'color:#10b981; font-weight:800;' : 'color:#fef08a;'}">
+        ${it.collected ? '✅' : '⬜'} ${it.icon} ${it.name}
+      </span>
+    `).join(' &nbsp;|&nbsp; ');
+  }
+
+  const collectedCount = stage.items.filter(it => it.collected).length;
+  const totalCount = stage.items.length;
+
+  if (gateBadgeEl) {
+    if (stage.gate.unlocked) {
+      gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Puerta: ¡ABIERTA! Corre a la meta 🏁</span>`;
+    } else {
+      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Puerta: CERRADA (${collectedCount}/${totalCount})</span>`;
+    }
+  }
+
+  if (stepCollectEl && stepGateEl) {
+    if (collectedCount === totalCount) {
+      stepCollectEl.classList.add('completed');
+      stepGateEl.classList.add('active');
+    } else {
+      stepCollectEl.classList.remove('completed');
+      stepCollectEl.classList.add('active');
+      stepGateEl.classList.remove('active');
+    }
+  }
+}
+
+function showObbyFloatingBanner(text, durationFrames = 180) {
+  obbyBannerMessage = text;
+  obbyBannerTimer = durationFrames;
+}
+
+function tryPlayerJump() {
+  if (Player.jumpsLeft > 0) {
+    const isDoubleJump = Player.jumpsLeft === 1;
+    Player.jumpsLeft--;
+    Player.vy = Player.jumpPower;
+    Player.isGrounded = false;
+    sfx.playJump();
+    createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, isDoubleJump);
+  }
 }
 
 function setupObbyEventListeners() {
@@ -470,11 +536,8 @@ function setupObbyEventListeners() {
       ObbyControls.right = true;
     }
     if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === ' ') {
-      if (!ObbyControls.jump && Player.isGrounded) {
-        Player.vy = Player.jumpPower;
-        Player.isGrounded = false;
-        sfx.playJump();
-        createJumpDust(Player.x + Player.w / 2, Player.y + Player.h);
+      if (!ObbyControls.jump) {
+        tryPlayerJump();
       }
       ObbyControls.jump = true;
     }
@@ -503,27 +566,24 @@ function setupObbyEventListeners() {
     bindTouch(btnLeft, () => ObbyControls.left = true, () => ObbyControls.left = false);
     bindTouch(btnRight, () => ObbyControls.right = true, () => ObbyControls.right = false);
     bindTouch(btnJump, () => {
-      if (Player.isGrounded) {
-        Player.vy = Player.jumpPower;
-        Player.isGrounded = false;
-        sfx.playJump();
-        createJumpDust(Player.x + Player.w / 2, Player.y + Player.h);
-      }
+      tryPlayerJump();
       ObbyControls.jump = true;
     }, () => ObbyControls.jump = false);
   }
 }
 
-function createJumpDust(x, y) {
-  for (let i = 0; i < 6; i++) {
+function createJumpDust(x, y, isDouble = false) {
+  const count = isDouble ? 12 : 6;
+  const color = isDouble ? '#ec4899' : 'rgba(255, 255, 255, 0.85)';
+  for (let i = 0; i < count; i++) {
     obbyParticles.push({
       x: x,
       y: y,
-      vx: (Math.random() - 0.5) * 3,
-      vy: (Math.random() - 0.5) * 1.5,
-      radius: 3 + Math.random() * 3,
-      color: 'rgba(255, 255, 255, 0.7)',
-      life: 18
+      vx: (Math.random() - 0.5) * (isDouble ? 5 : 3),
+      vy: (Math.random() - 0.5) * 2,
+      radius: (isDouble ? 3.5 : 2.5) + Math.random() * 2,
+      color: color,
+      life: isDouble ? 24 : 18
     });
   }
 }
@@ -556,7 +616,7 @@ function obbyGameLoop() {
     Player.vx = Player.speed;
     Player.facing = 'right';
   } else {
-    Player.vx *= 0.8; // Fricción
+    Player.vx *= 0.8; // Fricción suave
   }
 
   // Gravedad
@@ -570,7 +630,7 @@ function obbyGameLoop() {
   // Colisión con plataformas
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
-    // Si es un Block Drop falso, la plataforma no es sólida cuando caes sobre ella
+    // Si es un Block Drop falso, wobbles y cae
     if (p.type === 'block_drop_fake') {
       if (
         Player.x + Player.w > p.x &&
@@ -578,7 +638,6 @@ function obbyGameLoop() {
         Player.y + Player.h >= p.y &&
         Player.y + Player.h <= p.y + p.h + Player.vy
       ) {
-        // Cae a través de la plataforma falsa
         p.wobble = true;
       }
       return;
@@ -595,13 +654,14 @@ function obbyGameLoop() {
       Player.y = p.y - Player.h;
       Player.vy = 0;
       Player.isGrounded = true;
+      Player.jumpsLeft = Player.maxJumps; // Restaura doble salto al tocar suelo
 
       // Trampolín de Gelatina
       if (p.type === 'jelly') {
-        Player.vy = -15.5; // Súper salto
+        Player.vy = -16.0; // Súper impulso
         Player.isGrounded = false;
         sfx.playBoing();
-        createJumpDust(Player.x + Player.w / 2, Player.y + Player.h);
+        createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, true);
       }
 
       // Cinta Transportadora
@@ -617,10 +677,10 @@ function obbyGameLoop() {
   stage.items.forEach(it => {
     if (!it.collected) {
       if (
-        Player.x + Player.w > it.x &&
-        Player.x < it.x + 30 &&
-        Player.y + Player.h > it.y &&
-        Player.y < it.y + 30
+        Player.x + Player.w > it.x - 10 &&
+        Player.x < it.x + 40 &&
+        Player.y + Player.h > it.y - 10 &&
+        Player.y < it.y + 40
       ) {
         it.collected = true;
         sfx.playCoin();
@@ -628,11 +688,18 @@ function obbyGameLoop() {
         speakEnglish(it.name, 'kid');
         AppState.addStars(15);
 
+        // Actualizar HUD
+        updateObbyHudChecklist();
+
         // Verificar si se recolectaron todos los artículos requeridos
         const allCollected = stage.items.every(item => item.collected);
         if (allCollected) {
           stage.gate.unlocked = true;
           sfx.playSuccess();
+          showObbyFloatingBanner("🎉 ¡TODOS LOS ARTÍCULOS RECOGIDOS! ¡LA PUERTA ESTÁ ABIERTA! ➔➔➔", 220);
+          updateObbyHudChecklist();
+        } else {
+          showObbyFloatingBanner(`✨ ¡Recogiste ${it.name}! Falta 1 artículo...`, 160);
         }
       }
     }
@@ -681,6 +748,8 @@ function obbyGameLoop() {
     Player.y = Player.respawnY;
     Player.vx = 0;
     Player.vy = 0;
+    Player.jumpsLeft = Player.maxJumps;
+    showObbyFloatingBanner("⚠️ ¡Caíste al agua! Reapareciendo en el checkpoint...", 100);
   }
 
   // 2. CÁMARA DINÁMICA
@@ -715,6 +784,10 @@ function obbyGameLoop() {
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#34d399";
       ctx.fillRect(rx + 4, p.y + 2, p.w - 8, 4);
+      // Texto "BOING"
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 9px Outfit, sans-serif";
+      ctx.fillText("⚡ BOING!", rx + p.w / 2 - 18, p.y + 13);
     } else if (p.type === 'shoe_box') {
       // Caja de zapatos boutique
       ctx.fillStyle = "#a855f7";
@@ -727,14 +800,14 @@ function obbyGameLoop() {
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#f59e0b";
       ctx.fillRect(rx, p.y, p.w, 3);
-      // Flechas de dirección
-      ctx.fillStyle = "#94a3b8";
-      ctx.font = "10px sans-serif";
+      // Flechas de dirección animadas
+      ctx.fillStyle = "#fde047";
+      ctx.font = "bold 11px sans-serif";
       const arrow = p.type === 'conveyor_right' ? '➔➔➔' : '⬅⬅⬅';
-      ctx.fillText(arrow, rx + p.w / 2 - 14, p.y + 14);
+      ctx.fillText(arrow, rx + p.w / 2 - 18, p.y + 14);
     } else if (p.type === 'block_drop_fake') {
       // Plataforma trampa de nubes
-      ctx.fillStyle = "rgba(236, 72, 153, 0.75)";
+      ctx.fillStyle = "rgba(236, 72, 153, 0.85)";
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 11px Outfit, sans-serif";
@@ -757,17 +830,35 @@ function obbyGameLoop() {
     }
   });
 
-  // Dibujar artículos de misión
+  // Dibujar artículos de misión con etiquetas de texto y flechas flotantes
   stage.items.forEach(it => {
     if (!it.collected) {
       const ix = it.x - cameraX;
-      ctx.font = "24px sans-serif";
-      ctx.fillText(it.icon, ix, it.y + 24);
+      const floatY = Math.sin(Date.now() * 0.005) * 5;
+
+      // Icono flotante
+      ctx.font = "26px sans-serif";
+      ctx.fillText(it.icon, ix, it.y + 24 + floatY);
+
       // Halo brillante
       ctx.beginPath();
-      ctx.arc(ix + 12, it.y + 12, 18, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(253, 224, 71, 0.6)";
+      ctx.arc(ix + 13, it.y + 13 + floatY, 20, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(253, 224, 71, 0.8)";
+      ctx.lineWidth = 2;
       ctx.stroke();
+
+      // Etiqueta de texto superior (Nombre del artículo en inglés)
+      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+      ctx.roundRect(ix - 36, it.y - 18 + floatY, 100, 20, 6);
+      ctx.fill();
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "bold 10px Outfit, sans-serif";
+      ctx.fillText(it.name, ix - 30, it.y - 4 + floatY);
+
+      // Flecha apuntando hacia abajo
+      ctx.fillStyle = "#f59e0b";
+      ctx.font = "12px sans-serif";
+      ctx.fillText("▼", ix + 8, it.y - 18 + floatY);
     }
   });
 
@@ -786,23 +877,49 @@ function obbyGameLoop() {
     }
   });
 
-  // Dibujar Puerta del Checkpoint
+  // Dibujar Puerta del Checkpoint / Meta
   const gx = stage.gate.x - cameraX;
   if (stage.gate.unlocked) {
+    // Puerta Abierta en Verde
     ctx.fillStyle = "#10b981";
-    ctx.fillRect(gx, stage.gate.y, 8, stage.gate.h);
-    ctx.font = "28px sans-serif";
-    ctx.fillText("🏁", gx - 8, stage.gate.y - 10);
+    ctx.fillRect(gx, stage.gate.y, 10, stage.gate.h);
+    ctx.font = "32px sans-serif";
+    ctx.fillText("🏁", gx - 10, stage.gate.y - 10);
+
+    // Cartel brillante encima de la puerta abierta
+    ctx.fillStyle = "rgba(16, 185, 129, 0.95)";
+    ctx.roundRect(gx - 80, stage.gate.y - 36, 170, 24, 8);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 11px Outfit, sans-serif";
+    ctx.fillText("🔓 ¡META ABIERTA! ➔➔➔", gx - 70, stage.gate.y - 20);
   } else {
+    // Puerta Bloqueada en Rojo
     ctx.fillStyle = "#ef4444";
-    ctx.fillRect(gx, stage.gate.y, 16, stage.gate.h);
-    ctx.font = "22px sans-serif";
-    ctx.fillText("🔒", gx - 4, stage.gate.y + 45);
+    ctx.fillRect(gx, stage.gate.y, 18, stage.gate.h);
+    ctx.font = "24px sans-serif";
+    ctx.fillText("🔒", gx - 3, stage.gate.y + 45);
+
+    // Cartel rojo de bloqueo
+    ctx.fillStyle = "rgba(239, 68, 68, 0.95)";
+    ctx.roundRect(gx - 75, stage.gate.y - 28, 160, 20, 6);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 10px Outfit, sans-serif";
+    ctx.fillText("🔒 BLOQUEADA: Recoge los ítems", gx - 68, stage.gate.y - 14);
   }
 
   // 4. DIBUJAR A BARNABY (PERSONAJE JUGADOR EN 2D)
   const px = Player.x - cameraX;
   const py = Player.y;
+
+  // Si tiene doble salto disponible, halo tenue en los pies
+  if (Player.jumpsLeft === 2) {
+    ctx.fillStyle = "rgba(236, 72, 153, 0.3)";
+    ctx.beginPath();
+    ctx.ellipse(px + Player.w / 2, py + Player.h, 12, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
   // Cuerpo de Barnaby (Osito tierno con gorro de chef o shopping)
   ctx.fillStyle = "#92400e"; // Pelo castaño de osito
@@ -831,7 +948,7 @@ function obbyGameLoop() {
   ctx.arc(px + Player.w / 2, py + 14, 2.5, 0, Math.PI * 2);
   ctx.fill();
 
-  // Gorrito de compras rojo
+  // Gorrito de compras rojo/fucsia
   ctx.fillStyle = "#ec4899";
   ctx.beginPath();
   ctx.arc(px + Player.w / 2, py + 2, 7, Math.PI, 0);
@@ -861,6 +978,23 @@ function obbyGameLoop() {
       obbyParticles.splice(idx, 1);
     }
   });
+
+  // 6. RENDERIZAR BANNER FLOTANTE SUPERIOR
+  if (obbyBannerTimer > 0) {
+    obbyBannerTimer--;
+    ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+    ctx.roundRect(canvas.width / 2 - 240, 16, 480, 36, 12);
+    ctx.fill();
+    ctx.strokeStyle = "#c084fc";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 13px Outfit, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(obbyBannerMessage, canvas.width / 2, 39);
+    ctx.textAlign = "left"; // Restablecer alineación
+  }
 
   requestAnimationFrame(obbyGameLoop);
 }
