@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jigsaw Puzzle Adventure • Bilikids</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="puzzle_styles.css?v=1.0">
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="puzzle-header">
+    <a href="javascript:void(0)" id="backBtn" class="back-nav-btn" title="Go Back">
+      <span class="back-icon">←</span>
+      <span id="backBtnLabel">Back</span>
+    </a>
+
+    <!-- Central Branding & Title -->
+    <div class="header-title-box">
+      <h1 class="header-title">
+        <span class="puzzle-emoji-spin">🧩</span> Jigsaw Puzzle Adventure
+      </h1>
+      <span class="header-subtitle" id="modeSubtitle">Babies • 2x2 Easy</span>
+    </div>
+
+    <!-- Difficulty Switcher (Babies / Toddlers / Kids) -->
+    <div class="difficulty-switcher">
+      <button class="diff-btn active" data-mode="babies" title="Babies (2x2 • Easy • 4 pieces)">
+        <span>🍼</span> Babies
+      </button>
+      <button class="diff-btn" data-mode="toddlers" title="Toddlers (3x3 • Medium • 9 pieces)">
+        <span>🧸</span> Toddlers
+      </button>
+      <button class="diff-btn" data-mode="kids" title="Kids (4x4 • Hard • 16 pieces)">
+        <span>🚀</span> Kids
+      </button>
+    </div>
+
+    <!-- Right Controls: Stars, Sound, Restart -->
+    <div class="header-actions">
+      <div class="stars-badge" id="starsBadge" title="Your Bilikids Stars">
+        <span class="star-icon">⭐</span>
+        <span class="stars-count" id="starsCount">120</span>
+      </div>
+
+      <button class="action-round-btn" id="soundBtn" title="Toggle Sound">
+        <span id="soundIcon">🔊</span>
+      </button>
+
+      <button class="action-round-btn" id="restartBtn" title="Shuffle / Restart Puzzle">
+        <span>🔄</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN GAME WORKSPACE -->
+  <main class="puzzle-workspace">
+    
+    <!-- Info Bar: Picture title, Timer, Moves, Hint -->
+    <div class="puzzle-info-bar">
+      <div class="info-left">
+        <span class="current-puzzle-icon" id="puzzleIcon">🏰</span>
+        <h2 class="current-puzzle-title" id="puzzleTitle">Bili's Magic Kingdom</h2>
+      </div>
+
+      <div class="info-stats">
+        <div class="stat-pill">
+          <span class="stat-icon">⏱️</span>
+          <span class="stat-value" id="timerDisplay">00:00</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-value" id="movesDisplay">Moves: 0</span>
+        </div>
+        <button class="hint-btn" id="hintBtn" title="Show ghost image guide">
+          <span>💡</span> Hint
+        </button>
+      </div>
+    </div>
+
+    <!-- Gameplay Area: Board (Left) & Pieces Tray (Right) -->
+    <div class="game-stage">
+      
+      <!-- Left: Puzzle Frame & Assembly Board -->
+      <div class="board-wrapper">
+        <div class="board-frame">
+          <div class="puzzle-board" id="puzzleBoard">
+            <!-- Ghost background guide -->
+            <img id="ghostImage" class="ghost-guide" alt="Ghost Guide" />
+            <!-- Grid Slot Overlay -->
+            <div class="grid-overlay" id="gridOverlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Pieces Tray (Pieces Dock) -->
+      <div class="tray-wrapper">
+        <div class="tray-header">
+          <span class="tray-title">🧩 Puzzle Pieces</span>
+          <span class="tray-progress" id="progressDisplay">0 / 4 placed</span>
+        </div>
+        
+        <div class="pieces-tray" id="piecesTray">
+          <!-- Dynamic Jigsaw Pieces injected here -->
+        </div>
+
+        <div class="tray-help-hint" id="trayHelpHint">
+          <span>👉</span> <strong>Tip:</strong> Drag a piece or tap it, then tap its slot!
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- BOTTOM PICTURE CAROUSEL (10 STUNNING DRAWINGS) -->
+  <section class="gallery-section">
+    <div class="gallery-header-row">
+      <h3 class="gallery-title">
+        <span>🖼️</span> Choose a Picture to Solve
+      </h3>
+      <span class="gallery-count">10 Amazing 3D Illustrations</span>
+    </div>
+
+    <div class="gallery-carousel" id="galleryCarousel">
+      <!-- Injected dynamically with thumbnails -->
+    </div>
+  </section>
+
+  <!-- VICTORY CELEBRATION MODAL OVERLAY -->
+  <div class="victory-overlay" id="victoryModal">
+    <div class="victory-card">
+      <div class="victory-trophy-wrap">
+        <span class="victory-trophy">🏆</span>
+        <div class="victory-stars-row" id="victoryStarsRow">
+          <span class="v-star star-1">⭐</span>
+          <span class="v-star star-2">⭐</span>
+          <span class="v-star star-3">⭐</span>
+        </div>
+      </div>
+
+      <h2 class="victory-title" id="victoryTitle">Awesome Job!</h2>
+      <p class="victory-desc" id="victoryDesc">You solved the puzzle with flying colors!</p>
+
+      <div class="victory-stats-box">
+        <div class="v-stat">
+          <span class="v-stat-label">Time</span>
+          <span class="v-stat-value" id="vTime">00:32</span>
+        </div>
+        <div class="v-stat">
+          <span class="v-stat-label">Moves</span>
+          <span class="v-stat-value" id="vMoves">12</span>
+        </div>
+        <div class="v-stat highlight-reward">
+          <span class="v-stat-label">Points Earned</span>
+          <span class="v-stat-value reward-glow" id="vPoints">+100 ⭐</span>
+        </div>
+      </div>
+
+      <div class="victory-actions">
+        <button class="v-action-btn btn-replay" id="replayBtn">
+          <span>🔄</span> Play Again
+        </button>
+        <button class="v-action-btn btn-next" id="nextPuzzleBtn">
+          <span>➡️</span> Next Puzzle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING DRAG GHOST -->
+  <div id="dragGhost" class="drag-ghost"></div>
+
+  <!-- CONFETTI CANVAS -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="puzzle_engine.js?v=1.0"></script>
+</body>
+</html>

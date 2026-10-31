@@ -1,0 +1,72 @@
+[
+  {
+    "id": "bili_magic",
+    "title": "Bili's Magic Kingdom",
+    "emoji": "\ud83c\udff0",
+    "image": "assets/puzzles/bili_magic.jpg",
+    "thumb": "assets/puzzles/bili_magic_thumb.jpg"
+  },
+  {
+    "id": "safari_party",
+    "title": "Safari Celebration",
+    "emoji": "\ud83e\udd92",
+    "image": "assets/puzzles/safari_party.jpg",
+    "thumb": "assets/puzzles/safari_party_thumb.jpg"
+  },
+  {
+    "id": "rainbow_world",
+    "title": "Rainbow Wonderland",
+    "emoji": "\ud83c\udf08",
+    "image": "assets/puzzles/rainbow_world.jpg",
+    "thumb": "assets/puzzles/rainbow_world_thumb.jpg"
+  },
+  {
+    "id": "leo_farm",
+    "title": "Leo the Lion Cub",
+    "emoji": "\ud83e\udd81",
+    "image": "assets/puzzles/leo_farm.jpg",
+    "thumb": "assets/puzzles/leo_farm_thumb.jpg"
+  },
+  {
+    "id": "luna_home",
+    "title": "Luna's Cozy House",
+    "emoji": "\ud83d\udc31",
+    "image": "assets/puzzles/luna_home.jpg",
+    "thumb": "assets/puzzles/luna_home_thumb.jpg"
+  },
+  {
+    "id": "friends_picnic",
+    "title": "Friends Sunny Picnic",
+    "emoji": "\ud83e\uddfa",
+    "image": "assets/puzzles/friends_picnic.jpg",
+    "thumb": "assets/puzzles/friends_picnic_thumb.jpg"
+  },
+  {
+    "id": "ocean_blue",
+    "title": "Blue Ocean Friends",
+    "emoji": "\ud83d\udc2c",
+    "image": "assets/puzzles/ocean_blue.jpg",
+    "thumb": "assets/puzzles/ocean_blue_thumb.jpg"
+  },
+  {
+    "id": "tall_giraffe",
+    "title": "Gentle Giraffe",
+    "emoji": "\ud83c\udf3f",
+    "image": "assets/puzzles/tall_giraffe.jpg",
+    "thumb": "assets/puzzles/tall_giraffe_thumb.jpg"
+  },
+  {
+    "id": "barnaby_bear",
+    "title": "Barnaby's Forest",
+    "emoji": "\ud83e\uddf8",
+    "image": "assets/puzzles/barnaby_bear.jpg",
+    "thumb": "assets/puzzles/barnaby_bear_thumb.jpg"
+  },
+  {
+    "id": "bunny_pip",
+    "title": "Little Bunny Pip",
+    "emoji": "\ud83d\udc30",
+    "image": "assets/puzzles/bunny_pip.jpg",
+    "thumb": "assets/puzzles/bunny_pip_thumb.jpg"
+  }
+]
