@@ -164,9 +164,31 @@ class PuzzleAudio {
 const audio = new PuzzleAudio();
 
 // ============================================================================
-// PUZZLE CATALOG SPECIFICATION (10 3D ILLUSTRATIONS)
+// PUZZLE CATALOG SPECIFICATION (13 HIGH-QUALITY ILLUSTRATIONS)
+// Includes the 3 featured puzzles from the category cards!
 // ============================================================================
 const PUZZLE_CATALOG = [
+  {
+    id: 'cute_bear',
+    title: 'Cute Teddy Bear',
+    emoji: '🧸',
+    image: 'assets/puzzles/cute_bear.jpg',
+    thumb: 'assets/puzzles/cute_bear_thumb.jpg'
+  },
+  {
+    id: 'cute_elephant',
+    title: 'Baby Elephant',
+    emoji: '🐘',
+    image: 'assets/puzzles/cute_elephant.jpg',
+    thumb: 'assets/puzzles/cute_elephant_thumb.jpg'
+  },
+  {
+    id: 'volcano_landscape',
+    title: 'Mountain Adventure',
+    emoji: '🌋',
+    image: 'assets/puzzles/volcano_landscape.jpg',
+    thumb: 'assets/puzzles/volcano_landscape_thumb.jpg'
+  },
   {
     id: 'bili_magic',
     title: "Bili's Magic Kingdom",
@@ -317,6 +339,15 @@ class JigsawGame {
     const mode = params.get('mode');
     if (mode && DIFFICULTY_CONFIG[mode.toLowerCase()]) {
       this.currentMode = mode.toLowerCase();
+    }
+
+    // Configure matching featured puzzle index per mode
+    if (this.currentMode === 'babies') {
+      this.currentPuzzleIdx = 0; // Cute Teddy Bear
+    } else if (this.currentMode === 'toddlers') {
+      this.currentPuzzleIdx = 1; // Baby Elephant
+    } else if (this.currentMode === 'kids') {
+      this.currentPuzzleIdx = 2; // Mountain Adventure
     }
 
     // Configure Back button destination

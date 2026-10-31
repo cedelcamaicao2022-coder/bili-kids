@@ -868,3 +868,25 @@ body {
   object-position: center !important;
   opacity: 1 !important;
 }
+
+/* PUZZLE CATEGORY BUTTON CARDS (TRANSPARENT WITH NATURAL FLOATING SHADOW) */
+.puzzle-button-card {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease !important;
+  display: block;
+}
+
+.puzzle-button-card:hover {
+  transform: translateY(-6px) scale(1.04) !important;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.16)) !important;
+}
+
+.puzzle-button-card .carousel-card-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
