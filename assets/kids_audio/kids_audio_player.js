@@ -1,7 +1,8 @@
 /**
  * Bilikids Unified Audio Player
  * Automatically routes speech requests to ElevenLabs studio MP3s when available,
- * playing audio natively as downloaded, with seamless fallback to Web Speech API.
+ * playing audio at a natural, calm pedagogical pace (0.88x with pitch preservation),
+ * with seamless zero-latency fallback to Web Speech API.
  */
 function normalizeAudioKey(str) {
   return (str || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
@@ -37,11 +38,13 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
 
-      // Play audio cleanly as downloaded
-      audio.playbackRate = 1.0;
+      // Preservar tono exacto y reducir velocidad a un ritmo pausado y natural para niños
       audio.preservesPitch = true;
+      audio.mozPreservesPitch = true;
+      audio.webkitPreservesPitch = true;
+      audio.playbackRate = 0.88; // Ritmo pausado, claro y natural
 
-      const safeDuration = Math.max(1600, text.length * 100);
+      const safeDuration = Math.max(2000, (text.length * 120) / audio.playbackRate);
       const safeTimer = setTimeout(finish, safeDuration);
 
       audio.onended = () => {
@@ -75,8 +78,8 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.90;
-    utterance.pitch = (voiceType === 'maya' || voiceType === 'girl') ? 1.25 : 1.10;
+    utterance.rate = 0.82; // Ritmo pausado y natural
+    utterance.pitch = (voiceType === 'maya' || voiceType === 'girl') ? 1.20 : 1.05;
 
     const voices = window.speechSynthesis.getVoices();
     const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Karen'))) 
@@ -85,7 +88,7 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
 
     const safeTimer = setTimeout(() => {
       if (callback) callback();
-    }, Math.max(1400, text.length * 75));
+    }, Math.max(1600, text.length * 90));
 
     utterance.onend = () => {
       clearTimeout(safeTimer);
