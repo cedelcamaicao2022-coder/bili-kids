@@ -855,3 +855,16 @@ body {
   .subpage-hero-bg-img { width: 100%; opacity: 0.4; }
   .hero-group-title { font-size: 2.6rem; }
 }
+
+
+/* Babies Hero: Clean crisp artwork with no difuminado / gradient fog */
+.babies-hero .subpage-hero-overlay {
+  background: transparent !important;
+}
+.babies-hero .subpage-hero-bg-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+}
