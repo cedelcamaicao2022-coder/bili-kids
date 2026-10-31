@@ -1,6 +1,7 @@
 /**
  * BILIKIDS COLORING STUDIO - BABIES (3-5 YEARS)
  * Interactive Engine with Flood-Fill, Multi-Tools, Sound & Color Voice
+ * Strict Figure Boundary Masking (Exterior background cannot be painted)
  */
 
 // ============================================================================
@@ -25,75 +26,83 @@ class AudioController {
   playPop() {
     if (!this.soundEnabled) return;
     this.init();
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(420, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(840, this.ctx.currentTime + 0.08);
-    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 0.08);
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(420, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(840, this.ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.08);
+    } catch(e) {}
   }
 
   playSplash() {
     if (!this.soundEnabled) return;
     this.init();
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(320, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(640, this.ctx.currentTime + 0.15);
-    gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 0.15);
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(640, this.ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.15);
+    } catch(e) {}
   }
 
   playMagic() {
     if (!this.soundEnabled) return;
     this.init();
-    const now = this.ctx.currentTime;
-    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.12, now + i * 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.18);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(now + i * 0.05);
-      osc.stop(now + i * 0.05 + 0.18);
-    });
+    try {
+      const now = this.ctx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.12, now + i * 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.18);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.05);
+        osc.stop(now + i * 0.05 + 0.18);
+      });
+    } catch(e) {}
   }
 
   playFanfare() {
     if (!this.soundEnabled) return;
     this.init();
-    const now = this.ctx.currentTime;
-    const notes = [
-      { f: 523.25, d: 0.12, delay: 0 },
-      { f: 659.25, d: 0.12, delay: 0.12 },
-      { f: 783.99, d: 0.15, delay: 0.24 },
-      { f: 1046.50, d: 0.40, delay: 0.40 }
-    ];
-    notes.forEach(n => {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.value = n.f;
-      gain.gain.setValueAtTime(0.25, now + n.delay);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + n.delay + n.d);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(now + n.delay);
-      osc.stop(now + n.delay + n.d);
-    });
+    try {
+      const now = this.ctx.currentTime;
+      const notes = [
+        { f: 523.25, d: 0.12, delay: 0 },
+        { f: 659.25, d: 0.12, delay: 0.12 },
+        { f: 783.99, d: 0.15, delay: 0.24 },
+        { f: 1046.50, d: 0.40, delay: 0.40 }
+      ];
+      notes.forEach(n => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.value = n.f;
+        gain.gain.setValueAtTime(0.25, now + n.delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + n.delay + n.d);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + n.delay);
+        osc.stop(now + n.delay + n.d);
+      });
+    } catch(e) {}
   }
 
   speakColor(colorName) {
@@ -118,7 +127,7 @@ class AudioController {
 const audioCtrl = new AudioController();
 
 // ============================================================================
-// COLOR PALETTE SPECIFICATION
+// COLOR PALETTE SPECIFICATION (15 VIBRANT CHILD-SAFE SWATCHES)
 // ============================================================================
 const COLOR_PALETTE = [
   { name: 'Red', hex: '#ef4444' },
@@ -139,103 +148,157 @@ const COLOR_PALETTE = [
 ];
 
 // ============================================================================
-// COLORING PAGES CATALOG (12 PAGES)
+// COLORING PAGES CATALOG (14 USER DRAWINGS + FREESTYLE CANVAS)
 // ============================================================================
 const COLORING_PAGES = [
   {
-    id: 'elephant',
-    name: 'Baby Elephant',
-    icon: '🐘',
-    type: 'png',
-    src: 'assets/coloring_pages/clean_elephant.png',
-    thumb: 'assets/coloring_pages/clean_elephant.png'
+    id: 'bluey',
+    name: 'Bluey',
+    nameEs: 'Bluey',
+    icon: '🐕',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_bluey_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_bluey_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_bluey_thumb.png'
   },
   {
-    id: 'teddy',
-    name: 'Teddy Bear',
-    icon: '🧸',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_teddy.svg',
-    thumb: 'assets/coloring_pages/svg/page_teddy.svg'
+    id: 'mario',
+    name: 'Super Mario',
+    nameEs: 'Super Mario',
+    icon: '🍄',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_mario_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_mario_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_mario_thumb.png'
   },
   {
-    id: 'puppy',
-    name: 'Happy Puppy',
-    icon: '🐶',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_puppy.svg',
-    thumb: 'assets/coloring_pages/svg/page_puppy.svg'
-  },
-  {
-    id: 'kitty',
-    name: 'Sweet Kitty',
-    icon: '🐱',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_kitty.svg',
-    thumb: 'assets/coloring_pages/svg/page_kitty.svg'
-  },
-  {
-    id: 'bunny',
-    name: 'Fluffy Bunny',
-    icon: '🐰',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_bunny.svg',
-    thumb: 'assets/coloring_pages/svg/page_bunny.svg'
+    id: 'peppa',
+    name: 'Peppa Pig',
+    nameEs: 'Peppa Pig',
+    icon: '🐷',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_peppa_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_peppa_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_peppa_thumb.png'
   },
   {
     id: 'dino',
     name: 'Baby Dino',
-    icon: '🦕',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_dino.svg',
-    thumb: 'assets/coloring_pages/svg/page_dino.svg'
+    nameEs: 'Dinosaurio',
+    icon: '🦖',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_dino_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_dino_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_dino_thumb.png'
   },
   {
-    id: 'butterfly',
-    name: 'Butterfly',
-    icon: '🦋',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_butterfly.svg',
-    thumb: 'assets/coloring_pages/svg/page_butterfly.svg'
+    id: 'puppy',
+    name: 'Happy Puppy',
+    nameEs: 'Perrito Feliz',
+    icon: '🐶',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_puppy_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_puppy_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_puppy_thumb.png'
   },
   {
-    id: 'lion',
-    name: 'Baby Lion',
-    icon: '🦁',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_lion.svg',
-    thumb: 'assets/coloring_pages/svg/page_lion.svg'
+    id: 'caticorn',
+    name: 'Magic Kitty',
+    nameEs: 'Gato Unicornio',
+    icon: '🐱',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_caticorn_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_caticorn_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_caticorn_thumb.png'
   },
   {
-    id: 'car',
-    name: 'Zoom Car',
-    icon: '🚗',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_car.svg',
-    thumb: 'assets/coloring_pages/svg/page_car.svg'
+    id: 'cow',
+    name: 'Farm Cow',
+    nameEs: 'Vaquita',
+    icon: '🐮',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_cow_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_cow_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_cow_thumb.png'
+  },
+  {
+    id: 'giraffe',
+    name: 'Giraffe',
+    nameEs: 'Jirafa',
+    icon: '🦒',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_giraffe_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_giraffe_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_giraffe_thumb.png'
   },
   {
     id: 'boat',
     name: 'Sunny Boat',
+    nameEs: 'Barco Velero',
     icon: '⛵',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_boat.svg',
-    thumb: 'assets/coloring_pages/svg/page_boat.svg'
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_boat_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_boat_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_boat_thumb.png'
   },
   {
-    id: 'dolphin',
-    name: 'Dolphin',
-    icon: '🐬',
-    type: 'svg',
-    src: 'assets/coloring_pages/svg/page_dolphin.svg',
-    thumb: 'assets/coloring_pages/svg/page_dolphin.svg'
+    id: 'duck',
+    name: 'Little Duck',
+    nameEs: 'Patito',
+    icon: '🦆',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_duck_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_duck_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_duck_thumb.png'
+  },
+  {
+    id: 'turtle',
+    name: 'Little Turtle',
+    nameEs: 'Tortuguita',
+    icon: '🐢',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_turtle_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_turtle_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_turtle_thumb.png'
+  },
+  {
+    id: 'unicorn',
+    name: 'Baby Unicorn',
+    nameEs: 'Unicornio',
+    icon: '🦄',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_unicorn_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_unicorn_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_unicorn_thumb.png'
+  },
+  {
+    id: 'puppy2',
+    name: 'Playful Pup',
+    nameEs: 'Cachorrito',
+    icon: '🐕',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_puppy2_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_puppy2_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_puppy2_thumb.png'
+  },
+  {
+    id: 'friends',
+    name: 'Cute Friends',
+    nameEs: 'Amiguitos',
+    icon: '🧸',
+    type: 'page',
+    outline: 'assets/coloring_pages/user_pages/page_friends_outline.png',
+    mask: 'assets/coloring_pages/user_pages/page_friends_mask.png',
+    thumb: 'assets/coloring_pages/user_pages/page_friends_thumb.png'
   },
   {
     id: 'freestyle',
     name: 'Free Draw',
+    nameEs: 'Lienzo Libre',
     icon: '✨',
     type: 'blank',
-    src: null,
+    outline: null,
+    mask: null,
     thumb: null
   }
 ];
@@ -250,7 +313,7 @@ class ColoringStudio {
     this.paintCtx = this.paintCanvas.getContext('2d', { willReadFrequently: true });
     this.outlineCtx = this.outlineCanvas.getContext('2d', { willReadFrequently: true });
 
-    this.currentTool = 'bucket'; // 'crayon', 'marker', 'bucket', 'magic', 'stamp', 'eraser'
+    this.currentTool = 'bucket'; // 'bucket', 'crayon', 'marker', 'magic', 'stamp', 'eraser'
     this.currentColor = COLOR_PALETTE[0].hex; // Default Red
     this.currentPageIndex = 0;
 
@@ -262,7 +325,12 @@ class ColoringStudio {
     this.historyIndex = -1;
     this.maxHistory = 15;
 
+    // Loaded image and mask references
     this.loadedOutlineImg = null;
+    this.loadedMaskImg = null;
+    this.drawBounds = null; // { x, y, w, h }
+    this.insideMask = null; // Uint8Array of 1 (inside) and 0 (outside)
+    this.outsideMaskCanvas = null; // Pre-rendered canvas with white background outside figure
 
     this.init();
   }
@@ -289,25 +357,27 @@ class ColoringStudio {
       this.height = rect.height;
 
       // Internal bitmap resolution
-      this.paintCanvas.width = this.width * dpr;
-      this.paintCanvas.height = this.height * dpr;
-      this.outlineCanvas.width = this.width * dpr;
-      this.outlineCanvas.height = this.height * dpr;
+      this.paintCanvas.width = Math.round(this.width * dpr);
+      this.paintCanvas.height = Math.round(this.height * dpr);
+      this.outlineCanvas.width = Math.round(this.width * dpr);
+      this.outlineCanvas.height = Math.round(this.height * dpr);
 
       this.paintCanvas.style.width = `${this.width}px`;
       this.paintCanvas.style.height = `${this.height}px`;
       this.outlineCanvas.style.width = `${this.width}px`;
       this.outlineCanvas.style.height = `${this.height}px`;
 
+      this.paintCtx.setTransform(1, 0, 0, 1, 0, 0);
       this.paintCtx.scale(dpr, dpr);
+      this.outlineCtx.setTransform(1, 0, 0, 1, 0, 0);
       this.outlineCtx.scale(dpr, dpr);
 
       // Re-fill white background on base layer
       this.paintCtx.fillStyle = '#ffffff';
       this.paintCtx.fillRect(0, 0, this.width, this.height);
 
-      if (this.loadedOutlineImg) {
-        this.drawOutlineImage();
+      if (this.loadedOutlineImg && this.loadedMaskImg) {
+        this.renderOutlineAndMask();
       }
     };
 
@@ -418,36 +488,110 @@ class ColoringStudio {
 
     if (page.type === 'blank') {
       this.loadedOutlineImg = null;
+      this.loadedMaskImg = null;
+      this.insideMask = null;
+      this.outsideMaskCanvas = null;
       this.saveState();
       return;
     }
 
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      this.loadedOutlineImg = img;
-      this.drawOutlineImage();
-      this.saveState();
+    // Load outline and mask concurrently
+    let loadedCount = 0;
+    const outlineImg = new Image();
+    const maskImg = new Image();
+
+    const onAssetLoaded = () => {
+      loadedCount++;
+      if (loadedCount === 2) {
+        this.loadedOutlineImg = outlineImg;
+        this.loadedMaskImg = maskImg;
+        this.renderOutlineAndMask();
+        this.saveState();
+      }
     };
-    img.src = page.src;
+
+    outlineImg.onload = onAssetLoaded;
+    maskImg.onload = onAssetLoaded;
+
+    outlineImg.src = page.outline;
+    maskImg.src = page.mask;
   }
 
-  drawOutlineImage() {
-    if (!this.loadedOutlineImg) return;
-    const img = this.loadedOutlineImg;
+  renderOutlineAndMask() {
+    if (!this.loadedOutlineImg || !this.loadedMaskImg) return;
+    const outlineImg = this.loadedOutlineImg;
+    const maskImg = this.loadedMaskImg;
+
     this.outlineCtx.clearRect(0, 0, this.width, this.height);
 
-    // Maintain aspect ratio with padding
-    const padding = 24;
+    // Compute fitted drawing rectangle maintaining aspect ratio
+    const padding = 20;
     const maxW = this.width - padding * 2;
     const maxH = this.height - padding * 2;
-    const scale = Math.min(maxW / img.width, maxH / img.height);
-    const drawW = img.width * scale;
-    const drawH = img.height * scale;
-    const x = (this.width - drawW) / 2;
-    const y = (this.height - drawH) / 2;
+    const scale = Math.min(maxW / outlineImg.width, maxH / outlineImg.height);
+    const drawW = outlineImg.width * scale;
+    const drawH = outlineImg.height * scale;
+    const drawX = (this.width - drawW) / 2;
+    const drawY = (this.height - drawH) / 2;
 
-    this.outlineCtx.drawImage(img, x, y, drawW, drawH);
+    this.drawBounds = { x: drawX, y: drawY, w: drawW, h: drawH };
+
+    // 1. Render crisp lineart onto outlineCanvas
+    this.outlineCtx.drawImage(outlineImg, drawX, drawY, drawW, drawH);
+
+    // 2. Build 1-bit inside mask at exact canvas pixel buffer resolution
+    const dpr = window.devicePixelRatio || 1;
+    const canvasW = Math.round(this.width * dpr);
+    const canvasH = Math.round(this.height * dpr);
+
+    const tempMaskCanvas = document.createElement('canvas');
+    tempMaskCanvas.width = canvasW;
+    tempMaskCanvas.height = canvasH;
+    const tempCtx = tempMaskCanvas.getContext('2d', { willReadFrequently: true });
+    tempCtx.scale(dpr, dpr);
+    tempCtx.drawImage(maskImg, drawX, drawY, drawW, drawH);
+
+    const maskData = tempCtx.getImageData(0, 0, canvasW, canvasH);
+    const mBytes = maskData.data;
+    this.insideMask = new Uint8Array(canvasW * canvasH);
+
+    for (let i = 0, p = 0; i < mBytes.length; i += 4, p++) {
+      // In mask image, interior is white (>120), exterior background is black (0)
+      if (mBytes[i] > 120) {
+        this.insideMask[p] = 1;
+      }
+    }
+
+    // 3. Pre-render outsideMaskCanvas (White outside, transparent inside)
+    // Any time child draws, drawing this over paintCtx wipes out any marks outside the character
+    this.outsideMaskCanvas = document.createElement('canvas');
+    this.outsideMaskCanvas.width = canvasW;
+    this.outsideMaskCanvas.height = canvasH;
+    const outCtx = this.outsideMaskCanvas.getContext('2d');
+    const outImgData = outCtx.createImageData(canvasW, canvasH);
+    const out32 = new Uint32Array(outImgData.data.buffer);
+
+    // ABGR 0xFFFFFFFF = pure solid white
+    const SOLID_WHITE = 0xFFFFFFFF;
+    for (let p = 0; p < canvasW * canvasH; p++) {
+      if (this.insideMask[p] === 0) {
+        out32[p] = SOLID_WHITE;
+      } else {
+        out32[p] = 0; // Transparent inside figure
+      }
+    }
+    outCtx.putImageData(outImgData, 0, 0);
+
+    // Clean initial canvas with outside mask
+    this.applyOutsideMask();
+  }
+
+  applyOutsideMask() {
+    if (!this.outsideMaskCanvas || COLORING_PAGES[this.currentPageIndex].type === 'blank') return;
+    this.paintCtx.save();
+    this.paintCtx.setTransform(1, 0, 0, 1, 0, 0);
+    this.paintCtx.drawImage(this.outsideMaskCanvas, 0, 0);
+    this.paintCtx.restore();
   }
 
   setupEvents() {
@@ -473,7 +617,6 @@ class ColoringStudio {
 
       if (this.currentTool === 'bucket') {
         this.floodFill(Math.round(pos.x), Math.round(pos.y), this.currentColor);
-        this.saveState();
       } else if (this.currentTool === 'stamp') {
         this.drawStamp(pos.x, pos.y);
         this.saveState();
@@ -499,6 +642,7 @@ class ColoringStudio {
       if (!this.isDrawing) return;
       this.isDrawing = false;
       if (this.currentTool !== 'bucket' && this.currentTool !== 'stamp') {
+        this.applyOutsideMask();
         this.saveState();
       }
     };
@@ -561,7 +705,6 @@ class ColoringStudio {
     } else if (this.currentTool === 'crayon') {
       ctx.strokeStyle = this.currentColor;
       ctx.lineWidth = 14;
-      // Add subtle crayon texture with slight alpha
       ctx.globalAlpha = 0.85;
     } else if (this.currentTool === 'magic') {
       ctx.strokeStyle = this.currentColor;
@@ -585,9 +728,25 @@ class ColoringStudio {
     // Reset shadow & alpha
     ctx.shadowBlur = 0;
     ctx.globalAlpha = 1.0;
+
+    // Constrain stroke strictly inside figure silhouette
+    this.applyOutsideMask();
   }
 
   drawStamp(x, y) {
+    // Only place stamp if coordinate is inside the figure
+    const dpr = window.devicePixelRatio || 1;
+    const px = Math.round(x * dpr);
+    const py = Math.round(y * dpr);
+    const canvasW = Math.round(this.width * dpr);
+    const idx = py * canvasW + px;
+
+    if (this.insideMask && !this.insideMask[idx]) {
+      // Outside figure, ignore stamp
+      audioCtrl.playPop();
+      return;
+    }
+
     const ctx = this.paintCtx;
     const stamps = ['⭐', '❤️', '🌟', '🌸', '✨', '🎈'];
     const stamp = stamps[Math.floor(Math.random() * stamps.length)];
@@ -595,6 +754,7 @@ class ColoringStudio {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(stamp, x, y);
+    this.applyOutsideMask();
     audioCtrl.playPop();
   }
 
@@ -611,11 +771,10 @@ class ColoringStudio {
   }
 
   // ============================================================================
-  // INSTANT FLOOD FILL (4-WAY BFS ON HTML5 CANVAS)
+  // STRICT BOUNDARY-ENFORCED FLOOD FILL (4-WAY BFS)
+  // Background outside the figure CANNOT be filled.
   // ============================================================================
   floodFill(startX, startY, fillHex) {
-    audioCtrl.playSplash();
-
     const dpr = window.devicePixelRatio || 1;
     const pixelX = Math.round(startX * dpr);
     const pixelY = Math.round(startY * dpr);
@@ -625,7 +784,15 @@ class ColoringStudio {
 
     if (pixelX < 0 || pixelX >= canvasW || pixelY < 0 || pixelY >= canvasH) return;
 
-    // Get Outline Image data to detect black outlines
+    const startIndex = pixelY * canvasW + pixelX;
+
+    // 1. STRICT ENFORCEMENT: Never allow flood-fill on background outside character!
+    if (this.insideMask && !this.insideMask[startIndex]) {
+      audioCtrl.playPop();
+      return;
+    }
+
+    // Get Outline Image data to detect dark boundaries
     const outlineData = this.outlineCtx.getImageData(0, 0, canvasW, canvasH);
     const outline32 = new Uint32Array(outlineData.data.buffer);
 
@@ -633,11 +800,8 @@ class ColoringStudio {
     const paintData = this.paintCtx.getImageData(0, 0, canvasW, canvasH);
     const paint32 = new Uint32Array(paintData.data.buffer);
 
-    // Parse target color and fill color
-    const startIndex = pixelY * canvasW + pixelX;
+    // Target and fill colors
     const targetColor = paint32[startIndex];
-
-    // Convert hex to 32-bit ABGR uint32
     const fillR = parseInt(fillHex.slice(1, 3), 16);
     const fillG = parseInt(fillHex.slice(3, 5), 16);
     const fillB = parseInt(fillHex.slice(5, 7), 16);
@@ -648,16 +812,18 @@ class ColoringStudio {
     // Check if clicked directly on an outline
     const targetAlpha = (outline32[startIndex] >> 24) & 0xFF;
     const targetLum = (outline32[startIndex] & 0xFF) + ((outline32[startIndex] >> 8) & 0xFF) + ((outline32[startIndex] >> 16) & 0xFF);
-    if (targetAlpha > 180 && targetLum < 200) {
-      // Clicked on a dark outline, do not flood fill outline
+    if (targetAlpha > 140 && targetLum < 190) {
       return;
     }
 
     const matchTarget = (idx) => {
+      // Must be strictly inside figure mask
+      if (this.insideMask && !this.insideMask[idx]) return false;
+
       // Must not hit black outline
       const oAlpha = (outline32[idx] >> 24) & 0xFF;
       const oLum = (outline32[idx] & 0xFF) + ((outline32[idx] >> 8) & 0xFF) + ((outline32[idx] >> 16) & 0xFF);
-      if (oAlpha > 160 && oLum < 180) return false;
+      if (oAlpha > 130 && oLum < 190) return false;
 
       // Color distance to target
       const c = paint32[idx];
@@ -678,7 +844,6 @@ class ColoringStudio {
       const idx = cy * canvasW + cx;
       paint32[idx] = fillColor;
 
-      // 4 directions
       const neighbors = [
         cx + 1, cy,
         cx - 1, cy,
@@ -701,6 +866,9 @@ class ColoringStudio {
     }
 
     this.paintCtx.putImageData(paintData, 0, 0);
+    this.applyOutsideMask();
+    this.saveState();
+    audioCtrl.playSplash();
   }
 
   // ============================================================================
@@ -746,6 +914,7 @@ class ColoringStudio {
   resetCanvas() {
     this.paintCtx.fillStyle = '#ffffff';
     this.paintCtx.fillRect(0, 0, this.width, this.height);
+    this.applyOutsideMask();
     this.saveState();
     audioCtrl.playPop();
   }
@@ -764,9 +933,14 @@ class ColoringStudio {
     exportCanvas.height = h;
     const exportCtx = exportCanvas.getContext('2d');
 
-    // 1. Draw painted colors
+    // 1. Draw white background
+    exportCtx.fillStyle = '#ffffff';
+    exportCtx.fillRect(0, 0, w, h);
+
+    // 2. Draw painted colors
     exportCtx.drawImage(this.paintCanvas, 0, 0);
-    // 2. Composite black line art
+
+    // 3. Composite black line art
     exportCtx.drawImage(this.outlineCanvas, 0, 0);
 
     const link = document.createElement('a');
@@ -818,7 +992,7 @@ class ColoringStudio {
       pieces.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.45; // gravity
+        p.vy += 0.45;
         p.rotation += p.vr;
 
         ctx.save();

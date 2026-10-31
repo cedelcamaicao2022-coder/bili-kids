@@ -1,0 +1,156 @@
+[
+  {
+    "id": "boat",
+    "name": "Sunny Boat",
+    "nameEs": "Barco Velero",
+    "icon": "⛵",
+    "outline": "assets/coloring_pages/user_pages/page_boat_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_boat_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_boat_thumb.png",
+    "width": 749,
+    "height": 1000
+  },
+  {
+    "id": "puppy",
+    "name": "Happy Puppy",
+    "nameEs": "Perrito Feliz",
+    "icon": "🐶",
+    "outline": "assets/coloring_pages/user_pages/page_puppy_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_puppy_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_puppy_thumb.png",
+    "width": 725,
+    "height": 1000
+  },
+  {
+    "id": "caticorn",
+    "name": "Magic Kitty",
+    "nameEs": "Gato Unicornio",
+    "icon": "🐱",
+    "outline": "assets/coloring_pages/user_pages/page_caticorn_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_caticorn_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_caticorn_thumb.png",
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "id": "bluey",
+    "name": "Bluey",
+    "nameEs": "Bluey",
+    "icon": "🐕",
+    "outline": "assets/coloring_pages/user_pages/page_bluey_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_bluey_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_bluey_thumb.png",
+    "width": 705,
+    "height": 1000
+  },
+  {
+    "id": "cow",
+    "name": "Farm Cow",
+    "nameEs": "Vaquita",
+    "icon": "🐮",
+    "outline": "assets/coloring_pages/user_pages/page_cow_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_cow_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_cow_thumb.png",
+    "width": 667,
+    "height": 1000
+  },
+  {
+    "id": "giraffe",
+    "name": "Giraffe",
+    "nameEs": "Jirafa",
+    "icon": "🦒",
+    "outline": "assets/coloring_pages/user_pages/page_giraffe_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_giraffe_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_giraffe_thumb.png",
+    "width": 706,
+    "height": 1000
+  },
+  {
+    "id": "dino",
+    "name": "Baby Dino",
+    "nameEs": "Dinosaurio",
+    "icon": "🦖",
+    "outline": "assets/coloring_pages/user_pages/page_dino_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_dino_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_dino_thumb.png",
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "id": "peppa",
+    "name": "Peppa Pig",
+    "nameEs": "Peppa Pig",
+    "icon": "🐷",
+    "outline": "assets/coloring_pages/user_pages/page_peppa_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_peppa_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_peppa_thumb.png",
+    "width": 678,
+    "height": 1000
+  },
+  {
+    "id": "friends",
+    "name": "Cute Friends",
+    "nameEs": "Amiguitos",
+    "icon": "🧸",
+    "outline": "assets/coloring_pages/user_pages/page_friends_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_friends_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_friends_thumb.png",
+    "width": 675,
+    "height": 1000
+  },
+  {
+    "id": "puppy2",
+    "name": "Playful Pup",
+    "nameEs": "Cachorrito",
+    "icon": "🐕",
+    "outline": "assets/coloring_pages/user_pages/page_puppy2_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_puppy2_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_puppy2_thumb.png",
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "id": "mario",
+    "name": "Super Mario",
+    "nameEs": "Super Mario",
+    "icon": "🍄",
+    "outline": "assets/coloring_pages/user_pages/page_mario_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_mario_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_mario_thumb.png",
+    "width": 708,
+    "height": 1000
+  },
+  {
+    "id": "duck",
+    "name": "Little Duck",
+    "nameEs": "Patito",
+    "icon": "🦆",
+    "outline": "assets/coloring_pages/user_pages/page_duck_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_duck_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_duck_thumb.png",
+    "width": 667,
+    "height": 1000
+  },
+  {
+    "id": "turtle",
+    "name": "Little Turtle",
+    "nameEs": "Tortuguita",
+    "icon": "🐢",
+    "outline": "assets/coloring_pages/user_pages/page_turtle_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_turtle_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_turtle_thumb.png",
+    "width": 750,
+    "height": 1000
+  },
+  {
+    "id": "unicorn",
+    "name": "Baby Unicorn",
+    "nameEs": "Unicornio",
+    "icon": "🦄",
+    "outline": "assets/coloring_pages/user_pages/page_unicorn_outline.png",
+    "mask": "assets/coloring_pages/user_pages/page_unicorn_mask.png",
+    "thumb": "assets/coloring_pages/user_pages/page_unicorn_thumb.png",
+    "width": 1000,
+    "height": 1000
+  }
+]
