@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 660" width="800" height="660">
+  <g fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Leaping Dolphin Body -->
+    <path d="M 220 330 C 240 220 380 150 520 180 C 620 200 670 280 660 320 C 640 330 580 320 540 350 C 470 400 370 410 280 360 L 220 330 Z"/>
+    <!-- Snout & Smile -->
+    <path d="M 220 330 Q 170 340 185 360 Q 230 370 250 350" fill="none"/>
+    <!-- Eye -->
+    <circle cx="280" cy="290" r="14" fill="#111827"/>
+    <circle cx="276" cy="286" r="5" fill="#ffffff" stroke="none"/>
+    <!-- Dorsal Fin -->
+    <path d="M 440 170 Q 450 100 490 120 Q 485 160 500 175 Z"/>
+    <!-- Flippers -->
+    <path d="M 350 350 Q 340 430 380 430 Q 390 380 385 355 Z"/>
+    <!-- Tail Fluke -->
+    <path d="M 660 320 C 710 300 730 270 740 285 C 720 320 680 335 690 360 C 680 360 670 340 660 320 Z"/>
+    <!-- Ocean Waves -->
+    <path d="M 120 480 Q 180 440 240 480 Q 300 520 360 480 Q 420 440 480 480 Q 540 520 600 480 Q 660 440 720 480" fill="none"/>
+  </g>
+</svg>

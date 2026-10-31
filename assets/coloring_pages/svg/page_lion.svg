@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 660" width="800" height="660">
+  <g fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Big Fluffy Mane -->
+    <path d="M 400 80 C 450 80 480 120 520 110 C 560 100 590 140 620 160 C 660 180 660 230 670 270 C 680 320 650 360 650 400 C 650 440 610 470 590 500 C 560 530 520 520 480 540 C 440 560 400 560 360 550 C 310 540 280 500 240 490 C 200 470 170 420 160 380 C 150 330 170 290 170 240 C 180 200 170 150 210 130 C 250 110 290 120 330 100 C 360 90 380 80 400 80 Z"/>
+    <!-- Ears -->
+    <circle cx="300" cy="210" r="45"/>
+    <circle cx="300" cy="210" r="25"/>
+    <circle cx="500" cy="210" r="45"/>
+    <circle cx="500" cy="210" r="25"/>
+    <!-- Head -->
+    <circle cx="400" cy="300" r="125"/>
+    <!-- Eyes -->
+    <ellipse cx="345" cy="270" rx="16" ry="20" fill="#111827"/>
+    <ellipse cx="455" cy="270" rx="16" ry="20" fill="#111827"/>
+    <circle cx="340" cy="265" r="6" fill="#ffffff" stroke="none"/>
+    <circle cx="450" cy="265" r="6" fill="#ffffff" stroke="none"/>
+    <!-- Nose & Mouth -->
+    <polygon points="400,320 385,302 415,302" fill="#111827"/>
+    <path d="M 400 320 L 400 340 Q 375 355 355 340 M 400 340 Q 425 355 445 340" fill="none"/>
+    <!-- Paws Front -->
+    <ellipse cx="330" cy="550" rx="48" ry="40"/>
+    <ellipse cx="470" cy="550" rx="48" ry="40"/>
+  </g>
+</svg>

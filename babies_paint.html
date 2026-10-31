@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bilikids Coloring Studio • Babies (3-5 años)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="babies_paint_styles.css">
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="studio-header">
+    <a href="babies.html" class="back-btn" title="Volver al módulo de Babies">
+      <span>←</span>
+      <span>Babies</span>
+    </a>
+
+    <div class="studio-title-box">
+      <h1 class="studio-title">
+        <span>🎨</span> Bilikids Coloring Studio
+      </h1>
+      <span class="studio-badge">Babies 3–5 años</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-action-btn" id="saveBtn" title="Descargar dibujo como imagen">
+        <span>💾</span>
+        <span>Guardar</span>
+      </button>
+      <button class="header-action-btn" id="clearBtn" title="Limpiar y empezar de nuevo">
+        <span>🧹</span>
+        <span>Limpiar</span>
+      </button>
+      <button class="header-action-btn celebrate-btn" id="celebrateBtn" title="¡Mostrar celebración!">
+        <span>🌟</span>
+        <span>¡Terminado!</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- TABLET MOCKUP HARDWARE CONTAINER -->
+  <main class="tablet-container">
+    <div class="tablet-device">
+      
+      <!-- Tablet Screen Area -->
+      <div class="tablet-screen">
+
+        <!-- Left Sidebar: Tools & Colors -->
+        <aside class="screen-sidebar">
+          
+          <!-- Column 1: Drawing & Action Tools -->
+          <div class="tools-column">
+            <button class="tool-btn" data-tool="bucket" title="Bote de pintura (Toca para rellenar)">🪣</button>
+            <button class="tool-btn" data-tool="crayon" title="Crayón suave">✏️</button>
+            <button class="tool-btn" data-tool="marker" title="Marcador grueso">🖍️</button>
+            <button class="tool-btn" data-tool="magic" title="Pincel mágico con estrellas">✨</button>
+            <button class="tool-btn" data-tool="stamp" title="Estampas divertidas">⭐</button>
+            <button class="tool-btn" data-tool="eraser" title="Borrador">🧼</button>
+
+            <div class="tool-btn-divider"></div>
+
+            <button class="tool-btn" data-tool="undo" title="Deshacer (Undo)">↺</button>
+            <button class="tool-btn" data-tool="redo" title="Rehacer (Redo)">↻</button>
+            <button class="tool-btn" data-tool="reset" title="Reiniciar dibujo">🔄</button>
+          </div>
+
+          <!-- Column 2: 15 Vibrant Color Swatches -->
+          <div class="colors-column" id="colorsColumn">
+            <!-- Inyectado dinámicamente con nombres y voz en inglés -->
+          </div>
+
+        </aside>
+
+        <!-- Center Canvas Workspace -->
+        <div class="canvas-workspace">
+          <canvas id="paintCanvas" class="canvas-layer"></canvas>
+          <canvas id="outlineCanvas" class="canvas-layer"></canvas>
+
+          <!-- Toast Flotante con el Nombre del Color en Inglés -->
+          <div class="color-toast" id="colorToast">
+            <span class="toast-color-dot" id="toastColorDot"></span>
+            <span id="toastColorName">Red</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- BOTTOM GALLERY DRAWER (12 DIBUJOS PARA ESCOGER) -->
+  <section class="gallery-drawer">
+    <div class="gallery-title-wrap">
+      <h2 class="gallery-heading">
+        <span>🖼️</span> Elige tu Dibujo para Colorear
+      </h2>
+      <span style="font-size:0.85rem; color:#64748b; font-weight:700;">12 Láminas Infantiles</span>
+    </div>
+
+    <div class="gallery-scroll-container" id="galleryScroll">
+      <!-- Inyectado con miniaturas: Elefante, Oso, Perrito, Gatito, Conejo, Dino, Mariposa, León, Carro, Barco, Delfín, Hoja en Blanco -->
+    </div>
+  </section>
+
+  <!-- CELEBRATION MODAL OVERLAY -->
+  <div class="celebration-overlay" id="celebrationModal">
+    <div class="celebration-card">
+      <div class="celebration-emoji">🎉</div>
+      <h3 class="celebration-title">¡Qué Hermoso Dibujo!</h3>
+      <p class="celebration-desc">¡Eres un gran artista! Has llenado de colores mágicos tu lámina.</p>
+      <button class="celebration-btn" onclick="closeCelebration()">¡Seguir Pintando! 🎨</button>
+    </div>
+  </div>
+
+  <!-- CONFETTI CANVAS -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="babies_paint_engine.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 660" width="800" height="660">
+  <g fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Ears -->
+    <circle cx="280" cy="180" r="60"/>
+    <circle cx="280" cy="180" r="35"/>
+    <circle cx="520" cy="180" r="60"/>
+    <circle cx="520" cy="180" r="35"/>
+    <!-- Head -->
+    <circle cx="400" cy="270" r="140"/>
+    <!-- Snout -->
+    <ellipse cx="400" cy="300" rx="65" ry="48"/>
+    <!-- Nose -->
+    <ellipse cx="400" cy="280" rx="22" ry="16" fill="#111827"/>
+    <!-- Mouth -->
+    <path d="M 400 296 L 400 318 Q 380 335 365 320 M 400 318 Q 420 335 435 320" fill="none"/>
+    <!-- Eyes -->
+    <ellipse cx="345" cy="240" rx="14" ry="18" fill="#111827"/>
+    <ellipse cx="455" cy="240" rx="14" ry="18" fill="#111827"/>
+    <circle cx="342" cy="235" r="5" fill="#ffffff" stroke="none"/>
+    <circle cx="452" cy="235" r="5" fill="#ffffff" stroke="none"/>
+    <!-- Arms -->
+    <ellipse cx="250" cy="410" rx="45" ry="75" transform="rotate(25 250 410)"/>
+    <ellipse cx="550" cy="410" rx="45" ry="75" transform="rotate(-25 550 410)"/>
+    <!-- Body -->
+    <ellipse cx="400" cy="450" rx="130" ry="140"/>
+    <!-- Belly Patch with Heart -->
+    <ellipse cx="400" cy="460" rx="85" ry="95"/>
+    <path d="M 400 445 C 385 425 355 435 365 460 C 375 480 400 500 400 500 C 400 500 425 480 435 460 C 445 435 415 425 400 445 Z" fill="#ffffff"/>
+    <!-- Legs / Feet -->
+    <ellipse cx="280" cy="560" rx="70" ry="50"/>
+    <circle cx="280" cy="560" r="30"/>
+    <ellipse cx="520" cy="560" rx="70" ry="50"/>
+    <circle cx="520" cy="560" r="30"/>
+  </g>
+</svg>

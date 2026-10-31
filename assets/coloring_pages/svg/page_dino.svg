@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 660" width="800" height="660">
+  <g fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Back Plates / Spikes -->
+    <path d="M 330 180 Q 345 130 360 185"/>
+    <path d="M 380 195 Q 405 145 420 205"/>
+    <path d="M 440 220 Q 470 170 480 235"/>
+    <path d="M 500 260 Q 535 210 540 275"/>
+    <path d="M 560 310 Q 600 270 595 330"/>
+    <!-- Dino Head & Long Neck -->
+    <path d="M 240 310 C 180 300 170 200 250 180 C 330 160 380 240 370 340 L 480 350 C 580 360 680 430 680 480 C 670 500 580 500 540 490 L 520 560 L 460 560 L 470 490 L 380 490 L 370 560 L 310 560 L 320 450 C 300 420 250 350 240 310 Z"/>
+    <!-- Eye -->
+    <circle cx="230" cy="225" r="18" fill="#111827"/>
+    <circle cx="225" cy="220" r="6" fill="#ffffff" stroke="none"/>
+    <!-- Nostril & Cute Smile -->
+    <circle cx="195" cy="235" r="5" fill="#111827"/>
+    <path d="M 190 260 Q 220 280 245 260" fill="none"/>
+    <!-- Belly Arc -->
+    <path d="M 280 370 Q 380 440 460 440" fill="none"/>
+    <!-- Spots -->
+    <circle cx="380" cy="390" r="20"/>
+    <circle cx="440" cy="400" r="16"/>
+    <circle cx="410" cy="440" r="18"/>
+  </g>
+</svg>

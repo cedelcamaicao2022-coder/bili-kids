@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 660" width="800" height="660">
+  <g fill="#ffffff" stroke="#111827" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Pointy Ears -->
+    <path d="M 280 240 L 260 120 L 370 190 Z"/>
+    <path d="M 285 225 L 280 150 L 350 200 Z"/>
+    <path d="M 520 240 L 540 120 L 430 190 Z"/>
+    <path d="M 515 225 L 520 150 L 450 200 Z"/>
+    <!-- Head -->
+    <circle cx="400" cy="270" r="130"/>
+    <!-- Cute Eyes -->
+    <ellipse cx="340" cy="250" rx="16" ry="22" fill="#111827"/>
+    <ellipse cx="460" cy="250" rx="16" ry="22" fill="#111827"/>
+    <circle cx="335" cy="242" r="6" fill="#ffffff" stroke="none"/>
+    <circle cx="455" cy="242" r="6" fill="#ffffff" stroke="none"/>
+    <!-- Tiny Nose & Mouth -->
+    <polygon points="400,285 390,273 410,273" fill="#111827"/>
+    <path d="M 400 285 L 400 300 Q 380 315 365 300 M 400 300 Q 420 315 435 300" fill="none"/>
+    <!-- Whiskers -->
+    <line x1="280" y1="280" x2="330" y2="290"/>
+    <line x1="270" y1="305" x2="330" y2="305"/>
+    <line x1="470" y1="290" x2="520" y2="280"/>
+    <line x1="470" y1="305" x2="530" y2="305"/>
+    <!-- Body -->
+    <ellipse cx="400" cy="460" rx="100" ry="120"/>
+    <ellipse cx="400" cy="460" rx="60" ry="80"/>
+    <!-- Front Paws -->
+    <ellipse cx="350" cy="545" rx="38" ry="48"/>
+    <ellipse cx="450" cy="545" rx="38" ry="48"/>
+    <!-- Cute Yarn Ball -->
+    <circle cx="580" cy="530" r="55"/>
+    <path d="M 550 510 Q 580 550 610 520 M 540 540 Q 580 500 620 540" fill="none"/>
+    <path d="M 535 560 Q 490 570 430 550" fill="none"/>
+  </g>
+</svg>
