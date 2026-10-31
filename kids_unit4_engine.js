@@ -145,6 +145,9 @@ const sfx = new SoundEffects();
 // SPEECH SYNTHESIS ENGINE (Safe Callback + Timeout Fallback)
 // ============================================================================
 function speakEnglish(text, voiceType = 'kid', onComplete = null) {
+  if (typeof playStudioOrSynthAudio === "function") {
+    return playStudioOrSynthAudio(arguments[0], arguments[1], arguments[2]);
+  }
   if (!('speechSynthesis' in window)) {
     if (onComplete) onComplete();
     return;

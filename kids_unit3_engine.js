@@ -115,6 +115,9 @@ const sfx = new SoundEffects();
 // NATIVE SPEECH SYNTHESIS ENGINE
 // ============================================================================
 function speakEnglish(text, voiceType = 'kid', callback) {
+  if (typeof playStudioOrSynthAudio === "function") {
+    return playStudioOrSynthAudio(arguments[0], arguments[1], arguments[2]);
+  }
   let called = false;
   const finish = () => {
     if (!called) {
