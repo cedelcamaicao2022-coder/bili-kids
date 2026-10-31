@@ -3,104 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>Bilikids Adventure | Babies (3 - 5 años)</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
-  <link rel="stylesheet" href="subpages_styles.css?v=20261031_0745">
-  <style>
-    /* Direct overriding styles to bypass browser cache instantly */
-    .babies-page-container {
-      max-width: 1040px !important;
-      margin: 0 auto !important;
-      padding: 1.25rem 1.5rem 3.5rem 1.5rem !important;
-      gap: 1.25rem !important;
-    }
-    .babies-hero-wrap {
-      width: 100% !important;
-      height: 200px !important;
-      max-height: 205px !important;
-      border-radius: 20px !important;
-      overflow: hidden !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
-      border: 1px solid rgba(226, 232, 240, 0.8) !important;
-      background: #ffffff !important;
-    }
-    .babies-hero-link {
-      display: block !important;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .babies-hero-img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      object-position: center !important;
-      display: block !important;
-    }
-    .babies-categories-grid {
-      display: grid !important;
-      grid-template-columns: repeat(5, 1fr) !important;
-      gap: 0.85rem !important;
-    }
-    .category-pill-card-v2 {
-      height: 110px !important;
-      min-height: 110px !important;
-      border-radius: 16px !important;
-      padding: 0.75rem 0.9rem 0.65rem 0.9rem !important;
-      box-sizing: border-box !important;
-    }
-    .cat-v2-title {
-      font-size: 1.05rem !important;
-    }
-    .cat-v2-sub {
-      font-size: 0.74rem !important;
-    }
-    .art-multiply {
-      max-height: 48px !important;
-      max-width: 78px !important;
-      mix-blend-mode: multiply !important;
-    }
-    .art-thumb {
-      max-height: 46px !important;
-      max-width: 68px !important;
-      height: 46px !important;
-      border-radius: 10px !important;
-    }
-    .cat-v2-circle-btn {
-      width: 24px !important;
-      height: 24px !important;
-    }
-    .babies-cont-grid {
-      display: grid !important;
-      grid-template-columns: repeat(6, 1fr) !important;
-      gap: 0.75rem !important;
-      margin-top: 0.85rem !important;
-    }
-    .cont-card-v2 {
-      height: 116px !important;
-      border-radius: 14px !important;
-      box-sizing: border-box !important;
-    }
-    .cont-card-thumb-wrap {
-      height: 64px !important;
-    }
-    .cont-card-thumb-img {
-      object-fit: cover !important;
-      object-position: center !important;
-    }
-    .cont-card-body {
-      padding: 0.45rem 0.65rem !important;
-      gap: 0.2rem !important;
-    }
-    .cont-card-title {
-      font-size: 0.84rem !important;
-    }
-    .cont-card-meta {
-      font-size: 0.72rem !important;
-    }
-  </style>
+  <link rel="stylesheet" href="subpages_styles.css">
 </head>
 <body>
 
@@ -166,95 +71,63 @@
   <!-- ========================================================================
        MAIN CONTENT CONTAINER
        ======================================================================== -->
-  <main class="subpage-container babies-page-container">
+  <main class="subpage-container">
 
-    <!-- HERO BANNER (ORIGINAL HIGH DEFINITION 2172x724 MASTER ART) -->
-    <section class="babies-hero-wrap">
-      <a href="colors_book.html" class="babies-hero-link" title="¡Comenzar ahora con Colors!">
-        <img src="assets/babies_hd/babies_hero_banner.png" alt="Babies 3 - 5 años: Explora, juega y aprende en inglés con Bili, Luna y Leo" class="babies-hero-img">
-      </a>
+    <!-- HERO BANNER (HIGH DEFINITION 3D PIXAR ART & VECTOR TYPOGRAPHY) -->
+    <section class="subpage-hero babies-hero">
+      <div class="subpage-hero-overlay">
+        <div class="subpage-hero-content">
+          <div class="hero-title-with-sun">
+            <h1 class="hero-group-title">Babies</h1>
+            <svg class="hero-sun-rays" viewBox="0 0 36 36" fill="none">
+              <path d="M4 18h6M6.5 9.5l4.5 4.5M18 4v6M29.5 9.5l-4.5 4.5M32 18h-6" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2 class="hero-group-age">3 – 5 años</h2>
+          <p class="hero-group-desc">
+            Explora, juega y aprende<br>en inglés con Bili, Luna y Leo
+          </p>
+          <a href="colors_book.html" class="hero-start-btn babies-cta" title="¡Comenzar ahora!">
+            <span class="btn-play-circle">▶</span>
+            ¡Comenzar ahora!
+          </a>
+        </div>
+      </div>
+
+      <!-- Floating Cloud Badge -->
+      <div class="hero-floating-cloud">
+        <span class="cloud-text-line cloud-blue">Small Steps,</span>
+        <span class="cloud-text-line cloud-pink">Big Adventures</span>
+      </div>
+
+      <img src="assets/heroes/babies_hero_3d.jpg" alt="Babies 3D Hero Art" class="subpage-hero-bg-img">
     </section>
 
     <!-- 5 CATEGORY CARDS (STORIES, VIDEOS, SONGS, GAMES, ACTIVITIES) -->
-    <section class="categories-5-grid babies-categories-grid">
+    <section class="categories-5-grid">
       <!-- 1. Stories -->
-      <a href="stories.html" class="category-pill-card-v2 theme-stories" title="Cuentos en inglés para Babies">
-        <div class="cat-v2-header">
-          <h3 class="cat-v2-title">Stories</h3>
-          <span class="cat-v2-sub">Cuentos en inglés</span>
-        </div>
-        <div class="cat-v2-bottom">
-          <img src="assets/babies_hd/babies_cat_stories.png" alt="Stories - Cuentos en inglés" class="cat-v2-art art-multiply">
-          <div class="cat-v2-circle-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+      <a href="stories.html" class="category-pill-card" title="Cuentos en inglés para Babies">
+        <img src="assets/subpages_cards/babies_cat_stories.png" alt="Stories - Cuentos en inglés" class="category-card-img">
       </a>
 
       <!-- 2. Videos -->
-      <a href="videos.html" class="category-pill-card-v2 theme-videos" title="Videos y animaciones de Barnaby">
-        <div class="cat-v2-header">
-          <h3 class="cat-v2-title">Videos</h3>
-          <span class="cat-v2-sub">Mira y aprende</span>
-        </div>
-        <div class="cat-v2-bottom">
-          <img src="assets/babies_hd/babies_cat_videos.png" alt="Videos - Mira y aprende" class="cat-v2-art art-thumb">
-          <div class="cat-v2-circle-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+      <a href="videos.html" class="category-pill-card" title="Videos y animaciones de Barnaby">
+        <img src="assets/subpages_cards/babies_cat_videos.png" alt="Videos - Mira y aprende" class="category-card-img">
       </a>
 
       <!-- 3. Songs -->
-      <a href="songs.html" class="category-pill-card-v2 theme-songs" title="Canciones infantiles en inglés">
-        <div class="cat-v2-header">
-          <h3 class="cat-v2-title">Songs</h3>
-          <span class="cat-v2-sub">Escucha y canta</span>
-        </div>
-        <div class="cat-v2-bottom">
-          <img src="assets/babies_hd/babies_cat_songs.png" alt="Songs - Escucha y canta" class="cat-v2-art art-multiply">
-          <div class="cat-v2-circle-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+      <a href="songs.html" class="category-pill-card" title="Canciones infantiles en inglés">
+        <img src="assets/subpages_cards/babies_cat_songs.png" alt="Songs - Escucha y canta" class="category-card-img">
       </a>
 
       <!-- 4. Games -->
-      <a href="juegos.html" class="category-pill-card-v2 theme-games" title="Juegos y dinámicas de aprendizaje">
-        <div class="cat-v2-header">
-          <h3 class="cat-v2-title">Games</h3>
-          <span class="cat-v2-sub">Juega y practica</span>
-        </div>
-        <div class="cat-v2-bottom">
-          <img src="assets/babies_hd/babies_cat_games.png" alt="Games - Juega y practica" class="cat-v2-art art-multiply">
-          <div class="cat-v2-circle-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+      <a href="juegos.html" class="category-pill-card" title="Juegos y dinámicas de aprendizaje">
+        <img src="assets/subpages_cards/babies_cat_games.png" alt="Games - Juega y practica" class="category-card-img">
       </a>
 
       <!-- 5. Activities -->
-      <a href="actividades.html" class="category-pill-card-v2 theme-activities" title="Manualidades, colorear y actividades">
-        <div class="cat-v2-header">
-          <h3 class="cat-v2-title">Activities</h3>
-          <span class="cat-v2-sub">Manualidades y actividades</span>
-        </div>
-        <div class="cat-v2-bottom">
-          <img src="assets/babies_hd/babies_cat_activities.png" alt="Activities - Manualidades y actividades" class="cat-v2-art art-multiply">
-          <div class="cat-v2-circle-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+      <a href="actividades.html" class="category-pill-card" title="Manualidades, colorear y actividades">
+        <img src="assets/subpages_cards/babies_cat_activities.png" alt="Activities - Manualidades y actividades" class="category-card-img">
       </a>
     </section>
 
@@ -265,101 +138,35 @@
         <a href="juegos.html" class="link-see-all">Ver todos ➔</a>
       </div>
 
-      <div class="carousel-cards-grid babies-cont-grid">
+      <div class="carousel-cards-grid" style="margin-top: 1rem;">
         <!-- 1. Colors (Video) -->
-        <a href="colors_book.html" class="cont-card-v2" title="Colors - Video lección">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_colors.png" alt="Colors" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">Colors</h4>
-            <div class="cont-card-meta">
-              <span class="meta-circle-icon icon-video">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-              </span>
-              <span>Video</span>
-            </div>
-          </div>
+        <a href="colors_book.html" class="carousel-card-item" title="Colors - Video lección">
+          <img src="assets/subpages_cards/babies_cont_colors.png" alt="Colors" class="carousel-card-img">
         </a>
 
         <!-- 2. Animals (Canción) -->
-        <a href="farm.html" class="cont-card-v2" title="Animals - Canción y sonidos">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_animals.png" alt="Animals" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">Animals</h4>
-            <div class="cont-card-meta">
-              <span class="meta-icon-clean">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-              </span>
-              <span>Canción</span>
-            </div>
-          </div>
+        <a href="farm.html" class="carousel-card-item" title="Animals - Canción y sonidos">
+          <img src="assets/subpages_cards/babies_cont_animals.png" alt="Animals" class="carousel-card-img">
         </a>
 
         <!-- 3. My House (Cuento) -->
-        <a href="house.html" class="cont-card-v2" title="My House - Cuento interactivo">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_house.png" alt="My House" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">My House</h4>
-            <div class="cont-card-meta">
-              <span class="meta-icon-clean">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/></svg>
-              </span>
-              <span>Cuento</span>
-            </div>
-          </div>
+        <a href="house.html" class="carousel-card-item" title="My House - Cuento interactivo">
+          <img src="assets/subpages_cards/babies_cont_house.png" alt="My House" class="carousel-card-img">
         </a>
 
         <!-- 4. Fruits (Juego) -->
-        <a href="lab.html" class="cont-card-v2" title="Fruits - Juego de memoria">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_fruits.png" alt="Fruits" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">Fruits</h4>
-            <div class="cont-card-meta">
-              <span class="meta-icon-clean">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></svg>
-              </span>
-              <span>Juego</span>
-            </div>
-          </div>
+        <a href="lab.html" class="carousel-card-item" title="Fruits - Juego de memoria">
+          <img src="assets/subpages_cards/babies_cont_fruits.png" alt="Fruits" class="carousel-card-img">
         </a>
 
         <!-- 5. Hello and Goodbye (Video) -->
-        <a href="videos.html" class="cont-card-v2" title="Hello and Goodbye - Video con Barnaby">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_hello.png" alt="Hello and Goodbye" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">Hello and Goodbye</h4>
-            <div class="cont-card-meta">
-              <span class="meta-circle-icon icon-video">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-              </span>
-              <span>Video</span>
-            </div>
-          </div>
+        <a href="videos.html" class="carousel-card-item" title="Hello and Goodbye - Video con Barnaby">
+          <img src="assets/subpages_cards/babies_cont_hello.png" alt="Hello and Goodbye" class="carousel-card-img">
         </a>
 
         <!-- 6. Shapes (Actividad) -->
-        <a href="writing.html" class="cont-card-v2" title="Shapes - Taller de figuras">
-          <div class="cont-card-thumb-wrap">
-            <img src="assets/babies_hd/babies_cont_shapes.png" alt="Shapes" class="cont-card-thumb-img">
-          </div>
-          <div class="cont-card-body">
-            <h4 class="cont-card-title">Shapes</h4>
-            <div class="cont-card-meta">
-              <span class="meta-icon-clean">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
-              </span>
-              <span>Actividad</span>
-            </div>
-          </div>
+        <a href="writing.html" class="carousel-card-item" title="Shapes - Taller de figuras">
+          <img src="assets/subpages_cards/babies_cont_shapes.png" alt="Shapes" class="carousel-card-img">
         </a>
       </div>
     </section>
