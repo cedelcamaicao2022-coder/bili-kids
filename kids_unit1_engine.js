@@ -190,7 +190,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Hello! Good morning. Welcome to Bilikids School!",
         es: "¡Hola! Buenos días. ¡Bienvenido a la Escuela Bilikids!",
-        question: "¿Cómo debe responder Maya cordialmente?",
+        question: "How should Maya reply politely?",
         choices: [
           { text: "Good morning! My name is Maya.", es: "¡Buenos días! Mi nombre es Maya.", correct: true },
           { text: "Good night, I am sleeping.", es: "Buenas noches, estoy durmiendo.", correct: false },
@@ -201,7 +201,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Nice to meet you, Maya! Are you a new student here?",
         es: "¡Mucho gusto, Maya! ¿Eres una nueva estudiante aquí?",
-        question: "Maya confirma que sí es nueva alumna. ¿Qué dice?",
+        question: "Maya confirms she is a new student. What does she say?",
         choices: [
           { text: "Yes, I am! Today is my first day.", es: "¡Sí, lo soy! Hoy es mi primer día.", correct: true },
           { text: "No, I am the teacher.", es: "No, yo soy la profesora.", correct: false },
@@ -212,7 +212,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "I am ten years old. How old are you, Maya?",
         es: "Yo tengo diez años. ¿Cuántos años tienes tú, Maya?",
-        question: "Maya tiene 9 años. ¿Cómo dice su edad correctamente?",
+        question: "Maya is 9 years old. What does she say?",
         choices: [
           { text: "I have nine years.", es: "Tengo nueve años (error común en inglés)", correct: false },
           { text: "I am nine years old.", es: "Tengo nueve años (usando el verbo be)", correct: true },
@@ -223,7 +223,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Which grade are you in? Are we in fourth grade?",
         es: "¿En qué grado estás? ¿Estamos en cuarto grado?",
-        question: "¿Cómo responde Maya que están en el mismo grado?",
+        question: "How does Maya reply that they are in the same grade?",
         choices: [
           { text: "Yes, we are in fourth grade together!", es: "¡Sí, estamos en cuarto grado juntos!", correct: true },
           { text: "No, we are at the beach.", es: "No, estamos en la playa.", correct: false },
@@ -234,7 +234,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "The bell is ringing! Where is our classroom?",
         es: "¡Está sonando el timbre! ¿Dónde está nuestro salón?",
-        question: "Maya señala el salón número 5. ¿Qué debe decir?",
+        question: "Maya points to classroom number 5. What does she say?",
         choices: [
           { text: "It is room number five, next to the library.", es: "Es el salón número cinco, al lado de la biblioteca.", correct: true },
           { text: "The airplane is flying high.", es: "El avión está volando alto.", correct: false },
@@ -245,7 +245,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Great! Let's walk to class. We are a great team!",
         es: "¡Genial! Vamos al salón. ¡Somos un gran equipo!",
-        question: "¿Cómo celebra Maya entusiasmada?",
+        question: "How does Maya celebrate excitedly?",
         choices: [
           { text: "Yes, let's go! I am ready to learn.", es: "¡Sí, vamos! Estoy lista para aprender.", correct: true },
           { text: "I am tired, goodbye.", es: "Estoy cansada, adiós.", correct: false },
@@ -265,7 +265,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
         text: "Hello! Welcome to Fashion Kids. Can I help you?",
         es: "¡Hola! Bienvenidos a Fashion Kids. ¿Puedo ayudarles?",
-        question: "Maya busca una camiseta azul. ¿Qué debe responder?",
+        question: "Maya is looking for a blue T-shirt. What does she say?",
         choices: [
           { text: "Yes, please. I am looking for a blue T-shirt.", es: "Sí, por favor. Estoy buscando una camiseta azul.", correct: true },
           { text: "No, I am eating a burger.", es: "No, estoy comiendo una hamburguesa.", correct: false },
@@ -276,7 +276,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
         text: "Sure! What size do you need? Small or medium?",
         es: "¡Por supuesto! ¿Qué talla necesitas? ¿Pequeña o mediana?",
-        question: "Maya necesita talla mediana. ¿Cómo lo dice?",
+        question: "Maya needs a medium size. What does she say?",
         choices: [
           { text: "I need size medium, please.", es: "Necesito talla mediana, por favor.", correct: true },
           { text: "I need a football ball.", es: "Necesito un balón de fútbol.", correct: false },
@@ -287,7 +287,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
         text: "Here is a nice blue T-shirt. Would you like to try it on?",
         es: "Aquí tienes una linda camiseta azul. ¿Te gustaría probártela?",
-        question: "Maya pregunta dónde está el probador. ¿Qué dice?",
+        question: "Maya asks where the fitting room is. What does she say?",
         choices: [
           { text: "Yes, thank you! Where is the fitting room?", es: "¡Sí, gracias! ¿Dónde está el probador?", correct: true },
           { text: "Where is the swimming pool?", es: "¿Dónde está la piscina?", correct: false },
@@ -298,7 +298,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "It looks very cool on you, Maya! How much is it?",
         es: "¡Te queda genial, Maya! ¿Cuánto cuesta?",
-        question: "Maya mira la etiqueta de 15 dólares. ¿Cómo responde?",
+        question: "Maya sees the 15-dollar price tag. What does she say?",
         choices: [
           { text: "It is fifteen dollars. That is a great price!", es: "Cuesta quince dólares. ¡Es un buen precio!", correct: true },
           { text: "It is fifteen kilometers.", es: "Son quince kilómetros.", correct: false },
@@ -309,7 +309,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
         text: "Are you paying with cash or credit card?",
         es: "¿Pagas en efectivo o con tarjeta de crédito?",
-        question: "Maya tiene dinero en efectivo. ¿Qué responde?",
+        question: "Maya has cash. What does she reply?",
         choices: [
           { text: "I am paying with cash. Here is twenty dollars.", es: "Pago en efectivo. Aquí tiene veinte dólares.", correct: true },
           { text: "I am paying with an apple.", es: "Pago con una manzana.", correct: false },
@@ -320,7 +320,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Store Clerk', avatar: '👔',
         text: "Here is your five dollars change and the receipt. Have a great day!",
         es: "Aquí está su cambio de cinco dólares y el recibo. ¡Que tenga un buen día!",
-        question: "¿Cómo se despide Maya educadamente?",
+        question: "How does Maya say goodbye politely?",
         choices: [
           { text: "Thank you very much! Have a nice day, goodbye!", es: "¡Muchas gracias! ¡Tenga un buen día, adiós!", correct: true },
           { text: "No problem, I don't care.", es: "Sin problema, no me importa.", correct: false },
@@ -340,7 +340,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "We are at the cinema! Which movie do you want to see?",
         es: "¡Estamos en el cine! ¿Qué película quieres ver?",
-        question: "Maya quiere ver la película espacial. ¿Qué responde?",
+        question: "Maya wants to watch the space movie. What does she reply?",
         choices: [
           { text: "I want to see the new Space Adventure movie!", es: "¡Quiero ver la nueva película de Aventuras Espaciales!", correct: true },
           { text: "I want to cook dinner.", es: "Quiero cocinar la cena.", correct: false },
@@ -351,7 +351,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Ticket Clerk', avatar: '🎟️',
         text: "Hello! Welcome to CineStar. How many tickets do you need?",
         es: "¡Hola! Bienvenidos a CineStar. ¿Cuántos boletos necesitan?",
-        question: "Son 2 boletos para niños. ¿Qué debe pedir Alex?",
+        question: "They need 2 tickets for kids. What should Alex ask for?",
         choices: [
           { text: "Two tickets for kids, please. Space Adventure at 4 PM.", es: "Dos boletos para niños, por favor. Aventura Espacial a las 4 PM.", correct: true },
           { text: "Ten adult tickets for tomorrow.", es: "Diez boletos de adulto para mañana.", correct: false },
@@ -362,7 +362,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Ticket Clerk', avatar: '🎟️',
         text: "That is twelve dollars in total. Here are your tickets for row D.",
         es: "Son doce dólares en total. Aquí tienen sus boletos para la fila D.",
-        question: "¿Qué responde Maya para agradecer?",
+        question: "What does Maya say to thank him?",
         choices: [
           { text: "Thank you! Row D is perfect.", es: "¡Gracias! La fila D es perfecta.", correct: true },
           { text: "Good night teacher.", es: "Buenas noches profesora.", correct: false },
@@ -373,7 +373,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Now let's go to the candy bar. Do you want popcorn or nachos?",
         es: "Ahora vamos a la dulcería. ¿Quieres palomitas o nachos?",
-        question: "Maya prefiere palomitas con queso. ¿Qué dice?",
+        question: "Maya prefers cheese popcorn. What does she say?",
         choices: [
           { text: "I would like a large popcorn with cheese, please!", es: "¡Me gustaría palomitas grandes con queso, por favor!", correct: true },
           { text: "I don't eat breakfast.", es: "No desayuno.", correct: false },
@@ -384,7 +384,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "And what would you like to drink? Juice or water?",
         es: "¿Y qué te gustaría tomar? ¿Jugo o agua?",
-        question: "Maya pide un jugo de manzana natural. ¿Cómo lo dice?",
+        question: "Maya asks for fresh apple juice. What does she say?",
         choices: [
           { text: "An apple juice for me, please.", es: "Un jugo de manzana para mí, por favor.", correct: true },
           { text: "I drink hot soup.", es: "Tomo sopa caliente.", correct: false },
@@ -395,7 +395,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "The movie is starting now! Seats D4 and D5 are here.",
         es: "¡La película está empezando! Los asientos D4 y D5 están aquí.",
-        question: "¿Cómo expresa Maya que está emocionada por la película?",
+        question: "How does Maya express that she is excited for the movie?",
         choices: [
           { text: "Awesome! Let's silence our phones and enjoy the movie!", es: "¡Genial! ¡Silenciemos los teléfonos y disfrutemos la película!", correct: true },
           { text: "I want to go home right now.", es: "Quiero ir a casa ahora mismo.", correct: false },
@@ -415,7 +415,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
         text: "Good morning! Welcome to SkyAir. Where are you flying today?",
         es: "¡Buenos días! Bienvenidos a SkyAir. ¿A dónde vuelan hoy?",
-        question: "Alex y Maya vuelan a Londres. ¿Qué deben responder?",
+        question: "Alex and Maya are flying to London. What should they reply?",
         choices: [
           { text: "Good morning! We are flying to London today.", es: "¡Buenos días! Volamos a Londres hoy.", correct: true },
           { text: "We are walking to the supermarket.", es: "Estamos caminando al supermercado.", correct: false },
@@ -426,7 +426,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
         text: "Wonderful! May I please see your passports and tickets?",
         es: "¡Maravilloso! ¿Puedo ver sus pasaportes y boletos por favor?",
-        question: "Maya entrega los documentos educadamente. ¿Qué dice?",
+        question: "Maya hands over the documents politely. What does she say?",
         choices: [
           { text: "Here they are, officer. Two passports.", es: "Aquí los tiene, oficial. Dos pasaportes.", correct: true },
           { text: "I lost my shoes in the park.", es: "Perdí mis zapatos en el parque.", correct: false },
@@ -437,7 +437,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
         text: "Thank you. Do you have any luggage to check in?",
         es: "Gracias. ¿Tienen algún equipaje para registrar?",
-        question: "Alex tiene una maleta y una mochila de mano. ¿Qué responde?",
+        question: "Alex has a suitcase and a backpack. What does he reply?",
         choices: [
           { text: "Yes, we have one big suitcase and one backpack.", es: "Sí, tenemos una maleta grande y una mochila.", correct: true },
           { text: "We have five elephants.", es: "Tenemos cinco elefantes.", correct: false },
@@ -448,7 +448,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
         text: "Please put your suitcase on the scale. It weighs 18 kilos. Perfect!",
         es: "Por favor pongan su maleta en la báscula. Pesa 18 kilos. ¡Perfecto!",
-        question: "Maya pregunta por la puerta de embarque. ¿Qué dice?",
+        question: "Maya asks for the boarding gate. What does she say?",
         choices: [
           { text: "Thank you! Which gate is our flight departing from?", es: "¡Gracias! ¿De qué puerta sale nuestro vuelo?", correct: true },
           { text: "Where is my bedroom?", es: "¿Dónde está mi habitación?", correct: false },
@@ -459,7 +459,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Airline Agent', avatar: '🛫',
         text: "Your flight is boarding at Gate 14 at 10:30 AM. Here are your boarding passes.",
         es: "Su vuelo aborda en la Puerta 14 a las 10:30 AM. Aquí tienen sus pases de abordar.",
-        question: "¿Cómo agradece Alex por la atención recibida?",
+        question: "How does Alex say thank you?",
         choices: [
           { text: "Thank you very much for your help! Have a great day.", es: "¡Muchas gracias por su ayuda! Que tenga un gran día.", correct: true },
           { text: "I don't want to fly anymore.", es: "Ya no quiero volar.", correct: false },
@@ -470,7 +470,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Gate 14 is right over there. Are you excited for London, Maya?",
         es: "La Puerta 14 está justo allá. ¿Estás emocionada por Londres, Maya?",
-        question: "¿Qué responde Maya con alegría sobre el viaje?",
+        question: "What does Maya reply happily about the trip?",
         choices: [
           { text: "Yes, I am super excited! London is an amazing city.", es: "¡Sí, estoy súper emocionada! Londres es una ciudad increíble.", correct: true },
           { text: "No, I forgot my homework at school.", es: "No, olvidé mi tarea en la escuela.", correct: false },
@@ -490,7 +490,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
         text: "Good afternoon! Welcome to Bella Pizza. Table for two?",
         es: "¡Buenas tardes! Bienvenidos a Bella Pizza. ¿Mesa para dos?",
-        question: "¿Cómo responde Maya confirmando la mesa?",
+        question: "How does Maya reply confirming the table?",
         choices: [
           { text: "Yes, please! Table for two near the window.", es: "¡Sí, por favor! Mesa para dos cerca de la ventana.", correct: true },
           { text: "No, I am playing soccer.", es: "No, estoy jugando fútbol.", correct: false },
@@ -501,7 +501,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
         text: "Right this way. Here is the menu. What would you like to drink first?",
         es: "Por aquí. Aquí está el menú. ¿Qué les gustaría tomar primero?",
-        question: "Alex pide limonada fría para ambos. ¿Cómo lo formula?",
+        question: "Alex orders cold lemonade for both. What does he say?",
         choices: [
           { text: "We would like two cold lemonades, please.", es: "Nos gustaría dos limonadas frías, por favor.", correct: true },
           { text: "We want two hot coffees.", es: "Queremos dos cafés calientes.", correct: false },
@@ -512,7 +512,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
         text: "Two lemonades, perfect. And what pizza would you like today?",
         es: "Dos limonadas, perfecto. ¿Y qué pizza les gustaría hoy?",
-        question: "Maya quiere ordenar pizza de queso y champiñones. ¿Qué dice?",
+        question: "Maya wants to order cheese and mushroom pizza. What does she say?",
         choices: [
           { text: "Can we have a medium cheese and mushroom pizza, please?", es: "¿Nos puede dar una pizza mediana de queso y champiñones, por favor?", correct: true },
           { text: "I want an ice cream sandwich.", es: "Quiero un sándwich de helado.", correct: false },
@@ -523,7 +523,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
         text: "Excellent choice! That is our specialty. Would you like extra cheese?",
         es: "¡Excelente elección! Es nuestra especialidad. ¿Desean queso extra?",
-        question: "¿Cómo responde Alex diciendo que sí, por favor?",
+        question: "How does Alex say yes, please?",
         choices: [
           { text: "Yes, extra cheese sounds delicious! Thank you.", es: "¡Sí, queso extra suena delicioso! Gracias.", correct: true },
           { text: "No, I don't like food.", es: "No, no me gusta la comida.", correct: false },
@@ -534,7 +534,7 @@ const RealWorldScenarios = {
         speaker: 'clerk', name: 'Waiter', avatar: '👨‍🍳',
         text: "Here is your hot pizza and drinks! Enjoy your meal.",
         es: "¡Aquí tienen su pizza caliente y bebidas! Buen provecho.",
-        question: "¿Qué dicen Alex y Maya al mesero?",
+        question: "What do Alex and Maya say to the waiter?",
         choices: [
           { text: "Thank you so much! It smells wonderful.", es: "¡Muchas gracias! Huele maravilloso.", correct: true },
           { text: "Where is my pencil case?", es: "¿Dónde está mi cartuchera?", correct: false },
@@ -545,7 +545,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "That was the most delicious pizza ever! Let's ask for the bill.",
         es: "¡Fue la pizza más rica del mundo! Pidamos la cuenta.",
-        question: "Maya llama al mesero para pedir la cuenta. ¿Cómo se dice en inglés?",
+        question: "Maya asks the waiter for the bill. What does she say?",
         choices: [
           { text: "Excuse me, could we have the bill, please?", es: "Disculpe, ¿nos podría traer la cuenta, por favor?", correct: true },
           { text: "Excuse me, where is the cinema?", es: "Disculpe, ¿dónde está el cine?", correct: false },
@@ -565,7 +565,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Hey Maya! What do you like to do in your free time?",
         es: "¡Hola Maya! ¿Qué te gusta hacer en tu tiempo libre?",
-        question: "Maya dice que le encanta dibujar y andar en bicicleta. ¿Qué responde?",
+        question: "Maya says she loves drawing and riding her bicycle. What does she reply?",
         choices: [
           { text: "I love drawing pictures and riding my bicycle!", es: "¡Me encanta dibujar dibujos y andar en mi bicicleta!", correct: true },
           { text: "I love sleeping at school.", es: "Me encanta dormir en la escuela.", correct: false },
@@ -576,7 +576,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "That's awesome! Do you play any sports on the weekends?",
         es: "¡Eso es genial! ¿Practicas algún deporte los fines de semana?",
-        question: "Maya juega al fútbol los sábados por la mañana. ¿Cómo lo dice?",
+        question: "Maya plays football on Saturday mornings. What does she say?",
         choices: [
           { text: "Yes, I play soccer every Saturday morning with my friends.", es: "Sí, juego al fútbol todos los sábados por la mañana con mis amigos.", correct: true },
           { text: "I play video games 24 hours a day.", es: "Juego videojuegos 24 horas al día.", correct: false },
@@ -587,7 +587,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "I play basketball! And do you play any musical instrument?",
         es: "¡Yo juego al básquetbol! ¿Y tocas algún instrumento musical?",
-        question: "Maya toca el piano. ¿Qué responde ella?",
+        question: "Maya plays the piano. What does she reply?",
         choices: [
           { text: "Yes, I practice the piano three days a week.", es: "Sí, practico el piano tres días a la semana.", correct: true },
           { text: "I have a big piano in my pocket.", es: "Tengo un gran piano en mi bolsillo.", correct: false },
@@ -598,7 +598,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "That is so cool. What kind of music is your favorite?",
         es: "Eso es genial. ¿Qué tipo de música es tu favorita?",
-        question: "Maya dice que le gusta la música pop y las canciones alegres.",
+        question: "Maya says she likes pop music and cheerful songs. What does she say?",
         choices: [
           { text: "I really like pop music and energetic songs!", es: "¡Me gusta mucho la música pop y las canciones alegres!", correct: true },
           { text: "I don't like listening to sounds.", es: "No me gusta escuchar sonidos.", correct: false },
@@ -609,7 +609,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Do you want to play a video game together this afternoon?",
         es: "¿Quieres jugar a un videojuego juntos esta tarde?",
-        question: "¿Cómo responde Maya aceptando la invitación?",
+        question: "How does Maya reply accepting the invitation?",
         choices: [
           { text: "Yes, I'd love to! We can play the new adventure quest.", es: "¡Sí, me encantaría! Podemos jugar la nueva aventura.", correct: true },
           { text: "No, tomorrow was yesterday.", es: "No, mañana fue ayer.", correct: false },
@@ -620,7 +620,7 @@ const RealWorldScenarios = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Great! Let's meet at 4 o'clock at my house. See you later!",
         es: "¡Genial! Nos vemos a las 4 en punto en mi casa. ¡Hasta luego!",
-        question: "¿Cómo se despide Maya confirmando la hora?",
+        question: "How does Maya say goodbye confirming the time?",
         choices: [
           { text: "Perfect! See you at 4 PM. Have a great day, Alex!", es: "¡Perfecto! Nos vemos a las 4 PM. ¡Que tengas un buen día, Alex!", correct: true },
           { text: "Goodbye, I am sleeping now.", es: "Adiós, estoy durmiendo ahora.", correct: false },
@@ -672,7 +672,7 @@ function renderStoryCurrentStep() {
   const stepLabel = document.getElementById('storyStepLabel');
   const decisionContainer = document.getElementById('storyDecisionContainer');
 
-  if (stepLabel) stepLabel.textContent = `Intercambio ${currentStoryStep + 1} de ${totalSteps}`;
+  if (stepLabel) stepLabel.textContent = `Dialogue Turn ${currentStoryStep + 1} of ${totalSteps}`;
   if (progressBar) progressBar.style.width = `${((currentStoryStep + 1) / totalSteps) * 100}%`;
 
   // Añadir la frase del interlocutor (Alex, Mesero, Agente, etc.)
@@ -688,14 +688,14 @@ function renderStoryCurrentStep() {
   if (decisionContainer) {
     decisionContainer.innerHTML = `
       <div class="story-prompt-card">
-        <span class="prompt-badge">🤔 Tu turno • Lee con atención y elige</span>
+        <span class="prompt-badge">🤔 Your turn • Choose the best reply</span>
         <h3 class="prompt-question">${step.question}</h3>
         <div class="prompt-options-list">
           ${shuffledChoices.map((choice) => `
             <button class="prompt-option-btn" onclick="selectShuffledChoice(${choice.correct}, this, '${choice.text.replace(/'/g, "\\'")}', '${choice.es.replace(/'/g, "\\'")}')">
               <div>
                 <div>${choice.text}</div>
-                <div style="font-size:0.78rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
+                
               </div>
               <span style="font-size:1.1rem; opacity:0.6;">👉</span>
             </button>
@@ -726,11 +726,11 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
       <div class="chat-sender-name">
         <span>${charName}</span>
         <button class="chat-listen-btn" onclick="replayChatAudio('${textEn.replace(/'/g, "\\'")}', '${charKey}', 'avatar-${msgId}')">
-          🔊 Escuchar
+          🔊 Listen
         </button>
       </div>
       <div class="chat-text-en">"${textEn}"</div>
-      <div class="chat-text-es">${textEs}</div>
+      
     </div>
   `;
 
@@ -883,7 +883,7 @@ function renderWordCards(filterCat = 'all') {
       <div class="word-english">${item.en}</div>
       <div class="word-ipa">${item.ipa}</div>
       <div class="word-spanish">${item.es}</div>
-      <span class="word-audio-btn">🔊 Escuchar</span>
+      <span class="word-audio-btn">🔊 Listen</span>
     </div>
   `).join('');
 }

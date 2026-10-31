@@ -189,7 +189,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Hi Maya! I forgot my pencil case. May I borrow a blue pen?",
         es: "¡Hola Maya! Olvidé mi cartuchera. ¿Me prestas un bolígrafo azul?",
-        question: "Maya tiene dos bolígrafos azules. ¿Qué debe responder amablemente?",
+        question: "Maya has two blue pens. What should she reply politely?",
         choices: [
           { text: "Sure, Alex! Here is a blue pen for you.", es: "¡Claro, Alex! Aquí tienes un bolígrafo azul para ti.", correct: true },
           { text: "I am eating a pizza.", es: "Estoy comiendo una pizza.", correct: false },
@@ -200,7 +200,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Thank you so much! And do you have an eraser? I made a mistake.",
         es: "¡Muchas gracias! ¿Y tienes un borrador? Cometí un error.",
-        question: "Maya le presta su borrador blanco. ¿Cómo responde usando 'an'?",
+        question: "Maya lends him her white eraser. What does she reply?",
         choices: [
           { text: "Yes, here is an eraser. You can keep it.", es: "Sí, aquí tienes un borrador. Te lo puedes quedar.", correct: true },
           { text: "Here is a umbrella.", es: "Aquí hay un paraguas.", correct: false },
@@ -211,7 +211,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where is your ruler? I need to draw a straight line.",
         es: "¿Dónde está tu regla? Necesito trazar una línea recta.",
-        question: "La regla de Maya está sobre su escritorio. ¿Cómo lo indica?",
+        question: "Maya's ruler is on her desk. How does she point it out?",
         choices: [
           { text: "It is on my desk, next to the notebook.", es: "Está sobre mi escritorio, al lado del cuaderno.", correct: true },
           { text: "The ruler is swimming in the pool.", es: "La regla está nadando en la piscina.", correct: false },
@@ -222,7 +222,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Whose backpack is this under the chair? Is it yours?",
         es: "¿De quién es esta mochila debajo de la silla? ¿Es tuya?",
-        question: "Maya dice que es la mochila de David. ¿Cómo usa el posesivo 's?",
+        question: "Maya says it is David's backpack. What does she say?",
         choices: [
           { text: "No, it is David's backpack. His backpack is green.", es: "No, es la mochila de David. Su mochila es verde.", correct: true },
           { text: "Yes, they are chairs.", es: "Sí, son sillas.", correct: false },
@@ -233,7 +233,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "And what are these on the shelf? Are these colored markers?",
         es: "¿Y qué son estos en el estante? ¿Son marcadores de colores?",
-        question: "Maya confirma usando el demostrativo plural 'These'. ¿Qué dice?",
+        question: "Maya confirms using 'These'. What does she say?",
         choices: [
           { text: "Yes! These are the teacher's markers for art class.", es: "¡Sí! Estos son los marcadores de la profesora para clase de arte.", correct: true },
           { text: "This is a car.", es: "Este es un carro.", correct: false },
@@ -244,7 +244,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Great! The teacher is coming. Let's open our English books!",
         es: "¡Genial! La profesora viene. ¡Abramos nuestros libros de inglés!",
-        question: "¿Cómo responde Maya lista para comenzar la lección?",
+        question: "How does Maya reply ready to begin the lesson?",
         choices: [
           { text: "Yes! My book is on page twelve. Let's study!", es: "¡Sí! Mi libro está en la página doce. ¡A estudiar!", correct: true },
           { text: "Goodbye, I am going home.", es: "Adiós, me voy a casa.", correct: false },
@@ -264,7 +264,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Welcome to the science lab, class! Put on your safety glasses.",
         es: "¡Bienvenidos al laboratorio de ciencias, clase! Pónganse sus lentes de protección.",
-        question: "¿Cómo responde Maya respetuosamente al profesor?",
+        question: "How does Maya reply respectfully to the teacher?",
         choices: [
           { text: "Yes, Mr. Clark! We are wearing our safety glasses.", es: "¡Sí, profesor Clark! Ya tenemos puestos nuestros lentes.", correct: true },
           { text: "I want chocolate cake.", es: "Quiero pastel de chocolate.", correct: false },
@@ -275,7 +275,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Alex, what is that machine on the large table?",
         es: "Alex, ¿qué es esa máquina sobre la mesa grande?",
-        question: "Alex identifica el microscopio usando 'That is a...'.",
+        question: "Alex identifies the microscope using 'That is a...'. What does he say?",
         choices: [
           { text: "That is a microscope! We use it to see tiny cells.", es: "¡Eso es un microscopio! Lo usamos para ver células diminutas.", correct: true },
           { text: "That are books.", es: "Eso son libros (error de concordancia).", correct: false },
@@ -286,7 +286,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, where are the glass test tubes for our experiment?",
         es: "Maya, ¿dónde están los tubos de ensayo de vidrio para nuestro experimento?",
-        question: "Maya indica que están en la caja, detrás del microscopio.",
+        question: "Maya says they are in the box, behind the microscope. What does she say?",
         choices: [
           { text: "They are in the blue box, behind the microscope.", es: "Están en la caja azul, detrás del microscopio.", correct: true },
           { text: "The dog is in the kitchen.", es: "El perro está en la cocina.", correct: false },
@@ -297,7 +297,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Very good! And please be careful: is there water on the floor?",
         es: "¡Muy bien! Y por favor tengan cuidado: ¿hay agua en el piso?",
-        question: "Maya revisa debajo de la mesa y dice que el piso está seco.",
+        question: "Maya checks under the table and says the floor is dry. What does she say?",
         choices: [
           { text: "No, Mr. Clark. The floor under the table is clean and dry.", es: "No, profesor Clark. El piso debajo de la mesa está limpio y seco.", correct: true },
           { text: "Yes, I am ten years old.", es: "Sí, tengo diez años.", correct: false },
@@ -308,7 +308,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Look! This plant leaf has tiny green dots under the lens!",
         es: "¡Mira! ¡Esta hoja de planta tiene diminutos puntos verdes bajo la lente!",
-        question: "¿Cómo reacciona Maya maravillada con la observación?",
+        question: "How does Maya react amazed by what she sees?",
         choices: [
           { text: "Amazing! These are plant cells. Science is so fun!", es: "¡Increíble! Esas son células vegetales. ¡La ciencia es tan divertida!", correct: true },
           { text: "I don't like homework.", es: "No me gustan las tareas.", correct: false },
@@ -319,7 +319,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Great teamwork, Maya and Alex! Put the slides back in the cabinet.",
         es: "¡Gran trabajo en equipo, Maya y Alex! Guarden las muestras en el gabinete.",
-        question: "¿Qué responden ambos al terminar la práctica?",
+        question: "What do they both reply when finishing the lab?",
         choices: [
           { text: "Yes, sir! We are putting everything in its place. Thank you!", es: "¡Sí, profesor! Estamos poniendo todo en su lugar. ¡Gracias!", correct: true },
           { text: "Goodbye yesterday.", es: "Adiós ayer.", correct: false },
@@ -339,7 +339,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Shh... Welcome to the library. How can I help you two today?",
         es: "Shh... Bienvenidos a la biblioteca. ¿Cómo les puedo ayudar hoy?",
-        question: "Maya busca un diccionario de inglés. ¿Cómo lo pide en voz baja?",
+        question: "Maya is looking for an English dictionary. How does she ask quietly?",
         choices: [
           { text: "Hello! We are looking for an English dictionary, please.", es: "¡Hola! Estamos buscando un diccionario de inglés, por favor.", correct: true },
           { text: "We want to play football loudly.", es: "Queremos jugar fútbol ruidosamente.", correct: false },
@@ -350,7 +350,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Of course! The dictionaries are on the shelf next to the big window.",
         es: "¡Por supuesto! Los diccionarios están en el estante junto a la gran ventana.",
-        question: "¿Qué dice Alex para agradecer la indicación?",
+        question: "What does Alex say to thank the librarian?",
         choices: [
           { text: "Thank you! We will walk quietly to that shelf.", es: "¡Gracias! Caminaremos en silencio hacia ese estante.", correct: true },
           { text: "I like running fast in the hall.", es: "Me gusta correr rápido en el pasillo.", correct: false },
@@ -361,7 +361,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, look at this huge book! Is this an encyclopedia of animals?",
         es: "Maya, ¡mira este enorme libro! ¿Es esta una enciclopedia de animales?",
-        question: "Maya mira la portada y confirma usando 'Yes, it is.'",
+        question: "Maya looks at the cover and confirms using 'Yes, it is.' What does she say?",
         choices: [
           { text: "Yes, it is! It has colorful photos of lions and eagles.", es: "¡Sí, lo es! Tiene fotos a color de leones y águilas.", correct: true },
           { text: "No, they are bananas.", es: "No, son plátanos.", correct: false },
@@ -372,7 +372,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where can we sit down to read? Those chairs look comfortable.",
         es: "¿Dónde podemos sentarnos a leer? Esas sillas se ven cómodas.",
-        question: "Maya sugiere sentarse en la mesa redonda cerca de la lámpara.",
+        question: "Maya suggests sitting at the round table near the lamp. What does she say?",
         choices: [
           { text: "Let's sit at the round table under the warm lamp.", es: "Sentémonos en la mesa redonda debajo de la lámpara cálida.", correct: true },
           { text: "Let's sit on the roof.", es: "Sentémonos en el tejado.", correct: false },
@@ -383,7 +383,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Do you have your student library cards to borrow these books?",
         es: "¿Tienen sus carnets de biblioteca para llevarse estos libros?",
-        question: "Maya muestra los dos carnets estudiantiles.",
+        question: "Maya shows both student library cards. What does she say?",
         choices: [
           { text: "Yes, here are our two library cards, ma'am.", es: "Sí, aquí están nuestros dos carnets de biblioteca, señora.", correct: true },
           { text: "No, I only have five apples.", es: "No, solo tengo cinco manzanas.", correct: false },
@@ -394,7 +394,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Perfect! You can keep the books for two weeks. Enjoy reading!",
         es: "¡Perfecto! Pueden tener los libros por dos semanas. ¡Disfruten la lectura!",
-        question: "¿Cómo se despiden Alex y Maya agradecidos?",
+        question: "How do Alex and Maya say goodbye politely?",
         choices: [
           { text: "Thank you very much! Have a wonderful day, goodbye!", es: "¡Muchas gracias! ¡Que tenga un día maravilloso, adiós!", correct: true },
           { text: "I don't like reading at all.", es: "No me gusta leer para nada.", correct: false },
@@ -414,7 +414,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Good afternoon, young artists! Today we are painting landscapes.",
         es: "¡Buenas tardes, jóvenes artistas! Hoy estamos pintando paisajes.",
-        question: "¿Cómo expresa Maya su entusiasmo por la pintura?",
+        question: "How does Maya express her excitement for painting?",
         choices: [
           { text: "Good afternoon! Painting landscapes is my favorite activity.", es: "¡Buenas tardes! Pintar paisajes es mi actividad favorita.", correct: true },
           { text: "I forgot my shoes today.", es: "Olvidé mis zapatos hoy.", correct: false },
@@ -425,7 +425,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, are these your paintbrushes on the tray?",
         es: "Maya, ¿son estos tus pinceles sobre la bandeja?",
-        question: "Maya aclara que los delgados son de ella y los gruesos son de Alex.",
+        question: "Maya explains that the thin ones are hers and the thick ones are Alex's. What does she say?",
         choices: [
           { text: "The thin ones are mine, and the thick brushes are yours!", es: "¡Los delgados son míos, y los pinceles gruesos son tuyos!", correct: true },
           { text: "These are tomatoes.", es: "Estos son tomates.", correct: false },
@@ -436,7 +436,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Who has the scissors? We need to cut blue paper for the sky.",
         es: "¿Quién tiene las tijeras? Necesitamos cortar papel azul para el cielo.",
-        question: "Alex indica que las tijeras están en la mesa del profesor.",
+        question: "Alex says the scissors are on the teacher's desk. What does he say?",
         choices: [
           { text: "The scissors are on your desk, teacher, next to the glue.", es: "Las tijeras están en su escritorio, profesor, junto al pegamento.", correct: true },
           { text: "Scissors are eating grass.", es: "Las tijeras están comiendo pasto.", correct: false },
@@ -447,7 +447,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Look at my mountain drawing! Is this green paint too dark?",
         es: "¡Mira mi dibujo de la montaña! ¿Es esta pintura verde demasiado oscura?",
-        question: "Maya sugiere mezclarla con un poco de amarillo.",
+        question: "Maya suggests mixing it with a little yellow. What does she say?",
         choices: [
           { text: "It is nice, but add a little yellow to make it brighter!", es: "¡Es bonita, pero agrega un poco de amarillo para hacerla más brillante!", correct: true },
           { text: "Green is a number.", es: "El verde es un número.", correct: false },
@@ -458,7 +458,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Ten minutes left! Please wash your brushes in the sink.",
         es: "¡Quedan diez minutos! Por favor laven sus pinceles en el lavadero.",
-        question: "¿Cómo confirma Maya que van a limpiar su área?",
+        question: "How does Maya confirm they will clean their table?",
         choices: [
           { text: "Yes, teacher! We are cleaning our brushes and palettes.", es: "¡Sí, profesor! Estamos limpiando nuestros pinceles y paletas.", correct: true },
           { text: "No, we are going to the moon.", es: "No, nos vamos a la luna.", correct: false },
@@ -469,7 +469,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Our paintings are drying on the rack. They look wonderful!",
         es: "Nuestras pinturas se están secando en el estante. ¡Se ven maravillosas!",
-        question: "¿Qué dice Maya contenta con el resultado artístico?",
+        question: "What does Maya say happy with their artwork?",
         choices: [
           { text: "Yes! We are proud of our artwork today.", es: "¡Sí! Estamos orgullosos de nuestro trabajo artístico hoy.", correct: true },
           { text: "I don't like colors.", es: "No me gustan los colores.", correct: false },
@@ -489,7 +489,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, someone left a yellow jacket on the bench. Whose jacket is it?",
         es: "Maya, alguien dejó una chaqueta amarilla en la banca. ¿De quién es?",
-        question: "Maya reconoce la chaqueta de Emma por el nombre en la etiqueta.",
+        question: "Maya recognizes Emma's jacket by the name tag. What does she say?",
         choices: [
           { text: "Look at the tag: it is Emma's jacket! She was looking for it.", es: "Mira la etiqueta: ¡es la chaqueta de Emma! Ella la estaba buscando.", correct: true },
           { text: "It is a sandwich.", es: "Es un sándwich.", correct: false },
@@ -500,7 +500,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "And what about this blue notebook? Is it the teacher's notebook?",
         es: "¿Y qué hay de este cuaderno azul? ¿Es el cuaderno de la profesora?",
-        question: "Maya lee el nombre de Lucas en la primera página.",
+        question: "Maya reads Lucas's name on the first page. What does she say?",
         choices: [
           { text: "No, it is Lucas's English notebook. His name is on the cover.", es: "No, es el cuaderno de inglés de Lucas. Su nombre está en la portada.", correct: true },
           { text: "The notebook is flying in the sky.", es: "El cuaderno está volando en el cielo.", correct: false },
@@ -511,7 +511,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "There are two pencil sharpeners in the box. Are these yours?",
         es: "Hay dos sacapuntas en la caja. ¿Son estos tuyos?",
-        question: "Maya dice que el sacapuntas rojo es de ella, pero el azul no.",
+        question: "Maya says the red sharpener is hers, but the blue one is not. What does she say?",
         choices: [
           { text: "The red sharpener is mine, but the blue one is not mine.", es: "El sacapuntas rojo es mío, pero el azul no es mío.", correct: true },
           { text: "They are elephants.", es: "Son elefantes.", correct: false },
@@ -522,7 +522,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'School Secretary', avatar: '📋',
         text: "Hello kids! Are you helping return lost items to their owners?",
         es: "¡Hola chicos! ¿Están ayudando a devolver los objetos perdidos a sus dueños?",
-        question: "Alex confirma con amabilidad y espíritu de colaboración.",
+        question: "Alex confirms kindly and helpfully. What does he say?",
         choices: [
           { text: "Yes! We are returning Emma's jacket and Lucas's notebook.", es: "¡Sí! Estamos devolviendo la chaqueta de Emma y el cuaderno de Lucas.", correct: true },
           { text: "No, we are eating lunch right now.", es: "No, estamos almorzando ahora mismo.", correct: false },
@@ -533,7 +533,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'School Secretary', avatar: '📋',
         text: "That is so kind of you! You are very responsible students.",
         es: "¡Eso es muy amable de su parte! Son estudiantes muy responsables.",
-        question: "¿Cómo responde Maya al halago de la secretaria?",
+        question: "How does Maya reply politely to the staff?",
         choices: [
           { text: "Thank you! We always like to help our classmates.", es: "¡Gracias! Siempre nos gusta ayudar a nuestros compañeros.", correct: true },
           { text: "I don't know who I am.", es: "No sé quién soy.", correct: false },
@@ -544,7 +544,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "All items are back with their owners now. Mission accomplished!",
         es: "Todos los objetos volvieron con sus dueños ahora. ¡Misión cumplida!",
-        question: "¿Cómo celebra Maya con su compañero?",
+        question: "How does Maya celebrate with her classmate?",
         choices: [
           { text: "High five, Alex! Teamwork makes everything easier.", es: "¡Choca los cinco, Alex! El trabajo en equipo hace todo más fácil.", correct: true },
           { text: "Goodbye yesterday night.", es: "Adiós ayer por la noche.", correct: false },
@@ -564,7 +564,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Good morning! Please sit at your assigned computer desk.",
         es: "¡Buenos días! Por favor siéntense en su escritorio de computadora asignado.",
-        question: "¿Qué responde Alex al tomar su lugar?",
+        question: "What does Alex reply as he takes his seat?",
         choices: [
           { text: "Good morning, teacher! We are at desk number four.", es: "¡Buenos días, profesor! Estamos en el escritorio número cuatro.", correct: true },
           { text: "I am at the supermarket.", es: "Estoy en el supermercado.", correct: false },
@@ -575,7 +575,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, is this a tablet or a touchscreen monitor?",
         es: "Maya, ¿esto es una tableta o un monitor de pantalla táctil?",
-        question: "Maya examina el dispositivo y aclara qué es.",
+        question: "Maya checks the device and explains what it is. What does she say?",
         choices: [
           { text: "This is a touchscreen monitor connected to the keyboard.", es: "¡Este es un monitor de pantalla táctil conectado al teclado!", correct: true },
           { text: "This is an apple pie.", es: "Este es un pastel de manzana.", correct: false },
@@ -586,7 +586,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where are the headphones? We need them for English listening.",
         es: "¿Dónde están los audífonos? Los necesitamos para la comprensión de inglés.",
-        question: "Maya indica que los audífonos cuelgan al lado de la pantalla.",
+        question: "Maya says the headphones are next to the screen. What does she say?",
         choices: [
           { text: "They are hanging next to the screen on the right side.", es: "Están colgados al lado de la pantalla en el lado derecho.", correct: true },
           { text: "The headphones are in the refrigerator.", es: "Los audífonos están en el refrigerador.", correct: false },
@@ -597,7 +597,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Open the Bilikids Learning App and enter your student username.",
         es: "Abran la Aplicación de Aprendizaje Bilikids e ingresen su usuario estudiantil.",
-        question: "Maya ayuda a Alex a teclear su nombre en la aplicación.",
+        question: "Maya helps Alex type his name in the app. What does she say?",
         choices: [
           { text: "I am typing my username now: Maya_Grade4. Done!", es: "Estoy escribiendo mi usuario ahora: Maya_Grade4. ¡Listo!", correct: true },
           { text: "I am singing a song loudly.", es: "Estoy cantando una canción ruidosamente.", correct: false },
@@ -608,7 +608,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "The audio sounds crystal clear through these headphones!",
         es: "¡El audio se escucha súper claro a través de estos audífonos!",
-        question: "¿Qué dice Maya al escuchar las voces nativas en inglés?",
+        question: "What does Maya say when listening to the English audio?",
         choices: [
           { text: "Yes! The pronunciation exercises are very clear and helpful.", es: "¡Sí! Los ejercicios de pronunciación son muy claros y útiles.", correct: true },
           { text: "I don't like computers at all.", es: "No me gustan las computadoras para nada.", correct: false },
@@ -619,7 +619,7 @@ const RealWorldScenariosUnit2 = {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Time is up! Log out of your session and leave your desks neat.",
         es: "¡Terminó el tiempo! Cierren sesión y dejen sus escritorios ordenados.",
-        question: "¿Cómo se despiden los alumnos del profesor de tecnología?",
+        question: "How do the students say goodbye to the teacher?",
         choices: [
           { text: "We logged out and pushed our chairs in. Thank you, teacher!", es: "Ya cerramos sesión y guardamos las sillas. ¡Gracias, profesor!", correct: true },
           { text: "Goodbye last month.", es: "Adiós el mes pasado.", correct: false },
@@ -671,7 +671,7 @@ function renderStoryCurrentStep() {
   const stepLabel = document.getElementById('storyStepLabel');
   const decisionContainer = document.getElementById('storyDecisionContainer');
 
-  if (stepLabel) stepLabel.textContent = `Intercambio ${currentStoryStep + 1} de ${totalSteps}`;
+  if (stepLabel) stepLabel.textContent = `Dialogue Turn ${currentStoryStep + 1} of ${totalSteps}`;
   if (progressBar) progressBar.style.width = `${((currentStoryStep + 1) / totalSteps) * 100}%`;
 
   appendStoryChatMessage(step.speaker, step.name, step.avatar, step.text, step.es);
@@ -683,14 +683,14 @@ function renderStoryCurrentStep() {
   if (decisionContainer) {
     decisionContainer.innerHTML = `
       <div class="story-prompt-card">
-        <span class="prompt-badge">🤔 Tu turno • Lee con atención y responde</span>
+        <span class="prompt-badge">🤔 Your turn • Choose the best reply</span>
         <h3 class="prompt-question">${step.question}</h3>
         <div class="prompt-options-list">
           ${shuffledChoices.map((choice) => `
             <button class="prompt-option-btn" onclick="selectShuffledChoice(${choice.correct}, this, '${choice.text.replace(/'/g, "\\'")}', '${choice.es.replace(/'/g, "\\'")}')">
               <div>
                 <div>${choice.text}</div>
-                <div style="font-size:0.78rem; color:#64748b; font-weight:normal; margin-top:2px;">${choice.es}</div>
+                
               </div>
               <span style="font-size:1.1rem; opacity:0.6;">👉</span>
             </button>
@@ -721,11 +721,11 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
       <div class="chat-sender-name">
         <span>${charName}</span>
         <button class="chat-listen-btn" onclick="replayChatAudio('${textEn.replace(/'/g, "\\'")}', '${charKey}', 'avatar-${msgId}')">
-          🔊 Escuchar
+          🔊 Listen
         </button>
       </div>
       <div class="chat-text-en">"${textEn}"</div>
-      <div class="chat-text-es">${textEs}</div>
+      
     </div>
   `;
 
@@ -881,7 +881,7 @@ function renderWordCards(filterCat = 'all') {
       <div class="word-ipa">${item.ipa}</div>
       <div class="word-spanish">${item.es}</div>
       <span class="word-grammar-badge">${item.grammar}</span>
-      <span class="word-audio-btn">🔊 Escuchar</span>
+      <span class="word-audio-btn">🔊 Listen</span>
     </div>
   `).join('');
 }
