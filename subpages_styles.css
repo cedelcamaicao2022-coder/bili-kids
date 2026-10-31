@@ -842,6 +842,7 @@ body {
   .kids-units-12-grid { grid-template-columns: repeat(2, 1fr); }
   .teens-hero-card { grid-template-columns: 1fr; }
   .kids-hero-card { flex-direction: column; align-items: center; }
+  .kids-action-strip { grid-template-columns: 1fr !important; }
   .kids-hero-art-side { width: 100%; height: 200px; }
   .kids-continue-widget { width: 100%; }
 }
@@ -918,6 +919,54 @@ body {
   top: 77.4%;
   width: 21%;
   height: 16%;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 9999px;
+  z-index: 10;
+}
+
+/* Kids Hero: The provided artwork is 2172x724 with 3D typography and CTA button baked in.
+   Match exact aspect-ratio so ZERO pixels are cropped on the left or right, and zero difuminado. */
+.kids-hero {
+  min-height: unset !important;
+  height: auto !important;
+  aspect-ratio: 2172 / 724 !important;
+  width: 100% !important;
+  overflow: hidden;
+}
+.kids-hero .subpage-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: unset !important;
+  padding: 0 !important;
+  background: transparent !important;
+  pointer-events: none;
+}
+.kids-hero .subpage-hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill !important;
+  object-position: center !important;
+  opacity: 1 !important;
+}
+.kids-hero .subpage-hero-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.kids-hero .kids-cta {
+  position: absolute;
+  left: 4.0%;
+  top: 62.2%;
+  width: 28.2%;
+  height: 27.5%;
   opacity: 0;
   cursor: pointer;
   pointer-events: auto;

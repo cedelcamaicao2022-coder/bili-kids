@@ -74,28 +74,43 @@
   <main class="subpage-container">
 
     <!-- HERO BANNER (HIGH DEFINITION 3D PIXAR ART & VECTOR TYPOGRAPHY) -->
-    <section class="kids-hero-card">
-      <!-- Left: 3D Classroom Illustration -->
-      <div class="kids-hero-art-side">
-        <img src="assets/heroes/kids_hero.jpg" alt="Kids 9-11 Bilikids Adventure" class="kids-hero-art-img">
-      </div>
-
-      <!-- Center: Title and Age -->
-      <div class="kids-hero-center">
-        <div class="hero-title-with-sun">
-          <svg class="hero-sun-rays" viewBox="0 0 36 36" fill="none" style="transform: rotate(180deg);">
-            <path d="M4 18h6M6.5 9.5l4.5 4.5M18 4v6M29.5 9.5l-4.5 4.5M32 18h-6" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
-          </svg>
-          <h1 class="kids-group-title">Kids</h1>
+    <section class="subpage-hero kids-hero" onclick="document.getElementById('unitsGrid').scrollIntoView({behavior: 'smooth'})" style="cursor: pointer;" title="¡Explora y aprende!">
+      <div class="subpage-hero-overlay">
+        <div class="subpage-hero-content">
+          <a href="#unitsGrid" class="hero-start-btn kids-cta" title="¡Explora y aprende!">
+            <span class="btn-play-circle">▶</span>
+            ¡Explora y aprende!
+          </a>
         </div>
-        <h2 class="kids-group-age">9 – 11 years old</h2>
-        <a href="#unitsGrid" class="kids-speech-bubble" title="Ver las 12 Unidades">
-          Choose a unit and start learning! ▾
-        </a>
       </div>
 
-      <!-- Right: Continue Learning Floating Widget -->
-      <a href="kids_unit3.html" class="kids-continue-widget" title="Continuar Unidad 3: Favorite People">
+      <img src="assets/kids_hd/kids_hero_banner.png" alt="Kids 9-11 Bilikids Adventure" class="subpage-hero-bg-img">
+    </section>
+
+    <!-- ACTION STRIP: KIDS PUZZLES QUEST & CONTINUE LEARNING -->
+    <section class="kids-action-strip" style="display: grid; grid-template-columns: 1fr 340px; gap: 1.25rem; margin: 1.25rem 0; align-items: stretch;">
+      <!-- Special Activity: Jigsaw Puzzle Quest -->
+      <a href="puzzle.html?mode=kids" class="kids-puzzle-quest-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #10b981 0%, #059669 35%, #047857 100%); border-radius: 26px; padding: 1rem 1.85rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 28px rgba(5, 150, 105, 0.35); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(255, 255, 255, 0.25);">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <div style="width: 80px; height: 105px; flex-shrink: 0; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25)); transition: transform 0.2s;">
+            <img src="assets/puzzle_buttons/puzzle_btn_kids.png" alt="Kids Puzzles" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div>
+            <div style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; line-height: 1.2; display: flex; align-items: center; gap: 10px;">
+              <span>🧩</span> Kids Puzzles <span style="font-size: 0.82rem; background: #facc15; color: #78350f; padding: 3px 12px; border-radius: 999px; font-weight: 800;">4x4 Hard • 500 ⭐</span>
+            </div>
+            <div style="font-size: 0.92rem; opacity: 0.95; margin-top: 5px; font-weight: 600;">
+              Challenge your mind with 16-piece authentic jigsaw puzzles and earn reward stars!
+            </div>
+          </div>
+        </div>
+        <div style="background: #ffffff; color: #047857; font-weight: 800; font-size: 0.95rem; padding: 10px 22px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); flex-shrink: 0;">
+          <span>Play Now</span> ➔
+        </div>
+      </a>
+
+      <!-- Continue Learning Floating Widget -->
+      <a href="kids_unit3.html" class="kids-continue-widget" style="width: 100%; height: 100%;" title="Continuar Unidad 3: Favorite People">
         <div class="widget-header">
           <span style="color: #f59e0b; font-size: 1.1rem;">⭐</span>
           <span>Continue learning</span>
@@ -116,28 +131,6 @@
             <div class="widget-progress-fill" style="width: 60%;"></div>
           </div>
           <span class="widget-progress-text">60%</span>
-        </div>
-      </a>
-    </section>
-
-    <!-- SPECIAL ACTIVITY: JIGSAW PUZZLE QUEST -->
-    <section class="kids-special-activity" style="margin: 1.25rem 0;">
-      <a href="puzzle.html?mode=kids" class="kids-puzzle-quest-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #10b981 0%, #059669 35%, #047857 100%); border-radius: 26px; padding: 1rem 1.85rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 28px rgba(5, 150, 105, 0.35); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(255, 255, 255, 0.25);">
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-          <div style="width: 95px; height: 125px; flex-shrink: 0; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25)); transition: transform 0.2s;">
-            <img src="assets/puzzle_buttons/puzzle_btn_kids.png" alt="Kids Puzzles" style="width: 100%; height: 100%; object-fit: contain;">
-          </div>
-          <div>
-            <div style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.5rem; line-height: 1.2; display: flex; align-items: center; gap: 10px;">
-              <span>🧩</span> Kids Puzzles <span style="font-size: 0.82rem; background: #facc15; color: #78350f; padding: 3px 12px; border-radius: 999px; font-weight: 800;">4x4 Hard • 500 ⭐</span>
-            </div>
-            <div style="font-size: 0.95rem; opacity: 0.95; margin-top: 5px; font-weight: 600;">
-              Challenge your mind with 16-piece authentic jigsaw puzzles and earn reward stars!
-            </div>
-          </div>
-        </div>
-        <div style="background: #ffffff; color: #047857; font-weight: 800; font-size: 1rem; padding: 12px 26px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); flex-shrink: 0;">
-          <span>Play Now</span> ➔
         </div>
       </a>
     </section>
