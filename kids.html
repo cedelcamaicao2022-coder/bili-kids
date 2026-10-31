@@ -2,478 +2,190 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bilikids Kids Club | 7 a 10 años</title>
-
-  <!-- Tipografías modernas -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="kids_styles.css?v=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilikids Adventure | Kids (9 - 11 years old)</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
 </head>
 <body>
 
-  <!-- NAVBAR SUPERIOR -->
-  <nav class="kids-navbar">
-    <div class="kids-nav-container">
-      <div class="nav-left">
-        <a href="index.html" class="btn-nav-back" title="Volver al Portal Principal Bilikids">
-          <span>←</span>
-          <span>Inicio</span>
-        </a>
-        <a href="kids.html" class="kids-brand">
-          <img src="assets/bilikids_logo.png" alt="Bilikids">
-          <span class="kids-brand-badge">Kids Club • 7–10 años</span>
-        </a>
-      </div>
-
-      <div class="nav-right">
-        <div class="stats-chip" title="Nivel Cambridge">
-          <span class="icon">🎯</span>
-          <span>A1–A2 Starters & Movers</span>
-        </div>
-        <div class="stats-chip" title="Estrellas acumuladas">
-          <span class="icon">⭐</span>
-          <span id="playerStars">120 pts</span>
-        </div>
-      </div>
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="index.html" class="brand-link" title="Volver al Portal Principal Bilikids">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag">ADVENTURE</span>
+      </a>
     </div>
-  </nav>
 
-  <!-- HERO BANNER -->
-  <header class="kids-hero">
-    <div class="hero-card">
-      <div class="hero-text">
-        <span class="hero-tag">Aventura de Aprendizaje • 12 Misiones</span>
-        <h1 class="hero-title">Kids English Adventure</h1>
-        <p class="hero-desc">
-          Aprende inglés comunicativo con cómics interactivos, laboratorio de oraciones, pronunciación con reconocimiento de voz y desafíos de la vida real.
-        </p>
-        <div class="hero-badges-row">
-          <span class="hero-pill">💬 Cómics y Diálogos</span>
-          <span class="hero-pill">🧩 Sentence Builder</span>
-          <span class="hero-pill">📚 Flashcards con Audio Nativo</span>
-          <span class="hero-pill">🎙️ Speaking Challenge</span>
-        </div>
+    <nav class="nav-center-menu">
+      <a href="index.html" class="nav-pill-item active" title="Volver al Portal de Inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+      </a>
+      <a href="#unitsGrid" class="nav-pill-item" title="12 Unidades Cambridge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Units
+      </a>
+      <a href="kids.html" class="nav-pill-item" title="Mi Progreso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M18 20V10M12 20V4M6 20v-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        My Progress
+      </a>
+      <a href="stories.html" class="nav-pill-item" title="Recursos y Cuentos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Favorites
+      </a>
+      <a href="juegos.html" class="nav-pill-item" title="Zona de Recursos y Juegos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Resources
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="juegos.html" class="nav-circle-btn" title="Buscar unidad">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Alex / Matías">
+        <img src="assets/home/avatar_matias_2x.png" alt="Alex" class="user-avatar-circle">
+        <span class="user-greeting-name">Alex ⌵</span>
       </div>
     </div>
   </header>
 
-  <!-- BARRA DE SELECCIÓN Y FILTRO DE NIVELES -->
-  <section class="curriculum-bar">
-    <div class="curriculum-title-wrap">
-      <h2 class="curriculum-heading">Misiones del Curso</h2>
-      <span class="curriculum-sub">12 Unidades Temáticas</span>
-    </div>
+  <!-- ========================================================================
+       MAIN CONTENT CONTAINER
+       ======================================================================== -->
+  <main class="subpage-container">
 
-    <div class="level-filters">
-      <button class="filter-btn active" onclick="filterUnits('all', this)">Todas (12)</button>
-      <button class="filter-btn" onclick="filterUnits('A1', this)">Nivel A1 (1-6)</button>
-      <button class="filter-btn" onclick="filterUnits('A2', this)">Nivel A2 (7-12)</button>
-    </div>
-  </section>
+    <!-- HERO BANNER (HIGH DEFINITION 3D PIXAR ART & VECTOR TYPOGRAPHY) -->
+    <section class="kids-hero-card">
+      <!-- Left: 3D Classroom Illustration -->
+      <div class="kids-hero-art-side">
+        <img src="assets/heroes/kids_hero.jpg" alt="Kids 9-11 Bilikids Adventure" class="kids-hero-art-img">
+      </div>
 
-  <!-- CONTENEDOR DE LAS 12 UNIDADES -->
-  <main class="units-container">
-    <div class="units-grid" id="unitsGrid">
-
-      <!-- ================= UNIDAD 1 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active">Unit 1 • A1</span>
-          <div class="unit-icon-bubble" style="background: #ede9fe; color: #7c3aed;">👋</div>
+      <!-- Center: Title and Age -->
+      <div class="kids-hero-center">
+        <div class="hero-title-with-sun">
+          <svg class="hero-sun-rays" viewBox="0 0 36 36" fill="none" style="transform: rotate(180deg);">
+            <path d="M4 18h6M6.5 9.5l4.5 4.5M18 4v6M29.5 9.5l-4.5 4.5M32 18h-6" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+          <h1 class="kids-group-title">Kids</h1>
         </div>
-        <h3 class="unit-title">All About You</h3>
-        <p class="unit-description">
-          Aprende a presentarte, saludar formal e informalmente, decir tu edad y datos personales con el verbo <em>be</em>.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag">Verb Be (I, you, we)</span>
-          <span class="unit-tag">Greetings</span>
-          <span class="unit-tag">Numbers 0–10</span>
-          <span class="unit-tag">Personal Info</span>
+        <h2 class="kids-group-age">9 – 11 years old</h2>
+        <a href="#unitsGrid" class="kids-speech-bubble" title="Ver las 12 Unidades">
+          Choose a unit and start learning! ▾
+        </a>
+      </div>
+
+      <!-- Right: Continue Learning Floating Widget -->
+      <a href="kids_unit3.html" class="kids-continue-widget" title="Continuar Unidad 3: Favorite People">
+        <div class="widget-header">
+          <span style="color: #f59e0b; font-size: 1.1rem;">⭐</span>
+          <span>Continue learning</span>
         </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip">
-            <span class="activity-mini-icon">💬</span>
-            <span class="activity-mini-label">Comic</span>
+        <div class="widget-row">
+          <div class="widget-thumb-box">
+            <img src="assets/kids_cards/unit_3_card.png" alt="Unit 3">
+            <span class="widget-thumb-play">▶</span>
           </div>
-          <div class="activity-mini-chip">
-            <span class="activity-mini-icon">🧩</span>
-            <span class="activity-mini-label">Builder</span>
+          <div class="widget-info">
+            <div class="widget-unit-name">Unit 3: Favorite People</div>
+            <div class="widget-lesson-name">Lesson 2: My Family</div>
           </div>
-          <div class="activity-mini-chip">
-            <span class="activity-mini-icon">📚</span>
-            <span class="activity-mini-label">Words</span>
+          <div class="widget-arrow">›</div>
+        </div>
+        <div class="widget-progress-row">
+          <div class="widget-progress-track">
+            <div class="widget-progress-fill" style="width: 60%;"></div>
           </div>
-          <div class="activity-mini-chip">
-            <span class="activity-mini-icon">🎙️</span>
-            <span class="activity-mini-label">Speaking</span>
-          </div>
+          <span class="widget-progress-text">60%</span>
         </div>
-        <a href="kids_unit1.html" class="btn-unit-action btn-unit-primary">
-          <span>Iniciar Misión 1</span>
-          <span>➔</span>
+      </a>
+    </section>
+
+    <!-- 12 CAMBRIDGE UNITS GRID (4 COLUMNS X 3 ROWS) -->
+    <section id="unitsGrid">
+      <div class="kids-units-12-grid">
+        <!-- Unit 1: All About You -->
+        <a href="kids_unit1.html" class="kids-unit-card-btn" title="Unit 1: All About You">
+          <img src="assets/kids_cards/unit_1_card.png" alt="Unit 1: All About You" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 2 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1" style="border-color: #0ea5e9; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #e0f2fe; color: #0284c7;">Unit 2 • A1</span>
-          <div class="unit-icon-bubble" style="background: #e0f2fe; color: #0284c7;">🎒</div>
-        </div>
-        <h3 class="unit-title">In Class</h3>
-        <p class="unit-description">
-          Describe los objetos de tu salón de clases, útiles escolares, pertenencias y dónde están ubicados.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #e0f2fe; color: #0369a1;">Verb Be (he, she, they)</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #0369a1;">Articles a / an</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #0369a1;">This / These</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #0369a1;">Prepositions</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💬</span><span class="activity-mini-label">Diálogo</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧩</span><span class="activity-mini-label">Builder</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📚</span><span class="activity-mini-label">Words</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Speaking</span></div>
-        </div>
-        <a href="kids_unit2.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);">
-          <span>Iniciar Misión 2</span>
-          <span>➔</span>
+        <!-- Unit 2: In Class -->
+        <a href="kids_unit2.html" class="kids-unit-card-btn" title="Unit 2: In Class">
+          <img src="assets/kids_cards/unit_2_card.png" alt="Unit 2: In Class" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 3 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1" style="border-color: #ec4899; background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #fce7f3; color: #db2777;">Unit 3 • A1</span>
-          <div class="unit-icon-bubble" style="background: #fce7f3; color: #db2777;">👨‍👩‍👧</div>
-        </div>
-        <h3 class="unit-title">Favorite People</h3>
-        <p class="unit-description">
-          Árbol genealógico interactivo, detective de pistas, caza-errores gramaticales y podcast de entrevistas.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #fce7f3; color: #9d174d;">Possessive Adjectives</span>
-          <span class="unit-tag" style="background: #fce7f3; color: #9d174d;">Family & Friends</span>
-          <span class="unit-tag" style="background: #fce7f3; color: #9d174d;">Personalities</span>
-          <span class="unit-tag" style="background: #fce7f3; color: #9d174d;">Numbers 10–100</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🌳</span><span class="activity-mini-label">Árbol</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">⚡</span><span class="activity-mini-label">Match</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🩺</span><span class="activity-mini-label">Doctor</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Podcast</span></div>
-        </div>
-        <a href="kids_unit3.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #ec4899, #db2777); box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);">
-          <span>Iniciar Misión 3</span>
-          <span>➔</span>
+        <!-- Unit 3: Favorite People -->
+        <a href="kids_unit3.html" class="kids-unit-card-btn" title="Unit 3: Favorite People">
+          <img src="assets/kids_cards/unit_3_card.png" alt="Unit 3: Favorite People" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 4 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1" style="border-color: #f59e0b; background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #fef3c7; color: #b45309;">Unit 4 • A1-A2</span>
-          <div class="unit-icon-bubble" style="background: #fef3c7; color: #b45309;">⏰</div>
-        </div>
-        <h3 class="unit-title">Everyday Life</h3>
-        <p class="unit-description">
-          Reloj interactivo de 24 horas, planificador de misiones semanales, balanza de verbos con -S y simulador de vlog en vivo.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #fef3c7; color: #92400e;">Simple Present</span>
-          <span class="unit-tag" style="background: #fef3c7; color: #92400e;">Daily Routines</span>
-          <span class="unit-tag" style="background: #fef3c7; color: #92400e;">Days of Week</span>
-          <span class="unit-tag" style="background: #fef3c7; color: #92400e;">Verb -S Scale</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">⏰</span><span class="activity-mini-label">Reloj</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🗓️</span><span class="activity-mini-label">Planner</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">⚖️</span><span class="activity-mini-label">Balanza</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📹</span><span class="activity-mini-label">Vlog</span></div>
-        </div>
-        <a href="kids_unit4.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #f59e0b, #f97316); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);">
-          <span>Iniciar Misión 4</span>
-          <span>➔</span>
+        <!-- Unit 4: Everyday Life -->
+        <a href="kids_unit4.html" class="kids-unit-card-btn" title="Unit 4: Everyday Life">
+          <img src="assets/kids_cards/unit_4_card.png" alt="Unit 4: Everyday Life" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 5 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1" style="border-color: #10b981; background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #d1fae5; color: #047857;">Unit 5 • A1-A2</span>
-          <div class="unit-icon-bubble" style="background: #d1fae5; color: #047857;">🎮</div>
-        </div>
-        <h3 class="unit-title">Free Time</h3>
-        <p class="unit-description">
-          Casillero de equipamiento de hobbies, consola de DJ con crossfader deslizante & vinilo, laboratorio -ING y talent show.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #d1fae5; color: #065f46;">Hobby Gear</span>
-          <span class="unit-tag" style="background: #d1fae5; color: #065f46;">Frequency Adverbs</span>
-          <span class="unit-tag" style="background: #d1fae5; color: #065f46;">Like + -ING</span>
-          <span class="unit-tag" style="background: #d1fae5; color: #065f46;">Can / Can't</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎒</span><span class="activity-mini-label">Casillero</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎚️</span><span class="activity-mini-label">DJ Fader</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧪</span><span class="activity-mini-label">Verb -ING</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🏆</span><span class="activity-mini-label">Talent</span></div>
-        </div>
-        <a href="kids_unit5.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #10b981, #06b6d4); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
-          <span>Iniciar Misión 5</span>
-          <span>➔</span>
+        <!-- Unit 5: Free Time -->
+        <a href="kids_unit5.html" class="kids-unit-card-btn" title="Unit 5: Free Time">
+          <img src="assets/kids_cards/unit_5_card.png" alt="Unit 5: Free Time" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 6 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A1" style="border-color: #0284c7; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #e0f2fe; color: #0369a1;">Unit 6 • A1-A2</span>
-          <div class="unit-icon-bubble" style="background: #e0f2fe; color: #0369a1;">🏙️</div>
-        </div>
-        <h3 class="unit-title">Neighborhoods</h3>
-        <p class="unit-description">
-          Navegante del mapa de la ciudad, sello municipal There is / There are, brújula GPS de preposiciones y tour bus con Let's.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #e0f2fe; color: #075985;">Places in Town</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #075985;">There is / There are</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #075985;">Prepositions</span>
-          <span class="unit-tag" style="background: #e0f2fe; color: #075985;">Let's Suggestions</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🗺️</span><span class="activity-mini-label">Mapa</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🏢</span><span class="activity-mini-label">Inspector</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧭</span><span class="activity-mini-label">GPS</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🚌</span><span class="activity-mini-label">Tour Bus</span></div>
-        </div>
-        <a href="kids_unit6.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #0284c7, #0ea5e9); box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
-          <span>Iniciar Misión 6</span>
-          <span>➔</span>
+        <!-- Unit 6: Neighborhoods -->
+        <a href="kids_unit6.html" class="kids-unit-card-btn" title="Unit 6: Neighborhoods">
+          <img src="assets/kids_cards/unit_6_card.png" alt="Unit 6: Neighborhoods" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 7 (ACTIVA) ================= -->
-      <article class="unit-card active-unit" data-level="A2" style="border-color: #3b82f6; background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-active" style="background: #dbeafe; color: #1d4ed8;">Unit 7 • A2 Movers</span>
-          <div class="unit-icon-bubble" style="background: #dbeafe; color: #1d4ed8;">⛅</div>
-        </div>
-        <h3 class="unit-title">Out and About</h3>
-        <p class="unit-description">
-          Froggy River Jumps (Educaplay), Cloud Balloon Popper (Wordwall), rueda de la fortuna climática y TV studio con Quizizz Power-Ups.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #dbeafe; color: #1e40af;">Present Continuous</span>
-          <span class="unit-tag" style="background: #dbeafe; color: #1e40af;">Weather & Seasons</span>
-          <span class="unit-tag" style="background: #dbeafe; color: #1e40af;">Clothes & Gear</span>
-          <span class="unit-tag" style="background: #dbeafe; color: #1e40af;">Quizizz Power-Ups</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🐸</span><span class="activity-mini-label">Froggy</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎈</span><span class="activity-mini-label">Balloons</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎡</span><span class="activity-mini-label">Wheel</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">⚡</span><span class="activity-mini-label">TV News</span></div>
-        </div>
-        <a href="kids_unit7.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);">
-          <span>Iniciar Misión 7</span>
-          <span>➔</span>
+        <!-- Unit 7: Out and About -->
+        <a href="kids_unit7.html" class="kids-unit-card-btn" title="Unit 7: Out and About">
+          <img src="assets/kids_cards/unit_7_card.png" alt="Unit 7: Out and About" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 8 ================= -->
-      <article class="unit-card" data-level="A2" style="border-color: #ddd6fe; box-shadow: 0 10px 24px rgba(139, 92, 246, 0.12);">
-        <div class="unit-card-header">
-          <span class="unit-badge" style="background: #8b5cf6; color: #ffffff;">Unit 8 • A2</span>
-          <div class="unit-icon-bubble" style="background: #f5f3ff; color: #7c3aed;">🛍️</div>
-        </div>
-        <h3 class="unit-title">Shopping & Obby Run</h3>
-        <p class="unit-description">
-          ¡Videojuego de plataformas Obby 2D en tiempo real! Salta cajas de zapatos, esquiva cintas transportadoras, abre cofres de oro estilo Blooket y cobra como cajero estrella.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag" style="background: #f3e8ff; color: #6b21a8;">Obby 2D Game</span>
-          <span class="unit-tag" style="background: #f3e8ff; color: #6b21a8;">Blooket Gold Quest</span>
-          <span class="unit-tag" style="background: #f3e8ff; color: #6b21a8;">This / That / These</span>
-          <span class="unit-tag" style="background: #f3e8ff; color: #6b21a8;">How much is it?</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🏃‍♂️</span><span class="activity-mini-label">Obby 2D</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💎</span><span class="activity-mini-label">Gold Quest</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🛒</span><span class="activity-mini-label">Cashier</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Vlogger</span></div>
-        </div>
-        <a href="kids_unit8.html" class="btn-unit-action btn-unit-primary" style="background: linear-gradient(135deg, #7c3aed, #ec4899); box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);">
-          <span>Iniciar Misión 8</span>
-          <span>➔</span>
+        <!-- Unit 8: Shopping (Mall Obby Run 2D!) -->
+        <a href="kids_unit8.html" class="kids-unit-card-btn" title="Unit 8: Shopping & Mall Obby Run 2D">
+          <img src="assets/kids_cards/unit_8_card.png" alt="Unit 8: Shopping" class="kids-unit-card-img">
         </a>
-      </article>
 
-      <!-- ================= UNIDAD 9 ================= -->
-      <article class="unit-card" data-level="A2">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-locked">Unit 9 • A2</span>
-          <div class="unit-icon-bubble" style="background: #f1f5f9; color: #14b8a6;">🌍</div>
-        </div>
-        <h3 class="unit-title">A Wide World</h3>
-        <p class="unit-description">
-          Viajes por el planeta, países, idiomas del mundo, nacionalidades y habilidades especiales con Can / Can't.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag">Modal Can / Can't</span>
-          <span class="unit-tag">Countries & Flags</span>
-          <span class="unit-tag">Languages</span>
-          <span class="unit-tag">Sightseeing</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💬</span><span class="activity-mini-label">Comic</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧩</span><span class="activity-mini-label">Builder</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📚</span><span class="activity-mini-label">Words</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Speaking</span></div>
-        </div>
-        <button class="btn-unit-action btn-unit-locked" onclick="openPreviewModal(9, 'A Wide World')">
-          <span>Vista Previa 👁️</span>
-        </button>
-      </article>
+        <!-- Unit 9: A Wide World -->
+        <a href="kids_unit1.html" class="kids-unit-card-btn" title="Unit 9: A Wide World">
+          <img src="assets/kids_cards/unit_9_card.png" alt="Unit 9: A Wide World" class="kids-unit-card-img">
+        </a>
 
-      <!-- ================= UNIDAD 10 ================= -->
-      <article class="unit-card" data-level="A2">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-locked">Unit 10 • A2</span>
-          <div class="unit-icon-bubble" style="background: #f1f5f9; color: #f97316;">📅</div>
-        </div>
-        <h3 class="unit-title">Busy Lives</h3>
-        <p class="unit-description">
-          ¡Ayer y la semana pasada! Aprende a contar lo que hiciste usando verbos regulares e irregulares en Pasado Simple.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag">Simple Past (did)</span>
-          <span class="unit-tag">Regular Verbs -ed</span>
-          <span class="unit-tag">Past Expressions</span>
-          <span class="unit-tag">Last Weekend</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💬</span><span class="activity-mini-label">Comic</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧩</span><span class="activity-mini-label">Builder</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📚</span><span class="activity-mini-label">Words</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Speaking</span></div>
-        </div>
-        <button class="btn-unit-action btn-unit-locked" onclick="openPreviewModal(10, 'Busy Lives')">
-          <span>Vista Previa 👁️</span>
-        </button>
-      </article>
+        <!-- Unit 10: Busy Lives -->
+        <a href="kids_unit4.html" class="kids-unit-card-btn" title="Unit 10: Busy Lives">
+          <img src="assets/kids_cards/unit_10_card.png" alt="Unit 10: Busy Lives" class="kids-unit-card-img">
+        </a>
 
-      <!-- ================= UNIDAD 11 ================= -->
-      <article class="unit-card" data-level="A2">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-locked">Unit 11 • A2</span>
-          <div class="unit-icon-bubble" style="background: #f1f5f9; color: #6366f1;">🏖️</div>
-        </div>
-        <h3 class="unit-title">Looking Back</h3>
-        <p class="unit-description">
-          Recuerdos inolvidables y vacaciones: ¿dónde estuviste? Usar Was / Were, emociones y expresiones con Go.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag">Past of Be (was/were)</span>
-          <span class="unit-tag">Vacations & Trips</span>
-          <span class="unit-tag">Feelings & Moods</span>
-          <span class="unit-tag">Expressions with Go</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💬</span><span class="activity-mini-label">Comic</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧩</span><span class="activity-mini-label">Builder</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📚</span><span class="activity-mini-label">Words</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Speaking</span></div>
-        </div>
-        <button class="btn-unit-action btn-unit-locked" onclick="openPreviewModal(11, 'Looking Back')">
-          <span>Vista Previa 👁️</span>
-        </button>
-      </article>
+        <!-- Unit 11: Looking Back -->
+        <a href="stories.html" class="kids-unit-card-btn" title="Unit 11: Looking Back">
+          <img src="assets/kids_cards/unit_11_card.png" alt="Unit 11: Looking Back" class="kids-unit-card-img">
+        </a>
 
-      <!-- ================= UNIDAD 12 ================= -->
-      <article class="unit-card" data-level="A2">
-        <div class="unit-card-header">
-          <span class="unit-badge badge-unit-locked">Unit 12 • A2</span>
-          <div class="unit-icon-bubble" style="background: #f1f5f9; color: #e11d48;">🍕</div>
-        </div>
-        <h3 class="unit-title">Fabulous Food</h3>
-        <p class="unit-description">
-          En el restaurante: comidas contables e incontables, pedir lo que te gusta y ordenar como un pro.
-        </p>
-        <div class="unit-tags">
-          <span class="unit-tag">Countable / Uncountable</span>
-          <span class="unit-tag">How much / How many</span>
-          <span class="unit-tag">Would you like...?</span>
-          <span class="unit-tag">Restaurant Menu</span>
-        </div>
-        <div class="unit-activities-preview">
-          <div class="activity-mini-chip"><span class="activity-mini-icon">💬</span><span class="activity-mini-label">Comic</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🧩</span><span class="activity-mini-label">Builder</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">📚</span><span class="activity-mini-label">Words</span></div>
-          <div class="activity-mini-chip"><span class="activity-mini-icon">🎙️</span><span class="activity-mini-label">Speaking</span></div>
-        </div>
-        <button class="btn-unit-action btn-unit-locked" onclick="openPreviewModal(12, 'Fabulous Food')">
-          <span>Vista Previa 👁️</span>
-        </button>
-      </article>
+        <!-- Unit 12: Fabulous Food -->
+        <a href="kids_unit8.html" class="kids-unit-card-btn" title="Unit 12: Fabulous Food">
+          <img src="assets/kids_cards/unit_12_card.png" alt="Unit 12: Fabulous Food" class="kids-unit-card-img">
+        </a>
+      </div>
+    </section>
 
-    </div>
   </main>
 
-  <!-- MODAL DE VISTA PREVIA DE UNIDAD -->
-  <div id="unitPreviewModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(6px); z-index:200; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#ffffff; max-width:480px; width:100%; border-radius:24px; padding:28px; box-shadow:0 20px 40px rgba(0,0,0,0.2); text-align:center; position:relative;">
-      <button onclick="closePreviewModal()" style="position:absolute; top:16px; right:16px; border:none; background:#f1f5f9; width:36px; height:36px; border-radius:50%; font-size:1.1rem; cursor:pointer;">✕</button>
-      <div id="modalIcon" style="font-size:2.5rem; margin-bottom:12px;">🔒</div>
-      <h3 id="modalTitle" style="font-family:var(--font-display); font-size:1.5rem; color:#0f172a; margin-bottom:8px;">Unit Preview</h3>
-      <p id="modalDesc" style="font-size:0.92rem; color:#64748b; margin-bottom:20px; line-height:1.5;">Esta unidad forma parte del currículum de 12 misiones. Primero iniciemos y completemos la Unidad 1.</p>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:12px; margin-bottom:20px; text-align:left;">
-        <div style="font-weight:700; font-size:0.82rem; color:#334155; margin-bottom:6px;">Ecosistema de actividades:</div>
-        <div style="font-size:0.85rem; color:#64748b; line-height:1.4;">
-          💬 Cómic y Diálogo interactivo con audio<br>
-          🧩 Sentence Builder (Gramática Cambridge)<br>
-          📚 Word Explorer (Vocabulario clave + fonética)<br>
-          🎙️ Speaking Quest (Grabación y reconocimiento)
-        </div>
-      </div>
-      <a href="kids_unit1.html" style="display:block; width:100%; padding:12px; border-radius:12px; background:var(--kids-primary); color:#ffffff; font-family:var(--font-display); font-size:1rem; font-weight:600; text-decoration:none;">
-        Ir a Unidad 1: All About You ➔
-      </a>
-    </div>
-  </div>
-
-  <footer class="kids-footer">
-    Bilikids Kids Club • Plataforma de Inglés para 7 a 10 años • Marco Cambridge Young Learners
-  </footer>
-
-  <script>
-    function filterUnits(level, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const cards = document.querySelectorAll('.unit-card');
-      cards.forEach(card => {
-        if (level === 'all' || card.dataset.level === level) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    function openPreviewModal(unitNum, unitName) {
-      document.getElementById('modalTitle').textContent = `Unit ${unitNum}: ${unitName}`;
-      document.getElementById('unitPreviewModal').style.display = 'flex';
-    }
-
-    function closePreviewModal() {
-      document.getElementById('unitPreviewModal').style.display = 'none';
-    }
-  </script>
 </body>
 </html>

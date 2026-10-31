@@ -2,279 +2,205 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bilikids Teens (12 - 16 años) | Cambridge B1-B2 & Fluency Hub</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-dark: #0c1322;
-      --font-display: 'Fredoka', cursive, sans-serif;
-      --font-main: 'Plus Jakarta Sans', sans-serif;
-      --accent-teen: #a855f7;
-      --accent-teen-hover: #9333ea;
-      --radius-lg: 20px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%);
-      color: #ffffff;
-      font-family: var(--font-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .teens-header {
-      background: rgba(19, 28, 49, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.85rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .btn-back-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      padding: 0.55rem 1.25rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-back-home:hover {
-      background: var(--accent-teen);
-      border-color: var(--accent-teen);
-      transform: translateX(-3px);
-    }
-
-    .brand-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .badge-age {
-      background: rgba(168, 85, 247, 0.2);
-      color: #c084fc;
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .teens-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-      width: 100%;
-      flex-grow: 1;
-    }
-
-    .hero-box {
-      background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      color: #c084fc;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-desc {
-      color: #cbd5e1;
-      font-size: 1.05rem;
-      max-width: 600px;
-      line-height: 1.5;
-    }
-
-    .activities-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 900px) {
-      .activities-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .activities-grid { grid-template-columns: 1fr; }
-      .hero-box { flex-direction: column; text-align: center; }
-    }
-
-    .activity-card {
-      background: rgba(26, 38, 64, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .activity-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(168, 85, 247, 0.5);
-      box-shadow: 0 14px 32px rgba(168, 85, 247, 0.2);
-    }
-
-    .card-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-desc {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-
-    .btn-card-action {
-      background: var(--accent-teen);
-      color: #ffffff;
-      font-weight: 700;
-      padding: 0.65rem 1.25rem;
-      border-radius: 12px;
-      text-align: center;
-      transition: background 0.2s;
-    }
-
-    .activity-card:hover .btn-card-action {
-      background: var(--accent-teen-hover);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilikids Adventure | Teens (12 - 16 años)</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
 </head>
 <body>
 
-  <header class="teens-header">
-    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
-      ← Volver al Inicio
-    </a>
-    <div class="brand-title">
-      ⚡ Bilikids <span style="color: #c084fc;">Teens</span>
-      <span class="badge-age">12 a 16 años</span>
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="index.html" class="brand-link" title="Volver al Portal Principal Bilikids">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag" style="color: #a855f7;">TEENS</span>
+      </a>
+    </div>
+
+    <nav class="nav-center-menu">
+      <a href="index.html" class="nav-pill-item active" style="background:#f3e8ff; color:#7e22ce;" title="Volver al Portal de Inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Inicio
+      </a>
+      <a href="stories.html" class="nav-pill-item" title="Lecturas Críticas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Biblioteca
+      </a>
+      <a href="juegos.html" class="nav-pill-item" title="Retos Cambridge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Mis clases
+      </a>
+      <a href="actividades.html" class="nav-pill-item" title="Taller de Escritura">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Recursos
+      </a>
+      <a href="kids.html" class="nav-pill-item" title="Mi Progreso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M18 20V10M12 20V4M6 20v-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Mi progreso
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="juegos.html" class="nav-circle-btn" title="Buscar módulo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Matías">
+        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar-circle">
+        <span class="user-greeting-name">Hola, Matías ⌵</span>
+      </div>
     </div>
   </header>
 
-  <main class="teens-container">
-    <section class="hero-box">
-      <div>
-        <h1 class="hero-title">Bilikids Teens Academy 🚀</h1>
-        <p class="hero-desc">
-          Preparación para certificaciones Cambridge A2-B1, debates reales, lectura crítica, redacción estructurada y fluidez comunicativa en inglés.
+  <!-- ========================================================================
+       MAIN CONTENT CONTAINER
+       ======================================================================== -->
+  <main class="subpage-container">
+
+    <!-- TEENS HERO BANNER -->
+    <section class="teens-hero-card">
+      <div class="teens-hero-content">
+        <span class="teens-badge-tag">⚡ Cambridge A2 - B1 Preparation</span>
+        <h1 class="teens-hero-title">Teens Academy</h1>
+        <h2 class="teens-hero-sub">12 – 16 años</h2>
+        <p class="teens-hero-desc">
+          Perfecciona tu fluidez conversacional, domina la redacción estructurada en inglés y supérate con retos globales de nivel internacional.
         </p>
+        <a href="juegos.html" class="teens-cta-btn">
+          ▶ ¡Empezar ahora!
+        </a>
       </div>
-      <div style="font-size: 4.5rem;">🎧💡</div>
+      <div class="teens-hero-img-box">
+        <img src="assets/heroes/teens_hero.jpg" alt="Teens Academy 3D - Bilikids" class="teens-hero-art">
+      </div>
     </section>
 
-    <section class="activities-grid">
-      <!-- 1. Cambridge Preliminary Test Prep -->
-      <a href="kids.html" class="activity-card">
-        <div>
-          <div class="card-icon">🎯</div>
-          <h2 class="card-title">Retos Cambridge A2-B1</h2>
-          <p class="card-desc">12 Módulos con comprensión auditiva avanzada, construcción gramatical y misiones interactivas.</p>
+    <!-- 5 CATEGORY CARDS -->
+    <section class="categories-5-grid">
+      <!-- 1. Stories -->
+      <a href="stories.html" class="category-pill-card" title="Lecturas Globales y Cuentos">
+        <div style="background: #fdf2f8; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #fbcfe8;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📖</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #be185d;">Readings</h3>
+          <p style="font-size: 0.8rem; color: #9d174d;">Artículos y cultura</p>
         </div>
-        <div class="btn-card-action">Entrar a los Retos ➔</div>
       </a>
 
-      <!-- 2. Writing Workshop -->
-      <a href="writing.html" class="activity-card">
-        <div>
-          <div class="card-icon">✍️</div>
-          <h2 class="card-title">Taller de Escritura (Writing)</h2>
-          <p class="card-desc">Redacción de párrafos, conectores lógicos, ortografía y estructura de ideas en inglés formal e informal.</p>
+      <!-- 2. Videos -->
+      <a href="videos.html" class="category-pill-card" title="Videos y Podcasts en Inglés">
+        <div style="background: #f0f9ff; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #bae6fd;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🎧</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #0369a1;">Podcasts</h3>
+          <p style="font-size: 0.8rem; color: #0284c7;">Listening nativo</p>
         </div>
-        <div class="btn-card-action">Iniciar Taller ➔</div>
       </a>
 
-      <!-- 3. Advanced Stories -->
-      <a href="stories.html" class="activity-card">
-        <div>
-          <div class="card-icon">📖</div>
-          <h2 class="card-title">Lecturas Globales (Reading)</h2>
-          <p class="card-desc">Artículos sobre ciencia, historia, tecnología y cultura juvenil con audio en inglés británico y americano.</p>
+      <!-- 3. Songs / Karaoke -->
+      <a href="karaoke.html" class="category-pill-card" title="Karaoke Oficial Bilikids 'You Belong'">
+        <div style="background: #fefce8; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #fef08a;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">⭐</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #a16207;">Karaoke Studio</h3>
+          <p style="font-size: 0.8rem; color: #b45309;">Himno Oficial & Letras</p>
         </div>
-        <div class="btn-card-action">Explorar Artículos ➔</div>
       </a>
 
-      <!-- 4. Vocabulary & Syntax Lab -->
-      <a href="lab.html" class="activity-card">
-        <div>
-          <div class="card-icon">🔬</div>
-          <h2 class="card-title">Laboratorio de Sintaxis</h2>
-          <p class="card-desc">Desafíos de gramática, pares de palabras, tiempos verbales y modismos cotidianos.</p>
+      <!-- 4. Games -->
+      <a href="juegos.html" class="category-pill-card" title="Retos y Videojuegos 2D">
+        <div style="background: #faf5ff; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #e9d5ff;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🎮</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #7e22ce;">Challenges</h3>
+          <p style="font-size: 0.8rem; color: #6b21a8;">Misiones y Obby 2D</p>
         </div>
-        <div class="btn-card-action">Abrir Laboratorio ➔</div>
       </a>
 
-      <!-- 5. Flashcards 20 -->
-      <a href="cards_20.html" class="activity-card">
-        <div>
-          <div class="card-icon">🃏</div>
-          <h2 class="card-title">Flashcards de Vocabulario</h2>
-          <p class="card-desc">Tarjetas de memoria de alta frecuencia, pronunciación fonética y repaso espaciado.</p>
+      <!-- 5. Activities -->
+      <a href="actividades.html" class="category-pill-card" title="Taller de Escritura y Ensayos">
+        <div style="background: #f0fdf4; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #bbf7d0;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">✍️</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #15803d;">Writing Lab</h3>
+          <p style="font-size: 0.8rem; color: #166534;">Ensayos y sintaxis</p>
         </div>
-        <div class="btn-card-action">Practicar Tarjetas ➔</div>
-      </a>
-
-      <!-- 6. Safari Adventure -->
-      <a href="safari.html" class="activity-card">
-        <div>
-          <div class="card-icon">🌍</div>
-          <h2 class="card-title">Exploración de Biomas</h2>
-          <p class="card-desc">Expedición sobre biodiversidad mundial, hábitats naturales y ecología en inglés.</p>
-        </div>
-        <div class="btn-card-action">Iniciar Expedición ➔</div>
       </a>
     </section>
+
+    <!-- SECTION: CONTINÚA APRENDIENDO -->
+    <section>
+      <div class="section-headline-row">
+        <h2 class="section-headline-title">Continúa aprendiendo</h2>
+        <a href="juegos.html" class="link-see-all">Ver todos ➔</a>
+      </div>
+
+      <div class="carousel-cards-grid" style="margin-top: 1rem; grid-template-columns: repeat(4, 1fr);">
+        <!-- 1. Mall Obby Run (Challenge) -->
+        <a href="kids_unit8.html" class="carousel-card-item" title="Shopping Mall Obby Run 2D">
+          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
+            <div style="height: 120px; background: linear-gradient(135deg, #7c3aed, #ec4899); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">🛍️</div>
+            <strong style="color: #0f172a; font-size: 0.95rem;">Shopping Mall 2D</strong>
+            <div style="font-size: 0.8rem; color: #a855f7; font-weight: 700; margin-top: 2px;">Challenge • A2</div>
+          </div>
+        </a>
+
+        <!-- 2. Critical Reading -->
+        <a href="stories.html" class="carousel-card-item" title="World Discoveries">
+          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
+            <div style="height: 120px; background: linear-gradient(135deg, #0284c7, #38bdf8); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">🌍</div>
+            <strong style="color: #0f172a; font-size: 0.95rem;">World Discoveries</strong>
+            <div style="font-size: 0.8rem; color: #0284c7; font-weight: 700; margin-top: 2px;">Reading • B1</div>
+          </div>
+        </a>
+
+        <!-- 3. Daily Routines & Time -->
+        <a href="kids_unit4.html" class="carousel-card-item" title="Daily Routines & Schedules">
+          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
+            <div style="height: 120px; background: linear-gradient(135deg, #f59e0b, #fbbf24); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">⏰</div>
+            <strong style="color: #0f172a; font-size: 0.95rem;">Daily Routines & Schedules</strong>
+            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 2px;">Grammar • A2</div>
+          </div>
+        </a>
+
+        <!-- 4. Essay Writing Pad -->
+        <a href="writing.html" class="carousel-card-item" title="Essay & Writing Workshop">
+          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
+            <div style="height: 120px; background: linear-gradient(135deg, #10b981, #14b8a6); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">✍️</div>
+            <strong style="color: #0f172a; font-size: 0.95rem;">Essay Writing Workshop</strong>
+            <div style="font-size: 0.8rem; color: #047857; font-weight: 700; margin-top: 2px;">Writing • B1</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION: EXPLORA MÁS RECURSOS -->
+    <section>
+      <div class="section-headline-row" style="margin-bottom: 0.85rem;">
+        <h2 class="section-headline-title">Explora más recursos</h2>
+      </div>
+
+      <div class="topic-pills-row">
+        <button class="topic-filter-btn active" onclick="window.location.href='juegos.html'">⚡ Todos</button>
+        <button class="topic-filter-btn" onclick="window.location.href='kids_unit8.html'">🎯 Cambridge B1</button>
+        <button class="topic-filter-btn" onclick="window.location.href='videos.html'">🎙️ Podcasts</button>
+        <button class="topic-filter-btn" onclick="window.location.href='writing.html'">✍️ Essay Writing</button>
+        <button class="topic-filter-btn" onclick="window.location.href='cards_20.html'">📚 Vocabulary</button>
+        <button class="topic-filter-btn" onclick="window.location.href='stories.html'">🌍 Global Culture</button>
+      </div>
+    </section>
+
   </main>
 
 </body>
