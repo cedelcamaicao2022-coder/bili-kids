@@ -28,7 +28,7 @@
       return this.muted;
     }
 
-    // Realistic Paper Swish/Flutter Sound
+    // Realistic Paper Swish/Flutter Sound with tactile dual-stage response
     playPageTurn() {
       if (this.muted) return;
       this.init();
@@ -36,11 +36,11 @@
 
       const now = this.ctx.currentTime;
       // White noise buffer for paper friction
-      const bufferSize = this.ctx.sampleRate * 0.35;
+      const bufferSize = Math.floor(this.ctx.sampleRate * 0.42);
       const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
       const output = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
-        output[i] = (Math.random() * 2 - 1) * 0.5;
+        output[i] = (Math.random() * 2 - 1) * 0.45;
       }
 
       const whiteNoise = this.ctx.createBufferSource();
@@ -49,21 +49,21 @@
       // Bandpass filter to sculpt the soft paper rustle
       const filter = this.ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1400, now);
-      filter.frequency.exponentialRampToValueAtTime(450, now + 0.32);
-      filter.Q.setValueAtTime(3.0, now);
+      filter.frequency.setValueAtTime(1600, now);
+      filter.frequency.exponentialRampToValueAtTime(380, now + 0.35);
+      filter.Q.setValueAtTime(3.2, now);
 
       const gain = this.ctx.createGain();
-      gain.gain.setValueAtTime(0.01, now);
-      gain.gain.linearRampToValueAtTime(0.28, now + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.32, now + 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.40);
 
       whiteNoise.connect(filter);
       filter.connect(gain);
       gain.connect(this.ctx.destination);
 
       whiteNoise.start(now);
-      whiteNoise.stop(now + 0.36);
+      whiteNoise.stop(now + 0.41);
     }
 
     playChime() {
@@ -954,6 +954,20 @@
         this.turnPage('next');
       });
 
+      // Direct tactile page tapping (Right page = Next, Left page = Prev)
+      if (this.dom.rightPage) {
+        this.dom.rightPage.addEventListener('click', (e) => {
+          if (e.target.closest('.interactive-word-badge') || e.target.closest('button') || e.target.closest('a')) return;
+          this.turnPage('next');
+        });
+      }
+      if (this.dom.leftPage) {
+        this.dom.leftPage.addEventListener('click', (e) => {
+          if (e.target.closest('button') || e.target.closest('a')) return;
+          this.turnPage('prev');
+        });
+      }
+
       // Keyboard arrow navigation
       window.addEventListener('keydown', (e) => {
         if (this.dom.screenReader.classList.contains('active')) {
@@ -1218,18 +1232,79 @@
 
     animatePageFlip(dir, callback) {
       const leaf = this.dom.turningLeaf;
+      const leafFront = document.getElementById('leafFront');
+      const leafBack = document.getElementById('leafBack');
+      const story = STORIES[this.currentStoryKey];
+      if (!leaf || !story || !story.pages) {
+        callback();
+        return;
+      }
+
+      const currentIndex = this.currentPageIndex;
+      const targetIndex = dir === 'forward' ? currentIndex + 1 : currentIndex - 1;
+
+      // Populate leaf contents for a photorealistic 3D paper turnover
+      if (dir === 'forward') {
+        // Front of the leaf is the CURRENT right page (text) lifting up
+        if (leafFront && this.dom.rightPage) {
+          leafFront.innerHTML = this.dom.rightPage.innerHTML;
+        }
+        // Back of the leaf is the NEXT left page (illustration) landing down
+        if (leafBack && story.pages[targetIndex]) {
+          const nextPage = story.pages[targetIndex];
+          leafBack.innerHTML = `
+            <div class="page-inner page-art-layout">
+              <div class="illustration-frame">
+                <img class="scene-illustration" src="${nextPage.image}" alt="Page illustration" onerror="this.src='${story.mascot}'">
+              </div>
+              <span class="page-number page-left-num">Pág. ${nextPage.num}</span>
+            </div>
+            <div class="leaf-shadow-overlay"></div>
+          `;
+        }
+      } else {
+        // Backward flip:
+        // Back of the leaf is the CURRENT left page (illustration) lifting up
+        if (leafBack && this.dom.leftPage) {
+          leafBack.innerHTML = this.dom.leftPage.innerHTML;
+        }
+        // Front of the leaf is the PREVIOUS right page (text) landing down
+        if (leafFront && story.pages[targetIndex]) {
+          const prevPage = story.pages[targetIndex];
+          leafFront.innerHTML = `
+            <div class="page-inner page-text-layout">
+              <div class="story-header-ornament">
+                <span class="ornament-leaf">🍃</span>
+                <span class="ornament-divider">✦ ✦ ✦</span>
+                <span class="ornament-leaf">🍃</span>
+              </div>
+              <div class="story-typography-content">
+                <p class="story-text-primary en-text">${prevPage.textEn}</p>
+                <p class="story-text-secondary es-text">${prevPage.textEs}</p>
+              </div>
+              <span class="page-number page-right-num">Pág. ${prevPage.num} de ${story.pages.length}</span>
+            </div>
+            <div class="leaf-shadow-overlay"></div>
+          `;
+        }
+      }
+
       const animClass = dir === 'forward' ? 'flipping-forward' : 'flipping-backward';
       leaf.classList.remove('flipping-forward', 'flipping-backward');
       void leaf.offsetWidth; // trigger reflow
       leaf.classList.add(animClass);
 
+      // Midway through flip (at 360ms, perpendicular 90deg), swap underlying pages seamlessly
       setTimeout(() => {
         callback();
-      }, 420); // midway through flip to swap contents seamlessly
+      }, 360);
 
+      // Animation complete (at 720ms)
       setTimeout(() => {
         leaf.classList.remove(animClass);
-      }, 850);
+        if (leafFront) leafFront.innerHTML = '<div class="leaf-shadow-overlay"></div>';
+        if (leafBack) leafBack.innerHTML = '<div class="leaf-shadow-overlay"></div>';
+      }, 730);
     }
 
     playPageAudio() {
