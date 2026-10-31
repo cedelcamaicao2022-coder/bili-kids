@@ -858,13 +858,11 @@ body {
 }
 
 
-/* Babies & Toddlers Hero: Clean crisp artwork with no difuminado / gradient fog */
-.babies-hero .subpage-hero-overlay,
-.toddlers-hero .subpage-hero-overlay {
+/* Babies Hero: Clean crisp artwork with no difuminado / gradient fog */
+.babies-hero .subpage-hero-overlay {
   background: transparent !important;
 }
-.babies-hero .subpage-hero-bg-img,
-.toddlers-hero .subpage-hero-bg-img {
+.babies-hero .subpage-hero-bg-img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -872,13 +870,15 @@ body {
   opacity: 1 !important;
 }
 
-/* Toddlers Hero: The provided artwork has 3D typography and CTA button baked in.
-   We hide duplicate HTML text to avoid double-rendering, and position the CTA link over the baked button. */
-.toddlers-hero .hero-title-with-sun,
-.toddlers-hero .hero-group-age,
-.toddlers-hero .hero-group-desc,
-.toddlers-hero .hero-floating-cloud {
-  display: none !important;
+/* Toddlers Hero: The provided artwork is 3072x740 with 3D typography and CTA button baked in.
+   Match exact aspect-ratio so ZERO pixels are cropped on the left or right, hide duplicate HTML text,
+   and position the CTA link over the baked button. */
+.toddlers-hero {
+  min-height: unset !important;
+  height: auto !important;
+  aspect-ratio: 3072 / 740 !important;
+  width: 100% !important;
+  overflow: hidden;
 }
 .toddlers-hero .subpage-hero-overlay {
   position: absolute;
@@ -886,8 +886,26 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  min-height: unset !important;
   padding: 0 !important;
+  background: transparent !important;
   pointer-events: none;
+}
+.toddlers-hero .subpage-hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill !important;
+  object-position: center !important;
+  opacity: 1 !important;
+}
+.toddlers-hero .hero-title-with-sun,
+.toddlers-hero .hero-group-age,
+.toddlers-hero .hero-group-desc,
+.toddlers-hero .hero-floating-cloud {
+  display: none !important;
 }
 .toddlers-hero .subpage-hero-content {
   position: relative;
