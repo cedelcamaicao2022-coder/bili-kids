@@ -268,22 +268,39 @@ class TeensSaberEngine {
       qBox.className = `question-box ${isAnswered ? 'answered' : ''}`;
       qBox.id = `qbox-${q.id}`;
 
-      const optionsHtml = Object.keys(q.options).map(letter => {
-        const isSelected = this.userAnswers[q.id] === letter;
+      // Normalize options whether they are an Array of objects [{key, text}] or an Object {A: text, B: text}
+      let optionsList = [];
+      if (Array.isArray(q.options)) {
+        optionsList = q.options.map(opt => ({
+          letter: opt.key || opt.letter || opt.id,
+          text: opt.text || opt.label || ''
+        }));
+      } else if (q.options && typeof q.options === 'object') {
+        optionsList = Object.keys(q.options).map(letter => ({
+          letter: letter,
+          text: q.options[letter]
+        }));
+      }
+
+      const optionsHtml = optionsList.map(opt => {
+        const isSelected = this.userAnswers[q.id] === opt.letter;
         return `
-          <button type="button" class="option-btn ${isSelected ? 'selected' : ''}" data-qid="${q.id}" data-letter="${letter}">
-            <span class="option-bullet">${letter}</span>
-            <span class="option-text">${q.options[letter]}</span>
+          <button type="button" class="option-btn ${isSelected ? 'selected' : ''}" data-qid="${q.id}" data-letter="${opt.letter}">
+            <span class="option-bullet">${opt.letter}</span>
+            <span class="option-text">${opt.text}</span>
           </button>
         `;
       }).join('');
 
+      const stemText = q.question || q.stem || '';
+      const competencyText = q.competence || q.competency || 'Reading Comprehension';
+
       qBox.innerHTML = `
         <div class="question-meta-row">
           <span class="question-number-badge">Question ${q.id}</span>
-          <span class="question-competency-tag">🎯 ${q.competency}</span>
+          <span class="question-competency-tag">🎯 ${competencyText}</span>
         </div>
-        <div class="question-stem">${q.stem}</div>
+        <div class="question-stem">${stemText}</div>
         <div class="options-list">
           ${optionsHtml}
         </div>
@@ -294,8 +311,8 @@ class TeensSaberEngine {
 
     // Wire Option Click Handlers
     questionsContainer.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const qid = parseInt(btn.dataset.qid, 10);
+      btn.addEventListener('click', () => {
+        const qid = btn.dataset.qid; // Keep as string (e.g., "Q1-1")
         const letter = btn.dataset.letter;
         this.selectAnswer(qid, letter);
       });
@@ -415,17 +432,33 @@ class TeensSaberEngine {
         const isCorrect = userChoice === q.correct;
         if (isCorrect) correctAnswers++;
 
+        const findOptionText = (key) => {
+          if (!key) return '';
+          if (Array.isArray(q.options)) {
+            const found = q.options.find(o => (o.key || o.letter) === key);
+            return found ? (found.text || found.label || '') : '';
+          }
+          if (q.options && typeof q.options === 'object') {
+            return q.options[key] || '';
+          }
+          return '';
+        };
+
+        const stemText = q.question || q.stem || '';
+        const compText = q.competence || q.competency || 'Reading Comprehension';
+        const explText = q.explanation || q.rationale || 'Detailed contextual explanation not available.';
+
         reviewItems.push({
           questionId: q.id,
-          stem: q.stem,
+          stem: stemText,
           topic: reading.topic,
-          competency: q.competency,
+          competency: compText,
           userChoice: userChoice || 'Unanswered',
           correctChoice: q.correct,
-          correctText: q.options[q.correct],
-          userText: userChoice ? q.options[userChoice] : 'No answer selected',
+          correctText: findOptionText(q.correct),
+          userText: userChoice ? findOptionText(userChoice) : 'No answer selected',
           isCorrect,
-          rationale: q.rationale
+          rationale: explText
         });
       });
     });
