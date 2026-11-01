@@ -1,43 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bilikids Adventure | Teens (12 - 16 años)</title>
+  <title>Bilikids Adventure | Teens Academy (Ages 12 - 16)</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
   <link rel="stylesheet" href="subpages_styles.css">
+  <style>
+    .teens-track-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.4rem;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .teens-track-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.12);
+      border-color: #818cf8;
+    }
+    .lab-challenge-mini-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1rem 1.15rem;
+      border: 1.5px solid #f1f5f9;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    .lab-challenge-mini-card:hover {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.12);
+      background: #f8fafc;
+    }
+  </style>
 </head>
 <body>
 
   <!-- ========================================================================
-       TOP NAVIGATION BAR
+       TOP NAVIGATION BAR (100% TEENS EXCLUSIVE)
        ======================================================================== -->
   <header class="subpage-navbar">
     <div class="nav-left-brand">
-      <a href="index.html" class="brand-link" title="Volver al Portal Principal Bilikids">
+      <a href="index.html" class="brand-link" title="Bilikids Global Portal">
         <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
-        <span class="brand-subtitle-tag" style="color: #a855f7;">TEENS</span>
+        <span class="brand-subtitle-tag" style="color: #6366f1;">TEENS ACADEMY</span>
       </a>
     </div>
 
     <nav class="nav-center-menu">
-      <a href="teens.html" class="nav-pill-item active" style="background:#f3e8ff; color:#7e22ce;" title="Portal Teens">
+      <a href="teens.html" class="nav-pill-item active" style="background:#ede9fe; color:#6366f1;" title="Teens Portal Home">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Inicio
+        Home
       </a>
-      <a href="teens_saber_tests.html" class="nav-pill-item" title="Simulador Pruebas Saber 9°-11°">
+      <a href="teens_saber_tests.html" class="nav-pill-item" title="Pruebas Saber 9°-11° Simulator">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Saber 9°-11°
+        Saber 9°-11° (10)
       </a>
-      <a href="teens_speed_writing.html" class="nav-pill-item" title="Speed Writing Challenge (1 min)">
+      <a href="teens_speed_writing.html" class="nav-pill-item" title="Speed Writing Challenge (60s)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Speed Writing
+        Speed Writing (60s)
       </a>
       <a href="teens_interactive_lab.html" class="nav-pill-item" title="Language Lab (12 B2 Challenges)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -45,37 +84,25 @@
         </svg>
         Language Lab (12)
       </a>
-      <a href="teens_cambridge_b2.html" class="nav-pill-item" title="Cambridge B2 First Practice">
+      <a href="teens_cambridge_b2.html" class="nav-pill-item" title="Cambridge B2 First Use of English">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Cambridge B2
-      </a>
-      <a href="stories.html" class="nav-pill-item" title="Lecturas Críticas">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Biblioteca
-      </a>
-      <a href="kids.html" class="nav-pill-item" title="Portal Kids">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M18 20V10M12 20V4M6 20v-6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Kids
+        Cambridge B2 First
       </a>
     </nav>
 
     <div class="nav-right-actions">
-      <a href="juegos.html" class="nav-circle-btn" title="Buscar módulo">
+      <a href="teens_interactive_lab.html" class="nav-circle-btn" title="Explore Teens Modules">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </a>
-      <div class="user-profile-badge" title="Estudiante: Matías">
-        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar-circle">
-        <span class="user-greeting-name">Hola, Matías ⌵</span>
+      <div class="user-profile-badge" title="Student Profile">
+        <img src="assets/home/avatar_matias_2x.png" alt="Student" class="user-avatar-circle">
+        <span class="user-greeting-name">Hi, Alex ⌵</span>
       </div>
     </div>
   </header>
@@ -88,14 +115,14 @@
     <!-- TEENS HERO BANNER -->
     <section class="teens-hero-card">
       <div class="teens-hero-content">
-        <span class="teens-badge-tag">🇨🇴 Pruebas Saber 9°-11° & Cambridge B1-B2 First</span>
-        <h1 class="teens-hero-title">Teens Academy</h1>
-        <h2 class="teens-hero-sub">12 – 16 años</h2>
+        <span class="teens-badge-tag">🇨🇴 Colombian Saber 9°-11° & Cambridge B1–B2 Standard</span>
+        <h1 class="teens-hero-title">Teens Academic Hub</h1>
+        <h2 class="teens-hero-sub">Ages 12 – 16 • Advanced Fluency & Critical Thinking</h2>
         <p class="teens-hero-desc">
-          Perfecciona tu fluidez conversacional, domina la lectura crítica del MEN / ICFES y supérate con retos Cambridge B2 de nivel internacional.
+          Accelerate your fluency, conquer official Colombian MEN/ICFES critical reading passages, practice 60-second timed argumentative writing, and master 12 Cambridge B2 interactive challenges.
         </p>
         <a href="teens_saber_tests.html" class="teens-cta-btn">
-          ▶ ¡Iniciar Simulador Saber!
+          ▶ Launch Saber 9°-11° Simulator
         </a>
       </div>
       <div class="teens-hero-img-box">
@@ -103,11 +130,11 @@
       </div>
     </section>
 
-    <!-- TEENS ELITE ACADEMY: PRUEBAS SABER 9-11, SPEED WRITING & CAMBRIDGE B2 -->
+    <!-- FEATURED PANORAMIC STRIP: SABER 9°-11° + 3 QUICK-LAUNCH HUBS -->
     <section class="teens-elite-academy-strip" style="margin: 1.5rem 0; display: flex; flex-direction: column; gap: 1rem;">
       
       <!-- 1. FEATURED BANNER: PRUEBAS SABER 9° A 11° SIMULATOR -->
-      <a href="teens_saber_tests.html" class="teens-saber-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border-radius: 26px; padding: 1.25rem 2rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 30px rgba(49, 46, 129, 0.35); border: 2px solid rgba(165, 180, 252, 0.3); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);">
+      <a href="teens_saber_tests.html" class="teens-saber-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border-radius: 26px; padding: 1.35rem 2rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 30px rgba(49, 46, 129, 0.35); border: 2px solid rgba(165, 180, 252, 0.3); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);">
         <div style="display: flex; align-items: center; gap: 1.5rem;">
           <div style="font-size: 3.5rem; line-height: 1; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
             🇨🇴
@@ -115,19 +142,19 @@
           <div>
             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
               <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.01em;">
-                Simulador Oficial Pruebas Saber 9° a 11°
+                Pruebas Saber 9° a 11° Reading Simulator
               </span>
               <span style="background: #facc15; color: #78350f; font-size: 0.8rem; font-weight: 800; padding: 3px 12px; border-radius: 999px;">
-                10 Tests • 30 Lecturas Críticas • Nivel B1/B2
+                10 Tests • 30 Passages • ICFES Standard
               </span>
             </div>
             <div style="font-size: 0.95rem; opacity: 0.92; margin-top: 6px; font-weight: 500; max-width: 680px; line-height: 1.45;">
-              Entrena con lecturas del estándar MEN e ICFES: cronómetro oficial, inferencia, propósito discursivo y retroalimentación pedagógica instantánea.
+              Train under official exam conditions: live countdown timer, author purpose, textual inference, font-size zoom, and instant pedagogical answer keys.
             </div>
           </div>
         </div>
         <div style="background: #ffffff; color: #312e81; font-weight: 800; font-size: 0.95rem; padding: 12px 24px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); flex-shrink: 0;">
-          <span>Iniciar Test</span> ➔
+          <span>Start Tests</span> ➔
         </div>
       </a>
 
@@ -141,15 +168,15 @@
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <strong style="font-family: var(--font-display); font-size: 1.18rem;">Speed Writing</strong>
-                <span style="background: #fed7aa; color: #9a3412; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">60s</span>
+                <span style="background: #fed7aa; color: #9a3412; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">60s SPRINT</span>
               </div>
               <p style="margin: 3px 0 0; font-size: 0.85rem; opacity: 0.92; line-height: 1.35;">
-                Párrafo en 1 min: coherencia gramatical, cohesión y WPM.
+                Persuasive paragraph in 1 min: live WPM, grammar, and B2 coherence scoring.
               </p>
             </div>
           </div>
           <div style="background: rgba(255, 255, 255, 0.2); padding: 8px 12px; border-radius: 999px; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; margin-left: 6px;">
-            Escribir ➔
+            Write ➔
           </div>
         </a>
 
@@ -160,15 +187,15 @@
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <strong style="font-family: var(--font-display); font-size: 1.18rem;">Language Lab</strong>
-                <span style="background: #bae6fd; color: #075985; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">12 RETOS B2</span>
+                <span style="background: #bae6fd; color: #075985; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">12 B2 LABS</span>
               </div>
               <p style="margin: 3px 0 0; font-size: 0.85rem; opacity: 0.92; line-height: 1.35;">
-                Debate builder, phrasal verbs, collocations, speech & conditionals.
+                Debate builder, phrasal verbs, collocations, conditionals & inversion.
               </p>
             </div>
           </div>
           <div style="background: rgba(255, 255, 255, 0.2); padding: 8px 12px; border-radius: 999px; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; margin-left: 6px;">
-            Entrenar ➔
+            Train ➔
           </div>
         </a>
 
@@ -182,12 +209,12 @@
                 <span style="background: #fbcfe8; color: #831843; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">USE OF ENGLISH</span>
               </div>
               <p style="margin: 3px 0 0; font-size: 0.85rem; opacity: 0.92; line-height: 1.35;">
-                Cloze, open cloze, word formation & sentence transformations.
+                Multiple choice cloze, open cloze, word formation & transformations.
               </p>
             </div>
           </div>
           <div style="background: rgba(255, 255, 255, 0.2); padding: 8px 12px; border-radius: 999px; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; margin-left: 6px;">
-            Practicar ➔
+            Practice ➔
           </div>
         </a>
 
@@ -195,113 +222,219 @@
 
     </section>
 
-    <!-- 5 CATEGORY CARDS -->
-    <section class="categories-5-grid">
-      <!-- 1. Stories -->
-      <a href="stories.html" class="category-pill-card" title="Lecturas Globales y Cuentos">
-        <div style="background: #fdf2f8; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #fbcfe8;">
-          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📖</div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #be185d;">Readings</h3>
-          <p style="font-size: 0.8rem; color: #9d174d;">Artículos y cultura</p>
+    <!-- SECTION: TEENS SPECIALIZED TRAINING TRACKS -->
+    <section style="margin: 2.2rem 0;">
+      <div class="section-headline-row" style="margin-bottom: 1.1rem;">
+        <div>
+          <h2 class="section-headline-title" style="font-size: 1.45rem;">Core B1/B2 Competency Tracks</h2>
+          <p style="font-size: 0.88rem; color: #64748b; margin: 4px 0 0;">Rigorous curricula tailored to Colombian national testing and international CEFR certification.</p>
         </div>
-      </a>
-
-      <!-- 2. Videos -->
-      <a href="videos.html" class="category-pill-card" title="Videos y Podcasts en Inglés">
-        <div style="background: #f0f9ff; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #bae6fd;">
-          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🎧</div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #0369a1;">Podcasts</h3>
-          <p style="font-size: 0.8rem; color: #0284c7;">Listening nativo</p>
-        </div>
-      </a>
-
-      <!-- 3. Songs / Karaoke -->
-      <a href="karaoke.html" class="category-pill-card" title="Karaoke Oficial Bilikids 'You Belong'">
-        <div style="background: #fefce8; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #fef08a;">
-          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">⭐</div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #a16207;">Karaoke Studio</h3>
-          <p style="font-size: 0.8rem; color: #b45309;">Himno Oficial & Letras</p>
-        </div>
-      </a>
-
-      <!-- 4. Games -->
-      <a href="juegos.html" class="category-pill-card" title="Retos y Videojuegos 2D">
-        <div style="background: #faf5ff; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #e9d5ff;">
-          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🎮</div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #7e22ce;">Challenges</h3>
-          <p style="font-size: 0.8rem; color: #6b21a8;">Misiones y Obby 2D</p>
-        </div>
-      </a>
-
-      <!-- 5. Activities -->
-      <a href="actividades.html" class="category-pill-card" title="Taller de Escritura y Ensayos">
-        <div style="background: #f0fdf4; padding: 1.25rem; text-align: center; border-radius: 18px; border: 1px solid #bbf7d0;">
-          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">✍️</div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #15803d;">Writing Lab</h3>
-          <p style="font-size: 0.8rem; color: #166534;">Ensayos y sintaxis</p>
-        </div>
-      </a>
-    </section>
-
-    <!-- SECTION: CONTINÚA APRENDIENDO -->
-    <section>
-      <div class="section-headline-row">
-        <h2 class="section-headline-title">Continúa aprendiendo</h2>
-        <a href="juegos.html" class="link-see-all">Ver todos ➔</a>
       </div>
 
-      <div class="carousel-cards-grid" style="margin-top: 1rem; grid-template-columns: repeat(4, 1fr);">
-        <!-- 1. Mall Obby Run (Challenge) -->
-        <a href="kids_unit8.html" class="carousel-card-item" title="Shopping Mall Obby Run 2D">
-          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
-            <div style="height: 120px; background: linear-gradient(135deg, #7c3aed, #ec4899); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">🛍️</div>
-            <strong style="color: #0f172a; font-size: 0.95rem;">Shopping Mall 2D</strong>
-            <div style="font-size: 0.8rem; color: #a855f7; font-weight: 700; margin-top: 2px;">Challenge • A2</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem;">
+        <!-- Track 1: Saber 9-11 -->
+        <a href="teens_saber_tests.html" class="teens-track-card">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem;">
+              <span style="font-size: 2.2rem;">📖</span>
+              <span style="background: #e0e7ff; color: #3730a3; font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;">ICFES STANDARDS</span>
+            </div>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin: 0 0 0.5rem; font-weight: 800;">Critical Reading 9°-11°</h3>
+            <p style="font-size: 0.84rem; color: #475569; line-height: 1.45; margin: 0;">
+              Analyze implicit opinions, pragmatic meaning, and synthesis across 10 official tests with 30 reading passages.
+            </p>
+          </div>
+          <div style="margin-top: 1.2rem; font-size: 0.84rem; font-weight: 800; color: #4f46e5; display: flex; align-items: center; justify-content: space-between;">
+            <span>Open Tests (10)</span> ➔
           </div>
         </a>
 
-        <!-- 2. Critical Reading -->
-        <a href="stories.html" class="carousel-card-item" title="World Discoveries">
-          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
-            <div style="height: 120px; background: linear-gradient(135deg, #0284c7, #38bdf8); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">🌍</div>
-            <strong style="color: #0f172a; font-size: 0.95rem;">World Discoveries</strong>
-            <div style="font-size: 0.8rem; color: #0284c7; font-weight: 700; margin-top: 2px;">Reading • B1</div>
+        <!-- Track 2: Speed Writing -->
+        <a href="teens_speed_writing.html" class="teens-track-card">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem;">
+              <span style="font-size: 2.2rem;">⚡</span>
+              <span style="background: #ffedd5; color: #9a3412; font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;">60s SYNTHESIS</span>
+            </div>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin: 0 0 0.5rem; font-weight: 800;">Timed Argumentation</h3>
+            <p style="font-size: 0.84rem; color: #475569; line-height: 1.45; margin: 0;">
+              Formulate structured thesis statements, cohesive connectors, and arguments under high-pressure countdowns.
+            </p>
+          </div>
+          <div style="margin-top: 1.2rem; font-size: 0.84rem; font-weight: 800; color: #ea580c; display: flex; align-items: center; justify-content: space-between;">
+            <span>Start Sprint</span> ➔
           </div>
         </a>
 
-        <!-- 3. Daily Routines & Time -->
-        <a href="kids_unit4.html" class="carousel-card-item" title="Daily Routines & Schedules">
-          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
-            <div style="height: 120px; background: linear-gradient(135deg, #f59e0b, #fbbf24); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">⏰</div>
-            <strong style="color: #0f172a; font-size: 0.95rem;">Daily Routines & Schedules</strong>
-            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 2px;">Grammar • A2</div>
+        <!-- Track 3: Language Lab -->
+        <a href="teens_interactive_lab.html" class="teens-track-card">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem;">
+              <span style="font-size: 2.2rem;">🔬</span>
+              <span style="background: #e0f2fe; color: #0369a1; font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;">12 LAB MODULES</span>
+            </div>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin: 0 0 0.5rem; font-weight: 800;">Interactive Grammar Lab</h3>
+            <p style="font-size: 0.84rem; color: #475569; line-height: 1.45; margin: 0;">
+              Interactive deep dive: debate building, phrasal verbs, collocations, inversion, conditionals, and tone matching.
+            </p>
+          </div>
+          <div style="margin-top: 1.2rem; font-size: 0.84rem; font-weight: 800; color: #0284c7; display: flex; align-items: center; justify-content: space-between;">
+            <span>Explore 12 Labs</span> ➔
           </div>
         </a>
 
-        <!-- 4. Essay Writing Pad -->
-        <a href="writing.html" class="carousel-card-item" title="Essay & Writing Workshop">
-          <div style="background: #ffffff; padding: 1rem; border-radius: 16px;">
-            <div style="height: 120px; background: linear-gradient(135deg, #10b981, #14b8a6); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 2.8rem; margin-bottom: 0.75rem;">✍️</div>
-            <strong style="color: #0f172a; font-size: 0.95rem;">Essay Writing Workshop</strong>
-            <div style="font-size: 0.8rem; color: #047857; font-weight: 700; margin-top: 2px;">Writing • B1</div>
+        <!-- Track 4: Cambridge B2 -->
+        <a href="teens_cambridge_b2.html" class="teens-track-card">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem;">
+              <span style="font-size: 2.2rem;">🎯</span>
+              <span style="background: #fae8ff; color: #86198f; font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;">CAMBRIDGE FCE</span>
+            </div>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin: 0 0 0.5rem; font-weight: 800;">Cambridge B2 First</h3>
+            <p style="font-size: 0.84rem; color: #475569; line-height: 1.45; margin: 0;">
+              Exam-grade Use of English practice: sentence restructuring, affixes, multiple choice cloze and open cloze drills.
+            </p>
+          </div>
+          <div style="margin-top: 1.2rem; font-size: 0.84rem; font-weight: 800; color: #9333ea; display: flex; align-items: center; justify-content: space-between;">
+            <span>Start Practice</span> ➔
           </div>
         </a>
       </div>
     </section>
 
-    <!-- SECTION: EXPLORA MÁS RECURSOS -->
-    <section>
+    <!-- SECTION: LANGUAGE LAB CHALLENGES OVERVIEW -->
+    <section style="margin: 2.2rem 0;">
+      <div class="section-headline-row" style="margin-bottom: 1.1rem;">
+        <div>
+          <h2 class="section-headline-title" style="font-size: 1.45rem;">Language Lab — 12 B2 Challenges</h2>
+          <p style="font-size: 0.88rem; color: #64748b; margin: 4px 0 0;">Hands-on interactive drills for lexical precision and grammatical complexity.</p>
+        </div>
+        <a href="teens_interactive_lab.html" class="link-see-all" style="font-weight: 800; color: #0284c7;">Launch All 12 Labs ➔</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem;">
+        <!-- Lab 1 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #e0e7ff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">💬</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #4f46e5; text-transform: uppercase;">Activity 01</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Debate & Argument Builder</strong>
+          </div>
+        </a>
+
+        <!-- Lab 2 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #e0f2fe; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🔍</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #0284c7; text-transform: uppercase;">Activity 02</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Phrasal Verbs in Context</strong>
+          </div>
+        </a>
+
+        <!-- Lab 3 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #fef3c7; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🧩</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #b45309; text-transform: uppercase;">Activity 03</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Collocation Detective</strong>
+          </div>
+        </a>
+
+        <!-- Lab 4 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #fae8ff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🔄</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #86198f; text-transform: uppercase;">Activity 04</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Reported Speech Transposer</strong>
+          </div>
+        </a>
+
+        <!-- Lab 5 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #fee2e2; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">⚡</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #b91c1c; text-transform: uppercase;">Activity 05</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Inversion & Emphasis</strong>
+          </div>
+        </a>
+
+        <!-- Lab 6 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #dcfce7; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🔗</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #15803d; text-transform: uppercase;">Activity 06</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Academic Connector Matrix</strong>
+          </div>
+        </a>
+
+        <!-- Lab 7 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #ffedd5; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🎯</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #c2410c; text-transform: uppercase;">Activity 07</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Conditionals Master</strong>
+          </div>
+        </a>
+
+        <!-- Lab 8 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #f3e8ff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🛠️</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #7e22ce; text-transform: uppercase;">Activity 08</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Passive & Causative Voice</strong>
+          </div>
+        </a>
+
+        <!-- Lab 9 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #ecfccb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">💡</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #4d7c0f; text-transform: uppercase;">Activity 09</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Modal Verbs of Deduction</strong>
+          </div>
+        </a>
+
+        <!-- Lab 10 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #cffafe; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🎭</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #0e7490; text-transform: uppercase;">Activity 10</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Register & Tone Matcher</strong>
+          </div>
+        </a>
+
+        <!-- Lab 11 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #fdf2f8; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">🏗️</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #be185d; text-transform: uppercase;">Activity 11</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Word Formation Challenge</strong>
+          </div>
+        </a>
+
+        <!-- Lab 12 -->
+        <a href="teens_interactive_lab.html" class="lab-challenge-mini-card">
+          <div style="font-size: 1.8rem; background: #e2e8f0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0;">📜</div>
+          <div>
+            <div style="font-size: 0.74rem; font-weight: 800; color: #334155; text-transform: uppercase;">Activity 12</div>
+            <strong style="font-size: 0.92rem; color: #0f172a; display: block;">Evidence Finder & Stance</strong>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION: QUICK ACCESS HUB (100% TEENS MODULES) -->
+    <section style="margin: 2rem 0 3rem;">
       <div class="section-headline-row" style="margin-bottom: 0.85rem;">
-        <h2 class="section-headline-title">Explora más recursos</h2>
+        <h2 class="section-headline-title" style="font-size: 1.25rem;">Quick Access & Direct Launch</h2>
       </div>
 
       <div class="topic-pills-row">
-        <button class="topic-filter-btn active" onclick="window.location.href='juegos.html'">⚡ Todos</button>
-        <button class="topic-filter-btn" onclick="window.location.href='kids_unit8.html'">🎯 Cambridge B1</button>
-        <button class="topic-filter-btn" onclick="window.location.href='videos.html'">🎙️ Podcasts</button>
-        <button class="topic-filter-btn" onclick="window.location.href='writing.html'">✍️ Essay Writing</button>
-        <button class="topic-filter-btn" onclick="window.location.href='cards_20.html'">📚 Vocabulary</button>
-        <button class="topic-filter-btn" onclick="window.location.href='stories.html'">🌍 Global Culture</button>
+        <button class="topic-filter-btn active" onclick="window.location.href='teens.html'">⚡ All Teens Hub</button>
+        <button class="topic-filter-btn" onclick="window.location.href='teens_saber_tests.html'">🇨🇴 Saber 9°-11° (10 Tests)</button>
+        <button class="topic-filter-btn" onclick="window.location.href='teens_speed_writing.html'">⏱️ Speed Writing (60s)</button>
+        <button class="topic-filter-btn" onclick="window.location.href='teens_interactive_lab.html'">🔬 Language Lab (12 Labs)</button>
+        <button class="topic-filter-btn" onclick="window.location.href='teens_cambridge_b2.html'">🎯 Cambridge B2 First</button>
       </div>
     </section>
 
