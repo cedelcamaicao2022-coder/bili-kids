@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 10: Busy Lives | Bilikids Kids Club</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kids_units_styles.css">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Kids Map</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 10 • A2</span>
+        <h1 class="unit-name-head">Busy Lives</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Reward Stars">
+        <span>⭐</span>
+        <span id="unitStarsCount">180 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVITY TABS -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('timeline', this)">
+        <span>⏰</span>
+        <span>Daily Timeline</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('chores', this)">
+        <span>🧹</span>
+        <span>Chore Buster</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('sorter', this)">
+        <span>📅</span>
+        <span>Past vs Present</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('vlog', this)">
+        <span>🎙️</span>
+        <span>Vlogger Studio</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- WORKSPACE -->
+  <main class="unit-workspace">
+
+    <!-- 1. TIMELINE SEQUENCER -->
+    <section id="view-timeline" class="activity-view active-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">⏰ Daily Routine Timeline</h2>
+          <p class="unit-card-subtitle">
+            Organize Barnaby's busy daily schedule in chronological order using the ▲ and ▼ buttons!
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;" id="timelineRoutineList">
+          <!-- Rendered by engine -->
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <button id="btnVerifyTimeline" class="kids-tile-btn" style="background:#0284c7; color:#ffffff; font-weight:800; border:none; padding:12px 28px; width:auto;">
+            ✓ Check Routine Order
+          </button>
+          <div id="timelineFeedback" class="kids-toast-feedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CHORE BUSTER -->
+    <section id="view-chores" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <h2 class="unit-card-title">🧹 Household Chore Buster Arcade</h2>
+            <span id="choreBusterStatus" style="font-weight: 800; color: #0284c7;">Completed: 0 / 6 Chores</span>
+          </div>
+          <p class="unit-card-subtitle">
+            Tap each chore tile to complete the mission, hear its English pronunciation, and clean the house!
+          </p>
+        </div>
+
+        <div class="kids-interactive-grid" id="choreBusterGrid">
+          <!-- Rendered by engine -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PAST VS PRESENT SORTER -->
+    <section id="view-sorter" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">📅 Past vs Present Tense Sorter</h2>
+          <p class="unit-card-subtitle">
+            Look at the time expression in the sentence and decide if it describes the PAST or PRESENT!
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="text-align: center; justify-content: center;">
+          <span class="kids-clue-text" id="sorterSentenceDisplay">Loading sentence...</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          <button id="btnChoosePast" class="kids-tile-btn" style="background: #fdf4ff; border-color: #d8b4fe;">
+            <span style="font-size: 2.5rem;">⏪</span>
+            <span class="kids-tile-name" style="color: #7e22ce;">PAST SIMPLE</span>
+            <span class="kids-tile-sub">Yesterday, last night, 2 hours ago</span>
+          </button>
+
+          <button id="btnChoosePresent" class="kids-tile-btn" style="background: #f0fdf4; border-color: #86efac;">
+            <span style="font-size: 2.5rem;">⏩</span>
+            <span class="kids-tile-name" style="color: #15803d;">PRESENT SIMPLE</span>
+            <span class="kids-tile-sub">Every morning, always, on Saturdays</span>
+          </button>
+        </div>
+
+        <div id="sorterFeedback" class="kids-toast-feedback"></div>
+      </div>
+    </section>
+
+    <!-- 4. VLOGGER STUDIO -->
+    <section id="view-vlog" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🎙️ Kids Daily Vlogger Studio</h2>
+          <p class="unit-card-subtitle">
+            Rehearse recording a video blog entry describing your busy day in English!
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;" id="vloggerPhrasesList">
+          <!-- Rendered by engine -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="kids_unit10_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new KidsUnit10Engine();
+      engine.init();
+      window.unit10Engine = engine;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Toddlers Academy (6 - 8 años) | Bilikids Adventure</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
+  <link rel="stylesheet" href="toddlers_units_styles.css">
+</head>
+<body class="toddler-body">
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="toddlers.html" class="brand-link" title="Volver al Portal Toddlers">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag" style="color: #f59e0b;">TODDLERS ACADEMY</span>
+      </a>
+    </div>
+
+    <nav class="nav-center-menu">
+      <a href="toddlers.html" class="nav-pill-item" title="Volver a Toddlers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Toddlers Home
+      </a>
+      <a href="toddlers_units.html" class="nav-pill-item active" style="background:#fef3c7; color:#b45309;" title="Unidades Interactivas Toddlers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        6 Unidades
+      </a>
+      <a href="puzzle.html?mode=toddlers" class="nav-pill-item" title="Rompecabezas Toddlers 3x3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Puzzles 3x3
+      </a>
+      <a href="farm.html" class="nav-pill-item" title="Farm Animals">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+        Granja
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="toddlers.html" class="saber-exit-btn" title="Volver al Portal Toddlers">
+        🚪 Volver a Toddlers
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Matías">
+        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar-circle">
+        <span class="user-greeting-name">Toddler • 6-8 años</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN TODDLERS WORKSPACE
+       ======================================================================== -->
+  <main class="toddler-container">
+
+    <!-- 6 UNITS NAVIGATION TABS -->
+    <nav class="toddler-units-nav" id="toddlerUnitsNav">
+      <!-- Injected by engine -->
+    </nav>
+
+    <!-- HEADER CARD -->
+    <header class="toddler-header-box">
+      <div class="toddler-header-left">
+        <span class="toddler-unit-tag" id="toddlerUnitTag">Unit 1 • Animals & Sounds</span>
+        <h1 class="toddler-unit-title" id="toddlerUnitTitle">🐮 Happy Farm Animals</h1>
+        <p class="toddler-unit-desc" id="toddlerUnitDesc">
+          Meet friendly farm animals, listen to their sounds in English, and match each animal with its name!
+        </p>
+      </div>
+
+      <div class="toddler-score-badge" id="toddlerScoreDisplay">
+        100 ⭐
+      </div>
+    </header>
+
+    <!-- INTERACTIVE WORKSPACE CARD -->
+    <section class="toddler-workspace-card" id="toddlerWorkspace">
+      <!-- Rendered dynamically by engine -->
+    </section>
+
+  </main>
+
+  <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="toddlers_units_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new ToddlersUnitsEngine();
+      engine.init();
+      window.toddlersEngine = engine;
+    });
+  </script>
+</body>
+</html>

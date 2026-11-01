@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 11: Looking Back | Bilikids Kids Club</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kids_units_styles.css">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Kids Map</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill" style="background:#f3e8ff; color:#7e22ce;">Unit 11 • A2</span>
+        <h1 class="unit-name-head">Looking Back</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Reward Stars">
+        <span>⭐</span>
+        <span id="unitStarsCount">210 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVITY TABS -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('fossils', this)">
+        <span>🦖</span>
+        <span>Fossil Dig Site</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('inventions', this)">
+        <span>🏛️</span>
+        <span>Ancient Inventions</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('weaver', this)">
+        <span>📜</span>
+        <span>Past Story Weaver</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('museum', this)">
+        <span>🎙️</span>
+        <span>Museum Guide Tour</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- WORKSPACE -->
+  <main class="unit-workspace">
+
+    <!-- 1. FOSSIL DIG SITE -->
+    <section id="view-fossils" class="activity-view active-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🦖 Prehistoric Fossil Excavation</h2>
+          <p class="unit-card-subtitle">
+            Tap each dinosaur fossil to excavate it and discover fascinating paleontological facts!
+          </p>
+        </div>
+
+        <div class="kids-interactive-grid" id="fossilDigGrid">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ANCIENT INVENTIONS -->
+    <section id="view-inventions" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🏛️ Great Inventions That Changed the World</h2>
+          <p class="unit-card-subtitle">
+            Explore when and where fundamental human inventions were created!
+          </p>
+        </div>
+
+        <div class="kids-interactive-grid" id="inventionsGrid">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PAST STORY WEAVER -->
+    <section id="view-weaver" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">📜 Past Tense Story Weaver</h2>
+          <p class="unit-card-subtitle">
+            Complete the ancient adventure story by selecting the correct past simple verb!
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="text-align:center; justify-content:center;">
+          <span class="kids-clue-text" id="storyWeaverPrompt">Loading story line...</span>
+        </div>
+
+        <div class="kids-interactive-grid" id="storyWeaverOptions">
+          <!-- Injected by engine -->
+        </div>
+
+        <div id="storyWeaverFeedback" class="kids-toast-feedback"></div>
+      </div>
+    </section>
+
+    <!-- 4. MUSEUM TOUR -->
+    <section id="view-museum" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🎙️ Ancient History Museum Guide Tour</h2>
+          <p class="unit-card-subtitle">
+            Practice reading and speaking as the chief docent in the Ancient History Museum!
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;" id="museumPhrasesContainer">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="kids_unit11_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new KidsUnit11Engine();
+      engine.init();
+      window.unit11Engine = engine;
+    });
+  </script>
+</body>
+</html>

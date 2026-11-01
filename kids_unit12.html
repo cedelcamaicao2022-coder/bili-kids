@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 12: Fabulous Food | Bilikids Kids Club</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kids_units_styles.css">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Kids Map</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill" style="background:#fef3c7; color:#b45309;">Unit 12 • A2</span>
+        <h1 class="unit-name-head">Fabulous Food</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Reward Stars">
+        <span>⭐</span>
+        <span id="unitStarsCount">250 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVITY TABS -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('pizza', this)">
+        <span>🍕</span>
+        <span>Pizza Chef Kitchen</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('market', this)">
+        <span>🛒</span>
+        <span>Supermarket Sorter</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('bistro', this)">
+        <span>🍽️</span>
+        <span>Restaurant Waiter</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('critic', this)">
+        <span>😋</span>
+        <span>Food Critic Lab</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- WORKSPACE -->
+  <main class="unit-workspace">
+
+    <!-- 1. PIZZA CHEF KITCHEN -->
+    <section id="view-pizza" class="activity-view active-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🍕 MasterChef Custom Pizza Kitchen</h2>
+          <p class="unit-card-subtitle" id="chefOrderPrompt">
+            Loading order from Chef Barnaby...
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="text-align:center; justify-content:center; background:#fff7ed; border-color:#fdba74;">
+          <span class="kids-clue-text" id="pizzaPlateVisual" style="color:#c2410c;">Empty Pizza Crust ready for toppings!</span>
+        </div>
+
+        <div class="kids-interactive-grid" id="pizzaIngredientsGrid">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SUPERMARKET SORTER -->
+    <section id="view-market" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🛒 Supermarket Aisle Sorter</h2>
+          <p class="unit-card-subtitle">
+            Sort each grocery item into Dairy, Fresh Produce, or Bakery!
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="text-align:center; justify-content:center;" id="supermarketItemDisplay">
+          Loading grocery item...
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+          <button id="btnSortDairy" class="kids-tile-btn" style="background:#f0fdf4; border-color:#86efac;">
+            <span style="font-size:2rem;">🥛</span>
+            <span class="kids-tile-name" style="color:#166534;">DAIRY</span>
+            <span class="kids-tile-sub">Milk, Cheese, Yogurt</span>
+          </button>
+
+          <button id="btnSortProduce" class="kids-tile-btn" style="background:#fefce8; border-color:#fde047;">
+            <span style="font-size:2rem;">🍎</span>
+            <span class="kids-tile-name" style="color:#854d0e;">PRODUCE</span>
+            <span class="kids-tile-sub">Fruits & Vegetables</span>
+          </button>
+
+          <button id="btnSortBakery" class="kids-tile-btn" style="background:#fff7ed; border-color:#fdba74;">
+            <span style="font-size:2rem;">🥖</span>
+            <span class="kids-tile-name" style="color:#9a3412;">BAKERY</span>
+            <span class="kids-tile-sub">Bread & Pastries</span>
+          </button>
+        </div>
+
+        <div id="supermarketFeedback" class="kids-toast-feedback"></div>
+      </div>
+    </section>
+
+    <!-- 3. RESTAURANT WAITER -->
+    <section id="view-bistro" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🍽️ Bilikids Bistro: Table Service Roleplay</h2>
+          <p class="unit-card-subtitle">
+            Listen to Waiter Leo and practice ordering dishes politely in English!
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="background:#f0fdf4; border-color:#86efac;">
+          <span class="kids-clue-icon">👨‍🍳</span>
+          <div style="flex:1;">
+            <div style="font-weight:800; color:#166534; font-size:1.15rem;">Bistro Waiter:</div>
+            <p style="margin:4px 0 8px; color:#15803d; font-size:1rem;">
+              "Good afternoon! Welcome to Bilikids Bistro. Are you ready to order, or would you like to hear today's lunch specials?"
+            </p>
+            <button id="btnHearWaiterAudio" class="kids-audio-play-btn" style="background:#16a34a; color:#ffffff; border:none;">
+              🔊 Listen to Waiter
+            </button>
+          </div>
+        </div>
+
+        <h3 style="margin:1.5rem 0 0.8rem; font-size:1.15rem; color:#0f172a;">
+          Tap each customer phrase to rehearse speaking:
+        </h3>
+
+        <div style="display:flex; flex-direction:column; gap:10px;" id="restaurantResponsesGrid">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FOOD CRITIC LAB -->
+    <section id="view-critic" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">😋 Junior Food Critic Sensory Vocabulary</h2>
+          <p class="unit-card-subtitle">
+            Learn rich adjectives to describe textures, flavors, and nutrition in English!
+          </p>
+        </div>
+
+        <div class="kids-interactive-grid" id="foodCriticCardsGrid">
+          <!-- Injected by engine -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="kids_unit12_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new KidsUnit12Engine();
+      engine.init();
+      window.unit12Engine = engine;
+    });
+  </script>
+</body>
+</html>

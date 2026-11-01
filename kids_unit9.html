@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unit 9: A Wide World | Bilikids Kids Club</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kids_units_styles.css">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="unit-nav">
+    <div class="unit-nav-inner">
+      <a href="kids.html" class="btn-back-map">
+        <span>←</span>
+        <span>Kids Map</span>
+      </a>
+
+      <div class="unit-title-header">
+        <span class="unit-tag-pill">Unit 9 • A2</span>
+        <h1 class="unit-name-head">A Wide World</h1>
+      </div>
+
+      <div class="unit-score-pill" title="Reward Stars">
+        <span>⭐</span>
+        <span id="unitStarsCount">140 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVITY TABS -->
+  <nav class="activity-tabs-bar">
+    <div class="tabs-track">
+      <button class="tab-btn active" onclick="switchTab('passport', this)">
+        <span>🌍</span>
+        <span>Passport Explorer</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('flags', this)">
+        <span>🚩</span>
+        <span>Flag & Nationality</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('geo', this)">
+        <span>🗺️</span>
+        <span>Geography Quiz</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('airport', this)">
+        <span>🎙️</span>
+        <span>Airport Roleplay</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- WORKSPACE -->
+  <main class="unit-workspace">
+
+    <!-- 1. PASSPORT WORLD EXPLORER -->
+    <section id="view-passport" class="activity-view active-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🌍 Passport World Explorer</h2>
+          <p class="unit-card-subtitle">
+            Tap any country passport card to hear its English greeting, capital city, and famous landscapes!
+          </p>
+        </div>
+
+        <div class="kids-interactive-grid" id="passportCountriesGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. FLAG & NATIONALITY -->
+    <section id="view-flags" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🚩 Flag & Nationality Turbo Match</h2>
+          <p class="unit-card-subtitle">
+            Match the country with the correct nationality name!
+          </p>
+        </div>
+
+        <div class="kids-clue-box">
+          <span class="kids-clue-icon">✈️</span>
+          <span class="kids-clue-text" id="flagMatchClue">Loading country...</span>
+        </div>
+
+        <div class="kids-interactive-grid" id="flagMatchOptions">
+          <!-- Options rendered dynamically -->
+        </div>
+
+        <div id="flagMatchFeedback" class="kids-toast-feedback"></div>
+      </div>
+    </section>
+
+    <!-- 3. GEOGRAPHY QUIZ -->
+    <section id="view-geo" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🗺️ World Geography Quiz Quest</h2>
+          <p class="unit-card-subtitle">
+            Test your knowledge of the continents, oceans, and natural wonders!
+          </p>
+        </div>
+
+        <div class="kids-clue-box">
+          <span class="kids-clue-icon">🧭</span>
+          <span class="kids-clue-text" id="geoQuestionStem">Loading geography question...</span>
+        </div>
+
+        <div class="kids-interactive-grid" id="geoQuestionOptions">
+          <!-- Options rendered dynamically -->
+        </div>
+
+        <div id="geoQuestionFeedback" class="kids-toast-feedback"></div>
+      </div>
+    </section>
+
+    <!-- 4. AIRPORT ROLEPLAY -->
+    <section id="view-airport" class="activity-view">
+      <div class="unit-game-card">
+        <div class="unit-card-header">
+          <h2 class="unit-card-title">🎙️ Airport Customs & Immigration Officer</h2>
+          <p class="unit-card-subtitle">
+            Listen to Officer Charlie and practice speaking your English responses out loud!
+          </p>
+        </div>
+
+        <div class="kids-clue-box" style="background: #f0fdf4; border-color: #86efac;">
+          <span class="kids-clue-icon">👮‍♂️</span>
+          <div style="flex:1;">
+            <div style="font-weight: 800; color: #166534; font-size: 1.15rem;">Immigration Officer:</div>
+            <p style="margin: 4px 0 8px; color: #15803d; font-size: 1rem;">
+              "Good morning! Welcome to SkyAir. Where are you flying from today, and what is your nationality?"
+            </p>
+            <button id="btnPlayOfficerAudio" class="kids-audio-play-btn" style="background:#16a34a; color:#ffffff; border:none;">
+              🔊 Listen to Officer
+            </button>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.5rem 0 0.8rem; font-size: 1.15rem; color: #0f172a;">
+          Choose and practice your spoken response:
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="kids-tile-btn airport-speak-option" data-phrase="Good morning Officer! I am flying from Colombia, and I am Colombian. I am here for a vacation!" style="flex-direction: row; text-align: left; justify-content: flex-start;">
+            <span style="font-size: 1.5rem;">🇨🇴</span>
+            <div>
+              <strong style="display: block; font-size: 1.05rem;">"Good morning Officer! I am flying from Colombia, and I am Colombian. I am here for a vacation!"</strong>
+              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
+            </div>
+          </button>
+
+          <button class="kids-tile-btn airport-speak-option" data-phrase="Hello! I am traveling from Japan, and I am Japanese. I am visiting my friends in London." style="flex-direction: row; text-align: left; justify-content: flex-start;">
+            <span style="font-size: 1.5rem;">🇯🇵</span>
+            <div>
+              <strong style="display: block; font-size: 1.05rem;">"Hello! I am traveling from Japan, and I am Japanese. I am visiting my friends in London."</strong>
+              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
+            </div>
+          </button>
+
+          <button class="kids-tile-btn airport-speak-option" data-phrase="Hi Officer! I came from Canada, and I am Canadian. Here is my passport and boarding pass." style="flex-direction: row; text-align: left; justify-content: flex-start;">
+            <span style="font-size: 1.5rem;">🇨🇦</span>
+            <div>
+              <strong style="display: block; font-size: 1.05rem;">"Hi Officer! I came from Canada, and I am Canadian. Here is my passport and boarding pass."</strong>
+              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="kids_unit9_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new KidsUnit9Engine();
+      engine.init();
+      window.unit9Engine = engine;
+    });
+  </script>
+</body>
+</html>
