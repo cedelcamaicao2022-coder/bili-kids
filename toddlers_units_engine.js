@@ -362,7 +362,7 @@ class ToddlersUnitsEngine {
     let html = `
       <div style="margin-bottom: 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
-          <h2 style="margin:0; font-size:1.45rem; color:#78350f;">🌟 Unit ${unit.id} Vocabulary & Phonics Explorer</h2>
+          <h2 style="margin:0; font-size:1.45rem; color:#78350f;">🌟 Unit ${unit.id} • Vocabulary & Phonics Explorer</h2>
           <p style="margin:4px 0 0; color:#6b7280; font-size:0.95rem;">Tap any card to hear authentic pronunciation, learn fun facts, and practice English!</p>
         </div>
         <button class="toddler-nav-pill active" onclick="toddlersEngine.playAudio('Welcome to ${unit.title}! Let us explore together.')">
