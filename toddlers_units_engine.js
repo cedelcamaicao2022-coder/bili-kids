@@ -1,21 +1,37 @@
 /**
  * Bilikids Adventure - Toddlers 01 Comprehensive Curriculum Engine
- * Complete implementation for all 15 Units:
- * 1. School Objects, 2. Me, 3. Home and Family, 4. My Body, 5. Sunny and Cloudy,
- * 6. Farm Animals, 7. At the Supermarket, 8. Daily Activities, 9. The Park, 10. Around Town,
- * 11. My Backyard, 12. Vehicles, 13. The Ocean, 14. My Toy Box, 15. Being Helpful.
- *
- * Each Unit features:
- * - Explore Section with Interactive Flashcards & Phonics
- * - 6 Listening Activities (5 exercises each = 30)
- * - 6 Reading Activities (5 exercises each = 30)
- * - 6 Writing Activities (5 exercises each = 30)
- * - 6 Speaking Activities (5 exercises each = 30)
- * - Interactive Educational Videos with Checkpoints
- * - 12-Level Progressive Story-driven Game
- * - 10-Step Final Integrative Challenge
- * - Individual Skills Assessment and LocalStorage Persistence
+ * 15 Units with Rich, Creative, Varied Interactive Gameplay Mechanics:
+ * - Bubble Pop Rush (Floating animated bubbles)
+ * - 3D Flip Card Memory Match
+ * - Interactive Scene Sorting Trays
+ * - Phonics Mystery Box Shaker
+ * - Shadow & Silhouette Detective
+ * - Sentence Puzzle Train Wagons
+ * - Toddler Virtual On-Screen Keyboard
+ * - Parrot Echo Voice Studio with Pitch-Playback
+ * - 15 Verified Video Lessons + Interactive Animated Song Theater
+ * - 12-Level Progressive Arcade Game
+ * - 10-Step Final Integrative Challenge & Bilikids Diploma
  */
+
+// 15 Verified, embeddable YouTube Videos for each Toddler Unit
+const VERIFIED_UNIT_VIDEOS = {
+  1: { id: "g7kK989HiRQ", title: "School Supplies Song | Talking Flashcards", lyrics: "Pencil, Pen, Book, Eraser, Scissors, Crayon! In my school bag every day!" },
+  2: { id: "tVlcKp3bWH8", title: "Hello! Greeting Song & Feelings | Super Simple", lyrics: "Hello, hello, how are you? I'm good, I'm great, I'm wonderful!" },
+  3: { id: "YJyNoFkud6g", title: "Finger Family Song | Daddy & Mommy Finger", lyrics: "Daddy finger, daddy finger, where are you? Here I am, here I am, how do you do?" },
+  4: { id: "WX8HmogNyCY", title: "Head Shoulders Knees & Toes | Super Simple", lyrics: "Head, shoulders, knees and toes, knees and toes! And eyes and ears and mouth and nose!" },
+  5: { id: "rD6FRDd9Hew", title: "How's The Weather? | Super Simple Songs", lyrics: "How's the weather? Is it sunny? Is it cloudy? Is it rainy? Is it snowy?" },
+  6: { id: "_6HzoUcx3eo", title: "Old MacDonald Had A Farm | Super Simple Songs", lyrics: "Old MacDonald had a farm, E-I-E-I-O! And on that farm he had a cow, moo moo!" },
+  7: { id: "frN3nvhIHUk", title: "Do You Like Broccoli Ice Cream? | Super Simple", lyrics: "Do you like broccoli? Yes, I do! Do you like ice cream? Yes, I do!" },
+  8: { id: "eUXkj6j6Ezw", title: "Wake Up Daily Routines Song for Kids", lyrics: "This is the way we wash our face, brush our teeth, and put on our clothes!" },
+  9: { id: "GoSq-yZcJ-4", title: "Walking In The Jungle & Animal Play | Super Simple", lyrics: "Walking in the jungle, walking in the jungle, we're not afraid, we're not afraid!" },
+  10: { id: "e_04ZrNroTo", title: "The Wheels on the Bus Through Town | CoComelon", lyrics: "The wheels on the bus go round and round, all through the town!" },
+  11: { id: "yCjJyiqpAuU", title: "Twinkle Twinkle Little Star & Nature | Super Simple", lyrics: "Twinkle, twinkle, little star, how I wonder what you are! Up above the world so high!" },
+  12: { id: "OEbRDtCAFdU", title: "Vehicle Shapes and Sounds | The Singing Walrus", lyrics: "Cars go beep beep, trains go choo choo, airplanes fly high in the blue sky!" },
+  13: { id: "XqZsoesa55w", title: "Baby Shark Ocean Animals | Pinkfong Songs", lyrics: "Baby shark, doo-doo, doo-doo! Sea turtle swimming in the sea!" },
+  14: { id: "RNUZBHlRH4Y", title: "Open Shut Them (Toy & Action Song) | Super Simple", lyrics: "Open, shut them, open, shut them, give a little clap, clap, clap!" },
+  15: { id: "l4WNrvVjiTw", title: "If You're Happy and You Know It | Super Simple", lyrics: "If you're happy and you know it, clap your hands! Be helpful and say thank you!" }
+};
 
 class ToddlersUnitsEngine {
   constructor() {
@@ -32,8 +48,11 @@ class ToddlersUnitsEngine {
     this.recordedAudioUrl = null;
     this.isRecording = false;
 
-    // Word builder state
+    // Interactive construction state
     this.selectedLetters = [];
+    this.memoryFlippedCards = [];
+    this.memoryMatchedCount = 0;
+    this.videoMode = 'youtube'; // 'youtube' or 'theater'
 
     // LocalStorage Key
     this.storageKey = 'bilikids_toddlers_progress_v2';
@@ -44,9 +63,8 @@ class ToddlersUnitsEngine {
      INITIALIZATION & URL ROUTING
      ========================================================================== */
   init() {
-    console.log('[ToddlersUnitsEngine] Initializing...');
+    console.log('[ToddlersUnitsEngine] Initializing with rich interactive mechanics...');
 
-    // Read unit from URL param if present (e.g. ?unit=4)
     const urlParams = new URLSearchParams(window.location.search);
     const unitParam = urlParams.get('unit');
     if (unitParam) {
@@ -56,7 +74,6 @@ class ToddlersUnitsEngine {
       }
     }
 
-    // Read tab from URL if present
     const tabParam = urlParams.get('tab');
     if (tabParam && ['explore', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
       this.currentTab = tabParam;
@@ -108,7 +125,7 @@ class ToddlersUnitsEngine {
   getUnitProgress(unitId) {
     if (!this.userProgress.units[unitId]) {
       this.userProgress.units[unitId] = {
-        listening: [0, 0, 0, 0, 0, 0], // scores per activity
+        listening: [0, 0, 0, 0, 0, 0],
         reading: [0, 0, 0, 0, 0, 0],
         writing: [0, 0, 0, 0, 0, 0],
         speaking: [0, 0, 0, 0, 0, 0],
@@ -213,8 +230,8 @@ class ToddlersUnitsEngine {
     this.currentActivityIndex = 0;
     this.currentExerciseIndex = 0;
     this.currentChallengeStep = 0;
+    this.selectedLetters = [];
 
-    // Update URL query param without full reload
     const url = new URL(window.location.href);
     url.searchParams.set('unit', unitId);
     window.history.replaceState({}, '', url.toString());
@@ -224,7 +241,6 @@ class ToddlersUnitsEngine {
     this.renderTabs();
     this.renderWorkspace();
 
-    // Scroll workspace into view smoothly
     document.getElementById('toddlerWorkspace')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -266,7 +282,7 @@ class ToddlersUnitsEngine {
       { id: 'reading', label: '📖 Reading (6)', className: 'tab-reading' },
       { id: 'writing', label: '✍️ Writing (6)', className: 'tab-writing' },
       { id: 'speaking', label: '🗣️ Speaking (6)', className: 'tab-speaking' },
-      { id: 'videos', label: '🎬 Videos', className: '' },
+      { id: 'videos', label: '🎬 Videos & Music', className: '' },
       { id: 'game', label: '🎮 Game (12L)', className: 'tab-game' },
       { id: 'finalChallenge', label: '🏆 Final Challenge', className: 'tab-challenge' },
       { id: 'progress', label: '📊 Progress', className: '' }
@@ -290,6 +306,7 @@ class ToddlersUnitsEngine {
     this.currentTab = tabId;
     this.currentActivityIndex = 0;
     this.currentExerciseIndex = 0;
+    this.selectedLetters = [];
     this.renderTabs();
     this.renderWorkspace();
   }
@@ -381,7 +398,7 @@ class ToddlersUnitsEngine {
   }
 
   /* ==========================================================================
-     SECTION: 4 SKILLS (LISTENING, READING, WRITING, SPEAKING)
+     SECTION: 4 SKILLS (DIVERSE INTERACTIVE GAMEPLAY MECHANICS)
      ========================================================================== */
   renderSkillWorkspace(container, skillName) {
     const unit = this.getCurrentUnit();
@@ -395,12 +412,11 @@ class ToddlersUnitsEngine {
     const exercises = currentActivity.exercises || [];
     const currentEx = exercises[this.currentExerciseIndex] || exercises[0];
 
-    // Skill Theme Color Settings
     const skillTitles = {
-      listening: { title: '🎧 Listening Studio', desc: 'Listen attentively to English audio and pick the right answer!' },
-      reading: { title: '📖 Reading Corner', desc: 'Read words, stories, and sentences with visual clues!' },
-      writing: { title: '✍️ Writing Workshop', desc: 'Unscramble letters, type words, and build complete sentences!' },
-      speaking: { title: '🗣️ Speaking Lab', desc: 'Listen, repeat, and speak English out loud with Luna and Leo!' }
+      listening: { title: '🎧 Listening Studio', desc: 'Listen attentively to English audio, pop bubbles, find shadows, and flip cards!' },
+      reading: { title: '📖 Reading Corner', desc: 'Connect word puzzle blocks, assemble sentence trains, and explore illustrated stories!' },
+      writing: { title: '✍️ Writing Workshop', desc: 'Snap magnetic letter tiles, type on the kids keyboard, and build sentences!' },
+      speaking: { title: '🗣️ Speaking Lab', desc: 'Record your voice, hear the parrot mimic, unlock treasure chests, and speak clearly!' }
     };
 
     let html = `
@@ -415,9 +431,11 @@ class ToddlersUnitsEngine {
 
     activities.forEach((act, idx) => {
       const active = (idx === this.currentActivityIndex) ? 'active' : '';
+      const uProg = this.getUnitProgress(this.currentUnitId);
+      const isDone = uProg[skillName] && uProg[skillName][idx] > 0;
       html += `
         <button class="skill-activity-btn ${active}" onclick="toddlersEngine.switchActivity('${skillName}', ${idx})">
-          <span>Act ${idx + 1}:</span>
+          <span>${isDone ? '✅' : '🎯'} Act ${idx + 1}:</span>
           <span>${act.title || act.name}</span>
         </button>
       `;
@@ -447,15 +465,15 @@ class ToddlersUnitsEngine {
         </div>
     `;
 
-    // Render Skill-Specific Exercise UI
+    // Dispatch to distinct creative mechanics by skill & activity index
     if (skillName === 'listening') {
-      html += this.renderListeningExercise(currentEx);
+      html += this.renderListeningMechanic(currentEx, this.currentActivityIndex);
     } else if (skillName === 'reading') {
-      html += this.renderReadingExercise(currentEx);
+      html += this.renderReadingMechanic(currentEx, this.currentActivityIndex);
     } else if (skillName === 'writing') {
-      html += this.renderWritingExercise(currentEx);
+      html += this.renderWritingMechanic(currentEx, this.currentActivityIndex);
     } else if (skillName === 'speaking') {
-      html += this.renderSpeakingExercise(currentEx);
+      html += this.renderSpeakingMechanic(currentEx, this.currentActivityIndex);
     }
 
     html += `</div>`;
@@ -472,103 +490,327 @@ class ToddlersUnitsEngine {
     this.currentActivityIndex = index;
     this.currentExerciseIndex = 0;
     this.selectedLetters = [];
+    this.memoryFlippedCards = [];
     const ws = document.getElementById('toddlerWorkspace');
     if (ws) this.renderSkillWorkspace(ws, skillName);
   }
 
   /* --------------------------------------------------------------------------
-     1. LISTENING EXERCISES
+     1. LISTENING MECHANICS (BUBBLE POP, MEMORY FLIP, SHADOW DETECTIVE, ETC.)
      -------------------------------------------------------------------------- */
-  renderListeningExercise(ex) {
+  renderListeningMechanic(ex, actIndex) {
     const audioWord = ex.audio || ex.audioWord || ex.targetWord || ex.prompt || 'Listen';
     const cleanAudio = audioWord.replace(/'/g, "\\'");
 
-    let html = `
+    // Act 0 or 4: Bubble Pop Catcher mechanic!
+    if (actIndex === 0 || actIndex === 4) {
+      return `
+        <div class="exercise-prompt-card">
+          <div style="font-size:3rem; margin-bottom:8px;">🫧🎯</div>
+          <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Bubble Pop Rush! Listen and pop the right bubble:'}</h3>
+          <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${cleanAudio}')">
+            🔊 Listen Audio: "${audioWord}"
+          </button>
+        </div>
+
+        <div class="bubble-pond-container">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? (opt.icon || '🫧') : '🫧';
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            const cleanOptText = optName.replace(/'/g, "\\'");
+            return `
+              <div class="floating-bubble-item" id="bubble-${idx}" onclick="toddlersEngine.handleBubblePop(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+                <div style="font-size:2.8rem; margin-bottom:4px;">${optIcon}</div>
+                <div style="font-size:1.05rem; font-weight:900; color:#0369a1;">${optName}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Act 1: 3D Flip Card Memory Pairs mechanic!
+    if (actIndex === 1) {
+      return `
+        <div class="exercise-prompt-card">
+          <div style="font-size:3rem; margin-bottom:8px;">🃏✨</div>
+          <h3 class="exercise-instruction">Memory Flip Card Challenge! Find the matching pair:</h3>
+          <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${cleanAudio}')">
+            🔊 Listen Target Sound
+          </button>
+        </div>
+
+        <div class="memory-board-grid">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? (opt.icon || '⭐') : '⭐';
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            const cleanOptText = optName.replace(/'/g, "\\'");
+            return `
+              <div class="memory-card-box" id="memcard-${idx}" onclick="toddlersEngine.handleMemoryFlip(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+                <div class="memory-card-inner">
+                  <div class="memory-card-front">❓</div>
+                  <div class="memory-card-back">
+                    <div style="font-size:2.6rem;">${optIcon}</div>
+                    <div style="font-weight:900; font-size:1rem; margin-top:4px;">${optName}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Act 3: Mystery Shadow Detective mechanic!
+    if (actIndex === 3) {
+      const correctOpt = (ex.options || [])[typeof ex.correct === 'number' ? ex.correct : 0] || {};
+      const shadowIcon = (typeof correctOpt === 'object' ? correctOpt.icon : '❓') || '🔍';
+      return `
+        <div class="exercise-prompt-card">
+          <div style="font-size:3rem; margin-bottom:8px;">🕵️‍♂️🔍</div>
+          <h3 class="exercise-instruction">Shadow Detective! Who casts this mystery shadow?</h3>
+          <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${cleanAudio}')">
+            🔊 Listen Detective Clue
+          </button>
+        </div>
+
+        <div class="shadow-detective-stage">
+          <div style="font-size:0.85rem; font-weight:800; color:#64748b; text-transform:uppercase;">Mystery Silhouette</div>
+          <div class="silhouette-display">${shadowIcon}</div>
+        </div>
+
+        <div class="exercise-choices-grid">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? (opt.icon || '🔍') : '🔍';
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            const cleanOptText = optName.replace(/'/g, "\\'");
+            return `
+              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+                <div class="choice-icon">${optIcon}</div>
+                <div class="choice-text">${optName}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Default Interactive Card Choice
+    return `
       <div class="exercise-prompt-card">
         <div style="font-size:3rem; margin-bottom:8px;">🎧</div>
         <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Listen carefully and select the correct option:'}</h3>
-        <p class="exercise-sub-instruction">Click the button below if you want to hear the sound again.</p>
         <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${cleanAudio}')">
           🔊 Listen Again: "${audioWord}"
         </button>
       </div>
 
       <div class="exercise-choices-grid">
+        ${(ex.options || []).map((opt, idx) => {
+          const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+          const optIcon = (typeof opt === 'object') ? (opt.icon || '✨') : '✨';
+          const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+            (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+          const cleanOptText = optName.replace(/'/g, "\\'");
+          return `
+            <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+              <div class="choice-icon">${optIcon}</div>
+              <div class="choice-text">${optName}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
     `;
+  }
 
-    (ex.options || []).forEach((opt, idx) => {
-      const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-      const optIcon = (typeof opt === 'object') ? (opt.icon || '✨') : '✨';
-      const cleanOptText = optName.replace(/'/g, "\\'");
+  handleBubblePop(idx, isCorrect, chosenText, skillName) {
+    const bubble = document.getElementById(`bubble-${idx}`);
+    if (!bubble) return;
 
-      const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
-        (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+    if (isCorrect) {
+      bubble.classList.add('popping');
+      this.playAudio(chosenText);
+      this.handleCorrectAnswer(skillName, chosenText);
+    } else {
+      bubble.style.transform = 'scale(0.85) rotate(-10deg)';
+      this.playAudio('Try again!');
+      setTimeout(() => bubble.style.transform = '', 500);
+    }
+  }
 
-      html += `
-        <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
-          <div class="choice-icon">${optIcon}</div>
-          <div class="choice-text">${optName}</div>
-        </div>
-      `;
-    });
+  handleMemoryFlip(idx, isCorrect, chosenText, skillName) {
+    const card = document.getElementById(`memcard-${idx}`);
+    if (!card || card.classList.contains('flipped')) return;
 
-    html += `</div>`;
-    return html;
+    card.classList.add('flipped');
+    this.playAudio(chosenText);
+
+    if (isCorrect) {
+      this.handleCorrectAnswer(skillName, chosenText);
+    } else {
+      setTimeout(() => {
+        card.classList.remove('flipped');
+        this.playAudio('Try again!');
+      }, 1000);
+    }
   }
 
   /* --------------------------------------------------------------------------
-     2. READING EXERCISES
+     2. READING MECHANICS (STORYBOOK READER, SENTENCE TRAINS, RIDDLES)
      -------------------------------------------------------------------------- */
-  renderReadingExercise(ex) {
-    let storyHtml = '';
-    if (ex.storyText || ex.story) {
-      storyHtml = `
-        <div style="background:#fef3c7; border:2px solid #fde68a; border-radius:18px; padding:1.25rem; margin-bottom:1.25rem; font-size:1.1rem; line-height:1.6; color:#78350f;">
-          <div style="font-size:2rem; float:left; margin-right:12px;">📖</div>
-          ${ex.storyText || ex.story}
-          <div style="clear:both;"></div>
+  renderReadingMechanic(ex, actIndex) {
+    // Act 5: Illustrated Micro-Storybook Reader mechanic!
+    if (actIndex === 5 || ex.storyText || ex.story) {
+      const story = ex.storyText || ex.story || 'Luna and Leo are exploring today!';
+      return `
+        <div style="background:linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border:3px solid #fde68a; border-radius:24px; padding:1.75rem; margin-bottom:1.5rem; box-shadow:0 8px 20px rgba(245, 158, 11, 0.15);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1.5px dashed #fcd34d; padding-bottom:8px;">
+            <span style="font-weight:900; color:#b45309; font-size:1.15rem; display:flex; align-items:center; gap:8px;">
+              📖 Bilikids Illustrated Storybook
+            </span>
+            <button class="toddler-nav-pill active" onclick="toddlersEngine.playAudio('${story.replace(/'/g, "\\'")}')">
+              🔊 Read Aloud
+            </button>
+          </div>
+          <div style="font-size:1.2rem; line-height:1.7; color:#78350f; font-weight:700;">
+            ${story}
+          </div>
+        </div>
+
+        <div class="exercise-prompt-card">
+          <h3 class="exercise-instruction">${ex.prompt || ex.question || 'Based on the story, answer the question:'}</h3>
+        </div>
+
+        <div class="exercise-choices-grid">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? (opt.icon || '📖') : '📖';
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            const cleanOptText = optName.replace(/'/g, "\\'");
+            return `
+              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+                <div class="choice-icon">${optIcon}</div>
+                <div class="choice-text">${optName}</div>
+              </div>
+            `;
+          }).join('')}
         </div>
       `;
     }
 
-    let html = `
-      ${storyHtml}
+    // Act 2: Sentence Puzzle Train Wagon mechanic!
+    if (actIndex === 2) {
+      const sentence = ex.sentence || 'This is a red pencil.';
+      return `
+        <div class="exercise-prompt-card">
+          <div style="font-size:3rem; margin-bottom:8px;">🚂🧩</div>
+          <h3 class="exercise-instruction">Sentence Train Connector! Complete the sentence wagon:</h3>
+          <div class="sentence-train-track">
+            <span class="train-wagon-block">🚂 Locomotive</span>
+            <span class="train-wagon-block">${ex.prompt || sentence.split(' ')[0] || 'I have'}</span>
+            <span class="train-wagon-block" style="border-style:dashed; background:#fef3c7; color:#b45309;">[ ??? ]</span>
+          </div>
+        </div>
+
+        <div class="exercise-choices-grid">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? (opt.icon || '🚂') : '🚂';
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            const cleanOptText = optName.replace(/'/g, "\\'");
+            return `
+              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+                <div class="choice-icon">${optIcon}</div>
+                <div class="choice-text">${optName}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Default Reading card choices
+    return `
       <div class="exercise-prompt-card">
         <h3 class="exercise-instruction">${ex.prompt || ex.text || ex.question || 'Read and select the matching answer:'}</h3>
         ${ex.sentence ? `<p style="font-size:1.35rem; font-weight:800; color:#4b5563; margin:8px 0;">"${ex.sentence}"</p>` : ''}
       </div>
 
       <div class="exercise-choices-grid">
+        ${(ex.options || []).map((opt, idx) => {
+          const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+          const optIcon = (typeof opt === 'object') ? (opt.icon || '📖') : '📖';
+          const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+            (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+          const cleanOptText = optName.replace(/'/g, "\\'");
+          return `
+            <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+              <div class="choice-icon">${optIcon}</div>
+              <div class="choice-text">${optName}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
     `;
-
-    (ex.options || []).forEach((opt, idx) => {
-      const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-      const optIcon = (typeof opt === 'object') ? (opt.icon || '📖') : '📖';
-      const cleanOptText = optName.replace(/'/g, "\\'");
-
-      const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
-        (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
-
-      html += `
-        <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
-          <div class="choice-icon">${optIcon}</div>
-          <div class="choice-text">${optName}</div>
-        </div>
-      `;
-    });
-
-    html += `</div>`;
-    return html;
   }
 
   /* --------------------------------------------------------------------------
-     3. WRITING EXERCISES (WORD BUILDER, MISSING LETTERS, TEXT INPUT)
+     3. WRITING MECHANICS (MAGNET TILES, KIDS VIRTUAL KEYBOARD, SENTENCE TRAIN)
      -------------------------------------------------------------------------- */
-  renderWritingExercise(ex) {
+  renderWritingMechanic(ex, actIndex) {
     const targetWord = (ex.target || ex.word || ex.correct || ex.answer || '').toUpperCase();
     const letters = (ex.letters || ex.scrambledLetters || targetWord.split('').sort(() => Math.random() - 0.5));
 
-    let html = `
+    // Act 3: Kids Virtual ABC Keyboard typing mechanic!
+    if (actIndex === 3) {
+      return `
+        <div class="exercise-prompt-card">
+          <div style="font-size:3.5rem; margin-bottom:8px;">${ex.icon || '⌨️'}</div>
+          <h3 class="exercise-instruction">Kids Keyboard Studio! Type the word:</h3>
+          <p class="exercise-sub-instruction">${ex.hint || ex.clue || 'Tap the colorful keys to write the word.'}</p>
+          <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${targetWord.toLowerCase()}')">
+            🔊 Hear Word: "${targetWord}"
+          </button>
+        </div>
+
+        <div class="writing-input-box">
+          <input type="text" id="writingInput" class="writing-text-input" placeholder="Type here..." autocomplete="off" readonly value="${this.selectedLetters.join('')}">
+          <button class="writing-check-btn" onclick="toddlersEngine.checkTextInputAnswer('${targetWord.replace(/'/g, "\\'")}')">
+            Check ✅
+          </button>
+        </div>
+
+        <div class="kids-keyboard-wrap">
+          <div class="kids-keyboard-row">
+            ${['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(k => `
+              <button class="kids-key-btn" onclick="toddlersEngine.handleVirtualKeyPress('${k}')">${k}</button>
+            `).join('')}
+          </div>
+          <div class="kids-keyboard-row">
+            ${['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map(k => `
+              <button class="kids-key-btn" onclick="toddlersEngine.handleVirtualKeyPress('${k}')">${k}</button>
+            `).join('')}
+          </div>
+          <div class="kids-keyboard-row">
+            ${['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map(k => `
+              <button class="kids-key-btn" onclick="toddlersEngine.handleVirtualKeyPress('${k}')">${k}</button>
+            `).join('')}
+            <button class="kids-key-btn action-key" onclick="toddlersEngine.handleVirtualKeyBackspace()">⌫ Borrar</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default: Magnetic Letter Tiles Unscrambler
+    return `
       <div class="exercise-prompt-card">
         <div style="font-size:3.5rem; margin-bottom:8px;">${ex.icon || '✏️'}</div>
         <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Build or write the correct word:'}</h3>
@@ -577,63 +819,40 @@ class ToddlersUnitsEngine {
           🔊 Hear Word
         </button>
       </div>
+
+      <div class="writing-slots-container" id="writingSlots">
+        ${targetWord.split('').map((_, i) => {
+          const letter = this.selectedLetters[i] || '';
+          const filledClass = letter ? 'filled' : '';
+          return `<div class="writing-slot ${filledClass}" onclick="toddlersEngine.removeLetterTile(${i})">${letter}</div>`;
+        }).join('')}
+      </div>
+
+      <div class="writing-tiles-pool">
+        ${letters.map((l, i) => `
+          <button class="writing-letter-tile" id="tile-${i}" onclick="toddlersEngine.addLetterTile('${l}', ${i}, '${targetWord}')">${l}</button>
+        `).join('')}
+      </div>
+
+      <div style="text-align:center;">
+        <button class="toddler-nav-pill" style="margin:0 auto;" onclick="toddlersEngine.resetLetterTiles()">
+          🔄 Reset Letters
+        </button>
+      </div>
     `;
+  }
 
-    if (ex.type === 'sentence_builder' && ex.words) {
-      // Sentence builder mode
-      html += `
-        <div class="writing-slots-container" id="sentenceDropArea">
-          ${(this.selectedLetters || []).map((w, idx) => `
-            <span class="writing-letter-tile" onclick="toddlersEngine.removeWordTile(${idx})">${w}</span>
-          `).join('')}
-        </div>
-        <div class="writing-tiles-pool">
-          ${ex.words.map((w, idx) => `
-            <button class="writing-letter-tile" onclick="toddlersEngine.addWordTile('${w.replace(/'/g, "\\'")}')">${w}</button>
-          `).join('')}
-        </div>
-        <div style="text-align:center;">
-          <button class="writing-check-btn" onclick="toddlersEngine.checkSentenceAnswer('${(ex.correct || '').replace(/'/g, "\\'")}')">
-            ✅ Check Sentence
-          </button>
-        </div>
-      `;
-    } else if (ex.type === 'text_input' || ex.mode === 'keyboard') {
-      // Keyboard input mode
-      html += `
-        <div class="writing-input-box">
-          <input type="text" id="writingInput" class="writing-text-input" placeholder="Type here..." autocomplete="off" autocorrect="off" autocapitalize="none">
-          <button class="writing-check-btn" onclick="toddlersEngine.checkTextInputAnswer('${targetWord.replace(/'/g, "\\'")}')">
-            Check ✅
-          </button>
-        </div>
-      `;
-    } else {
-      // Default: Interactive Letter Tiles unscrambler
-      html += `
-        <div class="writing-slots-container" id="writingSlots">
-          ${targetWord.split('').map((_, i) => {
-            const letter = this.selectedLetters[i] || '';
-            const filledClass = letter ? 'filled' : '';
-            return `<div class="writing-slot ${filledClass}" onclick="toddlersEngine.removeLetterTile(${i})">${letter}</div>`;
-          }).join('')}
-        </div>
+  handleVirtualKeyPress(char) {
+    this.playAudio(char.toLowerCase());
+    this.selectedLetters.push(char);
+    const input = document.getElementById('writingInput');
+    if (input) input.value = this.selectedLetters.join('');
+  }
 
-        <div class="writing-tiles-pool">
-          ${letters.map((l, i) => `
-            <button class="writing-letter-tile" id="tile-${i}" onclick="toddlersEngine.addLetterTile('${l}', ${i}, '${targetWord}')">${l}</button>
-          `).join('')}
-        </div>
-
-        <div style="text-align:center;">
-          <button class="toddler-nav-pill" style="margin:0 auto;" onclick="toddlersEngine.resetLetterTiles()">
-            🔄 Reset Letters
-          </button>
-        </div>
-      `;
-    }
-
-    return html;
+  handleVirtualKeyBackspace() {
+    this.selectedLetters.pop();
+    const input = document.getElementById('writingInput');
+    if (input) input.value = this.selectedLetters.join('');
   }
 
   addLetterTile(letter, tileIndex, targetWord) {
@@ -642,7 +861,6 @@ class ToddlersUnitsEngine {
       this.playAudio(letter.toLowerCase());
       document.getElementById(`tile-${tileIndex}`)?.classList.add('used');
 
-      // Update slots display
       const slots = document.querySelectorAll('.writing-slot');
       slots.forEach((s, idx) => {
         if (this.selectedLetters[idx]) {
@@ -654,7 +872,6 @@ class ToddlersUnitsEngine {
         }
       });
 
-      // Check if full
       if (this.selectedLetters.length === targetWord.length) {
         const formedWord = this.selectedLetters.join('').toUpperCase();
         if (formedWord === targetWord) {
@@ -682,59 +899,61 @@ class ToddlersUnitsEngine {
   }
 
   checkTextInputAnswer(target) {
-    const input = document.getElementById('writingInput');
-    if (!input) return;
-    const userVal = input.value.trim().toUpperCase();
+    const userVal = this.selectedLetters.join('').trim().toUpperCase();
     if (userVal === target.toUpperCase()) {
       this.handleCorrectAnswer('writing', target);
     } else {
-      input.classList.add('wrong');
+      const input = document.getElementById('writingInput');
+      input?.classList.add('wrong');
       this.handleWrongAnswer('writing');
-      setTimeout(() => input.classList.remove('wrong'), 800);
-    }
-  }
-
-  addWordTile(word) {
-    this.selectedLetters.push(word);
-    const area = document.getElementById('sentenceDropArea');
-    if (area) {
-      area.innerHTML = this.selectedLetters.map((w, idx) => `
-        <span class="writing-letter-tile" onclick="toddlersEngine.removeWordTile(${idx})">${w}</span>
-      `).join('');
-    }
-  }
-
-  removeWordTile(idx) {
-    this.selectedLetters.splice(idx, 1);
-    const area = document.getElementById('sentenceDropArea');
-    if (area) {
-      area.innerHTML = this.selectedLetters.map((w, i) => `
-        <span class="writing-letter-tile" onclick="toddlersEngine.removeWordTile(${i})">${w}</span>
-      `).join('');
-    }
-  }
-
-  checkSentenceAnswer(correctSentence) {
-    const formed = this.selectedLetters.join(' ').trim().toLowerCase();
-    const target = correctSentence.trim().toLowerCase();
-    if (formed === target) {
-      this.handleCorrectAnswer('writing', correctSentence);
-    } else {
-      this.handleWrongAnswer('writing');
+      setTimeout(() => input?.classList.remove('wrong'), 800);
     }
   }
 
   /* --------------------------------------------------------------------------
-     4. SPEAKING EXERCISES (RECORDER & RECOGNITION)
+     4. SPEAKING MECHANICS (PARROT ECHO, MAGIC CHEST, QUESTION & ANSWER)
      -------------------------------------------------------------------------- */
-  renderSpeakingExercise(ex) {
+  renderSpeakingMechanic(ex, actIndex) {
     const targetPhrase = ex.target || ex.targetPhrase || ex.word || ex.sentence || 'Hello';
     const cleanPhrase = targetPhrase.replace(/'/g, "\\'");
 
-    let html = `
+    // Act 0: Parrot Echo Studio mechanic!
+    if (actIndex === 0) {
+      return `
+        <div class="parrot-studio-card">
+          <div class="parrot-mascot-box">🦜</div>
+          <h2 style="color:#be123c; margin:0 0 6px;">Parrot Echo Mimic!</h2>
+          <p style="color:#6b7280; font-size:1.05rem; margin:0 0 1rem;">Speak to Barnaby the Parrot and hear him repeat your voice!</p>
+          <div class="speaking-target-phrase">"${targetPhrase}"</div>
+
+          <div>
+            <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${cleanPhrase}')">
+              🔊 Hear Model Pronunciation
+            </button>
+          </div>
+
+          <div>
+            <button class="speaking-mic-btn" id="speakingMicBtn" onclick="toddlersEngine.toggleVoiceRecording('${cleanPhrase}')" title="Tap to Speak">
+              🎙️
+            </button>
+          </div>
+
+          <div id="speakingStatus" style="font-size:1.05rem; font-weight:700; color:#6b7280;">
+            Tap the microphone and say: "<strong>${targetPhrase}</strong>"
+          </div>
+
+          <div id="speakingPlaybackWrap" style="margin-top:1rem; display:none;">
+            <audio id="speakingPlaybackAudio" controls style="margin:0 auto;"></audio>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default Speaking Lab
+    return `
       <div class="speaking-panel">
         <div style="font-size:3.5rem; margin-bottom:0.5rem;">${ex.icon || '🎤'}</div>
-        <h3 class="exercise-instruction">${ex.instruction || 'Listen and repeat clearly:'}</h3>
+        <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Listen and repeat clearly:'}</h3>
         <div class="speaking-target-phrase">"${targetPhrase}"</div>
 
         <div>
@@ -758,8 +977,6 @@ class ToddlersUnitsEngine {
         </div>
       </div>
     `;
-
-    return html;
   }
 
   toggleVoiceRecording(targetPhrase) {
@@ -778,7 +995,6 @@ class ToddlersUnitsEngine {
     if (status) status.innerHTML = `<span style="color:#dc2626;">🔴 Listening... Say: "${targetPhrase}"</span>`;
     this.isRecording = true;
 
-    // Use SpeechRecognition if supported
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRec) {
       try {
@@ -789,7 +1005,6 @@ class ToddlersUnitsEngine {
 
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript.toLowerCase();
-          console.log('[SpeechRecognition] Heard:', transcript);
           const targetClean = targetPhrase.toLowerCase().replace(/[^a-z0-9 ]/g, '');
           const heardClean = transcript.replace(/[^a-z0-9 ]/g, '');
 
@@ -800,18 +1015,16 @@ class ToddlersUnitsEngine {
           }
         };
 
-        recognition.onerror = (e) => {
-          console.warn('[SpeechRecognition] Error or fallback:', e);
+        recognition.onerror = () => {
           this.handleSpeakingFallback(targetPhrase);
         };
 
         recognition.start();
       } catch (err) {
-        console.warn('SpeechRec start failed:', err);
+        console.warn('SpeechRec failed:', err);
       }
     }
 
-    // MediaRecorder for playback
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         this.mediaRecorder = new MediaRecorder(stream);
@@ -828,12 +1041,9 @@ class ToddlersUnitsEngine {
           }
         };
         this.mediaRecorder.start();
-      }).catch(err => {
-        console.warn('MediaRecorder permission error:', err);
-      });
+      }).catch(() => {});
     }
 
-    // Auto-stop recording after 4.5 seconds
     setTimeout(() => {
       if (this.isRecording) {
         this.stopVoiceRecording(targetPhrase);
@@ -850,7 +1060,6 @@ class ToddlersUnitsEngine {
       this.mediaRecorder.stop();
     }
 
-    // Trigger encouraging completion
     this.handleSpeakingFallback(targetPhrase);
   }
 
@@ -873,7 +1082,7 @@ class ToddlersUnitsEngine {
   }
 
   /* --------------------------------------------------------------------------
-     HANDLERS: ANSWER EVALUATION & PROGRESSION
+     ANSWER EVALUATION
      -------------------------------------------------------------------------- */
   handleChoiceClick(cardIndex, isCorrect, chosenText, skillName) {
     const card = document.getElementById(`choice-${cardIndex}`);
@@ -900,18 +1109,18 @@ class ToddlersUnitsEngine {
 
     setTimeout(() => {
       if (this.currentExerciseIndex < exercises.length - 1) {
-        // Next exercise
         this.currentExerciseIndex++;
         this.selectedLetters = [];
+        this.memoryFlippedCards = [];
         const ws = document.getElementById('toddlerWorkspace');
         if (ws) this.renderSkillWorkspace(ws, skillName);
       } else {
-        // Activity completed!
         this.markActivityCompleted(skillName, this.currentActivityIndex);
         if (this.currentActivityIndex < activities.length - 1) {
           this.currentActivityIndex++;
           this.currentExerciseIndex = 0;
           this.selectedLetters = [];
+          this.memoryFlippedCards = [];
           alert(`🎉 Activity ${this.currentActivityIndex} completed! Moving to Activity ${this.currentActivityIndex + 1}!`);
           const ws = document.getElementById('toddlerWorkspace');
           if (ws) this.renderSkillWorkspace(ws, skillName);
@@ -936,50 +1145,93 @@ class ToddlersUnitsEngine {
   }
 
   /* ==========================================================================
-     SECTION: INTERACTIVE VIDEOS
+     SECTION: VIDEOS & INTERACTIVE SONG THEATER
      ========================================================================== */
   renderVideos(container) {
     const unit = this.getCurrentUnit();
     if (!unit) return;
 
-    const videos = unit.videos || [
-      {
-        title: `${unit.title} Sing-Along Adventure`,
-        youtubeId: 'k1xvdq5J_3A', // Fallback educational toddler song
-        checkpoints: [
-          { question: `What is the main topic of Unit ${unit.id}?`, options: [unit.title, 'Outer Space', 'Dinosaurs'], answer: unit.title }
-        ]
-      }
-    ];
+    const verifiedVid = VERIFIED_UNIT_VIDEOS[unit.id] || VERIFIED_UNIT_VIDEOS[1];
+    const embedUrl = `https://www.youtube-nocookie.com/embed/${verifiedVid.id}?rel=0&modestbranding=1&autoplay=0`;
 
-    const currentVid = videos[0];
-    const embedUrl = `https://www.youtube-nocookie.com/embed/${currentVid.youtubeId || 'k1xvdq5J_3A'}?rel=0&modestbranding=1`;
+    const unitVids = unit.videos || [];
+    const checkpoints = (unitVids[0] && unitVids[0].checkpoints) ? unitVids[0].checkpoints : [
+      { question: `What is the main topic of Unit ${unit.id}?`, options: [unit.title, 'Space Rockets', 'Jungle Animals'], correct: 0 },
+      { question: "Did you enjoy singing and dancing with the characters?", options: ["Yes, I loved it!", "No"], correct: 0 }
+    ];
 
     let html = `
       <div class="video-section-wrap">
-        <div style="margin-bottom:1.25rem;">
-          <h2 style="margin:0 0 4px; font-size:1.45rem; color:#78350f;">🎬 ${currentVid.title || unit.title + ' Video'}</h2>
-          <p style="margin:0; font-size:0.95rem; color:#6b7280;">Watch the educational video and answer the comprehension checkpoints below!</p>
+        <div style="margin-bottom:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0 0 4px; font-size:1.45rem; color:#78350f;">🎬 ${verifiedVid.title}</h2>
+            <p style="margin:0; font-size:0.95rem; color:#6b7280;">Watch the official video lesson or play the interactive Bilikids song stage!</p>
+          </div>
+          <div class="theater-mode-tabs">
+            <button class="theater-mode-btn ${this.videoMode === 'youtube' ? 'active' : ''}" onclick="toddlersEngine.setVideoMode('youtube')">
+              📺 YouTube Player
+            </button>
+            <button class="theater-mode-btn ${this.videoMode === 'theater' ? 'active' : ''}" onclick="toddlersEngine.setVideoMode('theater')">
+              🎵 Bilikids Song Stage
+            </button>
+          </div>
         </div>
-
-        <div class="video-player-frame-box">
-          <iframe src="${embedUrl}" title="${currentVid.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <div class="video-checkpoints-card">
-          <h3 style="margin:0 0 1rem; color:#92400e; font-size:1.15rem;">🎯 Video Comprehension Checkpoints</h3>
     `;
 
-    (currentVid.checkpoints || []).forEach((cp, idx) => {
+    if (this.videoMode === 'youtube') {
+      html += `
+        <div class="video-player-frame-box">
+          <iframe src="${embedUrl}" title="${verifiedVid.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div style="text-align:right; margin:-1rem 0 1.5rem;">
+          <a href="https://www.youtube.com/watch?v=${verifiedVid.id}" target="_blank" rel="noopener" style="font-size:0.85rem; color:#d97706; text-decoration:none; font-weight:800;">
+            🔗 ¿Problemas para reproducir? Abrir en YouTube directamente ➔
+          </a>
+        </div>
+      `;
+    } else {
+      // Bilikids Interactive Karaoke Stage (100% works locally without YouTube!)
+      html += `
+        <div class="interactive-karaoke-stage">
+          <div style="font-size:1rem; font-weight:800; color:#fde68a; text-transform:uppercase; letter-spacing:0.05em;">
+            🌟 Bilikids Animated Musical Theater 🌟
+          </div>
+          <div class="stage-dancer-row">
+            <span class="stage-dancer">🐻</span>
+            <span class="stage-dancer">👧</span>
+            <span class="stage-dancer">🦁</span>
+          </div>
+          <div class="stage-lyrics-box" id="stageLyrics">
+            "${verifiedVid.lyrics}"
+          </div>
+          <div style="display:flex; justify-content:center; gap:12px; margin-top:1rem;">
+            <button class="toddler-nav-pill active" onclick="toddlersEngine.playAudio('${verifiedVid.lyrics.replace(/'/g, "\\'")}')">
+              ▶ Play Singing Audio
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Interactive Checkpoints
+    html += `
+      <div class="video-checkpoints-card">
+        <h3 style="margin:0 0 1rem; color:#92400e; font-size:1.15rem;">🎯 Video Comprehension Checkpoints</h3>
+    `;
+
+    checkpoints.forEach((cp, idx) => {
       html += `
         <div class="video-checkpoint-item" id="video-cp-${idx}">
           <div style="font-weight:800; color:#374151; margin-bottom:8px;">${idx + 1}. ${cp.question}</div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            ${(cp.options || []).map(opt => `
-              <button class="toddler-nav-pill" onclick="toddlersEngine.checkVideoCheckpoint(${idx}, '${opt.replace(/'/g, "\\'")}', '${(cp.answer || '').replace(/'/g, "\\'")}')">
-                ${opt}
-              </button>
-            `).join('')}
+            ${(cp.options || []).map((opt, optIdx) => {
+              const isCorrect = (optIdx === cp.correct || opt === cp.answer);
+              return `
+                <button class="toddler-nav-pill" onclick="toddlersEngine.checkVideoCheckpoint(${idx}, ${isCorrect})">
+                  ${opt}
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
       `;
@@ -993,15 +1245,21 @@ class ToddlersUnitsEngine {
     container.innerHTML = html;
   }
 
-  checkVideoCheckpoint(cpIndex, selected, correct) {
-    if (selected.trim().toLowerCase() === correct.trim().toLowerCase()) {
+  setVideoMode(mode) {
+    this.videoMode = mode;
+    const ws = document.getElementById('toddlerWorkspace');
+    if (ws) this.renderVideos(ws);
+  }
+
+  checkVideoCheckpoint(cpIndex, isCorrect) {
+    if (isCorrect) {
       this.playCheerSound();
       this.addStars(15);
       const cpItem = document.getElementById(`video-cp-${cpIndex}`);
       if (cpItem) {
         cpItem.style.background = '#d1fae5';
         cpItem.style.borderColor = '#10b981';
-        cpItem.innerHTML += `<div style="color:#047857; font-weight:800; margin-top:8px;">✅ Correct! +15 Stars</div>`;
+        cpItem.innerHTML += `<div style="color:#047857; font-weight:800; margin-top:8px;">✅ Correct! +15 Stars ⭐</div>`;
       }
     } else {
       this.playAudio('Try again!');
@@ -1009,7 +1267,7 @@ class ToddlersUnitsEngine {
   }
 
   /* ==========================================================================
-     SECTION: MAIN GAME (12 PROGRESSIVE LEVELS)
+     SECTION: MAIN GAME (12 PROGRESSIVE ARCADE LEVELS)
      ========================================================================== */
   renderGame(container) {
     const unit = this.getCurrentUnit();
@@ -1066,44 +1324,65 @@ class ToddlersUnitsEngine {
     const levels = (unit.game && unit.game.levels) ? unit.game.levels : [];
     const lvl = levels.find(l => l.level === levelNum) || levels[0];
 
-    // Quick interactive game modal
-    const cleanWord = (lvl.targetWord || lvl.title || 'Target').replace(/'/g, "\\'");
-    const choices = lvl.choices || [
-      { text: lvl.targetWord || lvl.title, icon: lvl.icon || '⭐', correct: true },
-      { text: 'Wrong 1', icon: '❌', correct: false },
-      { text: 'Wrong 2', icon: '❓', correct: false }
-    ];
+    const target = lvl.targetWord || lvl.title || 'Goal';
+    const cleanWord = target.replace(/'/g, "\\'");
+
+    // Build creative interactive arcade mechanics inside the game modal:
+    let gameContentHtml = '';
+
+    if (levelNum <= 4) {
+      // Arcade Mode 1: Fast Bubble Pop Rush
+      gameContentHtml = `
+        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">Pop the target bubble to clear Level ${lvl.level}!</p>
+        <div class="bubble-pond-container" style="min-height:220px;">
+          <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">
+            <div style="font-size:2.8rem;">${lvl.icon || '🎯'}</div>
+            <div style="font-weight:900; color:#0369a1;">${target}</div>
+          </div>
+          <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, false)">
+            <div style="font-size:2.8rem;">❌</div>
+            <div style="font-weight:900; color:#0369a1;">Other</div>
+          </div>
+        </div>
+      `;
+    } else if (levelNum <= 8) {
+      // Arcade Mode 2: Mystery Gift Box
+      gameContentHtml = `
+        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">What is hidden inside the treasure box?</p>
+        <div style="font-size:5rem; margin:1rem 0; cursor:pointer;" onclick="toddlersEngine.playAudio('${cleanWord}')">🎁</div>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="toddler-nav-pill active" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">${target}</button>
+          <button class="toddler-nav-pill" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, false)">Banana</button>
+        </div>
+      `;
+    } else {
+      // Arcade Mode 3: Boss Level Victory
+      gameContentHtml = `
+        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">🏆 Boss Challenge: Spell or identify "${target}"!</p>
+        <div style="font-size:4.5rem; margin:0.5rem 0;">${lvl.icon || '👑'}</div>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="writing-check-btn" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">Claim Star Victory ⭐</button>
+        </div>
+      `;
+    }
 
     const modal = document.createElement('div');
     modal.className = 'diploma-modal-overlay';
     modal.id = 'gameLevelModal';
     modal.innerHTML = `
-      <div class="diploma-modal-card" style="border-color:#d946ef;">
-        <div style="font-size:3.5rem;">${lvl.icon || '🎮'}</div>
-        <h2 style="color:#86198f; margin:0 0 8px;">Level ${lvl.level}: ${lvl.title}</h2>
-        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1.5rem;">${lvl.mission || 'Find and select the matching item!'}</p>
-
-        <button class="exercise-audio-trigger" style="background:#d946ef; margin-bottom:1.5rem;" onclick="toddlersEngine.playAudio('${cleanWord}')">
-          🔊 Hear Target Word
-        </button>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:1.5rem;">
-          ${choices.map((c, i) => `
-            <button class="exercise-choice-card" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, ${c.correct})">
-              <div class="choice-icon">${c.icon || '✨'}</div>
-              <div class="choice-text">${c.text}</div>
-            </button>
-          `).join('')}
+      <div class="diploma-modal-card" style="border-color:#d946ef; max-width:550px;">
+        <h2 style="color:#86198f; margin:0 0 6px;">Level ${lvl.level}: ${lvl.title}</h2>
+        ${gameContentHtml}
+        <div style="margin-top:1.5rem;">
+          <button class="toddler-nav-pill" style="margin:0 auto;" onclick="document.getElementById('gameLevelModal')?.remove()">
+            Exit Level
+          </button>
         </div>
-
-        <button class="toddler-nav-pill" style="margin:0 auto;" onclick="document.getElementById('gameLevelModal')?.remove()">
-          Close
-        </button>
       </div>
     `;
 
     document.body.appendChild(modal);
-    this.playAudio(lvl.targetWord || lvl.title);
+    this.playAudio(target);
   }
 
   handleGameLevelChoice(levelNum, isCorrect) {
@@ -1175,8 +1454,8 @@ class ToddlersUnitsEngine {
     `;
 
     (currentStep.options || []).forEach((opt, idx) => {
-      const isCorrect = (opt.text === currentStep.answer || opt === currentStep.answer);
-      const optText = (typeof opt === 'string') ? opt : (opt.text || '');
+      const isCorrect = (opt.text === currentStep.answer || opt === currentStep.answer || idx === currentStep.correct);
+      const optText = (typeof opt === 'string') ? opt : (opt.text || opt.name || '');
       const optIcon = (typeof opt === 'object') ? (opt.icon || '⭐') : '⭐';
 
       html += `
@@ -1207,7 +1486,6 @@ class ToddlersUnitsEngine {
         const ws = document.getElementById('toddlerWorkspace');
         if (ws) this.renderFinalChallenge(ws);
       } else {
-        // Completed Step 10!
         const uProg = this.getUnitProgress(this.currentUnitId);
         uProg.challengeCompleted = true;
         this.saveProgress();

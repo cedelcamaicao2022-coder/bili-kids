@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Bilikids Toddlers Interactive Academy Styles (15 Units, 4 Skills, 12L Games)
+   Bilikids Toddlers Interactive Academy Styles (15 Units, Rich Diverse Mechanics)
    ========================================================================== */
 
 :root {
@@ -232,7 +232,7 @@ body.toddler-body {
 }
 
 /* ==========================================================================
-   UNIT SECTIONS MAIN TABS (Explore, Listening, Reading, Writing, Speaking, Videos, Game, Final, Progress)
+   UNIT SECTIONS MAIN TABS
    ========================================================================== */
 .toddler-tabs-nav {
   display: flex;
@@ -334,712 +334,407 @@ body.toddler-body {
 }
 
 /* ==========================================================================
-   EXPLORE SECTION (VOCABULARY FLASHCARDS & PHONICS)
+   MECHANIC A: BUBBLE POP RUSH (FLOATING BUBBLES)
    ========================================================================== */
-.explore-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
+.bubble-pond-container {
+  position: relative;
+  min-height: 340px;
+  background: radial-gradient(circle at center, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 24px;
+  border: 3px dashed #38bdf8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 2rem 1rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.explore-card {
-  background: #ffffff;
-  border: 2px solid #fde68a;
-  border-radius: 20px;
-  padding: 1.4rem;
-  text-align: center;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  position: relative;
+.floating-bubble-item {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), rgba(56, 189, 248, 0.45));
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: floatBubble 3s ease-in-out infinite alternate;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
 }
 
-.explore-card:hover {
-  transform: translateY(-5px);
-  border-color: #f59e0b;
-  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.2);
+.floating-bubble-item:nth-child(2) {
+  animation-duration: 3.6s;
+  animation-delay: -1s;
+}
+.floating-bubble-item:nth-child(3) {
+  animation-duration: 4.2s;
+  animation-delay: -2s;
 }
 
-.explore-icon {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-  transition: transform 0.2s ease;
+@keyframes floatBubble {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(3deg); }
+  100% { transform: translateY(8px) rotate(-3deg); }
 }
 
-.explore-card:hover .explore-icon {
-  transform: scale(1.15) rotate(3deg);
+.floating-bubble-item:hover {
+  transform: scale(1.15) !important;
+  box-shadow: 0 15px 35px rgba(14, 165, 233, 0.5);
 }
 
-.explore-word {
-  font-size: 1.45rem;
+.floating-bubble-item.popping {
+  animation: popBurst 0.4s forwards;
+}
+
+@keyframes popBurst {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; filter: brightness(1.5); }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* ==========================================================================
+   MECHANIC B: MEMORY CARDS FLIP BOARD
+   ========================================================================== */
+.memory-board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1.25rem;
+  max-width: 680px;
+  margin: 1.5rem auto 2rem;
+  perspective: 1000px;
+}
+
+.memory-card-box {
+  height: 140px;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  border-radius: 18px;
+}
+
+.memory-card-box.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front, .memory-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.memory-card-front {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  border: 3px solid #fef3c7;
+  font-size: 2.2rem;
   font-weight: 900;
-  color: #78350f;
-  margin: 0 0 0.35rem;
 }
 
-.explore-fact {
-  font-size: 0.92rem;
-  color: #6b7280;
-  line-height: 1.4;
+.memory-card-back {
+  background: #ffffff;
+  color: #1f2937;
+  border: 3px solid #10b981;
+  transform: rotateY(180deg);
+}
+
+/* ==========================================================================
+   MECHANIC C: DRAG & DROP SORTING TRAYS / CANASTAS
+   ========================================================================== */
+.sorting-stage-wrap {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.sorting-tray-basket {
+  flex: 1;
+  min-width: 260px;
+  max-width: 380px;
+  min-height: 200px;
+  background: #fafaf9;
+  border: 3px dashed #d6d3d1;
+  border-radius: 22px;
+  padding: 1.25rem;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.sorting-tray-basket.tray-a {
+  background: #ecfdf5;
+  border-color: #34d399;
+}
+
+.sorting-tray-basket.tray-b {
+  background: #fdf2f8;
+  border-color: #f472b6;
+}
+
+.sorting-tray-header {
+  font-size: 1.2rem;
+  font-weight: 900;
   margin-bottom: 1rem;
 }
 
-.explore-audio-btn {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1.5px solid #fde68a;
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 0.88rem;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
+.sorting-drop-zone {
+  min-height: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-  margin: 0 auto;
 }
 
-.explore-audio-btn:hover {
+/* ==========================================================================
+   MECHANIC D: MYSTERY SHADOW DETECTIVE
+   ========================================================================== */
+.shadow-detective-stage {
+  max-width: 500px;
+  margin: 1.5rem auto;
+  background: #f8fafc;
+  border: 3px solid #cbd5e1;
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.silhouette-display {
+  font-size: 5rem;
+  filter: brightness(0) drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+  margin: 1rem 0;
+  animation: pulseShadow 2s infinite ease-in-out;
+}
+
+@keyframes pulseShadow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* ==========================================================================
+   MECHANIC E: SENTENCE PUZZLE TRAIN WAGONS
+   ========================================================================== */
+.sentence-train-track {
+  background: #f1f5f9;
+  border-bottom: 4px solid #64748b;
+  border-radius: 18px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  min-height: 90px;
+}
+
+.train-wagon-block {
+  background: #ffffff;
+  border: 2px solid #0ea5e9;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0369a1;
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.2);
+  cursor: pointer;
+  position: relative;
+}
+
+.train-wagon-block::after {
+  content: '🔗';
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+}
+
+.train-wagon-block:last-child::after {
+  content: '';
+}
+
+/* ==========================================================================
+   MECHANIC F: KIDS COLORFUL ON-SCREEN KEYBOARD
+   ========================================================================== */
+.kids-keyboard-wrap {
+  max-width: 650px;
+  margin: 1.5rem auto 0;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.kids-keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.kids-key-btn {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  width: 44px;
+  height: 48px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+  transition: all 0.1s ease;
+}
+
+.kids-key-btn:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  transform: translateY(-2px);
+}
+
+.kids-key-btn:active {
+  transform: translateY(2px);
+}
+
+.kids-key-btn.action-key {
+  width: auto;
+  padding: 0 16px;
+  font-size: 0.95rem;
+  background: #f1f5f9;
+}
+
+/* ==========================================================================
+   MECHANIC G: PARROT ECHO SPEAKING STUDIO
+   ========================================================================== */
+.parrot-studio-card {
+  max-width: 600px;
+  margin: 1rem auto;
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  border: 3px solid #fda4af;
+  border-radius: 26px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.parrot-mascot-box {
+  font-size: 5rem;
+  margin-bottom: 0.5rem;
+  animation: parrotHop 1.5s infinite ease-in-out alternate;
+}
+
+@keyframes parrotHop {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+  100% { transform: translateY(0) rotate(-4deg); }
+}
+
+/* ==========================================================================
+   INTERACTIVE VIDEO & THEATER STAGE
+   ========================================================================== */
+.theater-mode-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.theater-mode-btn {
+  background: #ffffff;
+  border: 2px solid #fde68a;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #78350f;
+  cursor: pointer;
+}
+
+.theater-mode-btn.active {
   background: #f59e0b;
   color: #ffffff;
   border-color: #d97706;
 }
 
-/* ==========================================================================
-   SKILL SUB-NAVIGATION (6 ACTIVITIES PER SKILL)
-   ========================================================================== */
-.skill-activities-nav {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 4px 0 16px;
+.interactive-karaoke-stage {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  border-radius: 24px;
+  padding: 2rem;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(30, 27, 75, 0.4);
   margin-bottom: 1.5rem;
-  border-bottom: 1.5px dashed #e5e7eb;
+  position: relative;
+  overflow: hidden;
 }
 
-.skill-activity-btn {
-  background: #f9fafb;
-  border: 1.5px solid #d1d5db;
-  padding: 8px 16px;
-  border-radius: 14px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #4b5563;
-  cursor: pointer;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.skill-activity-btn:hover {
-  background: #f3f4f6;
-  border-color: #9ca3af;
-}
-
-.skill-activity-btn.active {
-  background: #fef3c7;
-  border-color: #f59e0b;
-  color: #92400e;
-  font-weight: 800;
-}
-
-/* ==========================================================================
-   EXERCISE RUNNER (5 EXERCISES PER ACTIVITY)
-   ========================================================================== */
-.exercise-runner-box {
-  max-width: 840px;
-  margin: 0 auto;
-}
-
-.exercise-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.exercise-progress-dots {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.exercise-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #e5e7eb;
-  transition: all 0.2s ease;
-}
-
-.exercise-dot.active {
-  background: #f59e0b;
-  transform: scale(1.25);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-}
-
-.exercise-dot.completed {
-  background: #10b981;
-}
-
-.exercise-prompt-card {
-  background: #fdfaf3;
-  border: 2px dashed #fcd34d;
-  border-radius: 20px;
-  padding: 1.5rem;
-  text-align: center;
-  margin-bottom: 1.75rem;
-}
-
-.exercise-instruction {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #78350f;
-  margin: 0 0 0.5rem;
-}
-
-.exercise-sub-instruction {
-  font-size: 0.95rem;
-  color: #6b7280;
-  margin: 0;
-}
-
-.exercise-audio-trigger {
-  margin-top: 1rem;
-  background: #f59e0b;
-  color: #ffffff;
-  border: none;
-  border-radius: 999px;
-  padding: 10px 24px;
-  font-size: 1rem;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-  transition: all 0.15s ease;
-}
-
-.exercise-audio-trigger:hover {
-  background: #d97706;
-  transform: translateY(-2px);
-}
-
-/* Choices Grid */
-.exercise-choices-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.exercise-choice-card {
-  background: #ffffff;
-  border: 2px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 1.25rem 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  min-height: 120px;
-}
-
-.exercise-choice-card:hover {
-  transform: translateY(-4px);
-  border-color: #f59e0b;
-  box-shadow: 0 8px 18px rgba(245, 158, 11, 0.2);
-}
-
-.exercise-choice-card .choice-icon {
-  font-size: 3rem;
-  margin-bottom: 0.35rem;
-}
-
-.exercise-choice-card .choice-text {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #374151;
-}
-
-.exercise-choice-card.correct {
-  background: #d1fae5;
-  border-color: #10b981;
-  color: #065f46;
-  transform: scale(1.03);
-}
-
-.exercise-choice-card.wrong {
-  background: #fee2e2;
-  border-color: #ef4444;
-  color: #991b1b;
-  animation: shake 0.4s ease;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
-}
-
-/* ==========================================================================
-   WRITING EXERCISE COMPONENTS (TILES, SLOTS, KEYBOARDS)
-   ========================================================================== */
-.writing-slots-container {
+.stage-dancer-row {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 1.5rem 0;
-  flex-wrap: wrap;
-}
-
-.writing-slot {
-  width: 52px;
-  height: 60px;
-  border: 2.5px dashed #f59e0b;
-  border-radius: 14px;
-  background: #fffbeb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: #78350f;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.writing-slot.filled {
-  border-style: solid;
-  border-color: #10b981;
-  background: #ecfdf5;
-  color: #047857;
-}
-
-.writing-tiles-pool {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.writing-letter-tile {
-  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
-  border: 2px solid #f59e0b;
-  border-radius: 14px;
-  padding: 10px 18px;
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #92400e;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);
-  transition: all 0.15s ease;
-  user-select: none;
-}
-
-.writing-letter-tile:hover {
-  transform: translateY(-3px);
-  background: #f59e0b;
-  color: #ffffff;
-}
-
-.writing-letter-tile.used {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-.writing-input-box {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 1.5rem 0;
-}
-
-.writing-text-input {
-  border: 2.5px solid #d1d5db;
-  border-radius: 16px;
-  padding: 12px 20px;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #1f2937;
-  text-align: center;
-  outline: none;
-  width: 280px;
-  transition: border-color 0.2s ease;
-}
-
-.writing-text-input:focus {
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
-}
-
-.writing-check-btn {
-  background: #10b981;
-  color: #ffffff;
-  border: none;
-  border-radius: 16px;
-  padding: 12px 26px;
-  font-size: 1.1rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.writing-check-btn:hover {
-  background: #059669;
-}
-
-/* ==========================================================================
-   SPEAKING EXERCISE COMPONENTS (RECORDER & SPEECH RECOGNITION)
-   ========================================================================== */
-.speaking-panel {
-  text-align: center;
-  padding: 1.5rem 1rem;
-}
-
-.speaking-target-phrase {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #be123c;
+  gap: 3rem;
+  font-size: 4rem;
   margin: 1rem 0;
 }
 
-.speaking-mic-btn {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-  border: 4px solid #ffffff;
-  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.4);
-  color: #ffffff;
-  font-size: 2.2rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+.stage-dancer {
+  animation: danceBeat 0.8s infinite alternate ease-in-out;
+}
+
+.stage-dancer:nth-child(2) {
+  animation-delay: -0.4s;
+}
+
+@keyframes danceBeat {
+  0% { transform: translateY(0) scale(1) rotate(-5deg); }
+  100% { transform: translateY(-18px) scale(1.1) rotate(5deg); }
+}
+
+.stage-lyrics-box {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fde047;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
   margin: 1.5rem 0;
+  min-height: 48px;
 }
 
-.speaking-mic-btn:hover {
-  transform: scale(1.08);
-}
-
-.speaking-mic-btn.recording {
-  background: #dc2626;
-  animation: pulse-ring 1.25s infinite;
-}
-
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-  70% { box-shadow: 0 0 0 22px rgba(220, 38, 38, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-}
-
-.speaking-feedback-badge {
-  display: inline-block;
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 800;
-  margin-top: 1rem;
-}
-
-.speaking-feedback-badge.success {
-  background: #d1fae5;
-  color: #047857;
-  border: 1.5px solid #10b981;
-}
-
-/* ==========================================================================
-   INTERACTIVE VIDEOS SECTION
-   ========================================================================== */
-.video-section-wrap {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.video-player-frame-box {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 ratio */
-  height: 0;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  margin-bottom: 1.75rem;
-  background: #000;
-}
-
-.video-player-frame-box iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video-checkpoints-card {
-  background: #fdfaf3;
-  border: 2px solid #fde68a;
-  border-radius: 20px;
-  padding: 1.5rem;
-}
-
-.video-checkpoint-item {
-  background: #ffffff;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-}
-
-/* ==========================================================================
-   MAIN GAME (12 PROGRESSIVE LEVELS)
-   ========================================================================== */
-.game-levels-map-wrap {
-  padding: 1rem 0;
-}
-
-.game-levels-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-}
-
-.game-level-node {
-  background: #ffffff;
-  border: 2.5px solid #e5e7eb;
-  border-radius: 22px;
-  padding: 1.25rem;
-  text-align: center;
-  position: relative;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-}
-
-.game-level-node.unlocked {
-  border-color: #f59e0b;
-  cursor: pointer;
-}
-
-.game-level-node.unlocked:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(245, 158, 11, 0.25);
-}
-
-.game-level-node.locked {
-  background: #f9fafb;
-  opacity: 0.65;
-  filter: grayscale(0.5);
-  cursor: not-allowed;
-}
-
-.game-level-node.completed {
-  border-color: #10b981;
-  background: #f0fdf4;
-}
-
-.game-level-num {
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: #78350f;
-  margin-bottom: 0.35rem;
-}
-
-.game-level-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.game-level-title {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #374151;
-  margin-bottom: 0.5rem;
-}
-
-.game-level-stars {
-  font-size: 1.1rem;
-  color: #f59e0b;
-}
-
-/* ==========================================================================
-   FINAL INTEGRATIVE CHALLENGE (10 STEPS)
-   ========================================================================== */
-.final-challenge-stepper-wrap {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.challenge-stepper-bar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.challenge-step-badge {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #e5e7eb;
-  color: #4b5563;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.challenge-step-badge.active {
-  background: #f59e0b;
-  color: #ffffff;
-  transform: scale(1.2);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
-}
-
-.challenge-step-badge.completed {
-  background: #10b981;
-  color: #ffffff;
-}
-
-/* ==========================================================================
-   DIPLOMA / COMPLETION MODAL & CONFETTI
-   ========================================================================== */
-.diploma-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 1.5rem;
-}
-
-.diploma-modal-card {
-  background: #ffffff;
-  border: 4px solid #f59e0b;
-  border-radius: 30px;
-  max-width: 600px;
-  width: 100%;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  position: relative;
-  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.85); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.diploma-ribbon-badge {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-}
-
-.diploma-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #b45309;
-  margin: 0 0 0.5rem;
-}
-
-.diploma-desc {
-  font-size: 1.1rem;
-  color: #4b5563;
-  margin-bottom: 1.5rem;
-}
-
-.diploma-close-btn {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: #ffffff;
-  border: none;
-  border-radius: 999px;
-  padding: 12px 32px;
-  font-size: 1.15rem;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
-}
-
-/* ==========================================================================
-   PROGRESS & ASSESSMENT DASHBOARD
-   ========================================================================== */
-.progress-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.progress-skill-card {
-  background: #ffffff;
-  border: 2px solid #e5e7eb;
-  border-radius: 20px;
-  padding: 1.25rem;
-  text-align: center;
-}
-
-.progress-skill-card.listening { border-color: #0ea5e9; }
-.progress-skill-card.reading { border-color: #8b5cf6; }
-.progress-skill-card.writing { border-color: #10b981; }
-.progress-skill-card.speaking { border-color: #f43f5e; }
-
-.progress-meter-track {
-  width: 100%;
-  height: 12px;
-  background: #e5e7eb;
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 0.75rem;
-}
-
-.progress-meter-fill {
-  height: 100%;
-  border-radius: 999px;
-  transition: width 0.4s ease;
-}
-
-/* Responsive queries */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .toddler-header-box {
-    padding: 1.25rem;
+  .bubble-pond-container {
+    min-height: 280px;
   }
-  .toddler-unit-title {
-    font-size: 1.45rem;
+  .floating-bubble-item {
+    width: 110px;
+    height: 110px;
   }
-  .explore-grid {
-    grid-template-columns: 1fr;
-  }
-  .exercise-choices-grid {
-    grid-template-columns: 1fr;
-  }
-  .game-levels-grid {
+  .memory-board-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
