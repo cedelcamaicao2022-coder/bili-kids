@@ -153,17 +153,50 @@ class ToddlersUnitsEngine {
   }
 
   /* ==========================================================================
-     AUDIO PLAYBACK & SPEECH UTILITIES
+     AUDIO PLAYBACK & SPEECH UTILITIES (ELEVENLABS STUDIO + SPEECH SYNTHESIS)
      ========================================================================== */
   playAudio(text, voice = 'kid') {
+    if (!text || typeof text !== 'string') return;
+
+    const normKey = (text || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+    const manifest = window.ToddlersAudioManifest || window.BilikidsAudioManifest || {};
+    const audioSrc = manifest[normKey] || manifest[text];
+
+    if (audioSrc) {
+      try {
+        if (this._currentAudio) {
+          this._currentAudio.pause();
+          this._currentAudio.currentTime = 0;
+        }
+        const audio = new Audio(audioSrc);
+        this._currentAudio = audio;
+        audio.preservesPitch = true;
+        audio.playbackRate = 0.92;
+        audio.play().catch(() => {
+          this.fallbackSpeechSynthesis(text);
+        });
+        return;
+      } catch (e) {
+        // Fallback
+      }
+    }
+
     if (typeof playStudioOrSynthAudio === 'function') {
       playStudioOrSynthAudio(text, voice);
-    } else if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'en-US';
-      u.rate = 0.85;
-      window.speechSynthesis.speak(u);
+    } else {
+      this.fallbackSpeechSynthesis(text);
+    }
+  }
+
+  fallbackSpeechSynthesis(text) {
+    if ('speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+      } catch (err) {}
     }
   }
 
