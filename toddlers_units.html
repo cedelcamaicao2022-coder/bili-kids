@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Toddlers Academy (6 - 8 años) | Bilikids Adventure</title>
+  <title>Toddlers Academy (6 - 8 años) • 15 Unidades | Bilikids Adventure</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
   <link rel="stylesheet" href="subpages_styles.css">
   <link rel="stylesheet" href="toddlers_units_styles.css">
@@ -17,7 +17,7 @@
     <div class="nav-left-brand">
       <a href="toddlers.html" class="brand-link" title="Volver al Portal Toddlers">
         <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
-        <span class="brand-subtitle-tag" style="color: #f59e0b;">TODDLERS ACADEMY</span>
+        <span class="brand-subtitle-tag" style="color: #f59e0b;">TODDLERS 01</span>
       </a>
     </div>
 
@@ -28,11 +28,11 @@
         </svg>
         Toddlers Home
       </a>
-      <a href="toddlers_units.html" class="nav-pill-item active" style="background:#fef3c7; color:#b45309;" title="Unidades Interactivas Toddlers">
+      <a href="toddlers_units.html" class="nav-pill-item active" style="background:#fef3c7; color:#b45309;" title="15 Unidades Interactivas Toddlers">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
         </svg>
-        6 Unidades
+        15 Unidades
       </a>
       <a href="puzzle.html?mode=toddlers" class="nav-pill-item" title="Rompecabezas Toddlers 3x3">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -67,7 +67,7 @@
        ======================================================================== -->
   <main class="toddler-container">
 
-    <!-- 6 UNITS NAVIGATION TABS -->
+    <!-- 15 UNITS NAVIGATION STRIP -->
     <nav class="toddler-units-nav" id="toddlerUnitsNav">
       <!-- Injected by engine -->
     </nav>
@@ -75,10 +75,10 @@
     <!-- HEADER CARD -->
     <header class="toddler-header-box">
       <div class="toddler-header-left">
-        <span class="toddler-unit-tag" id="toddlerUnitTag">Unit 1 • Animals & Sounds</span>
-        <h1 class="toddler-unit-title" id="toddlerUnitTitle">🐮 Happy Farm Animals</h1>
+        <span class="toddler-unit-tag" id="toddlerUnitTag">Unit 1 • School Objects</span>
+        <h1 class="toddler-unit-title" id="toddlerUnitTitle">🎒 School Objects</h1>
         <p class="toddler-unit-desc" id="toddlerUnitDesc">
-          Meet friendly farm animals, listen to their sounds in English, and match each animal with its name!
+          Explore school items, listen to classroom words, unscramble letters, speak with Leo and Luna, and complete the 12-level quest!
         </p>
       </div>
 
@@ -94,7 +94,12 @@
 
   </main>
 
+  <!-- SCRIPTS ORDER: AUDIO PLAYER -> PART 1 -> PART 2 -> PART 3 -> MASTER DATA -> ENGINE -->
   <script src="assets/kids_audio/kids_audio_player.js"></script>
+  <script src="toddlers_data_u1_u5.js"></script>
+  <script src="toddlers_data_u6_u10.js"></script>
+  <script src="toddlers_data_u11_u15.js"></script>
+  <script src="toddlers_data.js"></script>
   <script src="toddlers_units_engine.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
