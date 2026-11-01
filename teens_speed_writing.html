@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speed Writing 60s | Reto de Escritura Rápida B2 - Teens Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
+  <link rel="stylesheet" href="teens_speed_styles.css">
+</head>
+<body class="speed-body">
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="teens.html" class="brand-link" title="Volver al Portal Teens Academy">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag" style="color: #6366f1;">SPEED WRITING 60s</span>
+      </a>
+    </div>
+
+    <nav class="nav-center-menu">
+      <a href="teens.html" class="nav-pill-item" title="Volver a Teens Academy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Teens Home
+      </a>
+      <a href="teens_saber_tests.html" class="nav-pill-item" title="Simulador Saber 9°-11°">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Saber 9°-11°
+      </a>
+      <a href="teens_speed_writing.html" class="nav-pill-item active" style="background:#e0e7ff; color:#4338ca;" title="Speed Writing Challenge (1 min)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Speed Writing
+      </a>
+      <a href="teens_cambridge_b2.html" class="nav-pill-item" title="Cambridge B2 First Practice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cambridge B2
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="teens.html" class="nav-circle-btn" title="Volver a Teens">
+        ✕
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Matías">
+        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar-circle">
+        <span class="user-greeting-name">Matías • B2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN SPEED WRITING CHALLENGE CONTAINER
+       ======================================================================== -->
+  <main class="speed-wrapper">
+
+    <!-- HORIZONTAL PROMPT SELECTOR -->
+    <div class="speed-prompts-bar" id="promptPillsList">
+      <!-- Generated dynamically by engine -->
+    </div>
+
+    <!-- WRITING CARD -->
+    <div class="speed-card-box">
+
+      <div class="speed-header-top">
+        <div>
+          <span class="speed-badge-category" id="promptCategoryBadge">Technology & Society</span>
+          <h1 class="speed-prompt-title" id="promptTitle">Artificial Intelligence in Schools</h1>
+          <p class="speed-prompt-desc" id="promptInstructions">
+            Should artificial intelligence tools like ChatGPT be integrated into secondary school classrooms, or do they weaken students' critical thinking? Explain your perspective in one clear, cohesive paragraph.
+          </p>
+        </div>
+
+        <!-- 60-Second Countdown Digital Clock -->
+        <div class="speed-timer-block">
+          <span class="speed-timer-number" id="timerSecondsDisplay">60s</span>
+          <span class="speed-timer-sub">Temporizador</span>
+        </div>
+      </div>
+
+      <!-- Linear Countdown Bar -->
+      <div class="speed-progress-track">
+        <div class="speed-progress-bar" id="timerProgressBar" style="width: 100%;"></div>
+      </div>
+
+      <!-- Student Input Area -->
+      <div class="speed-editor-box">
+        <textarea
+          id="studentTextInput"
+          class="speed-textarea"
+          placeholder="Presiona 'Iniciar Reto de 1 Minuto' para desbloquear el editor..."
+          disabled
+        ></textarea>
+      </div>
+
+      <!-- Real-Time Metrics Strip -->
+      <div class="speed-stats-bar">
+        <div class="speed-stats-group">
+          <span class="stat-chip">Palabras: <strong id="statWordCount">0</strong></span>
+          <span class="stat-chip">Caracteres: <strong id="statCharCount">0</strong></span>
+          <span class="stat-chip">Velocidad: <strong id="statWpm">0</strong> PPM</span>
+        </div>
+        <div>
+          <button id="soundToggleBtn" class="speed-secondary-btn" style="padding: 6px 14px; font-size: 0.85rem;">
+            🔊 Sonido
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Action Buttons -->
+      <div class="speed-actions-row">
+        <button id="resetChallengeBtn" class="speed-secondary-btn">
+          ↺ Reiniciar
+        </button>
+
+        <div style="display: flex; gap: 12px;">
+          <button id="startChallengeBtn" class="speed-main-btn">
+            ⚡ Iniciar Reto de 1 Minuto
+          </button>
+          <button id="submitChallengeBtn" class="speed-main-btn speed-submit-btn" style="display: none;">
+            ✓ Enviar y Evaluar Párrafo
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="teens_speed_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const speedEngine = new TeensSpeedEngine();
+      speedEngine.init();
+      window.speedEngine = speedEngine;
+    });
+  </script>
+</body>
+</html>

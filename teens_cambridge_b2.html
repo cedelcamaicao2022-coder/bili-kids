@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambridge B2 First (FCE) | Use of English Academy - Teens Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
+  <link rel="stylesheet" href="teens_cambridge_styles.css">
+</head>
+<body class="cambridge-body">
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="teens.html" class="brand-link" title="Volver al Portal Teens Academy">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag" style="color: #7c3aed;">CAMBRIDGE B2 FIRST</span>
+      </a>
+    </div>
+
+    <nav class="nav-center-menu">
+      <a href="teens.html" class="nav-pill-item" title="Volver a Teens Academy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Teens Home
+      </a>
+      <a href="teens_saber_tests.html" class="nav-pill-item" title="Simulador Saber 9°-11°">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Saber 9°-11°
+      </a>
+      <a href="teens_speed_writing.html" class="nav-pill-item" title="Speed Writing Challenge (1 min)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Speed Writing
+      </a>
+      <a href="teens_cambridge_b2.html" class="nav-pill-item active" style="background:#f3e8ff; color:#7e22ce;" title="Cambridge B2 First Practice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cambridge B2
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="teens.html" class="nav-circle-btn" title="Volver a Teens">
+        ✕
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Matías">
+        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar-circle">
+        <span class="user-greeting-name">Matías • B2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN CAMBRIDGE B2 WORKSPACE
+       ======================================================================== -->
+  <main class="cambridge-container">
+
+    <!-- 4 PART NAVIGATION BUTTONS -->
+    <nav class="cambridge-parts-nav">
+      <button class="cambridge-part-btn active" data-part="part1">
+        <span>Part 1:</span> Multiple-Choice Cloze
+      </button>
+      <button class="cambridge-part-btn" data-part="part2">
+        <span>Part 2:</span> Open Cloze
+      </button>
+      <button class="cambridge-part-btn" data-part="part3">
+        <span>Part 3:</span> Word Formation
+      </button>
+      <button class="cambridge-part-btn" data-part="part4">
+        <span>Part 4:</span> Key Word Transformations
+      </button>
+    </nav>
+
+    <!-- HEADER / INTRO CARD -->
+    <header class="cambridge-header-box">
+      <span class="cambridge-badge" id="partBadge">Lexical & Collocations</span>
+      <h1 class="cambridge-title" id="partTitle">Part 1: Multiple-Choice Cloze</h1>
+      <p class="cambridge-desc" id="partDescription">
+        Read the text and decide which answer best fits each gap. This tests collocations, idioms, and phrasal verbs.
+      </p>
+
+      <div class="cambridge-ex-selector" id="exerciseSelectorPills">
+        <!-- Rendered dynamically -->
+      </div>
+    </header>
+
+    <!-- EXERCISE CARD CONTAINER -->
+    <section id="cambridgeExerciseBody">
+      <!-- Injected by teens_cambridge_engine.js -->
+    </section>
+
+  </main>
+
+  <script src="teens_cambridge_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cbEngine = new TeensCambridgeEngine();
+      cbEngine.init();
+      window.cbEngine = cbEngine;
+    });
+  </script>
+</body>
+</html>

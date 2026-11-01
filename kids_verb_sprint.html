@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verb Sprint 60s | Cambridge A1-A2 Reto de Verbos - Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="stylesheet" href="subpages_styles.css">
+  <link rel="stylesheet" href="kids_verb_styles.css">
+</head>
+<body class="kids-verb-body">
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="subpage-navbar">
+    <div class="nav-left-brand">
+      <a href="kids.html" class="brand-link" title="Volver al Portal Kids">
+        <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
+        <span class="brand-subtitle-tag" style="color: #10b981;">VERB SPRINT 60s</span>
+      </a>
+    </div>
+
+    <nav class="nav-center-menu">
+      <a href="kids.html" class="nav-pill-item" title="Volver a Kids">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Kids Home
+      </a>
+      <a href="kids_verb_sprint.html" class="nav-pill-item active" style="background:#d1fae5; color:#065f46;" title="Verb Sprint 60s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Verb Sprint
+      </a>
+      <a href="puzzle.html?mode=kids" class="nav-pill-item" title="Kids Puzzles">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Puzzles
+      </a>
+    </nav>
+
+    <div class="nav-right-actions">
+      <a href="kids.html" class="nav-circle-btn" title="Volver a Kids">
+        ✕
+      </a>
+      <div class="user-profile-badge" title="Estudiante: Sofía">
+        <img src="assets/home/avatar_matias_2x.png" alt="Estudiante" class="user-avatar-circle">
+        <span class="user-greeting-name">Kids • A1/A2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN SPRINT CONTAINER
+       ======================================================================== -->
+  <main class="verb-sprint-container">
+
+    <!-- HUD STATS STRIP -->
+    <header class="verb-hud-bar">
+      <div class="verb-hud-stat">
+        <span class="verb-stat-label">Puntos:</span>
+        <span class="verb-stat-value" id="sprintScoreVal">0</span>
+      </div>
+
+      <div class="verb-timer-chip">
+        <span>⏱️</span>
+        <span id="sprintTimerDisplay">60s</span>
+      </div>
+
+      <div class="verb-hud-stat">
+        <span class="verb-stat-label">Racha:</span>
+        <span class="verb-stat-value" id="sprintStreakVal">0 🔥</span>
+      </div>
+
+      <div class="verb-hud-stat">
+        <span class="verb-stat-label">Aciertos:</span>
+        <span class="verb-stat-value" id="sprintCountVal">0/0</span>
+      </div>
+
+      <button id="btnSoundSprint" class="verb-btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+        🔊 Sonido: ON
+      </button>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="verb-timer-progress-track">
+      <div class="verb-timer-progress-fill" id="sprintTimerBar" style="width: 100%;"></div>
+    </div>
+
+    <!-- 1. START / WELCOME CARD -->
+    <section class="verb-intro-card" id="sprintStartCard">
+      <span class="verb-intro-badge">⚡ Cambridge Young Learners & A2 Key</span>
+      <h1 class="verb-intro-title">Verb Sprint Challenge!</h1>
+      <p class="verb-intro-desc">
+        ¡Tienes exactamente <b>60 segundos</b> para completar la mayor cantidad de oraciones en inglés con el verbo correcto! Acumula rachas de fuego 🔥 y gana estrellas ⭐.
+      </p>
+
+      <div class="verb-features-row">
+        <div class="verb-feature-pill">⏱️ 1 Minuto sin parar</div>
+        <div class="verb-feature-pill">🎯 Presente, Pasado y Continuo</div>
+        <div class="verb-feature-pill">⭐ Hasta 500+ Puntos</div>
+      </div>
+
+      <button id="btnStartSprint" class="verb-btn-primary" style="font-size: 1.25rem; padding: 16px 38px;">
+        ▶ ¡Iniciar Verb Sprint Ahora!
+      </button>
+    </section>
+
+    <!-- 2. ACTIVE GAMEPLAY CARD -->
+    <section class="verb-game-card" id="sprintGameCard" style="display: none;">
+      <div class="verb-question-header">
+        <span class="verb-cat-pill" id="sprintCategoryBadge">Present Simple</span>
+        <span style="font-size: 0.85rem; color: #64748b; font-weight: 700;">¡Elige el verbo correcto rápido!</span>
+      </div>
+
+      <!-- Sentence Box -->
+      <div class="verb-sentence-display" id="sprintSentenceText">
+        Lucas always <span class="verb-blank">______</span> his teeth before sleeping.
+      </div>
+
+      <!-- 4 Option Buttons -->
+      <div class="verb-options-grid" id="sprintOptionsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="kids_verb_engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const verbEngine = new KidsVerbEngine();
+      verbEngine.init();
+      window.verbEngine = verbEngine;
+    });
+  </script>
+</body>
+</html>
