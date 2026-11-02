@@ -904,12 +904,16 @@ class JigsawGame {
 
     // Victory modal buttons
     document.getElementById('replayBtn').addEventListener('click', () => {
+      if (this.toddlerAutoNextTimer) clearTimeout(this.toddlerAutoNextTimer);
+      if (this.toddlerCountdownInterval) clearInterval(this.toddlerCountdownInterval);
       document.getElementById('victoryModal').style.display = 'none';
       audio.playGrab();
       this.loadPuzzle(this.currentPuzzleIdx);
     });
 
     document.getElementById('nextPuzzleBtn').addEventListener('click', () => {
+      if (this.toddlerAutoNextTimer) clearTimeout(this.toddlerAutoNextTimer);
+      if (this.toddlerCountdownInterval) clearInterval(this.toddlerCountdownInterval);
       document.getElementById('victoryModal').style.display = 'none';
       const nextIdx = (this.currentPuzzleIdx + 1) % PUZZLE_CATALOG.length;
       this.selectPuzzle(nextIdx);
@@ -977,6 +981,33 @@ class JigsawGame {
 
     const modal = document.getElementById('victoryModal');
     modal.style.display = 'flex';
+
+    if (this.currentMode === 'toddlers') {
+      const nextBtn = document.getElementById('nextPuzzleBtn');
+      if (nextBtn) {
+        let count = 4;
+        nextBtn.innerHTML = `<span>➔</span> ¡Siguiente en ${count}s!`;
+        if (this.toddlerCountdownInterval) clearInterval(this.toddlerCountdownInterval);
+        this.toddlerCountdownInterval = setInterval(() => {
+          count--;
+          if (count > 0 && nextBtn) {
+            nextBtn.innerHTML = `<span>➔</span> ¡Siguiente en ${count}s!`;
+          } else {
+            clearInterval(this.toddlerCountdownInterval);
+          }
+        }, 1000);
+
+        if (this.toddlerAutoNextTimer) clearTimeout(this.toddlerAutoNextTimer);
+        this.toddlerAutoNextTimer = setTimeout(() => {
+          if (modal.style.display !== 'none') {
+            modal.style.display = 'none';
+            nextBtn.innerHTML = `<span>➔</span> Siguiente`;
+            const nextIdx = (this.currentPuzzleIdx + 1) % PUZZLE_CATALOG.length;
+            this.selectPuzzle(nextIdx);
+          }
+        }, 4200);
+      }
+    }
   }
 
   launchConfetti() {

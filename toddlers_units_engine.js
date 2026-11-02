@@ -1150,19 +1150,72 @@ class ToddlersUnitsEngine {
       } else {
         this.markActivityCompleted(skillName, this.currentActivityIndex);
         if (this.currentActivityIndex < activities.length - 1) {
+          const completedNum = this.currentActivityIndex + 1;
+          const nextNum = completedNum + 1;
           this.currentActivityIndex++;
           this.currentExerciseIndex = 0;
           this.selectedLetters = [];
           this.memoryFlippedCards = [];
-          alert(`🎉 Activity ${this.currentActivityIndex} completed! Moving to Activity ${this.currentActivityIndex + 1}!`);
+
+          this.showCelebrationBanner(
+            `🎉 ¡Actividad ${completedNum} Completada!`,
+            `Pasando a la Actividad ${nextNum}... ⭐⭐⭐`,
+            '#059669'
+          );
+
           const ws = document.getElementById('toddlerWorkspace');
           if (ws) this.renderSkillWorkspace(ws, skillName);
         } else {
-          alert(`🏆 Outstanding! You completed all 6 ${skillName.toUpperCase()} activities for Unit ${unit.id}!`);
-          this.switchTab('game');
+          this.showCelebrationBanner(
+            `🏆 ¡Excelente! ¡6 de 6 actividades superadas!`,
+            `Pasando a los Juegos Arcade... 🎮`,
+            '#8b5cf6'
+          );
+          setTimeout(() => {
+            this.switchTab('game');
+          }, 1500);
         }
       }
     }, 1100);
+  }
+
+  showCelebrationBanner(title, subtitle, bgColor = '#10b981') {
+    const existing = document.getElementById('toddlerCelebrationBanner');
+    if (existing) existing.remove();
+
+    const banner = document.createElement('div');
+    banner.id = 'toddlerCelebrationBanner';
+    banner.style.position = 'fixed';
+    banner.style.top = '85px';
+    banner.style.left = '50%';
+    banner.style.transform = 'translateX(-50%) scale(0.9)';
+    banner.style.background = bgColor;
+    banner.style.color = '#ffffff';
+    banner.style.padding = '12px 28px';
+    banner.style.borderRadius = '999px';
+    banner.style.boxShadow = '0 12px 30px rgba(0,0,0,0.25)';
+    banner.style.zIndex = '10000';
+    banner.style.display = 'flex';
+    banner.style.flexDirection = 'column';
+    banner.style.alignItems = 'center';
+    banner.style.textAlign = 'center';
+    banner.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    banner.style.pointerEvents = 'none';
+    banner.innerHTML = `
+      <div style="font-weight:900; font-size:1.15rem; font-family:'Fredoka',sans-serif;">${title}</div>
+      <div style="font-size:0.9rem; font-weight:700; opacity:0.95;">${subtitle}</div>
+    `;
+
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => {
+      banner.style.transform = 'translateX(-50%) scale(1)';
+    });
+
+    setTimeout(() => {
+      banner.style.transform = 'translateX(-50%) scale(0.8)';
+      banner.style.opacity = '0';
+      setTimeout(() => banner.remove(), 350);
+    }, 2400);
   }
 
   handleWrongAnswer(skillName) {
@@ -1335,7 +1388,7 @@ class ToddlersUnitsEngine {
       const starsDisplay = '⭐'.repeat(starsCount) || '☆☆☆';
 
       html += `
-        <div class="game-level-node ${nodeClass}" onclick="${isUnlocked ? `toddlersEngine.playGameLevel(${lvl.level})` : `alert('Complete previous level first!')`}">
+        <div class="game-level-node ${nodeClass}" onclick="${isUnlocked ? `toddlersEngine.playGameLevel(${lvl.level})` : `toddlersEngine.showCelebrationBanner('🔒 Nivel Bloqueado', '¡Completa los niveles anteriores primero!', '#d97706')`}">
           <div class="game-level-num">Level ${lvl.level}</div>
           <div class="game-level-icon">${isUnlocked ? (lvl.icon || '🎯') : '🔒'}</div>
           <div class="game-level-title">${lvl.title || 'Level ' + lvl.level}</div>
@@ -1432,9 +1485,43 @@ class ToddlersUnitsEngine {
       }
       this.saveProgress();
 
-      alert(`🎉 Level ${levelNum} Cleared! 3 Stars awarded! ⭐⭐⭐`);
-      document.getElementById('gameLevelModal')?.remove();
-      this.renderWorkspace();
+      const modal = document.getElementById('gameLevelModal');
+      const card = modal ? modal.querySelector('.diploma-modal-card') : null;
+      const unit = this.getCurrentUnit();
+
+      if (levelNum < 12) {
+        if (card) {
+          card.innerHTML = `
+            <div style="font-size:3.5rem; animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">🎉 ⭐ ⭐ ⭐</div>
+            <h2 style="color:#059669; font-size:1.8rem; margin:10px 0 6px; font-weight:900;">¡Nivel ${levelNum} Superado!</h2>
+            <p style="color:#15803d; font-weight:700; font-size:1.15rem; margin-bottom:14px;">+20 Estrellas conseguidas ⭐</p>
+            <div style="display:inline-flex; align-items:center; gap:8px; background:#dcfce7; color:#166534; padding:10px 22px; border-radius:999px; font-weight:800; font-size:1.05rem; box-shadow:0 4px 12px rgba(22, 101, 52, 0.15);">
+              <span>🚀 Pasando al Nivel ${levelNum + 1}...</span>
+            </div>
+          `;
+        }
+        setTimeout(() => {
+          document.getElementById('gameLevelModal')?.remove();
+          this.playGameLevel(levelNum + 1);
+          const ws = document.getElementById('toddlerWorkspace');
+          if (ws && this.currentTab === 'game') this.renderGame(ws);
+        }, 1300);
+      } else {
+        if (card) {
+          card.innerHTML = `
+            <div style="font-size:4rem; animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">🏆 👑 🌟</div>
+            <h2 style="color:#86198f; font-size:1.8rem; margin:10px 0 6px; font-weight:900;">¡Gran Victoria Arcade!</h2>
+            <p style="color:#701a75; font-weight:700; font-size:1.15rem; margin-bottom:14px;">¡Completaste los 12 niveles de la Unidad ${unit ? unit.id : ''}! ⭐</p>
+            <div style="display:inline-flex; align-items:center; gap:8px; background:#fdf4ff; color:#86198f; padding:10px 22px; border-radius:999px; font-weight:800; font-size:1.05rem; box-shadow:0 4px 12px rgba(134, 25, 143, 0.15);">
+              <span>🎓 Avanzando al Reto Final...</span>
+            </div>
+          `;
+        }
+        setTimeout(() => {
+          document.getElementById('gameLevelModal')?.remove();
+          this.switchTab('finalChallenge');
+        }, 1800);
+      }
     } else {
       this.playAudio('Oops, try again!');
     }
@@ -1492,7 +1579,7 @@ class ToddlersUnitsEngine {
       const optIcon = (typeof opt === 'object') ? (opt.icon || '⭐') : '⭐';
 
       html += `
-        <div class="exercise-choice-card" onclick="toddlersEngine.handleChallengeStepChoice(${isCorrect})">
+        <div class="exercise-choice-card" onclick="toddlersEngine.handleChallengeStepChoice(${isCorrect}, this)">
           <div class="choice-icon">${optIcon}</div>
           <div class="choice-text">${optText}</div>
         </div>
@@ -1507,24 +1594,38 @@ class ToddlersUnitsEngine {
     container.innerHTML = html;
   }
 
-  handleChallengeStepChoice(isCorrect) {
+  handleChallengeStepChoice(isCorrect, element) {
     if (isCorrect) {
+      if (element) element.classList.add('correct');
       this.playCheerSound();
       this.addStars(15);
       const unit = this.getCurrentUnit();
       const steps = (unit.finalChallenge && unit.finalChallenge.steps) ? unit.finalChallenge.steps : [];
 
       if (this.currentChallengeStep < steps.length - 1) {
-        this.currentChallengeStep++;
-        const ws = document.getElementById('toddlerWorkspace');
-        if (ws) this.renderFinalChallenge(ws);
+        this.showCelebrationBanner(
+          `⭐ ¡Paso ${this.currentChallengeStep + 1} Superado!`,
+          `Avanzando al siguiente paso... 🚀`,
+          '#0284c7'
+        );
+        setTimeout(() => {
+          this.currentChallengeStep++;
+          const ws = document.getElementById('toddlerWorkspace');
+          if (ws) this.renderFinalChallenge(ws);
+        }, 750);
       } else {
         const uProg = this.getUnitProgress(this.currentUnitId);
         uProg.challengeCompleted = true;
         this.saveProgress();
-        this.showDiplomaModal(unit);
+        setTimeout(() => {
+          this.showDiplomaModal(unit);
+        }, 600);
       }
     } else {
+      if (element) {
+        element.classList.add('wrong');
+        setTimeout(() => element.classList.remove('wrong'), 700);
+      }
       this.playAudio('Try again!');
     }
   }

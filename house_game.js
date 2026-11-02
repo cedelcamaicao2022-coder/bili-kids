@@ -803,7 +803,13 @@
       document.getElementById('btnPrintDiploma')?.addEventListener('click', () => window.print());
       document.getElementById('btnPlayAgain')?.addEventListener('click', () => this.showScreen('home'));
       document.getElementById('btnContinueStage2')?.addEventListener('click', () => {
-        document.getElementById('btnContinueStage2').style.display = 'none';
+        if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+        if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
+        const btnCont = document.getElementById('btnContinueStage2');
+        if (btnCont) {
+          btnCont.style.display = 'none';
+          btnCont.innerHTML = '<span>⭐</span> ¡Continuar a las Habitaciones Superiores! 🏰';
+        }
         this.goToLevel(11);
       });
     }
@@ -934,9 +940,33 @@
         setTimeout(() => {
           this.showScreen('celebration');
           const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) btnCont.style.display = 'inline-flex';
+          if (btnCont) {
+            btnCont.style.display = 'inline-flex';
+            let secondsLeft = 4;
+            btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
+            if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+            this.stage2CountdownInterval = setInterval(() => {
+              secondsLeft--;
+              if (secondsLeft > 0 && btnCont) {
+                btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
+              } else {
+                clearInterval(this.stage2CountdownInterval);
+              }
+            }, 1000);
+          }
           this.confetti.burst(160);
           this.voice.playClip('diploma_congrats');
+
+          if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
+          this.stage2AutoTimer = setTimeout(() => {
+            if (this.currentScreen === 'celebration') {
+              if (btnCont) {
+                btnCont.style.display = 'none';
+                btnCont.innerHTML = '<span>⭐</span> ¡Continuar a las Habitaciones Superiores! 🏰';
+              }
+              this.goToLevel(11);
+            }
+          }, 4500);
         }, 1200);
       } else if (levelNum === 20) {
         this.updateStarUI();

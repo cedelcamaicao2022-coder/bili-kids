@@ -761,8 +761,13 @@
       document.getElementById('btnPrintDiploma')?.addEventListener('click', () => window.print());
       document.getElementById('btnPlayAgain')?.addEventListener('click', () => this.showScreen('home'));
       document.getElementById('btnContinueStage2')?.addEventListener('click', () => {
+        if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+        if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
         const btnCont = document.getElementById('btnContinueStage2');
-        if (btnCont) btnCont.style.display = 'none';
+        if (btnCont) {
+          btnCont.style.display = 'none';
+          btnCont.innerHTML = '<span>⭐</span> ¡Continuar a la Etapa 2! 🦁';
+        }
         this.goToLevel(6);
       });
     }
@@ -913,9 +918,33 @@
         setTimeout(() => {
           this.showScreen('celebration');
           const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) btnCont.style.display = 'inline-flex';
+          if (btnCont) {
+            btnCont.style.display = 'inline-flex';
+            let secondsLeft = 4;
+            btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
+            if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+            this.stage2CountdownInterval = setInterval(() => {
+              secondsLeft--;
+              if (secondsLeft > 0 && btnCont) {
+                btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
+              } else {
+                clearInterval(this.stage2CountdownInterval);
+              }
+            }, 1000);
+          }
           this.confetti.burst(150);
           this.voice.playClip('diploma_congrats');
+
+          if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
+          this.stage2AutoTimer = setTimeout(() => {
+            if (this.currentScreen === 'celebration') {
+              if (btnCont) {
+                btnCont.style.display = 'none';
+                btnCont.innerHTML = '<span>⭐</span> ¡Continuar a la Etapa 2! 🦁';
+              }
+              this.goToLevel(6);
+            }
+          }, 4500);
         }, 1200);
       } else if (levelNum === 10) {
         this.updateStarUI();
