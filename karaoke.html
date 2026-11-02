@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bilikids Karaoke | Himno Oficial "You Belong"</title>
+  <title>Bilikids Karaoke Studio | Sing Together!</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,9 +81,9 @@
       gap: 0.5rem;
     }
 
-    /* MAIN STAGE */
+    /* MAIN CONTAINER */
     .karaoke-main {
-      max-width: 1100px;
+      max-width: 1160px;
       margin: 1.5rem auto 3rem auto;
       padding: 0 1.5rem;
       width: 100%;
@@ -91,13 +91,166 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 1.75rem;
     }
 
+    /* ==========================================================================
+       SONG SELECTOR PLAYLIST
+       ========================================================================== */
+    .song-selector-section {
+      width: 100%;
+      background: rgba(19, 28, 49, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .selector-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .selector-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .selector-count {
+      background: rgba(168, 85, 247, 0.25);
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      color: #e9d5ff;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .songs-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.85rem;
+      width: 100%;
+    }
+
+    @media (max-width: 1050px) {
+      .songs-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .songs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .song-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 1.15rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .song-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+      transform: translateY(-4px);
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .song-card.active {
+      background: linear-gradient(145deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.25));
+      border-color: #facc15;
+      box-shadow: 0 0 25px rgba(250, 204, 21, 0.4), inset 0 0 15px rgba(250, 204, 21, 0.15);
+      transform: scale(1.02);
+    }
+
+    .song-card-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 0.65rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .song-card:hover .song-card-badge {
+      transform: scale(1.1) rotate(6deg);
+    }
+
+    .song-card-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.5em;
+    }
+
+    .song-card-artist {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin-bottom: 0.65rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .song-card-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .song-card.active .song-card-pill {
+      background: #facc15;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(250, 204, 21, 0.5);
+    }
+
+    /* ==========================================================================
+       STAGE CARD (KARAOKE PLAYER)
+       ========================================================================== */
     .stage-card {
-      background: linear-gradient(145deg, rgba(26, 20, 48, 0.9), rgba(16, 24, 46, 0.9));
+      background: linear-gradient(145deg, rgba(26, 20, 48, 0.92), rgba(16, 24, 46, 0.92));
       border: 2px solid rgba(168, 85, 247, 0.35);
       border-radius: 32px;
-      padding: 2.5rem 2rem;
+      padding: 2.25rem 2rem;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(168, 85, 247, 0.2);
       width: 100%;
       display: flex;
@@ -108,23 +261,23 @@
       overflow: hidden;
     }
 
-    /* MIC & TITLE */
+    /* MIC HERO */
     .mic-hero {
       position: relative;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
 
     .mic-badge {
-      width: 96px;
-      height: 96px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       background: linear-gradient(135deg, #a855f7, #ec4899);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
+      font-size: 2.75rem;
       box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
-      transition: transform 0.3s;
+      transition: all 0.3s;
     }
 
     .mic-badge.pulsing {
@@ -138,23 +291,24 @@
 
     .song-title-main {
       font-family: var(--font-display);
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       color: #ffffff;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
       text-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+      transition: all 0.25s ease;
     }
 
     .song-artist-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.5rem;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.3rem 1rem;
+      padding: 0.35rem 1.15rem;
       border-radius: 999px;
       color: #cbd5e1;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.75rem;
     }
 
     /* TELEPROMPTER SCREEN */
@@ -170,7 +324,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
     }
 
@@ -182,6 +336,7 @@
       filter: drop-shadow(0 0 14px #facc15);
       opacity: 0;
       will-change: transform, left, top;
+      transition: opacity 0.2s ease;
     }
 
     .bouncing-star-indicator.active {
@@ -190,7 +345,7 @@
 
     .current-line-box {
       font-family: var(--font-display);
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 700;
       line-height: 1.4;
       min-height: 75px;
@@ -237,7 +392,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     .time-label {
@@ -270,18 +425,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
     }
 
     .btn-circle {
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -295,13 +450,13 @@
     }
 
     .btn-main-play {
-      width: 80px;
-      height: 80px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: linear-gradient(135deg, #ec4899, #a855f7);
       border: none;
       color: #ffffff;
-      font-size: 2.2rem;
+      font-size: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -317,11 +472,11 @@
 
     /* SCORE / STARS */
     .stars-rating {
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       color: #facc15;
     }
 
@@ -337,9 +492,9 @@
     }
 
     @media (max-width: 768px) {
-      .current-line-box { font-size: 1.6rem; }
-      .song-title-main { font-size: 1.8rem; }
-      .stage-card { padding: 1.75rem 1.25rem; }
+      .current-line-box { font-size: 1.55rem; }
+      .song-title-main { font-size: 1.7rem; }
+      .stage-card { padding: 1.5rem 1rem; }
     }
   </style>
 </head>
@@ -357,6 +512,23 @@
 
   <!-- MAIN STAGE -->
   <main class="karaoke-main">
+
+    <!-- ========================================================================
+         SONG SELECTOR PLAYLIST
+         ======================================================================== -->
+    <section class="song-selector-section">
+      <div class="selector-header">
+        <h2 class="selector-title">🎶 Elige tu Canción para Cantar</h2>
+        <span class="selector-count" id="songCountLabel">6 canciones listas</span>
+      </div>
+      <div class="songs-grid" id="songsGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         STAGE CARD (ACTIVE KARAOKE SCREEN)
+         ======================================================================== -->
     <section class="stage-card">
 
       <!-- MIC HERO -->
@@ -365,8 +537,8 @@
       </div>
 
       <!-- TITLE -->
-      <h1 class="song-title-main">You Belong (The Bilikids Anthem)</h1>
-      <div class="song-artist-badge">
+      <h1 class="song-title-main" id="songTitle">You Belong (The Bilikids Anthem)</h1>
+      <div class="song-artist-badge" id="songArtistBadge">
         <span>⭐ Himno Oficial de Bilikids</span>
         <span>•</span>
         <span>Audio Master Original</span>
@@ -419,87 +591,413 @@
     </section>
   </main>
 
-  <!-- HTML5 REAL AUDIO ELEMENT -->
-  <audio id="anthemAudio" src="assets/audio/bilikids_anthem.mp3" preload="auto"></audio>
+  <!-- HTML5 AUDIO ELEMENT -->
+  <audio id="anthemAudio" preload="auto"></audio>
 
   <script>
-    // Timestamped Synced Lyrics with start and end times for word interpolation
-    const lyricsData = [
-      { start: 0.0,   end: 3.5,   line: "🎵 Instrumental Intro... ¡Prepárate! 🎵" },
-      { start: 3.5,   end: 9.8,   line: "Hey myself, look at me ✨" },
-      { start: 10.0,  end: 16.5,  line: "You are more than you can see 🌟" },
-      { start: 16.5,  end: 20.8,  line: "Here at Bilikids you belong 💖" },
-      { start: 20.8,  end: 25.0,  line: "You are loved, you are strong! 💪" },
-      { start: 25.0,  end: 30.0,  line: "Ohhh, ohhh... 🎶" },
-      { start: 30.0,  end: 33.8,  line: "Some days the sun won't shine so bright ☁️" },
-      { start: 33.8,  end: 37.2,  line: "Some days you hide what's deep inside" },
-      { start: 37.2,  end: 40.8,  line: "It's okay to cry, it's okay to feel 💧" },
-      { start: 40.8,  end: 45.0,  line: "You don't have to hide what's real" },
-      { start: 45.0,  end: 48.5,  line: "If your heart feels tired and blue 💙" },
-      { start: 48.5,  end: 52.2,  line: "There is someone here for you" },
-      { start: 52.2,  end: 55.8,  line: "Take my hand let's talk awhile 🤝" },
-      { start: 55.8,  end: 60.5,  line: "You don't have to fake a smile 😊" },
-      { start: 60.5,  end: 64.5,  line: "You are not alone, alone, alone! 🌈" },
-      { start: 64.5,  end: 68.2,  line: "At Bilikids you found a home 🏡" },
-      { start: 68.2,  end: 71.8,  line: "You are enough just as you are ⭐" },
-      { start: 71.8,  end: 75.8,  line: "A precious life, a shining star! ✨" },
-      { start: 75.8,  end: 79.2,  line: "Hand in hand we'll help you through 🤝" },
-      { start: 79.2,  end: 82.8,  line: "There's a friend who cares for you 💖" },
-      { start: 82.8,  end: 86.5,  line: "Bilikids, together we stand! 🏆" },
-      { start: 86.5,  end: 91.0,  line: "There's always a friend to hold your hand 🌟" },
-      { start: 91.0,  end: 103.5, line: "Ohhh... to hold your hand! 🎶" },
-      { start: 103.5, end: 107.5, line: "Every voice deserves to be heard 🗣️" },
-      { start: 107.5, end: 110.8, line: "Every heart deserves kind words ❤️" },
-      { start: 110.8, end: 114.2, line: "Teachers, friends, we're here to care 🎒" },
-      { start: 114.2, end: 117.8, line: "You can talk, we'll always hear 👂" },
-      { start: 117.8, end: 121.2, line: "You don't need to be brave each day" },
-      { start: 121.2, end: 124.8, line: "You can ask for help along the way" },
-      { start: 124.8, end: 128.2, line: "There's no shame in saying 'I'm not okay' 🫂" },
-      { start: 128.2, end: 133.5, line: "We'll listen to what you have to say 💬" },
-      { start: 133.5, end: 137.2, line: "If you're falling we'll reach out 🤲" },
-      { start: 137.2, end: 140.8, line: "If you're hurting talk it out" },
-      { start: 140.8, end: 144.2, line: "One small step, one hand to hold 👣" },
-      { start: 144.2, end: 147.8, line: "You are precious more than you know 💎" },
-      { start: 147.8, end: 150.8, line: "Your story matters! 📖" },
-      { start: 150.8, end: 153.8, line: "Your dreams matter! 🚀" },
-      { start: 153.8, end: 158.5, line: "YOU MATTER, YOU MATTER! 🌟" },
-      { start: 158.5, end: 162.2, line: "You are not alone, alone, alone! 🌈" },
-      { start: 162.2, end: 165.8, line: "At Bilikids you found a home 🏡" },
-      { start: 165.8, end: 169.2, line: "You are enough just as you are ⭐" },
-      { start: 169.2, end: 172.8, line: "A precious life, a shining star! ✨" },
-      { start: 172.8, end: 176.2, line: "Hand in hand we'll help you through 🤝" },
-      { start: 176.2, end: 179.8, line: "There's a friend who cares for you 💖" },
-      { start: 179.8, end: 183.2, line: "Bilikids, together we stand! 🏆" },
-      { start: 183.2, end: 191.0, line: "There's always a friend to hold your hand 🌟" },
-      { start: 191.0, end: 201.0, line: "You matter! You belong! 💫" },
-      { start: 201.0, end: 215.0, line: "At Bilikids, you're never alone... 🏡💖✨" }
+    // Audio synthesizer for UI pops
+    class UIAudio {
+      constructor() { this.ctx = null; }
+      init() {
+        if (!this.ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) this.ctx = new AC();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      pop() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.08);
+        } catch(e) {}
+      }
+      sparkle() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.value = f;
+            const start = this.ctx.currentTime + idx * 0.05;
+            gain.gain.setValueAtTime(0.08, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.18);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.18);
+          });
+        } catch(e) {}
+      }
+    }
+    const uiAudio = new UIAudio();
+
+    // ==========================================================================
+    // SONGS CATALOG WITH FULL SYNCHRONIZED LYRICS
+    // ==========================================================================
+    const songsCatalog = [
+      {
+        id: 'anthem',
+        title: 'You Belong (The Bilikids Anthem)',
+        subtitle: '⭐ Himno Oficial de Bilikids • Audio Master Original',
+        icon: '🎙️',
+        badgeGradient: 'linear-gradient(135deg, #a855f7, #ec4899)',
+        durationDefault: '3:35',
+        src: 'assets/karaoke/song_bilikids_anthem.mp3',
+        lyrics: [
+          { start: 0.0,   end: 3.5,   line: "🎵 Instrumental Intro... ¡Prepárate! 🎵" },
+          { start: 3.5,   end: 9.8,   line: "Hey myself, look at me ✨" },
+          { start: 10.0,  end: 16.5,  line: "You are more than you can see 🌟" },
+          { start: 16.5,  end: 20.8,  line: "Here at Bilikids you belong 💖" },
+          { start: 20.8,  end: 25.0,  line: "You are loved, you are strong! 💪" },
+          { start: 25.0,  end: 30.0,  line: "Ohhh, ohhh... 🎶" },
+          { start: 30.0,  end: 33.8,  line: "Some days the sun won't shine so bright ☁️" },
+          { start: 33.8,  end: 37.2,  line: "Some days you hide what's deep inside" },
+          { start: 37.2,  end: 40.8,  line: "It's okay to cry, it's okay to feel 💧" },
+          { start: 40.8,  end: 45.0,  line: "You don't have to hide what's real" },
+          { start: 45.0,  end: 48.5,  line: "If your heart feels tired and blue 💙" },
+          { start: 48.5,  end: 52.2,  line: "There is someone here for you" },
+          { start: 52.2,  end: 55.8,  line: "Take my hand let's talk awhile 🤝" },
+          { start: 55.8,  end: 60.5,  line: "You don't have to fake a smile 😊" },
+          { start: 60.5,  end: 64.5,  line: "You are not alone, alone, alone! 🌈" },
+          { start: 64.5,  end: 68.2,  line: "At Bilikids you found a home 🏡" },
+          { start: 68.2,  end: 71.8,  line: "You are enough just as you are ⭐" },
+          { start: 71.8,  end: 75.8,  line: "A precious life, a shining star! ✨" },
+          { start: 75.8,  end: 79.2,  line: "Hand in hand we'll help you through 🤝" },
+          { start: 79.2,  end: 82.8,  line: "There's a friend who cares for you 💖" },
+          { start: 82.8,  end: 86.5,  line: "Bilikids, together we stand! 🏆" },
+          { start: 86.5,  end: 91.0,  line: "There's always a friend to hold your hand 🌟" },
+          { start: 91.0,  end: 103.5, line: "Ohhh... to hold your hand! 🎶" },
+          { start: 103.5, end: 107.5, line: "Every voice deserves to be heard 🗣️" },
+          { start: 107.5, end: 110.8, line: "Every heart deserves kind words ❤️" },
+          { start: 110.8, end: 114.2, line: "Teachers, friends, we're here to care 🎒" },
+          { start: 114.2, end: 117.8, line: "You can talk, we'll always hear 👂" },
+          { start: 117.8, end: 121.2, line: "You don't need to be brave each day" },
+          { start: 121.2, end: 124.8, line: "You can ask for help along the way" },
+          { start: 124.8, end: 128.2, line: "There's no shame in saying 'I'm not okay' 🫂" },
+          { start: 128.2, end: 133.5, line: "We'll listen to what you have to say 💬" },
+          { start: 133.5, end: 137.2, line: "If you're falling we'll reach out 🤲" },
+          { start: 137.2, end: 140.8, line: "If you're hurting talk it out" },
+          { start: 140.8, end: 144.2, line: "One small step, one hand to hold 👣" },
+          { start: 144.2, end: 147.8, line: "You are precious more than you know 💎" },
+          { start: 147.8, end: 150.8, line: "Your story matters! 📖" },
+          { start: 150.8, end: 153.8, line: "Your dreams matter! 🚀" },
+          { start: 153.8, end: 158.5, line: "YOU MATTER, YOU MATTER! 🌟" },
+          { start: 158.5, end: 162.2, line: "You are not alone, alone, alone! 🌈" },
+          { start: 162.2, end: 165.8, line: "At Bilikids you found a home 🏡" },
+          { start: 165.8, end: 169.2, line: "You are enough just as you are ⭐" },
+          { start: 169.2, end: 172.8, line: "A precious life, a shining star! ✨" },
+          { start: 172.8, end: 176.2, line: "Hand in hand we'll help you through 🤝" },
+          { start: 176.2, end: 179.8, line: "There's a friend who cares for you 💖" },
+          { start: 179.8, end: 183.5, line: "Bilikids, together we stand! 🏆" },
+          { start: 183.5, end: 188.0, line: "There's always a friend to hold your hand 🌟" },
+          { start: 188.0, end: 198.5, line: "Hold your hand, you belong! 💖" },
+          { start: 198.5, end: 206.5, line: "You belong at Bilikids! 🌟🌈" },
+          { start: 206.5, end: 215.5, line: "🎵 Outro Final... ¡Gran trabajo, eres increíble! 🎵" }
+        ]
+      },
+      {
+        id: 'hello_hello',
+        title: 'Hello, Hello! Can You Clap Your Hands?',
+        subtitle: '👋 Super Simple Songs • Saludos y Movimiento',
+        icon: '👋',
+        badgeGradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
+        durationDefault: '2:10',
+        src: 'assets/karaoke/song_hello_hello.webm',
+        lyrics: [
+          { start: 0.0,   end: 5.0,   line: "🎵 Instrumental Intro... ¡Listos para saludar! 🎵" },
+          { start: 5.0,   end: 10.5,  line: "Hello, hello! Can you clap your hands? 👏" },
+          { start: 10.5,  end: 16.0,  line: "Hello, hello! Can you clap your hands? 👏" },
+          { start: 16.0,  end: 21.0,  line: "Can you stretch up high? 🙆" },
+          { start: 21.0,  end: 26.0,  line: "Can you touch your toes? 👟" },
+          { start: 26.0,  end: 31.0,  line: "Can you turn around? 🔄" },
+          { start: 31.0,  end: 36.5,  line: "Can you say, 'Hello'? 👋" },
+          { start: 36.5,  end: 42.0,  line: "Hello, hello! Can you stamp your feet? 🦶" },
+          { start: 42.0,  end: 47.5,  line: "Hello, hello! Can you stamp your feet? 🦶" },
+          { start: 47.5,  end: 52.5,  line: "Can you stretch up high? 🙆" },
+          { start: 52.5,  end: 57.5,  line: "Can you touch your toes? 👟" },
+          { start: 57.5,  end: 62.5,  line: "Can you turn around? 🔄" },
+          { start: 62.5,  end: 68.0,  line: "Can you say, 'Hello'? 👋" },
+          { start: 68.0,  end: 74.0,  line: "🎵 ¡Música instrumental y baile alegre! 💃🕺 🎵" },
+          { start: 74.0,  end: 79.5,  line: "Hello, hello! Can you clap your hands? 👏" },
+          { start: 79.5,  end: 85.0,  line: "Hello, hello! Can you stamp your feet? 🦶" },
+          { start: 85.0,  end: 90.5,  line: "Can you stretch up high? 🙆" },
+          { start: 90.5,  end: 95.5,  line: "Can you touch your toes? 👟" },
+          { start: 95.5,  end: 100.5, line: "Can you turn around? 🔄" },
+          { start: 100.5, end: 106.0, line: "Can you say, 'Hello'? 👋" },
+          { start: 106.0, end: 111.5, line: "Hello, hello! Can you clap your hands? 👏" },
+          { start: 111.5, end: 117.0, line: "Hello, hello! Can you stamp your feet? 🦶" },
+          { start: 117.0, end: 123.0, line: "Can you say, 'Hello'? Hello! 👋✨" },
+          { start: 123.0, end: 130.8, line: "🎉 ¡Excelente trabajo! ¡Qué bien saludaste! 🌟" }
+        ]
+      },
+      {
+        id: 'action_song',
+        title: 'Action Song',
+        subtitle: '🏃 The Singing Walrus • Verbos de Acción y Baile',
+        icon: '🏃',
+        badgeGradient: 'linear-gradient(135deg, #10b981, #06b6d4)',
+        durationDefault: '3:37',
+        src: 'assets/karaoke/song_action_song.webm',
+        lyrics: [
+          { start: 0.0,   end: 6.0,   line: "🎵 Intro musical... ¡A moverse con energía! 🎵" },
+          { start: 6.0,   end: 12.0,  line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 12.0,  end: 18.0,  line: "Oh, so happy, dance with me! 💃" },
+          { start: 18.0,  end: 24.0,  line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 24.0,  end: 30.0,  line: "Oh, so happy, dance with me! 🕺" },
+          { start: 30.0,  end: 36.5,  line: "Clap, clap, clap your hands! 👏" },
+          { start: 36.5,  end: 43.0,  line: "Stomp, stomp, stomp your feet! 🦶" },
+          { start: 43.0,  end: 49.5,  line: "Swing, swing, swing your arms! 🙆" },
+          { start: 49.5,  end: 56.5,  line: "Dance everybody and sing with me! 🎶" },
+          { start: 56.5,  end: 62.5,  line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 62.5,  end: 68.5,  line: "Oh, so happy, dance with me! 💃" },
+          { start: 68.5,  end: 74.5,  line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 74.5,  end: 81.0,  line: "Oh, so happy, dance with me! 🕺" },
+          { start: 81.0,  end: 87.5,  line: "Jump, jump, jump around! 🦘" },
+          { start: 87.5,  end: 94.0,  line: "Touch the sky and touch the ground! ⛅" },
+          { start: 94.0,  end: 100.5, line: "Shake, shake, shake your hips! 💫" },
+          { start: 100.5, end: 107.5, line: "I know a song, and it goes like this! 🎵" },
+          { start: 107.5, end: 113.5, line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 113.5, end: 119.5, line: "Oh, so happy, dance with me! 💃" },
+          { start: 119.5, end: 125.5, line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 125.5, end: 132.0, line: "Oh, so happy, dance with me! 🕺" },
+          { start: 132.0, end: 138.5, line: "Clap, clap, clap your hands! 👏" },
+          { start: 138.5, end: 144.5, line: "Stomp, stomp, stomp your feet! 🦶" },
+          { start: 144.5, end: 150.5, line: "Swing, swing, swing your arms! 🙆" },
+          { start: 150.5, end: 157.0, line: "Dance everybody and sing with me! 🎶" },
+          { start: 157.0, end: 163.5, line: "Jump, jump, jump around! 🦘" },
+          { start: 163.5, end: 169.5, line: "Touch the sky and touch the ground! ⛅" },
+          { start: 169.5, end: 175.5, line: "Shake, shake, shake your hips! 💫" },
+          { start: 175.5, end: 182.5, line: "I know a song, and it goes like this! 🎵" },
+          { start: 182.5, end: 188.5, line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 188.5, end: 194.5, line: "Oh, so happy, dance with me! 💃" },
+          { start: 194.5, end: 200.5, line: "Naa, naa, naa, I'm so happy! 😄" },
+          { start: 200.5, end: 208.0, line: "Oh, so happy, sing with me! 🌟" },
+          { start: 208.0, end: 217.4, line: "🎉 ¡Genial! ¡Gran baile y energía! 🏆" }
+        ]
+      },
+      {
+        id: 'days_of_the_week',
+        title: 'Seven Days a Week',
+        subtitle: '📅 The Singing Walrus • Días de la Semana',
+        icon: '📅',
+        badgeGradient: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+        durationDefault: '2:38',
+        src: 'assets/karaoke/song_days_of_the_week.webm',
+        lyrics: [
+          { start: 0.0,   end: 6.5,   line: "🎵 ¡Hola niños! Aprendamos los 7 días de la semana 🎵" },
+          { start: 6.5,   end: 12.0,  line: "I can dance with my hands, I can dance with my feet 💃" },
+          { start: 12.0,  end: 17.5,  line: "I like to dance everyday, seven days a week! 🕺" },
+          { start: 17.5,  end: 23.0,  line: "I can dance with my hands, I can dance with my feet 💃" },
+          { start: 23.0,  end: 29.0,  line: "I like to dance everyday, seven days a week! ⭐" },
+          { start: 29.0,  end: 34.5,  line: "Sundays! (Sundays!) ☀️" },
+          { start: 34.5,  end: 40.0,  line: "Mondays! (Mondays!) 🎒" },
+          { start: 40.0,  end: 45.5,  line: "Tuesdays! (Tuesdays!) 🎨" },
+          { start: 45.5,  end: 51.0,  line: "Wednesdays! (Wednesdays!) 📚" },
+          { start: 51.0,  end: 56.5,  line: "Thursdays! (Thursdays!) ⚽" },
+          { start: 56.5,  end: 62.0,  line: "Fridays! (Fridays!) 🍕" },
+          { start: 62.0,  end: 67.5,  line: "Saturdays! (Saturdays!) 🎪" },
+          { start: 67.5,  end: 73.0,  line: "Seven days a week! 🎉" },
+          { start: 73.0,  end: 78.5,  line: "I can shake my hands, I can shake my feet 🤝" },
+          { start: 78.5,  end: 84.0,  line: "I like to shake everyday, seven days a week! 💫" },
+          { start: 84.0,  end: 89.5,  line: "I can shake my hands, I can shake my feet 🤝" },
+          { start: 89.5,  end: 95.5,  line: "I like to shake everyday, seven days a week! 💫" },
+          { start: 95.5,  end: 101.0, line: "Sundays! Mondays! Tuesdays! 📅" },
+          { start: 101.0, end: 106.5, line: "Wednesdays! Thursdays! Fridays! 📅" },
+          { start: 106.5, end: 112.0, line: "Saturdays! Seven days a week! 🎈" },
+          { start: 112.0, end: 117.5, line: "I can drum with my hands, I can drum with my feet 🥁" },
+          { start: 117.5, end: 123.0, line: "I like to drum everyday, seven days a week! 🎵" },
+          { start: 123.0, end: 128.5, line: "I can drum with my hands, I can drum with my feet 🥁" },
+          { start: 128.5, end: 134.5, line: "I like to drum everyday, seven days a week! 🎵" },
+          { start: 134.5, end: 140.0, line: "Sundays! Mondays! Tuesdays! Wednesdays! 🌟" },
+          { start: 140.0, end: 145.5, line: "Thursdays! Fridays! Saturdays! 🌟" },
+          { start: 145.5, end: 151.0, line: "Seven days a week, yeah! 🏆" },
+          { start: 151.0, end: 158.1, line: "🎉 ¡Fantástico! ¡Te sabes todos los días! 🌟" }
+        ]
+      },
+      {
+        id: 'twinkle_star',
+        title: 'Twinkle, Twinkle, Little Star',
+        subtitle: '⭐ Super Simple Songs • Clásico Infantil y Noche',
+        icon: '⭐',
+        badgeGradient: 'linear-gradient(135deg, #6366f1, #a855f7)',
+        durationDefault: '2:34',
+        src: 'assets/karaoke/song_twinkle_twinkle.m4a',
+        lyrics: [
+          { start: 0.0,   end: 8.0,   line: "🎵 Dulce melodía de cuna... ✨ 🎵" },
+          { start: 8.0,   end: 16.0,  line: "Twinkle, twinkle, little star ✨" },
+          { start: 16.0,  end: 24.0,  line: "How I wonder what you are ⭐" },
+          { start: 24.0,  end: 32.0,  line: "Up above the world so high 🌌" },
+          { start: 32.0,  end: 40.0,  line: "Like a diamond in the sky 💎" },
+          { start: 40.0,  end: 48.0,  line: "Twinkle, twinkle, little star ✨" },
+          { start: 48.0,  end: 56.0,  line: "How I wonder what you are ⭐" },
+          { start: 56.0,  end: 64.0,  line: "🎵 Interludio mágico de estrellas fugaces 🌠 🎵" },
+          { start: 64.0,  end: 72.0,  line: "When the blazing sun is gone 🌅" },
+          { start: 72.0,  end: 80.0,  line: "When he nothing shines upon 🌙" },
+          { start: 80.0,  end: 88.0,  line: "Then you show your little light 🕯️" },
+          { start: 88.0,  end: 96.0,  line: "Twinkle, twinkle, all the night ✨" },
+          { start: 96.0,  end: 104.0, line: "Twinkle, twinkle, little star ⭐" },
+          { start: 104.0, end: 112.0, line: "How I wonder what you are 💖" },
+          { start: 112.0, end: 120.0, line: "🎵 Música suave de la noche 🌃 🎵" },
+          { start: 120.0, end: 128.0, line: "Twinkle, twinkle, little star ✨" },
+          { start: 128.0, end: 136.0, line: "How I wonder what you are ⭐" },
+          { start: 136.0, end: 144.0, line: "Up above the world so high, like a diamond in the sky 💎" },
+          { start: 144.0, end: 153.9, line: "Twinkle, twinkle, little star... Goodnight! 🌙✨" }
+        ]
+      },
+      {
+        id: 'weather_song',
+        title: 'The Weather Song',
+        subtitle: '⛅ Shapidoo • El Clima y las Estaciones',
+        icon: '⛅',
+        badgeGradient: 'linear-gradient(135deg, #0ea5e9, #f59e0b)',
+        durationDefault: '1:29',
+        src: 'assets/karaoke/song_weather_song.m4a',
+        lyrics: [
+          { start: 0.0,   end: 5.0,   line: "🎵 ¿Cómo está el clima hoy? ¡Descubrámoslo! ⛅ 🎵" },
+          { start: 5.0,   end: 9.5,   line: "What's the weather, weather, weather? 🌦️" },
+          { start: 9.5,   end: 14.0,  line: "What's the weather like today? ☀️" },
+          { start: 14.0,  end: 18.5,  line: "Let's look out the window, window 🪟" },
+          { start: 18.5,  end: 23.0,  line: "What's the weather? Let us say! 🗣️" },
+          { start: 23.0,  end: 27.5,  line: "It's sunny, sunny, warm and bright ☀️" },
+          { start: 27.5,  end: 32.0,  line: "The sun is shining, what a sight! ✨" },
+          { start: 32.0,  end: 36.5,  line: "Let's go out and play outside 🏃" },
+          { start: 36.5,  end: 41.0,  line: "Run and jump and slip and slide! 🛝" },
+          { start: 41.0,  end: 45.5,  line: "It's rainy, rainy, drip, drop, drip 🌧️" },
+          { start: 45.5,  end: 50.0,  line: "Puddles here, now jump and splash! 💦" },
+          { start: 50.0,  end: 54.5,  line: "Grab your boots, it's lots of fun 👢" },
+          { start: 54.5,  end: 59.0,  line: "Waiting for the shining sun! ☀️" },
+          { start: 59.0,  end: 63.5,  line: "It's windy, windy, whoosh, whoosh, whoosh 🍃" },
+          { start: 63.5,  end: 68.0,  line: "Leaves are blowing, swoosh, swoosh, swoosh 🍂" },
+          { start: 68.0,  end: 72.5,  line: "Hold your kite and let it fly 🪁" },
+          { start: 72.5,  end: 77.0,  line: "Up, up, up into the sky! ⛅" },
+          { start: 77.0,  end: 81.5,  line: "When the rain and sun come too 🌦️" },
+          { start: 81.5,  end: 85.5,  line: "A rainbow shines for me and you! 🌈" },
+          { start: 85.5,  end: 88.8,  line: "Red, orange, green and blue! What's the weather? ☀️🌈" }
+        ]
+      }
     ];
 
+    // Current State
+    let currentSongIndex = 0;
+    let activeLyrics = songsCatalog[0].lyrics;
+    let currentRenderedLineIdx = -1;
+
+    // DOM Elements
     const audio = document.getElementById('anthemAudio');
-    const btnPlayPause = document.getElementById('btnPlayPause');
+    const songTitleEl = document.getElementById('songTitle');
+    const songArtistBadgeEl = document.getElementById('songArtistBadge');
     const micBadge = document.getElementById('micBadge');
     const teleprompter = document.getElementById('teleprompter');
     const starIndicator = document.getElementById('starIndicator');
     const currentLineEl = document.getElementById('currentLine');
     const upcomingLineEl = document.getElementById('upcomingLine');
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const btnMute = document.getElementById('btnMute');
     const progressBarFill = document.getElementById('progressBarFill');
     const currentTimeLabel = document.getElementById('currentTimeLabel');
     const durationLabel = document.getElementById('durationLabel');
     const scoreBadge = document.getElementById('scoreBadge');
-    const btnMute = document.getElementById('btnMute');
+    const songsGrid = document.getElementById('songsGrid');
 
-    let currentRenderedLineIdx = -1;
+    // Build Song Playlist Grid
+    function renderPlaylistGrid() {
+      songsGrid.innerHTML = '';
+      songsCatalog.forEach((song, idx) => {
+        const card = document.createElement('div');
+        card.className = `song-card ${idx === currentSongIndex ? 'active' : ''}`;
+        card.id = `songCard_${idx}`;
+        card.onclick = () => selectSong(idx);
 
-    function formatTime(secs) {
-      if (isNaN(secs)) return '0:00';
-      const m = Math.floor(secs / 60);
-      const s = Math.floor(secs % 60);
-      return `${m}:${s < 10 ? '0' : ''}${s}`;
+        card.innerHTML = `
+          <div class="song-card-badge" style="background: ${song.badgeGradient};">${song.icon}</div>
+          <div class="song-card-title" title="${song.title}">${song.title}</div>
+          <div class="song-card-artist">${song.subtitle.split('•')[0].trim()}</div>
+          <span class="song-card-pill">
+            ${idx === currentSongIndex ? '🎙️ Cantando' : '⏱ ' + song.durationDefault}
+          </span>
+        `;
+        songsGrid.appendChild(card);
+      });
     }
 
-    function renderLineWords(lineStr) {
+    // Select Song
+    function selectSong(index) {
+      if (index === currentSongIndex && !audio.paused) return;
+      uiAudio.sparkle();
+      
+      currentSongIndex = index;
+      const song = songsCatalog[index];
+      activeLyrics = song.lyrics;
+
+      // Update UI Header & Stage
+      songTitleEl.textContent = song.title;
+      songArtistBadgeEl.innerHTML = `
+        <span>${song.subtitle}</span>
+      `;
+      micBadge.textContent = song.icon;
+      micBadge.style.background = song.badgeGradient;
+
+      // Load new audio
+      audio.pause();
+      audio.src = song.src;
+      audio.currentTime = 0;
+      currentRenderedLineIdx = -1;
+
+      // Reset Teleprompter
+      currentLineEl.innerHTML = `
+        <span class="k-word">¡Presiona</span>
+        <span class="k-word">Play</span>
+        <span class="k-word">para</span>
+        <span class="k-word">cantar</span>
+        <span class="k-word">juntos!</span>
+        <span class="k-word">${song.icon}</span>
+      `;
+      if (song.lyrics.length > 1) {
+        upcomingLineEl.textContent = 'Siguiente: "' + song.lyrics[1].line.replace(/[\u{1F300}-\u{1F6FF}]/gu, '').trim() + '"';
+      } else {
+        upcomingLineEl.textContent = '';
+      }
+
+      // Reset controls
+      btnPlayPause.textContent = '▶';
+      micBadge.classList.remove('pulsing');
+      starIndicator.classList.remove('active');
+      progressBarFill.style.width = '0%';
+      currentTimeLabel.textContent = '0:00';
+      durationLabel.textContent = song.durationDefault;
+      scoreBadge.textContent = 'Puntaje: 100 Pts';
+
+      // Update playlist cards highlight
+      document.querySelectorAll('.song-card').forEach((c, idx) => {
+        if (idx === index) {
+          c.classList.add('active');
+          const pill = c.querySelector('.song-card-pill');
+          if (pill) pill.textContent = '🎙️ Cantando';
+        } else {
+          c.classList.remove('active');
+          const pill = c.querySelector('.song-card-pill');
+          if (pill) pill.textContent = '⏱ ' + songsCatalog[idx].durationDefault;
+        }
+      });
+    }
+
+    // Render single line words
+    function renderLineWords(lineText) {
       currentLineEl.innerHTML = '';
-      const words = lineStr.split(' ');
+      const words = lineText.split(' ');
       words.forEach((w, idx) => {
         const span = document.createElement('span');
         span.className = 'k-word';
@@ -509,13 +1007,22 @@
       });
     }
 
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds < 0) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
     function togglePlayAudio() {
+      uiAudio.pop();
       if (audio.paused) {
         audio.play().then(() => {
           btnPlayPause.textContent = '⏸';
           micBadge.classList.add('pulsing');
-          starIndicator.classList.add('active');
-        }).catch(e => console.error(e));
+        }).catch(e => {
+          console.warn('Audio play request failed:', e);
+        });
       } else {
         audio.pause();
         btnPlayPause.textContent = '▶';
@@ -524,16 +1031,20 @@
     }
 
     function restartAudio() {
+      uiAudio.pop();
       audio.currentTime = 0;
       currentRenderedLineIdx = -1;
       if (audio.paused) togglePlayAudio();
     }
 
     function skipAudio(seconds) {
-      audio.currentTime = Math.max(0, Math.min(audio.duration || 215, audio.currentTime + seconds));
+      uiAudio.pop();
+      audio.currentTime = Math.max(0, Math.min(audio.duration || 9999, audio.currentTime + seconds));
+      currentRenderedLineIdx = -1;
     }
 
     function toggleMute() {
+      uiAudio.pop();
       audio.muted = !audio.muted;
       btnMute.textContent = audio.muted ? '🔇' : '🔊';
     }
@@ -551,7 +1062,7 @@
     function updateKaraokeFrame() {
       if (!audio.paused && !audio.ended) {
         const cur = audio.currentTime;
-        const dur = audio.duration || 215;
+        const dur = audio.duration || 180;
 
         // Progress bar
         const pct = (cur / dur) * 100;
@@ -560,72 +1071,71 @@
 
         // Find active line
         let activeLineIdx = 0;
-        for (let i = 0; i < lyricsData.length; i++) {
-          if (cur >= lyricsData[i].start && cur < lyricsData[i].end) {
+        for (let i = 0; i < activeLyrics.length; i++) {
+          if (cur >= activeLyrics[i].start && cur < activeLyrics[i].end) {
             activeLineIdx = i;
             break;
-          } else if (cur >= lyricsData[i].end) {
+          } else if (cur >= activeLyrics[i].end) {
             activeLineIdx = i;
           }
         }
 
-        const currentLineData = lyricsData[activeLineIdx];
+        const currentLineData = activeLyrics[activeLineIdx] || activeLyrics[0];
 
         // Re-render line words if line changed
-        if (currentRenderedLineIdx !== activeLineIdx) {
+        if (currentRenderedLineIdx !== activeLineIdx && currentLineData) {
           currentRenderedLineIdx = activeLineIdx;
           renderLineWords(currentLineData.line);
           
-          if (activeLineIdx + 1 < lyricsData.length) {
-            upcomingLineEl.textContent = 'Siguiente: "' + lyricsData[activeLineIdx + 1].line.replace(/[\u{1F300}-\u{1F6FF}]/gu, '').trim() + '"';
+          if (activeLineIdx + 1 < activeLyrics.length) {
+            upcomingLineEl.textContent = 'Siguiente: "' + activeLyrics[activeLineIdx + 1].line.replace(/[\u{1F300}-\u{1F6FF}]/gu, '').trim() + '"';
           } else {
             upcomingLineEl.textContent = '🎉 ¡Increíble canto! ¡Eres una estrella!';
           }
         }
 
         // Word tracking within current line
-        const words = currentLineData.line.split(' ');
-        const lineDuration = Math.max(0.1, currentLineData.end - currentLineData.start);
-        const lineProgress = Math.max(0, Math.min(1, (cur - currentLineData.start) / lineDuration));
-        
-        const activeWordIdx = Math.min(words.length - 1, Math.floor(lineProgress * words.length));
-        const wordProgress = (lineProgress * words.length) - activeWordIdx;
+        if (currentLineData) {
+          const words = currentLineData.line.split(' ');
+          const lineDuration = Math.max(0.1, currentLineData.end - currentLineData.start);
+          const lineProgress = Math.max(0, Math.min(1, (cur - currentLineData.start) / lineDuration));
+          
+          const activeWordIdx = Math.min(words.length - 1, Math.floor(lineProgress * words.length));
+          const wordProgress = (lineProgress * words.length) - activeWordIdx;
 
-        // Update word highlights
-        for (let w = 0; w < words.length; w++) {
-          const wordEl = document.getElementById('kword_' + w);
-          if (wordEl) {
-            if (w < activeWordIdx) {
-              wordEl.className = 'k-word sung';
-            } else if (w === activeWordIdx) {
-              wordEl.className = 'k-word active';
-            } else {
-              wordEl.className = 'k-word';
+          // Update word highlights
+          for (let w = 0; w < words.length; w++) {
+            const wordEl = document.getElementById('kword_' + w);
+            if (wordEl) {
+              if (w < activeWordIdx) {
+                wordEl.className = 'k-word sung';
+              } else if (w === activeWordIdx) {
+                wordEl.className = 'k-word active';
+              } else {
+                wordEl.className = 'k-word';
+              }
             }
+          }
+
+          // Position bouncing star over active word
+          const targetWordEl = document.getElementById('kword_' + activeWordIdx);
+          if (targetWordEl && starIndicator) {
+            const wordRect = targetWordEl.getBoundingClientRect();
+            const parentRect = teleprompter.getBoundingClientRect();
+
+            const starX = (wordRect.left - parentRect.left) + (wordRect.width / 2);
+            const jumpArc = -Math.sin(wordProgress * Math.PI) * 22;
+            const starY = (wordRect.top - parentRect.top) - 30 + jumpArc;
+
+            starIndicator.style.left = starX + 'px';
+            starIndicator.style.top = starY + 'px';
+            starIndicator.style.transform = `translate(-50%, 0) rotate(${wordProgress * 180}deg)`;
+            starIndicator.classList.add('active');
           }
         }
 
-        // Position bouncing star over active word
-        const targetWordEl = document.getElementById('kword_' + activeWordIdx);
-        if (targetWordEl && starIndicator) {
-          const wordRect = targetWordEl.getBoundingClientRect();
-          const parentRect = teleprompter.getBoundingClientRect();
-
-          // Calculate horizontal center of the target word relative to teleprompter
-          const starX = (wordRect.left - parentRect.left) + (wordRect.width / 2);
-          
-          // Parabolic hop: jumps up mid-word and lands right on top
-          const jumpArc = -Math.sin(wordProgress * Math.PI) * 22;
-          const starY = (wordRect.top - parentRect.top) - 30 + jumpArc;
-
-          starIndicator.style.left = starX + 'px';
-          starIndicator.style.top = starY + 'px';
-          starIndicator.style.transform = `translate(-50%, 0) rotate(${wordProgress * 180}deg)`;
-          starIndicator.classList.add('active');
-        }
-
         // Score update
-        const score = Math.min(1000, Math.floor(cur * 4.5) + 100);
+        const score = Math.min(1000, Math.floor(cur * 5.2) + 100);
         scoreBadge.textContent = `Puntaje: ${score} Pts`;
       }
 
@@ -643,8 +1153,15 @@
       btnPlayPause.textContent = '▶';
       micBadge.classList.remove('pulsing');
       starIndicator.classList.remove('active');
-      currentLineEl.innerHTML = '<span class="k-word active">🌟 ¡Felicidades! Completaste el Himno de Bilikids 🌟</span>';
-      upcomingLineEl.textContent = '¡Presiona Play para cantar de nuevo!';
+      currentLineEl.innerHTML = `<span class="k-word active">🌟 ¡Felicidades! Completaste "${songsCatalog[currentSongIndex].title}" 🌟</span>`;
+      upcomingLineEl.textContent = '¡Presiona Play para cantar de nuevo o elige otra canción!';
+      uiAudio.sparkle();
+    });
+
+    // Initialize playlist on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPlaylistGrid();
+      selectSong(0);
     });
   </script>
 </body>
