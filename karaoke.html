@@ -648,249 +648,994 @@
     // SONGS CATALOG WITH FULL SYNCHRONIZED LYRICS
     // ==========================================================================
     const songsCatalog = [
-      {
-        id: 'anthem',
-        title: 'You Belong (The Bilikids Anthem)',
-        subtitle: '⭐ Himno Oficial de Bilikids • Audio Master Original',
-        icon: '🎙️',
-        badgeGradient: 'linear-gradient(135deg, #a855f7, #ec4899)',
-        durationDefault: '3:35',
-        src: 'assets/karaoke/song_bilikids_anthem.mp3',
-        lyrics: [
-          { start: 0.0,   end: 3.5,   line: "🎵 Instrumental Intro... ¡Prepárate! 🎵" },
-          { start: 3.5,   end: 9.8,   line: "Hey myself, look at me ✨" },
-          { start: 10.0,  end: 16.5,  line: "You are more than you can see 🌟" },
-          { start: 16.5,  end: 20.8,  line: "Here at Bilikids you belong 💖" },
-          { start: 20.8,  end: 25.0,  line: "You are loved, you are strong! 💪" },
-          { start: 25.0,  end: 30.0,  line: "Ohhh, ohhh... 🎶" },
-          { start: 30.0,  end: 33.8,  line: "Some days the sun won't shine so bright ☁️" },
-          { start: 33.8,  end: 37.2,  line: "Some days you hide what's deep inside" },
-          { start: 37.2,  end: 40.8,  line: "It's okay to cry, it's okay to feel 💧" },
-          { start: 40.8,  end: 45.0,  line: "You don't have to hide what's real" },
-          { start: 45.0,  end: 48.5,  line: "If your heart feels tired and blue 💙" },
-          { start: 48.5,  end: 52.2,  line: "There is someone here for you" },
-          { start: 52.2,  end: 55.8,  line: "Take my hand let's talk awhile 🤝" },
-          { start: 55.8,  end: 60.5,  line: "You don't have to fake a smile 😊" },
-          { start: 60.5,  end: 64.5,  line: "You are not alone, alone, alone! 🌈" },
-          { start: 64.5,  end: 68.2,  line: "At Bilikids you found a home 🏡" },
-          { start: 68.2,  end: 71.8,  line: "You are enough just as you are ⭐" },
-          { start: 71.8,  end: 75.8,  line: "A precious life, a shining star! ✨" },
-          { start: 75.8,  end: 79.2,  line: "Hand in hand we'll help you through 🤝" },
-          { start: 79.2,  end: 82.8,  line: "There's a friend who cares for you 💖" },
-          { start: 82.8,  end: 86.5,  line: "Bilikids, together we stand! 🏆" },
-          { start: 86.5,  end: 91.0,  line: "There's always a friend to hold your hand 🌟" },
-          { start: 91.0,  end: 103.5, line: "Ohhh... to hold your hand! 🎶" },
-          { start: 103.5, end: 107.5, line: "Every voice deserves to be heard 🗣️" },
-          { start: 107.5, end: 110.8, line: "Every heart deserves kind words ❤️" },
-          { start: 110.8, end: 114.2, line: "Teachers, friends, we're here to care 🎒" },
-          { start: 114.2, end: 117.8, line: "You can talk, we'll always hear 👂" },
-          { start: 117.8, end: 121.2, line: "You don't need to be brave each day" },
-          { start: 121.2, end: 124.8, line: "You can ask for help along the way" },
-          { start: 124.8, end: 128.2, line: "There's no shame in saying 'I'm not okay' 🫂" },
-          { start: 128.2, end: 133.5, line: "We'll listen to what you have to say 💬" },
-          { start: 133.5, end: 137.2, line: "If you're falling we'll reach out 🤲" },
-          { start: 137.2, end: 140.8, line: "If you're hurting talk it out" },
-          { start: 140.8, end: 144.2, line: "One small step, one hand to hold 👣" },
-          { start: 144.2, end: 147.8, line: "You are precious more than you know 💎" },
-          { start: 147.8, end: 150.8, line: "Your story matters! 📖" },
-          { start: 150.8, end: 153.8, line: "Your dreams matter! 🚀" },
-          { start: 153.8, end: 158.5, line: "YOU MATTER, YOU MATTER! 🌟" },
-          { start: 158.5, end: 162.2, line: "You are not alone, alone, alone! 🌈" },
-          { start: 162.2, end: 165.8, line: "At Bilikids you found a home 🏡" },
-          { start: 165.8, end: 169.2, line: "You are enough just as you are ⭐" },
-          { start: 169.2, end: 172.8, line: "A precious life, a shining star! ✨" },
-          { start: 172.8, end: 176.2, line: "Hand in hand we'll help you through 🤝" },
-          { start: 176.2, end: 179.8, line: "There's a friend who cares for you 💖" },
-          { start: 179.8, end: 183.5, line: "Bilikids, together we stand! 🏆" },
-          { start: 183.5, end: 188.0, line: "There's always a friend to hold your hand 🌟" },
-          { start: 188.0, end: 198.5, line: "Hold your hand, you belong! 💖" },
-          { start: 198.5, end: 206.5, line: "You belong at Bilikids! 🌟🌈" },
-          { start: 206.5, end: 215.5, line: "🎵 Outro Final... ¡Gran trabajo, eres increíble! 🎵" }
+    {
+        "id": "anthem",
+        "title": "You Belong (The Bilikids Anthem)",
+        "subtitle": "⭐ Himno Oficial de Bilikids • Audio Master Original",
+        "icon": "🎙️",
+        "badgeGradient": "linear-gradient(135deg, #a855f7, #ec4899)",
+        "durationDefault": "3:35",
+        "src": "assets/karaoke/song_bilikids_anthem.mp3",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 3.5,
+                "line": "🎵 Instrumental Intro... ¡Prepárate! 🎵"
+            },
+            {
+                "start": 3.5,
+                "end": 10.0,
+                "line": "Hey myself, look at me ✨"
+            },
+            {
+                "start": 10.0,
+                "end": 17.0,
+                "line": "You are more than you can see 🌟"
+            },
+            {
+                "start": 17.0,
+                "end": 21.0,
+                "line": "Here at Bilikids you belong 💖"
+            },
+            {
+                "start": 21.0,
+                "end": 25.0,
+                "line": "You are loved, you are strong! 💪"
+            },
+            {
+                "start": 25.0,
+                "end": 30.0,
+                "line": "Ohhh, ohhh... 🎶"
+            },
+            {
+                "start": 30.0,
+                "end": 34.0,
+                "line": "Some days the sun won't shine so bright ☁️"
+            },
+            {
+                "start": 34.0,
+                "end": 37.5,
+                "line": "Some days you hide what's deep inside"
+            },
+            {
+                "start": 37.5,
+                "end": 41.0,
+                "line": "It's okay to cry, it's okay to feel 💧"
+            },
+            {
+                "start": 41.0,
+                "end": 45.0,
+                "line": "You don't have to hide what's real"
+            },
+            {
+                "start": 45.0,
+                "end": 48.8,
+                "line": "If your heart feels tired and blue 💙"
+            },
+            {
+                "start": 48.8,
+                "end": 52.5,
+                "line": "There is someone here for you"
+            },
+            {
+                "start": 52.5,
+                "end": 56.0,
+                "line": "Take my hand let's talk awhile 🤝"
+            },
+            {
+                "start": 56.0,
+                "end": 61.0,
+                "line": "You don't have to fake a smile 😊"
+            },
+            {
+                "start": 61.0,
+                "end": 65.0,
+                "line": "You are not alone, alone, alone! 🌈"
+            },
+            {
+                "start": 65.0,
+                "end": 68.5,
+                "line": "At Bilikids you found a home 🏡"
+            },
+            {
+                "start": 68.5,
+                "end": 72.0,
+                "line": "You are enough just as you are ⭐"
+            },
+            {
+                "start": 72.0,
+                "end": 76.0,
+                "line": "A precious life, a shining star! ✨"
+            },
+            {
+                "start": 76.0,
+                "end": 79.5,
+                "line": "Hand in hand we'll help you through 🤝"
+            },
+            {
+                "start": 79.5,
+                "end": 83.0,
+                "line": "There's a friend who cares for you 💖"
+            },
+            {
+                "start": 83.0,
+                "end": 86.8,
+                "line": "Bilikids, together we stand! 🏆"
+            },
+            {
+                "start": 86.8,
+                "end": 91.0,
+                "line": "There's always a friend to hold your hand 🌟"
+            },
+            {
+                "start": 91.0,
+                "end": 104.0,
+                "line": "Ohhh... to hold your hand! 🎶"
+            },
+            {
+                "start": 104.0,
+                "end": 108.0,
+                "line": "Every voice deserves to be heard 🗣️"
+            },
+            {
+                "start": 108.0,
+                "end": 111.0,
+                "line": "Every heart deserves kind words ❤️"
+            },
+            {
+                "start": 111.0,
+                "end": 114.5,
+                "line": "Teachers, friends, we're here to care 🎒"
+            },
+            {
+                "start": 114.5,
+                "end": 118.0,
+                "line": "You can talk, we'll always hear 👂"
+            },
+            {
+                "start": 118.0,
+                "end": 121.5,
+                "line": "You don't need to be brave each day"
+            },
+            {
+                "start": 121.5,
+                "end": 125.0,
+                "line": "You can ask for help along the way"
+            },
+            {
+                "start": 125.0,
+                "end": 128.5,
+                "line": "There's no shame in saying 'I'm not okay' 🫂"
+            },
+            {
+                "start": 128.5,
+                "end": 134.0,
+                "line": "We'll listen to what you have to say 💬"
+            },
+            {
+                "start": 134.0,
+                "end": 137.5,
+                "line": "If you're falling we'll reach out 🤲"
+            },
+            {
+                "start": 137.5,
+                "end": 141.0,
+                "line": "If you're hurting talk it out"
+            },
+            {
+                "start": 141.0,
+                "end": 144.5,
+                "line": "One small step, one hand to hold 👣"
+            },
+            {
+                "start": 144.5,
+                "end": 148.0,
+                "line": "You are precious more than you know 💎"
+            },
+            {
+                "start": 148.0,
+                "end": 151.0,
+                "line": "Your story matters! 📖"
+            },
+            {
+                "start": 151.0,
+                "end": 154.0,
+                "line": "Your dreams matter! 🚀"
+            },
+            {
+                "start": 154.0,
+                "end": 159.0,
+                "line": "YOU MATTER, YOU MATTER! 🌟"
+            },
+            {
+                "start": 159.0,
+                "end": 162.5,
+                "line": "You are not alone, alone, alone! 🌈"
+            },
+            {
+                "start": 162.5,
+                "end": 166.0,
+                "line": "At Bilikids you found a home 🏡"
+            },
+            {
+                "start": 166.0,
+                "end": 169.5,
+                "line": "You are enough just as you are ⭐"
+            },
+            {
+                "start": 169.5,
+                "end": 173.0,
+                "line": "A precious life, a shining star! ✨"
+            },
+            {
+                "start": 173.0,
+                "end": 176.5,
+                "line": "Hand in hand we'll help you through 🤝"
+            },
+            {
+                "start": 176.5,
+                "end": 180.0,
+                "line": "There's a friend who cares for you 💖"
+            },
+            {
+                "start": 180.0,
+                "end": 183.8,
+                "line": "Bilikids, together we stand! 🏆"
+            },
+            {
+                "start": 183.8,
+                "end": 188.0,
+                "line": "There's always a friend to hold your hand 🌟"
+            },
+            {
+                "start": 188.0,
+                "end": 198.5,
+                "line": "Hold your hand, you belong! 💖"
+            },
+            {
+                "start": 198.5,
+                "end": 206.5,
+                "line": "You belong at Bilikids! 🌟🌈"
+            },
+            {
+                "start": 206.5,
+                "end": 215.6,
+                "line": "🎵 Outro Final... ¡Gran trabajo, eres increíble! 🎵"
+            }
         ]
-      },
-      {
-        id: 'hello_hello',
-        title: 'Hello, Hello! Can You Clap Your Hands?',
-        subtitle: '👋 Super Simple Songs • Saludos y Movimiento',
-        icon: '👋',
-        badgeGradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
-        durationDefault: '2:10',
-        src: 'assets/karaoke/song_hello_hello.webm',
-        lyrics: [
-          { start: 0.0,   end: 5.0,   line: "🎵 Instrumental Intro... ¡Listos para saludar! 🎵" },
-          { start: 5.0,   end: 10.5,  line: "Hello, hello! Can you clap your hands? 👏" },
-          { start: 10.5,  end: 16.0,  line: "Hello, hello! Can you clap your hands? 👏" },
-          { start: 16.0,  end: 21.0,  line: "Can you stretch up high? 🙆" },
-          { start: 21.0,  end: 26.0,  line: "Can you touch your toes? 👟" },
-          { start: 26.0,  end: 31.0,  line: "Can you turn around? 🔄" },
-          { start: 31.0,  end: 36.5,  line: "Can you say, 'Hello'? 👋" },
-          { start: 36.5,  end: 42.0,  line: "Hello, hello! Can you stamp your feet? 🦶" },
-          { start: 42.0,  end: 47.5,  line: "Hello, hello! Can you stamp your feet? 🦶" },
-          { start: 47.5,  end: 52.5,  line: "Can you stretch up high? 🙆" },
-          { start: 52.5,  end: 57.5,  line: "Can you touch your toes? 👟" },
-          { start: 57.5,  end: 62.5,  line: "Can you turn around? 🔄" },
-          { start: 62.5,  end: 68.0,  line: "Can you say, 'Hello'? 👋" },
-          { start: 68.0,  end: 74.0,  line: "🎵 ¡Música instrumental y baile alegre! 💃🕺 🎵" },
-          { start: 74.0,  end: 79.5,  line: "Hello, hello! Can you clap your hands? 👏" },
-          { start: 79.5,  end: 85.0,  line: "Hello, hello! Can you stamp your feet? 🦶" },
-          { start: 85.0,  end: 90.5,  line: "Can you stretch up high? 🙆" },
-          { start: 90.5,  end: 95.5,  line: "Can you touch your toes? 👟" },
-          { start: 95.5,  end: 100.5, line: "Can you turn around? 🔄" },
-          { start: 100.5, end: 106.0, line: "Can you say, 'Hello'? 👋" },
-          { start: 106.0, end: 111.5, line: "Hello, hello! Can you clap your hands? 👏" },
-          { start: 111.5, end: 117.0, line: "Hello, hello! Can you stamp your feet? 🦶" },
-          { start: 117.0, end: 123.0, line: "Can you say, 'Hello'? Hello! 👋✨" },
-          { start: 123.0, end: 130.8, line: "🎉 ¡Excelente trabajo! ¡Qué bien saludaste! 🌟" }
+    },
+    {
+        "id": "hello_hello",
+        "title": "Hello Song (Greetings)",
+        "subtitle": "👋 The Singing Walrus • Saludos y Amigos",
+        "icon": "👋",
+        "badgeGradient": "linear-gradient(135deg, #f59e0b, #ef4444)",
+        "durationDefault": "2:10",
+        "src": "assets/karaoke/song_hello_hello.webm",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 8.0,
+                "line": "🎵 Instrumental Intro... ¡Listos para saludar! 👋 🎵"
+            },
+            {
+                "start": 8.0,
+                "end": 10.0,
+                "line": "Every day"
+            },
+            {
+                "start": 10.0,
+                "end": 12.0,
+                "line": "(every day) 🎒"
+            },
+            {
+                "start": 12.0,
+                "end": 14.0,
+                "line": "I go to school"
+            },
+            {
+                "start": 14.0,
+                "end": 16.0,
+                "line": "(I go to school) 🏫"
+            },
+            {
+                "start": 16.0,
+                "end": 18.0,
+                "line": "I meet my friends"
+            },
+            {
+                "start": 18.0,
+                "end": 20.0,
+                "line": "(I meet my friends) 👫"
+            },
+            {
+                "start": 20.0,
+                "end": 22.5,
+                "line": "And we all say"
+            },
+            {
+                "start": 22.5,
+                "end": 25.0,
+                "line": "(and we all say) 🗣️"
+            },
+            {
+                "start": 25.0,
+                "end": 27.2,
+                "line": "Hello, hello!"
+            },
+            {
+                "start": 27.2,
+                "end": 29.5,
+                "line": "How are you? 👋"
+            },
+            {
+                "start": 29.5,
+                "end": 32.5,
+                "line": "I'm good, I'm great! 😄"
+            },
+            {
+                "start": 32.5,
+                "end": 35.0,
+                "line": "How about you? ⭐"
+            },
+            {
+                "start": 35.0,
+                "end": 37.2,
+                "line": "Hello, hello!"
+            },
+            {
+                "start": 37.2,
+                "end": 39.5,
+                "line": "How are you? 👋"
+            },
+            {
+                "start": 39.5,
+                "end": 42.5,
+                "line": "I'm good, I'm great! 😄"
+            },
+            {
+                "start": 42.5,
+                "end": 45.0,
+                "line": "How about you? ⭐"
+            },
+            {
+                "start": 45.0,
+                "end": 52.5,
+                "line": "Na, na, na, na, na, na, na, na, na... 🎶"
+            },
+            {
+                "start": 52.5,
+                "end": 60.0,
+                "line": "Na, na, na, na, na, na, na, na, na, hey! 💃"
+            },
+            {
+                "start": 60.0,
+                "end": 62.0,
+                "line": "Every day"
+            },
+            {
+                "start": 62.0,
+                "end": 64.0,
+                "line": "(every day) 🎈"
+            },
+            {
+                "start": 64.0,
+                "end": 66.0,
+                "line": "I go and play"
+            },
+            {
+                "start": 66.0,
+                "end": 68.0,
+                "line": "(I go and play) ⚽"
+            },
+            {
+                "start": 68.0,
+                "end": 70.0,
+                "line": "I meet new friends"
+            },
+            {
+                "start": 70.0,
+                "end": 72.0,
+                "line": "(I meet new friends) 🤝"
+            },
+            {
+                "start": 72.0,
+                "end": 74.5,
+                "line": "And we all say"
+            },
+            {
+                "start": 74.5,
+                "end": 77.0,
+                "line": "(and we all say) 🗣️"
+            },
+            {
+                "start": 77.0,
+                "end": 79.5,
+                "line": "Hello, hello!"
+            },
+            {
+                "start": 79.5,
+                "end": 82.0,
+                "line": "What's your name? 👋"
+            },
+            {
+                "start": 82.0,
+                "end": 85.0,
+                "line": "Nice to meet you! 🌟"
+            },
+            {
+                "start": 85.0,
+                "end": 87.5,
+                "line": "Do you want to play? 🎨"
+            },
+            {
+                "start": 87.5,
+                "end": 90.0,
+                "line": "Hello, hello!"
+            },
+            {
+                "start": 90.0,
+                "end": 92.5,
+                "line": "What's your name? 👋"
+            },
+            {
+                "start": 92.5,
+                "end": 95.5,
+                "line": "Nice to meet you! 🌟"
+            },
+            {
+                "start": 95.5,
+                "end": 98.0,
+                "line": "Do you want to play? 🎨"
+            },
+            {
+                "start": 98.0,
+                "end": 106.0,
+                "line": "Na, na, na, na, na, na, na, na, na... 🎶"
+            },
+            {
+                "start": 106.0,
+                "end": 114.0,
+                "line": "Na, na, na, na, na, na, na, na, na... 🕺"
+            },
+            {
+                "start": 114.0,
+                "end": 122.0,
+                "line": "Na, na, na, na, na, na, na, na, na... 🌈"
+            },
+            {
+                "start": 122.0,
+                "end": 130.8,
+                "line": "🎉 ¡Qué bien saludaste! Goodbye, see you again! ✨"
+            }
         ]
-      },
-      {
-        id: 'action_song',
-        title: 'Action Song',
-        subtitle: '🏃 The Singing Walrus • Verbos de Acción y Baile',
-        icon: '🏃',
-        badgeGradient: 'linear-gradient(135deg, #10b981, #06b6d4)',
-        durationDefault: '3:37',
-        src: 'assets/karaoke/song_action_song.webm',
-        lyrics: [
-          { start: 0.0,   end: 6.0,   line: "🎵 Intro musical... ¡A moverse con energía! 🎵" },
-          { start: 6.0,   end: 12.0,  line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 12.0,  end: 18.0,  line: "Oh, so happy, dance with me! 💃" },
-          { start: 18.0,  end: 24.0,  line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 24.0,  end: 30.0,  line: "Oh, so happy, dance with me! 🕺" },
-          { start: 30.0,  end: 36.5,  line: "Clap, clap, clap your hands! 👏" },
-          { start: 36.5,  end: 43.0,  line: "Stomp, stomp, stomp your feet! 🦶" },
-          { start: 43.0,  end: 49.5,  line: "Swing, swing, swing your arms! 🙆" },
-          { start: 49.5,  end: 56.5,  line: "Dance everybody and sing with me! 🎶" },
-          { start: 56.5,  end: 62.5,  line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 62.5,  end: 68.5,  line: "Oh, so happy, dance with me! 💃" },
-          { start: 68.5,  end: 74.5,  line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 74.5,  end: 81.0,  line: "Oh, so happy, dance with me! 🕺" },
-          { start: 81.0,  end: 87.5,  line: "Jump, jump, jump around! 🦘" },
-          { start: 87.5,  end: 94.0,  line: "Touch the sky and touch the ground! ⛅" },
-          { start: 94.0,  end: 100.5, line: "Shake, shake, shake your hips! 💫" },
-          { start: 100.5, end: 107.5, line: "I know a song, and it goes like this! 🎵" },
-          { start: 107.5, end: 113.5, line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 113.5, end: 119.5, line: "Oh, so happy, dance with me! 💃" },
-          { start: 119.5, end: 125.5, line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 125.5, end: 132.0, line: "Oh, so happy, dance with me! 🕺" },
-          { start: 132.0, end: 138.5, line: "Clap, clap, clap your hands! 👏" },
-          { start: 138.5, end: 144.5, line: "Stomp, stomp, stomp your feet! 🦶" },
-          { start: 144.5, end: 150.5, line: "Swing, swing, swing your arms! 🙆" },
-          { start: 150.5, end: 157.0, line: "Dance everybody and sing with me! 🎶" },
-          { start: 157.0, end: 163.5, line: "Jump, jump, jump around! 🦘" },
-          { start: 163.5, end: 169.5, line: "Touch the sky and touch the ground! ⛅" },
-          { start: 169.5, end: 175.5, line: "Shake, shake, shake your hips! 💫" },
-          { start: 175.5, end: 182.5, line: "I know a song, and it goes like this! 🎵" },
-          { start: 182.5, end: 188.5, line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 188.5, end: 194.5, line: "Oh, so happy, dance with me! 💃" },
-          { start: 194.5, end: 200.5, line: "Naa, naa, naa, I'm so happy! 😄" },
-          { start: 200.5, end: 208.0, line: "Oh, so happy, sing with me! 🌟" },
-          { start: 208.0, end: 217.4, line: "🎉 ¡Genial! ¡Gran baile y energía! 🏆" }
+    },
+    {
+        "id": "action_song",
+        "title": "Action Song (Interactive)",
+        "subtitle": "🏃 The Singing Walrus • Acciones y Baile",
+        "icon": "🏃",
+        "badgeGradient": "linear-gradient(135deg, #10b981, #06b6d4)",
+        "durationDefault": "3:37",
+        "src": "assets/karaoke/song_action_song.webm",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 5.0,
+                "line": "🎵 Intro musical... ¡A moverse con energía! 🎵"
+            },
+            {
+                "start": 5.0,
+                "end": 15.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 💃"
+            },
+            {
+                "start": 15.0,
+                "end": 26.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 🕺"
+            },
+            {
+                "start": 26.0,
+                "end": 34.0,
+                "line": "Clap, clap, clap your hands! 👏 (¡Aplaude!)"
+            },
+            {
+                "start": 34.0,
+                "end": 42.0,
+                "line": "Stomp, stomp, stomp your feet! 🦶 (¡Zapatea!)"
+            },
+            {
+                "start": 42.0,
+                "end": 50.0,
+                "line": "Swing, swing, swing your arms! 🙆 (¡Mueve los brazos!)"
+            },
+            {
+                "start": 50.0,
+                "end": 58.0,
+                "line": "Dance everybody and sing with me! 🎶 (¡Todos a bailar!)"
+            },
+            {
+                "start": 58.0,
+                "end": 68.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 💃"
+            },
+            {
+                "start": 68.0,
+                "end": 83.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 🕺"
+            },
+            {
+                "start": 83.0,
+                "end": 91.0,
+                "line": "Jump, jump, jump around! 🦘 (¡Salta!)"
+            },
+            {
+                "start": 91.0,
+                "end": 99.0,
+                "line": "Touch the sky and touch the ground! ⛅ (¡Toca el suelo!)"
+            },
+            {
+                "start": 99.0,
+                "end": 107.0,
+                "line": "Shake, shake, shake your hips! 💫 (¡Mueve las caderas!)"
+            },
+            {
+                "start": 107.0,
+                "end": 116.0,
+                "line": "I know a song, and it goes like this! 🎵 (¡Así es la canción!)"
+            },
+            {
+                "start": 116.0,
+                "end": 128.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 💃"
+            },
+            {
+                "start": 128.0,
+                "end": 141.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 🕺"
+            },
+            {
+                "start": 141.0,
+                "end": 145.0,
+                "line": "Clap, clap, clap your hands! 👏"
+            },
+            {
+                "start": 145.0,
+                "end": 149.0,
+                "line": "Stomp, stomp, stomp your feet! 🦶"
+            },
+            {
+                "start": 149.0,
+                "end": 153.0,
+                "line": "Swing, swing, swing your arms! 🙆"
+            },
+            {
+                "start": 153.0,
+                "end": 157.0,
+                "line": "Dance everybody and sing with me! 🎶"
+            },
+            {
+                "start": 157.0,
+                "end": 161.0,
+                "line": "Jump, jump, jump around! 🦘"
+            },
+            {
+                "start": 161.0,
+                "end": 165.0,
+                "line": "Touch the sky and touch the ground! ⛅"
+            },
+            {
+                "start": 165.0,
+                "end": 169.0,
+                "line": "Shake, shake, shake your hips! 💫"
+            },
+            {
+                "start": 169.0,
+                "end": 175.0,
+                "line": "I know a song, and it goes like this! 🎵"
+            },
+            {
+                "start": 175.0,
+                "end": 185.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 💃"
+            },
+            {
+                "start": 185.0,
+                "end": 195.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, dance with me! 🕺"
+            },
+            {
+                "start": 195.0,
+                "end": 205.0,
+                "line": "Naa, naa, naa, I'm so happy! Oh, so happy, sing with me! 🌟"
+            },
+            {
+                "start": 205.0,
+                "end": 217.4,
+                "line": "Naa, naa, naa, I'm so happy! ¡Gran energía y baile! 🏆🎉"
+            }
         ]
-      },
-      {
-        id: 'days_of_the_week',
-        title: 'Seven Days a Week',
-        subtitle: '📅 The Singing Walrus • Días de la Semana',
-        icon: '📅',
-        badgeGradient: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-        durationDefault: '2:38',
-        src: 'assets/karaoke/song_days_of_the_week.webm',
-        lyrics: [
-          { start: 0.0,   end: 6.5,   line: "🎵 ¡Hola niños! Aprendamos los 7 días de la semana 🎵" },
-          { start: 6.5,   end: 12.0,  line: "I can dance with my hands, I can dance with my feet 💃" },
-          { start: 12.0,  end: 17.5,  line: "I like to dance everyday, seven days a week! 🕺" },
-          { start: 17.5,  end: 23.0,  line: "I can dance with my hands, I can dance with my feet 💃" },
-          { start: 23.0,  end: 29.0,  line: "I like to dance everyday, seven days a week! ⭐" },
-          { start: 29.0,  end: 34.5,  line: "Sundays! (Sundays!) ☀️" },
-          { start: 34.5,  end: 40.0,  line: "Mondays! (Mondays!) 🎒" },
-          { start: 40.0,  end: 45.5,  line: "Tuesdays! (Tuesdays!) 🎨" },
-          { start: 45.5,  end: 51.0,  line: "Wednesdays! (Wednesdays!) 📚" },
-          { start: 51.0,  end: 56.5,  line: "Thursdays! (Thursdays!) ⚽" },
-          { start: 56.5,  end: 62.0,  line: "Fridays! (Fridays!) 🍕" },
-          { start: 62.0,  end: 67.5,  line: "Saturdays! (Saturdays!) 🎪" },
-          { start: 67.5,  end: 73.0,  line: "Seven days a week! 🎉" },
-          { start: 73.0,  end: 78.5,  line: "I can shake my hands, I can shake my feet 🤝" },
-          { start: 78.5,  end: 84.0,  line: "I like to shake everyday, seven days a week! 💫" },
-          { start: 84.0,  end: 89.5,  line: "I can shake my hands, I can shake my feet 🤝" },
-          { start: 89.5,  end: 95.5,  line: "I like to shake everyday, seven days a week! 💫" },
-          { start: 95.5,  end: 101.0, line: "Sundays! Mondays! Tuesdays! 📅" },
-          { start: 101.0, end: 106.5, line: "Wednesdays! Thursdays! Fridays! 📅" },
-          { start: 106.5, end: 112.0, line: "Saturdays! Seven days a week! 🎈" },
-          { start: 112.0, end: 117.5, line: "I can drum with my hands, I can drum with my feet 🥁" },
-          { start: 117.5, end: 123.0, line: "I like to drum everyday, seven days a week! 🎵" },
-          { start: 123.0, end: 128.5, line: "I can drum with my hands, I can drum with my feet 🥁" },
-          { start: 128.5, end: 134.5, line: "I like to drum everyday, seven days a week! 🎵" },
-          { start: 134.5, end: 140.0, line: "Sundays! Mondays! Tuesdays! Wednesdays! 🌟" },
-          { start: 140.0, end: 145.5, line: "Thursdays! Fridays! Saturdays! 🌟" },
-          { start: 145.5, end: 151.0, line: "Seven days a week, yeah! 🏆" },
-          { start: 151.0, end: 158.1, line: "🎉 ¡Fantástico! ¡Te sabes todos los días! 🌟" }
+    },
+    {
+        "id": "days_of_the_week",
+        "title": "Seven Days a Week",
+        "subtitle": "📅 The Singing Walrus • Días de la Semana",
+        "icon": "📅",
+        "badgeGradient": "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+        "durationDefault": "2:38",
+        "src": "assets/karaoke/song_days_of_the_week.webm",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 15.0,
+                "line": "🎵 Intro musical... ¡Vamos a bailar toda la semana! 📅 🎵"
+            },
+            {
+                "start": 15.0,
+                "end": 22.5,
+                "line": "I can dance with my hands, I can dance with my feet 💃"
+            },
+            {
+                "start": 22.5,
+                "end": 29.5,
+                "line": "I like to dance everyday, seven days a week! 🕺"
+            },
+            {
+                "start": 29.5,
+                "end": 36.5,
+                "line": "I can dance with my hands, I can dance with my feet 💃"
+            },
+            {
+                "start": 36.5,
+                "end": 43.5,
+                "line": "I like to dance everyday, seven days a week! ⭐"
+            },
+            {
+                "start": 43.5,
+                "end": 45.5,
+                "line": "Sundays! (Sundays!) ☀️"
+            },
+            {
+                "start": 45.5,
+                "end": 47.5,
+                "line": "Mondays! (Mondays!) 🎒"
+            },
+            {
+                "start": 47.5,
+                "end": 49.5,
+                "line": "Tuesdays! (Tuesdays!) 🎨"
+            },
+            {
+                "start": 49.5,
+                "end": 51.5,
+                "line": "Wednesdays! (Wednesdays!) 📚"
+            },
+            {
+                "start": 51.5,
+                "end": 53.5,
+                "line": "Thursdays! (Thursdays!) ⚽"
+            },
+            {
+                "start": 53.5,
+                "end": 55.5,
+                "line": "Fridays! (Fridays!) 🍕"
+            },
+            {
+                "start": 55.5,
+                "end": 57.5,
+                "line": "Saturdays! (Saturdays!) 🎪"
+            },
+            {
+                "start": 57.5,
+                "end": 61.0,
+                "line": "Seven days a week! 🎉"
+            },
+            {
+                "start": 61.0,
+                "end": 68.0,
+                "line": "I can shake my hands, I can shake my feet 🤝"
+            },
+            {
+                "start": 68.0,
+                "end": 75.0,
+                "line": "I like to shake everyday, seven days a week! 💫"
+            },
+            {
+                "start": 75.0,
+                "end": 82.0,
+                "line": "I can shake my hands, I can shake my feet 🤝"
+            },
+            {
+                "start": 82.0,
+                "end": 89.0,
+                "line": "I like to shake everyday, seven days a week! 💫"
+            },
+            {
+                "start": 89.0,
+                "end": 92.5,
+                "line": "Sundays! Mondays! Tuesdays! 📅"
+            },
+            {
+                "start": 92.5,
+                "end": 96.0,
+                "line": "Wednesdays! Thursdays! Fridays! 📅"
+            },
+            {
+                "start": 96.0,
+                "end": 100.0,
+                "line": "Saturdays! Seven days a week! 🎈"
+            },
+            {
+                "start": 100.0,
+                "end": 107.0,
+                "line": "I can drum with my hands, I can drum with my feet 🥁"
+            },
+            {
+                "start": 107.0,
+                "end": 114.0,
+                "line": "I like to drum everyday, seven days a week! 🎵"
+            },
+            {
+                "start": 114.0,
+                "end": 121.0,
+                "line": "I can drum with my hands, I can drum with my feet 🥁"
+            },
+            {
+                "start": 121.0,
+                "end": 128.0,
+                "line": "I like to drum everyday, seven days a week! 🎵"
+            },
+            {
+                "start": 128.0,
+                "end": 132.0,
+                "line": "Sundays! Mondays! Tuesdays! Wednesdays! 🌟"
+            },
+            {
+                "start": 132.0,
+                "end": 136.0,
+                "line": "Thursdays! Fridays! Saturdays! 🌟"
+            },
+            {
+                "start": 136.0,
+                "end": 142.0,
+                "line": "Seven days a week, yeah! 🏆"
+            },
+            {
+                "start": 142.0,
+                "end": 149.0,
+                "line": "Na na na na, na na na na, na na na na... Seven days a week! 🎶"
+            },
+            {
+                "start": 149.0,
+                "end": 158.1,
+                "line": "Na na na na, na na na na, na na na na... ¡Te sabes todos los días! 🌟"
+            }
         ]
-      },
-      {
-        id: 'twinkle_star',
-        title: 'Twinkle, Twinkle, Little Star',
-        subtitle: '⭐ Super Simple Songs • Clásico Infantil y Noche',
-        icon: '⭐',
-        badgeGradient: 'linear-gradient(135deg, #6366f1, #a855f7)',
-        durationDefault: '2:34',
-        src: 'assets/karaoke/song_twinkle_twinkle.m4a',
-        lyrics: [
-          { start: 0.0,   end: 8.0,   line: "🎵 Dulce melodía de cuna... ✨ 🎵" },
-          { start: 8.0,   end: 16.0,  line: "Twinkle, twinkle, little star ✨" },
-          { start: 16.0,  end: 24.0,  line: "How I wonder what you are ⭐" },
-          { start: 24.0,  end: 32.0,  line: "Up above the world so high 🌌" },
-          { start: 32.0,  end: 40.0,  line: "Like a diamond in the sky 💎" },
-          { start: 40.0,  end: 48.0,  line: "Twinkle, twinkle, little star ✨" },
-          { start: 48.0,  end: 56.0,  line: "How I wonder what you are ⭐" },
-          { start: 56.0,  end: 64.0,  line: "🎵 Interludio mágico de estrellas fugaces 🌠 🎵" },
-          { start: 64.0,  end: 72.0,  line: "When the blazing sun is gone 🌅" },
-          { start: 72.0,  end: 80.0,  line: "When he nothing shines upon 🌙" },
-          { start: 80.0,  end: 88.0,  line: "Then you show your little light 🕯️" },
-          { start: 88.0,  end: 96.0,  line: "Twinkle, twinkle, all the night ✨" },
-          { start: 96.0,  end: 104.0, line: "Twinkle, twinkle, little star ⭐" },
-          { start: 104.0, end: 112.0, line: "How I wonder what you are 💖" },
-          { start: 112.0, end: 120.0, line: "🎵 Música suave de la noche 🌃 🎵" },
-          { start: 120.0, end: 128.0, line: "Twinkle, twinkle, little star ✨" },
-          { start: 128.0, end: 136.0, line: "How I wonder what you are ⭐" },
-          { start: 136.0, end: 144.0, line: "Up above the world so high, like a diamond in the sky 💎" },
-          { start: 144.0, end: 153.9, line: "Twinkle, twinkle, little star... Goodnight! 🌙✨" }
+    },
+    {
+        "id": "twinkle_star",
+        "title": "Twinkle, Twinkle, Little Star",
+        "subtitle": "⭐ Super Simple Songs • Canción de Cuna",
+        "icon": "⭐",
+        "badgeGradient": "linear-gradient(135deg, #6366f1, #a855f7)",
+        "durationDefault": "2:34",
+        "src": "assets/karaoke/song_twinkle_twinkle.m4a",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 15.0,
+                "line": "🎵 Dulce melodía de cuna... ¡Mira la estrella brillar! ✨ 🎵"
+            },
+            {
+                "start": 15.0,
+                "end": 23.0,
+                "line": "Twinkle, twinkle, little star ✨"
+            },
+            {
+                "start": 23.0,
+                "end": 31.0,
+                "line": "How I wonder what you are ⭐"
+            },
+            {
+                "start": 31.0,
+                "end": 39.0,
+                "line": "Up above the world so high 🌌"
+            },
+            {
+                "start": 39.0,
+                "end": 47.0,
+                "line": "Like a diamond in the sky 💎"
+            },
+            {
+                "start": 47.0,
+                "end": 55.0,
+                "line": "Twinkle, twinkle, little star ✨"
+            },
+            {
+                "start": 55.0,
+                "end": 65.0,
+                "line": "How I wonder what you are ⭐"
+            },
+            {
+                "start": 65.0,
+                "end": 85.0,
+                "line": "🎵 Interludio mágico de estrellas en el cielo nocturno 🌠 🎵"
+            },
+            {
+                "start": 85.0,
+                "end": 94.0,
+                "line": "Twinkle, twinkle, little star ✨"
+            },
+            {
+                "start": 94.0,
+                "end": 103.0,
+                "line": "How I wonder what you are ⭐"
+            },
+            {
+                "start": 103.0,
+                "end": 111.0,
+                "line": "Up above the world so high 🌌"
+            },
+            {
+                "start": 111.0,
+                "end": 119.0,
+                "line": "Like a diamond in the sky 💎"
+            },
+            {
+                "start": 119.0,
+                "end": 127.0,
+                "line": "Twinkle, twinkle, little star ✨"
+            },
+            {
+                "start": 127.0,
+                "end": 138.0,
+                "line": "How I wonder what you are... ⭐"
+            },
+            {
+                "start": 138.0,
+                "end": 153.9,
+                "line": "🌙 Dulces sueños... ¡Buenas noches pequeña estrella! 😴✨"
+            }
         ]
-      },
-      {
-        id: 'weather_song',
-        title: 'The Weather Song',
-        subtitle: '⛅ Shapidoo • El Clima y las Estaciones',
-        icon: '⛅',
-        badgeGradient: 'linear-gradient(135deg, #0ea5e9, #f59e0b)',
-        durationDefault: '1:29',
-        src: 'assets/karaoke/song_weather_song.m4a',
-        lyrics: [
-          { start: 0.0,   end: 5.0,   line: "🎵 ¿Cómo está el clima hoy? ¡Descubrámoslo! ⛅ 🎵" },
-          { start: 5.0,   end: 9.5,   line: "What's the weather, weather, weather? 🌦️" },
-          { start: 9.5,   end: 14.0,  line: "What's the weather like today? ☀️" },
-          { start: 14.0,  end: 18.5,  line: "Let's look out the window, window 🪟" },
-          { start: 18.5,  end: 23.0,  line: "What's the weather? Let us say! 🗣️" },
-          { start: 23.0,  end: 27.5,  line: "It's sunny, sunny, warm and bright ☀️" },
-          { start: 27.5,  end: 32.0,  line: "The sun is shining, what a sight! ✨" },
-          { start: 32.0,  end: 36.5,  line: "Let's go out and play outside 🏃" },
-          { start: 36.5,  end: 41.0,  line: "Run and jump and slip and slide! 🛝" },
-          { start: 41.0,  end: 45.5,  line: "It's rainy, rainy, drip, drop, drip 🌧️" },
-          { start: 45.5,  end: 50.0,  line: "Puddles here, now jump and splash! 💦" },
-          { start: 50.0,  end: 54.5,  line: "Grab your boots, it's lots of fun 👢" },
-          { start: 54.5,  end: 59.0,  line: "Waiting for the shining sun! ☀️" },
-          { start: 59.0,  end: 63.5,  line: "It's windy, windy, whoosh, whoosh, whoosh 🍃" },
-          { start: 63.5,  end: 68.0,  line: "Leaves are blowing, swoosh, swoosh, swoosh 🍂" },
-          { start: 68.0,  end: 72.5,  line: "Hold your kite and let it fly 🪁" },
-          { start: 72.5,  end: 77.0,  line: "Up, up, up into the sky! ⛅" },
-          { start: 77.0,  end: 81.5,  line: "When the rain and sun come too 🌦️" },
-          { start: 81.5,  end: 85.5,  line: "A rainbow shines for me and you! 🌈" },
-          { start: 85.5,  end: 88.8,  line: "Red, orange, green and blue! What's the weather? ☀️🌈" }
+    },
+    {
+        "id": "weather_song",
+        "title": "The Weather Song",
+        "subtitle": "⛅ Shapidoo • El Clima y el Arcoíris",
+        "icon": "⛅",
+        "badgeGradient": "linear-gradient(135deg, #0ea5e9, #f59e0b)",
+        "durationDefault": "1:29",
+        "src": "assets/karaoke/song_weather_song.m4a",
+        "lyrics": [
+            {
+                "start": 0.0,
+                "end": 5.0,
+                "line": "🎵 ¿Cómo está el clima hoy? ¡Descubrámoslo! ⛅ 🎵"
+            },
+            {
+                "start": 5.0,
+                "end": 8.3,
+                "line": "What's the weather, weather, weather? 🌦️"
+            },
+            {
+                "start": 8.3,
+                "end": 11.6,
+                "line": "What's the weather like today? ☀️"
+            },
+            {
+                "start": 11.6,
+                "end": 14.8,
+                "line": "Let's look out the window, window 🪟"
+            },
+            {
+                "start": 14.8,
+                "end": 18.0,
+                "line": "What's the weather? Let us say! 🗣️"
+            },
+            {
+                "start": 18.0,
+                "end": 21.3,
+                "line": "It's sunny, sunny, warm and bright ☀️"
+            },
+            {
+                "start": 21.3,
+                "end": 24.6,
+                "line": "The sun is shining, what a sight! ✨"
+            },
+            {
+                "start": 24.6,
+                "end": 27.8,
+                "line": "Let's go out and play outside 🏃"
+            },
+            {
+                "start": 27.8,
+                "end": 31.5,
+                "line": "Run and jump and slip and slide! 🛝"
+            },
+            {
+                "start": 31.5,
+                "end": 34.8,
+                "line": "It's rainy, rainy, drip, drop, drip 🌧️"
+            },
+            {
+                "start": 34.8,
+                "end": 38.0,
+                "line": "Puddles here, now jump and splash! 💦"
+            },
+            {
+                "start": 38.0,
+                "end": 41.2,
+                "line": "Grab your boots, it's lots of fun 👢"
+            },
+            {
+                "start": 41.2,
+                "end": 44.8,
+                "line": "Waiting for the shining sun! ⛅"
+            },
+            {
+                "start": 44.8,
+                "end": 48.0,
+                "line": "It's windy, windy, whoosh, whoosh, whoosh 🍃"
+            },
+            {
+                "start": 48.0,
+                "end": 51.3,
+                "line": "Leaves are blowing, swoosh, swoosh, swoosh 🍂"
+            },
+            {
+                "start": 51.3,
+                "end": 54.5,
+                "line": "Hold your kite and let it fly 🪁"
+            },
+            {
+                "start": 54.5,
+                "end": 58.0,
+                "line": "Up, up, up into the sky! ⛅"
+            },
+            {
+                "start": 58.0,
+                "end": 61.3,
+                "line": "It's snowy, snowy, cold and white ❄️"
+            },
+            {
+                "start": 61.3,
+                "end": 64.5,
+                "line": "Snowflakes falling, soft and light 🌨️"
+            },
+            {
+                "start": 64.5,
+                "end": 67.8,
+                "line": "Build a snowman, round and tall ⛄"
+            },
+            {
+                "start": 67.8,
+                "end": 71.5,
+                "line": "Snowy days are fun for all! 🧤"
+            },
+            {
+                "start": 71.5,
+                "end": 74.8,
+                "line": "When the rain and sun come too 🌦️"
+            },
+            {
+                "start": 74.8,
+                "end": 78.0,
+                "line": "A rainbow shines for me and you 🌈"
+            },
+            {
+                "start": 78.0,
+                "end": 81.2,
+                "line": "Red and orange, green and blue 🎨"
+            },
+            {
+                "start": 81.2,
+                "end": 88.8,
+                "line": "What's the weather? Now you knew! 🌟✨"
+            }
         ]
-      }
-    ];
+    }
+];
 
-    // Current State
     let currentSongIndex = 0;
     let activeLyrics = songsCatalog[0].lyrics;
     let currentRenderedLineIdx = -1;
@@ -1069,7 +1814,7 @@
         progressBarFill.style.width = pct + '%';
         currentTimeLabel.textContent = formatTime(cur);
 
-        // Find active line
+        // Find active line with precision
         let activeLineIdx = 0;
         for (let i = 0; i < activeLyrics.length; i++) {
           if (cur >= activeLyrics[i].start && cur < activeLyrics[i].end) {
@@ -1096,41 +1841,55 @@
 
         // Word tracking within current line
         if (currentLineData) {
-          const words = currentLineData.line.split(' ');
-          const lineDuration = Math.max(0.1, currentLineData.end - currentLineData.start);
-          const lineProgress = Math.max(0, Math.min(1, (cur - currentLineData.start) / lineDuration));
+          const isInstrumental = currentLineData.line.startsWith('🎵') || currentLineData.line.startsWith('🎉') || currentLineData.line.startsWith('🌙');
           
-          const activeWordIdx = Math.min(words.length - 1, Math.floor(lineProgress * words.length));
-          const wordProgress = (lineProgress * words.length) - activeWordIdx;
+          if (isInstrumental) {
+            // Instrumental or outro: highlight softly and park bouncing star
+            const words = currentLineData.line.split(' ');
+            for (let w = 0; w < words.length; w++) {
+              const wordEl = document.getElementById('kword_' + w);
+              if (wordEl) wordEl.className = 'k-word sung';
+            }
+            if (starIndicator) {
+              starIndicator.classList.remove('active');
+            }
+          } else {
+            const words = currentLineData.line.split(' ');
+            const lineDuration = Math.max(0.1, currentLineData.end - currentLineData.start);
+            const lineProgress = Math.max(0, Math.min(1, (cur - currentLineData.start) / lineDuration));
+            
+            const activeWordIdx = Math.min(words.length - 1, Math.floor(lineProgress * words.length));
+            const wordProgress = (lineProgress * words.length) - activeWordIdx;
 
-          // Update word highlights
-          for (let w = 0; w < words.length; w++) {
-            const wordEl = document.getElementById('kword_' + w);
-            if (wordEl) {
-              if (w < activeWordIdx) {
-                wordEl.className = 'k-word sung';
-              } else if (w === activeWordIdx) {
-                wordEl.className = 'k-word active';
-              } else {
-                wordEl.className = 'k-word';
+            // Update word highlights
+            for (let w = 0; w < words.length; w++) {
+              const wordEl = document.getElementById('kword_' + w);
+              if (wordEl) {
+                if (w < activeWordIdx) {
+                  wordEl.className = 'k-word sung';
+                } else if (w === activeWordIdx) {
+                  wordEl.className = 'k-word active';
+                } else {
+                  wordEl.className = 'k-word';
+                }
               }
             }
-          }
 
-          // Position bouncing star over active word
-          const targetWordEl = document.getElementById('kword_' + activeWordIdx);
-          if (targetWordEl && starIndicator) {
-            const wordRect = targetWordEl.getBoundingClientRect();
-            const parentRect = teleprompter.getBoundingClientRect();
+            // Position bouncing star over active word
+            const targetWordEl = document.getElementById('kword_' + activeWordIdx);
+            if (targetWordEl && starIndicator) {
+              const wordRect = targetWordEl.getBoundingClientRect();
+              const parentRect = teleprompter.getBoundingClientRect();
 
-            const starX = (wordRect.left - parentRect.left) + (wordRect.width / 2);
-            const jumpArc = -Math.sin(wordProgress * Math.PI) * 22;
-            const starY = (wordRect.top - parentRect.top) - 30 + jumpArc;
+              const starX = (wordRect.left - parentRect.left) + (wordRect.width / 2);
+              const jumpArc = -Math.sin(wordProgress * Math.PI) * 22;
+              const starY = (wordRect.top - parentRect.top) - 30 + jumpArc;
 
-            starIndicator.style.left = starX + 'px';
-            starIndicator.style.top = starY + 'px';
-            starIndicator.style.transform = `translate(-50%, 0) rotate(${wordProgress * 180}deg)`;
-            starIndicator.classList.add('active');
+              starIndicator.style.left = starX + 'px';
+              starIndicator.style.top = starY + 'px';
+              starIndicator.style.transform = `translate(-50%, 0) rotate(${wordProgress * 180}deg)`;
+              starIndicator.classList.add('active');
+            }
           }
         }
 
