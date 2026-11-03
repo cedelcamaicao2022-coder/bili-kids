@@ -1,0 +1,15 @@
+.git
+.git/**
+.gitignore
+.assetsignore
+.env*
+node_modules
+node_modules/**
+.wrangler
+.wrangler/**
+*.zip
+*.tar
+*.gz
+package.json
+package-lock.json
+wrangler.json
