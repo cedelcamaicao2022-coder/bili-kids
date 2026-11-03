@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bilikids Videos | Episodios Animados en Inglés</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,6 +234,7 @@
       color: #94a3b8;
     }
   </style>
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -264,6 +265,10 @@
         <p class="video-text" id="videoDesc">
           Acompaña a Barnaby en su divertida visita al centro comercial. Aprende vocabulario sobre tiendas de ropa, jugueterías, la zona de comidas y cómo preguntar precios en inglés.
         </p>
+      </div>
+      <div id="videoComprehensionCheck" style="margin:0 1.5rem 1.5rem;padding:16px;border:1px solid rgba(56,189,248,.35);border-radius:14px;background:rgba(15,23,42,.65);" aria-live="polite">
+        <strong>🎯 Watch, then remember</strong>
+        <p style="margin:8px 0;color:#cbd5e1;">Pause the episode when you finish to answer one question about what you learned.</p>
       </div>
     </section>
 
@@ -318,38 +323,67 @@
       1: {
         title: "Episodio 1: Barnaby & Friends at the Shopping Mall",
         sub: '"Hello everyone! Welcome to Bilikids English!"',
-        desc: "Acompaña a Barnaby en su divertida visita al centro comercial. Aprende vocabulario sobre tiendas de ropa, jugueterías, la zona de comidas y cómo preguntar precios en inglés."
+        desc: "Acompaña a Barnaby en su divertida visita al centro comercial. Aprende vocabulario sobre tiendas de ropa, jugueterías, la zona de comidas y cómo preguntar precios en inglés.",
+        check: { question: "Where does Barnaby go in this episode?", options: ["To a shopping mall", "To a farm", "To the moon"], correct: 0 }
       },
       2: {
         title: "Episodio 2: A Day at Leo's Farm",
         sub: '"Look at that friendly cow! Can you say Mooo?"',
-        desc: "Explora la granja con Leo el perrito. Descubre los nombres de los animales de campo, los tractores y canta la clásica canción infantil."
+        desc: "Explora la granja con Leo el perrito. Descubre los nombres de los animales de campo, los tractores y canta la clásica canción infantil.",
+        check: { question: "Which animal does Leo see on the farm?", options: ["A cow", "A shark", "A tiger"], correct: 0 }
       },
       3: {
         title: "Episodio 3: Colors in Luna's House",
         sub: '"Where is the yellow toy? It is under the bed!"',
-        desc: "Luna busca sus juguetes favoritos en su habitación. Aprende las preposiciones de lugar (in, on, under) y repasa los colores brillantes."
+        desc: "Luna busca sus juguetes favoritos en su habitación. Aprende las preposiciones de lugar (in, on, under) y repasa los colores brillantes.",
+        check: { question: "Where is the yellow toy?", options: ["Under the bed", "On the bus", "In the sea"], correct: 0 }
       },
       4: {
         title: "Episodio 4: Daily Routines with Matías",
         sub: '"First I brush my teeth, then I eat breakfast!"',
-        desc: "Sigue la rutina matutina de Matías antes de ir al colegio. Aprende a describir tus actividades diarias en presente simple."
+        desc: "Sigue la rutina matutina de Matías antes de ir al colegio. Aprende a describir tus actividades diarias en presente simple.",
+        check: { question: "What does Matías do first?", options: ["He brushes his teeth", "He eats dinner", "He goes swimming"], correct: 0 }
       },
       5: {
         title: "Episodio 5: Space Explorer Mission",
         sub: '"3, 2, 1... Blast off to the stars!"',
-        desc: "Viaja al espacio exterior en un cohete supersónico. Descubre los planetas, estrellas y vocabulario astronómico en inglés."
+        desc: "Viaja al espacio exterior en un cohete supersónico. Descubre los planetas, estrellas y vocabulario astronómico en inglés.",
+        check: { question: "What do the explorers travel in?", options: ["A rocket", "A school bus", "A boat"], correct: 0 }
       }
     };
 
     let isPlaying = false;
+    let currentEpisodeId = 1;
     function togglePlayVideo() {
       isPlaying = !isPlaying;
       const btn = document.getElementById('btnPlayVideo');
       btn.textContent = isPlaying ? '⏸' : '▶';
+      if (!isPlaying) renderVideoCheck(currentEpisodeId);
+    }
+
+    function renderVideoCheck(id) {
+      const episode = episodes[id];
+      const container = document.getElementById('videoComprehensionCheck');
+      container.innerHTML = `<strong>🎯 Quick episode check</strong><p style="margin:8px 0;color:#cbd5e1;">${episode.check.question}</p><div style="display:flex;flex-wrap:wrap;gap:8px;" class="video-check-options"></div><p class="video-check-feedback" role="status" aria-live="polite"></p>`;
+      const options = container.querySelector('.video-check-options');
+      episode.check.options.forEach((option, index) => {
+        const choice = document.createElement('button');
+        choice.type = 'button';
+        choice.textContent = option;
+        choice.style.cssText = 'padding:9px 13px;border:1px solid #38bdf8;border-radius:10px;background:#13233d;color:#fff;cursor:pointer;font-weight:700;';
+        choice.addEventListener('click', () => {
+          const feedback = container.querySelector('.video-check-feedback');
+          if (index === episode.check.correct) {
+            feedback.textContent = 'Correct. You remembered an important detail from the episode.';
+            options.querySelectorAll('button').forEach(button => { button.disabled = true; });
+          } else feedback.textContent = 'Try again. Think about the episode.';
+        });
+        options.appendChild(choice);
+      });
     }
 
     function loadEpisode(id) {
+      currentEpisodeId = id;
       document.querySelectorAll('.episode-item').forEach((el, idx) => {
         el.classList.toggle('active', idx + 1 === id);
       });
@@ -359,7 +393,9 @@
       document.getElementById('videoDesc').textContent = ep.desc;
       isPlaying = true;
       document.getElementById('btnPlayVideo').textContent = '⏸';
+      document.getElementById('videoComprehensionCheck').innerHTML = '<strong>🎯 Watch, then remember</strong><p style="margin:8px 0;color:#cbd5e1;">Pause the episode when you finish to answer one question about what you learned.</p>';
     }
   </script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

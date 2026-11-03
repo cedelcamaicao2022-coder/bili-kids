@@ -2,12 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bilikids Coloring Studio • Babies (3-5 años)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="babies_paint_styles.css">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -76,6 +77,11 @@
 
         <!-- Center Canvas Workspace -->
         <div class="canvas-workspace">
+          <div class="color-quest" id="colorQuest" aria-live="polite">
+            <span id="colorQuestText">Listen: choose Blue, then color your picture.</span>
+            <button type="button" id="colorQuestRepeat">🔊 Listen</button>
+            <span id="colorQuestFeedback">Choose the color and paint inside the picture.</span>
+          </div>
           <canvas id="paintCanvas" class="canvas-layer"></canvas>
           <canvas id="outlineCanvas" class="canvas-layer"></canvas>
 
@@ -110,7 +116,7 @@
     <div class="celebration-card">
       <div class="celebration-emoji">🎉</div>
       <h3 class="celebration-title">¡Qué Hermoso Dibujo!</h3>
-      <p class="celebration-desc">¡Eres un gran artista! Has llenado de colores mágicos tu lámina.</p>
+      <p class="celebration-desc">¡Eres un gran artista! Cada color que eliges hace tu dibujo aún más especial.</p>
       <button class="celebration-btn" onclick="closeCelebration()">¡Seguir Pintando! 🎨</button>
     </div>
   </div>
@@ -118,6 +124,7 @@
   <!-- CONFETTI CANVAS -->
   <canvas id="confettiCanvas"></canvas>
 
-  <script src="babies_paint_engine.js?v=2.0"></script>
+  <script src="babies_paint_engine.js?v=20261102_babyenglish"></script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

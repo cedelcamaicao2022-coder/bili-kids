@@ -315,18 +315,25 @@
   };
 
   function updateColorMission() {
-    const list = COLOR_MISSIONS[colorLevel] || COLOR_MISSIONS[1];
-    if (colorLevelRound >= list.length) colorLevelRound = 0;
-    const mission = list[colorLevelRound];
+    const stage1 = document.getElementById('colorStageLvl1');
+    const stage2 = document.getElementById('colorStagePainting');
+    const stage3 = document.getElementById('colorStagePrism');
+    const stage4 = document.getElementById('colorStageBubbles');
 
-    if (colorLevel === 4) {
-      colorMissionCard.style.display = 'flex';
-      colorTargetDesc.innerHTML = '🧪 Free Alchemy Sandbox! Experiment with all 8 flasks!';
-      colorTargetDot.style.background = 'linear-gradient(135deg, #ef4444, #eab308, #3b82f6)';
-    } else {
-      colorMissionCard.style.display = 'flex';
-      colorTargetDesc.innerHTML = `Mix colors to make <strong>${mission.name}</strong>! (${mission.hint})`;
-      colorTargetDot.style.background = mission.color;
+    if (stage1) stage1.style.display = (colorLevel === 1) ? 'block' : 'none';
+    if (stage2) stage2.style.display = (colorLevel === 2) ? 'block' : 'none';
+    if (stage3) stage3.style.display = (colorLevel === 3) ? 'block' : 'none';
+    if (stage4) stage4.style.display = (colorLevel === 4) ? 'block' : 'none';
+
+    if (colorLevel === 1) {
+      const list = COLOR_MISSIONS[1];
+      if (colorLevelRound >= list.length) colorLevelRound = 0;
+      const mission = list[colorLevelRound];
+      if (colorMissionCard) {
+        colorMissionCard.style.display = 'flex';
+        colorTargetDesc.innerHTML = `Mix colors to make <strong>${mission.name}</strong>! (${mission.hint})`;
+        colorTargetDot.style.background = mission.color;
+      }
     }
   }
 
@@ -341,9 +348,25 @@
         colorLevelRound = 0;
         emptyColorBeaker();
         updateColorMission();
+        if (window.colorMagicSuiteEngine) {
+          window.colorMagicSuiteEngine.switchStage(colorLevel);
+        }
         sound.playPop();
       });
     });
+
+    // Check URL parameters for direct level linking
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialLvl = parseInt(urlParams.get('level'), 10);
+    if (initialLvl >= 1 && initialLvl <= 4) {
+      colorLevel = initialLvl;
+      const targetChip = colorsLevelTabs.querySelector(`.lvl-chip[data-level="${initialLvl}"]`);
+      if (targetChip) {
+        colorsLevelTabs.querySelectorAll('.lvl-chip').forEach(c => c.classList.remove('active'));
+        targetChip.classList.add('active');
+      }
+      updateColorMission();
+    }
   }
 
   function spawnBeakerBubbles() {

@@ -6,6 +6,7 @@
   <title>Bilikids Adventure | Kids (9 - 11 years old)</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
   <link rel="stylesheet" href="subpages_styles.css">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -27,48 +28,15 @@
         </svg>
         Home
       </a>
-      <a href="kids_verb_sprint.html" class="nav-pill-item" title="Verb Sprint 60s" style="background: #e0f2fe; color: #0369a1; font-weight: 800;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Verb Sprint
-      </a>
-      <a href="puzzle.html?mode=kids" class="nav-pill-item" title="Puzzles 4x4" style="background: #dcfce7; color: #047857; font-weight: 800;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="3" width="7" height="7"></rect>
-          <rect x="14" y="3" width="7" height="7"></rect>
-          <rect x="14" y="14" width="7" height="7"></rect>
-          <rect x="3" y="14" width="7" height="7"></rect>
-        </svg>
-        Puzzles
-      </a>
       <a href="#unitsGrid" class="nav-pill-item" title="12 Unidades Cambridge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Units
-      </a>
-      <a href="stories.html" class="nav-pill-item" title="Recursos y Cuentos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Stories
-      </a>
-      <a href="teens.html" class="nav-pill-item" title="Portal Teens">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-        </svg>
-        Teens
+        Unidades (1 - 12)
       </a>
     </nav>
 
     <div class="nav-right-actions">
-      <a href="juegos.html" class="nav-circle-btn" title="Buscar unidad">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </a>
       <div class="user-profile-badge" title="Estudiante: Alex / Matías">
         <img src="assets/home/avatar_matias_2x.png" alt="Alex" class="user-avatar-circle">
         <span class="user-greeting-name">Alex ⌵</span>
@@ -95,72 +63,33 @@
       <img src="assets/kids_hd/kids_hero_banner.png" alt="Kids 9-11 Bilikids Adventure" class="subpage-hero-bg-img">
     </section>
 
-    <!-- ACTION STRIP: KIDS PUZZLES QUEST & CONTINUE LEARNING -->
-    <section class="kids-action-strip" style="display: grid; grid-template-columns: 1fr 340px; gap: 1.25rem; margin: 1.25rem 0; align-items: stretch;">
-      <!-- Special Activity: Jigsaw Puzzle Quest -->
-      <a href="puzzle.html?mode=kids" class="kids-puzzle-quest-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #10b981 0%, #059669 35%, #047857 100%); border-radius: 26px; padding: 1rem 1.85rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 28px rgba(5, 150, 105, 0.35); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(255, 255, 255, 0.25);">
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-          <div style="width: 80px; height: 105px; flex-shrink: 0; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25)); transition: transform 0.2s;">
-            <img src="assets/puzzle_buttons/puzzle_btn_kids.png" alt="Kids Puzzles" style="width: 100%; height: 100%; object-fit: contain;">
+    <!-- CONTINUE LEARNING STRIP (DIRECT ACCESS TO ACTIVE UNIT) -->
+    <section class="kids-continue-strip" style="margin: 1.25rem 0;">
+      <a href="kids_unit3.html" class="kids-continue-responsive-card" title="Continuar Unidad 3: Favorite People">
+        <div style="display: flex; align-items: center; gap: 1.25rem; flex: 1; min-width: 240px;">
+          <div class="widget-thumb-box" style="width: 76px; height: 56px; border-radius: 14px; overflow: hidden; position: relative; flex-shrink: 0;">
+            <img src="assets/kids_cards/unit_3_card.png" alt="Unit 3" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="widget-thumb-play" style="font-size: 0.9rem;">▶</span>
           </div>
           <div>
-            <div style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; line-height: 1.2; display: flex; align-items: center; gap: 10px;">
-              <span>🧩</span> Kids Puzzles <span style="font-size: 0.82rem; background: #facc15; color: #78350f; padding: 3px 12px; border-radius: 999px; font-weight: 800;">4x4 Hard • 500 ⭐</span>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span style="color: #f59e0b; font-size: 1.1rem;">⭐</span>
+              <span style="font-weight: 800; font-size: 0.82rem; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Continuar Aprendiendo</span>
             </div>
-            <div style="font-size: 0.92rem; opacity: 0.95; margin-top: 5px; font-weight: 600;">
-              Challenge your mind with 16-piece authentic jigsaw puzzles and earn reward stars!
+            <div class="widget-unit-name" style="font-size: 1.15rem; font-weight: 800; color: #0f172a;">Unit 3: Favorite People</div>
+            <div class="widget-lesson-name" style="font-size: 0.88rem; color: #64748b;">Lesson 2: My Family</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: space-between;">
+          <div class="widget-progress-row" style="min-width: 130px; flex: 1;">
+            <div class="widget-progress-track" style="height: 10px; border-radius: 999px; background: #e2e8f0; overflow: hidden; flex: 1;">
+              <div class="widget-progress-fill" style="width: 60%; height: 100%; background: linear-gradient(90deg, #10b981, #059669);"></div>
             </div>
+            <span class="widget-progress-text" style="font-weight: 800; color: #059669; font-size: 0.92rem; margin-left: 6px;">60%</span>
           </div>
-        </div>
-        <div style="background: #ffffff; color: #047857; font-weight: 800; font-size: 0.95rem; padding: 10px 22px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); flex-shrink: 0;">
-          <span>Play Now</span> ➔
-        </div>
-      </a>
-
-      <!-- Continue Learning Floating Widget -->
-      <a href="kids_unit3.html" class="kids-continue-widget" style="width: 100%; height: 100%;" title="Continuar Unidad 3: Favorite People">
-        <div class="widget-header">
-          <span style="color: #f59e0b; font-size: 1.1rem;">⭐</span>
-          <span>Continue learning</span>
-        </div>
-        <div class="widget-row">
-          <div class="widget-thumb-box">
-            <img src="assets/kids_cards/unit_3_card.png" alt="Unit 3">
-            <span class="widget-thumb-play">▶</span>
+          <div class="continue-btn-wrap" style="background: #0f172a; color: white; padding: 10px 20px; border-radius: 999px; font-weight: 800; font-size: 0.92rem; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; min-height: 44px;">
+            <span>Entrar a la Unidad</span> ➔
           </div>
-          <div class="widget-info">
-            <div class="widget-unit-name">Unit 3: Favorite People</div>
-            <div class="widget-lesson-name">Lesson 2: My Family</div>
-          </div>
-          <div class="widget-arrow">›</div>
-        </div>
-        <div class="widget-progress-row">
-          <div class="widget-progress-track">
-            <div class="widget-progress-fill" style="width: 60%;"></div>
-          </div>
-          <span class="widget-progress-text">60%</span>
-        </div>
-      </a>
-    </section>
-
-    <!-- ACTION STRIP 2: KIDS VERB SPRINT 60s -->
-    <section style="margin: 0.5rem 0 1.5rem;">
-      <a href="kids_verb_sprint.html" class="kids-verb-sprint-banner" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #0284c7 0%, #0369a1 40%, #075985 100%); border-radius: 26px; padding: 1.15rem 1.85rem; color: #ffffff; text-decoration: none; box-shadow: 0 12px 28px rgba(2, 132, 199, 0.35); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(255, 255, 255, 0.25);">
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-          <div style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3));">
-            ⚡
-          </div>
-          <div>
-            <div style="font-family: 'Fredoka', cursive, sans-serif; font-size: 1.4rem; line-height: 1.2; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-              <span>⏱️</span> Verb Sprint (60s) <span style="font-size: 0.82rem; background: #fed7aa; color: #9a3412; padding: 3px 12px; border-radius: 999px; font-weight: 800;">Cambridge A1-A2 • Reto Rápido</span>
-            </div>
-            <div style="font-size: 0.92rem; opacity: 0.95; margin-top: 5px; font-weight: 600;">
-              ¡Demuestra tu rapidez con los verbos en inglés en 1 minuto! Acumula rachas de fuego 🔥 y gana estrellas ⭐.
-            </div>
-          </div>
-        </div>
-        <div style="background: #ffffff; color: #0369a1; font-weight: 800; font-size: 0.95rem; padding: 10px 22px; border-radius: 999px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); flex-shrink: 0;">
-          <span>Start Sprint</span> ➔
         </div>
       </a>
     </section>
@@ -232,5 +161,7 @@
 
   </main>
 
+  <script src="mobile_audio_unlock.js"></script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

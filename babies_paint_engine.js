@@ -122,6 +122,24 @@ class AudioController {
       console.warn('Speech error:', e);
     }
   }
+
+  speakInstruction(text) {
+    if (!this.soundEnabled || !('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.15;
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(item => item.lang.startsWith('en') && /Natural|Samantha|Google/i.test(item.name))
+        || voices.find(item => item.lang.startsWith('en'));
+      if (voice) utterance.voice = voice;
+      window.speechSynthesis.speak(utterance);
+    } catch (error) {
+      console.warn('Instruction speech error:', error);
+    }
+  }
 }
 
 const audioCtrl = new AudioController();
@@ -183,9 +201,9 @@ const COLORING_PAGES = [
   },
   {
     id: 'dino',
-    name: 'Baby Dino',
-    nameEs: 'Dinosaurio',
-    icon: '🦖',
+    name: 'Little Pony',
+    nameEs: 'Poni Pequeño',
+    icon: '🐴',
     type: 'page',
     outline: 'assets/coloring_pages/user_pages/page_dino_outline.png',
     mask: 'assets/coloring_pages/user_pages/page_dino_mask.png',
@@ -316,6 +334,10 @@ class ColoringStudio {
     this.currentTool = 'bucket'; // 'bucket', 'crayon', 'marker', 'magic', 'stamp', 'eraser'
     this.currentColor = COLOR_PALETTE[0].hex; // Default Red
     this.currentPageIndex = 0;
+    this.paintQuestColor = COLOR_PALETTE.find(color => color.name === 'Blue');
+    this.paintQuestColorSelected = false;
+    this.paintQuestAttempted = false;
+    this.paintQuestCompleted = false;
 
     this.isDrawing = false;
     this.lastX = 0;
@@ -340,9 +362,22 @@ class ColoringStudio {
     this.renderColorSwatches();
     this.renderGalleryDrawer();
     this.setupEvents();
-    this.selectColor(COLOR_PALETTE[0].hex, COLOR_PALETTE[0].name);
+    this.selectColor(COLOR_PALETTE[0].hex, COLOR_PALETTE[0].name, false);
     this.setTool('bucket');
     this.loadPage(0);
+    const repeat = document.getElementById('colorQuestRepeat');
+    if (repeat) repeat.addEventListener('click', () => this.speakPaintQuest());
+    this.speakPaintQuest();
+  }
+
+  speakPaintQuest() {
+    const color = this.paintQuestColor.name;
+    audioCtrl.speakInstruction(`Choose ${color}. Color your picture.`);
+  }
+
+  updatePaintQuest(message) {
+    const feedback = document.getElementById('colorQuestFeedback');
+    if (feedback) feedback.textContent = message;
   }
 
   setupResize() {
@@ -410,7 +445,7 @@ class ColoringStudio {
     });
   }
 
-  selectColor(hex, name) {
+  selectColor(hex, name, isUserSelection = true) {
     this.currentColor = hex;
     document.querySelectorAll('.color-swatch-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.color.toLowerCase() === hex.toLowerCase());
@@ -419,6 +454,13 @@ class ColoringStudio {
     audioCtrl.playPop();
     audioCtrl.speakColor(name);
     this.showToast(name, hex);
+    if (!this.paintQuestCompleted && isUserSelection) {
+      this.paintQuestColorSelected = hex.toLowerCase() === this.paintQuestColor.hex.toLowerCase();
+      this.paintQuestAttempted = true;
+      this.updatePaintQuest(this.paintQuestColorSelected
+        ? `Good! Now use ${this.paintQuestColor.name} to paint inside the picture.`
+        : `Listen again: choose ${this.paintQuestColor.name}.`);
+    }
   }
 
   showToast(name, hex) {
@@ -616,12 +658,13 @@ class ColoringStudio {
       this.lastY = pos.y;
 
       if (this.currentTool === 'bucket') {
-        this.floodFill(Math.round(pos.x), Math.round(pos.y), this.currentColor);
+        if (this.floodFill(Math.round(pos.x), Math.round(pos.y), this.currentColor)) this.checkPaintQuestCompletion(pos.x, pos.y);
       } else if (this.currentTool === 'stamp') {
         this.drawStamp(pos.x, pos.y);
         this.saveState();
       } else {
         this.drawStroke(pos.x, pos.y, true);
+        this.checkPaintQuestCompletion(pos.x, pos.y);
       }
     };
 
@@ -688,6 +731,20 @@ class ColoringStudio {
     if (celebrateBtn) {
       celebrateBtn.addEventListener('click', () => this.celebrateMasterpiece());
     }
+  }
+
+  checkPaintQuestCompletion(x, y) {
+    if (this.paintQuestCompleted || !this.paintQuestColorSelected || this.currentColor.toLowerCase() !== this.paintQuestColor.hex.toLowerCase()) return;
+    const dpr = window.devicePixelRatio || 1;
+    const px = Math.round(x * dpr);
+    const py = Math.round(y * dpr);
+    const canvasW = Math.round(this.width * dpr);
+    const index = py * canvasW + px;
+    if (this.insideMask && !this.insideMask[index]) return;
+    if (this.currentTool === 'eraser') return;
+    this.paintQuestCompleted = true;
+    this.updatePaintQuest(`You chose ${this.paintQuestColor.name} and colored the picture. Great listening!`);
+    audioCtrl.speakInstruction(`Great job! You chose ${this.paintQuestColor.name} and colored the picture.`);
   }
 
   drawStroke(x, y, isStart) {
@@ -782,14 +839,14 @@ class ColoringStudio {
     const canvasW = Math.round(this.width * dpr);
     const canvasH = Math.round(this.height * dpr);
 
-    if (pixelX < 0 || pixelX >= canvasW || pixelY < 0 || pixelY >= canvasH) return;
+    if (pixelX < 0 || pixelX >= canvasW || pixelY < 0 || pixelY >= canvasH) return false;
 
     const startIndex = pixelY * canvasW + pixelX;
 
     // 1. STRICT ENFORCEMENT: Never allow flood-fill on background outside character!
     if (this.insideMask && !this.insideMask[startIndex]) {
       audioCtrl.playPop();
-      return;
+      return false;
     }
 
     // Get Outline Image data to detect dark boundaries
@@ -807,13 +864,13 @@ class ColoringStudio {
     const fillB = parseInt(fillHex.slice(5, 7), 16);
     const fillColor = (255 << 24) | (fillB << 16) | (fillG << 8) | fillR;
 
-    if (targetColor === fillColor) return;
+    if (targetColor === fillColor) return false;
 
     // Check if clicked directly on an outline
     const targetAlpha = (outline32[startIndex] >> 24) & 0xFF;
     const targetLum = (outline32[startIndex] & 0xFF) + ((outline32[startIndex] >> 8) & 0xFF) + ((outline32[startIndex] >> 16) & 0xFF);
     if (targetAlpha > 140 && targetLum < 190) {
-      return;
+      return false;
     }
 
     const matchTarget = (idx) => {
@@ -869,6 +926,7 @@ class ColoringStudio {
     this.applyOutsideMask();
     this.saveState();
     audioCtrl.playSplash();
+    return true;
   }
 
   // ============================================================================

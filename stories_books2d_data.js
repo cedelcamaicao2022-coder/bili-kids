@@ -1165,40 +1165,40 @@ window.BOOKS_2D = {
       {
         "num": 6,
         "image": "assets/stories/books2d/elephant_ella/p6.jpg",
-        "textEn": "Splish, splash! Ella rolled playfully in the soft mud.\n\nMud protects sensitive elephant skin from the hot sunny rays.",
-        "textEs": "¡Chapoteo, chapuzón! Ella rodó juguetona en el barro suave.\n\nEl barro protege la piel sensible de los elefantes del sol caliente.",
+        "textEn": "Splish, splash! Ella showered cool water over her back with her trunk.\n\nShe loved playing and splashing happily in the fresh water pool.",
+        "textEs": "¡Chapoteo, chapuzón! Ella roció agua fresca sobre su espalda con su trompita.\n\nLe encantaba jugar y chapotear felizmente en la poza de agua cristalina.",
         "words": [
           {
-            "en": "Mud",
-            "es": "Lodo"
+            "en": "Water",
+            "es": "Agua"
           },
           {
-            "en": "Roll",
-            "es": "Rodar"
+            "en": "Splash",
+            "es": "Chapotear"
           },
           {
-            "en": "Skin",
-            "es": "Piel"
+            "en": "Happy",
+            "es": "Feliz"
           }
         ]
       },
       {
         "num": 7,
         "image": "assets/stories/books2d/elephant_ella/p7.jpg",
-        "textEn": "A little monkey dropped a juicy sweet mango into tall yellow grass.\n\nElla scooped it up with her trunk and handed it back with a smile.",
-        "textEs": "Un monito dejó caer un dulce mango en la hierba alta.\n\nElla lo recogió con su trompa y se lo devolvió con una sonrisa.",
+        "textEn": "The afternoon sun bathed the wide savanna in warm golden light.\n\nElla and the elephant herd continued their peaceful journey across the plains.",
+        "textEs": "El sol de la tarde bañaba la inmensa sabana con una cálida luz dorada.\n\nElla y la manada de elefantes continuaban su tranquilo viaje por la llanura.",
         "words": [
           {
-            "en": "Monkey",
-            "es": "Mono"
+            "en": "Golden",
+            "es": "Dorado"
           },
           {
-            "en": "Mango",
-            "es": "Mango"
+            "en": "Savanna",
+            "es": "Sabana"
           },
           {
-            "en": "Help",
-            "es": "Ayuda"
+            "en": "Peaceful",
+            "es": "Tranquilo"
           }
         ]
       },
@@ -1225,12 +1225,12 @@ window.BOOKS_2D = {
       {
         "num": 9,
         "image": "assets/stories/books2d/elephant_ella/p9.jpg",
-        "textEn": "Ella held tightly to Mama Elephant's tail with her trunk.\n\nStep by step, the herd walked together to their sleeping ground.",
-        "textEs": "Ella se sujetó con fuerza de la cola de Mamá Elefante con su trompa.\n\nPaso a paso, la manada caminó unida hacia su lugar de descanso.",
+        "textEn": "Ella walked gently beside Mama Elephant across the golden path.\n\nStep by step, they walked together toward their peaceful resting place.",
+        "textEs": "Ella caminaba dulcemente al lado de Mamá Elefante por el sendero dorado.\n\nPaso a paso, caminaban juntas hacia su tranquilo lugar de descanso.",
         "words": [
           {
-            "en": "Tail",
-            "es": "Cola"
+            "en": "Beside",
+            "es": "Al lado"
           },
           {
             "en": "Together",

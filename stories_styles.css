@@ -1920,13 +1920,52 @@ body {
 }
 
 @media (max-width: 640px) {
+  .subpage-navbar {
+    padding: 0.65rem 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .nav-center-menu {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding: 4px 0;
+  }
+  .nav-center-menu::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-pill-item {
+    flex-shrink: 0;
+    min-height: 42px;
+    white-space: nowrap;
+    font-size: 0.88rem;
+    padding: 6px 14px;
+  }
   .modern-book-card {
-    flex: 0 0 210px;
+    flex: 0 0 170px;
   }
-  .shelf-nav-prev {
-    left: -10px;
+  .modern-shelf-track {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
   }
-  .shelf-nav-next {
-    right: -10px;
+  .shelf-nav-prev, .shelf-nav-next {
+    display: none; /* Native touch swiping is preferred on mobile */
+  }
+  .reader-top-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .reader-header-title {
+    font-size: 1.15rem;
+  }
+  .btn-voice-narrator {
+    padding: 6px 14px;
+    font-size: 0.85rem;
   }
 }

@@ -1045,9 +1045,9 @@
       const bookStage = document.querySelector('.book-stage');
       if (story.is2dBook) {
         if (bookStage) bookStage.classList.add('book-mode-2d');
-        if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.style.display = 'none';
-        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = 'none';
-        if (this.dom.btnRepeatPageAudio) this.dom.btnRepeatPageAudio.style.display = 'none';
+        if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.style.display = '';
+        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = '';
+        if (this.dom.btnRepeatPageAudio) this.dom.btnRepeatPageAudio.style.display = '';
         if (this.dom.btnToggleSpanish2d) {
           this.dom.btnToggleSpanish2d.style.display = 'inline-flex';
           this.dom.btnToggleSpanish2d.classList.remove('active');
@@ -1067,8 +1067,8 @@
       this.showScreen('reader');
       this.renderCurrentPage();
 
-      // Automatically start narration on opening only if not 2D book
-      if (!story.is2dBook) {
+      // Automatically start narration on opening if auto-turn is on, or user requests it
+      if (this.autoTurnEnabled) {
         setTimeout(() => {
           this.playPageAudio();
         }, 500);
@@ -1200,7 +1200,7 @@
         this.animatePageFlip('forward', () => {
           this.currentPageIndex++;
           this.renderCurrentPage();
-          if (!story.is2dBook && this.autoTurnEnabled) {
+          if (this.autoTurnEnabled) {
             setTimeout(() => this.playPageAudio(), 300);
           }
         });
@@ -1210,7 +1210,7 @@
         this.animatePageFlip('backward', () => {
           this.currentPageIndex--;
           this.renderCurrentPage();
-          if (!story.is2dBook && this.autoTurnEnabled) {
+          if (this.autoTurnEnabled) {
             setTimeout(() => this.playPageAudio(), 300);
           }
         });
@@ -1224,7 +1224,7 @@
       this.animatePageFlip(index > this.currentPageIndex ? 'forward' : 'backward', () => {
         this.currentPageIndex = index;
         this.renderCurrentPage();
-        if (!story.is2dBook && this.autoTurnEnabled) {
+        if (this.autoTurnEnabled) {
           setTimeout(() => this.playPageAudio(), 300);
         }
       });
@@ -1310,26 +1310,39 @@
     playPageAudio() {
       this.stopAudio();
       const story = STORIES[this.currentStoryKey];
-      if (story && story.is2dBook) return; // No voice or sound for 2D Books
+      if (!story) return;
       const page = story.pages[this.currentPageIndex];
       if (!page) return;
 
-      const audioSrc = `assets/stories/audio/${page.audioId}.mp3`;
+      let audioSrc;
+      let textToRead = page.textEn;
+
+      if (story.is2dBook) {
+        const isSpanishActive = this.currentLanguage === 'es' || (this.dom.spanishCard && this.dom.spanishCard.style.display !== 'none' && this.currentLanguage !== 'en');
+        const langCode = isSpanishActive ? 'es' : 'en';
+        textToRead = isSpanishActive ? page.textEs : page.textEn;
+        audioSrc = `assets/stories/books2d/${this.currentStoryKey}/audio/${langCode}_p${page.num}.mp3`;
+      } else {
+        audioSrc = `assets/stories/audio/${page.audioId}.mp3`;
+      }
+
       const audio = new Audio(audioSrc);
       this.currentAudio = audio;
+      audio.preservesPitch = true;
+      audio.playbackRate = 1.0;
 
       this.isPlayingNarration = true;
-      this.dom.btnPlayNarration.classList.add('speaking');
-      this.dom.voicePlayIcon.textContent = '⏸️';
-      this.dom.voicePlayText.textContent = 'Pausar';
-      this.dom.storyTextEn.classList.add('reading-active');
+      if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.classList.add('speaking');
+      if (this.dom.voicePlayIcon) this.dom.voicePlayIcon.textContent = '⏸️';
+      if (this.dom.voicePlayText) this.dom.voicePlayText.textContent = 'Pausar';
+      if (this.dom.storyTextEn) this.dom.storyTextEn.classList.add('reading-active');
 
       audio.onended = () => {
         this.isPlayingNarration = false;
-        this.dom.btnPlayNarration.classList.remove('speaking');
-        this.dom.voicePlayIcon.textContent = '▶️';
-        this.dom.voicePlayText.textContent = 'Narrar';
-        this.dom.storyTextEn.classList.remove('reading-active');
+        if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.classList.remove('speaking');
+        if (this.dom.voicePlayIcon) this.dom.voicePlayIcon.textContent = '▶️';
+        if (this.dom.voicePlayText) this.dom.voicePlayText.textContent = 'Narrar';
+        if (this.dom.storyTextEn) this.dom.storyTextEn.classList.remove('reading-active');
 
         // Auto-turn to next page if enabled
         if (this.autoTurnEnabled) {
@@ -1340,16 +1353,16 @@
       };
 
       audio.onerror = () => {
-        console.warn('Audio fallback to browser synthesis');
-        this.speakFallback(page.textEn, () => {
-          audio.onended();
+        console.warn('Audio fallback to browser synthesis for:', audioSrc);
+        this.speakFallback(textToRead, () => {
+          if (audio.onended) audio.onended();
         });
       };
 
       audio.play().catch(err => {
         console.warn('Autoplay blocked or audio error:', err);
-        this.speakFallback(page.textEn, () => {
-          audio.onended();
+        this.speakFallback(textToRead, () => {
+          if (audio.onended) audio.onended();
         });
       });
     }
@@ -1398,8 +1411,6 @@
 
     finishStory() {
       this.stopAudio();
-      this.sound.playCelebrationFanfare();
-      this.confetti.burst(150);
 
       const story = STORIES[this.currentStoryKey];
       this.dom.diplomaBookName.textContent = story.title;
@@ -1411,14 +1422,65 @@
           : `Has leído todas las páginas de <strong>${story.title}</strong> con la narración de ElevenLabs.`;
       }
 
-      // Save progress to LocalStorage
+      const check = document.getElementById('storyComprehensionCheck');
+      const diploma = document.querySelector('.celebration-diploma-card');
+      const wordPool = story.pages.flatMap(page => page.words || []).filter(word => word.en && word.es);
+      const uniqueWords = [...new Map(wordPool.map(word => [word.en.toLowerCase(), word])).values()];
+      if (check && uniqueWords.length >= 3) {
+        diploma.style.display = 'none';
+        check.style.display = 'block';
+        check.innerHTML = `<h2 style="color:#5b21b6;">🧠 One last story question</h2><p style="color:#475569;">Choose the English word you remember from <strong>${story.title}</strong>.</p><div id="storyRecallPrompt"></div><p id="storyRecallFeedback" style="min-height:24px;color:#475569;" aria-live="polite"></p>`;
+        const target = uniqueWords[Math.floor(Math.random() * uniqueWords.length)];
+        const distractors = uniqueWords.filter(word => word.en !== target.en).sort(() => Math.random() - 0.5).slice(0, 2);
+        const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+        const prompt = check.querySelector('#storyRecallPrompt');
+        prompt.innerHTML = `<p>Which English word means <strong>“${target.es}”</strong>?</p><div class="story-recall-options" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;"></div>`;
+        const optionBox = prompt.querySelector('.story-recall-options');
+        options.forEach(option => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn-primary-fun';
+          button.textContent = option.en;
+          button.addEventListener('click', () => {
+            const feedback = check.querySelector('#storyRecallFeedback');
+            if (option === target) {
+              feedback.textContent = `Correct! You remembered “${target.en}”.`;
+              optionBox.querySelectorAll('button').forEach(choice => { choice.disabled = true; });
+              const continueBtn = document.createElement('button');
+              continueBtn.type = 'button';
+              continueBtn.className = 'btn-secondary-fun';
+              continueBtn.textContent = 'See my story award';
+              continueBtn.addEventListener('click', () => {
+                check.style.display = 'none';
+                diploma.style.display = '';
+                this.sound.playCelebrationFanfare();
+                this.confetti.burst(150);
+                this.saveStoryCompletion();
+              });
+              check.appendChild(continueBtn);
+            } else {
+              feedback.textContent = 'Not this word. Think of one you saw or heard in the story.';
+            }
+          });
+          optionBox.appendChild(button);
+        });
+        this.showScreen('celebration');
+        return;
+      }
+
+      this.sound.playCelebrationFanfare();
+      this.confetti.burst(150);
+      if (diploma) diploma.style.display = '';
+      this.saveStoryCompletion();
+      this.showScreen('celebration');
+    }
+
+    saveStoryCompletion() {
       try {
         const prog = JSON.parse(localStorage.getItem('bili_stories_progress') || '{}');
         prog[this.currentStoryKey] = true;
         localStorage.setItem('bili_stories_progress', JSON.stringify(prog));
       } catch (e) {}
-
-      this.showScreen('celebration');
     }
   }
 

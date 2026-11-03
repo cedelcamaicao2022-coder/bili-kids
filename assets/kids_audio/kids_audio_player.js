@@ -38,11 +38,11 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
 
-      // Preservar tono exacto y reducir velocidad a un ritmo pausado y natural para niños
+      // Preservar tono exacto y reproducir a ritmo natural y claro para niños
       audio.preservesPitch = true;
       audio.mozPreservesPitch = true;
       audio.webkitPreservesPitch = true;
-      audio.playbackRate = 0.88; // Ritmo pausado, claro y natural
+      audio.playbackRate = 0.96; // Ritmo claro, natural y perfectamente modulado
 
       const safeDuration = Math.max(2000, (text.length * 120) / audio.playbackRate);
       const safeTimer = setTimeout(finish, safeDuration);

@@ -884,6 +884,58 @@ function renderWordCards(filterCat = 'all') {
       <span class="word-audio-btn">🔊 Listen</span>
     </div>
   `).join('');
+  renderWordRecallQuiz(filtered);
+}
+
+function renderWordRecallQuiz(items) {
+  const container = document.getElementById('wordsGridContainer');
+  if (!container) return;
+  container.hidden = false;
+  let quiz = document.getElementById('wordRecallQuiz');
+  if (!quiz) {
+    quiz = document.createElement('section');
+    quiz.id = 'wordRecallQuiz';
+    quiz.style.cssText = 'margin:0 0 20px;padding:18px;border:2px solid #bae6fd;border-radius:16px;background:#f0f9ff;';
+    container.before(quiz);
+  }
+  quiz.innerHTML = `<h3 style="margin:0 0 6px;color:#075985;">🧠 Quick word recall</h3><p>Review the cards, then hide them and test what you remember.</p><button type="button" class="category-chip recall-start">Start recall check</button>`;
+  const questions = [...items].sort(() => Math.random() - 0.5).slice(0, Math.min(5, items.length));
+  let index = 0;
+  let score = 0;
+  const render = () => {
+    if (index >= questions.length) {
+      quiz.innerHTML = `<h3>🧠 Vocabulary recall complete</h3><p role="status">You recalled ${score} of ${questions.length} words.</p><button type="button" class="category-chip recall-review">Review word cards</button>`;
+      quiz.querySelector('.recall-review').addEventListener('click', () => { container.hidden = false; index = 0; score = 0; renderWordRecallQuiz(items); });
+      return;
+    }
+    const target = questions[index];
+    const options = [target, ...items.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
+    quiz.innerHTML = `<h3 style="margin:0 0 6px;color:#075985;">🧠 Quick word recall</h3><p style="margin:0 0 12px;">What is the English word for <strong>“${target.es}”</strong>? Question ${index + 1} of ${questions.length}.</p><div class="recall-options" style="display:flex;flex-wrap:wrap;gap:8px;"></div><p class="recall-feedback" role="status" aria-live="polite"></p><p>Correct: ${score}/${questions.length}</p>`;
+    const optionsEl = quiz.querySelector('.recall-options');
+    options.forEach(option => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'category-chip';
+      button.textContent = `${option.icon} ${option.en}`;
+      button.addEventListener('click', () => {
+        const feedback = quiz.querySelector('.recall-feedback');
+        if (option === target) {
+          score++;
+          feedback.textContent = `Correct: ${target.en}. Listen and repeat the word.`;
+          speakWordCard(target.en);
+          optionsEl.querySelectorAll('button').forEach(choice => { choice.disabled = true; });
+          const next = document.createElement('button');
+          next.type = 'button';
+          next.className = 'category-chip';
+          next.textContent = index + 1 === questions.length ? 'Finish check' : 'Next word';
+          next.addEventListener('click', () => { index++; render(); });
+          optionsEl.after(next);
+        } else feedback.textContent = 'Not that one. Think of the word before choosing again.';
+      });
+      optionsEl.appendChild(button);
+    });
+  };
+  quiz.querySelector('.recall-start').addEventListener('click', () => { container.hidden = true; render(); });
 }
 
 function filterWordCards(category, chipEl) {
@@ -1192,6 +1244,7 @@ let recognitionInstance = null;
 function loadSpeakingPrompt(index) {
   currentSpeakingIndex = index;
   const item = speakingPromptsUnit2[index];
+  document.getElementById('micRecordBtn').disabled = false;
   document.getElementById('speakingTarget').textContent = `"${item.phrase}"`;
   document.getElementById('speakingHint').textContent = item.es;
   document.getElementById('speakingFeedback').innerHTML = '';
@@ -1212,13 +1265,12 @@ function toggleVoiceRecord() {
   if (!SpeechRecognition) {
     sfx.playPop();
     feedback.innerHTML = `
-      <div class="speech-result-text">🎙️ Grabación de práctica completada</div>
-      <span class="speech-score-badge" style="background:#dcfce7; color:#15803d;">
-        🌟 ¡Excelente pronunciación! +10 pts
+      <div class="speech-result-text">🎙️ Este navegador no puede verificar lo que dices.</div>
+      <span class="speech-score-badge" style="background:#fef3c7; color:#92400e;">
+        Práctica sin puntuación. Escucha el modelo y repite con un adulto.
       </span>
     `;
-    sfx.playSuccess();
-    AppState.addStars(10);
+    btn.disabled = true;
     return;
   }
 
@@ -1246,14 +1298,17 @@ function toggleVoiceRecord() {
       const cleanTranscript = transcript.toLowerCase().replace(/[^a-z0-9 ]/g, '');
       const cleanTarget = target.toLowerCase().replace(/[^a-z0-9 ]/g, '');
 
-      let isMatch = cleanTranscript === cleanTarget || cleanTarget.includes(cleanTranscript) || cleanTranscript.includes(cleanTarget);
+      const targetWords = cleanTarget.split(/\s+/).filter(Boolean);
+      const heardWords = new Set(cleanTranscript.split(/\s+/).filter(Boolean));
+      const matchedWords = targetWords.filter(word => heardWords.has(word)).length;
+      const isMatch = cleanTranscript.length > 0 && matchedWords >= Math.min(2, targetWords.length) && matchedWords / targetWords.length >= 0.6;
 
       if (isMatch) {
         sfx.playSuccess();
         feedback.innerHTML = `
           <div class="speech-result-text">Dijiste: "<strong>${transcript}</strong>"</div>
           <span class="speech-score-badge" style="background:#dcfce7; color:#15803d;">
-            🌟 ¡Perfecto! Pronunciación 100% (+15 pts)
+            🌟 Frase reconocida (+15 pts). Esto no mide la calidad de pronunciación.
           </span>
         `;
         AppState.addStars(15);
@@ -1262,10 +1317,9 @@ function toggleVoiceRecord() {
         feedback.innerHTML = `
           <div class="speech-result-text">Dijiste: "${transcript}"</div>
           <span class="speech-score-badge" style="background:#fef3c7; color:#92400e;">
-            👍 ¡Buen intento! Escucha el modelo e intenta de nuevo (+5 pts)
+            👍 No se reconoció la frase. Escucha el modelo e intenta de nuevo; sin puntos.
           </span>
         `;
-        AppState.addStars(5);
       }
     };
 

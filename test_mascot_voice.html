@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprobación y Prueba de Voz de Bili - Bilikids</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --primary: #fbbf24;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+    }
+    body {
+      margin: 0;
+      padding: 30px 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: var(--primary);
+      margin: 0 0 10px 0;
+      font-size: 28px;
+    }
+    p.subtitle {
+      color: var(--subtext);
+      font-size: 15px;
+      margin: 0 0 20px 0;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .voice-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .voice-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .phrase-title {
+      font-weight: 700;
+      font-size: 17px;
+      color: #fff;
+    }
+    .context-tag {
+      font-size: 12px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    audio {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      outline: none;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+    .btn-secondary {
+      background: #334155;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">🎙️ Panel de Escucha y Aprobación de Voz</div>
+      <h1>Voces de Bili generadas con ElevenLabs</h1>
+      <p class="subtitle">Escucha cada una de las frases para verificar si el tono, calidez y estilo de caricatura te gustan o si prefieres probar otra voz distinta.</p>
+    </header>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">1. "¡Hola peque! ¿Qué quieres aprender hoy?"</span>
+        <span class="context-tag">Saludo Principal</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_hola_peque.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">2. "¡Hola! Mi nombre es Bili, ¡vamos a explorar!"</span>
+        <span class="context-tag">Presentación</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_mi_nombre_es_bili.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">3. "¡Me gustó verte de nuevo!"</span>
+        <span class="context-tag">Reencuentro / Cuentos</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_me_gusto_verte.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">4. "¡Vamos a aprender jugando juntos!"</span>
+        <span class="context-tag">Juegos / Actividades</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_aprender_jugando.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">5. "¡Dame esos cinco! ¡High five!"</span>
+        <span class="context-tag">Interacción Lúdica</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_dame_cinco.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">6. "¡Lo hiciste genial, peque! ¡Eres increíble!"</span>
+        <span class="context-tag">Celebración / Victoria</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_lo_hiciste_genial.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">7. "¡Qué inteligente eres! ¡Superstar!"</span>
+        <span class="context-tag">Felicitación</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_que_inteligente.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">8. "¡Casi lo tienes peque! ¡Inténtalo de nuevo!"</span>
+        <span class="context-tag">Ánimo / Intentar de nuevo</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_casi_lo_tienes.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">9. "¡No te preocupes, tú puedes!"</span>
+        <span class="context-tag">Apoyo</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_no_te_preocupes.mp3"></audio>
+    </div>
+
+    <div class="voice-card">
+      <div class="card-top">
+        <span class="phrase-title">10. "¡Ya desperté! ¡A jugar peque!"</span>
+        <span class="context-tag">Al despertar de la siesta</span>
+      </div>
+      <audio controls src="assets/mascot/audio/bili_desperte.mp3"></audio>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="index.html" class="btn btn-secondary">← Volver al Inicio</a>
+    </div>
+  </div>
+</body>
+</html>

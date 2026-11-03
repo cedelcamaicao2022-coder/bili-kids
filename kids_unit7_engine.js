@@ -954,6 +954,7 @@ function handleWardrobeItemClick(cardEl, itemName, isCorrect, itemIcon) {
   const feedback = document.getElementById('wheelFeedbackBox');
 
   if (isCorrect) {
+    if (selectedWardrobeItems.includes(itemName) || selectedWardrobeItems.length >= 2) return;
     sfx.playPop();
     cardEl.classList.add('dressed');
     selectedWardrobeItems.push(itemName);
@@ -1067,6 +1068,7 @@ let isTVRecording = false;
 function loadTVBroadcast(index) {
   currentTVIndex = index;
   const b = tvBroadcastData[index];
+  document.getElementById('tvMicBtn').disabled = false;
 
   document.getElementById('tvCityBadge').textContent = `Boletín ${index + 1} de ${tvBroadcastData.length} • ${b.city}`;
   document.getElementById('tvHeadlineBanner').textContent = b.headline;
@@ -1122,14 +1124,13 @@ function toggleTVMic() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    sfx.playApplause();
     feedback.innerHTML = `
       <div style="font-size:1.15rem; font-weight:700; color:#38bdf8;">📺 ¡BOLETÍN METEOROLÓGICO TRANSMITIDO CON ÉXITO!</div>
       <span style="display:inline-block; margin-top:8px; background:rgba(16, 185, 129, 0.2); color:#34d399; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #10b981;">
-        👏 ¡La audiencia televisiva aplaude tu fluidez! (+25 pts)
+        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
       </span>
     `;
-    AppState.addStars(25);
+    btn.disabled = true;
     return;
   }
 
@@ -1149,14 +1150,12 @@ function toggleTVMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Transmitiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(59, 130, 246, 0.25); color:#60a5fa; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #3b82f6;">
-          📺 ¡Rating histórico! Transmisión impecable del clima (+25 pts)
+          📺 Transcripción de práctica; contenido y pronunciación no evaluados.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

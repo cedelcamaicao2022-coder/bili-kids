@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muestras de Voz Infantil para Bili (Comparador)</title>
+  <style>
+    :root {
+      --bg: #0b1329;
+      --card: #1e293b;
+      --accent-yellow: #fbbf24;
+      --accent-cyan: #38bdf8;
+      --accent-green: #34d399;
+      --accent-purple: #c084fc;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.5;
+    }
+    .wrapper {
+      max-width: 760px;
+      width: 100%;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid var(--accent-yellow);
+      color: var(--accent-yellow);
+      font-weight: bold;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      color: #fff;
+    }
+    p.lead {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+    }
+    .phrase-quote {
+      margin-top: 15px;
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #e0f2fe;
+      font-size: 15px;
+    }
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 25px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .card.highlight {
+      border: 1.5px solid var(--accent-green);
+      background: linear-gradient(180deg, #1e293b 0%, #162235 100%);
+    }
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .title-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .title-box h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #fff;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-original {
+      background: #475569;
+      color: #cbd5e1;
+    }
+    .tag-sweet {
+      background: rgba(52, 211, 153, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    .tag-lively {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+    .tag-cartoon {
+      background: rgba(192, 132, 252, 0.2);
+      color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.3);
+    }
+    .desc {
+      color: var(--muted);
+      font-size: 13.5px;
+      margin: 0;
+    }
+    audio {
+      width: 100%;
+      height: 38px;
+      outline: none;
+      border-radius: 8px;
+    }
+    .actions {
+      margin-top: 35px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+      background: #334155;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #475569;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="badge">🧸 Bili The Bear - Estudio de Modulación</div>
+      <h1>Muestras de Voz Infantil para Bili</h1>
+      <p class="lead">Comparamos la voz original con modulaciones más agudas para lograr el tono infantil/dibujo animado deseado. <strong>(Sin implementar aún en la plataforma)</strong>.</p>
+      <div class="phrase-quote">
+        Frase de prueba: <strong>"¡Hola peque! ¿Qué quieres aprender hoy?"</strong>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <!-- 0. Original -->
+      <div class="card">
+        <div class="card-head">
+          <div class="title-box">
+            <span>⚪</span>
+            <h3>Original (ElevenLabs Jessica sin cambios)</h3>
+          </div>
+          <span class="tag tag-original">Base</span>
+        </div>
+        <p class="desc">Tono natural original generado por la IA (voz femenina joven estándar).</p>
+        <audio controls src="assets/mascot/audio/bili_hola_peque.mp3"></audio>
+      </div>
+
+      <!-- 1. Opción A: Infantil Dulce (+15%) -->
+      <div class="card highlight">
+        <div class="card-head">
+          <div class="title-box">
+            <span>⭐</span>
+            <h3>Opción 1: Infantil Dulce (+15% agudo)</h3>
+          </div>
+          <span class="tag tag-sweet">Recomendada</span>
+        </div>
+        <p class="desc">Suena como un niño pequeño o un osito tierno y cariñoso, manteniendo total claridad en la dicción.</p>
+        <audio controls src="assets/mascot/audio/sample_pitch_mild.wav"></audio>
+      </div>
+
+      <!-- 2. Opción B: Infantil Animado (+25%) -->
+      <div class="card highlight">
+        <div class="card-head">
+          <div class="title-box">
+            <span>🎈</span>
+            <h3>Opción 2: Infantil Animado (+25% agudo)</h3>
+          </div>
+          <span class="tag tag-lively">Muy Lúdica</span>
+        </div>
+        <p class="desc">Voz más aguda, chispeante y juguetona. Estilo dibujo animado preescolar.</p>
+        <audio controls src="assets/mascot/audio/sample_pitch_medium.wav"></audio>
+      </div>
+
+      <!-- 3. Opción C: Caricatura / Dibujo Animado (+35%) -->
+      <div class="card">
+        <div class="card-head">
+          <div class="title-box">
+            <span>🚀</span>
+            <h3>Opción 3: Caricatura Muy Aguda (+35% agudo)</h3>
+          </div>
+          <span class="tag tag-cartoon">Estilo Cartoon</span>
+        </div>
+        <p class="desc">Tono muy agudo y rápido, estilo personaje travieso de caricatura.</p>
+        <audio controls src="assets/mascot/audio/sample_pitch_cartoon.wav"></audio>
+      </div>
+
+      <!-- 4. Opción D: Modulación Tonal (+2.5 semitonos) -->
+      <div class="card">
+        <div class="card-head">
+          <div class="title-box">
+            <span>🎵</span>
+            <h3>Opción 4: Tono Elevado (+2.5 semitonos, ritmo igual)</h3>
+          </div>
+          <span class="tag tag-sweet">Tonal</span>
+        </div>
+        <p class="desc">Eleva el tono sin alterar la velocidad o duración de la frase.</p>
+        <audio controls src="assets/mascot/audio/sample_shift_2semitones.wav"></audio>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="index.html" class="btn">← Volver al Inicio</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -289,6 +289,29 @@ body {
   cursor: crosshair;
 }
 
+.color-quest {
+  position: absolute;
+  z-index: 5;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 16px);
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 2px 8px rgba(15,23,42,.14);
+  color: #1e3a8a;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.color-quest button { border: 0; border-radius: 999px; padding: 5px 9px; background: #3b82f6; color: white; font: inherit; cursor: pointer; }
+
 .canvas-layer {
   position: absolute;
   top: 0;

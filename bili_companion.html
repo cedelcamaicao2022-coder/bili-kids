@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8df">
+  <title>Aprende con Bili • Bilikids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bili_companion.css?v=20261103_back_home_v1">
+</head>
+<body>
+  <main class="companion-shell">
+    <header class="topbar">
+      <a class="back-link" href="index.html" aria-label="Volver a la pantalla principal">← <span>Inicio</span></a>
+      <a class="brand" href="inicio.html"><img src="assets/bilikids_logo.png" alt="Bilikids Adventure"></a>
+      <span class="level-pill">BABIES · COLORS</span>
+    </header>
+
+    <section class="companion-card" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">A LITTLE ENGLISH ADVENTURE</p>
+        <h1 id="page-title">Aprende con Bili</h1>
+        <p class="intro-copy">Listen to Bili, then say the color in English.</p>
+      </div>
+
+      <div class="conversation-layout">
+        <section class="character-column" aria-label="Bili the animated bear">
+          <div class="speech-card" aria-live="polite" aria-atomic="true">
+            <span class="speech-stars" aria-hidden="true">✦</span>
+            <p id="biliLine">Hi, friend! Ready to find some colors?</p>
+            <button class="replay-button" id="replayButton" type="button" aria-label="Hear Bili again">🔊</button>
+          </div>
+          <div class="bili-stage" id="biliStage" data-state="idle">
+            <img class="classroom-background" src="assets/home/aprende_con_bili_room_bg.png" alt="">
+            <div class="bili-canvas" id="biliCanvas" role="img" aria-label="Bili the bear in pixel art">
+              <div class="bili-pixel-sprite" aria-hidden="true"><span class="bili-blink" aria-hidden="true"></span></div>
+            </div>
+            <span class="stage-sparkle sparkle-one" aria-hidden="true">✦</span>
+            <span class="stage-sparkle sparkle-two" aria-hidden="true">✦</span>
+          </div>
+          <p class="character-caption" id="biliMood">Bili is ready to play</p>
+        </section>
+
+        <section class="chat-column" aria-label="Color speaking game">
+          <div class="conversation-heading">
+            <span class="conversation-icon" aria-hidden="true">🎨</span>
+            <div><h2>Say it to Bili</h2><p id="roundLabel">3 little color questions</p></div>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Color quest progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span id="progressFill"></span></div>
+          <div class="round-dots" id="roundDots" aria-label="Question 0 of 3"><span></span><span></span><span></span></div>
+          <p class="reply-hint" id="replyHint">Press “Start the game” to meet Bili.</p>
+          <button class="start-button" id="startButton" type="button"><span aria-hidden="true">▶</span> Start the game</button>
+          <button class="mic-button" id="micButton" type="button" hidden><span aria-hidden="true">🎙️</span> Your turn — say it!</button>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <button class="next-button" id="nextButton" type="button" hidden>Next question <span aria-hidden="true">→</span></button>
+          <p class="privacy-note">With an adult’s help, tap the microphone and say the color. This short recording is sent to Deepgram for transcription and is not stored by Bilikids. If it cannot be checked, no points are awarded.</p>
+        </section>
+      </div>
+    </section>
+    <footer>Speak • Listen • Celebrate together</footer>
+  </main>
+  <script src="bili_companion.js?v=20261103_room_v1" defer></script>
+</body>
+</html>

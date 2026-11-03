@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bilikids Canciones | Jukebox de Música en Inglés</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,6 +241,7 @@
       color: #94a3b8;
     }
   </style>
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -267,6 +268,10 @@
 
       <div class="player-controls">
         <button class="btn-play-song" id="btnPlayMusic" onclick="toggleMusic()">▶</button>
+      </div>
+      <div id="songComprehensionCheck" role="status" aria-live="polite" style="width:100%;margin-top:20px;padding:16px;border:1px solid rgba(251,191,36,.35);border-radius:14px;background:rgba(15,23,42,.7);">
+        <strong>🎯 Listen, then remember</strong>
+        <p style="margin-top:8px;color:#cbd5e1;">Listen to the whole song. A short question will appear at the end.</p>
       </div>
     </section>
 
@@ -327,7 +332,8 @@
           '"Purple, orange, pink and bright! 🌟"',
           '"English colors shine with light! 🎉"'
         ],
-        notes: [523.25, 659.25, 783.99, 1046.50, 880.00]
+        notes: [523.25, 659.25, 783.99, 1046.50, 880.00],
+        check: { question: "Which colors are named in the song?", options: ["Red, yellow, blue and green", "Black, brown, grey and white", "Silver, gold, teal and violet"], correct: 0 }
       },
       2: {
         title: "Old MacDonald's Farm",
@@ -338,7 +344,8 @@
           '"With a moo-moo here, and a moo-moo there! 🌾"',
           '"Everywhere a moo-moo! 🥛"'
         ],
-        notes: [440.00, 440.00, 440.00, 329.63, 392.00]
+        notes: [440.00, 440.00, 440.00, 329.63, 392.00],
+        check: { question: "Which animal does Old MacDonald have?", options: ["A cow", "A shark", "A rabbit"], correct: 0 }
       },
       3: {
         title: "The ABC Phonics Beat",
@@ -349,7 +356,8 @@
           '"C is for Cat, /k/ /k/ Cat! 🐱"',
           '"Now we know our ABCs! 🏆"'
         ],
-        notes: [523.25, 587.33, 659.25, 698.46, 783.99]
+        notes: [523.25, 587.33, 659.25, 698.46, 783.99],
+        check: { question: "Which letter sound is matched with an apple?", options: ["A", "B", "C"], correct: 0 }
       },
       4: {
         title: "Days of the Week Rap",
@@ -360,7 +368,8 @@
           '"Saturday and Sunday are for fun! ☀️"',
           '"Seven days in the week, everyone! 🌟"'
         ],
-        notes: [440, 493.88, 523.25, 587.33, 659.25]
+        notes: [440, 493.88, 523.25, 587.33, 659.25],
+        check: { question: "How many days are in the week?", options: ["Seven", "Five", "Ten"], correct: 0 }
       },
       5: {
         title: "Wheels on the School Bus",
@@ -371,7 +380,8 @@
           '"The horn on the bus goes beep-beep-beep! 🎺"',
           '"All through the town! ✨"'
         ],
-        notes: [392.00, 523.25, 523.25, 523.25, 659.25]
+        notes: [392.00, 523.25, 523.25, 523.25, 659.25],
+        check: { question: "What do the bus wheels do?", options: ["Go round and round", "Fly through the sky", "Splash in the water"], correct: 0 }
       }
     };
 
@@ -404,6 +414,10 @@
 
     function toggleMusic() {
       initAudio();
+      if (!isPlaying && lyricIdx >= songsData[currentSongId].lyrics.length) {
+        lyricIdx = 0;
+        resetSongCheck();
+      }
       isPlaying = !isPlaying;
       const btn = document.getElementById('btnPlayMusic');
       const disk = document.getElementById('vinylDisk');
@@ -420,17 +434,51 @@
     function stepMusic() {
       if (!isPlaying) return;
       const s = songsData[currentSongId];
-      const note = s.notes[lyricIdx % s.notes.length];
+      const lineIndex = lyricIdx % s.lyrics.length;
+      const note = s.notes[lineIndex % s.notes.length];
       playNote(note);
 
-      document.getElementById('lyricText').textContent = s.lyrics[lyricIdx % s.lyrics.length];
+      document.getElementById('lyricText').textContent = s.lyrics[lineIndex];
       lyricIdx++;
+      if (lyricIdx >= s.lyrics.length) {
+        isPlaying = false;
+        document.getElementById('btnPlayMusic').textContent = '▶';
+        document.getElementById('vinylDisk').classList.remove('spinning');
+        renderSongCheck();
+        return;
+      }
       timer = setTimeout(stepMusic, 1500);
+    }
+
+    function resetSongCheck() {
+      document.getElementById('songComprehensionCheck').innerHTML = '<strong>🎯 Listen, then remember</strong><p style="margin-top:8px;color:#cbd5e1;">Listen to the whole song. A short question will appear at the end.</p>';
+    }
+
+    function renderSongCheck() {
+      const song = songsData[currentSongId];
+      const container = document.getElementById('songComprehensionCheck');
+      container.innerHTML = `<strong>🎯 Quick song check</strong><p style="margin:8px 0;">${song.check.question}</p><div class="song-check-options" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;"></div><p class="song-check-feedback" role="status" aria-live="polite"></p>`;
+      const options = container.querySelector('.song-check-options');
+      song.check.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = option;
+        button.style.cssText = 'padding:9px 13px;border:1px solid #fbbf24;border-radius:10px;background:#1e293b;color:#fff;cursor:pointer;font-weight:700;';
+        button.addEventListener('click', () => {
+          const feedback = container.querySelector('.song-check-feedback');
+          if (index === song.check.correct) {
+            feedback.textContent = 'Correct. You remembered a detail from the song!';
+            options.querySelectorAll('button').forEach(choice => { choice.disabled = true; });
+          } else feedback.textContent = 'Try again. Think about the words in the song.';
+        });
+        options.appendChild(button);
+      });
     }
 
     function pickSong(id) {
       currentSongId = id;
       lyricIdx = 0;
+      resetSongCheck();
       document.querySelectorAll('.song-item').forEach((el, idx) => {
         el.classList.toggle('active', idx + 1 === id);
       });
@@ -444,5 +492,6 @@
       }
     }
   </script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

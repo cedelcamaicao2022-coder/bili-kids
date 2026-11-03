@@ -242,16 +242,73 @@ class KidsUnit9Engine {
       });
     }
 
-    const speakResponses = document.querySelectorAll('.airport-speak-option');
-    speakResponses.forEach(btn => {
+    const speakResponses = [...document.querySelectorAll('.airport-speak-option')];
+    const practice = document.createElement('div');
+    practice.id = 'airportSpeakingPractice';
+    practice.setAttribute('role', 'status');
+    practice.style.cssText = 'margin-top:14px;padding:14px;border-radius:14px;background:#f8fafc;border:1px solid #cbd5e1;';
+    practice.textContent = 'Choose a situation above to prepare your answer.';
+    if (speakResponses.length) speakResponses[speakResponses.length - 1].after(practice);
+
+    speakResponses.forEach((btn, index) => {
       btn.addEventListener('click', () => {
-        const text = btn.dataset.phrase;
-        this.speak(text);
-        this.playSuccess();
-        this.addStars(30);
+        const phrase = btn.dataset.phrase;
+        speakResponses.forEach(item => item.classList.remove('correct'));
         btn.classList.add('correct');
+        practice.innerHTML = `
+          <strong>Your turn:</strong> Answer Officer Charlie in your own voice. Use the country, nationality, and trip details from your situation.<br>
+          <button type="button" class="kids-audio-play-btn" data-action="model">🔊 Hear a model</button>
+          <button type="button" class="kids-audio-play-btn" data-action="record">🎙️ Record my answer</button>
+          <div class="airport-speaking-feedback" aria-live="polite" style="margin-top:10px;"></div>`;
+        practice.querySelector('[data-action="model"]').addEventListener('click', () => this.speak(phrase));
+        const recordBtn = practice.querySelector('[data-action="record"]');
+        const feedback = practice.querySelector('.airport-speaking-feedback');
+        recordBtn.addEventListener('click', () => this.recognizeAirportResponse(phrase, feedback, recordBtn, btn));
       });
     });
+  }
+
+  recognizeAirportResponse(expected, feedback, recordBtn, scenarioBtn) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      feedback.textContent = 'Not evaluated: this browser cannot check speech. Listen to the model and practise aloud with an adult.';
+      recordBtn.disabled = true;
+      return;
+    }
+    recordBtn.disabled = true;
+    feedback.textContent = 'Listening… Answer the officer now.';
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = event => {
+      const transcript = event.results[0][0].transcript;
+      const words = value => value.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
+      const targetWords = words(expected);
+      const heard = new Set(words(transcript));
+      const matches = targetWords.filter(word => heard.has(word)).length;
+      const passed = matches >= Math.min(3, targetWords.length) && matches / targetWords.length >= 0.55;
+      if (passed) {
+        feedback.textContent = `Key words recognized: “${transcript}”. This checks words, not pronunciation quality.`;
+        if (scenarioBtn.dataset.scored !== 'true') {
+          scenarioBtn.dataset.scored = 'true';
+          this.addStars(30);
+          this.playSuccess();
+        }
+      } else {
+        feedback.textContent = `Not evaluated as a correct response: “${transcript}”. Listen to the model and try again.`;
+        recordBtn.disabled = false;
+      }
+    };
+    recognition.onerror = () => {
+      feedback.textContent = 'Not evaluated. The browser could not recognize the response; listen to the model and try again.';
+      recordBtn.disabled = false;
+    };
+    recognition.onend = () => { if (feedback.textContent.startsWith('Listening')) recordBtn.disabled = false; };
+    try { recognition.start(); } catch (error) {
+      feedback.textContent = 'Not evaluated. The microphone could not start; listen to the model and practise with an adult.';
+      recordBtn.disabled = false;
+    }
   }
 }
 

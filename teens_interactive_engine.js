@@ -56,7 +56,7 @@ const TEENS_ACTIVITIES_DATA = [
     items: [
       { prompt: "The United Nations delegates finally managed to _____ a consensus on climate funding.", correct: "reach", options: ["reach", "make", "do", "gain"], explanation: "We say 'reach a consensus' or 'arrive at a consensus'." },
       { prompt: "Chronic sleep deprivation can _____ a heavy toll on cognitive performance.", correct: "take", options: ["take", "give", "bring", "make"], explanation: "Idiomatic collocation: 'take a toll on' something." },
-      { prompt: "The latest archaeological discovery has _____ fresh light on ancient migration patterns.", correct: "shed", options: ["shed", "thrown", "cast", "drawn"], explanation: "Fixed idiom: 'shed light on' (or 'cast light on'). 'Shed' is the most academic." },
+      { prompt: "The latest archaeological discovery has _____ a new avenue for research into ancient migration patterns.", correct: "opened", options: ["opened", "reached", "taken", "drawn"], explanation: "The academic collocation is 'open a new avenue for research'." },
       { prompt: "Invasive predator species _____ a grave threat to local marine biodiversity.", correct: "pose", options: ["pose", "set", "make", "render"], explanation: "Collocation: 'pose a threat / danger to'." },
       { prompt: "Sociologists are actively _____ research into social media usage among adolescents.", correct: "conducting", options: ["conducting", "making", "practicing", "operating"], explanation: "We 'conduct research' or 'carry out research', never 'make research'." }
     ]
@@ -400,6 +400,16 @@ class TeensInteractiveLab {
     this.playTone(220, 0.18, 'sawtooth');
   }
 
+  playPhrase(text) {
+    if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') return false;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+    return true;
+  }
+
   renderActivityPills() {
     const container = document.getElementById('activityPillsContainer');
     if (!container) return;
@@ -533,14 +543,14 @@ class TeensInteractiveLab {
       let promptText = item.prompt || item.sentence || item.informal || item.activeClaim || item.context || item.word || item.scenario;
       let promptPrefix = "";
       if (item.audioPhrase) {
-        promptText = `🔊 Audio Phrase: "${item.audioPhrase}"`;
+        promptText = `Listen to the phrase and choose its natural spoken form: “${item.audioPhrase}”`;
       }
       if (item.word) {
         promptPrefix = `<span style="font-size: 1.25rem; font-weight: 800; color: #4338ca; letter-spacing: 0.05em;">${item.word}</span>`;
         promptText = "";
       }
 
-      let options = item.options;
+      let options = item.options || item.transcriptionOptions || [];
       if (item.hasError !== undefined) {
         options = ["Grammatically Correct", "Contains a Syntax Error"];
       }
@@ -559,6 +569,7 @@ class TeensInteractiveLab {
           </div>
           ${promptPrefix}
           ${promptText ? `<p class="lab-item-prompt">${promptText}</p>` : ''}
+          ${item.audioPhrase ? `<button type="button" class="lab-audio-phrase-btn" data-item="${idx}" aria-label="Play English phrase">🔊 Play phrase</button>` : ''}
           <div class="lab-item-options-grid">
             ${optionsHtml}
           </div>
@@ -590,6 +601,17 @@ class TeensInteractiveLab {
         card.querySelectorAll('.lab-item-option-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         this.playTone(550, 0.06, 'sine');
+      });
+    });
+
+    container.querySelectorAll('.lab-audio-phrase-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = items[parseInt(btn.dataset.item, 10)];
+        const supported = this.playPhrase(item.audioPhrase);
+        if (!supported) {
+          btn.textContent = 'Audio playback is unavailable';
+          btn.disabled = true;
+        }
       });
     });
 

@@ -1,0 +1,57 @@
+/* Toddlers curriculum cards: photo-led layout matching the Kids unit-card art. */
+.toddler-course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.toddler-course-card {
+  min-width: 0;
+  min-height: 164px;
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr);
+  grid-template-rows: minmax(98px, 1fr) auto;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 12px;
+  border: 2px solid #f1e4cc;
+  border-radius: 24px;
+  background: #fff;
+  color: #613d26;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(119, 75, 32, .08);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.toddler-course-card:hover,
+.toddler-course-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--unit-accent, #f8b84e);
+  box-shadow: 0 12px 26px rgba(119, 75, 32, .14);
+  outline: none;
+}
+.toddler-course-card-featured { border-color: var(--unit-accent, #f8b84e); box-shadow: 0 7px 20px rgba(248, 184, 78, .2); }
+.toddler-course-card-image {
+  width: 98px;
+  height: 98px;
+  grid-column: 1;
+  grid-row: 1;
+  object-fit: cover;
+  border-radius: 19px;
+  background: var(--unit-tint, #fff1cf);
+}
+.toddler-course-card-content { min-width: 0; grid-column: 2; grid-row: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.toddler-course-card-kicker { color: var(--unit-accent, #c47a24); font-size: .72rem; line-height: 1; font-weight: 900; letter-spacing: .06em; }
+.toddler-course-card-title { color: #613d26; font-size: 1.14rem; line-height: 1.14; font-weight: 900; }
+.toddler-course-card-description { color: #86735f; font-size: .82rem; line-height: 1.25; font-weight: 600; }
+.toddler-course-card-footer { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 4px 0; border-top: 1px solid #f2eadb; color: #8f795f; font-size: .82rem; font-weight: 800; }
+.toddler-course-card-action { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; background: var(--unit-tint, #fff1cf); color: #684323; font-size: .82rem; font-weight: 900; white-space: nowrap; }
+.toddler-course-card-featured .toddler-course-card-action { background: var(--unit-accent, #f8b84e); color: #fff; }
+@media (max-width: 1000px) { .toddler-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+@media (max-width: 620px) {
+  .toddler-course-grid { grid-template-columns: 1fr; gap: 12px; }
+  .toddler-course-card { min-height: 148px; grid-template-columns: 90px minmax(0,1fr); padding: 10px; border-radius: 21px; gap: 9px 12px; }
+  .toddler-course-card-image { width: 90px; height: 90px; border-radius: 17px; }
+  .toddler-course-card-title { font-size: 1.05rem; }
+  .toddler-course-card-description { font-size: .78rem; }
+  .toddler-course-card-footer { font-size: .78rem; }
+}
+@media (prefers-reduced-motion: reduce) { .toddler-course-card { transition: none; } }

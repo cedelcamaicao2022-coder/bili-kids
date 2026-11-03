@@ -85,19 +85,22 @@ class KidsUnit11Engine {
     if (!grid) return;
 
     grid.innerHTML = fossils.map((f, i) => `
-      <div class="kids-tile-btn fossil-tile" data-idx="${i}">
+      <button type="button" class="kids-tile-btn fossil-tile" data-idx="${i}" aria-label="Uncover ${f.name} fossil">
         <span class="kids-tile-icon">${f.icon}</span>
         <span class="kids-tile-name">${f.name}</span>
         <span class="kids-tile-sub">${f.period}</span>
-        <span style="font-size:0.75rem; color:#64748b; margin-top:4px;">Tap to uncover fossil!</span>
-      </div>
+        <span class="fossil-tile-hint" style="font-size:0.75rem; color:#64748b; margin-top:4px;">Tap to uncover fossil!</span>
+      </button>
     `).join('');
 
     grid.querySelectorAll('.fossil-tile').forEach(tile => {
       tile.addEventListener('click', () => {
+        if (tile.disabled) return;
         const i = parseInt(tile.dataset.idx, 10);
         const f = fossils[i];
+        tile.disabled = true;
         tile.classList.add('correct');
+        tile.querySelector('.fossil-tile-hint').textContent = 'Fossil uncovered!';
         this.playSuccess();
         this.addStars(20);
         this.speak(`Fossil uncovered! The ${f.name}! ${f.fact}`);
@@ -129,12 +132,57 @@ class KidsUnit11Engine {
       </div>
     `).join('');
 
+    const recall = document.createElement('section');
+    recall.id = 'inventionRecallCheck';
+    recall.style.cssText = 'grid-column:1/-1;margin-top:18px;padding:18px;border:2px solid #c4b5fd;border-radius:16px;background:#f5f3ff;';
+    recall.setAttribute('aria-labelledby', 'inventionRecallTitle');
+    recall.innerHTML = `<h3 id="inventionRecallTitle" style="margin:0 0 6px;color:#5b21b6;">🧠 Invention recall</h3><p>Review the invention cards, then hide them and match each clue from memory.</p><button type="button" class="kids-audio-play-btn" data-action="start">Start 4-question recall check</button><div class="invention-recall-question" role="status" aria-live="polite"></div>`;
+    container.after(recall);
+    const recallBox = recall.querySelector('.invention-recall-question');
+    recall.querySelector('[data-action="start"]').addEventListener('click', () => {
+      container.hidden = true;
+      let index = 0;
+      let score = 0;
+      const renderQuestion = () => {
+        if (index >= inventions.length) {
+          recallBox.innerHTML = `<p style="font-weight:700;color:#5b21b6;">Recall complete: ${score}/${inventions.length} correct. Review the cards and try the check again later.</p><button type="button" class="kids-audio-play-btn" data-action="review">Review invention cards</button>`;
+          recallBox.querySelector('[data-action="review"]').addEventListener('click', () => { container.hidden = false; recallBox.innerHTML = ''; });
+          return;
+        }
+        const target = inventions[index];
+        const options = [target, ...inventions.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
+        recallBox.innerHTML = `<p><strong>Clue ${index + 1} of ${inventions.length}:</strong> ${target.desc}</p><div class="invention-recall-options" style="display:flex;flex-wrap:wrap;gap:8px;"></div><p class="invention-recall-feedback"></p>`;
+        const optionsBox = recallBox.querySelector('.invention-recall-options');
+        options.forEach(option => {
+          const choice = document.createElement('button');
+          choice.type = 'button';
+          choice.className = 'kids-tile-btn';
+          choice.textContent = `${option.icon} ${option.item}`;
+          choice.addEventListener('click', () => {
+            const feedback = recallBox.querySelector('.invention-recall-feedback');
+            if (option === target) {
+              score++;
+              feedback.textContent = `Correct: ${target.item}. Listen to its discovery story.`;
+              this.speak(`${target.item} was invented in ${target.date}. ${target.desc}`);
+              optionsBox.querySelectorAll('button').forEach(button => { button.disabled = true; });
+              const next = document.createElement('button');
+              next.type = 'button';
+              next.className = 'kids-audio-play-btn';
+              next.textContent = index + 1 === inventions.length ? 'Finish recall check' : 'Next clue';
+              next.addEventListener('click', () => { index++; renderQuestion(); });
+              optionsBox.after(next);
+            } else feedback.textContent = 'Not that invention. Think of the clue and try another choice.';
+          });
+          optionsBox.appendChild(choice);
+        });
+      };
+      renderQuestion();
+    });
+
     container.querySelectorAll('.kids-audio-play-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         this.speak(btn.dataset.text);
-        this.playSuccess();
-        this.addStars(15);
       });
     });
   }

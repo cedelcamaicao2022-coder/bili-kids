@@ -403,6 +403,8 @@ function handleCityPinClick(btnEl, placeId, placeName, placeIcon) {
   const feedback = document.getElementById('cityFeedbackBox');
 
   if (placeId === m.targetPlaceId) {
+    if (btnEl.disabled) return;
+    btnEl.disabled = true;
     sfx.playCarHonk();
     sfx.playSuccess();
     btnEl.classList.add('correct');
@@ -620,6 +622,8 @@ function stampPermit(btnEl, isCorrect, chosenText, sentenceComplete, explanation
   sfx.playStampThud();
 
   if (isCorrect) {
+    if (btnEl.disabled) return;
+    btnEl.disabled = true;
     sfx.playSuccess();
 
     if (blank) {
@@ -854,6 +858,8 @@ function checkGPSPreposition(btnEl, chosenOpt, correctOpt, promptComplete, expla
   const feedback = document.getElementById('gpsFeedbackBox');
 
   if (chosenOpt === correctOpt) {
+    if (btnEl.disabled) return;
+    btnEl.disabled = true;
     sfx.playGPSChime();
     sfx.playSuccess();
     btnEl.classList.add('correct');
@@ -968,6 +974,7 @@ let isTourRecording = false;
 function loadTourPrompt(index) {
   currentTourIndex = index;
   const t = tourGuidePromptsData[index];
+  document.getElementById('tourMicBtn').disabled = false;
 
   document.getElementById('tourStopBadge').textContent = `Parada ${index + 1} de ${tourGuidePromptsData.length}`;
   document.getElementById('tourSceneTag').textContent = t.sceneTag;
@@ -994,15 +1001,13 @@ function toggleTourMic() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    sfx.playBusHorn();
-    sfx.playApplause();
     feedback.innerHTML = `
       <div style="font-size:1.15rem; font-weight:700; color:#0284c7;">📢 ¡SUGERENCIA ANUNCIADA POR EL ALTAVOZ!</div>
       <span style="display:inline-block; margin-top:8px; background:#e0f2fe; color:#0369a1; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #7dd3fc;">
-        👏 ¡Los turistas aplauden tu guía! +25 pts
+        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
       </span>
     `;
-    AppState.addStars(25);
+    btn.disabled = true;
     return;
   }
 
@@ -1022,15 +1027,12 @@ function toggleTourMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playBusHorn();
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#0f172a;">Anunciaste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:#ecfdf5; color:#065f46; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #10b981;">
-          🚌 ¡Los turistas aceptan tu sugerencia con alegría! (+25 pts)
+          🚌 Transcripción de práctica; el contenido y la estructura no se evalúan.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

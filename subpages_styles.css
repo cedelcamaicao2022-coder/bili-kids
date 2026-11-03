@@ -454,19 +454,30 @@ body {
   transform: scale(1.04);
 }
 
-.kids-continue-widget {
-  width: 320px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: var(--radius-lg);
-  padding: 1.15rem;
+.kids-continue-responsive-card {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.85rem;
+  border-radius: 24px;
   text-decoration: none;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  transition: transform 0.2s;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .kids-continue-responsive-card {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .kids-continue-responsive-card .continue-btn-wrap {
+    width: 100%;
+  }
 }
 
 .kids-continue-widget:hover {
@@ -666,6 +677,10 @@ body {
   display: block;
 }
 
+.bili-companion-entry { text-decoration: none; text-align: center; color: #155e8b; font-weight: 900; }
+.bili-companion-entry .carousel-card-img { height: 118px; object-fit: contain; background: #fffaf0; }
+.bili-companion-entry span { display: block; padding: 8px 4px; }
+
 /* ==========================================================================
    KIDS 12 UNITS GRID (CAMBRIDGE A1-A2)
    ========================================================================== */
@@ -847,15 +862,103 @@ body {
   .kids-continue-widget { width: 100%; }
 }
 
-@media (max-width: 640px) {
-  .subpage-navbar { padding: 0.75rem 1rem; flex-wrap: wrap; gap: 0.75rem; }
-  .nav-center-menu { order: 3; width: 100%; justify-content: space-around; }
-  .categories-5-grid { grid-template-columns: repeat(2, 1fr); }
-  .carousel-cards-grid { grid-template-columns: repeat(2, 1fr); }
-  .kids-units-12-grid { grid-template-columns: 1fr; }
-  .subpage-hero-overlay { padding: 1.5rem; background: linear-gradient(180deg, rgba(254,252,249,0.95) 0%, rgba(254,252,249,0.85) 60%, rgba(254,252,249,0.4) 100%); }
-  .subpage-hero-bg-img { width: 100%; opacity: 0.4; }
-  .hero-group-title { font-size: 2.6rem; }
+@media (max-width: 768px) {
+  .subpage-navbar {
+    padding: 0.65rem 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .nav-center-menu {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #e2e8f0;
+    gap: 6px;
+    padding: 4px 0;
+  }
+  .nav-center-menu::-webkit-scrollbar {
+    display: block;
+    height: 5px;
+  }
+  .nav-center-menu::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 999px;
+  }
+  .nav-center-menu::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 999px;
+  }
+  .nav-pill-item {
+    flex-shrink: 0;
+    min-height: 42px;
+    white-space: nowrap;
+    font-size: 0.88rem;
+    padding: 6px 14px;
+  }
+  .subpage-container {
+    padding: 0.75rem;
+  }
+  .kids-units-12-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+  .teens-hero-card {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+  .teens-hero-title {
+    font-size: 2rem;
+  }
+  .teens-hero-sub {
+    font-size: 1.05rem;
+  }
+  .teens-hero-art {
+    max-height: 280px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-logo-img {
+    height: 32px;
+  }
+  .brand-subtitle-tag {
+    font-size: 0.72rem;
+    padding: 2px 6px;
+  }
+  .user-greeting-name {
+    display: none;
+  }
+  .user-profile-badge {
+    padding: 3px;
+    gap: 4px;
+  }
+  .user-avatar-circle {
+    width: 34px;
+    height: 34px;
+  }
+  .kids-units-12-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .categories-5-grid {
+    grid-template-columns: 1fr;
+  }
+  .carousel-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-group-title {
+    font-size: 2rem;
+  }
+  .subpage-hero-overlay {
+    padding: 1.2rem;
+  }
 }
 
 

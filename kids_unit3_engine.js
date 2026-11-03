@@ -401,6 +401,8 @@ function loadDetectiveClue(index) {
   // Voltear todas las cartas al frente para el nuevo misterio
   document.querySelectorAll('.mystery-flip-card').forEach(c => {
     c.classList.remove('is-flipped', 'correct-target', 'wrong-target');
+    const solveButton = c.querySelector('.btn-solve-detective');
+    if (solveButton) solveButton.disabled = false;
   });
 
   speakEnglish(clue.clueEn, 'host');
@@ -410,10 +412,13 @@ function confirmDetectiveTarget(personId) {
   sfx.playPop();
   const clue = detectiveClues[currentClueIndex];
   const card = document.getElementById(`card-${personId}`);
+  if (!card || card.classList.contains('correct-target')) return;
 
   if (personId === clue.targetId) {
     sfx.playSuccess();
     card.classList.add('correct-target');
+    const solveButton = card.querySelector('.btn-solve-detective');
+    if (solveButton) solveButton.disabled = true;
     AppState.addStars(20);
 
     const person = familyMembersData.find(p => p.id === personId);
@@ -897,6 +902,7 @@ let isPodcastRecording = false;
 function loadPodcastInterview(index) {
   currentPodcastIndex = index;
   const interview = podcastInterviewsData[index];
+  document.getElementById('podcastMicBtn').disabled = false;
 
   document.getElementById('podcastEpisodeNum').textContent = `Entrevista ${index + 1} de ${podcastInterviewsData.length}`;
   document.getElementById('podcastHostQuestion').textContent = interview.hostQuestion;
@@ -927,14 +933,13 @@ function togglePodcastMic() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    sfx.playApplause();
     feedback.innerHTML = `
-      <div style="font-size:1.1rem; font-weight:700; color:#db2777;">🎙️ ¡Entrevista al aire completada!</div>
+      <div style="font-size:1.1rem; font-weight:700; color:#db2777;">🎙️ Este navegador no puede verificar tu respuesta.</div>
       <span style="display:inline-block; margin-top:6px; background:#dcfce7; color:#15803d; font-weight:700; padding:6px 16px; border-radius:999px;">
-        👏 ¡Gran participación en el podcast! +20 pts
+        Práctica sin puntuación. Escucha el modelo y responde en voz alta.
       </span>
     `;
-    AppState.addStars(20);
+    btn.disabled = true;
     return;
   }
 
@@ -954,14 +959,12 @@ function togglePodcastMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#0f172a;">Respondiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:6px; background:#fdf2f8; color:#db2777; font-weight:700; padding:6px 16px; border-radius:999px; border:1px solid #fbcfe8;">
-          🎙️ ¡El público del Talk Show aplaude tu fluidez! (+25 pts)
+          🎙️ Transcripción de práctica; no se evalúa corrección ni fluidez.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

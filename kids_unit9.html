@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 9: A Wide World | Bilikids Kids Club</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kids_units_styles.css">
+  <link rel="stylesheet" href="kids_responsive.css?v=20261102_navfix">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -143,32 +145,23 @@
         </div>
 
         <h3 style="margin: 1.5rem 0 0.8rem; font-size: 1.15rem; color: #0f172a;">
-          Choose and practice your spoken response:
+          Choose a travel situation, then answer the officer aloud:
         </h3>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <button class="kids-tile-btn airport-speak-option" data-phrase="Good morning Officer! I am flying from Colombia, and I am Colombian. I am here for a vacation!" style="flex-direction: row; text-align: left; justify-content: flex-start;">
             <span style="font-size: 1.5rem;">🇨🇴</span>
-            <div>
-              <strong style="display: block; font-size: 1.05rem;">"Good morning Officer! I am flying from Colombia, and I am Colombian. I am here for a vacation!"</strong>
-              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
-            </div>
+            <div><strong style="display:block;font-size:1.05rem;">🇨🇴 You are from Colombia. Tell the officer where you are flying from, your nationality, and why you are visiting.</strong><span style="font-size:0.82rem;color:#64748b;">Select this situation to prepare your spoken answer.</span></div>
           </button>
 
           <button class="kids-tile-btn airport-speak-option" data-phrase="Hello! I am traveling from Japan, and I am Japanese. I am visiting my friends in London." style="flex-direction: row; text-align: left; justify-content: flex-start;">
             <span style="font-size: 1.5rem;">🇯🇵</span>
-            <div>
-              <strong style="display: block; font-size: 1.05rem;">"Hello! I am traveling from Japan, and I am Japanese. I am visiting my friends in London."</strong>
-              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
-            </div>
+            <div><strong style="display:block;font-size:1.05rem;">🇯🇵 You are from Japan. Tell the officer where you are flying from, your nationality, and whom you will visit.</strong><span style="font-size:0.82rem;color:#64748b;">Select this situation to prepare your spoken answer.</span></div>
           </button>
 
           <button class="kids-tile-btn airport-speak-option" data-phrase="Hi Officer! I came from Canada, and I am Canadian. Here is my passport and boarding pass." style="flex-direction: row; text-align: left; justify-content: flex-start;">
             <span style="font-size: 1.5rem;">🇨🇦</span>
-            <div>
-              <strong style="display: block; font-size: 1.05rem;">"Hi Officer! I came from Canada, and I am Canadian. Here is my passport and boarding pass."</strong>
-              <span style="font-size: 0.82rem; color: #64748b;">Tap to speak & earn +30 ⭐</span>
-            </div>
+            <div><strong style="display:block;font-size:1.05rem;">🇨🇦 You are from Canada. Tell the officer where you came from, your nationality, and show your travel documents.</strong><span style="font-size:0.82rem;color:#64748b;">Select this situation to prepare your spoken answer.</span></div>
           </button>
         </div>
 
@@ -178,7 +171,7 @@
   </main>
 
   <script src="assets/kids_audio/kids_audio_player.js"></script>
-  <script src="kids_unit9_engine.js"></script>
+  <script src="kids_unit9_engine.js?v=20261102_roleplay"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const engine = new KidsUnit9Engine();
@@ -186,5 +179,6 @@
       window.unit9Engine = engine;
     });
   </script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

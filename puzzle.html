@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jigsaw Puzzle Adventure • Bilikids</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="puzzle_styles.css?v=1.0">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
 
@@ -81,6 +82,12 @@
         </button>
       </div>
     </div>
+
+    <section id="babiesListeningTask" class="babies-listening-task" aria-live="polite" hidden>
+      <span id="babiesListeningPrompt">Listen and find the teddy bear.</span>
+      <button type="button" id="babiesListeningRepeat">🔊 Listen</button>
+      <span id="babiesListeningFeedback">Choose the matching picture below.</span>
+    </section>
 
     <!-- Gameplay Area: Board (Left) & Pieces Tray (Right) -->
     <div class="game-stage">
@@ -178,6 +185,7 @@
   <!-- CONFETTI CANVAS -->
   <canvas id="confettiCanvas"></canvas>
 
-  <script src="puzzle_engine.js?v=1.0"></script>
+  <script src="puzzle_engine.js?v=20261102_babyenglish"></script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

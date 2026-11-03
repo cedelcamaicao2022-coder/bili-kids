@@ -83,6 +83,7 @@ class KidsUnit10Engine {
     ];
 
     let currentOrder = [...routineSteps].sort(() => Math.random() - 0.5);
+    let routineRewarded = false;
 
     const render = () => {
       const container = document.getElementById('timelineRoutineList');
@@ -140,11 +141,17 @@ class KidsUnit10Engine {
 
         if (isRight) {
           this.playSuccess();
-          this.addStars(50);
-          this.speak("Awesome job! You organized Barnaby's busy day in perfect order!");
+          const firstCompletion = !routineRewarded;
+          if (firstCompletion) {
+            routineRewarded = true;
+            this.addStars(50);
+            this.speak("Awesome job! You organized Barnaby's busy day in perfect order!");
+          }
           if (fb) {
             fb.className = 'kids-toast-feedback good';
-            fb.textContent = "🎉 Perfect chronological order! (+50 ⭐)";
+            fb.textContent = firstCompletion
+              ? "🎉 Perfect chronological order! (+50 ⭐)"
+              : "🎉 Perfect chronological order! The reward for this routine was already claimed.";
           }
         } else {
           this.playError();

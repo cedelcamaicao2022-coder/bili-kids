@@ -26,7 +26,7 @@
       { word: 'DOOR', emoji: '🚪', audio: 'assets/luna/audio/door.mp3' },
       { word: 'FORK', emoji: '🍴', audio: 'assets/luna/audio/fork.mp3' },
       { word: 'LAMP', emoji: '🛋️', audio: 'assets/luna/audio/lamp.mp3' },
-      { word: 'BIRD', emoji: '🐦', audio: 'assets/leo/audio/bird.mp3' },
+      { word: 'BIRD', emoji: '🐦', audio: 'assets/luna/audio/bird.mp3' },
       { word: 'PINK', emoji: '🌸', audio: 'assets/audio/pink.mp3' }
     ],
     3: [
@@ -108,8 +108,17 @@
   function playCurrentWordAudio() {
     const list = WORD_BANKS[currentLevel];
     const item = list[wordIndex];
-    if (item && item.audio) {
+    if (!item) return;
+    if (item.audio) {
       playAudioFile(item.audio);
+      return;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(item.word.toLowerCase());
+      utterance.lang = 'en-US';
+      utterance.rate = 0.82;
+      window.speechSynthesis.speak(utterance);
     }
   }
 
@@ -261,16 +270,10 @@
     currentEmoji.textContent = item.emoji;
     wordSubHint.textContent = `Write '${item.word}' with your finger or stylus!`;
 
-    // Update speaker button availability
-    if (item.audio) {
-      btnSpeakWord.style.opacity = '1';
-      btnSpeakWord.style.pointerEvents = 'auto';
-      btnSpeakWord.title = 'Hear Word Audio';
-    } else {
-      btnSpeakWord.style.opacity = '0.4';
-      btnSpeakWord.style.pointerEvents = 'none';
-      btnSpeakWord.title = 'Sound coming soon';
-    }
+    // Keep pronunciation available; use browser speech synthesis when no recording exists.
+    btnSpeakWord.style.opacity = '1';
+    btnSpeakWord.style.pointerEvents = 'auto';
+    btnSpeakWord.title = item.audio ? 'Hear Word Audio' : 'Hear word pronunciation';
 
     // Clear Canvas for new word
     clearDrawingCanvas();

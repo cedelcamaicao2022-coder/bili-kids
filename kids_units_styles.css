@@ -210,6 +210,9 @@ body {
   border: 2px solid #e2e8f0;
   border-radius: 18px;
   padding: 1.25rem;
+  width: 100%;
+  color: inherit;
+  font: inherit;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
@@ -217,6 +220,20 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+.kids-tile-btn:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.kids-tile-btn:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.kids-tile-btn:disabled:hover {
+  transform: none;
 }
 
 .kids-tile-btn:hover {

@@ -101,6 +101,7 @@ class KidsUnit12Engine {
     }
 
     let selectedIngredients = [];
+    let recipeRewarded = false;
     prepGrid.querySelectorAll('.pizza-ingredient-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const name = btn.dataset.name;
@@ -119,7 +120,8 @@ class KidsUnit12Engine {
             : "Empty Pizza Crust ready for toppings!";
         }
 
-        if (selectedIngredients.includes("Mozzarella Cheese") && selectedIngredients.includes("Ripe Red Tomatoes") && selectedIngredients.includes("Fresh Mushrooms")) {
+        if (!recipeRewarded && selectedIngredients.includes("Mozzarella Cheese") && selectedIngredients.includes("Ripe Red Tomatoes") && selectedIngredients.includes("Fresh Mushrooms")) {
+          recipeRewarded = true;
           this.speak("Delicious! Your custom pizza is baked to perfection!");
           this.addStars(40);
         }
@@ -198,29 +200,80 @@ class KidsUnit12Engine {
       "For my main course, I would love the grilled salmon with roasted potatoes.",
       "And could we please have a large jug of fresh lemonade for the table?"
     ];
+    const orderPrompts = [
+      "Ask politely for two bowls of hot vegetable soup.",
+      "Order grilled salmon with roasted potatoes as your main course.",
+      "Ask politely for a large jug of fresh lemonade to share."
+    ];
 
     const container = document.getElementById('restaurantResponsesGrid');
     if (!container) return;
 
-    container.innerHTML = customerPhrases.map(ph => `
-      <button class="kids-tile-btn" data-phrase="${ph}" style="flex-direction:row; text-align:left; justify-content:flex-start;">
+    container.innerHTML = customerPhrases.map((ph, index) => `
+      <div class="kids-tile-btn" data-phrase="${ph}" style="flex-direction:row; text-align:left; justify-content:flex-start;">
         <span style="font-size:1.6rem;">🍽️</span>
         <div>
-          <strong style="font-size:1.02rem; color:#0f172a; display:block;">"${ph}"</strong>
-          <span style="font-size:0.8rem; color:#b45309;">Tap to practice ordering food in English (+30 ⭐)</span>
+          <strong style="font-size:1.02rem; color:#0f172a; display:block;">${orderPrompts[index]}</strong>
+          <span style="font-size:0.8rem; color:#b45309;">Use a polite request. Listen to the model only if you need help.</span><br>
+          <button type="button" class="kids-audio-play-btn restaurant-model-btn">🔊 Hear a model</button>
+          <button type="button" class="kids-audio-play-btn restaurant-record-btn">🎙️ Record my order</button>
+          <div class="restaurant-speaking-feedback" role="status" aria-live="polite" style="margin-top:8px;"></div>
         </div>
-      </button>
+      </div>
     `).join('');
 
-    container.querySelectorAll('.kids-tile-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const text = btn.dataset.phrase;
-        this.speak(text);
-        this.playSuccess();
-        this.addStars(30);
-        btn.classList.add('correct');
-      });
+    container.querySelectorAll('.kids-tile-btn').forEach(card => {
+      const phrase = card.dataset.phrase;
+      const modelBtn = card.querySelector('.restaurant-model-btn');
+      const recordBtn = card.querySelector('.restaurant-record-btn');
+      const feedback = card.querySelector('.restaurant-speaking-feedback');
+      modelBtn.addEventListener('click', () => this.speak(phrase));
+      recordBtn.addEventListener('click', () => this.recognizeRestaurantOrder(phrase, feedback, recordBtn, card));
     });
+  }
+
+  recognizeRestaurantOrder(expected, feedback, recordBtn, card) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      feedback.textContent = 'Not evaluated: this browser cannot check speech. Listen to the model and practise aloud with an adult.';
+      recordBtn.disabled = true;
+      return;
+    }
+    recordBtn.disabled = true;
+    feedback.textContent = 'Listening… Place your order now.';
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = event => {
+      const transcript = event.results[0][0].transcript;
+      const words = value => value.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
+      const targetWords = words(expected);
+      const heard = new Set(words(transcript));
+      const matches = targetWords.filter(word => heard.has(word)).length;
+      const passed = matches >= Math.min(3, targetWords.length) && matches / targetWords.length >= 0.6;
+      if (passed) {
+        feedback.textContent = `Order recognized: “${transcript}”. This checks recognized words, not pronunciation quality.`;
+        if (card.dataset.scored !== 'true') {
+          card.dataset.scored = 'true';
+          card.classList.add('correct');
+          this.addStars(30);
+          this.playSuccess();
+        }
+      } else {
+        feedback.textContent = `Not evaluated as a complete order: “${transcript}”. Listen to the model and try again.`;
+        recordBtn.disabled = false;
+      }
+    };
+    recognition.onerror = () => {
+      feedback.textContent = 'Not evaluated. The browser could not recognize the response; listen to the model and try again.';
+      recordBtn.disabled = false;
+    };
+    recognition.onend = () => { if (feedback.textContent.startsWith('Listening')) recordBtn.disabled = false; };
+    try { recognition.start(); } catch (error) {
+      feedback.textContent = 'Not evaluated. The microphone could not start; listen to the model and practise with an adult.';
+      recordBtn.disabled = false;
+    }
   }
 
   // 4. FOOD CRITIC STUDIO

@@ -235,6 +235,26 @@ body.lab-body {
   line-height: 1.5;
 }
 
+.lab-audio-phrase-btn {
+  margin: 0 0 1rem;
+  padding: 8px 14px;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lab-audio-phrase-btn:hover,
+.lab-audio-phrase-btn:focus-visible {
+  background: #e0e7ff;
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
 .lab-item-options-grid {
   display: flex;
   flex-direction: column;

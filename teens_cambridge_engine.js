@@ -20,13 +20,13 @@ const CAMBRIDGE_B2_ACTIVITIES = {
         gaps: [
           {
             number: 1,
-            options: ["precision", "accuracy", "strictly", "measure"],
+            options: ["precision", "accurate", "strictly", "measure"],
             correct: 0,
             explanation: "'Incredible precision' is the natural collocation referring to navigating an exact course."
           },
           {
             number: 2,
-            options: ["hold", "maintain", "possess", "stand"],
+            options: ["place", "maintain", "possess", "stand"],
             correct: 1,
             explanation: "To 'maintain a heading' is the standard nautical and aeronautical collocation for staying on course."
           },
@@ -38,7 +38,7 @@ const CAMBRIDGE_B2_ACTIVITIES = {
           },
           {
             number: 4,
-            options: ["transformations", "shifts", "shifts", "alterations"],
+            options: ["transformations", "shifts", "shift", "alterations"],
             correct: 1,
             explanation: "'Environmental shifts' is the recognized ecological term for major habitat changes."
           }
@@ -146,10 +146,7 @@ const CAMBRIDGE_B2_ACTIVITIES = {
         keyWord: "LAST",
         secondPrefix: "It has been three years ",
         secondSuffix: " London.",
-        correctAnswers: [
-          "since I last visited",
-          "since i last visited"
-        ],
+        correctAnswers: ["since I last visited"],
         explanation: "Time structure: 'It has been [time] since I last visited...'"
       },
       {
@@ -158,10 +155,7 @@ const CAMBRIDGE_B2_ACTIVITIES = {
         keyWord: "ENOUGH",
         secondPrefix: "The mountain lake was ",
         secondSuffix: " for us to swim in.",
-        correctAnswers: [
-          "not warm enough",
-          "not warm enough"
-        ],
+        correctAnswers: ["not warm enough"],
         explanation: "'Too cold' transforms to 'not warm enough'."
       },
       {
@@ -170,10 +164,7 @@ const CAMBRIDGE_B2_ACTIVITIES = {
         keyWord: "ADVISED",
         secondPrefix: "Liam ",
         secondSuffix: " apologize to my teacher.",
-        correctAnswers: [
-          "advised me to",
-          "advised me to"
-        ],
+        correctAnswers: ["advised me to"],
         explanation: "Reporting verb: 'advise + object + to-infinitive': advised me to."
       },
       {
@@ -182,10 +173,7 @@ const CAMBRIDGE_B2_ACTIVITIES = {
         keyWord: "BEING",
         secondPrefix: "The modern art gallery ",
         secondSuffix: " this month.",
-        correctAnswers: [
-          "is being renovated",
-          "is being renovated"
-        ],
+        correctAnswers: ["is being renovated"],
         explanation: "Present continuous passive: is + being + past participle (renovated)."
       }
     ]

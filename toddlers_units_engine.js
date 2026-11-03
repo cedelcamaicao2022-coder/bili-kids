@@ -33,6 +33,24 @@ const VERIFIED_UNIT_VIDEOS = {
   15: { id: "l4WNrvVjiTw", title: "If You're Happy and You Know It | Super Simple", lyrics: "If you're happy and you know it, clap your hands! Be helpful and say thank you!" }
 };
 
+const TODDLER_VIDEO_RECALL = {
+  1: { question: 'Which item belongs in a school bag?', options: ['A book', 'A banana', 'A pillow'], correct: 0 },
+  2: { question: 'Which greeting did you hear?', options: ['Hello, how are you?', 'Good night, goodbye', 'Where is my shoe?'], correct: 0 },
+  3: { question: 'Who is in the finger family song?', options: ['Daddy finger', 'Baby shark', 'Farmer Leo'], correct: 0 },
+  4: { question: 'Which body parts are named in the song?', options: ['Head, shoulders, knees and toes', 'Wings, tail and paws', 'Wheels, doors and seats'], correct: 0 },
+  5: { question: 'Which weather words are in the song?', options: ['Sunny and rainy', 'Hungry and sleepy', 'Fast and slow'], correct: 0 },
+  6: { question: 'Which animal is on Old MacDonald’s farm?', options: ['A cow', 'A shark', 'A penguin'], correct: 0 },
+  7: { question: 'Which two foods are named in the song?', options: ['Broccoli and ice cream', 'Rice and soup', 'Apples and bread'], correct: 0 },
+  8: { question: 'What does the song say to do first?', options: ['Wash your face', 'Ride a bus', 'Feed a cow'], correct: 0 },
+  9: { question: 'What are the characters doing in the jungle?', options: ['Walking', 'Sleeping in class', 'Cooking dinner'], correct: 0 },
+  10: { question: 'What do the bus wheels do?', options: ['Go round and round', 'Fly up high', 'Swim in the sea'], correct: 0 },
+  11: { question: 'Where is the little star?', options: ['Up above the world', 'Under the bed', 'Inside a school bag'], correct: 0 },
+  12: { question: 'What sound does the train make?', options: ['Choo choo', 'Moo moo', 'Quack quack'], correct: 0 },
+  13: { question: 'Which animal swims in the ocean song?', options: ['A sea turtle', 'A farm cow', 'A little lamb'], correct: 0 },
+  14: { question: 'What do we do after opening and closing our hands?', options: ['Give a little clap', 'Brush our teeth', 'Turn the page'], correct: 0 },
+  15: { question: 'What do you do when you are happy?', options: ['Clap your hands', 'Hide your shoes', 'Close your book'], correct: 0 }
+};
+
 class ToddlersUnitsEngine {
   constructor() {
     this.currentUnitId = 1;
@@ -53,6 +71,11 @@ class ToddlersUnitsEngine {
     this.memoryFlippedCards = [];
     this.memoryMatchedCount = 0;
     this.videoMode = 'youtube'; // 'youtube' or 'theater'
+    try {
+      this.videoRecallCompleteUnits = new Set(JSON.parse(localStorage.getItem('bili_toddler_video_recall') || '[]'));
+    } catch (e) {
+      this.videoRecallCompleteUnits = new Set();
+    }
 
     // LocalStorage Key
     this.storageKey = 'bilikids_toddlers_progress_v2';
@@ -77,6 +100,14 @@ class ToddlersUnitsEngine {
     const tabParam = urlParams.get('tab');
     if (tabParam && ['explore', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
       this.currentTab = tabParam;
+    }
+
+    const actParam = urlParams.get('act') || urlParams.get('activity');
+    if (actParam !== null) {
+      const parsedAct = parseInt(actParam, 10);
+      if (!isNaN(parsedAct) && parsedAct >= 0 && parsedAct <= 5) {
+        this.currentActivityIndex = parsedAct;
+      }
     }
 
     this.renderUnitsSelector();
@@ -155,12 +186,56 @@ class ToddlersUnitsEngine {
   /* ==========================================================================
      AUDIO PLAYBACK & SPEECH UTILITIES (ELEVENLABS STUDIO + SPEECH SYNTHESIS)
      ========================================================================== */
+  escapeHtmlAttr(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   playAudio(text, voice = 'kid') {
     if (!text || typeof text !== 'string') return;
 
-    const normKey = (text || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
     const manifest = window.ToddlersAudioManifest || window.BilikidsAudioManifest || {};
-    const audioSrc = manifest[normKey] || manifest[text];
+    
+    // Priority candidates for manifest audio lookup
+    const candidates = [];
+    const rawTrim = text.trim();
+    candidates.push(rawTrim);
+    candidates.push(rawTrim.toLowerCase());
+
+    // 1. Standard alphanumeric normalizations
+    const normKey = rawTrim.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    const noSpaceKey = normKey.replace(/\s+/g, '');
+    candidates.push(normKey, noSpaceKey);
+
+    // 2. Clean quotes, emojis, parentheticals, blanks, arrows
+    const cleaned = rawTrim
+      .replace(/['"`«»]/g, '')
+      .replace(/\([^)]*\)/g, '')
+      .replace(/➔.*/g, '')
+      .replace(/_+/g, '')
+      .trim();
+    const normC = cleaned.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    const noSpaceC = normC.replace(/\s+/g, '');
+    candidates.push(normC, noSpaceC);
+
+    // 3. Strip command prefixes (Read:, Find:, Complete:, Tap:, Choose:, Listen:, Follow instruction:, etc.)
+    const stripped = cleaned.replace(/^(read|find|complete|listen|say|repeat|tap|choose|follow instruction)\s*:?\s*/i, '').trim();
+    const normS = stripped.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    const noSpaceS = normS.replace(/\s+/g, '');
+    candidates.push(normS, noSpaceS);
+
+    let audioSrc = null;
+    for (const c of candidates) {
+      if (c && manifest[c]) {
+        audioSrc = manifest[c];
+        break;
+      }
+    }
 
     if (audioSrc) {
       try {
@@ -170,21 +245,22 @@ class ToddlersUnitsEngine {
         }
         const audio = new Audio(audioSrc);
         this._currentAudio = audio;
-        audio.preservesPitch = true;
-        audio.playbackRate = 0.92;
-        audio.play().catch(() => {
-          this.fallbackSpeechSynthesis(text);
+        audio.playbackRate = 1.0;
+        console.log('[ToddlersAudio] Playing Studio MP3:', audioSrc, 'for text:', text);
+        audio.play().catch((err) => {
+          console.warn('[ToddlersAudio] HTML5 audio.play() blocked or failed:', err, 'falling back to speech synthesis');
+          this.fallbackSpeechSynthesis(stripped || cleaned || text);
         });
         return;
       } catch (e) {
-        // Fallback
+        console.warn('[ToddlersAudio] Audio error:', e);
       }
     }
 
     if (typeof playStudioOrSynthAudio === 'function') {
-      playStudioOrSynthAudio(text, voice);
+      playStudioOrSynthAudio(stripped || cleaned || text, voice);
     } else {
-      this.fallbackSpeechSynthesis(text);
+      this.fallbackSpeechSynthesis(stripped || cleaned || text);
     }
   }
 
@@ -223,17 +299,16 @@ class ToddlersUnitsEngine {
     if (!navElem) return;
 
     const allUnits = window.TODDLERS_ALL_UNITS || [];
+    const currentUnit = this.getCurrentUnit();
     let html = `
       <div class="toddler-units-selector-wrap" style="width:100%;">
         <div class="toddler-units-selector-header">
           <span class="toddler-units-selector-title">
-            🎒 15 Unidades Curriculares • Toddlers 01 (6-8 años)
+            🎒 Unidad ${this.currentUnitId} • ${currentUnit?.title || 'Toddlers'}
           </span>
-          <span class="toddler-units-counter-badge">
-            Unidad ${this.currentUnitId} de ${allUnits.length}
-          </span>
+          <button class="toddler-units-toggle" id="toddlerUnitsToggle" type="button" aria-expanded="false" aria-controls="toddlerUnitsList" onclick="toddlersEngine.toggleUnitsSelector()">Cambiar unidad <span aria-hidden="true">⌄</span></button>
         </div>
-        <div class="toddler-units-nav">
+        <div class="toddler-units-nav" id="toddlerUnitsList" hidden>
     `;
 
     allUnits.forEach(u => {
@@ -256,6 +331,17 @@ class ToddlersUnitsEngine {
     `;
 
     navElem.innerHTML = html;
+  }
+
+  toggleUnitsSelector() {
+    const list = document.getElementById('toddlerUnitsList');
+    const toggle = document.getElementById('toddlerUnitsToggle');
+    if (!list || !toggle) return;
+
+    const isOpen = list.hidden;
+    list.hidden = !isOpen;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.innerHTML = `${isOpen ? 'Ocultar unidades' : 'Cambiar unidad'} <span aria-hidden="true">${isOpen ? '⌃' : '⌄'}</span>`;
   }
 
   switchUnit(unitId) {
@@ -313,8 +399,8 @@ class ToddlersUnitsEngine {
       { id: 'explore', label: '🌟 Explore', className: '' },
       { id: 'listening', label: '🎧 Listening (6)', className: 'tab-listening' },
       { id: 'reading', label: '📖 Reading (6)', className: 'tab-reading' },
-      { id: 'writing', label: '✍️ Writing (6)', className: 'tab-writing' },
       { id: 'speaking', label: '🗣️ Speaking (6)', className: 'tab-speaking' },
+      { id: 'writing', label: '✍️ Writing (6)', className: 'tab-writing' },
       { id: 'videos', label: '🎬 Videos & Music', className: '' },
       { id: 'game', label: '🎮 Game (12L)', className: 'tab-game' },
       { id: 'finalChallenge', label: '🏆 Final Challenge', className: 'tab-challenge' },
@@ -396,7 +482,7 @@ class ToddlersUnitsEngine {
       <div style="margin-bottom: 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
           <h2 style="margin:0; font-size:1.45rem; color:#78350f;">🌟 Unit ${unit.id} • Vocabulary & Phonics Explorer</h2>
-          <p style="margin:4px 0 0; color:#6b7280; font-size:0.95rem;">Tap any card to hear authentic pronunciation, learn fun facts, and practice English!</p>
+          <p style="margin:4px 0 0; color:#6b7280; font-size:0.95rem;">Explore the cards, then try the picture-to-word recall check below.</p>
         </div>
         <button class="toddler-nav-pill active" onclick="toddlersEngine.playAudio('Welcome to ${unit.title}! Let us explore together.')">
           🔊 Hear Welcome Audio
@@ -428,6 +514,70 @@ class ToddlersUnitsEngine {
 
     html += `</div>`;
     container.innerHTML = html;
+    this.setupExploreRecall(container, items);
+  }
+
+  setupExploreRecall(container, items) {
+    const cards = container.querySelector('.explore-grid');
+    const quiz = document.createElement('section');
+    quiz.style.cssText = 'margin-top:22px;padding:18px;border-radius:18px;background:#fffbeb;border:2px solid #fcd34d;';
+    quiz.setAttribute('aria-labelledby', 'toddlerRecallTitle');
+    quiz.innerHTML = `<h3 id="toddlerRecallTitle" style="margin:0 0 6px;color:#78350f;">🧠 Picture-to-word recall</h3><p style="margin:0 0 12px;color:#6b7280;">Review the cards first, then hide them and choose each English word from memory.</p><button type="button" class="toddler-nav-pill toddler-recall-start">Start recall check</button><div class="toddler-recall-question" aria-live="polite"></div>`;
+    container.appendChild(quiz);
+    const questionBox = quiz.querySelector('.toddler-recall-question');
+    const pool = items.filter(item => (item.word || item.name) && item.icon);
+    const questions = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(3, pool.length));
+    let index = 0;
+    let score = 0;
+    const render = () => {
+      if (index >= questions.length) {
+        questionBox.innerHTML = `<p role="status" style="font-weight:800;color:#166534;">Recall check complete: ${score}/${questions.length} correct.</p><button type="button" class="toddler-nav-pill toddler-recall-review">Review vocabulary cards</button>`;
+        questionBox.querySelector('.toddler-recall-review').addEventListener('click', () => {
+          if (cards) cards.hidden = false;
+          index = 0;
+          score = 0;
+          questionBox.innerHTML = '';
+          const start = quiz.querySelector('.toddler-recall-start');
+          start.disabled = false;
+        });
+        return;
+      }
+      const target = questions[index];
+      const targetWord = target.word || target.name;
+      const options = [target, ...pool.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
+      questionBox.innerHTML = `<div style="display:flex;align-items:center;gap:10px;margin:10px 0 14px;"><span style="font-size:2.5rem;" aria-hidden="true">${target.icon}</span><strong>Picture ${index + 1} of ${questions.length}</strong></div><div style="display:flex;flex-wrap:wrap;gap:8px;" class="toddler-recall-options"></div><p class="toddler-recall-feedback" role="status" aria-live="polite"></p><p style="font-size:.9rem;color:#6b7280;">Correct: ${score}/${questions.length}</p>`;
+      const buttons = questionBox.querySelector('.toddler-recall-options');
+      options.forEach(option => {
+        const word = option.word || option.name;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'toddler-nav-pill';
+        button.textContent = word;
+        button.addEventListener('click', () => {
+          const feedback = questionBox.querySelector('.toddler-recall-feedback');
+          if (word === targetWord) {
+            score++;
+            feedback.textContent = `Correct: ${targetWord}. Listen and say it aloud.`;
+            this.playAudio(targetWord);
+            buttons.querySelectorAll('button').forEach(choice => { choice.disabled = true; });
+            const next = document.createElement('button');
+            next.type = 'button';
+            next.className = 'toddler-nav-pill';
+            next.textContent = index + 1 === questions.length ? 'Finish recall check' : 'Next picture';
+            next.addEventListener('click', () => { index++; render(); });
+            buttons.after(next);
+          } else {
+            feedback.textContent = 'Not this word. Look at the picture and try another choice.';
+          }
+        });
+        buttons.appendChild(button);
+      });
+    };
+    quiz.querySelector('.toddler-recall-start').addEventListener('click', event => {
+      if (cards) cards.hidden = true;
+      event.currentTarget.disabled = true;
+      render();
+    });
   }
 
   /* ==========================================================================
@@ -512,9 +662,9 @@ class ToddlersUnitsEngine {
     html += `</div>`;
     container.innerHTML = html;
 
-    // Auto-trigger audio for listening or speaking prompts
-    if (skillName === 'listening') {
-      const audioToPlay = currentEx.audio || currentEx.audioWord || currentEx.targetWord || currentEx.prompt;
+    // Auto-trigger audio for listening or reading prompts
+    if (skillName === 'listening' || skillName === 'reading') {
+      const audioToPlay = currentEx.audio || currentEx.text || currentEx.prompt || currentEx.audioWord || currentEx.targetWord;
       if (audioToPlay) setTimeout(() => this.playAudio(audioToPlay), 350);
     }
   }
@@ -624,10 +774,10 @@ class ToddlersUnitsEngine {
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
             const cleanOptText = optName.replace(/'/g, "\\'");
             return `
-              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+              <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${optName}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
                 <div class="choice-icon">${optIcon}</div>
                 <div class="choice-text">${optName}</div>
-              </div>
+              </button>
             `;
           }).join('')}
         </div>
@@ -652,10 +802,10 @@ class ToddlersUnitsEngine {
             (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
           const cleanOptText = optName.replace(/'/g, "\\'");
           return `
-            <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
+            <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${optName}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'listening')">
               <div class="choice-icon">${optIcon}</div>
               <div class="choice-text">${optName}</div>
-            </div>
+              </button>
           `;
         }).join('')}
       </div>
@@ -694,62 +844,89 @@ class ToddlersUnitsEngine {
     }
   }
 
+  getChoiceIcon(label, fallback = '📖') {
+    const value = String(label || '').toLowerCase();
+    const choices = [
+      [/\b(luna|moon)\b/, '🌙'], [/\bleo\b/, '🦁'], [/\bbili\b/, '🐻'],
+      [/\b(apple|apples)\b/, '🍎'], [/\b(balloon|balloons)\b/, '🎈'],
+      [/\b(cake|cupcake)\b/, '🧁'], [/\b(cat|kitten)\b/, '🐱'],
+      [/\b(dog|puppy)\b/, '🐶'], [/\b(duck|duckling)\b/, '🦆'],
+      [/\b(fish)\b/, '🐟'], [/\b(hat|hats)\b/, '🎩'], [/\b(flower|flowers)\b/, '🌼'],
+      [/\b(book|books)\b/, '📚'], [/\b(pencil|pencils)\b/, '✏️'],
+      [/\b(crayon|crayons)\b/, '🖍️'], [/\b(red)\b/, '🔴'],
+      [/\b(blue)\b/, '🔵'], [/\b(yellow)\b/, '🟡'],
+      [/\b(green)\b/, '🟢'], [/\b(number|one|two|three|four|five)\b/, '🔢']
+    ];
+    return choices.find(([pattern]) => pattern.test(value))?.[1] || fallback;
+  }
+
   /* --------------------------------------------------------------------------
      2. READING MECHANICS (STORYBOOK READER, SENTENCE TRAINS, RIDDLES)
      -------------------------------------------------------------------------- */
   renderReadingMechanic(ex, actIndex) {
-    // Act 5: Illustrated Micro-Storybook Reader mechanic!
-    if (actIndex === 5 || ex.storyText || ex.story) {
-      const story = ex.storyText || ex.story || 'Luna and Leo are exploring today!';
+    // 1. Illustrated Micro-Storybook Reader mechanic (Act 3, Act 5, or exercises with multi-sentence stories)
+    const isStory = (actIndex === 3 || actIndex === 5 || ex.storyText || ex.story || (ex.text && ex.text.length > 35 && ex.text.includes('.')));
+    if (isStory) {
+      const story = ex.storyText || ex.story || ex.text || 'Luna and Leo are exploring today!';
+      const promptText = ex.prompt || ex.question || 'Based on the story, answer the question:';
       return `
         <div style="background:linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border:3px solid #fde68a; border-radius:24px; padding:1.75rem; margin-bottom:1.5rem; box-shadow:0 8px 20px rgba(245, 158, 11, 0.15);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1.5px dashed #fcd34d; padding-bottom:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1.5px dashed #fcd34d; padding-bottom:8px; flex-wrap:wrap; gap:8px;">
             <span style="font-weight:900; color:#b45309; font-size:1.15rem; display:flex; align-items:center; gap:8px;">
               📖 Bilikids Illustrated Storybook
             </span>
-            <button class="toddler-nav-pill active" onclick="toddlersEngine.playAudio('${story.replace(/'/g, "\\'")}')">
-              🔊 Read Aloud
+            <button type="button" class="exercise-audio-trigger" style="margin:0; padding:8px 18px; font-size:0.95rem;" onclick="toddlersEngine.playAudio(this.dataset.audio)" data-audio="${this.escapeHtmlAttr(story)}">
+              🔊 Listen Story
             </button>
           </div>
-          <div style="font-size:1.2rem; line-height:1.7; color:#78350f; font-weight:700;">
+          <div style="font-size:1.25rem; line-height:1.75; color:#78350f; font-weight:700;">
             ${story}
           </div>
         </div>
 
         <div class="exercise-prompt-card">
-          <h3 class="exercise-instruction">${ex.prompt || ex.question || 'Based on the story, answer the question:'}</h3>
+          <h3 class="exercise-instruction">${promptText}</h3>
+          <button type="button" class="exercise-audio-trigger" onclick="toddlersEngine.playAudio(this.dataset.audio)" data-audio="${this.escapeHtmlAttr(promptText)}">
+            🔊 Listen Question: "${promptText}"
+          </button>
         </div>
 
         <div class="exercise-choices-grid">
           ${(ex.options || []).map((opt, idx) => {
             const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-            const optIcon = (typeof opt === 'object') ? (opt.icon || '📖') : '📖';
+            const optIcon = (typeof opt === 'object') ? this.getChoiceIcon(optName, opt.icon || '📖') : this.getChoiceIcon(optName, '📖');
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
-            const cleanOptText = optName.replace(/'/g, "\\'");
             return `
-              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+              <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${this.escapeHtmlAttr(optName)}" data-option="${this.escapeHtmlAttr(optName)}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, this.dataset.option, 'reading')">
                 <div class="choice-icon">${optIcon}</div>
                 <div class="choice-text">${optName}</div>
-              </div>
+              </button>
             `;
           }).join('')}
         </div>
       `;
     }
 
-    // Act 2: Sentence Puzzle Train Wagon mechanic!
+    // 2. Sentence Puzzle Train Wagon mechanic (Act 2)
     if (actIndex === 2) {
-      const sentence = ex.sentence || 'This is a red pencil.';
+      const sentence = ex.sentence || ex.text || 'This is a red pencil.';
+      const cleanWagonPrompt = sentence.replace(/______.*$/, '').trim() || 'This is a';
+      const promptToPlay = ex.prompt || sentence;
+      const emojiClue = sentence.match(/\([^\)]+\)/) ? sentence.match(/\([^\)]+\)/)[0].replace(/[\(\)]/g, '') : '📖';
       return `
         <div class="exercise-prompt-card">
           <div style="font-size:3rem; margin-bottom:8px;">🚂🧩</div>
           <h3 class="exercise-instruction">Sentence Train Connector! Complete the sentence wagon:</h3>
-          <div class="sentence-train-track">
-            <span class="train-wagon-block">🚂 Locomotive</span>
-            <span class="train-wagon-block">${ex.prompt || sentence.split(' ')[0] || 'I have'}</span>
-            <span class="train-wagon-block" style="border-style:dashed; background:#fef3c7; color:#b45309;">[ ??? ]</span>
+          <div class="sentence-train-track" style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin:1rem 0;">
+            <span class="train-wagon-block" style="background:#e0f2fe; border:2px solid #bae6fd; padding:8px 16px; border-radius:12px; font-weight:800; color:#0369a1;">🚂 Locomotive</span>
+            <span class="train-wagon-block" style="background:#fef3c7; border:2px solid #fde68a; padding:8px 16px; border-radius:12px; font-weight:800; color:#b45309;">${cleanWagonPrompt}</span>
+            <span class="train-wagon-block" style="border:2px dashed #f59e0b; background:#fffbeb; padding:8px 16px; border-radius:12px; font-weight:900; color:#b45309;">[ ??? ]</span>
+            <span class="train-wagon-block" style="font-size:1.6rem;">${emojiClue}</span>
           </div>
+          <button type="button" class="exercise-audio-trigger" onclick="toddlersEngine.playAudio(this.dataset.audio)" data-audio="${this.escapeHtmlAttr(promptToPlay)}">
+            🔊 Listen Prompt: "${promptToPlay}"
+          </button>
         </div>
 
         <div class="exercise-choices-grid">
@@ -758,37 +935,78 @@ class ToddlersUnitsEngine {
             const optIcon = (typeof opt === 'object') ? (opt.icon || '🚂') : '🚂';
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
-            const cleanOptText = optName.replace(/'/g, "\\'");
             return `
-              <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+              <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${this.escapeHtmlAttr(optName)}" data-option="${this.escapeHtmlAttr(optName)}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, this.dataset.option, 'reading')">
                 <div class="choice-icon">${optIcon}</div>
                 <div class="choice-text">${optName}</div>
-              </div>
+              </button>
             `;
           }).join('')}
         </div>
       `;
     }
 
-    // Default Reading card choices
+    // 3. Match Classroom Words - Flashcard Word Mode (Act 0 or single isolated word)
+    const isSingleWord = (actIndex === 0 || (ex.text && ex.text.length <= 15 && !ex.text.includes(' ') && !ex.text.includes('.')));
+    if (isSingleWord) {
+      const displayWord = ex.text || 'BOOK';
+      return `
+        <div class="exercise-prompt-card">
+          <div style="background:#ffffff; border:3px solid #fde68a; border-radius:24px; display:inline-block; padding:1.25rem 3rem; margin-bottom:1rem; box-shadow:0 8px 24px rgba(245, 158, 11, 0.15);">
+            <span style="font-size:2.8rem; font-weight:900; letter-spacing:3px; color:#d97706; text-transform:uppercase;">
+              ${displayWord}
+            </span>
+          </div>
+          <h3 class="exercise-instruction">${ex.prompt || 'Read the word card above and tap the matching illustration:'}</h3>
+          <button type="button" class="exercise-audio-trigger" onclick="toddlersEngine.playAudio(this.dataset.audio)" data-audio="${this.escapeHtmlAttr(displayWord)}">
+            🔊 Listen Word: "${displayWord}"
+          </button>
+        </div>
+
+        <div class="exercise-choices-grid">
+          ${(ex.options || []).map((opt, idx) => {
+            const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
+            const optIcon = (typeof opt === 'object') ? this.getChoiceIcon(optName, opt.icon || '📖') : this.getChoiceIcon(optName, '📖');
+            const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
+              (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
+            return `
+              <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${this.escapeHtmlAttr(optName)}" data-option="${this.escapeHtmlAttr(optName)}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, this.dataset.option, 'reading')">
+                <div class="choice-icon">${optIcon}</div>
+                <div class="choice-text">${optName}</div>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // 4. Default Sentence / Map Guide / Clue reading mechanic
+    const displaySentence = ex.sentence || ex.text || '';
+    const audioTarget = displaySentence || ex.prompt || 'Read and select the matching answer';
     return `
       <div class="exercise-prompt-card">
-        <h3 class="exercise-instruction">${ex.prompt || ex.text || ex.question || 'Read and select the matching answer:'}</h3>
-        ${ex.sentence ? `<p style="font-size:1.35rem; font-weight:800; color:#4b5563; margin:8px 0;">"${ex.sentence}"</p>` : ''}
+        ${displaySentence ? `
+          <div style="background:linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border:2.5px solid #fde68a; border-radius:20px; padding:1.25rem 2rem; margin-bottom:1.25rem; font-size:1.35rem; font-weight:800; color:#78350f; display:inline-block; box-shadow:0 4px 14px rgba(245, 158, 11, 0.12);">
+            "${displaySentence}"
+          </div>
+        ` : ''}
+        <h3 class="exercise-instruction">${ex.prompt || 'Read and select the matching answer:'}</h3>
+        <button type="button" class="exercise-audio-trigger" onclick="toddlersEngine.playAudio(this.dataset.audio)" data-audio="${this.escapeHtmlAttr(audioTarget)}">
+          🔊 Listen: "${displaySentence || ex.prompt}"
+        </button>
       </div>
 
       <div class="exercise-choices-grid">
         ${(ex.options || []).map((opt, idx) => {
           const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-          const optIcon = (typeof opt === 'object') ? (opt.icon || '📖') : '📖';
+          const optIcon = (typeof opt === 'object') ? this.getChoiceIcon(optName, opt.icon || '📖') : this.getChoiceIcon(optName, '📖');
           const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
             (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
-          const cleanOptText = optName.replace(/'/g, "\\'");
           return `
-            <div class="exercise-choice-card" id="choice-${idx}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, '${cleanOptText}', 'reading')">
+            <button type="button" class="exercise-choice-card" id="choice-${idx}" aria-label="${this.escapeHtmlAttr(optName)}" data-option="${this.escapeHtmlAttr(optName)}" onclick="toddlersEngine.handleChoiceClick(${idx}, ${isCorrect}, this.dataset.option, 'reading')">
               <div class="choice-icon">${optIcon}</div>
               <div class="choice-text">${optName}</div>
-            </div>
+            </button>
           `;
         }).join('')}
       </div>
@@ -1040,8 +1258,12 @@ class ToddlersUnitsEngine {
           const transcript = event.results[0][0].transcript.toLowerCase();
           const targetClean = targetPhrase.toLowerCase().replace(/[^a-z0-9 ]/g, '');
           const heardClean = transcript.replace(/[^a-z0-9 ]/g, '');
+          const targetWords = targetClean.split(/\s+/).filter(Boolean);
+          const heardWords = new Set(heardClean.split(/\s+/).filter(Boolean));
+          const matchedWords = targetWords.filter(word => heardWords.has(word)).length;
+          const matchRatio = targetWords.length ? matchedWords / targetWords.length : 0;
 
-          if (heardClean.includes(targetClean) || targetClean.includes(heardClean) || heardClean.length > 2) {
+          if (heardClean && matchedWords >= Math.min(2, targetWords.length) && matchRatio >= 0.6) {
             this.handleSpeakingSuccess(targetPhrase, transcript);
           } else {
             this.handleSpeakingFallback(targetPhrase);
@@ -1099,19 +1321,19 @@ class ToddlersUnitsEngine {
   handleSpeakingSuccess(targetPhrase, heardText) {
     const status = document.getElementById('speakingStatus');
     if (status) {
-      status.innerHTML = `<span class="speaking-feedback-badge success">🌟 Excellent Pronunciation! Heard: "${heardText}"</span>`;
+      status.innerHTML = `<span class="speaking-feedback-badge success">🌟 Phrase recognized: "${heardText}". This checks the recognized words, not pronunciation quality.</span>`;
     }
     this.handleCorrectAnswer('speaking', targetPhrase);
   }
 
   handleSpeakingFallback(targetPhrase) {
+    this.isRecording = false;
+    const micBtn = document.getElementById('speakingMicBtn');
+    if (micBtn) micBtn.classList.remove('recording');
     const status = document.getElementById('speakingStatus');
     if (status) {
-      status.innerHTML = `<span class="speaking-feedback-badge success">⭐ Great Effort! Luna heard your voice!</span>`;
+      status.innerHTML = `<span class="speaking-feedback-badge">⚠️ We couldn't verify this response. Your recording was not scored. Listen to the model and try again with an adult.</span>`;
     }
-    setTimeout(() => {
-      this.handleCorrectAnswer('speaking', targetPhrase);
-    }, 1200);
   }
 
   /* --------------------------------------------------------------------------
@@ -1121,19 +1343,26 @@ class ToddlersUnitsEngine {
     const card = document.getElementById(`choice-${cardIndex}`);
     if (!card) return;
 
+    // Immediately pronounce the tapped option card in English
+    if (chosenText) {
+      this.playAudio(chosenText);
+    }
+
     if (isCorrect) {
       card.classList.add('correct');
-      this.handleCorrectAnswer(skillName, chosenText);
+      setTimeout(() => this.handleCorrectAnswer(skillName, chosenText), 400);
     } else {
       card.classList.add('wrong');
-      this.playAudio('Try again!');
-      setTimeout(() => card.classList.remove('wrong'), 700);
+      if (window.BilikidsMascot) window.BilikidsMascot.encourage();
+      setTimeout(() => this.playAudio('Try again!'), 450);
+      setTimeout(() => card.classList.remove('wrong'), 750);
     }
   }
 
   handleCorrectAnswer(skillName, text) {
     this.playCheerSound();
     this.addStars(10);
+    if (window.BilikidsMascot) window.BilikidsMascot.celebrate();
 
     const unit = this.getCurrentUnit();
     const activities = this.getUnitActivities(unit, skillName);
@@ -1240,18 +1469,14 @@ class ToddlersUnitsEngine {
     const verifiedVid = VERIFIED_UNIT_VIDEOS[unit.id] || VERIFIED_UNIT_VIDEOS[1];
     const embedUrl = `https://www.youtube-nocookie.com/embed/${verifiedVid.id}?rel=0&modestbranding=1&autoplay=0`;
 
-    const unitVids = unit.videos || [];
-    const checkpoints = (unitVids[0] && unitVids[0].checkpoints) ? unitVids[0].checkpoints : [
-      { question: `What is the main topic of Unit ${unit.id}?`, options: [unit.title, 'Space Rockets', 'Jungle Animals'], correct: 0 },
-      { question: "Did you enjoy singing and dancing with the characters?", options: ["Yes, I loved it!", "No"], correct: 0 }
-    ];
+    const checkpoints = [TODDLER_VIDEO_RECALL[unit.id]];
 
     let html = `
       <div class="video-section-wrap">
         <div style="margin-bottom:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div>
             <h2 style="margin:0 0 4px; font-size:1.45rem; color:#78350f;">🎬 ${verifiedVid.title}</h2>
-            <p style="margin:0; font-size:0.95rem; color:#6b7280;">Watch the official video lesson or play the interactive Bilikids song stage!</p>
+            <p style="margin:0; font-size:0.95rem; color:#6b7280;">Watch or listen first, then answer a question about the words and ideas in the song.</p>
           </div>
           <div class="theater-mode-tabs">
             <button class="theater-mode-btn ${this.videoMode === 'youtube' ? 'active' : ''}" onclick="toddlersEngine.setVideoMode('youtube')">
@@ -1302,10 +1527,11 @@ class ToddlersUnitsEngine {
     // Interactive Checkpoints
     html += `
       <div class="video-checkpoints-card">
-        <h3 style="margin:0 0 1rem; color:#92400e; font-size:1.15rem;">🎯 Video Comprehension Checkpoints</h3>
+        <h3 style="margin:0 0 1rem; color:#92400e; font-size:1.15rem;">🎯 Watch, listen, and remember</h3>
     `;
 
     checkpoints.forEach((cp, idx) => {
+      const alreadyCompleted = this.videoRecallCompleteUnits.has(unit.id);
       html += `
         <div class="video-checkpoint-item" id="video-cp-${idx}">
           <div style="font-weight:800; color:#374151; margin-bottom:8px;">${idx + 1}. ${cp.question}</div>
@@ -1313,12 +1539,13 @@ class ToddlersUnitsEngine {
             ${(cp.options || []).map((opt, optIdx) => {
               const isCorrect = (optIdx === cp.correct || opt === cp.answer);
               return `
-                <button class="toddler-nav-pill" onclick="toddlersEngine.checkVideoCheckpoint(${idx}, ${isCorrect})">
+                <button class="toddler-nav-pill" ${alreadyCompleted ? 'disabled' : ''} onclick="toddlersEngine.checkVideoCheckpoint(${idx}, ${isCorrect})">
                   ${opt}
                 </button>
               `;
             }).join('')}
           </div>
+          ${alreadyCompleted ? '<div role="status" style="color:#047857;font-weight:800;margin-top:8px;">✅ You completed this recall check.</div>' : '<div class="video-checkpoint-feedback" role="status" aria-live="polite"></div>'}
         </div>
       `;
     });
@@ -1338,17 +1565,25 @@ class ToddlersUnitsEngine {
   }
 
   checkVideoCheckpoint(cpIndex, isCorrect) {
+    const cpItem = document.getElementById(`video-cp-${cpIndex}`);
+    if (!cpItem || cpItem.dataset.answered === 'true') return;
     if (isCorrect) {
+      cpItem.dataset.answered = 'true';
       this.playCheerSound();
       this.addStars(15);
-      const cpItem = document.getElementById(`video-cp-${cpIndex}`);
-      if (cpItem) {
-        cpItem.style.background = '#d1fae5';
-        cpItem.style.borderColor = '#10b981';
-        cpItem.innerHTML += `<div style="color:#047857; font-weight:800; margin-top:8px;">✅ Correct! +15 Stars ⭐</div>`;
-      }
+      this.videoRecallCompleteUnits.add(this.currentUnitId);
+      try { localStorage.setItem('bili_toddler_video_recall', JSON.stringify([...this.videoRecallCompleteUnits])); } catch (e) {}
+      cpItem.style.background = '#d1fae5';
+      cpItem.style.borderColor = '#10b981';
+      cpItem.querySelectorAll('button').forEach(button => { button.disabled = true; });
+      cpItem.insertAdjacentHTML('beforeend', `<div role="status" style="color:#047857; font-weight:800; margin-top:8px;">✅ Correct! You remembered a detail from the video or song. +15 Stars ⭐</div>`);
     } else {
       this.playAudio('Try again!');
+      const feedback = cpItem.querySelector('.video-checkpoint-feedback') || document.createElement('div');
+      feedback.className = 'video-checkpoint-feedback';
+      feedback.setAttribute('role', 'status');
+      feedback.textContent = 'Try again. Think about the words you heard.';
+      if (!feedback.isConnected) cpItem.appendChild(feedback);
     }
   }
 
@@ -1640,7 +1875,7 @@ class ToddlersUnitsEngine {
         <h2 class="diploma-title">¡FELICITACIONES, SUPER TODDLER!</h2>
         <p class="diploma-desc">
           Has completado con éxito la <strong>Unidad ${unit.id}: ${unit.title}</strong> de Bilikids Adventure,
-          demostrando dominio en Listening, Reading, Writing y Speaking.
+          demostrando dominio en Listening, Reading, Speaking y Writing.
         </p>
         <div style="background:#fef3c7; border:2px dashed #f59e0b; border-radius:18px; padding:1.25rem; margin-bottom:1.5rem;">
           <div style="font-size:1.15rem; font-weight:900; color:#92400e;">Diploma de Honor Bilikids</div>
@@ -1697,21 +1932,21 @@ class ToddlersUnitsEngine {
             </div>
           </div>
 
-          <div class="progress-skill-card writing">
-            <div style="font-size:2.5rem;">✍️</div>
-            <h3 style="margin:6px 0 2px; color:#047857;">Writing</h3>
-            <div style="font-size:1.4rem; font-weight:900; color:#10b981;">${wScore}%</div>
-            <div class="progress-meter-track">
-              <div class="progress-meter-fill" style="width:${wScore}%; background:#10b981;"></div>
-            </div>
-          </div>
-
           <div class="progress-skill-card speaking">
             <div style="font-size:2.5rem;">🗣️</div>
             <h3 style="margin:6px 0 2px; color:#be123c;">Speaking</h3>
             <div style="font-size:1.4rem; font-weight:900; color:#f43f5e;">${sScore}%</div>
             <div class="progress-meter-track">
               <div class="progress-meter-fill" style="width:${sScore}%; background:#f43f5e;"></div>
+            </div>
+          </div>
+
+          <div class="progress-skill-card writing">
+            <div style="font-size:2.5rem;">✍️</div>
+            <h3 style="margin:6px 0 2px; color:#047857;">Writing</h3>
+            <div style="font-size:1.4rem; font-weight:900; color:#10b981;">${wScore}%</div>
+            <div class="progress-meter-track">
+              <div class="progress-meter-fill" style="width:${wScore}%; background:#10b981;"></div>
             </div>
           </div>
         </div>

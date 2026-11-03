@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="lab_styles.css">
+  <link rel="stylesheet" href="lab_experiments_styles.css">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body>
   <div class="lab-app-container">
@@ -119,25 +121,27 @@
           <div class="level-nav-tabs" id="colorsLevelTabs">
             <button class="lvl-chip active" data-level="1">
               <span class="chip-num">Level 1</span>
-              <span class="chip-name">Primary Mixes 🍊</span>
+              <span class="chip-name">Potion Alchemy 🧪</span>
             </button>
             <button class="lvl-chip" data-level="2">
               <span class="chip-num">Level 2</span>
-              <span class="chip-name">Pastel Magic 🌸</span>
+              <span class="chip-name">Magic Painting 🎨</span>
             </button>
             <button class="lvl-chip" data-level="3">
               <span class="chip-num">Level 3</span>
-              <span class="chip-name">Deep Shades 🍫</span>
+              <span class="chip-name">Crystal Prism 💎</span>
             </button>
             <button class="lvl-chip" data-level="4">
               <span class="chip-num">Level 4</span>
-              <span class="chip-name">Free Alchemy 🌈</span>
+              <span class="chip-name">Bubble Symphony 🫧</span>
             </button>
           </div>
         </div>
 
-        <!-- Target Challenge Banner -->
-        <div class="mission-target-card" id="colorMissionCard">
+        <!-- ================= LEVEL 1: 🧪 POTION ALCHEMY STATION ================= -->
+        <div id="colorStageLvl1" class="color-stage-panel">
+          <!-- Target Challenge Banner -->
+          <div class="mission-target-card" id="colorMissionCard">
           <div class="target-badge">🎯 MISSION:</div>
           <div class="target-desc" id="colorTargetDesc">Mix two primary colors to make <strong>ORANGE 🍊</strong>!</div>
           <div class="target-preview-dot" id="colorTargetDot" style="background:#ea580c;"></div>
@@ -300,6 +304,234 @@
             </div>
           </div>
         </div>
+      </div><!-- End of #colorStageLvl1 -->
+
+      <!-- ================= LEVEL 2: 🎨 MAGIC PASTEL PAINTING STUDIO ================= -->
+      <div id="colorStagePainting" class="color-stage-panel" style="display: none;">
+        <div class="mission-target-card">
+          <div class="target-badge">🎨 PAINTING STUDIO:</div>
+          <div class="target-desc">Dip Luna's magic brush into pastel jars and tap zones to color the magic butterfly!</div>
+          <div class="painting-progress-pill" id="paintingProgressPill">0 / 7 Zones Painted</div>
+        </div>
+
+        <div class="painting-studio-layout">
+          <!-- Palette Jars -->
+          <div class="palette-jars-card">
+            <h3>🎨 Magic Paint Jars</h3>
+            <p style="font-size:0.85rem; color:#64748b; margin-top:2px;">Select a paint color to coat your brush:</p>
+            <div class="paint-jars-grid">
+              <button class="paint-jar-btn active" data-color="#ec4899" data-name="Pastel Pink 🌸" style="--jar-color: #ec4899;">
+                <span class="jar-liquid" style="background:#ec4899;"></span>
+                <span class="jar-label">Pink 🌸</span>
+              </button>
+              <button class="paint-jar-btn" data-color="#38bdf8" data-name="Sky Blue 🩵" style="--jar-color: #38bdf8;">
+                <span class="jar-liquid" style="background:#38bdf8;"></span>
+                <span class="jar-label">Sky Blue 🩵</span>
+              </button>
+              <button class="paint-jar-btn" data-color="#c084fc" data-name="Lavender 🪻" style="--jar-color: #c084fc;">
+                <span class="jar-liquid" style="background:#c084fc;"></span>
+                <span class="jar-label">Lavender 🪻</span>
+              </button>
+              <button class="paint-jar-btn" data-color="#4ade80" data-name="Mint Green 🍦" style="--jar-color: #4ade80;">
+                <span class="jar-liquid" style="background:#4ade80;"></span>
+                <span class="jar-label">Mint Green 🍦</span>
+              </button>
+              <button class="paint-jar-btn" data-color="#facc15" data-name="Lemon Yellow 🍋" style="--jar-color: #facc15;">
+                <span class="jar-liquid" style="background:#facc15;"></span>
+                <span class="jar-label">Lemon 🍋</span>
+              </button>
+              <button class="paint-jar-btn" data-color="#fb923c" data-name="Peach Orange 🍑" style="--jar-color: #fb923c;">
+                <span class="jar-liquid" style="background:#fb923c;"></span>
+                <span class="jar-label">Peach 🍑</span>
+              </button>
+            </div>
+
+            <div class="active-brush-indicator" id="activeBrushIndicator">
+              <span>Active Brush:</span>
+              <div class="brush-swatch" id="brushSwatch" style="background: #ec4899;"></div>
+              <strong id="brushName">Pastel Pink 🌸</strong>
+            </div>
+
+            <div class="painting-tools-row">
+              <button id="btnRainbowWash" class="lab-btn primary" style="font-size:0.85rem; padding:8px 14px;">
+                <span>✨</span> Rainbow Magic Fill
+              </button>
+              <button id="btnClearPainting" class="lab-btn secondary" style="font-size:0.85rem; padding:8px 14px;">
+                <span>🔄</span> Reset Canvas
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive SVG Painting Canvas -->
+          <div class="painting-canvas-card">
+            <div class="canvas-header-bar">
+              <span>🖼️ Luna's Magical Garden & Butterfly</span>
+              <span id="paintingStatusTag" style="font-size:0.8rem; font-weight:800; color:#10b981;">🖌️ Ready to Paint</span>
+            </div>
+            <div class="canvas-svg-wrapper" id="canvasSvgWrapper">
+              <svg viewBox="0 0 600 450" class="interactive-art-svg" id="interactiveArtSvg">
+                <!-- Sky / Background -->
+                <rect x="0" y="0" width="600" height="450" rx="20" fill="#f8fafc" />
+                
+                <!-- Rainbow Arc 1 (Peach) -->
+                <path id="zoneRainbowTop" class="paintable-zone" data-zone="Rainbow" fill="#ffffff" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="4,4"
+                  d="M 120 180 A 180 180 0 0 1 480 180 L 450 180 A 150 150 0 0 0 150 180 Z" />
+                  
+                <!-- Rainbow Arc 2 (Sky Blue) -->
+                <path id="zoneRainbowMid" class="paintable-zone" data-zone="Rainbow Arch" fill="#ffffff" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="4,4"
+                  d="M 150 180 A 150 150 0 0 1 450 180 L 420 180 A 120 120 0 0 0 180 180 Z" />
+
+                <!-- Sun (Lemon) -->
+                <circle id="zoneSun" class="paintable-zone" data-zone="Sun" cx="80" cy="80" r="45" fill="#ffffff" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="4,4" />
+
+                <!-- Garden Flowers Left (Pink) -->
+                <g id="zoneFlowerLeft" class="paintable-zone" data-zone="Garden Flower" fill="#ffffff" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="4,4">
+                  <circle cx="90" cy="360" r="24" />
+                  <circle cx="66" cy="360" r="16" />
+                  <circle cx="114" cy="360" r="16" />
+                  <circle cx="90" cy="336" r="16" />
+                  <circle cx="90" cy="384" r="16" />
+                </g>
+
+                <!-- Garden Leaves & Grass (Mint) -->
+                <path id="zoneGrass" class="paintable-zone" data-zone="Garden Grass" fill="#ffffff" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="4,4"
+                  d="M 0 380 Q 150 350 300 380 T 600 380 L 600 450 L 0 450 Z" />
+
+                <!-- Big Magic Butterfly Wings Left (Lavender) -->
+                <path id="zoneWingLeft" class="paintable-zone" data-zone="Butterfly Left Wing" fill="#ffffff" stroke="#cbd5e1" stroke-width="3.5" stroke-dasharray="4,4"
+                  d="M 285 240 C 230 160 170 200 180 260 C 185 300 230 310 285 270 Z" />
+
+                <!-- Big Magic Butterfly Wings Right (Mint / Sky) -->
+                <path id="zoneWingRight" class="paintable-zone" data-zone="Butterfly Right Wing" fill="#ffffff" stroke="#cbd5e1" stroke-width="3.5" stroke-dasharray="4,4"
+                  d="M 315 240 C 370 160 430 200 420 260 C 415 300 370 310 315 270 Z" />
+
+                <!-- Butterfly Body & Antennae -->
+                <ellipse cx="300" cy="255" rx="14" ry="40" fill="#475569" />
+                <circle cx="300" cy="210" r="14" fill="#334155" />
+                <path d="M 295 200 Q 280 180 270 185 M 305 200 Q 320 180 330 185" stroke="#334155" stroke-width="3" stroke-linecap="round" fill="none" />
+
+                <!-- Cute Flower Center -->
+                <circle cx="90" cy="360" r="12" fill="#fbbf24" stroke="#d97706" stroke-width="2" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= LEVEL 3: 💎 OPTICAL PRISM LIGHT PUZZLE ================= -->
+      <div id="colorStagePrism" class="color-stage-panel" style="display: none;">
+        <div class="mission-target-card">
+          <div class="target-badge">💎 OPTICAL PRISM LAB:</div>
+          <div class="target-desc">Rotate the optical prisms to direct laser beams into all 4 glowing gemstone crystals!</div>
+          <div class="painting-progress-pill" id="prismCrystalsPill">0 / 4 Crystals Energized</div>
+        </div>
+
+        <div class="prism-lab-layout">
+          <!-- Prisms Control Toolbox -->
+          <div class="prism-tools-card">
+            <h3>💎 Optical Laboratory</h3>
+            <p style="font-size:0.85rem; color:#cbd5e1; margin-top:2px;">Tap any prism on the grid to rotate it 45°:</p>
+            
+            <div class="prism-target-list">
+              <div class="gem-target-item" id="gemTargetRuby">
+                <span class="gem-indicator" style="background:#ef4444; color:#ef4444;"></span>
+                <strong>Ruby Gem 🔴</strong>
+                <span class="gem-status" id="statusRuby">Waiting...</span>
+              </div>
+              <div class="gem-target-item" id="gemTargetSapphire">
+                <span class="gem-indicator" style="background:#3b82f6; color:#3b82f6;"></span>
+                <strong>Sapphire Gem 🔵</strong>
+                <span class="gem-status" id="statusSapphire">Waiting...</span>
+              </div>
+              <div class="gem-target-item" id="gemTargetEmerald">
+                <span class="gem-indicator" style="background:#10b981; color:#10b981;"></span>
+                <strong>Emerald Gem 🟢</strong>
+                <span class="gem-status" id="statusEmerald">Waiting...</span>
+              </div>
+              <div class="gem-target-item" id="gemTargetAmethyst">
+                <span class="gem-indicator" style="background:#a855f7; color:#a855f7;"></span>
+                <strong>Amethyst Gem 🟣</strong>
+                <span class="gem-status" id="statusAmethyst">Waiting...</span>
+              </div>
+            </div>
+
+            <div class="prism-actions-row">
+              <button id="btnFirePrismBeam" class="lab-btn primary" style="width:100%; min-height:44px;">
+                <span>⚡</span> Re-Align Beam
+              </button>
+              <button id="btnResetPrismPuzzle" class="lab-btn secondary" style="width:100%; min-height:40px; margin-top:6px;">
+                <span>🔄</span> Reset Prisms
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Optical Stage -->
+          <div class="prism-stage-card">
+            <div class="canvas-header-bar" style="background:#090d16; color:#94a3b8; border-color:rgba(255,255,255,0.1);">
+              <span>🔮 Cosmic Light Chamber</span>
+              <span id="prismLaserStatus" style="color:#38bdf8; font-weight:800;">⚡ Laser Active</span>
+            </div>
+            <div class="prism-canvas-wrapper" style="position:relative; width:100%; height:420px; background:#070a12; border-radius:18px; overflow:hidden;">
+              <canvas id="prismCanvas" width="600" height="420" style="width:100%; height:100%; display:block;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= LEVEL 4: 🫧 FLOATING BUBBLE SYMPHONY ARCADE ================= -->
+      <div id="colorStageBubbles" class="color-stage-panel" style="display: none;">
+        <div class="mission-target-card" style="background: linear-gradient(135deg, #3b0764, #581c87); border-color:#9333ea;">
+          <div class="target-badge" style="background:#a855f7;">🫧 BUBBLE SYMPHONY:</div>
+          <div class="target-desc" id="bubbleMissionPrompt" style="color:#ffffff;">Listen to Luna and pop the requested color bubbles!</div>
+          <div class="painting-progress-pill" id="bubbleScorePill" style="background:#facc15; color:#78350f;">Score: 0 pts</div>
+        </div>
+
+        <div class="bubbles-arcade-layout">
+          <!-- Bubble Mission & Controls -->
+          <div class="bubble-mission-card">
+            <div class="bubble-target-display">
+              <span style="font-size:0.8rem; font-weight:800; color:#cbd5e1; text-transform:uppercase;">Current Target:</span>
+              <div class="target-bubble-visual" id="targetBubbleVisual">
+                <span class="target-color-circle" id="targetColorCircle" style="background:#a855f7; color:#a855f7;"></span>
+                <h2 id="targetColorName" style="color:#ffffff; margin:6px 0 2px;">PURPLE 🍇</h2>
+                <span id="targetColorPrompt" style="color:#cbd5e1; font-size:0.88rem;">Pop 5 purple bubbles!</span>
+              </div>
+            </div>
+
+            <div class="arcade-stats-box">
+              <div class="stat-item">
+                <span>Target Progress:</span>
+                <strong id="targetProgressCount" style="color:#10b981; font-size:1.2rem;">0 / 5</strong>
+              </div>
+              <div class="stat-item">
+                <span>Combo Multiplier:</span>
+                <strong id="arcadeCombo" style="color:#f59e0b; font-size:1.2rem;">x1</strong>
+              </div>
+              <div class="stat-item">
+                <span>Round:</span>
+                <strong id="arcadeRound" style="color:#38bdf8; font-size:1.2rem;">1 of 4</strong>
+              </div>
+            </div>
+
+            <div class="arcade-actions-row">
+              <button id="btnStartBubbleGame" class="lab-btn primary" style="width:100%; min-height:44px;">
+                <span>▶</span> Start Bubble Game
+              </button>
+            </div>
+          </div>
+
+          <!-- Arcade Canvas Arena -->
+          <div class="bubbles-arena-card">
+            <div class="canvas-header-bar" style="background:#1e1b4b; color:#cbd5e1; border-color:rgba(255,255,255,0.1);">
+              <span>🫧 Luna's Musical Cauldron</span>
+              <span id="bubbleComboBanner" style="color:#facc15; font-weight:800;">🎵 Tap bubbles to pop!</span>
+            </div>
+            <div class="bubble-canvas-container" id="bubbleContainer" style="position:relative; width:100%; height:440px; background:radial-gradient(ellipse at bottom, #2e1065 0%, #0f172a 100%); border-radius:18px; overflow:hidden; cursor:pointer;">
+              <canvas id="bubbleCanvas" width="600" height="440" style="width:100%; height:100%; display:block;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
       </section>
 
       <!-- ================= EXPERIMENT 2: ELECTRIC CIRCUIT (4 PROGRESSIVE LEVELS) ================= -->
@@ -864,5 +1096,7 @@
   </div>
 
   <script src="lab_engine.js"></script>
+  <script src="lab_experiments_engine.js"></script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

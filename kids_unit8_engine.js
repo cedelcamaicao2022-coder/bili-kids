@@ -1826,6 +1826,7 @@ let isVloggerRecording = false;
 function loadVloggerScript(index) {
   currentVloggerIndex = index;
   const item = VloggerHaulData[index];
+  document.getElementById('vloggerMicBtn').disabled = false;
 
   document.getElementById('vloggerHaulBadge').textContent = `Video ${index + 1} de ${VloggerHaulData.length}`;
   document.getElementById('vloggerLiveViewers').textContent = item.viewersCount;
@@ -1846,13 +1847,12 @@ function toggleVloggerMic() {
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
-    sfx.playSuccess();
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px; color:#065f46; font-weight:700;">
-        🎤 ¡Tu navegador no soporta SpeechRecognition, pero te otorgamos +25 pts por practicar en voz alta!
+        🎤 Este navegador no puede verificar tu respuesta. Práctica sin puntuación; escucha el modelo.
       </div>
     `;
-    AppState.addStars(25);
+    btn.disabled = true;
     return;
   }
 
@@ -1872,14 +1872,12 @@ function toggleVloggerMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Dijiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(236, 72, 153, 0.25); color:#f472b6; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #ec4899;">
-          🌟 ¡Tu video se volvió viral! Calificación 5 Estrellas (+25 pts)
+          🌟 Transcripción de práctica; respuesta y pronunciación no evaluadas.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

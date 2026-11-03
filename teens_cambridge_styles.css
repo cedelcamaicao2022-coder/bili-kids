@@ -386,3 +386,23 @@ body.cambridge-body {
   background: #fef2f2;
   border: 1px solid #fecaca;
 }
+
+@media (max-width: 768px) {
+  .cambridge-parts-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+    gap: 8px;
+  }
+
+  .cambridge-part-btn {
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
+    padding: 10px 8px;
+    min-height: 48px;
+    font-size: 0.8rem;
+  }
+}

@@ -119,6 +119,25 @@ body {
   letter-spacing: 0.3px;
 }
 
+.babies-listening-task {
+  margin: 8px auto;
+  padding: 8px 14px;
+  width: fit-content;
+  max-width: 95%;
+  border: 2px solid #fbbf24;
+  border-radius: 16px;
+  background: #fffbeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 800;
+  color: #713f12;
+}
+.babies-listening-task[hidden] { display: none; }
+.babies-listening-task button { border: 0; border-radius: 999px; padding: 8px 14px; background: #f59e0b; color: white; font: inherit; cursor: pointer; }
+
 /* Difficulty Switcher */
 .difficulty-switcher {
   display: flex;

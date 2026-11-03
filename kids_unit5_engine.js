@@ -481,6 +481,7 @@ function handleGearItemClick(cardEl, itemId, isCorrect, itemName, itemIcon) {
   const feedback = document.getElementById('lockerFeedbackBox');
 
   if (isCorrect) {
+    if (packedLockerItems.some(item => item.id === itemId) || packedLockerItems.length >= 3) return;
     sfx.playPackGear();
     cardEl.classList.add('packed');
     packedLockerItems.push({ id: itemId, name: itemName, icon: itemIcon });
@@ -640,9 +641,11 @@ const djMixerTracksData = [
 
 let currentDJIndex = 0;
 let currentSliderValue = 50;
+let djRewardClaimed = false;
 
 function loadDJTrack(index) {
   currentDJIndex = index;
+  djRewardClaimed = false;
   const track = djMixerTracksData[index];
 
   document.getElementById('djTrackBadge').textContent = `Pista ${index + 1} de ${djMixerTracksData.length}`;
@@ -734,11 +737,13 @@ function updateVUMeters(val) {
 }
 
 function dropTheDJBeat() {
+  if (djRewardClaimed) return;
   const track = djMixerTracksData[currentDJIndex];
   const feedback = document.getElementById('djFeedbackBox');
   const disc = document.getElementById('vinylDisc');
 
   if (currentSliderValue === track.targetPercentage) {
+    djRewardClaimed = true;
     // CORRECT BEAT DROP!
     sfx.playScratch();
     setTimeout(() => sfx.playBeatDrop(), 180);
@@ -1101,6 +1106,7 @@ let isTalentRecording = false;
 function loadTalentAudition(index) {
   currentTalentIndex = index;
   const audition = talentAuditionsData[index];
+  document.getElementById('talentMicBtn').disabled = false;
 
   document.getElementById('talentEpisodeNum').textContent = `Audición ${index + 1} de ${talentAuditionsData.length}`;
   document.getElementById('talentSceneTag').textContent = audition.talentTag;
@@ -1135,15 +1141,13 @@ function toggleTalentMic() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    sfx.playBuzzerGold();
-    sfx.playApplause();
     feedback.innerHTML = `
       <div style="font-size:1.15rem; font-weight:700; color:#fbbf24;">🔔 ¡GOLDEN BUZZER ACTIVADO!</div>
       <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.25); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-        🌟 ¡Los 3 jueces se pusieron de pie! +25 pts
+      Práctica sin puntuación. Escucha el modelo y responde en voz alta.
       </span>
     `;
-    AppState.addStars(25);
+    btn.disabled = true;
     return;
   }
 
@@ -1163,15 +1167,12 @@ function toggleTalentMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playBuzzerGold();
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Dijiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.25); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-          🔔 ¡GOLDEN BUZZER! Los tres jueces votaron SÍ (+25 pts)
+          🔔 Transcripción de práctica; la respuesta y pronunciación no se evalúan.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

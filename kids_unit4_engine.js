@@ -460,6 +460,7 @@ function listenClockPrompt() {
 }
 
 function checkClockChoice(btnEl, isCorrect, text, slotIndex) {
+  if (clockAnswered[slotIndex]) return;
   const feedback = document.getElementById('clockFeedbackBox');
 
   if (isCorrect) {
@@ -988,9 +989,11 @@ const verbScaleChallenges = [
 ];
 
 let currentScaleIndex = 0;
+let scaleAnswered = false;
 
 function loadScaleChallenge(index) {
   currentScaleIndex = index;
+  scaleAnswered = false;
   const challenge = verbScaleChallenges[index];
 
   document.getElementById('scaleCaseNum').textContent = `Reto ${index + 1} de ${verbScaleChallenges.length}`;
@@ -1022,11 +1025,13 @@ function loadScaleChallenge(index) {
 }
 
 function checkScaleVerb(btnEl, isCorrect, chosenText, sentenceComplete, ruleNote) {
+  if (scaleAnswered) return;
   const balance = document.getElementById('scaleBalanceGraphic');
   const blank = document.getElementById('scaleBlankSlot');
   const feedback = document.getElementById('scaleFeedbackBox');
 
   if (isCorrect) {
+    scaleAnswered = true;
     sfx.playSuccess();
     sfx.playBalanceTilt();
 
@@ -1155,6 +1160,7 @@ let isVlogRecording = false;
 function loadVlogEpisode(index) {
   currentVlogIndex = index;
   const ep = vlogEpisodesData[index];
+  document.getElementById('vlogMicBtn').disabled = false;
 
   document.getElementById('vlogEpisodeNum').textContent = `Episodio ${index + 1} de ${vlogEpisodesData.length}`;
   document.getElementById('vlogSceneTag').textContent = ep.scene;
@@ -1181,14 +1187,13 @@ function toggleVlogMic() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    sfx.playApplause();
     feedback.innerHTML = `
-      <div style="font-size:1.1rem; font-weight:700; color:#fbbf24;">📹 ¡Transmisión en vivo grabada con éxito!</div>
+      <div style="font-size:1.1rem; font-weight:700; color:#fbbf24;">📹 Este navegador no puede verificar tu frase.</div>
       <span style="display:inline-block; margin-top:6px; background:rgba(16, 185, 129, 0.2); color:#34d399; font-weight:700; padding:6px 16px; border-radius:999px; border:1px solid #10b981;">
-        👏 ¡El chat te regala 50K Likes y +25 pts!
+        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
       </span>
     `;
-    AppState.addStars(25);
+    btn.disabled = true;
     return;
   }
 
@@ -1208,14 +1213,12 @@ function toggleVlogMic() {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      sfx.playApplause();
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Grabaste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.2); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-          🔥 ¡Stream impecable! 100K Likes de los fans (+25 pts)
+          🔥 Transcripción de práctica; no se evalúa precisión ni pronunciación.
         </span>
       `;
-      AppState.addStars(25);
     };
 
     recognition.onerror = () => {

@@ -317,6 +317,8 @@ class JigsawGame {
     this.moves = 0;
     this.isGhostVisible = true;
     this.isWon = false;
+    this.babiesListeningPassed = false;
+    this.babiesListeningTarget = 0;
 
     // Drag tracking
     this.activeDragPiece = null;
@@ -396,6 +398,9 @@ class JigsawGame {
 
   setMode(mode, restart = true) {
     this.currentMode = mode;
+    const listeningTask = document.getElementById('babiesListeningTask');
+    if (listeningTask) listeningTask.hidden = mode !== 'babies';
+    if (mode === 'babies') this.babiesListeningPassed = false;
     const cfg = DIFFICULTY_CONFIG[mode];
 
     document.querySelectorAll('.diff-btn').forEach(btn => {
@@ -403,6 +408,7 @@ class JigsawGame {
     });
 
     document.getElementById('modeSubtitle').textContent = cfg.subtitle;
+    this.updateBabiesListeningTask();
     this.isGhostVisible = cfg.defaultGhost;
     this.updateGhostVisibility();
 
@@ -410,6 +416,20 @@ class JigsawGame {
       audio.playGrab();
     }
     this.loadPuzzle(this.currentPuzzleIdx);
+  }
+
+  updateBabiesListeningTask(message) {
+    if (this.currentMode !== 'babies') return;
+    const prompt = document.getElementById('babiesListeningPrompt');
+    const feedback = document.getElementById('babiesListeningFeedback');
+    const repeat = document.getElementById('babiesListeningRepeat');
+    const target = PUZZLE_CATALOG[this.babiesListeningTarget];
+    if (prompt) prompt.textContent = `Listen and find the ${target.title.replace(/^Cute |^Baby /, '').replace(/'s.*/, '')}.`;
+    if (feedback) feedback.textContent = message || (this.babiesListeningPassed ? 'Great listening! Now solve the 4-piece puzzle.' : 'Choose the matching picture below.');
+    if (repeat && !repeat.dataset.bound) {
+      repeat.dataset.bound = 'true';
+      repeat.addEventListener('click', () => audio.speak(`Find the ${PUZZLE_CATALOG[this.babiesListeningTarget].title.replace(/^Cute |^Baby /, '').replace(/'s.*/, '')}.`));
+    }
   }
 
   renderGallery() {
@@ -438,6 +458,16 @@ class JigsawGame {
   }
 
   selectPuzzle(idx) {
+    if (this.currentMode === 'babies' && !this.babiesListeningPassed) {
+      if (idx !== this.babiesListeningTarget) {
+        audio.playWrong();
+        this.updateBabiesListeningTask('Try again. Listen and find the matching picture.');
+        return;
+      }
+      this.babiesListeningPassed = true;
+      audio.speak('Great listening! Now solve the puzzle.');
+      this.updateBabiesListeningTask('Great listening! Now solve the 4-piece puzzle.');
+    }
     this.currentPuzzleIdx = idx;
     document.querySelectorAll('.gallery-card').forEach((c, i) => {
       c.classList.toggle('active', i === idx);
@@ -447,6 +477,18 @@ class JigsawGame {
   }
 
   loadPuzzle(idx) {
+    if (this.currentMode === 'babies' && !this.babiesListeningPassed) {
+      this.stopTimer();
+      const target = PUZZLE_CATALOG[this.babiesListeningTarget];
+      document.getElementById('puzzleIcon').textContent = target.emoji;
+      document.getElementById('puzzleTitle').textContent = target.title;
+      document.getElementById('ghostImage').removeAttribute('src');
+      document.getElementById('piecesTray').innerHTML = '';
+      document.getElementById('gridOverlay').innerHTML = '';
+      document.getElementById('progressDisplay').textContent = 'Listen first';
+      this.updateBabiesListeningTask();
+      return;
+    }
     this.stopTimer();
     this.secondsElapsed = 0;
     this.moves = 0;

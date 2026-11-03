@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilikids - Comparador de Voces de Estudio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+      color: #1e293b;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .header-card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 3px solid #e2e8f0;
+      margin-bottom: 2rem;
+    }
+    .header-title {
+      font-size: 2rem;
+      font-weight: 1000;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    .header-subtitle {
+      color: #64748b;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+    .rate-banner {
+      background: #fef2f2;
+      border: 2px solid #fecaca;
+      border-radius: 18px;
+      padding: 1rem 1.5rem;
+      color: #991b1b;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: inline-block;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .voices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .voice-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+    .voice-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+    .voice-card.highlight {
+      border-color: #3b82f6;
+      background: #f8fafc;
+    }
+    .voice-badge {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      align-self: flex-start;
+    }
+    .voice-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .voice-desc {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 1.25rem;
+      min-height: 40px;
+    }
+    .sample-btn {
+      background: #f1f5f9;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      transition: all 0.15s ease;
+    }
+    .sample-btn:hover {
+      background: #3b82f6;
+      color: white;
+      border-color: #2563eb;
+    }
+    .sample-btn:active {
+      transform: scale(0.97);
+    }
+    .sample-btn.playing {
+      background: #10b981;
+      color: white;
+      border-color: #059669;
+    }
+    .speed-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      align-items: center;
+      margin: 1.5rem 0;
+    }
+    .toggle-pill {
+      background: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toggle-pill.active {
+      background: #0f172a;
+      color: white;
+      border-color: #0f172a;
+    }
+    .actions-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: center;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-card">
+      <div style="font-size:3rem; margin-bottom:8px;">🎧🎙️</div>
+      <h1 class="header-title">Laboratorio de Voces Naturales Bilikids</h1>
+      <p class="header-subtitle">
+        Compara aquí en vivo las 4 voces pedagógicas más naturales de Deepgram Aura-2 y comprueba cómo suena cada una a velocidad natural (1.0x) vs con el procesador del navegador (0.92x).
+      </p>
+
+      <div class="rate-banner">
+        ⚠️ <strong>Causa del sonido metálico / robótico identificado:</strong><br>
+        En el motor anterior se había configurado <code>audio.playbackRate = 0.92</code> con preservación de tono. Los navegadores (Chrome/Safari) aplican un filtro granular que genera un efecto robótico y metálico.<br>
+        ✅ <strong>Ya se corrigió a velocidad nativa 1.0x</strong> para conservar el 100% de la calidez y fidelidad humana.
+      </div>
+
+      <div class="speed-toggle-wrap">
+        <span style="font-weight:800; color:#475569;">Velocidad de Prueba:</span>
+        <button class="toggle-pill active" id="btnRate1" onclick="setSpeed(1.0)">1.0x (Nativa 100% Humana)</button>
+        <button class="toggle-pill" id="btnRate92" onclick="setSpeed(0.92)">0.92x (Ralentizada por navegador)</button>
+      </div>
+    </div>
+
+    <div class="voices-grid">
+      <!-- CORA -->
+      <div class="voice-card highlight">
+        <span class="voice-badge" style="background:#fef3c7; color:#b45309;">Recomendada (Cuentos 2D)</span>
+        <div class="voice-name">Cora</div>
+        <div class="voice-desc">Voz de cuentacuentos y maestra cálida. Muy expresiva, suave y natural.</div>
+
+        <button class="sample-btn" onclick="playVoice('cora', 'welcome', this)">
+          <span>👋 Bienvenida</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('cora', 'phrase', this)">
+          <span>🎯 Frase Guía</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('cora', 'word', this)">
+          <span>🖍️ Palabra (Crayon)</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('cora', 'cheer', this)">
+          <span>🎉 Felicitación</span>
+          <span>▶️</span>
+        </button>
+      </div>
+
+      <!-- ASTERIA -->
+      <div class="voice-card">
+        <span class="voice-badge" style="background:#e0e7ff; color:#3730a3;">Ultra Expresiva</span>
+        <div class="voice-name">Asteria</div>
+        <div class="voice-desc">Voz conversacional insignia de Deepgram. Tono dulce, pausado y muy humano.</div>
+
+        <button class="sample-btn" onclick="playVoice('asteria', 'welcome', this)">
+          <span>👋 Bienvenida</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('asteria', 'phrase', this)">
+          <span>🎯 Frase Guía</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('asteria', 'word', this)">
+          <span>🖍️ Palabra (Crayon)</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('asteria', 'cheer', this)">
+          <span>🎉 Felicitación</span>
+          <span>▶️</span>
+        </button>
+      </div>
+
+      <!-- THALIA -->
+      <div class="voice-card">
+        <span class="voice-badge" style="background:#fce7f3; color:#9d174d;">Juvenil & Animada</span>
+        <div class="voice-name">Thalia</div>
+        <div class="voice-desc">Tono fresco, alegre y enérgico, ideal para juegos y actividades dinámicas.</div>
+
+        <button class="sample-btn" onclick="playVoice('thalia', 'welcome', this)">
+          <span>👋 Bienvenida</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('thalia', 'phrase', this)">
+          <span>🎯 Frase Guía</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('thalia', 'word', this)">
+          <span>🖍️ Palabra (Crayon)</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('thalia', 'cheer', this)">
+          <span>🎉 Felicitación</span>
+          <span>▶️</span>
+        </button>
+      </div>
+
+      <!-- LUNA -->
+      <div class="voice-card">
+        <span class="voice-badge" style="background:#ccfbf1; color:#0f766e;">Voz Actual (1.0x)</span>
+        <div class="voice-name">Luna</div>
+        <div class="voice-desc">Voz clara y pedagógica. Escúchala a 1.0x para notar la gran diferencia sin el filtro de ralentización.</div>
+
+        <button class="sample-btn" onclick="playVoice('luna', 'welcome', this)">
+          <span>👋 Bienvenida</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('luna', 'phrase', this)">
+          <span>🎯 Frase Guía</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('luna', 'word', this)">
+          <span>🖍️ Palabra (Crayon)</span>
+          <span>▶️</span>
+        </button>
+        <button class="sample-btn" onclick="playVoice('luna', 'cheer', this)">
+          <span>🎉 Felicitación</span>
+          <span>▶️</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="actions-card">
+      <h3 style="font-size:1.3rem; margin-bottom:8px;">¿Cuál de estas voces prefieres para todo el módulo de Toddlers?</h3>
+      <p style="color:#64748b; margin-bottom:1.5rem;">
+        Si te gusta más <strong>Cora</strong> o <strong>Asteria</strong>, puedo regenerar todo el paquete de Toddlers en menos de 5 minutos automáticamente con la voz que elijas.
+      </p>
+      <a href="toddlers_units.html?unit=1" style="display:inline-block; background:#0f172a; color:white; padding:12px 28px; border-radius:999px; text-decoration:none; font-weight:900; font-size:1rem;">
+        Volver a Toddlers Units (Con velocidad 1.0x corregida) ➔
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let currentAudio = null;
+    let currentSpeed = 1.0;
+    let activeBtn = null;
+
+    function setSpeed(speed) {
+      currentSpeed = speed;
+      document.getElementById('btnRate1').classList.toggle('active', speed === 1.0);
+      document.getElementById('btnRate92').classList.toggle('active', speed === 0.92);
+      if (currentAudio) {
+        currentAudio.playbackRate = currentSpeed;
+      }
+    }
+
+    function playVoice(voice, phrase, btn) {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      if (activeBtn) {
+        activeBtn.classList.remove('playing');
+        activeBtn.querySelector('span:last-child').textContent = '▶️';
+      }
+
+      activeBtn = btn;
+      btn.classList.add('playing');
+      btn.querySelector('span:last-child').textContent = '🔊';
+
+      const path = `assets/toddlers_media/voice_samples/${voice}_${phrase}.mp3`;
+      currentAudio = new Audio(path);
+      currentAudio.playbackRate = currentSpeed;
+      currentAudio.play().catch(e => console.error(e));
+
+      currentAudio.onended = () => {
+        btn.classList.remove('playing');
+        btn.querySelector('span:last-child').textContent = '▶️';
+      };
+    }
+  </script>
+</body>
+</html>
