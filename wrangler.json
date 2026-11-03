@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
-  "name": "bili-kids",
+  "name": "bilikids-adventure",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "."
