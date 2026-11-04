@@ -1027,75 +1027,172 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  .site-header {
-    padding: 0.65rem 1rem;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 0.75rem;
+/* ==========================================================================
+   EDGE-TO-EDGE IMMERSIVE PORTAL
+   ========================================================================== */
+body.fullscreen-portal-body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #0b1329;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portal-main-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portal-card {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Hitboxes */
+.hero-hitbox {
+  position: absolute;
+  cursor: pointer;
+  z-index: 8;
+  text-decoration: none;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: transparent;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-hitbox:hover {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: brightness(1.08);
+}
+
+.hero-hitbox:active {
+  background: rgba(0, 0, 0, 0.12);
+  transform: scale(0.98);
+}
+
+/* DESKTOP (Landscape / Wide screens >= 769px) */
+@media (min-width: 769px) {
+  body.fullscreen-portal-body {
+    background: #0b1329;
   }
-  .main-nav {
-    display: none;
+  .portal-card {
+    max-width: 1920px;
+    aspect-ratio: 1920 / 1080;
+    max-height: 100vh;
   }
-  .dashboard-container {
-    padding: 0.75rem 1rem 3.5rem 1rem;
-    gap: 1.15rem;
-    max-width: 100%;
-  }
-  .hero-card {
-    aspect-ratio: 1920 / 800;
-    border-radius: var(--radius-lg);
-  }
-  .hero-banner-main-img {
-    object-fit: cover;
-    object-position: top center;
+  .portal-img-desktop {
+    display: block;
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
-  .desktop-hero-hitboxes {
+  .portal-img-mobile {
     display: none !important;
   }
   .hero-hitbox-explorar {
-    left: 7%;
-    top: 76%;
-    width: 32%;
-    height: 16%;
-    min-height: 38px;
-    border-radius: 999px;
+    left: 7.97%;
+    top: 59.54%;
+    width: 19.43%;
+    height: 7.50%;
   }
-  .mobile-age-cards-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
+  .hero-hitbox-babies {
+    left: 7.92%;
+    top: 74.07%;
+    width: 20.73%;
+    height: 11.57%;
   }
-  .mobile-age-card {
-    display: block;
-    border-radius: 999px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.14);
-    transition: transform 0.16s ease, box-shadow 0.16s ease;
-    -webkit-tap-highlight-color: transparent;
-    background: #0b1329;
+  .hero-hitbox-toddlers {
+    left: 29.69%;
+    top: 74.07%;
+    width: 19.79%;
+    height: 11.57%;
   }
-  .mobile-age-card:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  .hero-hitbox-kids {
+    left: 50.78%;
+    top: 74.07%;
+    width: 19.79%;
+    height: 11.57%;
   }
-  .mobile-age-img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .hero-hitbox-teens {
+    left: 71.61%;
+    top: 74.07%;
+    width: 19.79%;
+    height: 11.57%;
   }
 }
 
-@media (min-width: 520px) and (max-width: 768px) {
-  .mobile-age-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 100%;
+/* MOBILE (Portrait / Phone screens <= 768px) */
+@media (max-width: 768px) {
+  body.fullscreen-portal-body {
+    background: #eef7fc;
+    min-height: 100dvh;
+    display: block;
+  }
+  .portal-main-wrapper {
+    min-height: 100dvh;
+    display: block;
+  }
+  .portal-card {
+    width: 100vw;
+    min-height: 100dvh;
+    aspect-ratio: 944 / 1822;
+  }
+  .portal-img-desktop {
+    display: none !important;
+  }
+  .portal-img-mobile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-hitbox-explorar {
+    left: 17%;
+    top: 34.5%;
+    width: 66%;
+    height: 6.8%;
+  }
+  .hero-hitbox-babies {
+    left: 1.5%;
+    top: 73.2%;
+    width: 47%;
+    height: 9.2%;
+  }
+  .hero-hitbox-toddlers {
+    left: 51.2%;
+    top: 73.2%;
+    width: 47%;
+    height: 9.2%;
+  }
+  .hero-hitbox-kids {
+    left: 1.5%;
+    top: 83.2%;
+    width: 47%;
+    height: 9.6%;
+  }
+  .hero-hitbox-teens {
+    left: 51.2%;
+    top: 83.2%;
+    width: 47%;
+    height: 9.6%;
   }
 }
   .section-headline-row {
