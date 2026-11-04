@@ -315,72 +315,68 @@ body {
   position: absolute;
   cursor: pointer;
   z-index: 8;
-  transition: all 0.22s ease;
   text-decoration: none;
+  box-sizing: border-box;
   border-radius: 999px;
+  background: transparent;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-hitbox:hover {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: brightness(1.08);
+}
+
+.hero-hitbox:active {
+  background: rgba(0, 0, 0, 0.08);
 }
 
 /* Hitbox: Explorar ahora */
 .hero-hitbox-explorar {
-  left: 7.8%;
-  top: 59.4%;
-  width: 20%;
-  height: 7.8%;
+  left: 7.97%;
+  top: 59.54%;
+  width: 19.43%;
+  height: 7.50%;
   border-radius: 999px;
 }
 
 .hero-hitbox-explorar:hover {
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.65), inset 0 0 15px rgba(255, 255, 255, 0.3);
-  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: brightness(1.12);
 }
 
 /* Hitbox: Age Category Pills */
 .hero-hitbox-babies {
-  left: 3.9%;
-  top: 72.2%;
-  width: 24%;
-  height: 11.5%;
-  border-radius: 28px;
-}
-.hero-hitbox-babies:hover {
-  box-shadow: 0 0 25px rgba(244, 63, 94, 0.45);
-  transform: translateY(-3px);
+  left: 7.92%;
+  top: 74.07%;
+  width: 20.73%;
+  height: 11.57%;
+  border-radius: 999px;
 }
 
 .hero-hitbox-toddlers {
-  left: 29.7%;
-  top: 72.2%;
-  width: 19.8%;
-  height: 11.5%;
-  border-radius: 28px;
-}
-.hero-hitbox-toddlers:hover {
-  box-shadow: 0 0 25px rgba(2, 132, 199, 0.45);
-  transform: translateY(-3px);
+  left: 29.69%;
+  top: 74.07%;
+  width: 19.79%;
+  height: 11.57%;
+  border-radius: 999px;
 }
 
 .hero-hitbox-kids {
-  left: 50.8%;
-  top: 72.2%;
-  width: 19.8%;
-  height: 11.5%;
-  border-radius: 28px;
-}
-.hero-hitbox-kids:hover {
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
-  transform: translateY(-3px);
+  left: 50.78%;
+  top: 74.07%;
+  width: 19.79%;
+  height: 11.57%;
+  border-radius: 999px;
 }
 
 .hero-hitbox-teens {
-  left: 71.6%;
-  top: 72.2%;
-  width: 20.3%;
-  height: 11.5%;
-  border-radius: 28px;
-}
-.hero-hitbox-teens:hover {
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.45);
-  transform: translateY(-3px);
+  left: 71.61%;
+  top: 74.07%;
+  width: 19.79%;
+  height: 11.57%;
+  border-radius: 999px;
 }
 
 /* Hide separate duplicate age cards because they are integrated into the hero portada */
