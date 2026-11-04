@@ -284,4 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => { userProfile.click(); }, 350);
     }
   }
+
+  const heroGreetingBadge = document.getElementById('heroGreetingBadge');
+  if (heroGreetingBadge && userProfile) {
+    heroGreetingBadge.addEventListener('click', () => {
+      userProfile.click();
+    });
+  }
 });

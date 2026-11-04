@@ -235,7 +235,7 @@ body {
 .hero-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 2172 / 724;
+  aspect-ratio: 1920 / 1080;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
@@ -246,7 +246,7 @@ body {
 }
 
 .hero-card:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(244, 63, 94, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(14, 165, 233, 0.25);
   border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
@@ -258,60 +258,134 @@ body {
   object-fit: cover;
 }
 
-/* Dynamic Hero Greeting Overlay (Live Child Greeting) */
-.hero-greeting-overlay {
+/* Dynamic Hero Student Badge (Personalized greeting) */
+.hero-student-badge {
   position: absolute;
-  left: 4.6%;
-  top: 14.5%;
-  z-index: 6;
-  pointer-events: none;
-  max-width: 46%;
-}
-
-.hero-greeting-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3.7vw, 3.25rem);
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.15;
-  margin: 0;
+  left: 3.8%;
+  top: 4.8%;
+  z-index: 10;
   display: inline-flex;
   align-items: center;
-  gap: 0.25em;
-  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 2px 5px rgba(0, 20, 60, 0.8);
-  letter-spacing: -0.02em;
-}
-
-.hero-greeting-text {
-  color: #ffffff;
-}
-
-.hero-greeting-text #heroChildName {
-  color: #ffffff;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: #1e293b;
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.4vw, 1.15rem);
   font-weight: 700;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18), 0 0 0 2px rgba(255, 255, 255, 0.7);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.22s ease;
 }
 
-.hero-sparkle-badge {
-  font-size: 0.85em;
-  display: inline-block;
+.hero-student-badge:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.24), 0 0 0 3px rgba(6, 182, 212, 0.5);
+}
+
+@media (max-width: 640px) {
+  .hero-student-badge {
+    left: 3%;
+    top: 4%;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.72rem;
+    gap: 0.25rem;
+  }
+}
+
+.hero-student-badge #heroChildName {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+.hero-student-badge .badge-icon {
+  font-size: 1.15em;
+}
+
+.hero-student-badge .badge-sparkle {
+  color: #f59e0b;
   animation: heroSparklePulse 2.4s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.85));
 }
 
-@keyframes heroSparklePulse {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.18) rotate(12deg); }
+/* Interactive Hitboxes inside Hero Adventure Cover */
+.hero-hitbox {
+  position: absolute;
+  cursor: pointer;
+  z-index: 8;
+  transition: all 0.22s ease;
+  text-decoration: none;
+  border-radius: 999px;
 }
 
-@media (max-width: 768px) {
-  .hero-greeting-overlay {
-    left: 4%;
-    top: 9%;
-    max-width: 60%;
-  }
-  .hero-greeting-title {
-    font-size: clamp(1.1rem, 4.4vw, 1.9rem);
-  }
+/* Hitbox: Explorar ahora */
+.hero-hitbox-explorar {
+  left: 7.8%;
+  top: 59.4%;
+  width: 20%;
+  height: 7.8%;
+  border-radius: 999px;
+}
+
+.hero-hitbox-explorar:hover {
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.65), inset 0 0 15px rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
+}
+
+/* Hitbox: Age Category Pills */
+.hero-hitbox-babies {
+  left: 3.9%;
+  top: 72.2%;
+  width: 24%;
+  height: 11.5%;
+  border-radius: 28px;
+}
+.hero-hitbox-babies:hover {
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.45);
+  transform: translateY(-3px);
+}
+
+.hero-hitbox-toddlers {
+  left: 29.7%;
+  top: 72.2%;
+  width: 19.8%;
+  height: 11.5%;
+  border-radius: 28px;
+}
+.hero-hitbox-toddlers:hover {
+  box-shadow: 0 0 25px rgba(2, 132, 199, 0.45);
+  transform: translateY(-3px);
+}
+
+.hero-hitbox-kids {
+  left: 50.8%;
+  top: 72.2%;
+  width: 19.8%;
+  height: 11.5%;
+  border-radius: 28px;
+}
+.hero-hitbox-kids:hover {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
+  transform: translateY(-3px);
+}
+
+.hero-hitbox-teens {
+  left: 71.6%;
+  top: 72.2%;
+  width: 20.3%;
+  height: 11.5%;
+  border-radius: 28px;
+}
+.hero-hitbox-teens:hover {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.45);
+  transform: translateY(-3px);
+}
+
+/* Hide separate duplicate age cards because they are integrated into the hero portada */
+.age-cards-grid {
+  display: none !important;
 }
 
 /* Student Profile Modal Styles */

@@ -74,23 +74,37 @@
        ======================================================================== -->
   <main class="dashboard-container">
 
-    <!-- HERO BANNER (MASTER 3D PIXAR ARTWORK) -->
+    <!-- HERO BANNER (MASTER 3D ADVENTURE COVER) -->
     <section class="hero-card" id="heroBanner">
-      <img src="assets/home/hero_banner_full_2x.png" alt="Plataforma de aprendizaje Bilikids Adventure" class="hero-banner-main-img">
+      <img src="assets/home/hero_banner_adventure_2x.png" alt="Plataforma de aprendizaje Bilikids Adventure" class="hero-banner-main-img">
       
-      <!-- Dynamic Child Greeting Overlay (Updates live when name changes) -->
-      <div class="hero-greeting-overlay" aria-hidden="false">
-        <h1 class="hero-greeting-title"><span class="hero-greeting-text">¡Hola, <strong id="heroChildName">Matías</strong>!</span><span class="hero-sparkle-badge" aria-hidden="true">✨</span></h1>
+      <!-- Dynamic Child Greeting Badge (Updates live when name changes) -->
+      <div class="hero-student-badge" id="heroGreetingBadge" title="Perfil del estudiante">
+        <span class="badge-icon">👋</span> ¡Hola, <strong id="heroChildName">Matías</strong>! <span class="badge-sparkle">✨</span>
       </div>
 
       <div class="sr-only">
-        <h1 id="heroSrHeading">¡Hola, Matías!</h1>
-        <h2>¿Qué quieres aprender hoy?</h2>
+        <h1 id="heroSrHeading">Welcome to BiliKids Adventure - ¡Hola, Matías!</h1>
         <p>Explora nuestros recursos de inglés, disfruta, practica y sigue avanzando a tu ritmo.</p>
       </div>
-      <!-- Accessible Interactive Access CTA button over 'Explorar recursos' -->
-      <a href="juegos.html" class="hero-cta-hitbox hero-cta-btn" title="Explorar recursos" aria-label="Explorar recursos - Ir a juegos y actividades">
-        <span class="sr-only">Explorar recursos</span>
+
+      <!-- Interactive Clickable Hitbox for 'Explorar ahora' -->
+      <a href="#recursos" class="hero-hitbox hero-hitbox-explorar" title="Explorar recursos" aria-label="Explorar recursos">
+        <span class="sr-only">Explorar ahora</span>
+      </a>
+
+      <!-- Interactive Clickable Hitboxes for Age Categories -->
+      <a href="babies.html" class="hero-hitbox hero-hitbox-babies" title="Entrar a BABIES (3 - 5 años)" aria-label="Entrar a BABIES (3 - 5 años)">
+        <span class="sr-only">Babies (3 - 5 años)</span>
+      </a>
+      <a href="toddlers.html" class="hero-hitbox hero-hitbox-toddlers" title="Entrar a TODDLERS (6 - 8 años)" aria-label="Entrar a TODDLERS (6 - 8 años)">
+        <span class="sr-only">Toddlers (6 - 8 años)</span>
+      </a>
+      <a href="kids.html" class="hero-hitbox hero-hitbox-kids" title="Entrar a KIDS (9 - 11 años)" aria-label="Entrar a KIDS (9 - 11 años)">
+        <span class="sr-only">Kids (9 - 11 años)</span>
+      </a>
+      <a href="teens.html" class="hero-hitbox hero-hitbox-teens" title="Entrar a TEENS (12 - 16 años)" aria-label="Entrar a TEENS (12 - 16 años)">
+        <span class="sr-only">Teens (12 - 16 años)</span>
       </a>
     </section>
 
