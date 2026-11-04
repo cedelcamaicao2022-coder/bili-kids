@@ -61,9 +61,9 @@
         </svg>
       </button>
 
-      <div class="user-profile-btn" id="userProfile" title="Perfil de Matías">
-        <img src="assets/home/avatar_matias_2x.png" alt="Matías" class="user-avatar">
-        <span class="user-name">Matías</span>
+      <div class="user-profile-btn" id="userProfile" title="Cambiar nombre o foto del niño/a" role="button" tabindex="0">
+        <img src="assets/home/avatar_matias_2x.png" alt="Foto del estudiante" class="user-avatar" id="headerAvatarImg">
+        <span class="user-name" id="headerStudentName">Matías</span>
         <span class="user-chevron">▼</span>
       </div>
     </div>
@@ -76,9 +76,15 @@
 
     <!-- HERO BANNER (MASTER 3D PIXAR ARTWORK) -->
     <section class="hero-card" id="heroBanner">
-      <img src="assets/home/hero_banner_full_2x.png" alt="¡Hola, Matías! ¿Qué quieres aprender hoy? Explorar recursos" class="hero-banner-main-img">
+      <img src="assets/home/hero_banner_full_2x.png" alt="Plataforma de aprendizaje Bilikids Adventure" class="hero-banner-main-img">
+      
+      <!-- Dynamic Child Greeting Overlay (Updates live when name changes) -->
+      <div class="hero-greeting-overlay" aria-hidden="false">
+        <h1 class="hero-greeting-title"><span class="hero-greeting-text">¡Hola, <strong id="heroChildName">Matías</strong>!</span><span class="hero-sparkle-badge" aria-hidden="true">✨</span></h1>
+      </div>
+
       <div class="sr-only">
-        <h1>¡Hola, Matías!</h1>
+        <h1 id="heroSrHeading">¡Hola, Matías!</h1>
         <h2>¿Qué quieres aprender hoy?</h2>
         <p>Explora nuestros recursos de inglés, disfruta, practica y sigue avanzando a tu ritmo.</p>
       </div>
