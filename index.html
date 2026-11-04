@@ -60,12 +60,6 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </button>
-
-      <div class="user-profile-btn" id="userProfile" title="Cambiar nombre o foto del niño/a" role="button" tabindex="0">
-        <img src="assets/home/avatar_matias_2x.png" alt="Foto del estudiante" class="user-avatar" id="headerAvatarImg">
-        <span class="user-name" id="headerStudentName">Matías</span>
-        <span class="user-chevron">▼</span>
-      </div>
     </div>
   </header>
 
@@ -77,14 +71,9 @@
     <!-- HERO BANNER (MASTER 3D ADVENTURE COVER) -->
     <section class="hero-card" id="heroBanner">
       <img src="assets/home/hero_banner_adventure_2x.png" alt="Plataforma de aprendizaje Bilikids Adventure" class="hero-banner-main-img">
-      
-      <!-- Dynamic Child Greeting Badge (Updates live when name changes) -->
-      <div class="hero-student-badge" id="heroGreetingBadge" title="Perfil del estudiante">
-        <span class="badge-icon">👋</span> ¡Hola, <strong id="heroChildName">Matías</strong>! <span class="badge-sparkle">✨</span>
-      </div>
 
       <div class="sr-only">
-        <h1 id="heroSrHeading">Welcome to BiliKids Adventure - ¡Hola, Matías!</h1>
+        <h1 id="heroSrHeading">Welcome to BiliKids Adventure</h1>
         <p>Explora nuestros recursos de inglés, disfruta, practica y sigue avanzando a tu ritmo.</p>
       </div>
 
@@ -93,18 +82,36 @@
         <span class="sr-only">Explorar ahora</span>
       </a>
 
-      <!-- Interactive Clickable Hitboxes for Age Categories -->
-      <a href="babies.html" class="hero-hitbox hero-hitbox-babies" title="Entrar a BABIES (3 - 5 años)" aria-label="Entrar a BABIES (3 - 5 años)">
-        <span class="sr-only">Babies (3 - 5 años)</span>
+      <!-- Desktop Interactive Clickable Hitboxes for Age Categories -->
+      <div class="desktop-hero-hitboxes">
+        <a href="babies.html" class="hero-hitbox hero-hitbox-babies" title="Entrar a BABIES (3 - 5 años)" aria-label="Entrar a BABIES (3 - 5 años)">
+          <span class="sr-only">Babies (3 - 5 años)</span>
+        </a>
+        <a href="toddlers.html" class="hero-hitbox hero-hitbox-toddlers" title="Entrar a TODDLERS (6 - 8 años)" aria-label="Entrar a TODDLERS (6 - 8 años)">
+          <span class="sr-only">Toddlers (6 - 8 años)</span>
+        </a>
+        <a href="kids.html" class="hero-hitbox hero-hitbox-kids" title="Entrar a KIDS (9 - 11 años)" aria-label="Entrar a KIDS (9 - 11 años)">
+          <span class="sr-only">Kids (9 - 11 años)</span>
+        </a>
+        <a href="teens.html" class="hero-hitbox hero-hitbox-teens" title="Entrar a TEENS (12 - 16 años)" aria-label="Entrar a TEENS (12 - 16 años)">
+          <span class="sr-only">Teens (12 - 16 años)</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- MOBILE AGE CATEGORIES GRID (Touch-friendly & perfectly organized on mobile phones) -->
+    <section class="mobile-age-cards-grid" aria-label="Categorías por edad">
+      <a href="babies.html" class="mobile-age-card" title="Entrar a BABIES (3 - 5 años)">
+        <img src="assets/home/mobile_pill_babies.png" alt="Babies 3 a 5 años" class="mobile-age-img">
       </a>
-      <a href="toddlers.html" class="hero-hitbox hero-hitbox-toddlers" title="Entrar a TODDLERS (6 - 8 años)" aria-label="Entrar a TODDLERS (6 - 8 años)">
-        <span class="sr-only">Toddlers (6 - 8 años)</span>
+      <a href="toddlers.html" class="mobile-age-card" title="Entrar a TODDLERS (6 - 8 años)">
+        <img src="assets/home/mobile_pill_toddlers.png" alt="Toddlers 6 a 8 años" class="mobile-age-img">
       </a>
-      <a href="kids.html" class="hero-hitbox hero-hitbox-kids" title="Entrar a KIDS (9 - 11 años)" aria-label="Entrar a KIDS (9 - 11 años)">
-        <span class="sr-only">Kids (9 - 11 años)</span>
+      <a href="kids.html" class="mobile-age-card" title="Entrar a KIDS (9 - 11 años)">
+        <img src="assets/home/mobile_pill_kids.png" alt="Kids 9 a 11 años" class="mobile-age-img">
       </a>
-      <a href="teens.html" class="hero-hitbox hero-hitbox-teens" title="Entrar a TEENS (12 - 16 años)" aria-label="Entrar a TEENS (12 - 16 años)">
-        <span class="sr-only">Teens (12 - 16 años)</span>
+      <a href="teens.html" class="mobile-age-card" title="Entrar a TEENS (12 - 16 años)">
+        <img src="assets/home/mobile_pill_teens.png" alt="Teens 12 a 16 años" class="mobile-age-img">
       </a>
     </section>
 
