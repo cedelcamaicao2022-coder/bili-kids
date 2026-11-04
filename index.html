@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="home_styles.css?v=20261104">
+  <link rel="stylesheet" href="home_styles.css?v=20261104_v2">
   <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
 <body class="fullscreen-portal-body">
@@ -24,10 +24,16 @@
   <main class="portal-main-wrapper" id="portalMain">
     <div class="portal-card" id="heroBanner">
       <!-- Desktop Banner (16:9 Landscape Artwork) -->
-      <img src="assets/home/hero_banner_adventure_2x.png" alt="Bilikids Adventure" class="portal-img portal-img-desktop" id="heroBannerDesktop">
+      <picture class="portal-picture portal-picture-desktop">
+        <source srcset="assets/home/hero_banner_adventure_2x.webp" type="image/webp">
+        <img src="assets/home/hero_banner_adventure_2x.png" alt="Bilikids Adventure" class="portal-img portal-img-desktop" id="heroBannerDesktop" fetchpriority="high">
+      </picture>
       
       <!-- Mobile Banner (Vertical Portrait Artwork matching Phone Mockup) -->
-      <img src="assets/home/hero_banner_mobile_2x.png" alt="Bilikids Adventure" class="portal-img portal-img-mobile" id="heroBannerMobile">
+      <picture class="portal-picture portal-picture-mobile">
+        <source srcset="assets/home/hero_banner_mobile_2x.webp" type="image/webp">
+        <img src="assets/home/hero_banner_mobile_2x.png" alt="Bilikids Adventure" class="portal-img portal-img-mobile" id="heroBannerMobile" fetchpriority="high">
+      </picture>
 
       <!-- Interactive Clickable Hitbox for 'Explorar ahora' -->
       <a href="juegos.html" class="hero-hitbox hero-hitbox-explorar" title="Explorar todos los recursos y actividades" aria-label="Explorar ahora">
@@ -50,9 +56,7 @@
     </div>
   </main>
 
-  <!-- ========================================================================
-       INTERACTIVE MODAL POPUP (Retained for future profile & notifications)
-       ======================================================================== -->
+  <!-- Interactive Modal Popup (Retained for future profile & notifications) -->
   <div class="modal-overlay" id="biliModalOverlay">
     <div class="modal-box">
       <div class="modal-header">
