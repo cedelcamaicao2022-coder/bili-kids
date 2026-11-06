@@ -8,6 +8,23 @@
  * 4. 60-Second Timed Writing Challenge
  */
 
+function getLevelReading(levelKey, defaultTitle, defaultBadge) {
+  const passages = (typeof TEENS_CRITICAL_READINGS !== 'undefined' && TEENS_CRITICAL_READINGS[levelKey])
+    ? TEENS_CRITICAL_READINGS[levelKey]
+    : [];
+  const first = passages[0] || {};
+  return {
+    id: `${levelKey}_reading`,
+    type: "reading",
+    title: defaultTitle,
+    badge: defaultBadge,
+    passages: passages,
+    instruction: first.instruction || "Read the passage and answer the 4 questions.",
+    passage: first.passage || "",
+    questions: first.questions || []
+  };
+}
+
 const TEENS_LEVELS_DATA = {
   a1: {
     level: "A1",
@@ -17,41 +34,8 @@ const TEENS_LEVELS_DATA = {
     accentBg: "#ecfdf5",
     desc: "Master essential English structures, everyday vocabulary, and simple sentences for confident daily communication.",
     exercises: {
-      // 1. Reading
-      reading: {
-        id: "a1_reading",
-        type: "reading",
-        title: "Reading: The New Robotics Club",
-        badge: "Everyday Comprehension • A1",
-        instruction: "Read the school noticeboard announcement and answer the 4 questions.",
-        passage: "Welcome to the Bilikids Robotics Club! We meet every Wednesday at 3:30 PM in Science Lab 2. Our club is open to all students aged 11 to 14. You do not need any experience with programming or electronics. In our weekly sessions, we build small solar-powered cars, learn basic coding blocks on tablets, and design mini-robots with LEGO bricks. Please bring your student ID card and a notebook. If you have questions, email Mr. Harrison at harrison@bilikids.org or visit Room 14 during morning recess.",
-        questions: [
-          {
-            q: "1. On what day does the Robotics Club meet?",
-            options: ["Every Monday", "Every Wednesday", "Every Friday", "Every weekend"],
-            correct: 1,
-            explanation: "The text states: 'We meet every Wednesday at 3:30 PM'."
-          },
-          {
-            q: "2. Who can join the Robotics Club?",
-            options: ["Only students with coding experience", "Only 10-year-old students", "All students aged 11 to 14", "Only science teachers"],
-            correct: 2,
-            explanation: "The passage clarifies: 'Our club is open to all students aged 11 to 14'."
-          },
-          {
-            q: "3. What do students build during the sessions?",
-            options: ["Solar-powered cars and mini-robots", "Full-sized computers", "Flying airplanes", "Mobile phones"],
-            correct: 0,
-            explanation: "The announcement mentions: 'we build small solar-powered cars... and design mini-robots'."
-          },
-          {
-            q: "4. What must students bring to the club?",
-            options: ["A solar battery", "Their own laptop", "A student ID card and a notebook", "Safety goggles and tools"],
-            correct: 2,
-            explanation: "The text says: 'Please bring your student ID card and a notebook'."
-          }
-        ]
-      },
+      // 1. Reading (21 Passages Available)
+      reading: getLevelReading('a1', "Critical Reading A1 (21 Passages)", "CEFR A1 • 21 Passages Available"),
 
       // 2. Grammar Cloze
       grammar: {
@@ -146,41 +130,8 @@ const TEENS_LEVELS_DATA = {
     accentBg: "#f0f9ff",
     desc: "Build descriptive paragraphs, master past narratives, comparative structures, and real-life conversational exchanges.",
     exercises: {
-      // 1. Reading
-      reading: {
-        id: "a2_reading",
-        type: "reading",
-        title: "Reading: The Ocean Cleanup Expedition",
-        badge: "Environmental Story • A2",
-        instruction: "Read the article about young climate activists and answer the 4 questions.",
-        passage: "Last summer, fourteen-year-old Mateo and his classmates organized a beach cleanup along the northern coast. Over two days, fifty volunteers collected more than 300 kilograms of plastic bottles, fishing nets, and food wrappers. Instead of throwing the trash into landfill sites, the team partnered with a local recycling workshop. The workshop melted the cleaned plastic and transformed it into colorful benches for a community playground. Mateo explained: 'Many people think one teenager cannot change anything, but when our school worked together, we created something genuinely useful for our town.' The group now plans to organize river cleanups every month.",
-        questions: [
-          {
-            q: "1. How much plastic waste did the volunteers collect?",
-            options: ["Under 50 kilograms", "Exactly 100 kilograms", "More than 300 kilograms", "Over 1,000 kilograms"],
-            correct: 2,
-            explanation: "The passage states: 'fifty volunteers collected more than 300 kilograms of plastic'."
-          },
-          {
-            q: "2. What did the local workshop do with the collected plastic?",
-            options: ["Buried it in a landfill", "Turned it into playground benches", "Sold it to foreign companies", "Burned it for energy"],
-            correct: 1,
-            explanation: "The text says the workshop 'transformed it into colorful benches for a community playground'."
-          },
-          {
-            q: "3. What was Mateo's main message about teenagers?",
-            options: ["Teenagers should never do physical work", "Individual actions never succeed", "Working together allows teenagers to make a real difference", "Cleanups are too expensive for schools"],
-            correct: 2,
-            explanation: "Mateo stated that when people work together, they can create something genuinely useful."
-          },
-          {
-            q: "4. What is the group planning to do next?",
-            options: ["Move to another city", "Stop the project permanently", "Organize monthly river cleanups", "Build a plastic factory"],
-            correct: 2,
-            explanation: "The final sentence notes: 'The group now plans to organize river cleanups every month'."
-          }
-        ]
-      },
+      // 1. Reading (21 Passages Available)
+      reading: getLevelReading('a2', "Critical Reading A2 (21 Passages)", "CEFR A2 • 21 Passages Available"),
 
       // 2. Grammar Cloze
       grammar: {
@@ -275,41 +226,8 @@ const TEENS_LEVELS_DATA = {
     accentBg: "#eef2ff",
     desc: "Conquer official Colombian Saber 9° passages, modal deductions, conditional clauses, and cohesive academic arguments.",
     exercises: {
-      // 1. Reading
-      reading: {
-        id: "b1_reading",
-        type: "reading",
-        title: "Reading: The Rise of Teen Digital Entrepreneurs",
-        badge: "ICFES Saber 9° Standard • B1",
-        instruction: "Read the informational text and answer the 4 critical comprehension questions.",
-        passage: "Across Latin America, an increasing number of teenagers are leveraging digital platforms to launch creative enterprises. Rather than viewing smartphones merely as entertainment devices, youth are designing mobile applications, editing videos for international clients, and selling customized digital artwork. Economists highlight that digital entrepreneurship equips young individuals with vital 21st-century competencies, such as algorithmic thinking, financial literacy, and intercultural communication. However, educators also caution that students must balance their entrepreneurial ambitions with academic responsibilities. Maintaining adequate sleep, completing secondary coursework, and engaging in physical exercise remain indispensable for holistic adolescent development.",
-        questions: [
-          {
-            q: "1. What is the author's primary attitude toward teenage digital entrepreneurship?",
-            options: ["Completely hostile and dismissive", "Constructively positive while highlighting the necessity of balance", "Indifferent to modern youth trends", "Strictly concerned with government taxation"],
-            correct: 1,
-            explanation: "The text praises the valuable skills gained while warning that students must balance work with academics and health."
-          },
-          {
-            q: "2. Which of the following is cited as a skill developed by young digital entrepreneurs?",
-            options: ["Automotive mechanics", "Algorithmic thinking and financial literacy", "Industrial chemical manufacturing", "Heavy equipment operation"],
-            correct: 1,
-            explanation: "Paragraph 1 highlights 'algorithmic thinking, financial literacy, and intercultural communication'."
-          },
-          {
-            q: "3. What concern do educators express regarding teen entrepreneurs?",
-            options: ["They might neglect coursework, sleep, and physical health", "They will earn too much foreign currency", "Digital skills will become obsolete quickly", "Clients will refuse to pay teenagers"],
-            correct: 0,
-            explanation: "Educators caution that students must maintain adequate sleep, coursework, and exercise."
-          },
-          {
-            q: "4. The word 'indispensable' in the last sentence is closest in meaning to:",
-            options: ["Optional", "Essential", "Dangerous", "Expensive"],
-            correct: 1,
-            explanation: "'Indispensable' means absolutely necessary or essential for proper functioning."
-          }
-        ]
-      },
+      // 1. Reading (21 Passages Available)
+      reading: getLevelReading('b1', "Critical Reading B1 • Saber 9° (21 Passages)", "ICFES Saber 9° • 21 Passages Available"),
 
       // 2. Grammar Cloze
       grammar: {
@@ -404,41 +322,8 @@ const TEENS_LEVELS_DATA = {
     accentBg: "#faf5ff",
     desc: "Rigorous preparation for Colombian Saber 11° (ICFES) and Cambridge B2 First: lexical precision, syntactic inversion, and critical discourse.",
     exercises: {
-      // 1. Reading
-      reading: {
-        id: "b2_reading",
-        type: "reading",
-        title: "Reading: The Neurobiology of Multilingual Cognition",
-        badge: "Cambridge B2 / Saber 11° Textual Analysis",
-        instruction: "Read the analytical passage and solve the 4 inferential and rhetorical questions.",
-        passage: "For decades, pedagogical dogma held that raising children in a multilingual environment could trigger cognitive interference and developmental delays. Modern neuroimaging, however, has decisively overturned this assumption. Contemporary research indicates that navigating multiple linguistic codes strengthens executive function—the cognitive control mechanism responsible for selective attention, task switching, and working memory. Because bilingual individuals must continuously inhibit the dormant language while speaking the target tongue, their prefrontal cortex undergoes habitual structural refinement. Crucially, this cognitive reserve does not merely accelerate language acquisition; longitudinal clinical studies demonstrate that lifelong bilingualism delays the onset of neurodegenerative symptoms by an average of four to five years. Thus, linguistic diversity proves to be not merely a communicative asset, but a profound neurobiological safeguard.",
-        questions: [
-          {
-            q: "1. What former misconception regarding multilingual upbringing does the passage refute?",
-            options: ["That bilingual children learn arithmetic faster", "That bilingualism causes cognitive interference and delays", "That learning languages damages hearing acuity", "That multilingual adults forget their native tongue"],
-            correct: 1,
-            explanation: "Paragraph 1 notes that old dogma assumed multilingualism triggered 'cognitive interference and developmental delays', which neuroimaging overturned."
-          },
-          {
-            q: "2. According to the text, why does bilingualism strengthen executive function?",
-            options: ["Because speakers constantly suppress the non-active language during speech", "Because bilingual speakers sleep more hours per night", "Because bilingualism eliminates all emotional stress", "Because grammar rules replace mathematical formulas"],
-            correct: 0,
-            explanation: "The author explains: 'Because bilingual individuals must continuously inhibit the dormant language... their prefrontal cortex undergoes habitual refinement'."
-          },
-          {
-            q: "3. What clinical benefit is associated with lifelong bilingualism in elderly populations?",
-            options: ["Immediate restoration of 20/20 vision", "Postponing neurodegenerative symptoms by four to five years", "Permanent immunity against physical fatigue", "Complete prevention of cardiovascular illness"],
-            correct: 1,
-            explanation: "The text states that lifelong bilingualism 'delays the onset of neurodegenerative symptoms by an average of four to five years'."
-          },
-          {
-            q: "4. The author's primary communicative purpose is to:",
-            options: ["Criticize schools that teach only one foreign language", "Explain the neurocognitive advantages substantiated by modern bilingualism research", "Debate the economic cost of MRI neuroimaging equipment", "Discourage foreign language study in adult learners"],
-            correct: 1,
-            explanation: "The entire passage provides scientific explanation and evidence demonstrating the cognitive and neural benefits of bilingualism."
-          }
-        ]
-      },
+      // 1. Reading (21 Passages Available)
+      reading: getLevelReading('b2', "Critical Reading B2 • Saber 11° (21 Passages)", "Cambridge B2 / Saber 11° • 21 Passages Available"),
 
       // 2. Grammar Cloze
       grammar: {
@@ -525,3 +410,14 @@ const TEENS_LEVELS_DATA = {
     }
   }
 };
+
+if (typeof window !== "undefined") {
+  window.TEENS_LEVELS_DATA = TEENS_LEVELS_DATA;
+}
+if (typeof globalThis !== "undefined") {
+  globalThis.TEENS_LEVELS_DATA = TEENS_LEVELS_DATA;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { TEENS_LEVELS_DATA };
+}
+

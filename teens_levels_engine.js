@@ -15,12 +15,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "reading",
         icon: "📖",
-        badge: "CEFR A1 FOUNDATIONS",
+        badge: "21 CEFR PASSAGES",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Critical Reading A1",
-        desc: "Read school announcements and schedules with direct comprehension questions to build foundational confidence.",
-        actionText: "Open Test (4 Questions)",
+        title: "Critical Reading A1 (21 Passages)",
+        desc: "Master 21 comprehensive reading passages covering school announcements, daily routines, hobbies, and sports with instant feedback.",
+        actionText: "Open 21 Readings",
         actionColor: "#10b981"
       },
       {
@@ -65,12 +65,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "reading",
         icon: "📖",
-        badge: "ENVIRONMENTAL STORY",
+        badge: "21 CEFR PASSAGES",
         badgeBg: "#e0e7ff",
         badgeColor: "#3730a3",
-        title: "Critical Reading: Ocean Cleanup",
-        desc: "Analyze narrative articles about young climate activists and community teamwork with 4 comprehension questions.",
-        actionText: "Open Test (4 Questions)",
+        title: "Critical Reading A2 (21 Passages)",
+        desc: "Analyze 21 engaging narrative and informative texts about environmental cleanups, young inventors, science, and world cultures.",
+        actionText: "Open 21 Readings",
         actionColor: "#0284c7"
       },
       {
@@ -115,12 +115,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "reading",
         icon: "📖",
-        badge: "ICFES STANDARDS",
+        badge: "21 ICFES PASSAGES",
         badgeBg: "#e0e7ff",
         badgeColor: "#3730a3",
-        title: "Critical Reading 9°",
-        desc: "Analyze implicit opinions, author purpose, and textual synthesis across official ICFES passages.",
-        actionText: "Open Tests (Passage & Quiz)",
+        title: "Critical Reading B1 • Saber 9° (21 Passages)",
+        desc: "Analyze implicit opinions, author purpose, and textual synthesis across 21 official passages aligned with ICFES Saber 9° standards.",
+        actionText: "Open 21 Readings",
         actionColor: "#4f46e5",
         extLink: "teens_saber_tests.html",
         extLabel: "🇨🇴 Launch Saber 9° Simulator"
@@ -169,12 +169,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "reading",
         icon: "📖",
-        badge: "ICFES STANDARDS",
+        badge: "21 ADVANCED PASSAGES",
         badgeBg: "#e0e7ff",
         badgeColor: "#3730a3",
-        title: "Critical Reading 9°–11°",
-        desc: "Analyze implicit opinions, pragmatic meaning, and synthesis across 10 official tests with 30 reading passages.",
-        actionText: "Open Tests (10)",
+        title: "Critical Reading B2 • Saber 11° (21 Passages)",
+        desc: "Analyze implicit opinions, pragmatic meaning, and advanced discursive texts across 21 academic passages with detailed rationales.",
+        actionText: "Open 21 Readings",
         actionColor: "#4f46e5",
         extLink: "teens_saber_tests.html",
         extLabel: "🇨🇴 Full Saber Simulator (10 Tests)"
@@ -236,6 +236,7 @@ class TeensLevelsEngine {
 
     this.selectedAnswers = {};
     this.audioCtx = null;
+    this.readingIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
   }
 
   init() {
@@ -464,11 +465,28 @@ class TeensLevelsEngine {
   }
 
   /* ==========================================================================
-     1. READING VIEW RENDERER
+     1. READING VIEW RENDERER (21 PASSAGES PER LEVEL)
      ========================================================================== */
-  renderReadingView(container, exercise) {
+  renderReadingView(container, exerciseGroup) {
+    if (!this.readingIndexByLevel) {
+      this.readingIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
+    }
+
+    const passages = (exerciseGroup && exerciseGroup.passages && exerciseGroup.passages.length > 0)
+      ? exerciseGroup.passages
+      : [exerciseGroup];
+
+    const totalPassages = passages.length;
+    let currentIdx = this.readingIndexByLevel[this.currentLevel] || 0;
+    if (currentIdx >= totalPassages) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = 0;
+    this.readingIndexByLevel[this.currentLevel] = currentIdx;
+
+    const activePassage = passages[currentIdx] || passages[0];
+    this.selectedAnswers = {};
+
     let questionsHtml = '';
-    exercise.questions.forEach((qObj, idx) => {
+    activePassage.questions.forEach((qObj, idx) => {
       let optionsHtml = '';
       qObj.options.forEach((opt, optIdx) => {
         optionsHtml += `
@@ -492,19 +510,43 @@ class TeensLevelsEngine {
       <div class="level-exercise-stage">
         <div class="exercise-header-strip">
           <div class="exercise-tag-row">
-            <span class="exercise-type-pill" style="background:#ede9fe; color:#6366f1;">📖 READING & COMPREHENSION</span>
+            <span class="exercise-type-pill" style="background:#ede9fe; color:#6366f1;">📖 CRITICAL READING & COMPREHENSION</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
+            <span class="exercise-score-badge" style="background:#fef3c7; color:#92400e; font-weight:800;">
+              ${totalPassages} Passages Available
+            </span>
           </div>
-          <h3 class="exercise-main-title">${exercise.title}</h3>
-          <p class="exercise-instruction-text">${exercise.instruction}</p>
+          <h3 class="exercise-main-title">${activePassage.title}</h3>
+          <p class="exercise-instruction-text">${activePassage.instruction}</p>
+        </div>
+
+        <!-- 21 PASSAGE NAVIGATOR -->
+        <div class="reading-navigator-bar">
+          <button class="reading-nav-btn" id="btnPrevPassage" ${currentIdx === 0 ? 'disabled' : ''}>
+            ← Previous Passage
+          </button>
+          <div class="reading-selector-center">
+            <label class="reading-select-label" for="readingPassageSelect">Passage:</label>
+            <select id="readingPassageSelect" class="reading-dropdown-select">
+              ${passages.map((p, idx) => `
+                <option value="${idx}" ${idx === currentIdx ? 'selected' : ''}>
+                  Passage ${idx + 1}: ${p.title.replace(/^Reading \d+:\s*/, '')} (${(p.badge || '').split('•')[0].trim()})
+                </option>
+              `).join('')}
+            </select>
+            <span class="reading-counter-tag">${currentIdx + 1} of ${totalPassages}</span>
+          </div>
+          <button class="reading-nav-btn" id="btnNextPassage" ${currentIdx === totalPassages - 1 ? 'disabled' : ''}>
+            Next Passage →
+          </button>
         </div>
 
         <div class="reading-passage-box">
           <div class="passage-paper-header">
-            <span>Official Reading Passage</span>
+            <span>Official Reading Passage • ${activePassage.badge || ''}</span>
             <button class="btn-listen-passage" id="btnListenPassage">🔊 Listen Passage</button>
           </div>
-          <p class="passage-body-text">${exercise.passage}</p>
+          <p class="passage-body-text">${activePassage.passage}</p>
         </div>
 
         <div class="reading-questions-flow">
@@ -516,6 +558,11 @@ class TeensLevelsEngine {
             ✓ Check All Answers
           </button>
           <span class="exercise-score-badge" id="readingScoreBadge" style="display:none;"></span>
+          ${currentIdx < totalPassages - 1 ? `
+            <button class="btn-next-passage-action" id="btnCheckNextPassage" style="display:none;">
+              Next Passage (${currentIdx + 2} of ${totalPassages}) ➔
+            </button>
+          ` : ''}
         </div>
       </div>
     `;
@@ -526,10 +573,56 @@ class TeensLevelsEngine {
       btnListen.addEventListener('click', () => {
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(exercise.passage);
+          const u = new SpeechSynthesisUtterance(activePassage.passage);
           u.lang = 'en-US';
           u.rate = 0.95;
           window.speechSynthesis.speak(u);
+        }
+      });
+    }
+
+    // Previous Passage
+    const btnPrev = document.getElementById('btnPrevPassage');
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        if (currentIdx > 0) {
+          this.readingIndexByLevel[this.currentLevel] = currentIdx - 1;
+          this.renderReadingView(container, exerciseGroup);
+          window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Next Passage
+    const btnNext = document.getElementById('btnNextPassage');
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (currentIdx < totalPassages - 1) {
+          this.readingIndexByLevel[this.currentLevel] = currentIdx + 1;
+          this.renderReadingView(container, exerciseGroup);
+          window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Dropdown Select
+    const selectPassage = document.getElementById('readingPassageSelect');
+    if (selectPassage) {
+      selectPassage.addEventListener('change', (e) => {
+        this.readingIndexByLevel[this.currentLevel] = parseInt(e.target.value, 10);
+        this.renderReadingView(container, exerciseGroup);
+        window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+      });
+    }
+
+    // Next Passage from Action Bar (appears after checking)
+    const btnCheckNext = document.getElementById('btnCheckNextPassage');
+    if (btnCheckNext) {
+      btnCheckNext.addEventListener('click', () => {
+        if (currentIdx < totalPassages - 1) {
+          this.readingIndexByLevel[this.currentLevel] = currentIdx + 1;
+          this.renderReadingView(container, exerciseGroup);
+          window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
         }
       });
     }
@@ -551,7 +644,7 @@ class TeensLevelsEngine {
     // Check button
     document.getElementById('btnCheckReading').addEventListener('click', () => {
       let correct = 0;
-      exercise.questions.forEach((qObj, idx) => {
+      activePassage.questions.forEach((qObj, idx) => {
         const userChoice = this.selectedAnswers[idx];
         const card = document.getElementById(`qcard-${idx}`);
         const fb = document.getElementById(`feedback-${idx}`);
@@ -577,9 +670,13 @@ class TeensLevelsEngine {
 
       const scoreEl = document.getElementById('readingScoreBadge');
       scoreEl.style.display = 'inline-block';
-      scoreEl.innerHTML = `Score: <strong>${correct} / ${exercise.questions.length}</strong> (${Math.round((correct / exercise.questions.length) * 100)}%)`;
+      scoreEl.innerHTML = `Score: <strong>${correct} / ${activePassage.questions.length}</strong> (${Math.round((correct / activePassage.questions.length) * 100)}%)`;
 
-      if (correct === exercise.questions.length) this.playSuccess();
+      if (btnCheckNext) {
+        btnCheckNext.style.display = 'inline-flex';
+      }
+
+      if (correct === activePassage.questions.length) this.playSuccess();
       else this.playError();
     });
   }
