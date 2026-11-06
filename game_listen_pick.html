@@ -250,8 +250,12 @@
       <div class="victory-stars-row">
         <span>⭐</span><span>⭐</span><span>⭐</span>
       </div>
-      <h2 class="victory-title">¡Gran Oído en Inglés!</h2>
+      <h2 class="victory-title" id="victoryTitle">¡Gran Oído en Inglés!</h2>
       <p class="victory-msg" id="victoryMsg">Has superado todas las preguntas del nivel con éxito.</p>
+      <div class="auto-advance-bar-wrapper" id="autoAdvanceWrapper" style="display:none;">
+        <div class="auto-advance-bar-fill" id="autoAdvanceBar"></div>
+      </div>
+      <div class="auto-advance-countdown-text" id="autoAdvanceText" style="display:none;">🚀 Pasando al siguiente nivel automáticamente...</div>
       <div class="victory-actions">
         <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
         <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
@@ -462,15 +466,30 @@
       const btnRestart = document.getElementById('btnRestart');
       const btnModalReplay = document.getElementById('btnModalReplay');
       const btnModalNext = document.getElementById('btnModalNext');
+      const victoryTitle = document.getElementById('victoryTitle');
+      const autoAdvanceWrapper = document.getElementById('autoAdvanceWrapper');
+      const autoAdvanceBar = document.getElementById('autoAdvanceBar');
+      const autoAdvanceText = document.getElementById('autoAdvanceText');
+      let autoAdvanceTimer = null;
 
       function updateStats() {
         starsCountEl.textContent = totalStars;
       }
 
       function loadLevel(lvl) {
+        if (autoAdvanceTimer) {
+          clearTimeout(autoAdvanceTimer);
+          autoAdvanceTimer = null;
+        }
         currentLevel = lvl;
         questionIndex = 0;
         victoryModal.classList.remove('show');
+        if (autoAdvanceWrapper) autoAdvanceWrapper.style.display = 'none';
+        if (autoAdvanceText) autoAdvanceText.style.display = 'none';
+        if (autoAdvanceBar) {
+          autoAdvanceBar.style.transition = 'none';
+          autoAdvanceBar.style.width = '0%';
+        }
 
         document.querySelectorAll('.level-tab-chip').forEach(btn => {
           btn.classList.toggle('active', parseInt(btn.dataset.level, 10) === lvl);
@@ -576,28 +595,73 @@
         localStorage.setItem('bilikids_stars_count', totalStars);
         updateStats();
 
+        if (autoAdvanceTimer) {
+          clearTimeout(autoAdvanceTimer);
+          autoAdvanceTimer = null;
+        }
+
         setTimeout(() => {
           BilikidsAudio.playChime('fanfare');
-          BilikidsAudio.speakEnglish(`Fantastic listening! Level ${currentLevel} completed!`);
           BilikidsAudio.triggerConfetti('confettiCanvas');
 
-          victoryMsg.textContent = `¡Felicitaciones! Identificaste todos los sonidos del Nivel ${currentLevel}. Ganaste 20 estrellas ⭐.`;
-          victoryModal.classList.add('show');
+          if (currentLevel < 5) {
+            BilikidsAudio.speakEnglish(`Fantastic listening! Level ${currentLevel} completed! Next level!`);
+            victoryTitle.textContent = `¡Nivel ${currentLevel} Completado!`;
+            victoryMsg.textContent = `¡Felicitaciones! Identificaste todos los sonidos del Nivel ${currentLevel} (+20 ⭐).`;
+            btnModalNext.innerHTML = `Siguiente Nivel (${currentLevel + 1}) ➔`;
+
+            // Auto-advance progress bar setup
+            autoAdvanceWrapper.style.display = 'block';
+            autoAdvanceText.style.display = 'block';
+            autoAdvanceText.textContent = `🚀 Pasando al Nivel ${currentLevel + 1} en 2 segundos...`;
+            autoAdvanceBar.style.transition = 'none';
+            autoAdvanceBar.style.width = '0%';
+
+            victoryModal.classList.add('show');
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                autoAdvanceBar.style.transition = 'width 2.2s linear';
+                autoAdvanceBar.style.width = '100%';
+              });
+            });
+
+            autoAdvanceTimer = setTimeout(() => {
+              loadLevel(currentLevel + 1);
+            }, 2300);
+          } else {
+            // Level 5 completed: Grand finale!
+            BilikidsAudio.speakEnglish(`Hooray! You mastered all 5 listening levels! Outstanding ear for English!`);
+            victoryTitle.textContent = '🎧 ¡Oído Maestro!';
+            victoryMsg.innerHTML = `¡Has completado exitosamente los <strong>5 niveles</strong> de Listen & Pick Quest! Has ganado todas las estrellas ⭐.`;
+            autoAdvanceWrapper.style.display = 'none';
+            autoAdvanceText.style.display = 'none';
+            btnModalNext.innerHTML = `🔄 Jugar de Nuevo (Nivel 1)`;
+            victoryModal.classList.add('show');
+          }
         }, 500);
       }
 
       // Listeners
       document.querySelectorAll('.level-tab-chip').forEach(btn => {
         btn.addEventListener('click', () => {
+          if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
           loadLevel(parseInt(btn.dataset.level, 10));
         });
       });
 
       btnHeroListen.addEventListener('click', playQuestionAudio);
       btnRepeatInstruction.addEventListener('click', playQuestionAudio);
-      btnRestart.addEventListener('click', () => renderQuestion());
-      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnRestart.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+        renderQuestion();
+      });
+      btnModalReplay.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+        loadLevel(currentLevel);
+      });
       btnModalNext.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
         if (currentLevel < 5) {
           loadLevel(currentLevel + 1);
         } else {

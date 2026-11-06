@@ -211,8 +211,12 @@
       <div class="victory-stars-row">
         <span>⭐</span><span>⭐</span><span>⭐</span>
       </div>
-      <h2 class="victory-title">¡Excelente Trabajo!</h2>
+      <h2 class="victory-title" id="victoryTitle">¡Excelente Trabajo!</h2>
       <p class="victory-msg" id="victoryMsg">Has completado el Nivel 1 en 4 movimientos.</p>
+      <div class="auto-advance-bar-wrapper" id="autoAdvanceWrapper" style="display:none;">
+        <div class="auto-advance-bar-fill" id="autoAdvanceBar"></div>
+      </div>
+      <div class="auto-advance-countdown-text" id="autoAdvanceText" style="display:none;">🚀 Pasando al siguiente nivel automáticamente...</div>
       <div class="victory-actions">
         <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
         <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
@@ -313,6 +317,11 @@
       const btnRestart = document.getElementById('btnRestart');
       const btnModalReplay = document.getElementById('btnModalReplay');
       const btnModalNext = document.getElementById('btnModalNext');
+      const victoryTitle = document.getElementById('victoryTitle');
+      const autoAdvanceWrapper = document.getElementById('autoAdvanceWrapper');
+      const autoAdvanceBar = document.getElementById('autoAdvanceBar');
+      const autoAdvanceText = document.getElementById('autoAdvanceText');
+      let autoAdvanceTimer = null;
 
       function updateStats() {
         starsCountEl.textContent = totalStars;
@@ -320,12 +329,22 @@
       }
 
       function loadLevel(lvl) {
+        if (autoAdvanceTimer) {
+          clearTimeout(autoAdvanceTimer);
+          autoAdvanceTimer = null;
+        }
         currentLevel = lvl;
         flippedCards = [];
         matchedCount = 0;
         moves = 0;
         isBusy = false;
         victoryModal.classList.remove('show');
+        if (autoAdvanceWrapper) autoAdvanceWrapper.style.display = 'none';
+        if (autoAdvanceText) autoAdvanceText.style.display = 'none';
+        if (autoAdvanceBar) {
+          autoAdvanceBar.style.transition = 'none';
+          autoAdvanceBar.style.width = '0%';
+        }
 
         // Update Level Tabs UI
         document.querySelectorAll('.level-tab-chip').forEach(btn => {
@@ -431,19 +450,57 @@
         localStorage.setItem('bilikids_stars_count', totalStars);
         updateStats();
 
+        if (autoAdvanceTimer) {
+          clearTimeout(autoAdvanceTimer);
+          autoAdvanceTimer = null;
+        }
+
         setTimeout(() => {
           BilikidsAudio.playChime('fanfare');
-          BilikidsAudio.speakEnglish(`Awesome job! Level ${currentLevel} completed!`);
           BilikidsAudio.triggerConfetti('confettiCanvas');
 
-          victoryMsg.textContent = `¡Completaste el Nivel ${currentLevel} en ${moves} movimientos! Ganaste 15 estrellas ⭐.`;
-          victoryModal.classList.add('show');
+          if (currentLevel < 5) {
+            BilikidsAudio.speakEnglish(`Awesome job! Level ${currentLevel} completed! Next level!`);
+            victoryTitle.textContent = `¡Nivel ${currentLevel} Completado!`;
+            victoryMsg.textContent = `¡Excelente! Encontraste las parejas en ${moves} movimientos (+15 ⭐).`;
+            btnModalNext.innerHTML = `Siguiente Nivel (${currentLevel + 1}) ➔`;
+
+            // Auto-advance progress bar setup
+            autoAdvanceWrapper.style.display = 'block';
+            autoAdvanceText.style.display = 'block';
+            autoAdvanceText.textContent = `🚀 Pasando al Nivel ${currentLevel + 1} en 2 segundos...`;
+            autoAdvanceBar.style.transition = 'none';
+            autoAdvanceBar.style.width = '0%';
+
+            victoryModal.classList.add('show');
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                autoAdvanceBar.style.transition = 'width 2.2s linear';
+                autoAdvanceBar.style.width = '100%';
+              });
+            });
+
+            autoAdvanceTimer = setTimeout(() => {
+              loadLevel(currentLevel + 1);
+            }, 2300);
+          } else {
+            // Level 5 completed: Grand finale!
+            BilikidsAudio.speakEnglish(`Hooray! You completed all 5 levels! You are a superstar!`);
+            victoryTitle.textContent = '🏆 ¡Super Campeón!';
+            victoryMsg.innerHTML = `¡Has completado exitosamente los <strong>5 niveles</strong> de Memory Cards Adventure! Has ganado todas las estrellas ⭐.`;
+            autoAdvanceWrapper.style.display = 'none';
+            autoAdvanceText.style.display = 'none';
+            btnModalNext.innerHTML = `🔄 Jugar de Nuevo (Nivel 1)`;
+            victoryModal.classList.add('show');
+          }
         }, 500);
       }
 
       // Event Listeners
       document.querySelectorAll('.level-tab-chip').forEach(btn => {
         btn.addEventListener('click', () => {
+          if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
           loadLevel(parseInt(btn.dataset.level, 10));
         });
       });
@@ -452,9 +509,16 @@
         BilikidsAudio.speakEnglish(LEVELS[currentLevel].themePrompt);
       });
 
-      btnRestart.addEventListener('click', () => loadLevel(currentLevel));
-      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnRestart.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+        loadLevel(currentLevel);
+      });
+      btnModalReplay.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+        loadLevel(currentLevel);
+      });
       btnModalNext.addEventListener('click', () => {
+        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
         if (currentLevel < 5) {
           loadLevel(currentLevel + 1);
         } else {
