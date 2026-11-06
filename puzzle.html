@@ -15,10 +15,15 @@
 
   <!-- TOP HEADER -->
   <header class="puzzle-header">
-    <a href="javascript:void(0)" id="backBtn" class="back-nav-btn" title="Go Back">
-      <span class="back-icon">←</span>
-      <span id="backBtnLabel">Back</span>
-    </a>
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <a href="javascript:void(0)" id="backBtn" class="back-nav-btn btn-category-back" title="Volver a la Categoría">
+        <span class="back-icon">←</span>
+        <span id="backBtnLabel">Volver</span>
+      </a>
+      <a href="index.html" class="back-nav-btn" title="Volver al Portal Principal" style="background:#e0f2fe; border-color:#bae6fd; color:#0369a1;">
+        <span>🏠</span> Portal
+      </a>
+    </div>
 
     <!-- Central Branding & Title -->
     <div class="header-title-box">
@@ -186,6 +191,7 @@
   <canvas id="confettiCanvas"></canvas>
 
   <script src="puzzle_engine.js?v=20261102_babyenglish"></script>
+  <script src="category_nav.js"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>

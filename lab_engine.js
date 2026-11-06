@@ -261,16 +261,19 @@
     });
   });
 
-  // Handle URL hash navigation (e.g. #circuit, #plant, #density, #magnet, #volcano)
-  function checkUrlHash() {
+  // Handle URL parameter and hash navigation (e.g. ?exp=plant, ?exp=density, #magnet, #volcano)
+  function checkUrlNavigation() {
+    const params = new URLSearchParams(window.location.search);
+    const expParam = params.get('exp');
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    if (hash) {
-      const matchBtn = Array.from(tabBtns).find(b => b.dataset.exp === hash);
+    const target = (expParam || hash || '').toLowerCase();
+    if (target) {
+      const matchBtn = Array.from(tabBtns).find(b => b.dataset.exp === target);
       if (matchBtn) matchBtn.click();
     }
   }
-  window.addEventListener('hashchange', checkUrlHash);
-  checkUrlHash();
+  window.addEventListener('hashchange', checkUrlNavigation);
+  checkUrlNavigation();
 
   // =========================================================================
   // EXPERIMENT 1: COLOR ALCHEMY ENGINE (15+ RECIPES & 4 LEVELS)
@@ -1159,7 +1162,7 @@
     { name: 'Iron Nail', emoji: '🔩', isMagnetic: true },
     { name: 'Paperclip', emoji: '📎', isMagnetic: true },
     { name: 'Steel Spoon', emoji: '🥄', isMagnetic: true },
-    { name: 'Gold Ring', emoji: '💍', isMagnetic: true },
+    { name: 'Steel Key', emoji: '🗝️', isMagnetic: true },
     { name: 'Pencil', emoji: '✏️', isMagnetic: false },
     { name: 'Rubber Duck', emoji: '🦆', isMagnetic: false },
     { name: 'Lego Brick', emoji: '🧱', isMagnetic: false },

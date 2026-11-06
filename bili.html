@@ -26,9 +26,14 @@
     <!-- Top Header Bar with Bilikids Logo -->
     <header class="game-header">
       <div class="header-left">
-        <a href="index.html" class="header-btn" title="Volver al Portal Principal de Bilikids" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 0 #047857; text-decoration: none;">
+        <a href="babies.html" class="header-btn btn-category-back" id="btnCategoryBack" title="Volver a la categoría" style="background: linear-gradient(135deg, #0284c7, #0369a1); box-shadow: 0 4px 0 #075985; text-decoration: none;">
           <span class="btn-icon">←</span>
-          <span class="btn-label">Inicio</span>
+          <span class="btn-label cat-back-label">Volver</span>
+        </a>
+
+        <a href="index.html" class="header-btn" title="Volver al Portal Principal de Bilikids" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 0 #047857; text-decoration: none;">
+          <span class="btn-icon">🏠</span>
+          <span class="btn-label">Portal</span>
         </a>
 
         <button id="btnHome" class="header-btn" title="Ir al Menú de Niveles">
@@ -719,6 +724,7 @@
     <canvas id="confettiCanvas"></canvas>
   </div>
 
+  <script src="category_nav.js"></script>
   <script src="mobile_audio_unlock.js"></script>
   <script src="game.js?v=4.0"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>

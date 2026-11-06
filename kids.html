@@ -22,17 +22,23 @@
     </div>
 
     <nav class="nav-center-menu">
-      <a href="kids.html" class="nav-pill-item active" title="Kids Home">
+      <a href="index.html" class="nav-pill-item" title="Volver al Portal Principal de Bilikids">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Home
+        Inicio
       </a>
-      <a href="#unitsGrid" class="nav-pill-item" title="12 Unidades Cambridge">
+      <a href="#unitsGrid" class="nav-pill-item active" style="background:#fef3c7; color:#92400e; font-weight:800;" title="12 Unidades Cambridge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Unidades (1 - 12)
+        Unidades (12)
+      </a>
+      <a href="#kidsLabSection" class="nav-pill-item" title="Laboratorio de Ciencias">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.31l6.5 11.19A1 1 0 0 1 19.63 22H4.37a1 1 0 0 1-.87-1.5L10 9.31z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Laboratorio
       </a>
       <a href="kids_verb_sprint.html" class="nav-pill-item" style="background: rgba(16, 185, 129, 0.12); color: #047857; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3);" title="Verb Sprint 60s - Reto de Verbos">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -188,8 +194,95 @@
       </div>
     </section>
 
+    <!-- ========================================================================
+         SECTION: LABORATORIO DE ACTIVIDADES INTERACTIVAS (4 EXPERIMENTOS)
+         ======================================================================== -->
+    <section id="kidsLabSection" style="margin: 3rem 0 3.5rem;">
+      <div class="section-headline-row" style="margin-bottom: 1.25rem;">
+        <div>
+          <h2 class="section-headline-title" style="display: flex; align-items: center; gap: 8px;">
+            <span>🧪</span> Laboratorio de Actividades Interactivas
+          </h2>
+          <p style="margin: 4px 0 0; color: #64748b; font-size: 0.95rem; font-weight: 600;">
+            Experimentos científicos prácticos: botánica, hipótesis de densidad, magnetismo y erupciones de espuma.
+          </p>
+        </div>
+      </div>
+
+      <div class="lab-interactive-4-grid">
+        <!-- 1. MAGIC GARDEN -->
+        <a href="lab.html?exp=plant&cat=kids" class="lab-interactive-card lab-card-garden" title="Experimento: Magic Garden">
+          <div>
+            <div class="lab-card-top">
+              <div class="lab-card-icon-bubble" style="background: #dcfce7; color: #16a34a;">🌱</div>
+              <span class="lab-card-badge" style="background: #dcfce7; color: #15803d;">BOTÁNICA</span>
+            </div>
+            <h3 class="lab-card-title">Magic Garden</h3>
+            <p class="lab-card-desc">
+              Descubre las fases de cultivo: suelo fértil, siembra, agua y luz solar para ver florecer distintas especies botánicas.
+            </p>
+          </div>
+          <div class="lab-card-action" style="background: #ecfdf5; color: #15803d;">
+            <span>¡Abrir Experimento!</span> ➔
+          </div>
+        </a>
+
+        <!-- 2. SINK OR FLOAT -->
+        <a href="lab.html?exp=density&cat=kids" class="lab-interactive-card lab-card-sink" title="Experimento: Sink or Float">
+          <div>
+            <div class="lab-card-top">
+              <div class="lab-card-icon-bubble" style="background: #e0f2fe; color: #0284c7;">🌊</div>
+              <span class="lab-card-badge" style="background: #e0f2fe; color: #0369a1;">FÍSICA</span>
+            </div>
+            <h3 class="lab-card-title">Sink or Float</h3>
+            <p class="lab-card-desc">
+              Formula hipótesis científicas: predice qué objetos flotan o se hunden y verifica su densidad en el acuario de pruebas.
+            </p>
+          </div>
+          <div class="lab-card-action" style="background: #f0f9ff; color: #0369a1;">
+            <span>¡Probar Densidad!</span> ➔
+          </div>
+        </a>
+
+        <!-- 3. MAGNETIC LAB -->
+        <a href="lab.html?exp=magnet&cat=kids" class="lab-interactive-card lab-card-magnet" title="Experimento: Magnetic Lab">
+          <div>
+            <div class="lab-card-top">
+              <div class="lab-card-icon-bubble" style="background: #fee2e2; color: #dc2626;">🧲</div>
+              <span class="lab-card-badge" style="background: #fee2e2; color: #b91c1c;">FUERZAS</span>
+            </div>
+            <h3 class="lab-card-title">Magnetic Lab</h3>
+            <p class="lab-card-desc">
+              Investiga el electromagnetismo y los materiales ferromagnéticos atrayendo metales hacia los polos del imán.
+            </p>
+          </div>
+          <div class="lab-card-action" style="background: #fef2f2; color: #b91c1c;">
+            <span>¡Explorar Magnetismo!</span> ➔
+          </div>
+        </a>
+
+        <!-- 4. FOAM VOLCANO -->
+        <a href="lab.html?exp=volcano&cat=kids" class="lab-interactive-card lab-card-volcano" title="Experimento: Foam Volcano">
+          <div>
+            <div class="lab-card-top">
+              <div class="lab-card-icon-bubble" style="background: #fef3c7; color: #d97706;">🌋</div>
+              <span class="lab-card-badge" style="background: #fef3c7; color: #b45309;">QUÍMICA</span>
+            </div>
+            <h3 class="lab-card-title">Foam Volcano</h3>
+            <p class="lab-card-desc">
+              Prepara una reacción ácido-base espectacular combinando reactivos dentro del cráter para crear espuma volcánica.
+            </p>
+          </div>
+          <div class="lab-card-action" style="background: #fffbeb; color: #b45309;">
+            <span>¡Desatar Erupción!</span> ➔
+          </div>
+        </a>
+      </div>
+    </section>
+
   </main>
 
+  <script src="category_nav.js"></script>
   <script src="mobile_audio_unlock.js"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>
 </body>

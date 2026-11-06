@@ -503,9 +503,14 @@
 
   <!-- HEADER -->
   <header class="karaoke-header">
-    <a href="index.html" class="btn-back-home" title="Volver al Portal Principal">
-      ← Volver al Inicio
-    </a>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+      <a href="babies.html" class="btn-back-home btn-category-back" id="btnCategoryBack" title="Volver a la categoría" style="background: rgba(14, 165, 233, 0.2); border-color: rgba(56, 189, 248, 0.4);">
+        ← <span class="cat-back-label">Volver a Categoría</span>
+      </a>
+      <a href="index.html" class="btn-back-home" title="Volver al Portal Principal" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(52, 211, 153, 0.4);">
+        🏠 Inicio
+      </a>
+    </div>
     <div class="brand-title">
       🎤 Bilikids <span style="color: #c084fc;">Karaoke Studio</span>
     </div>
@@ -1956,6 +1961,7 @@
       selectSong(0);
     });
   </script>
+  <script src="category_nav.js"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>
