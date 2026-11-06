@@ -507,6 +507,10 @@
         return false;
       }
 
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+
       if (this.currentAudio) {
         try {
           this.currentAudio.pause();

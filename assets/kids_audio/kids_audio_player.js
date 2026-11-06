@@ -31,9 +31,15 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
 
   if (audioSrc) {
     try {
+      // Cancel any ongoing speech synthesis immediately so it never overlaps with real studio audio
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
       if (currentBilikidsAudio) {
         currentBilikidsAudio.pause();
         currentBilikidsAudio.currentTime = 0;
+        currentBilikidsAudio = null;
       }
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
@@ -49,15 +55,19 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
 
       audio.onended = () => {
         clearTimeout(safeTimer);
+        currentBilikidsAudio = null;
         finish();
       };
       audio.onerror = () => {
         clearTimeout(safeTimer);
+        currentBilikidsAudio = null;
+        // Only fallback if the audio file genuinely failed to load (e.g. 404)
         fallbackSpeechSynthesis(text, voiceType, finish);
       };
       audio.play().catch(err => {
-        clearTimeout(safeTimer);
-        fallbackSpeechSynthesis(text, voiceType, finish);
+        // Do NOT blindly trigger speech synthesis on transient play() aborts/delays,
+        // as doing so causes simultaneous overlapping robotic voice with the MP3.
+        console.warn("[KidsAudio] Audio play interrupted or delayed:", err);
       });
       return;
     } catch (e) {
@@ -65,7 +75,7 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
     }
   }
 
-  // 2. Fallback to Web Speech API
+  // 2. Fallback to Web Speech API only when no audioSrc exists in manifest
   fallbackSpeechSynthesis(text, voiceType, finish);
 }
 
@@ -75,6 +85,12 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
     return;
   }
   try {
+    // If studio audio is currently playing, do not speak over it!
+    if (currentBilikidsAudio && !currentBilikidsAudio.paused && !currentBilikidsAudio.ended) {
+      if (callback) callback();
+      return;
+    }
+
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';

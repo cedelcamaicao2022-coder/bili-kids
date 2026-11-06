@@ -94,6 +94,9 @@
   function playAudioFile(path) {
     if (isMuted || !path) return;
     try {
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
       if (!audioCache[path]) {
         audioCache[path] = new Audio(path);
       }

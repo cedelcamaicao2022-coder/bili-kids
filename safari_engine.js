@@ -460,6 +460,10 @@
       const pageData = SAFARI_PAGES[this.currentPage];
       if (!pageData.wordAudio || !this.sfx.soundEnabled) return;
 
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+
       this.dom.wordAudio.src = pageData.wordAudio;
       this.dom.wordAudio.currentTime = 0;
       this.dom.wordAudio.play().catch(() => {});

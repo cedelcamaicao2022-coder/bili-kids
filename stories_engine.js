@@ -1326,6 +1326,10 @@
         audioSrc = `assets/stories/audio/${page.audioId}.mp3`;
       }
 
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+
       const audio = new Audio(audioSrc);
       this.currentAudio = audio;
       audio.preservesPitch = true;
@@ -1353,22 +1357,26 @@
       };
 
       audio.onerror = () => {
-        console.warn('Audio fallback to browser synthesis for:', audioSrc);
+        console.warn('Audio file missing or failed to load:', audioSrc, 'using fallback');
         this.speakFallback(textToRead, () => {
           if (audio.onended) audio.onended();
         });
       };
 
       audio.play().catch(err => {
-        console.warn('Autoplay blocked or audio error:', err);
-        this.speakFallback(textToRead, () => {
-          if (audio.onended) audio.onended();
-        });
+        // Do NOT trigger speakFallback here: transient browser promise rejections
+        // cause the robotic voice to play simultaneously over the loading MP3!
+        console.warn('Audio play request interrupted or queued:', err);
       });
     }
 
     speakFallback(text, onEnd) {
       if (!window.speechSynthesis) {
+        if (onEnd) onEnd();
+        return;
+      }
+      // Never speak robotic voice if an audio element is actively playing
+      if (this.currentAudio && !this.currentAudio.paused && !this.currentAudio.ended) {
         if (onEnd) onEnd();
         return;
       }

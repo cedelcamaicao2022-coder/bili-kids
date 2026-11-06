@@ -145,7 +145,12 @@ class PuzzleAudio {
   }
 
   speak(text) {
-    if (!this.soundEnabled || !('speechSynthesis' in window)) return;
+    if (!this.soundEnabled) return;
+    if (typeof playStudioOrSynthAudio === 'function') {
+      playStudioOrSynthAudio(text, 'kid');
+      return;
+    }
+    if (!('speechSynthesis' in window)) return;
     try {
       window.speechSynthesis.cancel();
       const utt = new SpeechSynthesisUtterance(text);

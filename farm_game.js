@@ -430,6 +430,13 @@
     }
 
     playClip(clipKey, onEnd) {
+      if (this.synth) {
+        try { this.synth.cancel(); } catch (e) {}
+      }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio = null;
@@ -449,9 +456,9 @@
           onEnd();
         };
       }
-      audio.play().catch(() => {
-        // If file not generated yet, fallback to speech synthesis
-        this.speakFallback(clipKey, onEnd);
+      audio.play().catch((err) => {
+        console.warn("[FarmAudio] Audio play interrupted or delayed:", err);
+        if (onEnd) onEnd();
       });
       return true;
     }
@@ -462,10 +469,18 @@
       if (this.clips[clipKey]) {
         return this.playClip(clipKey, onEnd);
       }
-      return this.playClip(key, onEnd) || this.speak(`Find the ${animalKey}!`, onEnd);
+      if (this.clips[key]) {
+        return this.playClip(key, onEnd);
+      }
+      return this.speak(`Find the ${animalKey}!`, onEnd);
     }
 
     speakFallback(clipKey, onEnd) {
+      // If audio is actively playing, do not speak with robotic synth
+      if (this.currentAudio && !this.currentAudio.paused && !this.currentAudio.ended) {
+        if (onEnd) onEnd();
+        return;
+      }
       const fallbackTexts = {
         cow: 'Cow! Moo!',
         pig: 'Pig! Oink!',
@@ -492,6 +507,10 @@
     }
 
     speak(text, onEnd) {
+      if (this.currentAudio && !this.currentAudio.paused && !this.currentAudio.ended) {
+        if (onEnd) onEnd();
+        return;
+      }
       if (!this.synth) {
         if (onEnd) onEnd();
         return;

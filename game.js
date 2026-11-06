@@ -374,6 +374,14 @@
     }
 
     playClip(clipKey, onEnd) {
+      // Cancel any ongoing robotic speech immediately so it never overlaps with real studio audio
+      if (this.synth) {
+        try { this.synth.cancel(); } catch (e) {}
+      }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio = null;
@@ -409,6 +417,12 @@
     }
 
     speak(text, onEnd) {
+      // Do not speak with robotic synth if a studio MP3 clip is actively playing
+      if (this.currentAudio && !this.currentAudio.paused && !this.currentAudio.ended) {
+        if (onEnd) onEnd();
+        return;
+      }
+
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio = null;

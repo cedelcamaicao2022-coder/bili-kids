@@ -40,6 +40,9 @@
       if (this.muted) return;
       const path = this.speechFiles[wordKey];
       if (!path) return;
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
       try {
         if (!this.audioElements[wordKey]) {
           this.audioElements[wordKey] = new Audio(path);

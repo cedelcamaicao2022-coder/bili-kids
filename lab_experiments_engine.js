@@ -111,6 +111,10 @@ class ColorMagicSuiteEngine {
   }
 
   speakColor(name) {
+    if (typeof playStudioOrSynthAudio === 'function') {
+      playStudioOrSynthAudio(name, 'kid');
+      return;
+    }
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();

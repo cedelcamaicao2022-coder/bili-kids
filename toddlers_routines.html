@@ -135,11 +135,12 @@
         const text = tile.dataset.text;
 
         if (audioSrc) {
+          if ('speechSynthesis' in window) {
+            try { window.speechSynthesis.cancel(); } catch (e) {}
+          }
           const a = new Audio(audioSrc);
-          a.play().catch(() => {
-            if (typeof playStudioOrSynthAudio === 'function') {
-              playStudioOrSynthAudio(text, 'kid');
-            }
+          a.play().catch(err => {
+            console.warn('Routine audio play interrupted:', err);
           });
         } else if (typeof playStudioOrSynthAudio === 'function') {
           playStudioOrSynthAudio(text, 'kid');

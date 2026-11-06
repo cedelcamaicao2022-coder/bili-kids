@@ -239,6 +239,9 @@ class ToddlersUnitsEngine {
 
     if (audioSrc) {
       try {
+        if ('speechSynthesis' in window) {
+          try { window.speechSynthesis.cancel(); } catch (e) {}
+        }
         if (this._currentAudio) {
           this._currentAudio.pause();
           this._currentAudio.currentTime = 0;
@@ -248,8 +251,7 @@ class ToddlersUnitsEngine {
         audio.playbackRate = 1.0;
         console.log('[ToddlersAudio] Playing Studio MP3:', audioSrc, 'for text:', text);
         audio.play().catch((err) => {
-          console.warn('[ToddlersAudio] HTML5 audio.play() blocked or failed:', err, 'falling back to speech synthesis');
-          this.fallbackSpeechSynthesis(stripped || cleaned || text);
+          console.warn('[ToddlersAudio] HTML5 audio.play() blocked or aborted:', err);
         });
         return;
       } catch (e) {
@@ -265,6 +267,10 @@ class ToddlersUnitsEngine {
   }
 
   fallbackSpeechSynthesis(text) {
+    if (this._currentAudio && !this._currentAudio.paused && !this._currentAudio.ended) {
+      console.warn('[ToddlersAudio] Speech synthesis skipped because studio audio is currently playing.');
+      return;
+    }
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
@@ -277,6 +283,9 @@ class ToddlersUnitsEngine {
   }
 
   playCheerSound() {
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
     const cheers = [
       'assets/audio/cheer_great_job.mp3',
       'assets/audio/cheer_awesome.mp3',
