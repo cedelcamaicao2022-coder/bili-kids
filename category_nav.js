@@ -45,7 +45,15 @@
         }
         btn.title = `Regresar a la categoría ${target.name}`;
       } else {
-        btn.href = 'index.html';
+        // Fallback for Babies units (house, bili, farm) defaults directly to Babies
+        if (path.includes('house') || path.includes('bili') || path.includes('farm')) {
+          btn.href = 'babies.html';
+          const textSpan = btn.querySelector('.cat-back-label') || btn.querySelector('.btn-label');
+          if (textSpan) textSpan.textContent = 'Volver a Babies';
+          btn.title = 'Regresar a Babies';
+        } else {
+          btn.href = 'index.html';
+        }
       }
     });
   }

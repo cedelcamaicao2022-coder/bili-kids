@@ -23,44 +23,16 @@
   </div>
 
   <div id="houseApp" class="game-container">
-    <!-- Top Header Bar with Bilikids Logo & Adventure Switcher -->
+    <!-- Top Header Bar with Bilikids Logo & Return to Babies -->
     <header class="game-header">
       <div class="header-left">
-        <a href="babies.html" class="header-btn btn-category-back" id="btnCategoryBack" title="Volver a la categoría" style="background: linear-gradient(135deg, #0284c7, #0369a1); box-shadow: 0 4px 0 #075985; text-decoration: none;">
+        <a href="babies.html" class="btn-return-babies btn-category-back" id="btnCategoryBack" title="Volver a Babies">
           <span class="btn-icon">←</span>
-          <span class="btn-label cat-back-label">Volver</span>
+          <span class="btn-label cat-back-label">Volver a Babies</span>
         </a>
 
-        <a href="index.html" class="header-btn" title="Volver al Portal Principal de Bilikids" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 0 #047857; text-decoration: none;">
-          <span class="btn-icon">🏠</span>
-          <span class="btn-label">Portal</span>
-        </a>
-
-        <button id="btnHome" class="header-btn" title="Ir al Menú de la Casa">
-          <span class="btn-icon">🏠</span>
-          <span class="btn-label">Menú</span>
-        </button>
-
-        <a href="bili.html" class="header-game-switcher" title="Play Colors with Bili">
-          <span>🎨</span>
-          <span>Bili</span>
-        </a>
-        <a href="farm.html" class="header-game-switcher" title="Play Farm with Leo">
-          <span>🦁</span>
-          <span>Leo</span>
-        </a>
-        <a href="stories.html" class="header-game-switcher" title="Bili Kids Library">
-          <span>📚</span>
-          <span>Library</span>
-        </a>
-        <a href="lab.html" class="header-game-switcher" title="Science Lab">
-          <span>🧪</span>
-          <span>Lab</span>
-        </a>
-        <a href="writing.html" class="header-game-switcher" title="Writing Practice">
-          <span>✏️</span>
-          <span>Writing</span>
-        </a>
+        <!-- Hidden menu button for internal game js compatibility -->
+        <button id="btnHome" class="header-btn" title="Ir al Menú de la Casa" style="display:none;"></button>
 
         <div class="bilikids-mini-logo">Bili<span>kids</span></div>
       </div>
