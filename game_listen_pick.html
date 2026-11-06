@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listen & Pick • Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="interactive_games.css?v=1.0">
+  <style>
+    /* Listen & Pick Layout */
+    .listen-quest-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.75rem 1.5rem;
+      border: 3px solid #e0f2fe;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .quest-progress-dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+    .quest-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    .quest-dot.active {
+      background: #0284c7;
+      transform: scale(1.2);
+    }
+    .quest-dot.done {
+      background: #10b981;
+    }
+
+    /* Central Big Audio Speaker Button */
+    .audio-speaker-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 1rem;
+      animation: gentlePulse 2s infinite ease-in-out;
+    }
+    .audio-speaker-hero-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 28px rgba(2, 132, 199, 0.45);
+    }
+    .audio-speaker-hero-btn .speaker-icon {
+      font-size: 1.6rem;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35); }
+      50% { box-shadow: 0 8px 26px rgba(14, 165, 233, 0.55); }
+    }
+
+    .quest-hint-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Choices Cards Grid */
+    .choices-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.15rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .choice-pick-card {
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 1.25rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      min-height: 160px;
+    }
+    .choice-pick-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-color: #38bdf8;
+      box-shadow: 0 12px 28px rgba(2, 132, 199, 0.15);
+    }
+    .choice-pick-card.correct {
+      border-color: #10b981;
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+      transform: scale(1.06);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+    }
+    .choice-pick-card.wrong {
+      border-color: #ef4444;
+      background: #fef2f2;
+      animation: shakeWrong 0.35s ease;
+    }
+
+    .choice-emoji-visual {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    .choice-pick-card:hover .choice-emoji-visual {
+      transform: scale(1.1);
+    }
+    .choice-label-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    @keyframes shakeWrong {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    @media (max-width: 550px) {
+      .choices-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+      }
+      .choice-emoji-visual { font-size: 2.8rem; }
+      .choice-pick-card { min-height: 140px; padding: 1rem 0.65rem; }
+      .audio-speaker-hero-btn { padding: 10px 20px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body class="game-suite-body">
+
+  <div class="game-bg-atmosphere">
+    <div class="game-bg-circle circle-1"></div>
+    <div class="game-bg-circle circle-2"></div>
+    <div class="game-bg-circle circle-3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <div class="header-nav-group">
+      <a href="toddlers.html" class="nav-pill-btn btn-category-back" id="btnCategoryBack" title="Volver a la Categoría">
+        <span>←</span> <span class="cat-back-label">Volver</span>
+      </a>
+      <a href="index.html" class="nav-pill-btn btn-portal" title="Volver al Portal Principal">
+        <span>🏠</span> Portal
+      </a>
+    </div>
+
+    <div class="header-title-box">
+      <h1 class="game-main-title">
+        <span>🎧</span> Listen & Pick Quest
+      </h1>
+      <span class="game-sub-title" id="lblLevelSubtitle">Nivel 1 • Colors & Shapes</span>
+    </div>
+
+    <!-- 5 Levels Switcher -->
+    <div class="level-switcher-bar">
+      <button class="level-tab-chip active" data-level="1">Nivel 1</button>
+      <button class="level-tab-chip" data-level="2">Nivel 2</button>
+      <button class="level-tab-chip" data-level="3">Nivel 3</button>
+      <button class="level-tab-chip" data-level="4">Nivel 4</button>
+      <button class="level-tab-chip" data-level="5">Nivel 5</button>
+    </div>
+
+    <div class="header-stats-group">
+      <div class="badge-stat">
+        <span>⭐</span> <span id="starsCount">0</span>
+      </div>
+      <button class="round-action-btn" id="btnSoundToggle" title="Sonido">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <button class="round-action-btn" id="btnRestart" title="Reiniciar Pregunta">
+        <span>🔁</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <main class="game-workspace">
+    <!-- Mission Banner -->
+    <div class="mission-banner">
+      <div class="mission-text-area">
+        <div class="mission-icon-bubble" id="missionIcon">🎧</div>
+        <div>
+          <div class="mission-title-text" id="missionTitle">Misión: Escucha y elige la opción correcta</div>
+          <div class="mission-desc-text" id="missionDesc">Presiona el botón de audio, escucha la frase en inglés y toca la tarjeta correcta.</div>
+        </div>
+      </div>
+      <button class="mission-audio-btn" id="btnRepeatInstruction">
+        <span>🔊</span> Repetir
+      </button>
+    </div>
+
+    <div class="listen-quest-card">
+      <!-- Question Progress Dots -->
+      <div class="quest-progress-dots" id="progressDotsRow">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Hero Audio Button -->
+      <button class="audio-speaker-hero-btn" id="btnHeroListen">
+        <span class="speaker-icon">🔊</span>
+        <span id="lblHeroAction">¡Toca para Escuchar!</span>
+      </button>
+
+      <div class="quest-hint-text" id="questHintText">
+        Escucha con atención y selecciona la respuesta
+      </div>
+
+      <!-- Choices Grid -->
+      <div class="choices-cards-grid" id="choicesGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="game-victory-modal-backdrop" id="victoryModal">
+    <div class="victory-card">
+      <div class="victory-stars-row">
+        <span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+      <h2 class="victory-title">¡Gran Oído en Inglés!</h2>
+      <p class="victory-msg" id="victoryMsg">Has superado todas las preguntas del nivel con éxito.</p>
+      <div class="victory-actions">
+        <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
+        <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas" class="confetti-canvas-overlay"></canvas>
+
+  <script src="interactive_audio.js"></script>
+  <script src="category_nav.js"></script>
+  <script>
+    (function() {
+      const LEVELS = {
+        1: {
+          name: "Colors & Shapes",
+          desc: "Identifica colores y formas básicas por su sonido en inglés.",
+          icon: "🔴",
+          questions: [
+            {
+              audioPhrase: "Can you find the Red Heart?",
+              targetId: "heart",
+              options: [
+                { id: "heart", name: "Red Heart", emoji: "❤️" },
+                { id: "star", name: "Yellow Star", emoji: "⭐" },
+                { id: "circle", name: "Blue Circle", emoji: "🔵" }
+              ]
+            },
+            {
+              audioPhrase: "Where is the Yellow Sun?",
+              targetId: "sun",
+              options: [
+                { id: "cloud", name: "White Cloud", emoji: "☁️" },
+                { id: "sun", name: "Yellow Sun", emoji: "☀️" },
+                { id: "moon", name: "Moon", emoji: "🌙" }
+              ]
+            },
+            {
+              audioPhrase: "Tap the Green Leaf!",
+              targetId: "leaf",
+              options: [
+                { id: "flower", name: "Pink Flower", emoji: "🌸" },
+                { id: "ocean", name: "Blue Ocean", emoji: "🌊" },
+                { id: "leaf", name: "Green Leaf", emoji: "🍃" }
+              ]
+            }
+          ]
+        },
+        2: {
+          name: "Animals & Pets",
+          desc: "Escucha el sonido o nombre del animalito en inglés.",
+          icon: "🐶",
+          questions: [
+            {
+              audioPhrase: "Where is the happy Dog?",
+              targetId: "dog",
+              options: [
+                { id: "cat", name: "Cat", emoji: "🐱" },
+                { id: "dog", name: "Dog", emoji: "🐶" },
+                { id: "frog", name: "Frog", emoji: "🐸" }
+              ]
+            },
+            {
+              audioPhrase: "Listen carefully: Find the Cat! Meow!",
+              targetId: "cat",
+              options: [
+                { id: "cat", name: "Cat", emoji: "🐱" },
+                { id: "cow", name: "Cow", emoji: "🐮" },
+                { id: "duck", name: "Duck", emoji: "🦆" }
+              ]
+            },
+            {
+              audioPhrase: "Who says Moo? Tap the Cow!",
+              targetId: "cow",
+              options: [
+                { id: "pig", name: "Pig", emoji: "🐷" },
+                { id: "lion", name: "Lion", emoji: "🦁" },
+                { id: "cow", name: "Cow", emoji: "🐮" }
+              ]
+            }
+          ]
+        },
+        3: {
+          name: "Yummy Food",
+          desc: "Escucha el pedido de comida y encuentra la fruta correcta.",
+          icon: "🍎",
+          questions: [
+            {
+              audioPhrase: "I want a sweet Apple! Find the Apple!",
+              targetId: "apple",
+              options: [
+                { id: "apple", name: "Apple", emoji: "🍎" },
+                { id: "banana", name: "Banana", emoji: "🍌" },
+                { id: "pizza", name: "Pizza", emoji: "🍕" }
+              ]
+            },
+            {
+              audioPhrase: "Who loves Banana? Tap the Banana!",
+              targetId: "banana",
+              options: [
+                { id: "cookie", name: "Cookie", emoji: "🍪" },
+                { id: "banana", name: "Banana", emoji: "🍌" },
+                { id: "milk", name: "Milk", emoji: "🥛" }
+              ]
+            },
+            {
+              audioPhrase: "Time for dinner! Where is the Pizza?",
+              targetId: "pizza",
+              options: [
+                { id: "pizza", name: "Pizza", emoji: "🍕" },
+                { id: "strawberry", name: "Strawberry", emoji: "🍓" },
+                { id: "bread", name: "Bread", emoji: "🍞" }
+              ]
+            }
+          ]
+        },
+        4: {
+          name: "School & Objects",
+          desc: "Descubre objetos escolares y juguetes por su nombre en inglés.",
+          icon: "📖",
+          questions: [
+            {
+              audioPhrase: "Open your Book! Where is the Book?",
+              targetId: "book",
+              options: [
+                { id: "pencil", name: "Pencil", emoji: "✏️" },
+                { id: "book", name: "Book", emoji: "📖" },
+                { id: "backpack", name: "Backpack", emoji: "🎒" }
+              ]
+            },
+            {
+              audioPhrase: "Let's draw! Find the Pencil!",
+              targetId: "pencil",
+              options: [
+                { id: "clock", name: "Clock", emoji: "⏰" },
+                { id: "ball", name: "Ball", emoji: "⚽" },
+                { id: "pencil", name: "Pencil", emoji: "✏️" }
+              ]
+            },
+            {
+              audioPhrase: "Let's play sports! Tap the Soccer Ball!",
+              targetId: "ball",
+              options: [
+                { id: "ball", name: "Ball", emoji: "⚽" },
+                { id: "car", name: "Car", emoji: "🚗" },
+                { id: "tree", name: "Tree", emoji: "🌳" }
+              ]
+            }
+          ]
+        },
+        5: {
+          name: "Feelings & Actions",
+          desc: "Identifica emociones y acciones dinámicas en inglés.",
+          icon: "😊",
+          questions: [
+            {
+              audioPhrase: "Who is very Happy and Smiling?",
+              targetId: "happy",
+              options: [
+                { id: "happy", name: "Happy", emoji: "😊" },
+                { id: "sleep", name: "Sleeping", emoji: "😴" },
+                { id: "dance", name: "Dancing", emoji: "💃" }
+              ]
+            },
+            {
+              audioPhrase: "Shh! Who is Sleeping?",
+              targetId: "sleep",
+              options: [
+                { id: "run", name: "Running", emoji: "🏃" },
+                { id: "sing", name: "Singing", emoji: "🎤" },
+                { id: "sleep", name: "Sleeping", emoji: "😴" }
+              ]
+            },
+            {
+              audioPhrase: "Music time! Who is Singing with a microphone?",
+              targetId: "sing",
+              options: [
+                { id: "sing", name: "Singing", emoji: "🎤" },
+                { id: "happy", name: "Happy", emoji: "😊" },
+                { id: "jump", name: "Jumping", emoji: "🦘" }
+              ]
+            }
+          ]
+        }
+      };
+
+      let currentLevel = 1;
+      let questionIndex = 0;
+      let isAnswered = false;
+      let totalStars = parseInt(localStorage.getItem('bilikids_stars_count') || '120', 10);
+
+      // Elements
+      const lblLevelSubtitle = document.getElementById('lblLevelSubtitle');
+      const missionIcon = document.getElementById('missionIcon');
+      const missionTitle = document.getElementById('missionTitle');
+      const missionDesc = document.getElementById('missionDesc');
+      const starsCountEl = document.getElementById('starsCount');
+      const progressDotsRow = document.getElementById('progressDotsRow');
+      const btnHeroListen = document.getElementById('btnHeroListen');
+      const lblHeroAction = document.getElementById('lblHeroAction');
+      const questHintText = document.getElementById('questHintText');
+      const choicesGrid = document.getElementById('choicesGrid');
+      const victoryModal = document.getElementById('victoryModal');
+      const victoryMsg = document.getElementById('victoryMsg');
+      const btnRepeatInstruction = document.getElementById('btnRepeatInstruction');
+      const btnSoundToggle = document.getElementById('btnSoundToggle');
+      const soundIcon = document.getElementById('soundIcon');
+      const btnRestart = document.getElementById('btnRestart');
+      const btnModalReplay = document.getElementById('btnModalReplay');
+      const btnModalNext = document.getElementById('btnModalNext');
+
+      function updateStats() {
+        starsCountEl.textContent = totalStars;
+      }
+
+      function loadLevel(lvl) {
+        currentLevel = lvl;
+        questionIndex = 0;
+        victoryModal.classList.remove('show');
+
+        document.querySelectorAll('.level-tab-chip').forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.dataset.level, 10) === lvl);
+        });
+
+        const data = LEVELS[lvl];
+        lblLevelSubtitle.textContent = `Nivel ${lvl} • ${data.name}`;
+        missionIcon.textContent = data.icon;
+        missionTitle.textContent = `Misión: ${data.name} (${data.questions.length} retos)`;
+        missionDesc.textContent = data.desc;
+
+        renderQuestion();
+        updateStats();
+      }
+
+      function renderQuestion() {
+        const lvlData = LEVELS[currentLevel];
+        const q = lvlData.questions[questionIndex];
+        isAnswered = false;
+
+        // Progress Dots
+        progressDotsRow.innerHTML = '';
+        lvlData.questions.forEach((_, idx) => {
+          const dot = document.createElement('div');
+          dot.className = 'quest-dot';
+          if (idx < questionIndex) dot.classList.add('done');
+          if (idx === questionIndex) dot.classList.add('active');
+          progressDotsRow.appendChild(dot);
+        });
+
+        lblHeroAction.textContent = "¡Toca para Escuchar!";
+        questHintText.textContent = "Escucha atentamente el audio y toca la opción correcta";
+
+        // Render Choices
+        choicesGrid.innerHTML = '';
+        const shuffledChoices = [...q.options].sort(() => Math.random() - 0.5);
+
+        shuffledChoices.forEach(choice => {
+          const card = document.createElement('div');
+          card.className = 'choice-pick-card';
+          card.dataset.id = choice.id;
+
+          card.innerHTML = `
+            <div class="choice-emoji-visual">${choice.emoji}</div>
+            <div class="choice-label-name">${choice.name}</div>
+          `;
+
+          card.addEventListener('click', () => handleChoiceClick(card, choice, q));
+          choicesGrid.appendChild(card);
+        });
+
+        // Automatically speak prompt after slight delay
+        setTimeout(() => {
+          playQuestionAudio();
+        }, 400);
+      }
+
+      function playQuestionAudio() {
+        const q = LEVELS[currentLevel].questions[questionIndex];
+        lblHeroAction.textContent = "🔊 Escuchando...";
+        BilikidsAudio.speakEnglish(q.audioPhrase);
+        setTimeout(() => {
+          lblHeroAction.textContent = "Repetir Audio 🔊";
+        }, 2200);
+      }
+
+      function handleChoiceClick(cardEl, choice, q) {
+        if (isAnswered) return;
+
+        if (choice.id === q.targetId) {
+          // CORRECT!
+          isAnswered = true;
+          cardEl.classList.add('correct');
+
+          totalStars += 10;
+          localStorage.setItem('bilikids_stars_count', totalStars);
+          updateStats();
+
+          BilikidsAudio.playChime('match');
+          BilikidsAudio.speakEnglish(`Yes! That is ${choice.name}! Awesome!`);
+
+          setTimeout(() => {
+            questionIndex++;
+            if (questionIndex < LEVELS[currentLevel].questions.length) {
+              renderQuestion();
+            } else {
+              handleLevelComplete();
+            }
+          }, 1600);
+        } else {
+          // WRONG
+          BilikidsAudio.playChime('wrong');
+          cardEl.classList.add('wrong');
+          BilikidsAudio.speakEnglish(`Not that one! Listen again: ${q.audioPhrase}`);
+          setTimeout(() => {
+            cardEl.classList.remove('wrong');
+          }, 800);
+        }
+      }
+
+      function handleLevelComplete() {
+        totalStars += 20;
+        localStorage.setItem('bilikids_stars_count', totalStars);
+        updateStats();
+
+        setTimeout(() => {
+          BilikidsAudio.playChime('fanfare');
+          BilikidsAudio.speakEnglish(`Fantastic listening! Level ${currentLevel} completed!`);
+          BilikidsAudio.triggerConfetti('confettiCanvas');
+
+          victoryMsg.textContent = `¡Felicitaciones! Identificaste todos los sonidos del Nivel ${currentLevel}. Ganaste 20 estrellas ⭐.`;
+          victoryModal.classList.add('show');
+        }, 500);
+      }
+
+      // Listeners
+      document.querySelectorAll('.level-tab-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          loadLevel(parseInt(btn.dataset.level, 10));
+        });
+      });
+
+      btnHeroListen.addEventListener('click', playQuestionAudio);
+      btnRepeatInstruction.addEventListener('click', playQuestionAudio);
+      btnRestart.addEventListener('click', () => renderQuestion());
+      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalNext.addEventListener('click', () => {
+        if (currentLevel < 5) {
+          loadLevel(currentLevel + 1);
+        } else {
+          loadLevel(1);
+        }
+      });
+
+      btnSoundToggle.addEventListener('click', () => {
+        const muted = BilikidsAudio.toggleMute();
+        soundIcon.textContent = muted ? '🔇' : '🔊';
+      });
+
+      soundIcon.textContent = BilikidsAudio.isMuted() ? '🔇' : '🔊';
+      loadLevel(1);
+    })();
+  </script>
+</body>
+</html>

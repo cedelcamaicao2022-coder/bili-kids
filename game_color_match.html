@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color & Word Match • Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="interactive_games.css?v=1.0">
+  <style>
+    /* Color Match Specific Layout */
+    .color-game-workspace {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Target Objects Grid */
+    .targets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      justify-content: center;
+    }
+
+    .color-target-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.25rem 1rem;
+      border: 3px dashed #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      user-select: none;
+      min-height: 200px;
+      justify-content: space-between;
+    }
+    .color-target-card.drag-over {
+      border-color: #0284c7;
+      background: #f0f9ff;
+      transform: scale(1.03);
+    }
+    .color-target-card.matched {
+      border-style: solid;
+      border-color: #10b981;
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.18);
+    }
+
+    .target-emoji-visual {
+      font-size: 3.8rem;
+      margin-bottom: 0.25rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .color-target-card.matched .target-emoji-visual {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .target-label-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Drop Zone Slot */
+    .target-drop-slot {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+      padding: 4px 12px;
+    }
+    .color-target-card.matched .target-drop-slot {
+      border-style: solid;
+      border-color: transparent;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    /* Source Color Chips Deck */
+    .color-palette-deck {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.25rem 1.5rem;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+      text-align: center;
+    }
+    .palette-deck-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+    .palette-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Draggable Color Chip */
+    .draggable-color-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+    }
+    .draggable-color-chip:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .draggable-color-chip.selected {
+      outline: 4px solid #0284c7;
+      animation: pulseSelection 1s infinite alternate;
+    }
+    .draggable-color-chip.placed {
+      opacity: 0.35;
+      pointer-events: none;
+      transform: scale(0.9);
+      cursor: default;
+    }
+
+    @keyframes pulseSelection {
+      from { transform: scale(1.02); }
+      to { transform: scale(1.1); }
+    }
+
+    @media (max-width: 600px) {
+      .targets-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+      }
+      .color-target-card {
+        padding: 0.85rem 0.65rem;
+        min-height: 170px;
+      }
+      .target-emoji-visual {
+        font-size: 2.8rem;
+      }
+      .target-label-name {
+        font-size: 0.95rem;
+      }
+      .draggable-color-chip {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="game-suite-body">
+
+  <div class="game-bg-atmosphere">
+    <div class="game-bg-circle circle-1"></div>
+    <div class="game-bg-circle circle-2"></div>
+    <div class="game-bg-circle circle-3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <div class="header-nav-group">
+      <a href="toddlers.html" class="nav-pill-btn btn-category-back" id="btnCategoryBack" title="Volver a la Categoría">
+        <span>←</span> <span class="cat-back-label">Volver</span>
+      </a>
+      <a href="index.html" class="nav-pill-btn btn-portal" title="Volver al Portal Principal">
+        <span>🏠</span> Portal
+      </a>
+    </div>
+
+    <div class="header-title-box">
+      <h1 class="game-main-title">
+        <span>🎨</span> Color & Word Match
+      </h1>
+      <span class="game-sub-title" id="lblLevelSubtitle">Nivel 1 • Primary Colors</span>
+    </div>
+
+    <!-- 5 Levels Switcher -->
+    <div class="level-switcher-bar">
+      <button class="level-tab-chip active" data-level="1">Nivel 1</button>
+      <button class="level-tab-chip" data-level="2">Nivel 2</button>
+      <button class="level-tab-chip" data-level="3">Nivel 3</button>
+      <button class="level-tab-chip" data-level="4">Nivel 4</button>
+      <button class="level-tab-chip" data-level="5">Nivel 5</button>
+    </div>
+
+    <div class="header-stats-group">
+      <div class="badge-stat">
+        <span>⭐</span> <span id="starsCount">0</span>
+      </div>
+      <button class="round-action-btn" id="btnSoundToggle" title="Sonido">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <button class="round-action-btn" id="btnRestart" title="Reiniciar Nivel">
+        <span>🔁</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <main class="game-workspace">
+    <!-- Mission Banner -->
+    <div class="mission-banner">
+      <div class="mission-text-area">
+        <div class="mission-icon-bubble" id="missionIcon">🎨</div>
+        <div>
+          <div class="mission-title-text" id="missionTitle">Misión: Arrastra el color a su objeto</div>
+          <div class="mission-desc-text" id="missionDesc">Arrastra o toca el nombre del color y luego toca el objeto correcto en inglés.</div>
+        </div>
+      </div>
+      <button class="mission-audio-btn" id="btnSpeakTheme">
+        <span>🔊</span> Escuchar Ayuda
+      </button>
+    </div>
+
+    <div class="color-game-workspace">
+      <!-- Target Objects Grid -->
+      <div class="targets-grid" id="targetsGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Color Chips Palette Deck -->
+      <div class="color-palette-deck">
+        <div class="palette-deck-title">🎯 Paleta de Colores en Inglés (Toca o Arrastra)</div>
+        <div class="palette-chips-row" id="paletteChipsRow">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="game-victory-modal-backdrop" id="victoryModal">
+    <div class="victory-card">
+      <div class="victory-stars-row">
+        <span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+      <h2 class="victory-title">¡Colores Correctos!</h2>
+      <p class="victory-msg" id="victoryMsg">Has emparejado todos los colores del nivel.</p>
+      <div class="victory-actions">
+        <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
+        <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas" class="confetti-canvas-overlay"></canvas>
+
+  <script src="interactive_audio.js"></script>
+  <script src="category_nav.js"></script>
+  <script>
+    (function() {
+      const LEVELS = {
+        1: {
+          name: "Primary Colors",
+          desc: "Arrastra los 3 colores primarios a su objeto correspondiente.",
+          icon: "🔴",
+          hint: "Match Red to Apple, Yellow to Sun, and Blue to Ocean!",
+          items: [
+            { colorKey: "red", colorName: "Red", hex: "#ef4444", emoji: "🍎", objectName: "Apple", phrase: "Red Apple" },
+            { colorKey: "yellow", colorName: "Yellow", hex: "#eab308", emoji: "☀️", objectName: "Sun", phrase: "Yellow Sun" },
+            { colorKey: "blue", colorName: "Blue", hex: "#3b82f6", emoji: "🌊", objectName: "Ocean", phrase: "Blue Ocean" }
+          ]
+        },
+        2: {
+          name: "Secondary Colors",
+          desc: "Arrastra verde, naranja y morado a las frutas y la naturaleza.",
+          icon: "🟢",
+          hint: "Green for Frog, Orange for Orange, Purple for Grapes!",
+          items: [
+            { colorKey: "green", colorName: "Green", hex: "#22c55e", emoji: "🐸", objectName: "Frog", phrase: "Green Frog" },
+            { colorKey: "orange", colorName: "Orange", hex: "#f97316", emoji: "🍊", objectName: "Orange", phrase: "Orange Fruit" },
+            { colorKey: "purple", colorName: "Purple", hex: "#a855f7", emoji: "🍇", objectName: "Grapes", phrase: "Purple Grapes" }
+          ]
+        },
+        3: {
+          name: "Pastels & Animals",
+          desc: "Asocia rosa, café, blanco y negro con los animalitos.",
+          icon: "🦩",
+          hint: "Pink Flamingo, Brown Bear, White Cloud, and Black Cat!",
+          items: [
+            { colorKey: "pink", colorName: "Pink", hex: "#ec4899", emoji: "🦩", objectName: "Flamingo", phrase: "Pink Flamingo" },
+            { colorKey: "brown", colorName: "Brown", hex: "#854d0e", emoji: "🐻", objectName: "Bear", phrase: "Brown Bear" },
+            { colorKey: "white", colorName: "White", hex: "#94a3b8", emoji: "☁️", objectName: "Cloud", phrase: "White Cloud", textColor: "#1e293b" },
+            { colorKey: "black", colorName: "Black", hex: "#0f172a", emoji: "🐈‍⬛", objectName: "Cat", phrase: "Black Cat" }
+          ]
+        },
+        4: {
+          name: "Vehicles & Fun",
+          desc: "Colores en vehículos y objetos cotidianos divertidos.",
+          icon: "🚒",
+          hint: "Red Fire Truck, Yellow Duck, Green Leaf, Blue Bird, and Orange Ball!",
+          items: [
+            { colorKey: "red", colorName: "Red", hex: "#ef4444", emoji: "🚒", objectName: "Fire Truck", phrase: "Red Fire Truck" },
+            { colorKey: "yellow", colorName: "Yellow", hex: "#eab308", emoji: "🦆", objectName: "Duck", phrase: "Yellow Duck" },
+            { colorKey: "green", colorName: "Green", hex: "#22c55e", emoji: "🍃", objectName: "Leaf", phrase: "Green Leaf" },
+            { colorKey: "blue", colorName: "Blue", hex: "#3b82f6", emoji: "🐦", objectName: "Bird", phrase: "Blue Bird" },
+            { colorKey: "orange", colorName: "Orange", hex: "#f97316", emoji: "🏀", objectName: "Basketball", phrase: "Orange Basketball" }
+          ]
+        },
+        5: {
+          name: "Rainbow Master",
+          desc: "El desafío supremo de 6 colores del arcoíris.",
+          icon: "🌈",
+          hint: "Strawberry, Carrot, Banana, Turtle, Fish, and Eggplant!",
+          items: [
+            { colorKey: "red", colorName: "Red", hex: "#ef4444", emoji: "🍓", objectName: "Strawberry", phrase: "Red Strawberry" },
+            { colorKey: "orange", colorName: "Orange", hex: "#f97316", emoji: "🥕", objectName: "Carrot", phrase: "Orange Carrot" },
+            { colorKey: "yellow", colorName: "Yellow", hex: "#eab308", emoji: "🍌", objectName: "Banana", phrase: "Yellow Banana" },
+            { colorKey: "green", colorName: "Green", hex: "#22c55e", emoji: "🐢", objectName: "Turtle", phrase: "Green Turtle" },
+            { colorKey: "blue", colorName: "Blue", hex: "#3b82f6", emoji: "🐟", objectName: "Fish", phrase: "Blue Fish" },
+            { colorKey: "purple", colorName: "Purple", hex: "#a855f7", emoji: "🍆", objectName: "Eggplant", phrase: "Purple Eggplant" }
+          ]
+        }
+      };
+
+      let currentLevel = 1;
+      let matchedCount = 0;
+      let selectedChip = null;
+      let totalStars = parseInt(localStorage.getItem('bilikids_stars_count') || '120', 10);
+
+      const targetsGrid = document.getElementById('targetsGrid');
+      const paletteChipsRow = document.getElementById('paletteChipsRow');
+      const lblLevelSubtitle = document.getElementById('lblLevelSubtitle');
+      const missionIcon = document.getElementById('missionIcon');
+      const missionTitle = document.getElementById('missionTitle');
+      const missionDesc = document.getElementById('missionDesc');
+      const starsCountEl = document.getElementById('starsCount');
+      const victoryModal = document.getElementById('victoryModal');
+      const victoryMsg = document.getElementById('victoryMsg');
+      const btnSpeakTheme = document.getElementById('btnSpeakTheme');
+      const btnSoundToggle = document.getElementById('btnSoundToggle');
+      const soundIcon = document.getElementById('soundIcon');
+      const btnRestart = document.getElementById('btnRestart');
+      const btnModalReplay = document.getElementById('btnModalReplay');
+      const btnModalNext = document.getElementById('btnModalNext');
+
+      function updateStats() {
+        starsCountEl.textContent = totalStars;
+      }
+
+      function loadLevel(lvl) {
+        currentLevel = lvl;
+        matchedCount = 0;
+        selectedChip = null;
+        victoryModal.classList.remove('show');
+
+        document.querySelectorAll('.level-tab-chip').forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.dataset.level, 10) === lvl);
+        });
+
+        const data = LEVELS[lvl];
+        lblLevelSubtitle.textContent = `Nivel ${lvl} • ${data.name}`;
+        missionIcon.textContent = data.icon;
+        missionTitle.textContent = `Misión: ${data.name} (${data.items.length} objetos)`;
+        missionDesc.textContent = data.desc;
+
+        // Render Targets
+        targetsGrid.innerHTML = '';
+        data.items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'color-target-card';
+          card.dataset.colorKey = item.colorKey;
+          card.dataset.phrase = item.phrase;
+
+          card.innerHTML = `
+            <div class="target-emoji-visual">${item.emoji}</div>
+            <div class="target-label-name">${item.objectName}</div>
+            <div class="target-drop-slot" data-slot="drop">
+              <span>¿Qué color es?</span>
+            </div>
+          `;
+
+          // Desktop Drag-and-drop listeners
+          card.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!card.classList.contains('matched')) {
+              card.classList.add('drag-over');
+            }
+          });
+          card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+          card.addEventListener('drop', (e) => {
+            e.preventDefault();
+            card.classList.remove('drag-over');
+            const draggedColor = e.dataTransfer.getData('text/plain');
+            verifyMatch(draggedColor, card, item);
+          });
+
+          // Tap-to-match for mobile & younger learners
+          card.addEventListener('click', () => {
+            if (card.classList.contains('matched')) return;
+            if (selectedChip) {
+              verifyMatch(selectedChip.dataset.colorKey, card, item);
+            } else {
+              BilikidsAudio.speakEnglish(`This is the ${item.objectName}. Find its color!`);
+            }
+          });
+
+          targetsGrid.appendChild(card);
+        });
+
+        // Render Color Chips (Shuffled)
+        paletteChipsRow.innerHTML = '';
+        const shuffledColors = [...data.items].sort(() => Math.random() - 0.5);
+
+        shuffledColors.forEach(item => {
+          const chip = document.createElement('div');
+          chip.className = 'draggable-color-chip';
+          chip.draggable = true;
+          chip.dataset.colorKey = item.colorKey;
+          chip.dataset.colorName = item.colorName;
+          chip.style.backgroundColor = item.hex;
+          if (item.textColor) chip.style.color = item.textColor;
+
+          chip.innerHTML = `
+            <span>🎨</span>
+            <span>${item.colorName}</span>
+          `;
+
+          // Drag Start
+          chip.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', item.colorKey);
+            BilikidsAudio.playChime('pop');
+            BilikidsAudio.speakEnglish(item.colorName);
+          });
+
+          // Click / Tap Select
+          chip.addEventListener('click', () => {
+            if (chip.classList.contains('placed')) return;
+            BilikidsAudio.playChime('pop');
+            BilikidsAudio.speakEnglish(item.colorName);
+
+            document.querySelectorAll('.draggable-color-chip').forEach(c => c.classList.remove('selected'));
+            if (selectedChip === chip) {
+              selectedChip = null;
+            } else {
+              selectedChip = chip;
+              chip.classList.add('selected');
+            }
+          });
+
+          paletteChipsRow.appendChild(chip);
+        });
+
+        updateStats();
+        setTimeout(() => {
+          BilikidsAudio.speakEnglish(`Level ${lvl}. ${data.name}.`);
+        }, 300);
+      }
+
+      function verifyMatch(colorKey, targetCard, item) {
+        if (colorKey === item.colorKey) {
+          // CORRECT MATCH!
+          targetCard.classList.add('matched');
+          const slot = targetCard.querySelector('.target-drop-slot');
+          slot.style.backgroundColor = item.hex;
+          slot.style.color = item.textColor || '#ffffff';
+          slot.textContent = `✓ ${item.colorName} ${item.objectName}`;
+
+          // Mark corresponding chip as placed
+          const matchingChip = document.querySelector(`.draggable-color-chip[data-color-key="${colorKey}"]:not(.placed)`);
+          if (matchingChip) {
+            matchingChip.classList.remove('selected');
+            matchingChip.classList.add('placed');
+          }
+          selectedChip = null;
+
+          BilikidsAudio.playChime('match');
+          BilikidsAudio.speakEnglish(`Awesome! ${item.phrase}!`);
+          matchedCount++;
+
+          const totalRequired = LEVELS[currentLevel].items.length;
+          if (matchedCount === totalRequired) {
+            handleLevelComplete();
+          }
+        } else {
+          // WRONG MATCH
+          BilikidsAudio.playChime('wrong');
+          BilikidsAudio.speakEnglish(`Try again! That is not ${item.colorName}.`);
+          targetCard.style.transform = 'translateX(-6px)';
+          setTimeout(() => {
+            targetCard.style.transform = 'translateX(6px)';
+            setTimeout(() => {
+              targetCard.style.transform = 'none';
+            }, 100);
+          }, 100);
+        }
+      }
+
+      function handleLevelComplete() {
+        totalStars += 15;
+        localStorage.setItem('bilikids_stars_count', totalStars);
+        updateStats();
+
+        setTimeout(() => {
+          BilikidsAudio.playChime('fanfare');
+          BilikidsAudio.speakEnglish(`Hooray! Level ${currentLevel} completed!`);
+          BilikidsAudio.triggerConfetti('confettiCanvas');
+
+          victoryMsg.textContent = `¡Excelente! Emparejaste todos los colores del Nivel ${currentLevel}. Ganaste 15 estrellas ⭐.`;
+          victoryModal.classList.add('show');
+        }, 500);
+      }
+
+      // Listeners
+      document.querySelectorAll('.level-tab-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          loadLevel(parseInt(btn.dataset.level, 10));
+        });
+      });
+
+      btnSpeakTheme.addEventListener('click', () => {
+        BilikidsAudio.speakEnglish(LEVELS[currentLevel].hint);
+      });
+
+      btnRestart.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalNext.addEventListener('click', () => {
+        if (currentLevel < 5) {
+          loadLevel(currentLevel + 1);
+        } else {
+          loadLevel(1);
+        }
+      });
+
+      btnSoundToggle.addEventListener('click', () => {
+        const muted = BilikidsAudio.toggleMute();
+        soundIcon.textContent = muted ? '🔇' : '🔊';
+      });
+
+      soundIcon.textContent = BilikidsAudio.isMuted() ? '🔇' : '🔊';
+      loadLevel(1);
+    })();
+  </script>
+</body>
+</html>

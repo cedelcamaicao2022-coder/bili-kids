@@ -1305,10 +1305,14 @@ body {
   box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
 }
 
-.lab-interactive-card.lab-card-garden:hover { border-color: #22c55e; }
-.lab-interactive-card.lab-card-sink:hover { border-color: #0284c7; }
-.lab-interactive-card.lab-card-magnet:hover { border-color: #ef4444; }
-.lab-interactive-card.lab-card-volcano:hover { border-color: #f59e0b; }
+.lab-interactive-card.lab-card-garden:hover,
+.lab-interactive-card.lab-card-listening:hover { border-color: #10b981; }
+.lab-interactive-card.lab-card-sink:hover,
+.lab-interactive-card.lab-card-memory:hover { border-color: #6366f1; }
+.lab-interactive-card.lab-card-magnet:hover,
+.lab-interactive-card.lab-card-colors:hover { border-color: #ec4899; }
+.lab-interactive-card.lab-card-volcano:hover,
+.lab-interactive-card.lab-card-spelling:hover { border-color: #f59e0b; }
 
 .lab-card-top {
   display: flex;

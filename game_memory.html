@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Cards Adventure • Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="interactive_games.css?v=1.0">
+  <style>
+    /* Memory Cards Specific 3D Flip Styles */
+    .memory-grid-container {
+      display: grid;
+      gap: 1rem;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 760px;
+      perspective: 1000px;
+      justify-content: center;
+    }
+    .grid-lvl-1 { grid-template-columns: repeat(2, minmax(130px, 170px)); }
+    .grid-lvl-2 { grid-template-columns: repeat(3, minmax(110px, 150px)); }
+    .grid-lvl-3 { grid-template-columns: repeat(4, minmax(95px, 140px)); }
+    .grid-lvl-4 { grid-template-columns: repeat(5, minmax(85px, 120px)); }
+    .grid-lvl-5 { grid-template-columns: repeat(4, minmax(95px, 130px)); }
+
+    .memory-card-item {
+      aspect-ratio: 1 / 1.15;
+      position: relative;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+      border-radius: 20px;
+    }
+    .memory-card-item:hover:not(.flipped):not(.matched) {
+      transform: translateY(-4px) scale(1.02);
+    }
+    .memory-card-item.flipped {
+      transform: rotateY(180deg);
+    }
+    .memory-card-item.matched {
+      transform: rotateY(180deg) scale(0.96);
+      pointer-events: none;
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      user-select: none;
+    }
+
+    /* Card Back (Cover) */
+    .card-cover {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border: 3px solid #ffffff;
+      color: #ffffff;
+    }
+    .cover-pattern-logo {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      animation: gentleFloat 3s ease-in-out infinite;
+    }
+    .cover-brand-text {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+      opacity: 0.9;
+    }
+
+    /* Card Front (Revealed Content) */
+    .card-content {
+      background: #ffffff;
+      border: 3px solid #bae6fd;
+      transform: rotateY(180deg);
+      gap: 6px;
+    }
+    .memory-card-item.matched .card-content {
+      border-color: #10b981;
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+    }
+    .card-emoji-visual {
+      font-size: 2.8rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+    .memory-card-item.matched .card-emoji-visual {
+      animation: popMatch 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-word-badge {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .card-category-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    @keyframes popMatch {
+      0% { transform: scale(0.8); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    @media (max-width: 600px) {
+      .grid-lvl-4 { grid-template-columns: repeat(4, minmax(70px, 1fr)); }
+      .grid-lvl-5 { grid-template-columns: repeat(3, minmax(85px, 1fr)); }
+      .card-emoji-visual { font-size: 2rem; }
+      .card-word-badge { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body class="game-suite-body">
+
+  <div class="game-bg-atmosphere">
+    <div class="game-bg-circle circle-1"></div>
+    <div class="game-bg-circle circle-2"></div>
+    <div class="game-bg-circle circle-3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <div class="header-nav-group">
+      <a href="toddlers.html" class="nav-pill-btn btn-category-back" id="btnCategoryBack" title="Volver a la Categoría">
+        <span>←</span> <span class="cat-back-label">Volver</span>
+      </a>
+      <a href="index.html" class="nav-pill-btn btn-portal" title="Volver al Portal Principal">
+        <span>🏠</span> Portal
+      </a>
+    </div>
+
+    <div class="header-title-box">
+      <h1 class="game-main-title">
+        <span>🃏</span> Memory Cards Adventure
+      </h1>
+      <span class="game-sub-title" id="lblLevelSubtitle">Nivel 1 • Colors & Sky</span>
+    </div>
+
+    <!-- 5 Levels Switcher -->
+    <div class="level-switcher-bar">
+      <button class="level-tab-chip active" data-level="1">Nivel 1</button>
+      <button class="level-tab-chip" data-level="2">Nivel 2</button>
+      <button class="level-tab-chip" data-level="3">Nivel 3</button>
+      <button class="level-tab-chip" data-level="4">Nivel 4</button>
+      <button class="level-tab-chip" data-level="5">Nivel 5</button>
+    </div>
+
+    <div class="header-stats-group">
+      <div class="badge-stat">
+        <span>⭐</span> <span id="starsCount">0</span>
+      </div>
+      <div class="badge-stat" style="background:#f1f5f9; border-color:#e2e8f0; color:#334155;">
+        <span>🔄</span> <span id="movesCount">0</span>
+      </div>
+      <button class="round-action-btn" id="btnSoundToggle" title="Sonido">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <button class="round-action-btn" id="btnRestart" title="Reiniciar Nivel">
+        <span>🔁</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <main class="game-workspace">
+    <!-- Mission Banner -->
+    <div class="mission-banner">
+      <div class="mission-text-area">
+        <div class="mission-icon-bubble" id="missionIcon">🎨</div>
+        <div>
+          <div class="mission-title-text" id="missionTitle">Misión: Encuentra las 2 parejas</div>
+          <div class="mission-desc-text" id="missionDesc">Voltea las cartas, memoriza la posición y escucha la pronunciación en inglés.</div>
+        </div>
+      </div>
+      <button class="mission-audio-btn" id="btnSpeakTheme">
+        <span>🔊</span> Escuchar Tema
+      </button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="memory-grid-container grid-lvl-1" id="memoryCardsGrid">
+      <!-- Dynamic Memory Cards -->
+    </div>
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="game-victory-modal-backdrop" id="victoryModal">
+    <div class="victory-card">
+      <div class="victory-stars-row">
+        <span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+      <h2 class="victory-title">¡Excelente Trabajo!</h2>
+      <p class="victory-msg" id="victoryMsg">Has completado el Nivel 1 en 4 movimientos.</p>
+      <div class="victory-actions">
+        <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
+        <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas" class="confetti-canvas-overlay"></canvas>
+
+  <script src="interactive_audio.js"></script>
+  <script src="category_nav.js"></script>
+  <script>
+    // MEMORY GAME ENGINE - 5 PROGRESSIVE PEDAGOGICAL LEVELS
+    (function() {
+      const LEVELS = {
+        1: {
+          name: "Colors & Sky",
+          desc: "Encuentra las 2 parejas y aprende colores básicos en inglés.",
+          icon: "☀️",
+          themePrompt: "Find the matching cards: Red Apple and Yellow Sun!",
+          pairs: [
+            { id: "apple", word: "Red Apple", emoji: "🍎", tag: "Color" },
+            { id: "sun", word: "Yellow Sun", emoji: "☀️", tag: "Nature" }
+          ]
+        },
+        2: {
+          name: "Farm & Pets",
+          desc: "Encuentra las 3 parejas de animales adorables.",
+          icon: "🐱",
+          themePrompt: "Let's find the cute animals: Cat, Dog, and Duck!",
+          pairs: [
+            { id: "cat", word: "Cat", emoji: "🐱", tag: "Pet" },
+            { id: "dog", word: "Dog", emoji: "🐶", tag: "Pet" },
+            { id: "duck", word: "Duck", emoji: "🦆", tag: "Farm" }
+          ]
+        },
+        3: {
+          name: "Yummy Food",
+          desc: "Encuentra las 4 parejas de frutas y comidas deliciosas.",
+          icon: "🍓",
+          themePrompt: "Hungry? Find Banana, Strawberry, Pizza, and Milk!",
+          pairs: [
+            { id: "banana", word: "Banana", emoji: "🍌", tag: "Fruit" },
+            { id: "strawberry", word: "Strawberry", emoji: "🍓", tag: "Fruit" },
+            { id: "pizza", word: "Pizza", emoji: "🍕", tag: "Food" },
+            { id: "milk", word: "Milk", emoji: "🥛", tag: "Drink" }
+          ]
+        },
+        4: {
+          name: "School & Toys",
+          desc: "Encuentra las 5 parejas de objetos del colegio y juguetes.",
+          icon: "📖",
+          themePrompt: "Explore objects: Book, Star, Ball, Tree, and Car!",
+          pairs: [
+            { id: "book", word: "Book", emoji: "📖", tag: "School" },
+            { id: "star", word: "Star", emoji: "⭐", tag: "Shape" },
+            { id: "ball", word: "Ball", emoji: "⚽", tag: "Toy" },
+            { id: "tree", word: "Tree", emoji: "🌳", tag: "Nature" },
+            { id: "car", word: "Car", emoji: "🚗", tag: "Vehicle" }
+          ]
+        },
+        5: {
+          name: "Actions & Energy",
+          desc: "Encuentra las 6 parejas de acciones y emociones en inglés.",
+          icon: "💃",
+          themePrompt: "Show your energy: Smile, Dance, Sing, Sleep, Run, and Jump!",
+          pairs: [
+            { id: "smile", word: "Smile", emoji: "😊", tag: "Action" },
+            { id: "dance", word: "Dance", emoji: "💃", tag: "Action" },
+            { id: "sing", word: "Sing", emoji: "🎤", tag: "Action" },
+            { id: "sleep", word: "Sleep", emoji: "😴", tag: "Action" },
+            { id: "run", word: "Run", emoji: "🏃", tag: "Action" },
+            { id: "jump", word: "Jump", emoji: "🦘", tag: "Action" }
+          ]
+        }
+      };
+
+      let currentLevel = 1;
+      let flippedCards = [];
+      let matchedCount = 0;
+      let moves = 0;
+      let totalStars = parseInt(localStorage.getItem('bilikids_stars_count') || '120', 10);
+      let isBusy = false;
+
+      // Elements
+      const grid = document.getElementById('memoryCardsGrid');
+      const lblLevelSubtitle = document.getElementById('lblLevelSubtitle');
+      const missionIcon = document.getElementById('missionIcon');
+      const missionTitle = document.getElementById('missionTitle');
+      const missionDesc = document.getElementById('missionDesc');
+      const starsCountEl = document.getElementById('starsCount');
+      const movesCountEl = document.getElementById('movesCount');
+      const victoryModal = document.getElementById('victoryModal');
+      const victoryMsg = document.getElementById('victoryMsg');
+      const btnSpeakTheme = document.getElementById('btnSpeakTheme');
+      const btnSoundToggle = document.getElementById('btnSoundToggle');
+      const soundIcon = document.getElementById('soundIcon');
+      const btnRestart = document.getElementById('btnRestart');
+      const btnModalReplay = document.getElementById('btnModalReplay');
+      const btnModalNext = document.getElementById('btnModalNext');
+
+      function updateStats() {
+        starsCountEl.textContent = totalStars;
+        movesCountEl.textContent = moves;
+      }
+
+      function loadLevel(lvl) {
+        currentLevel = lvl;
+        flippedCards = [];
+        matchedCount = 0;
+        moves = 0;
+        isBusy = false;
+        victoryModal.classList.remove('show');
+
+        // Update Level Tabs UI
+        document.querySelectorAll('.level-tab-chip').forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.dataset.level, 10) === lvl);
+        });
+
+        const data = LEVELS[lvl];
+        lblLevelSubtitle.textContent = `Nivel ${lvl} • ${data.name}`;
+        missionIcon.textContent = data.icon;
+        missionTitle.textContent = `Misión: Encuentra las ${data.pairs.length} parejas`;
+        missionDesc.textContent = data.desc;
+
+        // Grid Class
+        grid.className = `memory-grid-container grid-lvl-${lvl}`;
+        grid.innerHTML = '';
+
+        // Duplicate and shuffle pairs
+        const cardsList = [];
+        data.pairs.forEach((item, idx) => {
+          cardsList.push({ ...item, key: `${item.id}_a` });
+          cardsList.push({ ...item, key: `${item.id}_b` });
+        });
+        cardsList.sort(() => Math.random() - 0.5);
+
+        // Render Cards
+        cardsList.forEach(card => {
+          const el = document.createElement('div');
+          el.className = 'memory-card-item';
+          el.dataset.id = card.id;
+          el.dataset.word = card.word;
+
+          el.innerHTML = `
+            <div class="card-face card-cover">
+              <div class="cover-pattern-logo">⭐</div>
+              <div class="cover-brand-text">Bilikids</div>
+            </div>
+            <div class="card-face card-content">
+              <span class="card-category-tag">${card.tag}</span>
+              <span class="card-emoji-visual">${card.emoji}</span>
+              <span class="card-word-badge">${card.word}</span>
+            </div>
+          `;
+
+          el.addEventListener('click', () => handleCardClick(el, card));
+          grid.appendChild(el);
+        });
+
+        updateStats();
+        setTimeout(() => {
+          BilikidsAudio.speakEnglish(`Level ${lvl}. ${data.name}.`);
+        }, 300);
+      }
+
+      function handleCardClick(el, card) {
+        if (isBusy) return;
+        if (el.classList.contains('flipped') || el.classList.contains('matched')) return;
+
+        el.classList.add('flipped');
+        BilikidsAudio.playChime('flip');
+        BilikidsAudio.speakEnglish(card.word);
+        flippedCards.push({ el, card });
+
+        if (flippedCards.length === 2) {
+          moves++;
+          updateStats();
+          isBusy = true;
+          checkMatch();
+        }
+      }
+
+      function checkMatch() {
+        const [c1, c2] = flippedCards;
+        if (c1.card.id === c2.card.id) {
+          // MATCH!
+          setTimeout(() => {
+            c1.el.classList.add('matched');
+            c2.el.classList.add('matched');
+            BilikidsAudio.playChime('match');
+            BilikidsAudio.speakEnglish(`Great! ${c1.card.word}!`);
+            matchedCount++;
+            flippedCards = [];
+            isBusy = false;
+
+            const totalPairs = LEVELS[currentLevel].pairs.length;
+            if (matchedCount === totalPairs) {
+              handleLevelComplete();
+            }
+          }, 350);
+        } else {
+          // NO MATCH
+          setTimeout(() => {
+            BilikidsAudio.playChime('wrong');
+            c1.el.classList.remove('flipped');
+            c2.el.classList.remove('flipped');
+            flippedCards = [];
+            isBusy = false;
+          }, 850);
+        }
+      }
+
+      function handleLevelComplete() {
+        totalStars += 15;
+        localStorage.setItem('bilikids_stars_count', totalStars);
+        updateStats();
+
+        setTimeout(() => {
+          BilikidsAudio.playChime('fanfare');
+          BilikidsAudio.speakEnglish(`Awesome job! Level ${currentLevel} completed!`);
+          BilikidsAudio.triggerConfetti('confettiCanvas');
+
+          victoryMsg.textContent = `¡Completaste el Nivel ${currentLevel} en ${moves} movimientos! Ganaste 15 estrellas ⭐.`;
+          victoryModal.classList.add('show');
+        }, 500);
+      }
+
+      // Event Listeners
+      document.querySelectorAll('.level-tab-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          loadLevel(parseInt(btn.dataset.level, 10));
+        });
+      });
+
+      btnSpeakTheme.addEventListener('click', () => {
+        BilikidsAudio.speakEnglish(LEVELS[currentLevel].themePrompt);
+      });
+
+      btnRestart.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalNext.addEventListener('click', () => {
+        if (currentLevel < 5) {
+          loadLevel(currentLevel + 1);
+        } else {
+          loadLevel(1);
+        }
+      });
+
+      btnSoundToggle.addEventListener('click', () => {
+        const muted = BilikidsAudio.toggleMute();
+        soundIcon.textContent = muted ? '🔇' : '🔊';
+      });
+
+      // Init
+      soundIcon.textContent = BilikidsAudio.isMuted() ? '🔇' : '🔊';
+      loadLevel(1);
+    })();
+  </script>
+</body>
+</html>

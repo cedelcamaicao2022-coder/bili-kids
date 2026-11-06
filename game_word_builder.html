@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Builder • Bilikids</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="interactive_games.css?v=1.0">
+  <style>
+    /* Word Builder Layout */
+    .builder-stage-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      border: 3px solid #e0f2fe;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .word-progress-pills {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+    .word-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    .word-dot.active {
+      background: #0284c7;
+      transform: scale(1.2);
+    }
+    .word-dot.done {
+      background: #10b981;
+    }
+
+    .word-hero-image-box {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
+      border: 2px solid #bbf7d0;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .word-hero-image-box:hover {
+      transform: scale(1.08) rotate(-4deg);
+    }
+
+    .word-hint-label {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Word Slots Row */
+    .word-slots-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .letter-slot {
+      width: 64px;
+      height: 72px;
+      border-radius: 16px;
+      border: 3px dashed #94a3b8;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+    .letter-slot.filled {
+      border-style: solid;
+      border-color: #0284c7;
+      background: #e0f2fe;
+      color: #0369a1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+    }
+    .letter-slot.correct {
+      border-color: #10b981;
+      background: #dcfce7;
+      color: #15803d;
+      animation: popMatch 0.4s ease;
+    }
+
+    /* Letters Pool */
+    .letters-pool-box {
+      width: 100%;
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 1rem 1.25rem;
+      border: 2px solid #e2e8f0;
+    }
+    .letters-pool-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.85rem;
+    }
+    .letters-pool-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .letter-block {
+      width: 58px;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border: 2px solid #cbd5e1;
+      box-shadow: 0 4px 0 #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f172a;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .letter-block:hover {
+      transform: translateY(-2px);
+      border-color: #0284c7;
+      color: #0284c7;
+      box-shadow: 0 6px 0 #0284c7;
+    }
+    .letter-block:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #94a3b8;
+    }
+    .letter-block.used {
+      opacity: 0.25;
+      pointer-events: none;
+      transform: none;
+      box-shadow: none;
+    }
+
+    @media (max-width: 500px) {
+      .letter-slot { width: 50px; height: 58px; font-size: 1.8rem; }
+      .letter-block { width: 48px; height: 54px; font-size: 1.6rem; }
+      .word-hero-image-box { width: 90px; height: 90px; font-size: 3.2rem; }
+    }
+  </style>
+</head>
+<body class="game-suite-body">
+
+  <div class="game-bg-atmosphere">
+    <div class="game-bg-circle circle-1"></div>
+    <div class="game-bg-circle circle-2"></div>
+    <div class="game-bg-circle circle-3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <div class="header-nav-group">
+      <a href="toddlers.html" class="nav-pill-btn btn-category-back" id="btnCategoryBack" title="Volver a la Categoría">
+        <span>←</span> <span class="cat-back-label">Volver</span>
+      </a>
+      <a href="index.html" class="nav-pill-btn btn-portal" title="Volver al Portal Principal">
+        <span>🏠</span> Portal
+      </a>
+    </div>
+
+    <div class="header-title-box">
+      <h1 class="game-main-title">
+        <span>🔤</span> Word Builder Quest
+      </h1>
+      <span class="game-sub-title" id="lblLevelSubtitle">Nivel 1 • 3-Letter Animals</span>
+    </div>
+
+    <!-- 5 Levels Switcher -->
+    <div class="level-switcher-bar">
+      <button class="level-tab-chip active" data-level="1">Nivel 1</button>
+      <button class="level-tab-chip" data-level="2">Nivel 2</button>
+      <button class="level-tab-chip" data-level="3">Nivel 3</button>
+      <button class="level-tab-chip" data-level="4">Nivel 4</button>
+      <button class="level-tab-chip" data-level="5">Nivel 5</button>
+    </div>
+
+    <div class="header-stats-group">
+      <div class="badge-stat">
+        <span>⭐</span> <span id="starsCount">0</span>
+      </div>
+      <button class="round-action-btn" id="btnSoundToggle" title="Sonido">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <button class="round-action-btn" id="btnRestart" title="Reiniciar Palabra">
+        <span>🔁</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <main class="game-workspace">
+    <!-- Mission Banner -->
+    <div class="mission-banner">
+      <div class="mission-text-area">
+        <div class="mission-icon-bubble" id="missionIcon">🔤</div>
+        <div>
+          <div class="mission-title-text" id="missionTitle">Misión: Arma la palabra en inglés</div>
+          <div class="mission-desc-text" id="missionDesc">Toca las letras en el orden correcto para formar la palabra del dibujo.</div>
+        </div>
+      </div>
+      <button class="mission-audio-btn" id="btnPronounceWord">
+        <span>🔊</span> Escuchar Palabra
+      </button>
+    </div>
+
+    <div class="builder-stage-card">
+      <!-- Words Progress Dots -->
+      <div class="word-progress-pills" id="progressDotsRow">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Emoji Illustration Box -->
+      <div class="word-hero-image-box" id="wordEmojiBox" title="Toca para escuchar de nuevo">
+        🐱
+      </div>
+      <div class="word-hint-label" id="wordHintLabel">
+        Gato en inglés
+      </div>
+
+      <!-- Target Slots Row -->
+      <div class="word-slots-row" id="slotsRow">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Letter Bank Pool -->
+      <div class="letters-pool-box">
+        <div class="letters-pool-title">Toca una letra para colocarla en la casilla</div>
+        <div class="letters-pool-row" id="poolLettersRow">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="game-victory-modal-backdrop" id="victoryModal">
+    <div class="victory-card">
+      <div class="victory-stars-row">
+        <span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+      <h2 class="victory-title">¡Palabras Completadas!</h2>
+      <p class="victory-msg" id="victoryMsg">Has armado correctamente todas las palabras del nivel.</p>
+      <div class="victory-actions">
+        <button class="btn-victory-replay" id="btnModalReplay">🔁 Repetir</button>
+        <button class="btn-victory-next" id="btnModalNext">Siguiente Nivel ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas" class="confetti-canvas-overlay"></canvas>
+
+  <script src="interactive_audio.js"></script>
+  <script src="category_nav.js"></script>
+  <script>
+    (function() {
+      const LEVELS = {
+        1: {
+          name: "3-Letter Animals",
+          desc: "Construye nombres de animales de 3 letras.",
+          icon: "🐱",
+          words: [
+            { word: "CAT", emoji: "🐱", hint: "Gato en inglés", phonic: "C... A... T... Cat!" },
+            { word: "DOG", emoji: "🐶", hint: "Perro en inglés", phonic: "D... O... G... Dog!" },
+            { word: "PIG", emoji: "🐷", hint: "Cerdito en inglés", phonic: "P... I... G... Pig!" },
+            { word: "COW", emoji: "🐮", hint: "Vaca en inglés", phonic: "C... O... W... Cow!" }
+          ]
+        },
+        2: {
+          name: "3-Letter Daily Words",
+          desc: "Palabras comunes de 3 letras de la naturaleza y objetos.",
+          icon: "☀️",
+          words: [
+            { word: "SUN", emoji: "☀️", hint: "Sol en inglés", phonic: "S... U... N... Sun!" },
+            { word: "RED", emoji: "🔴", hint: "Rojo en inglés", phonic: "R... E... D... Red!" },
+            { word: "CAR", emoji: "🚗", hint: "Carro en inglés", phonic: "C... A... R... Car!" },
+            { word: "BUS", emoji: "🚌", hint: "Autobús en inglés", phonic: "B... U... S... Bus!" }
+          ]
+        },
+        3: {
+          name: "4-Letter Animals & Food",
+          desc: "Palabras de 4 letras: animales y alimentos nutritivos.",
+          icon: "🦁",
+          words: [
+            { word: "LION", emoji: "🦁", hint: "León en inglés", phonic: "L... I... O... N... Lion!" },
+            { word: "FISH", emoji: "🐟", hint: "Pez en inglés", phonic: "F... I... S... H... Fish!" },
+            { word: "DUCK", emoji: "🦆", hint: "Pato en inglés", phonic: "D... U... C... K... Duck!" },
+            { word: "MILK", emoji: "🥛", hint: "Leche en inglés", phonic: "M... I... L... K... Milk!" }
+          ]
+        },
+        4: {
+          name: "4-Letter Everyday Objects",
+          desc: "Objetos del día a día de 4 letras en inglés.",
+          icon: "📖",
+          words: [
+            { word: "BOOK", emoji: "📖", hint: "Libro en inglés", phonic: "B... O... O... K... Book!" },
+            { word: "STAR", emoji: "⭐", hint: "Estrella en inglés", phonic: "S... T... A... R... Star!" },
+            { word: "BALL", emoji: "⚽", hint: "Pelota en inglés", phonic: "B... A... L... L... Ball!" },
+            { word: "TREE", emoji: "🌳", hint: "Árbol en inglés", phonic: "T... R... E... E... Tree!" }
+          ]
+        },
+        5: {
+          name: "5-Letter Super Words",
+          desc: "Reto avanzado de 5 letras para pequeños campeones.",
+          icon: "🍎",
+          words: [
+            { word: "APPLE", emoji: "🍎", hint: "Manzana en inglés", phonic: "A... P... P... L... E... Apple!" },
+            { word: "HOUSE", emoji: "🏠", hint: "Casa en inglés", phonic: "H... O... U... S... E... House!" },
+            { word: "TIGER", emoji: "🐯", hint: "Tigre en inglés", phonic: "T... I... G... E... R... Tiger!" },
+            { word: "TRAIN", emoji: "🚂", hint: "Tren en inglés", phonic: "T... R... A... I... N... Train!" }
+          ]
+        }
+      };
+
+      let currentLevel = 1;
+      let wordIndex = 0;
+      let placedLetters = []; // array of { letter, poolIndex }
+      let totalStars = parseInt(localStorage.getItem('bilikids_stars_count') || '120', 10);
+
+      // Elements
+      const lblLevelSubtitle = document.getElementById('lblLevelSubtitle');
+      const missionIcon = document.getElementById('missionIcon');
+      const missionTitle = document.getElementById('missionTitle');
+      const missionDesc = document.getElementById('missionDesc');
+      const starsCountEl = document.getElementById('starsCount');
+      const progressDotsRow = document.getElementById('progressDotsRow');
+      const wordEmojiBox = document.getElementById('wordEmojiBox');
+      const wordHintLabel = document.getElementById('wordHintLabel');
+      const slotsRow = document.getElementById('slotsRow');
+      const poolLettersRow = document.getElementById('poolLettersRow');
+      const victoryModal = document.getElementById('victoryModal');
+      const victoryMsg = document.getElementById('victoryMsg');
+      const btnPronounceWord = document.getElementById('btnPronounceWord');
+      const btnSoundToggle = document.getElementById('btnSoundToggle');
+      const soundIcon = document.getElementById('soundIcon');
+      const btnRestart = document.getElementById('btnRestart');
+      const btnModalReplay = document.getElementById('btnModalReplay');
+      const btnModalNext = document.getElementById('btnModalNext');
+
+      function updateStats() {
+        starsCountEl.textContent = totalStars;
+      }
+
+      function loadLevel(lvl) {
+        currentLevel = lvl;
+        wordIndex = 0;
+        victoryModal.classList.remove('show');
+
+        document.querySelectorAll('.level-tab-chip').forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.dataset.level, 10) === lvl);
+        });
+
+        const data = LEVELS[lvl];
+        lblLevelSubtitle.textContent = `Nivel ${lvl} • ${data.name}`;
+        missionIcon.textContent = data.icon;
+        missionTitle.textContent = `Misión: ${data.name} (${data.words.length} palabras)`;
+        missionDesc.textContent = data.desc;
+
+        renderCurrentWord();
+        updateStats();
+        setTimeout(() => {
+          BilikidsAudio.speakEnglish(`Level ${lvl}. ${data.name}.`);
+        }, 300);
+      }
+
+      function renderCurrentWord() {
+        const lvlData = LEVELS[currentLevel];
+        const currentItem = lvlData.words[wordIndex];
+        placedLetters = [];
+
+        // Progress Dots
+        progressDotsRow.innerHTML = '';
+        lvlData.words.forEach((_, idx) => {
+          const dot = document.createElement('div');
+          dot.className = 'word-dot';
+          if (idx < wordIndex) dot.classList.add('done');
+          if (idx === wordIndex) dot.classList.add('active');
+          progressDotsRow.appendChild(dot);
+        });
+
+        // Illustration & Hint
+        wordEmojiBox.textContent = currentItem.emoji;
+        wordHintLabel.textContent = `${currentItem.hint} (${currentItem.word.length} letras)`;
+
+        // Slots
+        slotsRow.innerHTML = '';
+        for (let i = 0; i < currentItem.word.length; i++) {
+          const slot = document.createElement('div');
+          slot.className = 'letter-slot';
+          slot.dataset.slotIndex = i;
+          slot.textContent = '';
+          slot.addEventListener('click', () => removeLetterFromSlot(i));
+          slotsRow.appendChild(slot);
+        }
+
+        // Shuffled Letters Pool
+        poolLettersRow.innerHTML = '';
+        const lettersArr = currentItem.word.split('').map((char, originalIdx) => ({
+          char,
+          id: originalIdx
+        }));
+        lettersArr.sort(() => Math.random() - 0.5);
+
+        lettersArr.forEach((item, poolIdx) => {
+          const block = document.createElement('div');
+          block.className = 'letter-block';
+          block.dataset.poolIdx = poolIdx;
+          block.dataset.letter = item.char;
+          block.textContent = item.char;
+
+          block.addEventListener('click', () => placeLetter(item.char, poolIdx, block));
+          poolLettersRow.appendChild(block);
+        });
+
+        setTimeout(() => {
+          BilikidsAudio.speakEnglish(currentItem.word);
+        }, 300);
+      }
+
+      function placeLetter(char, poolIdx, blockEl) {
+        if (blockEl.classList.contains('used')) return;
+
+        const lvlData = LEVELS[currentLevel];
+        const currentItem = lvlData.words[wordIndex];
+        if (placedLetters.length >= currentItem.word.length) return;
+
+        BilikidsAudio.playChime('pop');
+        BilikidsAudio.speakEnglish(char);
+
+        blockEl.classList.add('used');
+        const nextSlotIdx = placedLetters.length;
+        placedLetters.push({ char, poolIdx, blockEl });
+
+        const slotEl = slotsRow.querySelector(`.letter-slot[data-slot-index="${nextSlotIdx}"]`);
+        if (slotEl) {
+          slotEl.textContent = char;
+          slotEl.classList.add('filled');
+        }
+
+        // Check if word is complete
+        if (placedLetters.length === currentItem.word.length) {
+          checkWordSolution();
+        }
+      }
+
+      function removeLetterFromSlot(slotIdx) {
+        if (slotIdx >= placedLetters.length) return;
+
+        BilikidsAudio.playChime('pop');
+        const removed = placedLetters.splice(slotIdx, 1)[0];
+        removed.blockEl.classList.remove('used');
+
+        // Re-render filled slots
+        const slots = slotsRow.querySelectorAll('.letter-slot');
+        slots.forEach((s, idx) => {
+          if (idx < placedLetters.length) {
+            s.textContent = placedLetters[idx].char;
+            s.classList.add('filled');
+          } else {
+            s.textContent = '';
+            s.classList.remove('filled', 'correct');
+          }
+        });
+      }
+
+      function checkWordSolution() {
+        const currentItem = LEVELS[currentLevel].words[wordIndex];
+        const formedWord = placedLetters.map(p => p.char).join('');
+
+        if (formedWord === currentItem.word) {
+          // CORRECT!
+          const slots = slotsRow.querySelectorAll('.letter-slot');
+          slots.forEach(s => s.classList.add('correct'));
+
+          totalStars += 5;
+          localStorage.setItem('bilikids_stars_count', totalStars);
+          updateStats();
+
+          BilikidsAudio.playChime('match');
+          BilikidsAudio.speakEnglish(currentItem.phonic);
+
+          setTimeout(() => {
+            wordIndex++;
+            if (wordIndex < LEVELS[currentLevel].words.length) {
+              renderCurrentWord();
+            } else {
+              handleLevelComplete();
+            }
+          }, 1500);
+        } else {
+          // WRONG WORD
+          BilikidsAudio.playChime('wrong');
+          BilikidsAudio.speakEnglish(`Try again! That was not ${currentItem.word}.`);
+          slotsRow.style.transform = 'translateX(-8px)';
+          setTimeout(() => {
+            slotsRow.style.transform = 'translateX(8px)';
+            setTimeout(() => {
+              slotsRow.style.transform = 'none';
+            }, 100);
+          }, 100);
+        }
+      }
+
+      function handleLevelComplete() {
+        totalStars += 20;
+        localStorage.setItem('bilikids_stars_count', totalStars);
+        updateStats();
+
+        setTimeout(() => {
+          BilikidsAudio.playChime('fanfare');
+          BilikidsAudio.speakEnglish(`Fantastic! Level ${currentLevel} completed!`);
+          BilikidsAudio.triggerConfetti('confettiCanvas');
+
+          victoryMsg.textContent = `¡Felicitaciones! Armaste todas las palabras del Nivel ${currentLevel}. Ganaste 20 estrellas ⭐.`;
+          victoryModal.classList.add('show');
+        }, 500);
+      }
+
+      // Event Listeners
+      document.querySelectorAll('.level-tab-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          loadLevel(parseInt(btn.dataset.level, 10));
+        });
+      });
+
+      btnPronounceWord.addEventListener('click', () => {
+        const word = LEVELS[currentLevel].words[wordIndex].word;
+        BilikidsAudio.speakEnglish(word);
+      });
+
+      wordEmojiBox.addEventListener('click', () => {
+        const word = LEVELS[currentLevel].words[wordIndex].word;
+        BilikidsAudio.speakEnglish(word);
+      });
+
+      btnRestart.addEventListener('click', () => renderCurrentWord());
+      btnModalReplay.addEventListener('click', () => loadLevel(currentLevel));
+      btnModalNext.addEventListener('click', () => {
+        if (currentLevel < 5) {
+          loadLevel(currentLevel + 1);
+        } else {
+          loadLevel(1);
+        }
+      });
+
+      btnSoundToggle.addEventListener('click', () => {
+        const muted = BilikidsAudio.toggleMute();
+        soundIcon.textContent = muted ? '🔇' : '🔊';
+      });
+
+      soundIcon.textContent = BilikidsAudio.isMuted() ? '🔇' : '🔊';
+      loadLevel(1);
+    })();
+  </script>
+</body>
+</html>
