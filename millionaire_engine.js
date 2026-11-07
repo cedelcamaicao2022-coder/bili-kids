@@ -291,8 +291,13 @@
       els.optionsGrid.innerHTML = '';
       const letters = ['A', 'B', 'C', 'D'];
 
-      currentQuestion.options.forEach((optText, idx) => {
-        const letter = letters[idx];
+      // Defensive guard: Ensure options are strictly strings and capped at exactly 4 (A, B, C, D)
+      const safeOptions = (currentQuestion.options || [])
+        .filter(opt => typeof opt === 'string')
+        .slice(0, 4);
+
+      safeOptions.forEach((optText, idx) => {
+        const letter = letters[idx] || 'A';
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'option-hex-btn';
