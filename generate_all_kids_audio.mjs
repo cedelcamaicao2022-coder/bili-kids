@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,6 +6,7 @@ import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env.local') });
 
 const apiKey = process.env.ELEVENLABS_API_KEY;
 if (!apiKey) {
@@ -16,18 +16,18 @@ if (!apiKey) {
 
 const client = new ElevenLabsClient({ apiKey });
 
-// Available voices
+// Available voices - 100% Youthful and Child-friendly
 const VOICES = {
   alex: "TX3LPaxmHKxFdv7VOQHJ",       // Liam - energetic boy
-  maya: "Xb7hH8MSUJpSbSDYk0k2",       // Alice - clear young educator / girl
-  kid: "TX3LPaxmHKxFdv7VOQHJ",        // Liam
-  teacher: "Xb7hH8MSUJpSbSDYk0k2",    // Alice
-  clerk: "FGY2WhTYpPnrIDTdsKH5",      // Laura - enthusiast / courteous
-  officer: "IKne3meq5aSn9XLyUdCD",    // Charlie - confident adult male
-  judge: "IKne3meq5aSn9XLyUdCD",      // Charlie - talent show judge
-  host: "IKne3meq5aSn9XLyUdCD",       // Charlie - podcast host
-  guide: "Xb7hH8MSUJpSbSDYk0k2",      // Alice - tour guide
-  reporter: "Xb7hH8MSUJpSbSDYk0k2",   // Alice - TV weather reporter
+  maya: "cgSgspJ2msm6clMCkdW9",       // Jessica - playful, bright, warm girl
+  kid: "TX3LPaxmHKxFdv7VOQHJ",        // Liam - energetic boy
+  teacher: "cgSgspJ2msm6clMCkdW9",    // Jessica - young female
+  clerk: "FGY2WhTYpPnrIDTdsKH5",      // Laura - young enthusiast
+  officer: "bIHbv24MWmeRgasZH58o",    // Will - young male
+  judge: "bIHbv24MWmeRgasZH58o",      // Will - young male
+  host: "bIHbv24MWmeRgasZH58o",       // Will - young male
+  guide: "cgSgspJ2msm6clMCkdW9",      // Jessica - young female
+  reporter: "cgSgspJ2msm6clMCkdW9",   // Jessica - young female
   vlogger: "TX3LPaxmHKxFdv7VOQHJ",    // Liam - mall streamer
   default: "TX3LPaxmHKxFdv7VOQHJ"
 };
@@ -60,14 +60,8 @@ async function run() {
     manifest[normText] = relUrl;
     manifest[it.id] = relUrl;
 
-    if (fs.existsSync(destFile) && fs.statSync(destFile).size > 1000) {
-      console.log(`[${i+1}/${items.length}] Skipping existing: ${it.id} (${it.text.substring(0, 30)}...)`);
-      skipped++;
-      continue;
-    }
-
     const voiceId = VOICES[it.voice] || VOICES.default;
-    console.log(`[${i+1}/${items.length}] (${it.text.length} chars) Generating: [${it.voice}] "${it.text.substring(0, 40)}..."`);
+    console.log(`[${i+1}/${items.length}] (${it.text.length} chars) Generating with ElevenLabs: [${it.voice}] "${it.text.substring(0, 40)}..."`);
 
     try {
       const audioStream = await client.textToSpeech.convert(voiceId, {

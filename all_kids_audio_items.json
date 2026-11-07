@@ -1,0 +1,830 @@
+[
+  {
+    "id": "u1_sc_01_alex",
+    "text": "hello good morning welcome to bilikids school",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_02_alex",
+    "text": "nice to meet you maya are you a new student here",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_03_alex",
+    "text": "i am ten years old how old are you maya",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_04_alex",
+    "text": "which grade are you in are we in fourth grade",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_05_alex",
+    "text": "the bell is ringing where is our classroom",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_06_alex",
+    "text": "great lets walk to class we are a great team",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_07_clerk",
+    "text": "hello welcome to fashion kids can i help you",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_08_clerk",
+    "text": "sure what size do you need small or medium",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_09_clerk",
+    "text": "here is a nice blue tshirt would you like to try it on",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_10_alex",
+    "text": "it looks very cool on you maya how much is it",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_11_clerk",
+    "text": "are you paying with cash or credit card",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_12_clerk",
+    "text": "here is your five dollars change and the receipt have a great day",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_13_alex",
+    "text": "we are at the cinema which movie do you want to see",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_14_clerk",
+    "text": "hello welcome to cinestar how many tickets do you need",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_15_clerk",
+    "text": "that is twelve dollars in total here are your tickets for row d",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_16_alex",
+    "text": "now lets go to the candy bar do you want popcorn or nachos",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_17_alex",
+    "text": "and what would you like to drink juice or water",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_18_alex",
+    "text": "the movie is starting now seats d4 and d5 are here",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_19_clerk",
+    "text": "good morning welcome to skyair where are you flying today",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_20_clerk",
+    "text": "wonderful may i please see your passports and tickets",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_21_clerk",
+    "text": "thank you do you have any luggage to check in",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_22_clerk",
+    "text": "please put your suitcase on the scale it weighs 18 kilos perfect",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_23_clerk",
+    "text": "your flight is boarding at gate 14 at 1030 am here are your boarding passes",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_24_alex",
+    "text": "gate 14 is right over there are you excited for london maya",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_25_clerk",
+    "text": "good afternoon welcome to bella pizza table for two",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_26_clerk",
+    "text": "right this way here is the menu what would you like to drink first",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_27_clerk",
+    "text": "two lemonades perfect and what pizza would you like today",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_28_clerk",
+    "text": "excellent choice that is our specialty would you like extra cheese",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_29_clerk",
+    "text": "here is your hot pizza and drinks enjoy your meal",
+    "category": "scenarios",
+    "voice": "clerk"
+  },
+  {
+    "id": "u1_sc_30_alex",
+    "text": "that was the most delicious pizza ever lets ask for the bill",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_31_alex",
+    "text": "hey maya what do you like to do in your free time",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_32_alex",
+    "text": "that sounds like so much fun what day do you play football",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_33_alex",
+    "text": "i play basketball and do you play any musical instrument",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_34_alex",
+    "text": "that is so cool what kind of music is your favorite",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_35_alex",
+    "text": "do you want to play a video game together this afternoon",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u1_sc_36_alex",
+    "text": "great lets meet at 4 oclock at my house see you later",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_01_alex",
+    "text": "hi maya i forgot my pencil case may i borrow a blue pen",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_02_alex",
+    "text": "thank you so much and do you have an eraser i made a mistake",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_03_alex",
+    "text": "where is your ruler i need to draw a straight line",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_04_alex",
+    "text": "whose backpack is this under the chair is it yours",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_05_alex",
+    "text": "and what are these on the shelf are these colored markers",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_06_alex",
+    "text": "great the teacher is coming lets start the lesson",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_07_teacher",
+    "text": "welcome to the science lab class put on your safety glasses",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_08_teacher",
+    "text": "alex what is that machine on the large table",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_09_alex",
+    "text": "maya where are the glass test tubes for our experiment",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_10_teacher",
+    "text": "very good and please be careful is there water on the floor",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_11_alex",
+    "text": "look this plant leaf has tiny green dots under the lens",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_12_teacher",
+    "text": "great teamwork maya and alex put the slides back in the cabinet",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_13_teacher",
+    "text": "shh welcome to the library how can i help you two today",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_14_teacher",
+    "text": "of course the dictionaries are on the shelf next to the big window",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_15_alex",
+    "text": "maya look at this huge book is this an encyclopedia of animals",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_16_alex",
+    "text": "where can we sit down to read those chairs look comfortable",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_17_teacher",
+    "text": "do you have your student library cards to borrow these books",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_18_teacher",
+    "text": "perfect you can keep the books for two weeks enjoy reading",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_19_teacher",
+    "text": "good afternoon young artists today we are painting landscapes",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_20_alex",
+    "text": "maya are these your paintbrushes on the tray",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_21_teacher",
+    "text": "who has the scissors we need to cut blue paper for the sky",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_22_alex",
+    "text": "look at my mountain drawing is this green paint too dark",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_23_teacher",
+    "text": "ten minutes left please wash your brushes in the sink",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_24_alex",
+    "text": "our paintings are drying on the rack they look wonderful",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_25_alex",
+    "text": "maya someone left a yellow jacket on the bench whose jacket is it",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_26_alex",
+    "text": "and what about this blue notebook is it the teacher",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_27_alex",
+    "text": "there are two pencil sharpeners in the box are these yours",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_28_teacher",
+    "text": "hello kids are you helping return lost items to their owners",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_29_teacher",
+    "text": "that is so kind of you you are very responsible students",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_30_alex",
+    "text": "all items are back with their owners now mission accomplished",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_31_teacher",
+    "text": "good morning please sit at your assigned computer desk",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_32_alex",
+    "text": "maya is this a tablet or a touchscreen monitor",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_33_alex",
+    "text": "where are the headphones we need them for english listening",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_34_teacher",
+    "text": "open the bilikids learning app and enter your student username",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u2_sc_35_alex",
+    "text": "the audio sounds crystal clear through these headphones",
+    "category": "scenarios",
+    "voice": "alex"
+  },
+  {
+    "id": "u2_sc_36_teacher",
+    "text": "time is up log out of your session and leave your desks neat",
+    "category": "scenarios",
+    "voice": "teacher"
+  },
+  {
+    "id": "u1_spk_01",
+    "text": "hello my name is alex",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u1_spk_02",
+    "text": "i am nine years old",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u1_spk_03",
+    "text": "nice to meet you",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u1_spk_04",
+    "text": "we are students",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u2_spk_01",
+    "text": "this is a blue notebook",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u2_spk_02",
+    "text": "these are my colored pencils",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u2_spk_03",
+    "text": "the eraser is on the desk",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u2_spk_04",
+    "text": "may i borrow your ruler please",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u2_spk_05",
+    "text": "the backpack is under the chair",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u2_spk_06",
+    "text": "open your english book on page ten",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u2_spk_07",
+    "text": "they are students in my class",
+    "category": "speaking",
+    "voice": "07"
+  },
+  {
+    "id": "u2_spk_08",
+    "text": "this is maya",
+    "category": "speaking",
+    "voice": "08"
+  },
+  {
+    "id": "u3_spk_host_01",
+    "text": "welcome to bilikids talk show tell our audience who is your favorite person in your family",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u3_spk_host_02",
+    "text": "thats lovely and what is your best friend like is he or she funny",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u3_spk_host_03",
+    "text": "how old are your grandparents do they live in your city",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u3_spk_host_04",
+    "text": "do you have any brothers or sisters what are their names",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u3_spk_host_05",
+    "text": "who is the most creative person in your whole family",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u3_spk_host_06",
+    "text": "to wrap up our interview why is friendship so important to you",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u4_spk_vlog_01",
+    "text": "i wake up at seven oclock every morning",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u4_spk_vlog_02",
+    "text": "i eat breakfast with cereal and fruit",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u4_spk_vlog_03",
+    "text": "i catch the bus to go to school",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u4_spk_vlog_04",
+    "text": "i eat lunch in the cafeteria",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u4_spk_vlog_05",
+    "text": "i come back home in the afternoon",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u4_spk_vlog_06",
+    "text": "i do my homework and read stories",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u4_spk_vlog_07",
+    "text": "i play soccer and ride my bicycle",
+    "category": "speaking",
+    "voice": "07"
+  },
+  {
+    "id": "u4_spk_vlog_08",
+    "text": "we have dinner and talk about our day",
+    "category": "speaking",
+    "voice": "08"
+  },
+  {
+    "id": "u4_spk_vlog_09",
+    "text": "i brush my teeth and wash my face",
+    "category": "speaking",
+    "voice": "09"
+  },
+  {
+    "id": "u4_spk_vlog_10",
+    "text": "i go to bed and sleep peacefully",
+    "category": "speaking",
+    "voice": "10"
+  },
+  {
+    "id": "u4_spk_vlog_11",
+    "text": "good morning guys i wake up at seven oclock",
+    "category": "speaking",
+    "voice": "11"
+  },
+  {
+    "id": "u4_spk_vlog_12",
+    "text": "first i wash my face and brush my teeth",
+    "category": "speaking",
+    "voice": "12"
+  },
+  {
+    "id": "u4_spk_vlog_13",
+    "text": "for breakfast i eat cereal and drink orange juice",
+    "category": "speaking",
+    "voice": "13"
+  },
+  {
+    "id": "u4_spk_vlog_14",
+    "text": "then i put on my uniform and pack my backpack",
+    "category": "speaking",
+    "voice": "14"
+  },
+  {
+    "id": "u4_spk_vlog_15",
+    "text": "my brother doesn",
+    "category": "speaking",
+    "voice": "15"
+  },
+  {
+    "id": "u4_spk_vlog_16",
+    "text": "in the afternoon she finishes her homework before dinner",
+    "category": "speaking",
+    "voice": "16"
+  },
+  {
+    "id": "u4_spk_vlog_17",
+    "text": "at eight pm our whole family has dinner together",
+    "category": "speaking",
+    "voice": "17"
+  },
+  {
+    "id": "u4_spk_vlog_18",
+    "text": "finally i turn off the lights and go to bed good night",
+    "category": "speaking",
+    "voice": "18"
+  },
+  {
+    "id": "u5_spk_judge_01",
+    "text": "can you play the acoustic guitar",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u5_spk_judge_02",
+    "text": "can you do tricks on a skateboard",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u5_spk_judge_03",
+    "text": "can you sing pop songs in english",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u5_spk_judge_04",
+    "text": "can you swim fifty meters in the pool",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u5_spk_judge_05",
+    "text": "can you juggle three tennis balls",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u5_spk_judge_06",
+    "text": "can you draw comic cartoon characters",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u5_spk_judge_07",
+    "text": "can you make sweet banana pancakes",
+    "category": "speaking",
+    "voice": "07"
+  },
+  {
+    "id": "u5_spk_judge_08",
+    "text": "can you speak english and spanish fluently",
+    "category": "speaking",
+    "voice": "08"
+  },
+  {
+    "id": "u6_spk_tour_01",
+    "text": "it is sunny today lets ride our bicycles in the park",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u6_spk_tour_02",
+    "text": "i am hungry lets buy warm croissants at the bakery",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u6_spk_tour_03",
+    "text": "it is raining outside lets watch a funny movie at the cinema",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u6_spk_tour_04",
+    "text": "we have a science project lets study at the quiet library",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u6_spk_tour_05",
+    "text": "look at that cute puppy lets visit the friendly pet shop",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u6_spk_tour_06",
+    "text": "we need apples and juice lets walk to the fresh supermarket",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u6_spk_tour_07",
+    "text": "look at the model trains lets explore the awesome toy store",
+    "category": "speaking",
+    "voice": "07"
+  },
+  {
+    "id": "u6_spk_tour_08",
+    "text": "our tour is fantastic lets go to the sunny town square",
+    "category": "speaking",
+    "voice": "08"
+  },
+  {
+    "id": "u7_spk_weather_01",
+    "text": "attention viewers right now in london it is raining heavily and people are holding colorful umbrellas",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u7_spk_weather_02",
+    "text": "good evening in new york soft snowflakes are falling and children are building snowmen",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u7_spk_weather_03",
+    "text": "welcome back in sunny miami people are swimming in the ocean and wearing dark sunglasses",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u7_spk_weather_04",
+    "text": "live from tokyo gentle spring wind is blowing and families are walking under pink cherry trees",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u7_spk_weather_05",
+    "text": "weather update in chicago strong autumn wind is howling and yellow leaves are flying in the air",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u7_spk_weather_06",
+    "text": "good morning australia surfers are riding giant waves at bondi beach under the warm sun",
+    "category": "speaking",
+    "voice": "06"
+  },
+  {
+    "id": "u7_spk_weather_07",
+    "text": "live in paris people are drinking hot chocolate at street cafes while cool rain is tapping on windows",
+    "category": "speaking",
+    "voice": "07"
+  },
+  {
+    "id": "u7_spk_weather_08",
+    "text": "thank you for watching bilikids weather live have a fantastic day wherever you are",
+    "category": "speaking",
+    "voice": "08"
+  },
+  {
+    "id": "u8_spk_mall_01",
+    "text": "hey everyone look at these awesome white sneakers i bought today they are super comfortable",
+    "category": "speaking",
+    "voice": "01"
+  },
+  {
+    "id": "u8_spk_mall_02",
+    "text": "welcome back friends this warm red jacket was thirty dollars and it has huge cozy pockets",
+    "category": "speaking",
+    "voice": "02"
+  },
+  {
+    "id": "u8_spk_mall_03",
+    "text": "check out that electronics shop i would like to show you these wireless blue headphones",
+    "category": "speaking",
+    "voice": "03"
+  },
+  {
+    "id": "u8_spk_mall_04",
+    "text": "look at this superhero comic book the drawings are colorful and the story is fantastic",
+    "category": "speaking",
+    "voice": "04"
+  },
+  {
+    "id": "u8_spk_mall_05",
+    "text": "we are at the food court this cold strawberry smoothie is fresh and tastes delicious",
+    "category": "speaking",
+    "voice": "05"
+  },
+  {
+    "id": "u8_spk_mall_06",
+    "text": "thank you for shopping with me today remember to like subscribe and practice your english",
+    "category": "speaking",
+    "voice": "06"
+  }
+]

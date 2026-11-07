@@ -1,4 +1,4 @@
-// Bilikids Audio Manifest (Auto-generated with Deepgram Aura-2 Kid Voices)
+// Bilikids Audio Manifest (Auto-generated)
 window.BilikidsAudioManifest = {
   "hello good morning welcome to bilikids school": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
   "u1_sc_01_alex": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
@@ -32,7 +32,6 @@ window.BilikidsAudioManifest = {
   "u1_sc_15_clerk": "assets/kids_audio/scenarios/u1_sc_15_clerk.mp3",
   "now lets go to the candy bar do you want popcorn or nachos": "assets/kids_audio/scenarios/u1_sc_16_alex.mp3",
   "u1_sc_16_alex": "assets/kids_audio/scenarios/u1_sc_16_alex.mp3",
-  "now let": "assets/kids_audio/scenarios/u1_sc_16_alex.mp3",
   "and what would you like to drink juice or water": "assets/kids_audio/scenarios/u1_sc_17_alex.mp3",
   "u1_sc_17_alex": "assets/kids_audio/scenarios/u1_sc_17_alex.mp3",
   "the movie is starting now seats d4 and d5 are here": "assets/kids_audio/scenarios/u1_sc_18_alex.mp3",

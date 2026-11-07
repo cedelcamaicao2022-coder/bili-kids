@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,6 +6,7 @@ import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env.local') });
 
 const apiKey = process.env.ELEVENLABS_API_KEY;
 if (!apiKey) {
@@ -16,10 +16,11 @@ if (!apiKey) {
 
 const client = new ElevenLabsClient({ apiKey });
 
-// Voices
+// Voices - 100% Youthful and Child-friendly
 const VOICES = {
-  liam: "TX3LPaxmHKxFdv7VOQHJ", // Liam - clear energetic child
-  alice: "Xb7hH8MSUJpSbSDYk0k2", // Alice - warm young educator
+  liam: "TX3LPaxmHKxFdv7VOQHJ",    // Liam - clear energetic child / boy
+  alice: "cgSgspJ2msm6clMCkdW9",   // Jessica - playful, bright, warm young girl
+  jessica: "cgSgspJ2msm6clMCkdW9"  // Jessica - young female
 };
 
 const ITEMS_TO_GENERATE = [
@@ -137,15 +138,27 @@ async function run() {
   let skipped = 0;
   let totalChars = 0;
 
+  // Load existing manifest to update with new ElevenLabs mappings
+  const manifestJsonPath = path.join(__dirname, 'assets', 'toddlers_media', 'toddlers_audio_manifest.json');
+  const manifestJsPath = path.join(__dirname, 'assets', 'toddlers_media', 'toddlers_audio_manifest.js');
+  let manifest = {};
+  if (fs.existsSync(manifestJsonPath)) {
+    try {
+      manifest = JSON.parse(fs.readFileSync(manifestJsonPath, 'utf8'));
+    } catch (e) {}
+  }
+
   for (let i = 0; i < ITEMS_TO_GENERATE.length; i++) {
     const it = ITEMS_TO_GENERATE[i];
     const destFile = path.join(destDir, `${it.id}.mp3`);
+    const relUrl = `assets/toddlers_media/audio/${it.id}.mp3`;
 
-    if (fs.existsSync(destFile) && fs.statSync(destFile).size > 1000) {
-      console.log(`[${i+1}/${ITEMS_TO_GENERATE.length}] Skipping existing: ${it.id} ("${it.text}")`);
-      skipped++;
-      continue;
-    }
+    // Map clean text keys in manifest
+    const norm = normalizeKey(it.text);
+    const noSpace = norm.replace(/\s+/g, '');
+    manifest[norm] = relUrl;
+    manifest[noSpace] = relUrl;
+    manifest[it.id] = relUrl;
 
     const voiceId = VOICES[it.voice] || VOICES.liam;
     console.log(`[${i+1}/${ITEMS_TO_GENERATE.length}] Generating (${it.text.length} chars): [${it.voice}] "${it.text}"...`);
@@ -170,10 +183,10 @@ async function run() {
 
       generated++;
       totalChars += it.text.length;
-      console.log(`   -> OK: ${it.id}.mp3 (${fs.statSync(destFile).size} bytes)`);
+      console.log(`   -> OK: ${it.id}.mp3`);
 
       // Gentle pause between calls
-      await new Promise(r => setTimeout(r, 150));
+      await new Promise(r => setTimeout(r, 120));
     } catch (err) {
       console.error(`   -> Error generating ${it.id}:`, err.message);
       if (err.message && err.message.includes('quota')) {
@@ -183,8 +196,13 @@ async function run() {
     }
   }
 
+  // Save updated manifests
+  fs.writeFileSync(manifestJsonPath, JSON.stringify(manifest, null, 2), 'utf8');
+  fs.writeFileSync(manifestJsPath, `window.ToddlersAudioManifest = ${JSON.stringify(manifest, null, 2)};\n`, 'utf8');
+  console.log(`Updated Toddlers audio manifest with ${ITEMS_TO_GENERATE.length} items!`);
+
   console.log('==================================================');
-  console.log(`ElevenLabs Generation Complete: ${generated} new generated, ${skipped} skipped.`);
+  console.log(`ElevenLabs Generation Complete: ${generated} new generated.`);
   console.log(`Total characters consumed in this run: ${totalChars}`);
 }
 
