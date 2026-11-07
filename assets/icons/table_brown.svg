@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="bkTableBrownTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a16207"/>
+      <stop offset="100%" stop-color="#713f12"/>
+    </linearGradient>
+    <linearGradient id="bkTableBrownLeg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#552c08"/>
+      <stop offset="100%" stop-color="#381b04"/>
+    </linearGradient>
+  </defs>
+  <!-- Back Legs -->
+  <line x1="16" y1="30" x2="14" y2="52" stroke="#451a03" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="48" y1="30" x2="50" y2="52" stroke="#451a03" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Underframe Apron -->
+  <rect x="11" y="27" width="42" height="6" rx="2" fill="#451a03"/>
+  <!-- Front Legs -->
+  <line x1="11" y1="30" x2="9" y2="58" stroke="url(#bkTableBrownLeg)" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="53" y1="30" x2="55" y2="58" stroke="url(#bkTableBrownLeg)" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- Tabletop 3D Edge -->
+  <rect x="5" y="24" width="54" height="6" rx="3" fill="#552c08"/>
+  <!-- Tabletop Main Surface -->
+  <rect x="4" y="17" width="56" height="11" rx="4" fill="url(#bkTableBrownTop)"/>
+  <!-- Tabletop Gloss Highlight -->
+  <line x1="8" y1="20" x2="56" y2="20" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+</svg>

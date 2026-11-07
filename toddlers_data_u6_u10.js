@@ -1162,7 +1162,7 @@ window.TODDLERS_UNITS_PART2 = [
       { name: "Tree", icon: "🌳", fact: "A tall green oak tree that provides cool shade on sunny afternoons.", audio: "tree", color: "Green", shape: "Tree", count: 3 },
       { name: "Leaves", icon: "🍃", fact: "Green and golden leaves that flutter in the gentle park breeze.", audio: "leaf", color: "Green", shape: "Oval", count: 8 },
       { name: "Bicycle Path", icon: "🚲", fact: "Smooth paths where kids ride bicycles and scooters safely.", audio: "bicycle", color: "Grey", shape: "Path", count: 1 },
-      { name: "Park Bench", icon: "🪵🪑", fact: "Where Mommy and Daddy sit and wave as we play on the swings.", audio: "bench", color: "Brown", shape: "Rectangle", count: 2 }
+      { name: "Park Bench", icon: "🪑", fact: "Where Mommy and Daddy sit and wave as we play on the swings.", audio: "bench", color: "Brown", shape: "Rectangle", count: 2 }
     ],
 
     listening: [

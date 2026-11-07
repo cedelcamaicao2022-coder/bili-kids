@@ -836,16 +836,16 @@ const vocabularyDataUnit2 = [
   // Útiles Escolares
   { cat: 'supplies', en: 'Backpack', es: 'Mochila', ipa: '/ˈbækˌpæk/', icon: '🎒', grammar: 'Noun' },
   { cat: 'supplies', en: 'Pencil case', es: 'Cartuchera', ipa: '/ˈpen.səl keɪs/', icon: '👝', grammar: 'Noun' },
-  { cat: 'supplies', en: 'Eraser', es: 'Borrador', ipa: '/ɪˈreɪ.sər/', icon: '🧼', grammar: 'takes "an"' },
+  { cat: 'supplies', en: 'Eraser', es: 'Borrador', ipa: '/ɪˈreɪ.sər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.ERASER : '🧼'), grammar: 'takes "an"' },
   { cat: 'supplies', en: 'Ruler', es: 'Regla', ipa: '/ˈruː.lər/', icon: '📏', grammar: 'takes "a"' },
-  { cat: 'supplies', en: 'Sharpener', es: 'Sacapuntas', ipa: '/ˈʃɑːr.pən.ər/', icon: '✏️', grammar: 'Noun' },
+  { cat: 'supplies', en: 'Sharpener', es: 'Sacapuntas', ipa: '/ˈʃɑːr.pən.ər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.SHARPENER : '✏️'), grammar: 'Noun' },
   { cat: 'supplies', en: 'Scissors', es: 'Tijeras', ipa: '/ˈsɪz.ərz/', icon: '✂️', grammar: 'Plural' },
   { cat: 'supplies', en: 'Notebook', es: 'Cuaderno', ipa: '/ˈnoʊt.bʊk/', icon: '📓', grammar: 'takes "a"' },
   { cat: 'supplies', en: 'Glue', es: 'Pegamento', ipa: '/ɡluː/', icon: '🧴', grammar: 'Uncountable' },
 
   // Mobiliario & Aula
-  { cat: 'furniture', en: 'Desk', es: 'Escritorio', ipa: '/desk/', icon: '🪑', grammar: 'Furniture' },
-  { cat: 'furniture', en: 'Chair', es: 'Silla', ipa: '/tʃer/', icon: '💺', grammar: 'Furniture' },
+  { cat: 'furniture', en: 'Desk', es: 'Escritorio', ipa: '/desk/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.DESK : '🪑'), grammar: 'Furniture' },
+  { cat: 'furniture', en: 'Chair', es: 'Silla', ipa: '/tʃer/', icon: '🪑', grammar: 'Furniture' },
   { cat: 'furniture', en: 'Whiteboard', es: 'Pizarra blanca', ipa: '/ˈwaɪt.bɔːrd/', icon: '📋', grammar: 'Classroom' },
   { cat: 'furniture', en: 'Clock', es: 'Reloj de pared', ipa: '/klɑːk/', icon: '⏰', grammar: 'takes "a"' },
   { cat: 'furniture', en: 'Bookshelf', es: 'Estante de libros', ipa: '/ˈbʊk.ʃelf/', icon: '📚', grammar: 'Furniture' },
@@ -916,7 +916,7 @@ function renderWordRecallQuiz(items) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'category-chip';
-      button.textContent = `${option.icon} ${option.en}`;
+      button.innerHTML = `${option.icon} <span>${option.en}</span>`;
       button.addEventListener('click', () => {
         const feedback = quiz.querySelector('.recall-feedback');
         if (option === target) {

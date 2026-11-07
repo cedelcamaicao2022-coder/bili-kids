@@ -9,7 +9,7 @@
       { word: 'DOG', emoji: '🐶', audio: 'assets/leo/audio/dog.mp3' },
       { word: 'RED', emoji: '🔴', audio: 'assets/audio/red.mp3' },
       { word: 'SUN', emoji: '☀️', audio: null },
-      { word: 'CUP', emoji: '🥛', audio: 'assets/luna/audio/cup.mp3' },
+      { word: 'CUP', emoji: '🥤', audio: 'assets/luna/audio/cup.mp3' },
       { word: 'BED', emoji: '🛏️', audio: 'assets/luna/audio/bed.mp3' },
       { word: 'PIG', emoji: '🐷', audio: 'assets/leo/audio/pig.mp3' },
       { word: 'COW', emoji: '🐮', audio: 'assets/leo/audio/cow.mp3' },
@@ -25,7 +25,7 @@
       { word: 'MILK', emoji: '🥛', audio: 'assets/luna/audio/milk.mp3' },
       { word: 'DOOR', emoji: '🚪', audio: 'assets/luna/audio/door.mp3' },
       { word: 'FORK', emoji: '🍴', audio: 'assets/luna/audio/fork.mp3' },
-      { word: 'LAMP', emoji: '🛋️', audio: 'assets/luna/audio/lamp.mp3' },
+      { word: 'LAMP', emoji: '💡', audio: 'assets/luna/audio/lamp.mp3' },
       { word: 'BIRD', emoji: '🐦', audio: 'assets/luna/audio/bird.mp3' },
       { word: 'PINK', emoji: '🌸', audio: 'assets/audio/pink.mp3' }
     ],
@@ -35,7 +35,7 @@
       { word: 'APPLE', emoji: '🍎', audio: 'assets/luna/audio/apple.mp3' },
       { word: 'SPOON', emoji: '🥄', audio: 'assets/luna/audio/spoon.mp3' },
       { word: 'TRAIN', emoji: '🚂', audio: 'assets/luna/audio/train.mp3' },
-      { word: 'TABLE', emoji: '🪑', audio: 'assets/luna/audio/table.mp3' },
+      { word: 'TABLE', emoji: (typeof window !== 'undefined' && window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.TABLE : '🪑'), audio: 'assets/luna/audio/table.mp3' },
       { word: 'PLANT', emoji: '🪴', audio: 'assets/luna/audio/plant.mp3' },
       { word: 'CLOCK', emoji: '⏰', audio: 'assets/luna/audio/clock.mp3' }
     ]
@@ -270,7 +270,7 @@
       `<span class="letter-char" data-idx="${idx}" data-char="${ch}">${ch}</span>`
     ).join('');
 
-    currentEmoji.textContent = item.emoji;
+    currentEmoji.innerHTML = item.emoji;
     wordSubHint.textContent = `Write '${item.word}' with your finger or stylus!`;
 
     // Keep pronunciation available; use browser speech synthesis when no recording exists.
@@ -325,7 +325,7 @@
     list.forEach((item, idx) => {
       const chip = document.createElement('button');
       chip.className = `ribbon-chip ${idx === wordIndex ? 'active' : ''}`;
-      chip.textContent = `${item.emoji} ${item.word}`;
+      chip.innerHTML = `${item.emoji} <span>${item.word}</span>`;
       chip.addEventListener('click', () => {
         wordIndex = idx;
         loadCurrentWord();

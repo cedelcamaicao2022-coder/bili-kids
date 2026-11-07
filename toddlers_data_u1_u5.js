@@ -3,6 +3,13 @@
  * Units 01 - 05: School Objects, Me, Home and Family, My Body, Sunny and Cloudy
  */
 
+const _BK_ICONS = (typeof window !== 'undefined' && window.BILIKIDS_ICONS) ? window.BILIKIDS_ICONS : {
+  TABLE: `<svg viewBox="0 0 64 64" width="1.15em" height="1.15em" style="display:inline-block;vertical-align:-0.18em;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.18));" class="bilikids-icon-table" aria-label="Table"><defs><linearGradient id="bkTableTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient><linearGradient id="bkTableLeg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b45309"/><stop offset="100%" stop-color="#78350f"/></linearGradient></defs><line x1="16" y1="30" x2="14" y2="52" stroke="#92400e" stroke-width="4.5" stroke-linecap="round"/><line x1="48" y1="30" x2="50" y2="52" stroke="#92400e" stroke-width="4.5" stroke-linecap="round"/><rect x="11" y="27" width="42" height="6" rx="2" fill="#92400e"/><line x1="11" y1="30" x2="9" y2="58" stroke="url(#bkTableLeg)" stroke-width="5.5" stroke-linecap="round"/><line x1="53" y1="30" x2="55" y2="58" stroke="url(#bkTableLeg)" stroke-width="5.5" stroke-linecap="round"/><rect x="5" y="24" width="54" height="6" rx="3" fill="#b45309"/><rect x="4" y="17" width="56" height="11" rx="4" fill="url(#bkTableTop)"/><line x1="8" y1="20" x2="56" y2="20" stroke="#fef3c7" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/></svg>`,
+  TABLE_GREEN: `<svg viewBox="0 0 64 64" width="1.15em" height="1.15em" style="display:inline-block;vertical-align:-0.18em;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.18));" class="bilikids-icon-table" aria-label="Green Table"><defs><linearGradient id="bkTableGreenTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#059669"/></linearGradient><linearGradient id="bkTableGreenLeg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#047857"/><stop offset="100%" stop-color="#064e3b"/></linearGradient></defs><line x1="16" y1="30" x2="14" y2="52" stroke="#065f46" stroke-width="4.5" stroke-linecap="round"/><line x1="48" y1="30" x2="50" y2="52" stroke="#065f46" stroke-width="4.5" stroke-linecap="round"/><rect x="11" y="27" width="42" height="6" rx="2" fill="#065f46"/><line x1="11" y1="30" x2="9" y2="58" stroke="url(#bkTableGreenLeg)" stroke-width="5.5" stroke-linecap="round"/><line x1="53" y1="30" x2="55" y2="58" stroke="url(#bkTableGreenLeg)" stroke-width="5.5" stroke-linecap="round"/><rect x="5" y="24" width="54" height="6" rx="3" fill="#047857"/><rect x="4" y="17" width="56" height="11" rx="4" fill="url(#bkTableGreenTop)"/><line x1="8" y1="20" x2="56" y2="20" stroke="#d1fae5" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/></svg>`,
+  TABLE_BROWN: `<svg viewBox="0 0 64 64" width="1.15em" height="1.15em" style="display:inline-block;vertical-align:-0.18em;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.18));" class="bilikids-icon-table" aria-label="Brown Table"><defs><linearGradient id="bkTableBrownTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a16207"/><stop offset="100%" stop-color="#713f12"/></linearGradient><linearGradient id="bkTableBrownLeg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#552c08"/><stop offset="100%" stop-color="#381b04"/></linearGradient></defs><line x1="16" y1="30" x2="14" y2="52" stroke="#451a03" stroke-width="4.5" stroke-linecap="round"/><line x1="48" y1="30" x2="50" y2="52" stroke="#451a03" stroke-width="4.5" stroke-linecap="round"/><rect x="11" y="27" width="42" height="6" rx="2" fill="#451a03"/><line x1="11" y1="30" x2="9" y2="58" stroke="url(#bkTableBrownLeg)" stroke-width="5.5" stroke-linecap="round"/><line x1="53" y1="30" x2="55" y2="58" stroke="url(#bkTableBrownLeg)" stroke-width="5.5" stroke-linecap="round"/><rect x="5" y="24" width="54" height="6" rx="3" fill="#552c08"/><rect x="4" y="17" width="56" height="11" rx="4" fill="url(#bkTableBrownTop)"/><line x1="8" y1="20" x2="56" y2="20" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/></svg>`
+};
+if (typeof window !== 'undefined' && !window.BILIKIDS_ICONS) window.BILIKIDS_ICONS = _BK_ICONS;
+
 window.TODDLERS_UNITS_PART1 = [
   // ==========================================================================
   // UNIT 01: SCHOOL OBJECTS
@@ -27,7 +34,7 @@ window.TODDLERS_UNITS_PART1 = [
       { name: "Glue stick", icon: "🧴", fact: "Glue stick helps us stick colorful craft papers together.", audio: "glue stick", color: "Purple", shape: "Cylinder", count: 1 },
       { name: "Lunchbox", icon: "🍱", fact: "The lunchbox keeps healthy snacks fresh and yummy.", audio: "lunchbox", color: "Yellow", shape: "Rectangle", count: 1 },
       { name: "Scissors", icon: "✂️", fact: "Safety scissors cut paper shapes with adult supervision.", audio: "scissors", color: "Orange", shape: "Cross", count: 1 },
-      { name: "Table", icon: "🪵", fact: "Our classroom table is where we draw, write and create.", audio: "table", color: "Green", shape: "Circle", count: 1 },
+      { name: "Table", icon: _BK_ICONS.TABLE, fact: "Our classroom table is where we draw, write and create.", audio: "table", color: "Green", shape: "Circle", count: 1 },
       { name: "Paper", icon: "📄", fact: "Clean white paper ready for imaginative sketches.", audio: "paper", color: "White", shape: "Rectangle", count: 4 }
     ],
 
@@ -38,10 +45,10 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Listen to the spoken word and tap the correct classroom supply.",
         exercises: [
           { audio: "Book", prompt: "Listen and find: Book", options: [{ name: "Book", icon: "📖" }, { name: "Chair", icon: "🪑" }, { name: "Paper", icon: "📄" }], correct: 0 },
-          { audio: "Crayon", prompt: "Listen and find: Crayon", options: [{ name: "Scissors", icon: "✂️" }, { name: "Crayon", icon: "🖍️" }, { name: "Table", icon: "🪵" }], correct: 1 },
+          { audio: "Crayon", prompt: "Listen and find: Crayon", options: [{ name: "Scissors", icon: "✂️" }, { name: "Crayon", icon: "🖍️" }, { name: "Table", icon: _BK_ICONS.TABLE }], correct: 1 },
           { audio: "Lunchbox", prompt: "Listen and find: Lunchbox", options: [{ name: "Glue stick", icon: "🧴" }, { name: "Chair", icon: "🪑" }, { name: "Lunchbox", icon: "🍱" }], correct: 2 },
           { audio: "Scissors", prompt: "Listen and find: Scissors", options: [{ name: "Scissors", icon: "✂️" }, { name: "Book", icon: "📖" }, { name: "Paper", icon: "📄" }], correct: 0 },
-          { audio: "Glue stick", prompt: "Listen and find: Glue stick", options: [{ name: "Table", icon: "🪵" }, { name: "Glue stick", icon: "🧴" }, { name: "Crayon", icon: "🖍️" }], correct: 1 }
+          { audio: "Glue stick", prompt: "Listen and find: Glue stick", options: [{ name: "Table", icon: _BK_ICONS.TABLE }, { name: "Glue stick", icon: "🧴" }, { name: "Crayon", icon: "🖍️" }], correct: 1 }
         ]
       },
       {
@@ -50,10 +57,10 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Teacher Luna needs materials. Listen to the instruction and collect the right item.",
         exercises: [
           { audio: "Collect two crayons", prompt: "Collect two crayons for our drawing", options: [{ name: "2 Crayons", icon: "🖍️🖍️" }, { name: "1 Book", icon: "📖" }, { name: "3 Papers", icon: "📄📄📄" }], correct: 0 },
-          { audio: "Put the paper on the table", prompt: "Put the paper on the table", options: [{ name: "Paper on table", icon: "📄🪵" }, { name: "Scissors in box", icon: "✂️📦" }, { name: "Crayon on chair", icon: "🖍️🪑" }], correct: 0 },
+          { audio: "Put the paper on the table", prompt: "Put the paper on the table", options: [{ name: "Paper on table", icon: "📄" + _BK_ICONS.TABLE }, { name: "Scissors in box", icon: "✂️📦" }, { name: "Crayon on chair", icon: "🖍️🪑" }], correct: 0 },
           { audio: "Pick up the blue lunchbox", prompt: "Pick up the blue lunchbox", options: [{ name: "Red crayon", icon: "🖍️" }, { name: "Blue lunchbox", icon: "🍱" }, { name: "Green chair", icon: "🪑" }], correct: 1 },
           { audio: "Find the yellow scissors", prompt: "Find the yellow scissors", options: [{ name: "White paper", icon: "📄" }, { name: "Glue stick", icon: "🧴" }, { name: "Yellow scissors", icon: "✂️" }], correct: 2 },
-          { audio: "Place the book on the chair", prompt: "Place the book on the chair", options: [{ name: "Book on chair", icon: "📖🪑" }, { name: "Book on floor", icon: "📖⬇️" }, { name: "Lunchbox on table", icon: "🍱🪵" }], correct: 0 }
+          { audio: "Place the book on the chair", prompt: "Place the book on the chair", options: [{ name: "Book on chair", icon: "📖🪑" }, { name: "Book on floor", icon: "📖⬇️" }, { name: "Lunchbox on table", icon: "🍱" + _BK_ICONS.TABLE }], correct: 0 }
         ]
       },
       {
@@ -64,7 +71,7 @@ window.TODDLERS_UNITS_PART1 = [
           { audio: "Touch the red crayon", prompt: "Touch the red crayon", options: [{ name: "Red Crayon", icon: "🖍️", color: "Red" }, { name: "Blue Crayon", icon: "🖍️", color: "Blue" }, { name: "Green Crayon", icon: "🖍️", color: "Green" }], correct: 0 },
           { audio: "Select the yellow book", prompt: "Select the yellow book", options: [{ name: "Purple Book", icon: "📖" }, { name: "Yellow Book", icon: "📒" }, { name: "Black Book", icon: "📓" }], correct: 1 },
           { audio: "Where is the purple glue stick?", prompt: "Where is the purple glue stick?", options: [{ name: "Orange Box", icon: "📦" }, { name: "Purple Glue", icon: "🧴" }, { name: "Blue Paper", icon: "📄" }], correct: 1 },
-          { audio: "Find the green table", prompt: "Find the green table", options: [{ name: "Brown Chair", icon: "🪑" }, { name: "Red Scissors", icon: "✂️" }, { name: "Green Table", icon: "🪵" }], correct: 2 },
+          { audio: "Find the green table", prompt: "Find the green table", options: [{ name: "Brown Chair", icon: "🪑" }, { name: "Red Scissors", icon: "✂️" }, { name: "Green Table", icon: _BK_ICONS.TABLE_GREEN }], correct: 2 },
           { audio: "Touch the orange scissors", prompt: "Touch the orange scissors", options: [{ name: "Orange Scissors", icon: "✂️" }, { name: "Blue Lunchbox", icon: "🍱" }, { name: "Yellow Pencil", icon: "✏️" }], correct: 0 }
         ]
       },
@@ -74,10 +81,10 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Look at the desk. An object was removed! Listen to the clue to discover what disappeared.",
         exercises: [
           { audio: "We use it to read stories. What is missing?", prompt: "Clue: We read stories with it.", options: [{ name: "Book", icon: "📖" }, { name: "Chair", icon: "🪑" }, { name: "Scissors", icon: "✂️" }], correct: 0 },
-          { audio: "We color rainbows with it. What is missing?", prompt: "Clue: Used to color rainbows.", options: [{ name: "Lunchbox", icon: "🍱" }, { name: "Crayon", icon: "🖍️" }, { name: "Table", icon: "🪵" }], correct: 1 },
+          { audio: "We color rainbows with it. What is missing?", prompt: "Clue: Used to color rainbows.", options: [{ name: "Lunchbox", icon: "🍱" }, { name: "Crayon", icon: "🖍️" }, { name: "Table", icon: _BK_ICONS.TABLE }], correct: 1 },
           { audio: "It sticks pictures onto our poster. What is missing?", prompt: "Clue: It sticks paper together.", options: [{ name: "Paper", icon: "📄" }, { name: "Book", icon: "📖" }, { name: "Glue stick", icon: "🧴" }], correct: 2 },
           { audio: "It keeps your sandwich fresh. What is missing?", prompt: "Clue: Holds your delicious sandwich.", options: [{ name: "Lunchbox", icon: "🍱" }, { name: "Chair", icon: "🪑" }, { name: "Scissors", icon: "✂️" }], correct: 0 },
-          { audio: "You sit on it when you listen. What is missing?", prompt: "Clue: You sit on it.", options: [{ name: "Table", icon: "🪵" }, { name: "Chair", icon: "🪑" }, { name: "Crayon", icon: "🖍️" }], correct: 1 }
+          { audio: "You sit on it when you listen. What is missing?", prompt: "Clue: You sit on it.", options: [{ name: "Table", icon: _BK_ICONS.TABLE }, { name: "Chair", icon: "🪑" }, { name: "Crayon", icon: "🖍️" }], correct: 1 }
         ]
       },
       {
@@ -112,10 +119,10 @@ window.TODDLERS_UNITS_PART1 = [
         title: "Match Classroom Words",
         desc: "Read the written word card and tap the matching illustration.",
         exercises: [
-          { text: "BOOK", prompt: "Read: BOOK", options: [{ name: "Book", icon: "📖" }, { name: "Table", icon: "🪵" }, { name: "Chair", icon: "🪑" }], correct: 0 },
+          { text: "BOOK", prompt: "Read: BOOK", options: [{ name: "Book", icon: "📖" }, { name: "Table", icon: _BK_ICONS.TABLE }, { name: "Chair", icon: "🪑" }], correct: 0 },
           { text: "CRAYON", prompt: "Read: CRAYON", options: [{ name: "Scissors", icon: "✂️" }, { name: "Crayon", icon: "🖍️" }, { name: "Paper", icon: "📄" }], correct: 1 },
           { text: "CHAIR", prompt: "Read: CHAIR", options: [{ name: "Lunchbox", icon: "🍱" }, { name: "Glue stick", icon: "🧴" }, { name: "Chair", icon: "🪑" }], correct: 2 },
-          { text: "TABLE", prompt: "Read: TABLE", options: [{ name: "Table", icon: "🪵" }, { name: "Book", icon: "📖" }, { name: "Paper", icon: "📄" }], correct: 0 },
+          { text: "TABLE", prompt: "Read: TABLE", options: [{ name: "Table", icon: _BK_ICONS.TABLE }, { name: "Book", icon: "📖" }, { name: "Paper", icon: "📄" }], correct: 0 },
           { text: "SCISSORS", prompt: "Read: SCISSORS", options: [{ name: "Crayon", icon: "🖍️" }, { name: "Scissors", icon: "✂️" }, { name: "Chair", icon: "🪑" }], correct: 1 }
         ]
       },
@@ -125,9 +132,9 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Read the short sentence and discover where the item is located in the classroom.",
         exercises: [
           { text: "This is a red crayon.", prompt: "Find: 'This is a red crayon.'", options: [{ name: "Red Crayon", icon: "🖍️" }, { name: "Blue Book", icon: "📖" }, { name: "Yellow Scissors", icon: "✂️" }], correct: 0 },
-          { text: "This is my blue lunchbox.", prompt: "Find: 'This is my blue lunchbox.'", options: [{ name: "Brown Chair", icon: "🪑" }, { name: "Blue Lunchbox", icon: "🍱" }, { name: "Green Table", icon: "🪵" }], correct: 1 },
+          { text: "This is my blue lunchbox.", prompt: "Find: 'This is my blue lunchbox.'", options: [{ name: "Brown Chair", icon: "🪑" }, { name: "Blue Lunchbox", icon: "🍱" }, { name: "Green Table", icon: _BK_ICONS.TABLE_GREEN }], correct: 1 },
           { text: "This is white paper.", prompt: "Find: 'This is white paper.'", options: [{ name: "Glue stick", icon: "🧴" }, { name: "Crayon", icon: "🖍️" }, { name: "White paper", icon: "📄" }], correct: 2 },
-          { text: "This is a brown table.", prompt: "Find: 'This is a brown table.'", options: [{ name: "Brown Table", icon: "🪵" }, { name: "Scissors", icon: "✂️" }, { name: "Lunchbox", icon: "🍱" }], correct: 0 },
+          { text: "This is a brown table.", prompt: "Find: 'This is a brown table.'", options: [{ name: "Brown Table", icon: _BK_ICONS.TABLE_BROWN }, { name: "Scissors", icon: "✂️" }, { name: "Lunchbox", icon: "🍱" }], correct: 0 },
           { text: "This is a purple glue stick.", prompt: "Find: 'This is a purple glue stick.'", options: [{ name: "Red Book", icon: "📖" }, { name: "Purple Glue stick", icon: "🧴" }, { name: "Yellow Chair", icon: "🪑" }], correct: 1 }
         ]
       },
@@ -140,7 +147,7 @@ window.TODDLERS_UNITS_PART1 = [
           { text: "This is a ______ . (🪑)", prompt: "Complete: This is a ______", options: ["table", "chair", "paper"], correct: 1 },
           { text: "This is a ______ . (🖍️)", prompt: "Complete: This is a ______", options: ["lunchbox", "scissors", "crayon"], correct: 2 },
           { text: "This is a ______ . (✂️)", prompt: "Complete: This is a ______", options: ["scissors", "glue stick", "book"], correct: 0 },
-          { text: "This is a ______ . (🪵)", prompt: "Complete: This is a ______", options: ["chair", "table", "paper"], correct: 1 }
+          { text: "This is a ______ . (Table)", prompt: "Complete: This is a ______", options: ["chair", "table", "paper"], correct: 1 }
         ]
       },
       {
@@ -189,7 +196,7 @@ window.TODDLERS_UNITS_PART1 = [
         exercises: [
           { target: "BOOK", letters: ["O", "B", "K", "O"], icon: "📖", hint: "Something you read" },
           { target: "CHAIR", letters: ["A", "C", "H", "I", "R"], icon: "🪑", hint: "You sit on it" },
-          { target: "TABLE", letters: ["B", "T", "A", "L", "E"], icon: "🪵", hint: "Desk to work on" },
+          { target: "TABLE", letters: ["B", "T", "A", "L", "E"], icon: _BK_ICONS.TABLE, hint: "Desk to work on" },
           { target: "PAPER", letters: ["P", "A", "R", "E", "P"], icon: "📄", hint: "White sheet to draw" },
           { target: "PEN", letters: ["N", "E", "P"], icon: "🖊️", hint: "Used for writing" }
         ]
@@ -201,7 +208,7 @@ window.TODDLERS_UNITS_PART1 = [
         exercises: [
           { target: "B_OK", missing: "O", full: "BOOK", options: ["O", "A", "E"], icon: "📖" },
           { target: "CH_IR", missing: "A", full: "CHAIR", options: ["E", "A", "U"], icon: "🪑" },
-          { target: "T_BLE", missing: "A", full: "TABLE", options: ["I", "A", "O"], icon: "🪵" },
+          { target: "T_BLE", missing: "A", full: "TABLE", options: ["I", "A", "O"], icon: _BK_ICONS.TABLE },
           { target: "P_PER", missing: "A", full: "PAPER", options: ["A", "U", "E"], icon: "📄" },
           { target: "SCH_OL", missing: "O", full: "SCHOOL", options: ["O", "I", "U"], icon: "🏫" }
         ]
@@ -215,7 +222,7 @@ window.TODDLERS_UNITS_PART1 = [
           { prompt: "Label this object: 🪑", answer: "chair", accepted: ["chair", "Chair", "a chair"] },
           { prompt: "Label this object: 🖍️", answer: "crayon", accepted: ["crayon", "Crayon", "a crayon"] },
           { prompt: "Label this object: ✂️", answer: "scissors", accepted: ["scissors", "Scissors"] },
-          { prompt: "Label this object: 🪵", answer: "table", accepted: ["table", "Table", "a table"] }
+          { prompt: "Label this object: Table", icon: _BK_ICONS.TABLE, answer: "table", accepted: ["table", "Table", "a table"] }
         ]
       },
       {
@@ -266,7 +273,7 @@ window.TODDLERS_UNITS_PART1 = [
           { prompt: "Say: Chair", audio: "Chair", target: "chair", icon: "🪑" },
           { prompt: "Say: Crayon", audio: "Crayon", target: "crayon", icon: "🖍️" },
           { prompt: "Say: School", audio: "School", target: "school", icon: "🏫" },
-          { prompt: "Say: Table", audio: "Table", target: "table", icon: "🪵" }
+          { prompt: "Say: Table", audio: "Table", target: "table", icon: _BK_ICONS.TABLE }
         ]
       },
       {
@@ -369,7 +376,7 @@ window.TODDLERS_UNITS_PART1 = [
       story: "Show everything you learned in Unit 1 across 10 interactive mission steps!",
       steps: [
         { step: 1, type: "listening", prompt: "Listen: 'Where is the blue book?'", options: ["📖", "🪑", "✂️"], correct: 0 },
-        { step: 2, type: "reading", prompt: "Read the label: 'CRAYON'", options: ["🖍️", "🪵", "📄"], correct: 0 },
+        { step: 2, type: "reading", prompt: "Read the label: 'CRAYON'", options: ["🖍️", _BK_ICONS.TABLE, "📄"], correct: 0 },
         { step: 3, type: "writing", prompt: "Unscramble: K O O B", answer: "BOOK" },
         { step: 4, type: "speaking", prompt: "Say aloud: 'This is my school'", target: "this is my school" },
         { step: 5, type: "listening", prompt: "Listen: 'Collect three scissors'", options: ["✂️✂️✂️", "✂️✂️", "✂️✂️✂️✂️"], correct: 0 },
@@ -817,7 +824,7 @@ window.TODDLERS_UNITS_PART1 = [
         exercises: [
           { audio: "Open the front door", prompt: "Action: Open front door", options: [{ name: "Open door", icon: "🚪🔓" }, { name: "Close window", icon: "🪟" }, { name: "Turn off lamp", icon: "💡" }], correct: 0 },
           { audio: "Look out the square window", prompt: "Action: Look out window", options: [{ name: "Sit down", icon: "🪑" }, { name: "Look out window", icon: "🪟👀" }, { name: "Wash dishes", icon: "🍽️" }], correct: 1 },
-          { audio: "Help Mommy set the table", prompt: "Action: Set the table", options: [{ name: "Set table", icon: "🪵🍽️" }, { name: "Play ball", icon: "⚽" }, { name: "Sleep", icon: "😴" }], correct: 0 },
+          { audio: "Help Mommy set the table", prompt: "Action: Set the table", options: [{ name: "Set table", icon: _BK_ICONS.TABLE + "🍽️" }, { name: "Play ball", icon: "⚽" }, { name: "Sleep", icon: "😴" }], correct: 0 },
           { audio: "Give the toy to the baby", prompt: "Action: Give toy to baby", options: [{ name: "Give toy to baby", icon: "👶🧸" }, { name: "Eat apple", icon: "🍎" }, { name: "Run away", icon: "🏃" }], correct: 0 },
           { audio: "Say good night to Daddy", prompt: "Action: Say good night", options: [{ name: "Say good morning", icon: "☀️" }, { name: "Say good night", icon: "🌙👨" }, { name: "Drink juice", icon: "🧃" }], correct: 1 }
         ]
@@ -879,10 +886,10 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Read descriptions of parts of the house.",
         exercises: [
           { text: "DOOR", prompt: "Read: DOOR", options: [{ name: "Door", icon: "🚪" }, { name: "Window", icon: "🪟" }, { name: "Roof", icon: "🏠" }], correct: 0 },
-          { text: "WINDOW", prompt: "Read: WINDOW", options: [{ name: "Floor", icon: "🪵" }, { name: "Window", icon: "🪟" }, { name: "Door", icon: "🚪" }], correct: 1 },
+          { text: "WINDOW", prompt: "Read: WINDOW", options: [{ name: "Floor", icon: "🟫" }, { name: "Window", icon: "🪟" }, { name: "Door", icon: "🚪" }], correct: 1 },
           { text: "HOUSE", prompt: "Read: HOUSE", options: [{ name: "Car", icon: "🚗" }, { name: "Tree", icon: "🌳" }, { name: "House", icon: "🏡" }], correct: 2 },
           { text: "APARTMENT", prompt: "Read: APARTMENT", options: [{ name: "Apartment", icon: "🏢" }, { name: "Tent", icon: "⛺" }, { name: "Boat", icon: "⛵" }], correct: 0 },
-          { text: "BUILDING", prompt: "Read: BUILDING", options: [{ name: "Chair", icon: "🪑" }, { name: "Building", icon: "🏙️" }, { name: "Table", icon: "🪵" }], correct: 1 }
+          { text: "BUILDING", prompt: "Read: BUILDING", options: [{ name: "Chair", icon: "🪑" }, { name: "Building", icon: "🏙️" }, { name: "Table", icon: _BK_ICONS.TABLE }], correct: 1 }
         ]
       },
       {

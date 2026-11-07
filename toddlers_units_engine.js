@@ -82,6 +82,13 @@ class ToddlersUnitsEngine {
     this.userProgress = this.loadProgress();
   }
 
+  renderVisual(iconOrText, context = '') {
+    if (typeof window !== 'undefined' && window.bilikidsRenderIcon) {
+      return window.bilikidsRenderIcon(iconOrText, context);
+    }
+    return iconOrText || '✨';
+  }
+
   /* ==========================================================================
      INITIALIZATION & URL ROUTING
      ========================================================================== */
@@ -507,7 +514,7 @@ class ToddlersUnitsEngine {
       html += `
         <div class="explore-card" onclick="toddlersEngine.playAudio('${cleanWord}')">
           <div>
-            <div class="explore-icon">${item.icon || '✨'}</div>
+            <div class="explore-icon">${this.renderVisual(item.icon, item.word || item.name)}</div>
             <h3 class="explore-word">${item.word || item.name}</h3>
             ${item.phonics ? `<div style="font-size:0.85rem; color:#f59e0b; font-weight:800; margin-bottom:6px;">Phonics: ${item.phonics}</div>` : ''}
             <p class="explore-fact">${item.fact || 'Listen and repeat to master this word!'}</p>
@@ -554,7 +561,7 @@ class ToddlersUnitsEngine {
       const target = questions[index];
       const targetWord = target.word || target.name;
       const options = [target, ...pool.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
-      questionBox.innerHTML = `<div style="display:flex;align-items:center;gap:10px;margin:10px 0 14px;"><span style="font-size:2.5rem;" aria-hidden="true">${target.icon}</span><strong>Picture ${index + 1} of ${questions.length}</strong></div><div style="display:flex;flex-wrap:wrap;gap:8px;" class="toddler-recall-options"></div><p class="toddler-recall-feedback" role="status" aria-live="polite"></p><p style="font-size:.9rem;color:#6b7280;">Correct: ${score}/${questions.length}</p>`;
+      questionBox.innerHTML = `<div style="display:flex;align-items:center;gap:10px;margin:10px 0 14px;"><span style="font-size:2.5rem;" aria-hidden="true">${this.renderVisual(target.icon, targetWord)}</span><strong>Picture ${index + 1} of ${questions.length}</strong></div><div style="display:flex;flex-wrap:wrap;gap:8px;" class="toddler-recall-options"></div><p class="toddler-recall-feedback" role="status" aria-live="polite"></p><p style="font-size:.9rem;color:#6b7280;">Correct: ${score}/${questions.length}</p>`;
       const buttons = questionBox.querySelector('.toddler-recall-options');
       options.forEach(option => {
         const word = option.word || option.name;
@@ -708,7 +715,7 @@ class ToddlersUnitsEngine {
         <div class="bubble-pond-container">
           ${(ex.options || []).map((opt, idx) => {
             const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-            const optIcon = (typeof opt === 'object') ? (opt.icon || '🫧') : '🫧';
+            const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '🫧') : '🫧', optName);
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
             const cleanOptText = optName.replace(/'/g, "\\'");
@@ -737,7 +744,7 @@ class ToddlersUnitsEngine {
         <div class="memory-board-grid">
           ${(ex.options || []).map((opt, idx) => {
             const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-            const optIcon = (typeof opt === 'object') ? (opt.icon || '⭐') : '⭐';
+            const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '⭐') : '⭐', optName);
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
             const cleanOptText = optName.replace(/'/g, "\\'");
@@ -760,7 +767,7 @@ class ToddlersUnitsEngine {
     // Act 3: Mystery Shadow Detective mechanic!
     if (actIndex === 3) {
       const correctOpt = (ex.options || [])[typeof ex.correct === 'number' ? ex.correct : 0] || {};
-      const shadowIcon = (typeof correctOpt === 'object' ? correctOpt.icon : '❓') || '🔍';
+      const shadowIcon = this.renderVisual((typeof correctOpt === 'object' ? correctOpt.icon : '❓') || '🔍', correctOpt.name || correctOpt.text || '');
       return `
         <div class="exercise-prompt-card">
           <div style="font-size:3rem; margin-bottom:8px;">🕵️‍♂️🔍</div>
@@ -778,7 +785,7 @@ class ToddlersUnitsEngine {
         <div class="exercise-choices-grid">
           ${(ex.options || []).map((opt, idx) => {
             const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-            const optIcon = (typeof opt === 'object') ? (opt.icon || '🔍') : '🔍';
+            const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '🔍') : '🔍', optName);
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
             const cleanOptText = optName.replace(/'/g, "\\'");
@@ -806,7 +813,7 @@ class ToddlersUnitsEngine {
       <div class="exercise-choices-grid">
         ${(ex.options || []).map((opt, idx) => {
           const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-          const optIcon = (typeof opt === 'object') ? (opt.icon || '✨') : '✨';
+          const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '✨') : '✨', optName);
           const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
             (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
           const cleanOptText = optName.replace(/'/g, "\\'");
@@ -855,6 +862,14 @@ class ToddlersUnitsEngine {
 
   getChoiceIcon(label, fallback = '📖') {
     const value = String(label || '').toLowerCase();
+    if (window.BILIKIDS_ICONS) {
+      if (/\b(green table)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE_GREEN;
+      if (/\b(brown table)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE_BROWN;
+      if (/\b(desk|desks)\b/.test(value)) return window.BILIKIDS_ICONS.DESK;
+      if (/\b(table|tables)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE;
+      if (/\b(eraser|erasers)\b/.test(value)) return window.BILIKIDS_ICONS.ERASER;
+      if (/\b(sharpener|sharpeners)\b/.test(value)) return window.BILIKIDS_ICONS.SHARPENER;
+    }
     const choices = [
       [/\b(luna|moon)\b/, '🌙'], [/\bleo\b/, '🦁'], [/\bbili\b/, '🐻'],
       [/\b(apple|apples)\b/, '🍎'], [/\b(balloon|balloons)\b/, '🎈'],
@@ -864,9 +879,14 @@ class ToddlersUnitsEngine {
       [/\b(book|books)\b/, '📚'], [/\b(pencil|pencils)\b/, '✏️'],
       [/\b(crayon|crayons)\b/, '🖍️'], [/\b(red)\b/, '🔴'],
       [/\b(blue)\b/, '🔵'], [/\b(yellow)\b/, '🟡'],
-      [/\b(green)\b/, '🟢'], [/\b(number|one|two|three|four|five)\b/, '🔢']
+      [/\b(green)\b/, '🟢'], [/\b(number|one|two|three|four|five)\b/, '🔢'],
+      [/\b(chair|chairs)\b/, '🪑'], [/\b(scissors)\b/, '✂️'],
+      [/\b(paper|papers)\b/, '📄'], [/\b(lunchbox|lunchboxes)\b/, '🍱'],
+      [/\b(glue|glue stick)\b/, '🧴']
     ];
-    return choices.find(([pattern]) => pattern.test(value))?.[1] || fallback;
+    const match = choices.find(([pattern]) => pattern.test(value));
+    if (match) return match[1];
+    return this.renderVisual(fallback, label);
   }
 
   /* --------------------------------------------------------------------------
@@ -922,7 +942,8 @@ class ToddlersUnitsEngine {
       const sentence = ex.sentence || ex.text || 'This is a red pencil.';
       const cleanWagonPrompt = sentence.replace(/______.*$/, '').trim() || 'This is a';
       const promptToPlay = ex.prompt || sentence;
-      const emojiClue = sentence.match(/\([^\)]+\)/) ? sentence.match(/\([^\)]+\)/)[0].replace(/[\(\)]/g, '') : '📖';
+      const rawEmojiClue = sentence.match(/\([^\)]+\)/) ? sentence.match(/\([^\)]+\)/)[0].replace(/[\(\)]/g, '') : '📖';
+      const emojiClue = this.renderVisual(rawEmojiClue, sentence);
       return `
         <div class="exercise-prompt-card">
           <div style="font-size:3rem; margin-bottom:8px;">🚂🧩</div>
@@ -941,7 +962,7 @@ class ToddlersUnitsEngine {
         <div class="exercise-choices-grid">
           ${(ex.options || []).map((opt, idx) => {
             const optName = (typeof opt === 'string') ? opt : (opt.name || opt.text || opt.word || '');
-            const optIcon = (typeof opt === 'object') ? (opt.icon || '🚂') : '🚂';
+            const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '🚂') : '🚂', optName);
             const isCorrect = (idx === ex.correct || optName === ex.correct || opt === ex.correct ||
               (ex.correct !== undefined && optName.toLowerCase() === String(ex.correct).toLowerCase()));
             return `
@@ -1033,7 +1054,7 @@ class ToddlersUnitsEngine {
     if (actIndex === 3) {
       return `
         <div class="exercise-prompt-card">
-          <div style="font-size:3.5rem; margin-bottom:8px;">${ex.icon || '⌨️'}</div>
+          <div style="font-size:3.5rem; margin-bottom:8px;">${this.renderVisual(ex.icon || '⌨️', targetWord)}</div>
           <h3 class="exercise-instruction">Kids Keyboard Studio! Type the word:</h3>
           <p class="exercise-sub-instruction">${ex.hint || ex.clue || 'Tap the colorful keys to write the word.'}</p>
           <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${targetWord.toLowerCase()}')">
@@ -1072,7 +1093,7 @@ class ToddlersUnitsEngine {
     // Default: Magnetic Letter Tiles Unscrambler
     return `
       <div class="exercise-prompt-card">
-        <div style="font-size:3.5rem; margin-bottom:8px;">${ex.icon || '✏️'}</div>
+        <div style="font-size:3.5rem; margin-bottom:8px;">${this.renderVisual(ex.icon || '✏️', targetWord)}</div>
         <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Build or write the correct word:'}</h3>
         <p class="exercise-sub-instruction">${ex.hint || ex.clue || ex.sentence || 'Tap letters in order or write the word.'}</p>
         <button class="exercise-audio-trigger" onclick="toddlersEngine.playAudio('${targetWord.toLowerCase()}')">
@@ -1212,7 +1233,7 @@ class ToddlersUnitsEngine {
     // Default Speaking Lab
     return `
       <div class="speaking-panel">
-        <div style="font-size:3.5rem; margin-bottom:0.5rem;">${ex.icon || '🎤'}</div>
+        <div style="font-size:3.5rem; margin-bottom:0.5rem;">${this.renderVisual(ex.icon || '🎤', targetPhrase)}</div>
         <h3 class="exercise-instruction">${ex.prompt || ex.instruction || 'Listen and repeat clearly:'}</h3>
         <div class="speaking-target-phrase">"${targetPhrase}"</div>
 
@@ -1634,7 +1655,7 @@ class ToddlersUnitsEngine {
       html += `
         <div class="game-level-node ${nodeClass}" onclick="${isUnlocked ? `toddlersEngine.playGameLevel(${lvl.level})` : `toddlersEngine.showCelebrationBanner('🔒 Nivel Bloqueado', '¡Completa los niveles anteriores primero!', '#d97706')`}">
           <div class="game-level-num">Level ${lvl.level}</div>
-          <div class="game-level-icon">${isUnlocked ? (lvl.icon || '🎯') : '🔒'}</div>
+          <div class="game-level-icon">${isUnlocked ? this.renderVisual(lvl.icon || '🎯', lvl.title || target) : '🔒'}</div>
           <div class="game-level-title">${lvl.title || 'Level ' + lvl.level}</div>
           <div class="game-level-stars">${starsDisplay}</div>
         </div>
@@ -1666,7 +1687,7 @@ class ToddlersUnitsEngine {
         <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">Pop the target bubble to clear Level ${lvl.level}!</p>
         <div class="bubble-pond-container" style="min-height:220px;">
           <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">
-            <div style="font-size:2.8rem;">${lvl.icon || '🎯'}</div>
+            <div style="font-size:2.8rem;">${this.renderVisual(lvl.icon || '🎯', lvl.title || target)}</div>
             <div style="font-weight:900; color:#0369a1;">${target}</div>
           </div>
           <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, false)">
@@ -1689,7 +1710,7 @@ class ToddlersUnitsEngine {
       // Arcade Mode 3: Boss Level Victory
       gameContentHtml = `
         <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">🏆 Boss Challenge: Spell or identify "${target}"!</p>
-        <div style="font-size:4.5rem; margin:0.5rem 0;">${lvl.icon || '👑'}</div>
+        <div style="font-size:4.5rem; margin:0.5rem 0;">${this.renderVisual(lvl.icon || '👑', lvl.title || target)}</div>
         <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
           <button class="writing-check-btn" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">Claim Star Victory ⭐</button>
         </div>
@@ -1802,7 +1823,7 @@ class ToddlersUnitsEngine {
         </div>
 
         <div class="exercise-prompt-card" style="border-color:#eab308; background:#fefce8;">
-          <div style="font-size:3.5rem; margin-bottom:0.5rem;">${currentStep.icon || '🏅'}</div>
+          <div style="font-size:3.5rem; margin-bottom:0.5rem;">${this.renderVisual(currentStep.icon || '🏅', currentStep.question || currentStep.instruction)}</div>
           <span style="background:#fef08a; color:#854d0e; padding:4px 12px; border-radius:999px; font-weight:800; font-size:0.8rem; text-transform:uppercase;">
             Step ${this.currentChallengeStep + 1} of 10 • ${currentStep.skill || 'Mastery'}
           </span>
@@ -1820,7 +1841,7 @@ class ToddlersUnitsEngine {
     (currentStep.options || []).forEach((opt, idx) => {
       const isCorrect = (opt.text === currentStep.answer || opt === currentStep.answer || idx === currentStep.correct);
       const optText = (typeof opt === 'string') ? opt : (opt.text || opt.name || '');
-      const optIcon = (typeof opt === 'object') ? (opt.icon || '⭐') : '⭐';
+      const optIcon = this.renderVisual((typeof opt === 'object') ? (opt.icon || '⭐') : '⭐', optText);
 
       html += `
         <div class="exercise-choice-card" onclick="toddlersEngine.handleChallengeStepChoice(${isCorrect}, this)">

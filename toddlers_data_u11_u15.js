@@ -75,7 +75,7 @@ window.TODDLERS_UNITS_PART3 = [
         exercises: [
           { audio: "The spider is ON the green leaf.", prompt: "Where is the spider?", options: [{ name: "ON the leaf", icon: "🕷️🍃 (On top)" }, { name: "UNDER the soil", icon: "🪱🟤 (Underneath)" }], correct: 0 },
           { audio: "The worm is UNDER the dark soil.", prompt: "Where is the worm?", options: [{ name: "ON the roof", icon: "🏠" }, { name: "UNDER the soil", icon: "🪱🟤 (Underneath)" }], correct: 1 },
-          { audio: "The watering can is ON the garden table.", prompt: "Where is the can?", options: [{ name: "ON the table", icon: "🚿🪵 (On top)" }, { name: "UNDER the table", icon: "⬇️ (Under)" }], correct: 0 },
+          { audio: "The watering can is ON the garden table.", prompt: "Where is the can?", options: [{ name: "ON the table", icon: "🚿" + (typeof window !== "undefined" && window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.TABLE : "🪑") + " (On top)" }, { name: "UNDER the table", icon: "⬇️ (Under)" }], correct: 0 },
           { audio: "The roots are growing UNDER the ground.", prompt: "Where are roots?", options: [{ name: "ON the tree", icon: "🍃" }, { name: "UNDER the ground", icon: "🥕🟤 (Under)" }], correct: 1 },
           { audio: "A red ladybug is ON the purple flower.", prompt: "Where is ladybug?", options: [{ name: "ON the flower", icon: "🐞🌸 (On top)" }, { name: "UNDER the stone", icon: "🪨" }], correct: 0 }
         ]
@@ -225,7 +225,7 @@ window.TODDLERS_UNITS_PART3 = [
         exercises: [
           { sentence: "The spider is ______ the leaf. (🕷️🍃)", answer: "on", accepted: ["on", "On"] },
           { sentence: "The worm is ______ the soil. (🪱🟤)", answer: "under", accepted: ["under", "Under"] },
-          { sentence: "The watering can is ______ the table. (🪵)", answer: "on", accepted: ["on", "On"] },
+          { sentence: "The watering can is ______ the table. (Table)", answer: "on", accepted: ["on", "On"] },
           { sentence: "The roots grow ______ the ground. (🥕)", answer: "under", accepted: ["under", "Under"] },
           { sentence: "The ladybug rests ______ the flower. (🌸)", answer: "on", accepted: ["on", "On"] }
         ]
@@ -1208,8 +1208,8 @@ window.TODDLERS_UNITS_PART3 = [
         desc: "Listen to cleanup instructions: Put the doll IN the box, car ON the shelf.",
         exercises: [
           { audio: "Put the teddy bear IN the toy box.", prompt: "Instruction: Bear IN box", options: [{ name: "Bear IN box", icon: "🧸📦 (Inside)" }, { name: "Bear ON chair", icon: "🪑" }, { name: "Bear on floor", icon: "⬇️" }], correct: 0 },
-          { audio: "Place the red car ON the wooden shelf.", prompt: "Instruction: Car ON shelf", options: [{ name: "Car under bed", icon: "🛏️" }, { name: "Car ON shelf", icon: "🚗🪵 (On top)" }, { name: "Car in trash", icon: "🗑️" }], correct: 1 },
-          { audio: "Put the doll UNDER the warm blanket.", prompt: "Instruction: Doll UNDER blanket", options: [{ name: "Doll in tree", icon: "🌳" }, { name: "Doll on table", icon: "🪵" }, { name: "Doll UNDER blanket", icon: "🪆🛏️ (Under)" }], correct: 2 },
+          { audio: "Place the red car ON the wooden shelf.", prompt: "Instruction: Car ON shelf", options: [{ name: "Car under bed", icon: "🛏️" }, { name: "Car ON shelf", icon: "🚗🪜 (On top)" }, { name: "Car in trash", icon: "🗑️" }], correct: 1 },
+          { audio: "Put the doll UNDER the warm blanket.", prompt: "Instruction: Doll UNDER blanket", options: [{ name: "Doll in tree", icon: "🌳" }, { name: "Doll on table", icon: (typeof window !== "undefined" && window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.TABLE : "🪑") }, { name: "Doll UNDER blanket", icon: "🪆🛏️ (Under)" }], correct: 2 },
           { audio: "Put the puzzle pieces IN the cardboard box.", prompt: "Instruction: Puzzle IN box", options: [{ name: "Puzzle IN box", icon: "🧩📦 (Inside)" }, { name: "Puzzle on roof", icon: "🏠" }, { name: "Puzzle in water", icon: "💧" }], correct: 0 },
           { audio: "Place the kite ON the wall hook.", prompt: "Instruction: Kite ON hook", options: [{ name: "Kite under bed", icon: "🛏️" }, { name: "Kite ON hook", icon: "🪁🪝 (On wall)" }, { name: "Kite outside", icon: "🌧️" }], correct: 1 }
         ]
@@ -1273,7 +1273,7 @@ window.TODDLERS_UNITS_PART3 = [
           { text: "The teddy bear is ______ the toy box. (🧸📦)", options: ["in", "on", "under"], correct: 0 },
           { text: "The doll sits ______ the chair. (🪆🪑)", options: ["in", "on", "under"], correct: 1 },
           { text: "The toy truck rolled ______ the bed. (🚛🛏️)", options: ["in", "on", "under"], correct: 2 },
-          { text: "The puzzle pieces are ______ the table. (🧩🪵)", options: ["in", "on", "under"], correct: 1 },
+          { text: "The puzzle pieces are ______ the table. (🧩)", options: ["in", "on", "under"], correct: 1 },
           { text: "The blocks are stored ______ the closet shelf.", options: ["on", "under", "in"], correct: 0 }
         ]
       },
@@ -1672,7 +1672,7 @@ window.TODDLERS_UNITS_PART3 = [
         title: "Find the /f/ Sound",
         desc: "Review words starting with /f/ (Floor, Flower, Friend, Fast, Feed).",
         exercises: [
-          { prompt: "Which room part starts with /f/?", options: [{ name: "Floor", icon: "🪵" }, { name: "Wall", icon: "🧱" }, { name: "Door", icon: "🚪" }], correct: 0 },
+          { prompt: "Which room part starts with /f/?", options: [{ name: "Floor", icon: "🟫" }, { name: "Wall", icon: "🧱" }, { name: "Door", icon: "🚪" }], correct: 0 },
           { prompt: "Which garden blossom starts with /f/?", options: [{ name: "Tree", icon: "🌳" }, { name: "Flower", icon: "🌸" }, { name: "Grass", icon: "🌿" }], correct: 1 },
           { prompt: "Which kind person starts with /f/?", options: [{ name: "Dog", icon: "🐶" }, { name: "Teacher", icon: "👩‍🏫" }, { name: "Friend", icon: "👫" }], correct: 2 },
           { prompt: "Which speed word starts with /f/?", options: [{ name: "Fast", icon: "⚡" }, { name: "Slow", icon: "🐢" }, { name: "Big", icon: "🐘" }], correct: 0 },
