@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilikids Millionaire - ¿Quién Quiere Ser Millonario?</title>
+  <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="millionaire_styles.css">
+</head>
+<body>
+  <!-- Atmospheric Studio Backdrop Vignette -->
+  <div class="studio-backdrop-overlay"></div>
+
+  <!-- Confetti Canvas for Grand Finale -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="game-page-wrapper">
+    <!-- TOP NAVIGATION BAR -->
+    <header class="millionaire-nav-header">
+      <div class="nav-left">
+        <a href="index.html" class="return-home-btn" title="Volver al Portal Principal de Bilikids">
+          🏠 Inicio
+        </a>
+        <a href="kids.html" id="returnCategoryBtn" class="return-category-btn" title="Volver a la categoría">
+          ← Volver a Kids
+        </a>
+      </div>
+
+      <div class="nav-center-badge">
+        <span style="font-size: 1.1rem;">💎</span>
+        <span class="edition-pill" id="categoryBadge">KIDS EDITION • $1,000,000</span>
+      </div>
+
+      <div class="nav-right">
+        <button type="button" id="audioToggleBtn" class="audio-toggle-btn" title="Activar / Desactivar Sonido">
+          🔊
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN GAME ARENA -->
+    <main class="game-arena-container">
+      <!-- STAGE PLAYING FIELD -->
+      <section class="stage-section">
+        <!-- LIFELINES (COMODINES) -->
+        <div class="lifelines-bar">
+          <button type="button" id="lifeline5050" class="lifeline-btn" title="Comodín 50:50 (Elimina 2 opciones erróneas)">
+            <span class="lifeline-icon">50:50</span>
+            <span class="lifeline-label">Half</span>
+          </button>
+
+          <button type="button" id="lifelineAskBili" class="lifeline-btn" title="Pregúntale a Bili (Pista pedagógica del oso)">
+            <span class="lifeline-icon">🐻</span>
+            <span class="lifeline-label">Ask Bili</span>
+          </button>
+
+          <button type="button" id="lifelineSwitch" class="lifeline-btn" title="Cambiar Pregunta (Segunda oportunidad)">
+            <span class="lifeline-icon">🔄</span>
+            <span class="lifeline-label">Switch</span>
+          </button>
+        </div>
+
+        <!-- CENTER GAME SHOW MEDALLION / LOGO -->
+        <div class="stage-medallion-container">
+          <div class="stage-medallion-ring">
+            <img src="assets/millionaire_medallion_clean.jpg" alt="Millionaire Crest" class="stage-medallion-img">
+          </div>
+        </div>
+
+        <!-- QUESTION BOARD -->
+        <div class="question-board-wrapper">
+          <!-- Question Container -->
+          <div class="question-hex-container">
+            <div class="question-tier-pill" id="questionTierPill">
+              LEVEL 1 OF 10 • $1,000
+            </div>
+            <h1 class="question-text" id="questionText">
+              Loading challenge question...
+            </h1>
+          </div>
+
+          <!-- 2x2 Options Grid -->
+          <div class="options-grid" id="optionsGrid">
+            <!-- Dynamically populated options A, B, C, D -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SIDEBAR: PRIZE LADDER (MONEY TREE) -->
+      <aside class="prize-ladder-sidebar">
+        <div class="ladder-header">
+          ⚡ PRIZE LADDER
+        </div>
+        <div id="prizeLadderList">
+          <!-- Populated dynamically: 10 down to 1 -->
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- MODAL: ASK BILI (HINT) -->
+  <div class="modal-overlay" id="biliModalOverlay">
+    <div class="modal-content-card">
+      <img src="assets/bili.png" alt="Bili Mascot" class="bili-mascot-avatar">
+      <h2 class="modal-title">Bili's Helpful Clue! 🐻💡</h2>
+      <p class="modal-subtitle">Listen closely to Bili's pedagogical advice:</p>
+      <div class="modal-hint-bubble" id="biliModalHint">
+        "Read the question carefully and pay attention to key words!"
+      </div>
+      <button type="button" id="biliModalCloseBtn" class="modal-action-btn">
+        ¡Entendido, Bili! 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: GAME OVER -->
+  <div class="modal-overlay" id="gameOverModalOverlay">
+    <div class="modal-content-card">
+      <div style="font-size: 3.5rem; margin-bottom: 8px;">⏳</div>
+      <h2 class="modal-title" id="gameOverTitle" style="color: #f87171;">GOOD EFFORT!</h2>
+      <div class="modal-subtitle" id="gameOverMsg">
+        You played an impressive game!
+      </div>
+      <button type="button" id="gameOverRestartBtn" class="modal-action-btn">
+        🔄 Jugar de Nuevo (Nuevas Preguntas)
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: GRAND VICTORY ($1,000,000) -->
+  <div class="modal-overlay" id="victoryModalOverlay">
+    <div class="modal-content-card" style="border-color: #f59e0b; box-shadow: 0 0 50px rgba(245, 158, 11, 0.6);">
+      <div style="font-size: 4rem; margin-bottom: 6px; animation: bounce-arrow 1s infinite alternate;">🏆</div>
+      <h2 class="modal-title" style="color: #fbbf24; font-size: 1.8rem;">¡ERES UN MILLONARIO!</h2>
+      <p class="modal-subtitle" style="color: #fef08a;">
+        ¡Has conquistado la pregunta número 10 y ganado el premio mayor!
+      </p>
+      <div style="font-size: 2.8rem; font-weight: 900; color: #fbbf24; margin: 18px 0; font-family: 'Courier New', monospace; text-shadow: 0 0 25px rgba(245, 158, 11, 0.8);">
+        $1,000,000
+      </div>
+      <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 24px;">
+        Demostraste un dominio sobresaliente del inglés y una mente brillante.
+      </p>
+      <button type="button" id="victoryRestartBtn" class="modal-action-btn">
+        🌟 Jugar Otra Partida (Preguntas Nuevas)
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="millionaire_kids_data.js"></script>
+  <script src="millionaire_teens_data.js"></script>
+  <script src="millionaire_engine.js"></script>
+</body>
+</html>

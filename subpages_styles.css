@@ -1393,3 +1393,116 @@ body {
   }
 }
 
+
+
+/* ==========================================================================
+   FEATURED MARQUEE: BILI MILLIONAIRE BANNER (KIDS & TEENS)
+   ========================================================================== */
+.millionaire-featured-banner-kids {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: radial-gradient(circle at 80% 50%, rgba(30, 58, 138, 0.45) 0%, rgba(15, 23, 62, 0.95) 70%), linear-gradient(135deg, #090e2b 0%, #06091e 100%);
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  border-radius: 24px;
+  padding: 24px 28px;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(245, 158, 11, 0.15);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.millionaire-featured-banner-kids:hover {
+  transform: translateY(-2px);
+  border-color: #fbbf24;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(245, 158, 11, 0.3);
+}
+
+.millionaire-banner-left {
+  flex: 1;
+}
+
+.millionaire-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.millionaire-banner-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-family: var(--font-display, 'Outfit', sans-serif);
+}
+
+.millionaire-banner-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin-bottom: 16px;
+  max-width: 680px;
+}
+
+.millionaire-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.millionaire-featured-banner-kids:hover .millionaire-banner-btn {
+  transform: scale(1.04);
+}
+
+.millionaire-banner-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.millionaire-banner-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #fbbf24;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45);
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .millionaire-featured-banner-kids {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .millionaire-banner-right {
+    margin-top: 10px;
+  }
+  .millionaire-banner-img {
+    width: 90px;
+    height: 90px;
+  }
+}
