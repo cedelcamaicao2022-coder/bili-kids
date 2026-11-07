@@ -26,12 +26,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "BASIC SYNTAX",
+        badge: "20 SYNTAX DRILLS",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Daily Routine",
-        desc: "Practice Present Simple, 3rd person singular '-s', essential subject/object pronouns, and time prepositions.",
-        actionText: "Start Practice",
+        title: "Use of English: Daily Routine (20 Drills)",
+        desc: "Master 20 essential grammar challenges: Present Simple, 3rd person singular '-s', essential subject/object pronouns, and time prepositions.",
+        actionText: "Start Practice (20 Drills)",
         actionColor: "#9333ea"
       },
       {
@@ -48,12 +48,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "LEXICAL PAIRS",
+        badge: "20 LEXICAL DRILLS",
         badgeBg: "#e0e7ff",
         badgeColor: "#3730a3",
-        title: "Vocabulary Matrix: School & Life",
-        desc: "Master key vocabulary for academic rooms, school subjects, and everyday phrasal verb pairings.",
-        actionText: "Explore Matrix",
+        title: "Vocabulary Matrix: School & Life (20 Drills)",
+        desc: "Explore 20 targeted vocabulary items covering academic rooms, school subjects, and everyday phrasal verb pairings.",
+        actionText: "Explore Matrix (20 Drills)",
         actionColor: "#4f46e5"
       }
     ]
@@ -76,12 +76,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "NARRATIVE TENSES",
+        badge: "20 GRAMMAR DRILLS",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Past vs Present",
-        desc: "Master regular and irregular past simple verbs, time connectors, and comparative sentence structures.",
-        actionText: "Start Practice",
+        title: "Use of English: Past Narratives (20 Drills)",
+        desc: "Conquer 20 grammar challenges: Past Continuous vs Simple, comparatives/superlatives, going to, and modals.",
+        actionText: "Start Practice (20 Drills)",
         actionColor: "#9333ea"
       },
       {
@@ -98,12 +98,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "COLLOCATIONS",
+        badge: "20 LEXICAL DRILLS",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Vocabulary Matrix: Travel & Actions",
-        desc: "Master essential travel collocations, outdoor equipment vocabulary, and compound nouns.",
-        actionText: "Explore Matrix",
+        title: "Vocabulary Matrix: Social & Travel (20 Drills)",
+        desc: "Master 20 key collocations and phrasal verbs for travel, environmental actions, and everyday teenager life.",
+        actionText: "Explore Matrix (20 Drills)",
         actionColor: "#16a34a"
       }
     ]
@@ -128,12 +128,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "CAMBRIDGE PET / B1",
+        badge: "20 ADVANCED DRILLS",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Passive & Modals",
-        desc: "Exam-grade sentence transformation, auxiliary verbs, modal deductions, and cloze drills.",
-        actionText: "Start Practice",
+        title: "Use of English: Passive & Modals (20 Drills)",
+        desc: "Exam-grade Saber 9° & Cambridge B1: 20 drills covering conditionals, relative clauses, passive voice, and indirect speech.",
+        actionText: "Start Practice (20 Drills)",
         actionColor: "#9333ea"
       },
       {
@@ -152,12 +152,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "ACADEMIC WORD LIST",
+        badge: "20 ACADEMIC DRILLS",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Academic Word List & Collocations",
-        desc: "Master high-frequency academic vocabulary, prepositional collocations, and contextual phrasing.",
-        actionText: "Explore Matrix",
+        title: "Academic Word List & Collocations (20 Drills)",
+        desc: "Master 20 high-frequency academic collocations, formal discourse markers, and science terminology.",
+        actionText: "Explore Matrix (20 Drills)",
         actionColor: "#16a34a"
       }
     ]
@@ -182,12 +182,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "CAMBRIDGE FCE",
+        badge: "20 ADVANCED DRILLS",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Cambridge B2 First",
-        desc: "Exam-grade Use of English practice: sentence restructuring, affixes, multiple choice cloze and open cloze drills.",
-        actionText: "Start Practice",
+        title: "Cambridge B2 First (20 Drills)",
+        desc: "Exam-grade Use of English practice: 20 drills on inversion, inverted conditionals, passive reporting, and cleft sentences.",
+        actionText: "Start Practice (20 Drills)",
         actionColor: "#9333ea",
         extLink: "teens_cambridge_b2.html",
         extLabel: "🎯 Full Cambridge App"
@@ -208,12 +208,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "ADVANCED LEXICON",
+        badge: "20 ADVANCED DRILLS",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Advanced Collocations & Phrasals",
-        desc: "Master advanced multi-word verbs, formal academic registers, and nuanced syntactic connectors.",
-        actionText: "Explore Matrix",
+        title: "Advanced Collocations & Phrasals (20 Drills)",
+        desc: "Master 20 nuanced academic collocations, sophisticated three-part phrasals, and precision idioms for Cambridge B2 & Saber 11°.",
+        actionText: "Explore Matrix (20 Drills)",
         actionColor: "#16a34a"
       }
     ]
@@ -699,6 +699,9 @@ class TeensLevelsEngine {
 
       itemsHtml += `
         <div class="grammar-sentence-card" id="gcard-${idx}">
+          <div class="item-number-header">
+            <span class="item-badge-pill">Question ${idx + 1} of ${exercise.items.length}</span>
+          </div>
           <div class="grammar-sentence-text">${item.sentence}</div>
           <div class="reading-options-grid">${optionsHtml}</div>
           <div class="pedagogical-feedback-box" id="gfeedback-${idx}" style="display:none;"></div>
@@ -712,6 +715,9 @@ class TeensLevelsEngine {
           <div class="exercise-tag-row">
             <span class="exercise-type-pill" style="background:#e0f2fe; color:#0284c7;">🎯 USE OF ENGLISH & GRAMMAR</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
+            <span class="exercise-score-badge" style="background:#fef3c7; color:#92400e; font-weight:800;">
+              ${exercise.items.length} Questions Available
+            </span>
           </div>
           <h3 class="exercise-main-title">${exercise.title}</h3>
           <p class="exercise-instruction-text">${exercise.instruction}</p>
@@ -796,6 +802,9 @@ class TeensLevelsEngine {
 
       itemsHtml += `
         <div class="vocab-matrix-card" id="vcard-${idx}">
+          <div class="item-number-header">
+            <span class="item-badge-pill">Item ${idx + 1} of ${exercise.items.length}</span>
+          </div>
           <div class="vocab-prompt-text">${item.sentence}</div>
           <div class="reading-options-grid">${optionsHtml}</div>
           <div class="pedagogical-feedback-box" id="vfeedback-${idx}" style="display:none;"></div>
@@ -809,6 +818,9 @@ class TeensLevelsEngine {
           <div class="exercise-tag-row">
             <span class="exercise-type-pill" style="background:#fef3c7; color:#b45309;">⚡ VOCABULARY & COLLOCATIONS</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
+            <span class="exercise-score-badge" style="background:#dcfce7; color:#166534; font-weight:800;">
+              ${exercise.items.length} Questions Available
+            </span>
           </div>
           <h3 class="exercise-main-title">${exercise.title}</h3>
           <p class="exercise-instruction-text">${exercise.instruction}</p>
