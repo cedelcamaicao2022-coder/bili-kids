@@ -518,7 +518,18 @@ body {
 
 .flask-icon {
   font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+
+.flask-icon svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto;
 }
 
 .flask-name {

@@ -68,8 +68,8 @@ window.TODDLERS_UNITS_PART1 = [
         title: "Color Instructions",
         desc: "Listen to the color directive and select the item with that exact shade.",
         exercises: [
-          { audio: "Touch the red crayon", prompt: "Touch the red crayon", options: [{ name: "Red Crayon", icon: "🖍️", color: "Red" }, { name: "Blue Crayon", icon: "🖍️", color: "Blue" }, { name: "Green Crayon", icon: "🖍️", color: "Green" }], correct: 0 },
-          { audio: "Select the yellow book", prompt: "Select the yellow book", options: [{ name: "Purple Book", icon: "📖" }, { name: "Yellow Book", icon: "📒" }, { name: "Black Book", icon: "📓" }], correct: 1 },
+          { audio: "Touch the red crayon", prompt: "Touch the red crayon", options: [{ name: "Red Crayon", icon: _BK_ICONS.CRAYON_RED, color: "Red" }, { name: "Blue Crayon", icon: _BK_ICONS.CRAYON_BLUE, color: "Blue" }, { name: "Green Crayon", icon: _BK_ICONS.CRAYON_GREEN, color: "Green" }], correct: 0 },
+          { audio: "Select the yellow book", prompt: "Select the yellow book", options: [{ name: "Purple Book", icon: _BK_ICONS.BOOK_PURPLE }, { name: "Yellow Book", icon: "📒" }, { name: "Black Book", icon: "📓" }], correct: 1 },
           { audio: "Where is the purple glue stick?", prompt: "Where is the purple glue stick?", options: [{ name: "Orange Box", icon: "📦" }, { name: "Purple Glue", icon: "🧴" }, { name: "Blue Paper", icon: "📄" }], correct: 1 },
           { audio: "Find the green table", prompt: "Find the green table", options: [{ name: "Brown Chair", icon: "🪑" }, { name: "Red Scissors", icon: "✂️" }, { name: "Green Table", icon: _BK_ICONS.TABLE_GREEN }], correct: 2 },
           { audio: "Touch the orange scissors", prompt: "Touch the orange scissors", options: [{ name: "Orange Scissors", icon: "✂️" }, { name: "Blue Lunchbox", icon: "🍱" }, { name: "Yellow Pencil", icon: "✏️" }], correct: 0 }
@@ -380,7 +380,7 @@ window.TODDLERS_UNITS_PART1 = [
         { step: 3, type: "writing", prompt: "Unscramble: K O O B", answer: "BOOK" },
         { step: 4, type: "speaking", prompt: "Say aloud: 'This is my school'", target: "this is my school" },
         { step: 5, type: "listening", prompt: "Listen: 'Collect three scissors'", options: ["✂️✂️✂️", "✂️✂️", "✂️✂️✂️✂️"], correct: 0 },
-        { step: 6, type: "reading", prompt: "Read: 'This is a red chair.'", options: ["🪑 Red", "🪑 Blue", "🪑 Yellow"], correct: 0 },
+        { step: 6, type: "reading", prompt: "Read: 'This is a red chair.'", options: [{ name: "Red Chair", icon: _BK_ICONS.CHAIR_RED }, { name: "Blue Chair", icon: _BK_ICONS.CHAIR_BLUE }, { name: "Yellow Chair", icon: _BK_ICONS.CHAIR_YELLOW }], correct: 0 },
         { step: 7, type: "writing", prompt: "Fill the blank: 'This is a t_ble.'", answer: "a" },
         { step: 8, type: "speaking", prompt: "Say the color of the grass: 'Green'", target: "green" },
         { step: 9, type: "math_vocab", prompt: "Count the books: 📖 📖 📖 📖", options: ["2", "4", "5"], correct: 1 },
@@ -433,7 +433,7 @@ window.TODDLERS_UNITS_PART1 = [
         desc: "Listen to party decoration directions and place the item.",
         exercises: [
           { audio: "Put five candles on the cake", prompt: "Instruction: 5 candles on cake", options: [{ name: "5 Candles", icon: "🎂🕯️🕯️🕯️🕯️🕯️" }, { name: "2 Candles", icon: "🎂🕯️🕯️" }, { name: "1 Candle", icon: "🎂🕯️" }], correct: 0 },
-          { audio: "Hang three red balloons", prompt: "Instruction: 3 red balloons", options: [{ name: "3 Red Balloons", icon: "🎈🎈🎈" }, { name: "1 Blue Balloon", icon: "🎈" }, { name: "5 Yellow Balloons", icon: "🎈🎈🎈🎈🎈" }], correct: 0 },
+          { audio: "Hang three red balloons", prompt: "Instruction: 3 red balloons", options: [{ name: "3 Red Balloons", icon: "🎈🎈🎈" }, { name: "1 Blue Balloon", icon: _BK_ICONS.BALLOON_BLUE }, { name: "5 Yellow Balloons", icon: _BK_ICONS.BALLOON_YELLOW }], correct: 0 },
           { audio: "Place the blue present on the table", prompt: "Instruction: Blue present on table", options: [{ name: "Red hat", icon: "🥳" }, { name: "Blue present", icon: "🎁" }, { name: "Cookie plate", icon: "🍪" }], correct: 1 },
           { audio: "Put on the shiny party hat", prompt: "Instruction: Put on party hat", options: [{ name: "Shoes", icon: "👟" }, { name: "Socks", icon: "🧦" }, { name: "Party Hat", icon: "🥳" }], correct: 2 },
           { audio: "Serve chocolate cookies on a plate", prompt: "Instruction: Cookies on plate", options: [{ name: "Cookies", icon: "🍪🍽️" }, { name: "Water cup", icon: "🥛" }, { name: "Apple", icon: "🍎" }], correct: 0 }
@@ -1566,10 +1566,10 @@ window.TODDLERS_UNITS_PART1 = [
         title: "Listen and Dress",
         desc: "Listen to what clothes the character needs for today's weather.",
         exercises: [
-          { audio: "It is sunny! Wear your red t-shirt.", prompt: "Choose: Red t-shirt", options: [{ name: "Red T-shirt", icon: "👕 Red" }, { name: "Blue Jacket", icon: "🧥 Blue" }, { name: "Black Shoes", icon: "👟" }], correct: 0 },
-          { audio: "It is cloudy and cool. Put on your blue jacket.", prompt: "Choose: Blue jacket", options: [{ name: "Sandals", icon: "🩴" }, { name: "Blue Jacket", icon: "🧥 Blue" }, { name: "Shorts", icon: "🩳" }], correct: 1 },
+          { audio: "It is sunny! Wear your red t-shirt.", prompt: "Choose: Red t-shirt", options: [{ name: "Red T-shirt", icon: "👕" }, { name: "Blue Jacket", icon: "🧥" }, { name: "Black Shoes", icon: "👟" }], correct: 0 },
+          { audio: "It is cloudy and cool. Put on your blue jacket.", prompt: "Choose: Blue jacket", options: [{ name: "Sandals", icon: "🩴" }, { name: "Blue Jacket", icon: "🧥" }, { name: "Shorts", icon: "🩳" }], correct: 1 },
           { audio: "Put on your yellow sun hat.", prompt: "Choose: Yellow sun hat", options: [{ name: "Socks", icon: "🧦" }, { name: "Pants", icon: "👖" }, { name: "Yellow Hat", icon: "👒" }], correct: 2 },
-          { audio: "Wear your green shorts to run.", prompt: "Choose: Green shorts", options: [{ name: "Green Shorts", icon: "🩳 Green" }, { name: "Heavy Coat", icon: "🧥" }, { name: "Scarf", icon: "🧣" }], correct: 0 },
+          { audio: "Wear your green shorts to run.", prompt: "Choose: Green shorts", options: [{ name: "Green Shorts", icon: "🩳" }, { name: "Heavy Coat", icon: "🧥" }, { name: "Scarf", icon: "🧣" }], correct: 0 },
           { audio: "Put on comfortable sneakers shoes.", prompt: "Choose: Shoes", options: [{ name: "Hat", icon: "👒" }, { name: "Shoes", icon: "👟" }, { name: "Shirt", icon: "👕" }], correct: 1 }
         ]
       },
@@ -1590,11 +1590,11 @@ window.TODDLERS_UNITS_PART1 = [
         title: "Weather and Color Instructions",
         desc: "Listen to combined color and clothing directives.",
         exercises: [
-          { audio: "Find the pink dress", prompt: "Listen: 'Pink dress'", options: [{ name: "Pink Dress", icon: "👗 Pink" }, { name: "Blue Dress", icon: "👗 Blue" }, { name: "Yellow Shirt", icon: "👕" }], correct: 0 },
-          { audio: "Select the brown shoes", prompt: "Listen: 'Brown shoes'", options: [{ name: "White Shoes", icon: "👟 White" }, { name: "Brown Shoes", icon: "👟 Brown" }, { name: "Red Sandals", icon: "🩴" }], correct: 1 },
-          { audio: "Where are the blue pants?", prompt: "Listen: 'Blue pants'", options: [{ name: "Green Shorts", icon: "🩳" }, { name: "Yellow Hat", icon: "👒" }, { name: "Blue Pants", icon: "👖 Blue" }], correct: 2 },
-          { audio: "Touch the orange sandals", prompt: "Listen: 'Orange sandals'", options: [{ name: "Orange Sandals", icon: "🩴 Orange" }, { name: "Black Shoes", icon: "👟" }, { name: "Purple Jacket", icon: "🧥" }], correct: 0 },
-          { audio: "Pick up the yellow sun hat", prompt: "Listen: 'Yellow sun hat'", options: [{ name: "Red T-shirt", icon: "👕" }, { name: "Yellow Hat", icon: "👒 Yellow" }, { name: "Blue Pants", icon: "👖" }], correct: 1 }
+          { audio: "Find the pink dress", prompt: "Listen: 'Pink dress'", options: [{ name: "Pink Dress", icon: _BK_ICONS.DRESS_PINK }, { name: "Blue Dress", icon: _BK_ICONS.DRESS_BLUE }, { name: "Yellow Shirt", icon: "👕" }], correct: 0 },
+          { audio: "Select the brown shoes", prompt: "Listen: 'Brown shoes'", options: [{ name: "White Shoes", icon: "👟" }, { name: "Brown Shoes", icon: "👞" }, { name: "Red Sandals", icon: "🩴" }], correct: 1 },
+          { audio: "Where are the blue pants?", prompt: "Listen: 'Blue pants'", options: [{ name: "Green Shorts", icon: "🩳" }, { name: "Yellow Hat", icon: "👒" }, { name: "Blue Pants", icon: "👖" }], correct: 2 },
+          { audio: "Touch the orange sandals", prompt: "Listen: 'Orange sandals'", options: [{ name: "Orange Sandals", icon: "🩴" }, { name: "Black Shoes", icon: "👟" }, { name: "Purple Jacket", icon: "🧥" }], correct: 0 },
+          { audio: "Pick up the yellow sun hat", prompt: "Listen: 'Yellow sun hat'", options: [{ name: "Red T-shirt", icon: "👕" }, { name: "Yellow Hat", icon: "👒" }, { name: "Blue Pants", icon: "👖" }], correct: 1 }
         ]
       },
       {

@@ -871,8 +871,8 @@ window.TODDLERS_UNITS_PART2 = [
           { text: "SUN", prompt: "Read: SUN", options: [{ name: "Sun", icon: "☀️" }, { name: "Moon", icon: "🌙" }, { name: "Star", icon: "⭐" }], correct: 0 },
           { text: "MOON", prompt: "Read: MOON", options: [{ name: "Flower", icon: "🌸" }, { name: "Moon", icon: "🌙" }, { name: "Sun", icon: "☀️" }], correct: 1 },
           { text: "STAR", prompt: "Read: STAR", options: [{ name: "Rabbit", icon: "🐰" }, { name: "Ladybug", icon: "🐞" }, { name: "Star", icon: "⭐" }], correct: 2 },
-          { text: "DAY", prompt: "Read: DAY", options: [{ name: "Day", icon: "☀️" }, { name: "Night", icon: "🌙" }, { name: "Bed", icon: "🛏️" }], correct: 0 },
-          { text: "NIGHT", prompt: "Read: NIGHT", options: [{ name: "Day", icon: "☀️" }, { name: "Night", icon: "🌙" }, { name: "Sun", icon: "☀️" }], correct: 1 }
+          { text: "DAY", prompt: "Read: DAY", options: [{ name: "Day", icon: "🌤️" }, { name: "Night", icon: "🌙" }, { name: "Bed", icon: "🛏️" }], correct: 0 },
+          { text: "NIGHT", prompt: "Read: NIGHT", options: [{ name: "Day", icon: "🌤️" }, { name: "Night", icon: "🌙" }, { name: "Sun", icon: "☀️" }], correct: 1 }
         ]
       },
       {

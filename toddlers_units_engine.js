@@ -862,13 +862,9 @@ class ToddlersUnitsEngine {
 
   getChoiceIcon(label, fallback = '📖') {
     const value = String(label || '').toLowerCase();
-    if (window.BILIKIDS_ICONS) {
-      if (/\b(green table)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE_GREEN;
-      if (/\b(brown table)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE_BROWN;
-      if (/\b(desk|desks)\b/.test(value)) return window.BILIKIDS_ICONS.DESK;
-      if (/\b(table|tables)\b/.test(value)) return window.BILIKIDS_ICONS.TABLE;
-      if (/\b(eraser|erasers)\b/.test(value)) return window.BILIKIDS_ICONS.ERASER;
-      if (/\b(sharpener|sharpeners)\b/.test(value)) return window.BILIKIDS_ICONS.SHARPENER;
+    if (typeof window !== 'undefined' && window.bilikidsRenderIcon) {
+      const rendered = window.bilikidsRenderIcon(fallback, label);
+      if (rendered && rendered.includes('<svg')) return rendered;
     }
     const choices = [
       [/\b(luna|moon)\b/, '🌙'], [/\bleo\b/, '🦁'], [/\bbili\b/, '🐻'],
