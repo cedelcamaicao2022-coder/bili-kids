@@ -121,6 +121,14 @@ class ToddlersUnitsEngine {
     this.renderHeader();
     this.renderTabs();
     this.renderWorkspace();
+
+    const levelParam = urlParams.get('level');
+    if (levelParam && this.currentTab === 'game') {
+      const parsedLevel = parseInt(levelParam, 10);
+      if (parsedLevel >= 1 && parsedLevel <= 12) {
+        setTimeout(() => this.playGameLevel(parsedLevel), 120);
+      }
+    }
   }
 
   getUnitActivities(unit, skillName) {
@@ -1651,7 +1659,7 @@ class ToddlersUnitsEngine {
       html += `
         <div class="game-level-node ${nodeClass}" onclick="${isUnlocked ? `toddlersEngine.playGameLevel(${lvl.level})` : `toddlersEngine.showCelebrationBanner('🔒 Nivel Bloqueado', '¡Completa los niveles anteriores primero!', '#d97706')`}">
           <div class="game-level-num">Level ${lvl.level}</div>
-          <div class="game-level-icon">${isUnlocked ? this.renderVisual(lvl.icon || '🎯', lvl.title || target) : '🔒'}</div>
+          <div class="game-level-icon">${isUnlocked ? this.renderVisual(lvl.icon || '🎯', lvl.title || 'Game') : '🔒'}</div>
           <div class="game-level-title">${lvl.title || 'Level ' + lvl.level}</div>
           <div class="game-level-stars">${starsDisplay}</div>
         </div>
@@ -1666,126 +1674,511 @@ class ToddlersUnitsEngine {
     container.innerHTML = html;
   }
 
+  /* ==========================================================================
+     PEDAGOGICAL ARCADE GAME SYSTEM (12 LEVELS)
+     Filters: 1. Habilidad a Desarrollar, 2. Contenido Interactivo Justificado,
+              3. Medición del Aprendizaje
+     ========================================================================== */
   playGameLevel(levelNum) {
     const unit = this.getCurrentUnit();
     const levels = (unit.game && unit.game.levels) ? unit.game.levels : [];
-    const lvl = levels.find(l => l.level === levelNum) || levels[0];
+    const lvl = levels.find(l => l.level === levelNum) || levels[0] || { level: levelNum, title: `Level ${levelNum}` };
 
-    const target = lvl.targetWord || lvl.title || 'Goal';
-    const cleanWord = target.replace(/'/g, "\\'");
+    const exploreItems = (Array.isArray(unit.explore) ? unit.explore : (unit.explore && unit.explore.items ? unit.explore.items : []));
+    
+    // 1. Target Name & Icon Extraction
+    let targetName = '';
+    let targetIcon = lvl.icon || '🎯';
+    const lvlTitle = lvl.title || '';
+    const lvlMission = lvl.mission || '';
+    const itemType = (lvl.itemType || '').toLowerCase();
 
-    // Build creative interactive arcade mechanics inside the game modal:
-    let gameContentHtml = '';
+    let matchedItem = exploreItems.find(it => {
+      const itName = (it.name || it.word || '').toLowerCase();
+      return itName === itemType || lvlTitle.toLowerCase().includes(itName) || lvlMission.toLowerCase().includes(itName);
+    });
 
-    if (levelNum <= 4) {
-      // Arcade Mode 1: Fast Bubble Pop Rush
-      gameContentHtml = `
-        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">Pop the target bubble to clear Level ${lvl.level}!</p>
-        <div class="bubble-pond-container" style="min-height:220px;">
-          <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">
-            <div style="font-size:2.8rem;">${this.renderVisual(lvl.icon || '🎯', lvl.title || target)}</div>
-            <div style="font-weight:900; color:#0369a1;">${target}</div>
-          </div>
-          <div class="floating-bubble-item" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, false)">
-            <div style="font-size:2.8rem;">❌</div>
-            <div style="font-weight:900; color:#0369a1;">Other</div>
-          </div>
+    if (matchedItem) {
+      targetName = matchedItem.name || matchedItem.word;
+      targetIcon = matchedItem.icon || targetIcon;
+    } else {
+      targetName = lvlTitle.replace(/^(Find the|Collect the|Place the|Discover the|Choose the|Build the|Meet the|Help the|Prepare the|Pick up the|Visit the|Organize the)\s+/i, '').replace(/\s+Word$/i, '').trim();
+      if (!targetName) targetName = 'Item';
+    }
+
+    // 2. Determine Pedagogical Skill & Game Mode
+    let gameMode = 'collector';
+    let skillName = 'Discriminación Auditiva y Búsqueda Visual';
+
+    if (itemType === 'spelling' || levelNum === 5 || lvlTitle.toLowerCase().includes('build')) {
+      gameMode = 'phonics';
+      skillName = 'Conciencia Fonológica y Formación de Palabras';
+    } else if (itemType === 'counting' || levelNum === 8 || lvlTitle.toLowerCase().includes('count')) {
+      gameMode = 'counting';
+      skillName = 'Correspondencia Numérica y Conteo 1 a 1';
+      // For counting mode, pick a concrete countable unit object
+      const countCandidate = exploreItems.find(it => {
+        const n = (it.name || it.word || '').toLowerCase();
+        return !n.includes('count') && !n.includes('five') && !n.includes('number') && (lvlMission.toLowerCase().includes(n) || true);
+      }) || exploreItems[0];
+      if (countCandidate) {
+        targetName = countCandidate.name || countCandidate.word || 'Star';
+        targetIcon = countCandidate.icon || '⭐';
+      }
+    } else if (itemType === 'challenge' || itemType === 'finale' || itemType === 'instruction' || itemType === 'sentence' || levelNum >= 9) {
+      gameMode = 'checkpoints';
+      skillName = (levelNum >= 11) ? 'Integración y Maestría del Vocabulario' : 'Comprensión Auditiva y Seguimiento de Instrucciones';
+    } else if (itemType === 'match' || itemType === 'shapes' || levelNum === 4 || levelNum === 7) {
+      gameMode = 'checkpoints';
+      skillName = 'Asociación Léxico-Visual y Clasificación';
+    } else {
+      gameMode = 'collector';
+      skillName = 'Comprensión Auditiva y Búsqueda de Objetos';
+    }
+
+    const targetCount = (gameMode === 'counting')
+      ? Math.max(3, Math.min(lvl.targetCount || 5, 5))
+      : Math.max(2, Math.min(lvl.targetCount || 3, 4));
+
+    // 3. Initialize State
+    this.currentGameLevelState = {
+      levelNum,
+      lvl,
+      unit,
+      skillName,
+      gameMode,
+      targetName,
+      targetIcon,
+      targetCount,
+      collectedCount: 0,
+      errorsCount: 0,
+      letterIndex: 0,
+      countedItems: 0,
+      stepIndex: 0,
+      totalSteps: 3
+    };
+
+    // 4. Mount Modal
+    let modal = document.getElementById('gameLevelModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.className = 'diploma-modal-overlay';
+      modal.id = 'gameLevelModal';
+      document.body.appendChild(modal);
+    }
+
+    this.renderGameLevelModalContent();
+    this.playAudio(`Level ${levelNum}. ${lvl.title}!`);
+  }
+
+  renderGameLevelModalContent() {
+    const modal = document.getElementById('gameLevelModal');
+    if (!modal) return;
+    const state = this.currentGameLevelState;
+    const { lvl, targetName, targetIcon, targetCount, skillName, levelNum, gameMode } = state;
+    const cleanWord = targetName.replace(/'/g, "\\'");
+    const exploreItems = (Array.isArray(state.unit.explore) ? state.unit.explore : (state.unit.explore && state.unit.explore.items ? state.unit.explore.items : []));
+
+    let contentHtml = '';
+
+    if (gameMode === 'collector') {
+      const distractors = exploreItems.filter(it => (it.name || it.word || '').toLowerCase() !== targetName.toLowerCase());
+      const shuffledDistractors = [...distractors].sort(() => Math.random() - 0.5).slice(0, 4);
+
+      const pool = [];
+      for (let i = 0; i < targetCount; i++) {
+        pool.push({ isTarget: true, name: targetName, icon: targetIcon });
+      }
+      shuffledDistractors.forEach(d => {
+        pool.push({ isTarget: false, name: d.name || d.word, icon: d.icon });
+      });
+      const shuffledPool = pool.sort(() => Math.random() - 0.5);
+
+      contentHtml = `
+        <div class="pedagogical-skill-badge">🎯 Habilidad: ${skillName}</div>
+        <p style="color:#4b5563; font-size:1.05rem; margin:6px 0 12px; font-weight:700;">
+          ${lvl.mission || `Encuentra y recolecta ${targetCount} ${targetName}s en el aula.`}
+        </p>
+        <button class="toddler-nav-pill active" style="margin:0 auto 12px; display:inline-flex; align-items:center; gap:8px;" onclick="toddlersEngine.playAudio('Find the ${cleanWord}! Can you collect ${targetCount} ${cleanWord}s?')">
+          🔊 Escuchar Misión ("Find the ${targetName}")
+        </button>
+        <div class="collector-mission-bar">
+          <span>🎯 Recolectados: <strong id="collectorCounterText">${state.collectedCount} / ${targetCount}</strong></span>
+          <span style="color:#0284c7;">Objetivo: ${targetName} ${this.renderVisual(targetIcon, targetName)}</span>
+        </div>
+        <div id="collectorHintBanner" style="min-height:24px; font-weight:800; font-size:0.92rem; color:#6b7280; margin-bottom:10px;">
+          Toca cada ${targetName} que encuentres:
+        </div>
+        <div class="game-collector-grid">
+          ${shuffledPool.map((it, idx) => `
+            <div class="collector-card" id="colCard-${idx}" onclick="toddlersEngine.handleCollectorCardClick(this, ${it.isTarget}, '${it.name.replace(/'/g, "\\'")}', '${cleanWord}')">
+              <span class="card-icon">${this.renderVisual(it.icon, it.name)}</span>
+              <span class="card-name">${it.name}</span>
+            </div>
+          `).join('')}
         </div>
       `;
-    } else if (levelNum <= 8) {
-      // Arcade Mode 2: Mystery Gift Box
-      gameContentHtml = `
-        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">What is hidden inside the treasure box?</p>
-        <div style="font-size:5rem; margin:1rem 0; cursor:pointer;" onclick="toddlersEngine.playAudio('${cleanWord}')">🎁</div>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-          <button class="toddler-nav-pill active" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">${target}</button>
-          <button class="toddler-nav-pill" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, false)">Banana</button>
+    } else if (gameMode === 'phonics') {
+      const wordToSpell = (targetName.replace(/[^A-Za-z]/g, '') || 'BOOK').toUpperCase();
+      state.targetWord = wordToSpell;
+      state.letterIndex = 0;
+
+      const letters = wordToSpell.split('');
+      const shuffledTiles = letters.map((char, i) => ({ char, id: i })).sort(() => Math.random() - 0.5);
+
+      contentHtml = `
+        <div class="pedagogical-skill-badge">🔤 Habilidad: ${skillName}</div>
+        <p style="color:#4b5563; font-size:1.05rem; margin:6px 0 12px; font-weight:700;">
+          Construye la palabra <strong>${wordToSpell}</strong> tocando las letras en orden fonético:
+        </p>
+        <div style="font-size:3.5rem; margin:6px 0;">${this.renderVisual(targetIcon, targetName)}</div>
+        <button class="toddler-nav-pill active" style="margin:0 auto 10px; display:inline-flex; align-items:center; gap:8px;" onclick="toddlersEngine.playAudio('${wordToSpell}')">
+          🔊 Escuchar Palabra ("${wordToSpell}")
+        </button>
+        <div class="letter-builder-slots" id="letterSlotsContainer">
+          ${letters.map((char, i) => `<div class="letter-slot" id="letterSlot-${i}">_</div>`).join('')}
+        </div>
+        <div id="phonicsHintBanner" style="min-height:24px; font-weight:800; font-size:0.92rem; color:#6b7280; margin:10px 0 6px;">
+          Toca la primera letra: <strong>${letters[0]}</strong>
+        </div>
+        <div class="letter-tiles-pool">
+          ${shuffledTiles.map(t => `
+            <button type="button" class="letter-tile-btn" onclick="toddlersEngine.handlePhonicsTileClick(this, '${t.char}', '${wordToSpell}')">
+              ${t.char}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    } else if (gameMode === 'counting') {
+      const countN = Math.max(3, Math.min(targetCount || 5, 5));
+      state.targetCount = countN;
+      state.countedItems = 0;
+
+      contentHtml = `
+        <div class="pedagogical-skill-badge">🔢 Habilidad: ${skillName}</div>
+        <p style="color:#4b5563; font-size:1.05rem; margin:6px 0 12px; font-weight:700;">
+          Toca y cuenta los <strong>${countN} ${targetName}s</strong> uno por uno:
+        </p>
+        <button class="toddler-nav-pill active" style="margin:0 auto 12px; display:inline-flex; align-items:center; gap:8px;" onclick="toddlersEngine.playAudio('Count to ${countN}! Tap each ${cleanWord}!')">
+          🔊 Escuchar Consigna
+        </button>
+        <div class="collector-mission-bar">
+          <span>🔢 Conteo: <strong id="countingCounterText">0 / ${countN}</strong></span>
+          <span id="countingSpokenWord" style="color:#2563eb; font-weight:900;">¡Empieza a contar!</span>
+        </div>
+        <div class="counting-stage-grid">
+          ${Array.from({ length: countN }).map((_, i) => `
+            <button type="button" class="counting-item-btn" id="countBtn-${i}" onclick="toddlersEngine.handleCountingItemClick(this, ${countN}, '${cleanWord}')">
+              ${this.renderVisual(targetIcon, targetName)}
+            </button>
+          `).join('')}
         </div>
       `;
     } else {
-      // Arcade Mode 3: Boss Level Victory
-      gameContentHtml = `
-        <p style="color:#6b7280; font-size:1.1rem; margin-bottom:1rem;">🏆 Boss Challenge: Spell or identify "${target}"!</p>
-        <div style="font-size:4.5rem; margin:0.5rem 0;">${this.renderVisual(lvl.icon || '👑', lvl.title || target)}</div>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-          <button class="writing-check-btn" onclick="toddlersEngine.handleGameLevelChoice(${lvl.level}, true)">Claim Star Victory ⭐</button>
+      const currentStep = state.stepIndex;
+      const explorePool = exploreItems.length >= 3 ? exploreItems : [
+        { name: targetName, icon: targetIcon },
+        { name: 'Book', icon: '📖' },
+        { name: 'Chair', icon: '🪑' }
+      ];
+
+      const stepTarget = explorePool[currentStep % explorePool.length];
+      const stepDistractors = explorePool.filter(it => (it.name || it.word) !== (stepTarget.name || stepTarget.word)).slice(0, 2);
+      const stepOptions = [stepTarget, ...stepDistractors].sort(() => Math.random() - 0.5);
+
+      const stepPrompt = (currentStep === 0) 
+        ? `Encuentra: "${stepTarget.name || stepTarget.word}"`
+        : ((currentStep === 1) ? `¿Cuál objeto es "${stepTarget.name || stepTarget.word}"?` : `Reto final: Toca "${stepTarget.name || stepTarget.word}"`);
+
+      contentHtml = `
+        <div class="pedagogical-skill-badge">🎯 Habilidad: ${skillName}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0 12px; flex-wrap:wrap; gap:8px;">
+          <span style="font-weight:900; color:#86198f; font-size:1.05rem;">Paso ${currentStep + 1} de 3</span>
+          <span style="background:#e0e7ff; color:#3730a3; padding:4px 12px; border-radius:999px; font-weight:800; font-size:0.85rem;">Precisión en curso</span>
+        </div>
+        <p style="color:#1f2937; font-size:1.15rem; font-weight:800; margin:0 0 10px;">
+          ${stepPrompt}
+        </p>
+        <button class="toddler-nav-pill active" style="margin:0 auto 12px; display:inline-flex; align-items:center; gap:8px;" onclick="toddlersEngine.playAudio('${(stepTarget.name || stepTarget.word).replace(/'/g, "\\'")}')">
+          🔊 Escuchar Sonido ("${stepTarget.name || stepTarget.word}")
+        </button>
+        <div class="checkpoint-choices-grid">
+          ${stepOptions.map(opt => {
+            const isCorrect = (opt.name || opt.word) === (stepTarget.name || stepTarget.word);
+            const optName = opt.name || opt.word;
+            return `
+              <button type="button" class="checkpoint-choice-btn" onclick="toddlersEngine.handleCheckpointAnswer(this, ${isCorrect}, ${currentStep + 1}, 3, ${levelNum})">
+                <div style="font-size:3rem; margin-bottom:6px;">${this.renderVisual(opt.icon, optName)}</div>
+                <div style="font-size:1rem; font-weight:800; color:#1e293b;">${optName}</div>
+              </button>
+            `;
+          }).join('')}
         </div>
       `;
     }
 
-    const modal = document.createElement('div');
-    modal.className = 'diploma-modal-overlay';
-    modal.id = 'gameLevelModal';
     modal.innerHTML = `
-      <div class="diploma-modal-card" style="border-color:#d946ef; max-width:550px;">
-        <h2 style="color:#86198f; margin:0 0 6px;">Level ${lvl.level}: ${lvl.title}</h2>
-        ${gameContentHtml}
-        <div style="margin-top:1.5rem;">
+      <div class="diploma-modal-card" style="border-color:#d946ef; max-width:620px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1.5px solid #f3e8ff; padding-bottom:8px;">
+          <h2 style="color:#86198f; margin:0; font-size:1.35rem;">Nivel ${levelNum}: ${lvl.title}</h2>
+          <button style="border:none; background:none; font-size:1.4rem; cursor:pointer; color:#9ca3af;" onclick="document.getElementById('gameLevelModal')?.remove()">✕</button>
+        </div>
+        ${contentHtml}
+        <div style="margin-top:1.25rem;">
           <button class="toddler-nav-pill" style="margin:0 auto;" onclick="document.getElementById('gameLevelModal')?.remove()">
-            Exit Level
+            Salir del Nivel
           </button>
         </div>
       </div>
     `;
-
-    document.body.appendChild(modal);
-    this.playAudio(target);
   }
 
-  handleGameLevelChoice(levelNum, isCorrect) {
-    if (isCorrect) {
-      this.playCheerSound();
-      this.addStars(20);
+  handleCollectorCardClick(cardEl, isTarget, itemName, targetName) {
+    if (cardEl.classList.contains('collected')) return;
+    const state = this.currentGameLevelState;
 
-      const uProg = this.getUnitProgress(this.currentUnitId);
-      if (!uProg.gameLevelsStars) uProg.gameLevelsStars = {};
-      uProg.gameLevelsStars[levelNum] = 3;
+    if (isTarget) {
+      cardEl.classList.add('collected');
+      const badge = document.createElement('span');
+      badge.className = 'check-badge';
+      badge.textContent = '✓';
+      cardEl.appendChild(badge);
 
-      if (levelNum >= (uProg.gameUnlockedLevel || 1) && levelNum < 12) {
-        uProg.gameUnlockedLevel = levelNum + 1;
+      state.collectedCount++;
+      const countWords = ['One', 'Two', 'Three', 'Four', 'Five'];
+      const spokenCount = countWords[state.collectedCount - 1] || `${state.collectedCount}`;
+      this.playAudio(`${targetName}! ${spokenCount}!`);
+
+      const counterText = document.getElementById('collectorCounterText');
+      if (counterText) counterText.textContent = `${state.collectedCount} / ${state.targetCount}`;
+
+      const hintBanner = document.getElementById('collectorHintBanner');
+      if (hintBanner) {
+        hintBanner.style.color = '#10b981';
+        hintBanner.textContent = `✓ ¡Excelente! Encontraste un ${targetName} (${state.collectedCount} de ${state.targetCount}).`;
       }
-      this.saveProgress();
 
-      const modal = document.getElementById('gameLevelModal');
-      const card = modal ? modal.querySelector('.diploma-modal-card') : null;
-      const unit = this.getCurrentUnit();
-
-      if (levelNum < 12) {
-        if (card) {
-          card.innerHTML = `
-            <div style="font-size:3.5rem; animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">🎉 ⭐ ⭐ ⭐</div>
-            <h2 style="color:#059669; font-size:1.8rem; margin:10px 0 6px; font-weight:900;">¡Nivel ${levelNum} Superado!</h2>
-            <p style="color:#15803d; font-weight:700; font-size:1.15rem; margin-bottom:14px;">+20 Estrellas conseguidas ⭐</p>
-            <div style="display:inline-flex; align-items:center; gap:8px; background:#dcfce7; color:#166534; padding:10px 22px; border-radius:999px; font-weight:800; font-size:1.05rem; box-shadow:0 4px 12px rgba(22, 101, 52, 0.15);">
-              <span>🚀 Pasando al Nivel ${levelNum + 1}...</span>
-            </div>
-          `;
-        }
+      if (state.collectedCount >= state.targetCount) {
         setTimeout(() => {
-          document.getElementById('gameLevelModal')?.remove();
-          this.playGameLevel(levelNum + 1);
-          const ws = document.getElementById('toddlerWorkspace');
-          if (ws && this.currentTab === 'game') this.renderGame(ws);
-        }, 1300);
-      } else {
-        if (card) {
-          card.innerHTML = `
-            <div style="font-size:4rem; animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">🏆 👑 🌟</div>
-            <h2 style="color:#86198f; font-size:1.8rem; margin:10px 0 6px; font-weight:900;">¡Gran Victoria Arcade!</h2>
-            <p style="color:#701a75; font-weight:700; font-size:1.15rem; margin-bottom:14px;">¡Completaste los 12 niveles de la Unidad ${unit ? unit.id : ''}! ⭐</p>
-            <div style="display:inline-flex; align-items:center; gap:8px; background:#fdf4ff; color:#86198f; padding:10px 22px; border-radius:999px; font-weight:800; font-size:1.05rem; box-shadow:0 4px 12px rgba(134, 25, 143, 0.15);">
-              <span>🎓 Avanzando al Reto Final...</span>
-            </div>
-          `;
-        }
-        setTimeout(() => {
-          document.getElementById('gameLevelModal')?.remove();
-          this.switchTab('finalChallenge');
-        }, 1800);
+          this.completeGameLevelWithAssessment(state.levelNum, state.skillName, state.targetCount, state.errorsCount);
+        }, 700);
       }
     } else {
-      this.playAudio('Oops, try again!');
+      state.errorsCount++;
+      cardEl.style.transform = 'translateX(-6px)';
+      cardEl.style.borderColor = '#ef4444';
+      setTimeout(() => {
+        cardEl.style.transform = 'translateX(6px)';
+        setTimeout(() => {
+          cardEl.style.transform = 'none';
+          cardEl.style.borderColor = '#e2e8f0';
+        }, 120);
+      }, 120);
+
+      this.playAudio(`That is ${itemName}! Look for the ${targetName}!`);
+      const hintBanner = document.getElementById('collectorHintBanner');
+      if (hintBanner) {
+        hintBanner.style.color = '#dc2626';
+        hintBanner.textContent = `❌ Eso es "${itemName}". ¡Busca "${targetName}"!`;
+      }
     }
+  }
+
+  handlePhonicsTileClick(tileEl, letter, targetWord) {
+    if (tileEl.classList.contains('used')) return;
+    const state = this.currentGameLevelState;
+    const expectedLetter = targetWord[state.letterIndex];
+
+    if (letter === expectedLetter) {
+      tileEl.classList.add('used');
+      const slot = document.getElementById(`letterSlot-${state.letterIndex}`);
+      if (slot) {
+        slot.textContent = letter;
+        slot.classList.add('filled');
+      }
+
+      this.playAudio(letter);
+      state.letterIndex++;
+
+      const hintBanner = document.getElementById('phonicsHintBanner');
+      if (state.letterIndex < targetWord.length) {
+        if (hintBanner) {
+          hintBanner.style.color = '#10b981';
+          hintBanner.textContent = `✓ ¡Bien! Ahora toca la letra: ${targetWord[state.letterIndex]}`;
+        }
+      } else {
+        if (hintBanner) {
+          hintBanner.style.color = '#10b981';
+          hintBanner.textContent = `🎉 ¡Palabra completa: ${targetWord}!`;
+        }
+        this.playAudio(`${targetWord}! Awesome!`);
+        setTimeout(() => {
+          this.completeGameLevelWithAssessment(state.levelNum, state.skillName, targetWord.length, state.errorsCount);
+        }, 800);
+      }
+    } else {
+      state.errorsCount++;
+      tileEl.style.transform = 'translateX(-6px)';
+      setTimeout(() => {
+        tileEl.style.transform = 'translateX(6px)';
+        setTimeout(() => {
+          tileEl.style.transform = 'none';
+        }, 120);
+      }, 120);
+
+      this.playAudio(`Find letter ${expectedLetter}`);
+      const hintBanner = document.getElementById('phonicsHintBanner');
+      if (hintBanner) {
+        hintBanner.style.color = '#dc2626';
+        hintBanner.textContent = `❌ Necesitamos la letra "${expectedLetter}". ¡Búscala!`;
+      }
+    }
+  }
+
+  handleCountingItemClick(btnEl, targetCount, targetName) {
+    if (btnEl.classList.contains('counted')) return;
+    const state = this.currentGameLevelState;
+
+    btnEl.classList.add('counted');
+    state.countedItems++;
+
+    const badge = document.createElement('span');
+    badge.className = 'counting-num-badge';
+    badge.textContent = `${state.countedItems}`;
+    btnEl.appendChild(badge);
+
+    const countWords = ['One', 'Two', 'Three', 'Four', 'Five'];
+    const spoken = countWords[state.countedItems - 1] || `${state.countedItems}`;
+    this.playAudio(spoken);
+
+    const counterText = document.getElementById('countingCounterText');
+    if (counterText) counterText.textContent = `${state.countedItems} / ${targetCount}`;
+
+    const spokenBanner = document.getElementById('countingSpokenWord');
+    if (spokenBanner) spokenBanner.textContent = `"${spoken}!"`;
+
+    if (state.countedItems >= targetCount) {
+      setTimeout(() => {
+        this.playAudio(`${targetCount}! Fantastic counting!`);
+        this.completeGameLevelWithAssessment(state.levelNum, state.skillName, targetCount, state.errorsCount);
+      }, 700);
+    }
+  }
+
+  handleCheckpointAnswer(btnEl, isCorrect, nextStepIndex, totalSteps, levelNum) {
+    const state = this.currentGameLevelState;
+
+    if (isCorrect) {
+      this.playAudio('Correct! Great job!');
+      btnEl.style.borderColor = '#10b981';
+      btnEl.style.background = '#dcfce7';
+
+      setTimeout(() => {
+        if (nextStepIndex < totalSteps) {
+          state.stepIndex = nextStepIndex;
+          this.renderGameLevelModalContent();
+        } else {
+          this.completeGameLevelWithAssessment(levelNum, state.skillName, totalSteps, state.errorsCount);
+        }
+      }, 500);
+    } else {
+      state.errorsCount++;
+      btnEl.style.transform = 'translateX(-6px)';
+      btnEl.style.borderColor = '#ef4444';
+      setTimeout(() => {
+        btnEl.style.transform = 'translateX(6px)';
+        setTimeout(() => {
+          btnEl.style.transform = 'none';
+        }, 120);
+      }, 120);
+      this.playAudio('Oops, listen carefully and try again!');
+    }
+  }
+
+  completeGameLevelWithAssessment(levelNum, skillName, totalQuestions, errorsCount) {
+    this.playCheerSound();
+
+    let stars = 3;
+    let feedbackMsg = "¡Desempeño Perfecto! Dominaste completamente la habilidad.";
+    if (errorsCount === 1 || errorsCount === 2) {
+      stars = 2;
+      feedbackMsg = "¡Muy Buen Trabajo! Superaste el reto con gran perseverancia.";
+    } else if (errorsCount >= 3) {
+      stars = 1;
+      feedbackMsg = "¡Buen Esfuerzo! Puedes repetirlo para conseguir las 3 estrellas.";
+    }
+
+    const accuracy = Math.max(10, Math.round((totalQuestions / (totalQuestions + errorsCount)) * 100));
+
+    const uProg = this.getUnitProgress(this.currentUnitId);
+    if (!uProg.gameLevelsStars) uProg.gameLevelsStars = {};
+    uProg.gameLevelsStars[levelNum] = Math.max(uProg.gameLevelsStars[levelNum] || 0, stars);
+
+    if (levelNum >= (uProg.gameUnlockedLevel || 1) && levelNum < 12) {
+      uProg.gameUnlockedLevel = levelNum + 1;
+    }
+    this.addStars(20);
+    this.saveProgress();
+
+    let modal = document.getElementById('gameLevelModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'gameLevelModal';
+      modal.className = 'diploma-modal-overlay';
+      document.body.appendChild(modal);
+    }
+
+    const starsHtml = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
+
+    modal.innerHTML = `
+      <div class="diploma-modal-card" style="border-color:${stars === 3 ? '#10b981' : '#d946ef'}; max-width:620px;">
+        <div style="font-size:3.5rem; margin-bottom:8px; animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">
+          ${stars === 3 ? '🏆 🌟 🌟 🌟' : (stars === 2 ? '🎉 ⭐ ⭐ ☆' : '💪 ⭐ ☆ ☆')}
+        </div>
+        <h2 style="color:${stars === 3 ? '#059669' : '#86198f'}; font-size:1.65rem; margin:0 0 6px; font-weight:900;">
+          ¡Nivel ${levelNum} Completado!
+        </h2>
+        <div style="font-size:1.8rem; color:#f59e0b; margin-bottom:10px;">${starsHtml}</div>
+        <p style="color:#4b5563; font-weight:700; font-size:0.98rem; margin:0 0 14px;">${feedbackMsg}</p>
+
+        <div class="assessment-rubric-card">
+          <div class="rubric-row">
+            <span style="color:#64748b; font-weight:700;">Habilidad Evaluada:</span>
+            <span style="color:#86198f; font-weight:800;">${skillName}</span>
+          </div>
+          <div class="rubric-row">
+            <span style="color:#64748b; font-weight:700;">Precisión del Niño:</span>
+            <span style="color:#059669; font-weight:800;">${accuracy}% (${totalQuestions} superados)</span>
+          </div>
+          <div class="rubric-row">
+            <span style="color:#64748b; font-weight:700;">Reintentos / Errores:</span>
+            <span style="color:${errorsCount === 0 ? '#059669' : '#d97706'}; font-weight:800;">${errorsCount}</span>
+          </div>
+          <div class="rubric-row">
+            <span style="color:#64748b; font-weight:700;">Recompensa:</span>
+            <span style="color:#f59e0b; font-weight:800;">+20 Estrellas ⭐</span>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:12px; margin-top:1.5rem; flex-wrap:wrap;">
+          <button class="toddler-nav-pill" onclick="toddlersEngine.playGameLevel(${levelNum})">
+            🔁 Repetir Nivel
+          </button>
+          ${levelNum < 12 ? `
+            <button class="toddler-nav-pill active" onclick="document.getElementById('gameLevelModal')?.remove(); toddlersEngine.playGameLevel(${levelNum + 1}); const ws = document.getElementById('toddlerWorkspace'); if (ws && toddlersEngine.currentTab === 'game') toddlersEngine.renderGame(ws);">
+              Siguiente Nivel (${levelNum + 1}) ➔
+            </button>
+          ` : `
+            <button class="toddler-nav-pill active" onclick="document.getElementById('gameLevelModal')?.remove(); toddlersEngine.switchTab('finalChallenge');">
+              Ver Trofeo Dorado 🏆
+            </button>
+          `}
+        </div>
+      </div>
+    `;
+
+    const ws = document.getElementById('toddlerWorkspace');
+    if (ws && this.currentTab === 'game') this.renderGame(ws);
   }
 
   /* ==========================================================================

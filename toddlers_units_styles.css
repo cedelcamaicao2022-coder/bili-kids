@@ -1501,3 +1501,267 @@ body.toddler-body {
     font-size: 0.85rem;
   }
 }
+
+/* ==========================================================================
+   PEDAGOGICAL ARCADE GAME SYSTEM (12 LEVELS)
+   ========================================================================== */
+.pedagogical-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fdf4ff;
+  border: 1.5px solid #e879f9;
+  color: #86198f;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(217, 70, 239, 0.12);
+}
+
+.collector-mission-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 12px 0 16px;
+  font-weight: 800;
+  color: #166534;
+  font-size: 0.95rem;
+}
+
+.game-collector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.collector-card {
+  background: #ffffff;
+  border: 2.5px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.collector-card:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: #38bdf8;
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+}
+
+.collector-card.collected {
+  border-color: #10b981;
+  background: #f0fdf4;
+  transform: scale(0.95);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.collector-card .card-icon {
+  font-size: 3rem;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.collector-card .card-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.collector-card .check-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #10b981;
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+/* Phonics Word Builder */
+.letter-builder-slots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.letter-slot {
+  width: 46px;
+  height: 52px;
+  border: 2.5px dashed #cbd5e1;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.letter-slot.filled {
+  border-style: solid;
+  border-color: #10b981;
+  background: #dcfce7;
+  color: #15803d;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  transform: scale(1.05);
+}
+
+.letter-tiles-pool {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.letter-tile-btn {
+  width: 48px;
+  height: 52px;
+  border: 2px solid #f59e0b;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fef3c7, #fde68a);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #78350f;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.letter-tile-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 18px rgba(245, 158, 11, 0.35);
+}
+
+.letter-tile-btn.used {
+  opacity: 0.3;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* Counting items grid */
+.counting-stage-grid {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+
+.counting-item-btn {
+  position: relative;
+  background: #ffffff;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 22px;
+  padding: 16px 20px;
+  font-size: 3.4rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.counting-item-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  border-color: #3b82f6;
+}
+
+.counting-item-btn.counted {
+  border-color: #10b981;
+  background: #f0fdf4;
+  pointer-events: none;
+}
+
+.counting-num-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(29, 78, 216, 0.35);
+  animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Multi-checkpoint logic choices */
+.checkpoint-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+@media (max-width: 580px) {
+  .checkpoint-choices-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkpoint-choice-btn {
+  background: #ffffff;
+  border: 2.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 14px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.checkpoint-choice-btn:hover {
+  transform: translateY(-3px);
+  border-color: #a855f7;
+  box-shadow: 0 8px 18px rgba(168, 85, 247, 0.18);
+}
+
+.assessment-rubric-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  text-align: left;
+}
+
+.rubric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dashed #cbd5e1;
+  font-size: 0.92rem;
+}
+
+.rubric-row:last-child {
+  border-bottom: none;
+}
+
