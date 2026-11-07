@@ -26,12 +26,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "20 SYNTAX DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Daily Routine (20 Drills)",
-        desc: "Master 20 essential grammar challenges: Present Simple, 3rd person singular '-s', essential subject/object pronouns, and time prepositions.",
-        actionText: "Start Practice (20 Drills)",
+        title: "Use of English A1 (20 Tests)",
+        desc: "Take 20 focused grammar tests with instant feedback covering Present Simple, pronouns, prepositions, questions, and modals.",
+        actionText: "Open 20 Tests",
         actionColor: "#9333ea"
       },
       {
@@ -48,12 +48,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "20 LEXICAL DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#e0e7ff",
         badgeColor: "#3730a3",
-        title: "Vocabulary Matrix: School & Life (20 Drills)",
-        desc: "Explore 20 targeted vocabulary items covering academic rooms, school subjects, and everyday phrasal verb pairings.",
-        actionText: "Explore Matrix (20 Drills)",
+        title: "Vocabulary Matrix A1 (20 Tests)",
+        desc: "Explore 20 thematic vocabulary tests covering academic rooms, school subjects, hobbies, and essential phrasal verbs.",
+        actionText: "Open 20 Tests",
         actionColor: "#4f46e5"
       }
     ]
@@ -76,12 +76,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "20 GRAMMAR DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Past Narratives (20 Drills)",
-        desc: "Conquer 20 grammar challenges: Past Continuous vs Simple, comparatives/superlatives, going to, and modals.",
-        actionText: "Start Practice (20 Drills)",
+        title: "Use of English A2 (20 Tests)",
+        desc: "Take 20 grammar tests covering Past Continuous vs Simple, comparatives/superlatives, going to, and modals.",
+        actionText: "Open 20 Tests",
         actionColor: "#9333ea"
       },
       {
@@ -98,12 +98,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "20 LEXICAL DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Vocabulary Matrix: Social & Travel (20 Drills)",
-        desc: "Master 20 key collocations and phrasal verbs for travel, environmental actions, and everyday teenager life.",
-        actionText: "Explore Matrix (20 Drills)",
+        title: "Vocabulary Matrix A2 (20 Tests)",
+        desc: "Explore 20 thematic vocabulary tests covering travel, ecology, digital devices, and social life collocations.",
+        actionText: "Open 20 Tests",
         actionColor: "#16a34a"
       }
     ]
@@ -128,12 +128,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "20 ADVANCED DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Use of English: Passive & Modals (20 Drills)",
-        desc: "Exam-grade Saber 9° & Cambridge B1: 20 drills covering conditionals, relative clauses, passive voice, and indirect speech.",
-        actionText: "Start Practice (20 Drills)",
+        title: "Use of English B1 • Saber 9° (20 Tests)",
+        desc: "Complete 20 tests aligned with ICFES Saber 9° & Cambridge B1 covering conditionals, modals of deduction, and passives.",
+        actionText: "Open 20 Tests",
         actionColor: "#9333ea"
       },
       {
@@ -152,12 +152,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "20 ACADEMIC DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Academic Word List & Collocations (20 Drills)",
-        desc: "Master 20 high-frequency academic collocations, formal discourse markers, and science terminology.",
-        actionText: "Explore Matrix (20 Drills)",
+        title: "Academic Vocabulary B1 (20 Tests)",
+        desc: "Master 20 academic vocabulary tests covering research collocations, discourse markers, and civic terminology.",
+        actionText: "Open 20 Tests",
         actionColor: "#16a34a"
       }
     ]
@@ -182,12 +182,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "grammar",
         icon: "🎯",
-        badge: "20 ADVANCED DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#fae8ff",
         badgeColor: "#86198f",
-        title: "Cambridge B2 First (20 Drills)",
-        desc: "Exam-grade Use of English practice: 20 drills on inversion, inverted conditionals, passive reporting, and cleft sentences.",
-        actionText: "Start Practice (20 Drills)",
+        title: "Cambridge B2 First (20 Tests)",
+        desc: "Complete 20 high-level tests covering inversion, inverted conditionals, passive reporting, and cleft sentences.",
+        actionText: "Open 20 Tests",
         actionColor: "#9333ea",
         extLink: "teens_cambridge_b2.html",
         extLabel: "🎯 Full Cambridge App"
@@ -208,12 +208,12 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "vocab",
         icon: "🧩",
-        badge: "20 ADVANCED DRILLS",
+        badge: "20 TESTS AVAILABLE",
         badgeBg: "#dcfce7",
         badgeColor: "#166534",
-        title: "Advanced Collocations & Phrasals (20 Drills)",
-        desc: "Master 20 nuanced academic collocations, sophisticated three-part phrasals, and precision idioms for Cambridge B2 & Saber 11°.",
-        actionText: "Explore Matrix (20 Drills)",
+        title: "Advanced Collocations & Phrasals (20 Tests)",
+        desc: "Master 20 advanced vocabulary tests covering three-part phrasals, paradigm shifts, and precision academic idioms.",
+        actionText: "Open 20 Tests",
         actionColor: "#16a34a"
       }
     ]
@@ -237,6 +237,8 @@ class TeensLevelsEngine {
     this.selectedAnswers = {};
     this.audioCtx = null;
     this.readingIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
+    this.grammarIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
+    this.vocabIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
   }
 
   init() {
@@ -682,27 +684,51 @@ class TeensLevelsEngine {
   }
 
   /* ==========================================================================
-     2. GRAMMAR CLOZE VIEW RENDERER
+     2. GRAMMAR TESTS VIEW RENDERER (20 TESTS PER LEVEL)
      ========================================================================== */
-  renderGrammarView(container, exercise) {
-    let itemsHtml = '';
-    exercise.items.forEach((item, idx) => {
+  renderGrammarView(container, exerciseGroup) {
+    if (!this.grammarIndexByLevel) {
+      this.grammarIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
+    }
+
+    const tests = (exerciseGroup && exerciseGroup.tests && exerciseGroup.tests.length > 0)
+      ? exerciseGroup.tests
+      : (exerciseGroup && exerciseGroup.items ? [{
+          id: exerciseGroup.id,
+          title: exerciseGroup.title,
+          badge: exerciseGroup.badge,
+          instruction: exerciseGroup.instruction,
+          questions: exerciseGroup.items
+        }] : [exerciseGroup]);
+
+    const totalTests = tests.length;
+    let currentIdx = this.grammarIndexByLevel[this.currentLevel] || 0;
+    if (currentIdx >= totalTests) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = 0;
+    this.grammarIndexByLevel[this.currentLevel] = currentIdx;
+
+    const activeTest = tests[currentIdx] || tests[0];
+    const questions = activeTest.questions || activeTest.items || [];
+    this.selectedAnswers = {};
+
+    let questionsHtml = '';
+    questions.forEach((qObj, idx) => {
       let optionsHtml = '';
-      item.options.forEach((opt, optIdx) => {
+      qObj.options.forEach((opt, optIdx) => {
         optionsHtml += `
-          <button class="level-choice-option-btn" data-itemidx="${idx}" data-optidx="${optIdx}">
+          <button class="level-choice-option-btn" data-qidx="${idx}" data-optidx="${optIdx}">
             <span class="choice-letter">${String.fromCharCode(65 + optIdx)}</span>
             <span class="choice-text">${opt}</span>
           </button>
         `;
       });
 
-      itemsHtml += `
+      questionsHtml += `
         <div class="grammar-sentence-card" id="gcard-${idx}">
           <div class="item-number-header">
-            <span class="item-badge-pill">Question ${idx + 1} of ${exercise.items.length}</span>
+            <span class="item-badge-pill">Question ${idx + 1} of ${questions.length}</span>
           </div>
-          <div class="grammar-sentence-text">${item.sentence}</div>
+          <div class="grammar-sentence-text">${qObj.q || qObj.sentence}</div>
           <div class="reading-options-grid">${optionsHtml}</div>
           <div class="pedagogical-feedback-box" id="gfeedback-${idx}" style="display:none;"></div>
         </div>
@@ -716,46 +742,103 @@ class TeensLevelsEngine {
             <span class="exercise-type-pill" style="background:#e0f2fe; color:#0284c7;">🎯 USE OF ENGLISH & GRAMMAR</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
             <span class="exercise-score-badge" style="background:#fef3c7; color:#92400e; font-weight:800;">
-              ${exercise.items.length} Questions Available
+              ${totalTests} Tests Available
             </span>
           </div>
-          <h3 class="exercise-main-title">${exercise.title}</h3>
-          <p class="exercise-instruction-text">${exercise.instruction}</p>
+          <h3 class="exercise-main-title">${activeTest.title}</h3>
+          <p class="exercise-instruction-text">${activeTest.instruction}</p>
+        </div>
+
+        <!-- 20 TEST NAVIGATOR -->
+        <div class="reading-navigator-bar">
+          <button class="reading-nav-btn" id="btnPrevGrammarTest" ${currentIdx === 0 ? 'disabled' : ''}>
+            ← Previous Test
+          </button>
+          <div class="reading-selector-center">
+            <label class="reading-select-label" for="grammarTestSelect">Test:</label>
+            <select id="grammarTestSelect" class="reading-dropdown-select">
+              ${tests.map((t, idx) => `
+                <option value="${idx}" ${idx === currentIdx ? 'selected' : ''}>
+                  Test ${idx + 1}: ${t.title.replace(/^Grammar Test \d+:\s*/, '')} (${(t.badge || '').split('•')[0].trim()})
+                </option>
+              `).join('')}
+            </select>
+            <span class="reading-counter-tag">Test ${currentIdx + 1} of ${totalTests}</span>
+          </div>
+          <button class="reading-nav-btn" id="btnNextGrammarTest" ${currentIdx === totalTests - 1 ? 'disabled' : ''}>
+            Next Test →
+          </button>
         </div>
 
         <div class="grammar-items-flow">
-          ${itemsHtml}
+          ${questionsHtml}
         </div>
 
         <div class="exercise-actions-bar">
           <button class="btn-submit-exercise" id="btnCheckGrammar">
-            ✓ Check Grammar Answers
+            ✓ Check Test Answers
           </button>
           <span class="exercise-score-badge" id="grammarScoreBadge" style="display:none;"></span>
+          <button class="btn-submit-exercise btn-next-passage-action" id="btnNextGrammarAction" style="display:none; background:#10b981;">
+            Next Test →
+          </button>
         </div>
       </div>
     `;
 
+    // Dropdown change
+    const testSelect = document.getElementById('grammarTestSelect');
+    if (testSelect) {
+      testSelect.addEventListener('change', (e) => {
+        this.grammarIndexByLevel[this.currentLevel] = parseInt(e.target.value, 10);
+        this.renderGrammarView(container, exerciseGroup);
+      });
+    }
+
+    // Prev Button
+    const prevBtn = document.getElementById('btnPrevGrammarTest');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (this.grammarIndexByLevel[this.currentLevel] > 0) {
+          this.grammarIndexByLevel[this.currentLevel]--;
+          this.renderGrammarView(container, exerciseGroup);
+        }
+      });
+    }
+
+    // Next Button
+    const nextBtn = document.getElementById('btnNextGrammarTest');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (this.grammarIndexByLevel[this.currentLevel] < totalTests - 1) {
+          this.grammarIndexByLevel[this.currentLevel]++;
+          this.renderGrammarView(container, exerciseGroup);
+        }
+      });
+    }
+
+    // Option selection
     container.querySelectorAll('.level-choice-option-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const itemIdx = parseInt(btn.dataset.itemidx, 10);
+        const qIdx = parseInt(btn.dataset.qidx, 10);
         const optIdx = parseInt(btn.dataset.optidx, 10);
-        this.selectedAnswers[itemIdx] = optIdx;
+        this.selectedAnswers[qIdx] = optIdx;
 
-        const card = document.getElementById(`gcard-${itemIdx}`);
+        const card = document.getElementById(`gcard-${qIdx}`);
         card.querySelectorAll('.level-choice-option-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         this.playTone(520, 0.05, 'sine');
       });
     });
 
+    // Check Answers
     document.getElementById('btnCheckGrammar').addEventListener('click', () => {
       let correct = 0;
-      exercise.items.forEach((item, idx) => {
+      questions.forEach((qObj, idx) => {
         const userChoice = this.selectedAnswers[idx];
         const card = document.getElementById(`gcard-${idx}`);
         const fb = document.getElementById(`gfeedback-${idx}`);
-        const isCorrect = userChoice === item.correct;
+        const isCorrect = userChoice === qObj.correct;
 
         if (isCorrect) {
           correct++;
@@ -770,28 +853,61 @@ class TeensLevelsEngine {
         fb.innerHTML = `
           <div class="fb-callout ${isCorrect ? 'good' : 'bad'}">
             <strong>${isCorrect ? '✓ Correct Syntax!' : '✗ Rule & Explanation:'}</strong>
-            <p>${item.explanation}</p>
+            <p>${qObj.explanation}</p>
           </div>
         `;
       });
 
       const scoreEl = document.getElementById('grammarScoreBadge');
       scoreEl.style.display = 'inline-block';
-      scoreEl.innerHTML = `Score: <strong>${correct} / ${exercise.items.length}</strong> (${Math.round((correct / exercise.items.length) * 100)}%)`;
+      scoreEl.innerHTML = `Score: <strong>${correct} / ${questions.length}</strong> (${Math.round((correct / questions.length) * 100)}%)`;
 
-      if (correct === exercise.items.length) this.playSuccess();
+      const nextActionBtn = document.getElementById('btnNextGrammarAction');
+      if (nextActionBtn && currentIdx < totalTests - 1) {
+        nextActionBtn.style.display = 'inline-flex';
+        nextActionBtn.onclick = () => {
+          this.grammarIndexByLevel[this.currentLevel]++;
+          this.renderGrammarView(container, exerciseGroup);
+        };
+      }
+
+      if (correct === questions.length) this.playSuccess();
       else this.playError();
     });
   }
 
   /* ==========================================================================
-     3. VOCABULARY MATRIX VIEW RENDERER
+     3. VOCABULARY MATRIX VIEW RENDERER (20 TESTS PER LEVEL)
      ========================================================================== */
-  renderVocabView(container, exercise) {
-    let itemsHtml = '';
-    exercise.items.forEach((item, idx) => {
+  renderVocabView(container, exerciseGroup) {
+    if (!this.vocabIndexByLevel) {
+      this.vocabIndexByLevel = { a1: 0, a2: 0, b1: 0, b2: 0 };
+    }
+
+    const tests = (exerciseGroup && exerciseGroup.tests && exerciseGroup.tests.length > 0)
+      ? exerciseGroup.tests
+      : (exerciseGroup && exerciseGroup.items ? [{
+          id: exerciseGroup.id,
+          title: exerciseGroup.title,
+          badge: exerciseGroup.badge,
+          instruction: exerciseGroup.instruction,
+          questions: exerciseGroup.items
+        }] : [exerciseGroup]);
+
+    const totalTests = tests.length;
+    let currentIdx = this.vocabIndexByLevel[this.currentLevel] || 0;
+    if (currentIdx >= totalTests) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = 0;
+    this.vocabIndexByLevel[this.currentLevel] = currentIdx;
+
+    const activeTest = tests[currentIdx] || tests[0];
+    const questions = activeTest.questions || activeTest.items || [];
+    this.selectedAnswers = {};
+
+    let questionsHtml = '';
+    questions.forEach((qObj, idx) => {
       let optionsHtml = '';
-      item.options.forEach((opt, optIdx) => {
+      qObj.options.forEach((opt, optIdx) => {
         optionsHtml += `
           <button class="level-choice-option-btn" data-vidx="${idx}" data-optidx="${optIdx}">
             <span class="choice-letter">${String.fromCharCode(65 + optIdx)}</span>
@@ -800,12 +916,12 @@ class TeensLevelsEngine {
         `;
       });
 
-      itemsHtml += `
+      questionsHtml += `
         <div class="vocab-matrix-card" id="vcard-${idx}">
           <div class="item-number-header">
-            <span class="item-badge-pill">Item ${idx + 1} of ${exercise.items.length}</span>
+            <span class="item-badge-pill">Item ${idx + 1} of ${questions.length}</span>
           </div>
-          <div class="vocab-prompt-text">${item.sentence}</div>
+          <div class="vocab-prompt-text">${qObj.q || qObj.sentence}</div>
           <div class="reading-options-grid">${optionsHtml}</div>
           <div class="pedagogical-feedback-box" id="vfeedback-${idx}" style="display:none;"></div>
         </div>
@@ -819,26 +935,82 @@ class TeensLevelsEngine {
             <span class="exercise-type-pill" style="background:#fef3c7; color:#b45309;">⚡ VOCABULARY & COLLOCATIONS</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
             <span class="exercise-score-badge" style="background:#dcfce7; color:#166534; font-weight:800;">
-              ${exercise.items.length} Questions Available
+              ${totalTests} Tests Available
             </span>
           </div>
-          <h3 class="exercise-main-title">${exercise.title}</h3>
-          <p class="exercise-instruction-text">${exercise.instruction}</p>
+          <h3 class="exercise-main-title">${activeTest.title}</h3>
+          <p class="exercise-instruction-text">${activeTest.instruction}</p>
+        </div>
+
+        <!-- 20 TEST NAVIGATOR -->
+        <div class="reading-navigator-bar">
+          <button class="reading-nav-btn" id="btnPrevVocabTest" ${currentIdx === 0 ? 'disabled' : ''}>
+            ← Previous Test
+          </button>
+          <div class="reading-selector-center">
+            <label class="reading-select-label" for="vocabTestSelect">Test:</label>
+            <select id="vocabTestSelect" class="reading-dropdown-select">
+              ${tests.map((t, idx) => `
+                <option value="${idx}" ${idx === currentIdx ? 'selected' : ''}>
+                  Test ${idx + 1}: ${t.title.replace(/^Vocab Test \d+:\s*/, '')} (${(t.badge || '').split('•')[0].trim()})
+                </option>
+              `).join('')}
+            </select>
+            <span class="reading-counter-tag">Test ${currentIdx + 1} of ${totalTests}</span>
+          </div>
+          <button class="reading-nav-btn" id="btnNextVocabTest" ${currentIdx === totalTests - 1 ? 'disabled' : ''}>
+            Next Test →
+          </button>
         </div>
 
         <div class="vocab-items-flow">
-          ${itemsHtml}
+          ${questionsHtml}
         </div>
 
         <div class="exercise-actions-bar">
           <button class="btn-submit-exercise" id="btnCheckVocab">
-            ✓ Check Vocabulary Matrix
+            ✓ Check Test Answers
           </button>
           <span class="exercise-score-badge" id="vocabScoreBadge" style="display:none;"></span>
+          <button class="btn-submit-exercise btn-next-passage-action" id="btnNextVocabAction" style="display:none; background:#16a34a;">
+            Next Test →
+          </button>
         </div>
       </div>
     `;
 
+    // Dropdown change
+    const testSelect = document.getElementById('vocabTestSelect');
+    if (testSelect) {
+      testSelect.addEventListener('change', (e) => {
+        this.vocabIndexByLevel[this.currentLevel] = parseInt(e.target.value, 10);
+        this.renderVocabView(container, exerciseGroup);
+      });
+    }
+
+    // Prev Button
+    const prevBtn = document.getElementById('btnPrevVocabTest');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (this.vocabIndexByLevel[this.currentLevel] > 0) {
+          this.vocabIndexByLevel[this.currentLevel]--;
+          this.renderVocabView(container, exerciseGroup);
+        }
+      });
+    }
+
+    // Next Button
+    const nextBtn = document.getElementById('btnNextVocabTest');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (this.vocabIndexByLevel[this.currentLevel] < totalTests - 1) {
+          this.vocabIndexByLevel[this.currentLevel]++;
+          this.renderVocabView(container, exerciseGroup);
+        }
+      });
+    }
+
+    // Option selection
     container.querySelectorAll('.level-choice-option-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const vIdx = parseInt(btn.dataset.vidx, 10);
@@ -852,13 +1024,14 @@ class TeensLevelsEngine {
       });
     });
 
+    // Check Answers
     document.getElementById('btnCheckVocab').addEventListener('click', () => {
       let correct = 0;
-      exercise.items.forEach((item, idx) => {
+      questions.forEach((qObj, idx) => {
         const userChoice = this.selectedAnswers[idx];
         const card = document.getElementById(`vcard-${idx}`);
         const fb = document.getElementById(`vfeedback-${idx}`);
-        const isCorrect = userChoice === item.correct;
+        const isCorrect = userChoice === qObj.correct;
 
         if (isCorrect) {
           correct++;
@@ -873,16 +1046,25 @@ class TeensLevelsEngine {
         fb.innerHTML = `
           <div class="fb-callout ${isCorrect ? 'good' : 'bad'}">
             <strong>${isCorrect ? '✓ Precise Collocation!' : '✗ Lexical Context:'}</strong>
-            <p>${item.explanation}</p>
+            <p>${qObj.explanation}</p>
           </div>
         `;
       });
 
       const scoreEl = document.getElementById('vocabScoreBadge');
       scoreEl.style.display = 'inline-block';
-      scoreEl.innerHTML = `Score: <strong>${correct} / ${exercise.items.length}</strong> (${Math.round((correct / exercise.items.length) * 100)}%)`;
+      scoreEl.innerHTML = `Score: <strong>${correct} / ${questions.length}</strong> (${Math.round((correct / questions.length) * 100)}%)`;
 
-      if (correct === exercise.items.length) this.playSuccess();
+      const nextActionBtn = document.getElementById('btnNextVocabAction');
+      if (nextActionBtn && currentIdx < totalTests - 1) {
+        nextActionBtn.style.display = 'inline-flex';
+        nextActionBtn.onclick = () => {
+          this.vocabIndexByLevel[this.currentLevel]++;
+          this.renderVocabView(container, exerciseGroup);
+        };
+      }
+
+      if (correct === questions.length) this.playSuccess();
       else this.playError();
     });
   }

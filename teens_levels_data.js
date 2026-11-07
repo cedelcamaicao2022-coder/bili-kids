@@ -26,30 +26,36 @@ function getLevelReading(levelKey, defaultTitle, defaultBadge) {
 }
 
 function getLevelGrammar(levelKey, defaultTitle, defaultBadge, defaultInstruction) {
-  const items = (typeof TEENS_GRAMMAR_DATA !== 'undefined' && TEENS_GRAMMAR_DATA[levelKey])
-    ? TEENS_GRAMMAR_DATA[levelKey]
+  const tests = (typeof TEENS_GRAMMAR_TESTS !== 'undefined' && TEENS_GRAMMAR_TESTS[levelKey])
+    ? TEENS_GRAMMAR_TESTS[levelKey]
     : [];
+  const first = tests[0] || {};
   return {
     id: `${levelKey}_grammar`,
     type: "grammar",
     title: defaultTitle,
     badge: defaultBadge,
-    instruction: defaultInstruction,
-    items: items
+    tests: tests,
+    instruction: first.instruction || defaultInstruction || "Choose the grammatically correct option.",
+    questions: first.questions || [],
+    items: first.questions || []
   };
 }
 
 function getLevelVocab(levelKey, defaultTitle, defaultBadge, defaultInstruction) {
-  const items = (typeof TEENS_VOCAB_DATA !== 'undefined' && TEENS_VOCAB_DATA[levelKey])
-    ? TEENS_VOCAB_DATA[levelKey]
+  const tests = (typeof TEENS_VOCAB_TESTS !== 'undefined' && TEENS_VOCAB_TESTS[levelKey])
+    ? TEENS_VOCAB_TESTS[levelKey]
     : [];
+  const first = tests[0] || {};
   return {
     id: `${levelKey}_vocab`,
     type: "vocab",
     title: defaultTitle,
     badge: defaultBadge,
-    instruction: defaultInstruction,
-    items: items
+    tests: tests,
+    instruction: first.instruction || defaultInstruction || "Select the most accurate word for each context.",
+    questions: first.questions || [],
+    items: first.questions || []
   };
 }
 
@@ -65,19 +71,19 @@ const TEENS_LEVELS_DATA = {
       // 1. Reading (21 Passages Available)
       reading: getLevelReading('a1', "Critical Reading A1 (21 Passages)", "CEFR A1 • 21 Passages Available"),
 
-      // 2. Grammar Cloze (20 Drills)
+      // 2. Grammar Cloze (20 Tests Available)
       grammar: getLevelGrammar(
         'a1',
-        "Use of English: Daily Routine & Basic Syntax",
-        "Grammar & Sentence Flow • A1 (20 Drills)",
-        "Choose the correct word to complete each sentence with accurate A1 grammar."
+        "Use of English A1 (20 Tests)",
+        "CEFR A1 • 20 Tests Available",
+        "Select the correct option to complete each sentence with accurate A1 grammar."
       ),
 
-      // 3. Vocabulary Matrix (20 Drills)
+      // 3. Vocabulary Matrix (20 Tests Available)
       vocab: getLevelVocab(
         'a1',
-        "Vocabulary Matrix: School & Everyday Life",
-        "Lexical Pairs • A1 (20 Drills)",
+        "Vocabulary Matrix A1 (20 Tests)",
+        "CEFR A1 • 20 Tests Available",
         "Select the most accurate word to match the definition or context."
       ),
 
@@ -107,19 +113,19 @@ const TEENS_LEVELS_DATA = {
       // 1. Reading (21 Passages Available)
       reading: getLevelReading('a2', "Critical Reading A2 (21 Passages)", "CEFR A2 • 21 Passages Available"),
 
-      // 2. Grammar Cloze (20 Drills)
+      // 2. Grammar Cloze (20 Tests Available)
       grammar: getLevelGrammar(
         'a2',
-        "Use of English: Past Narratives & Comparatives",
-        "Grammar & Connectors • A2 (20 Drills)",
+        "Use of English A2 (20 Tests)",
+        "CEFR A2 • 20 Tests Available",
         "Choose the grammatically correct option to complete the sentences."
       ),
 
-      // 3. Vocabulary Matrix (20 Drills)
+      // 3. Vocabulary Matrix (20 Tests Available)
       vocab: getLevelVocab(
         'a2',
-        "Vocabulary & Phrasal Verbs: Social & Travel",
-        "Phrasal Verbs & Collocations • A2 (20 Drills)",
+        "Vocabulary Matrix A2 (20 Tests)",
+        "CEFR A2 • 20 Tests Available",
         "Identify the correct phrasal verb or collocation for each sentence."
       ),
 
@@ -149,19 +155,19 @@ const TEENS_LEVELS_DATA = {
       // 1. Reading (21 Passages Available)
       reading: getLevelReading('b1', "Critical Reading B1 • Saber 9° (21 Passages)", "ICFES Saber 9° • 21 Passages Available"),
 
-      // 2. Grammar Cloze (20 Drills)
+      // 2. Grammar Cloze (20 Tests Available)
       grammar: getLevelGrammar(
         'b1',
-        "Use of English: Conditionals & Modals of Deduction",
-        "B1 Intermediate Syntax • Saber 9° (20 Drills)",
+        "Use of English B1 • Saber 9° (20 Tests)",
+        "ICFES Saber 9° • 20 Tests Available",
         "Choose the grammatical option that best completes the complex sentence."
       ),
 
-      // 3. Vocabulary Matrix (20 Drills)
+      // 3. Vocabulary Matrix (20 Tests Available)
       vocab: getLevelVocab(
         'b1',
-        "Academic Collocations & Connective Discourse",
-        "Discourse Connectors • B1 (20 Drills)",
+        "Academic Vocabulary B1 (20 Tests)",
+        "ICFES Saber 9° • 20 Tests Available",
         "Select the most cohesive academic connector or collocation."
       ),
 
@@ -191,19 +197,19 @@ const TEENS_LEVELS_DATA = {
       // 1. Reading (21 Passages Available)
       reading: getLevelReading('b2', "Critical Reading B2 • Saber 11° (21 Passages)", "Cambridge B2 / Saber 11° • 21 Passages Available"),
 
-      // 2. Grammar Cloze (20 Drills)
+      // 2. Grammar Cloze (20 Tests Available)
       grammar: getLevelGrammar(
         'b2',
-        "Use of English: Inversion, Passive & Mixed Clauses",
-        "Cambridge B2 Use of English • FCE (20 Drills)",
+        "Cambridge B2 First • Use of English (20 Tests)",
+        "Cambridge FCE / Saber 11° • 20 Tests Available",
         "Select the option that adheres to advanced Cambridge B2 syntactic rules."
       ),
 
-      // 3. Vocabulary Matrix (20 Drills)
+      // 3. Vocabulary Matrix (20 Tests Available)
       vocab: getLevelVocab(
         'b2',
-        "Lexical Precision: Word Formation & Nuanced Idioms",
-        "Advanced Lexical Power • B2 (20 Drills)",
+        "Advanced Vocabulary & Collocations B2 (20 Tests)",
+        "Cambridge FCE / Saber 11° • 20 Tests Available",
         "Complete each sentence with the most precise B2 word or derivative."
       ),
 
