@@ -579,8 +579,22 @@
   color: #cbd5e1;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive adjustments: Tablets (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .painting-studio-layout,
+  .prism-lab-layout,
+  .bubbles-arcade-layout {
+    grid-template-columns: 260px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .paint-jars-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Responsive adjustments: Mobile Phones Only (<= 640px) */
+@media (max-width: 640px) {
   .painting-studio-layout,
   .prism-lab-layout,
   .bubbles-arcade-layout {

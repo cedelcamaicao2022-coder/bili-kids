@@ -1026,8 +1026,10 @@
       this.dom.screenCelebration.classList.toggle('hidden', name !== 'celebration');
 
       if (name === 'reader') {
+        document.body.classList.add('reader-open');
         this.particles.start();
       } else {
+        document.body.classList.remove('reader-open');
         this.particles.stop();
       }
     }

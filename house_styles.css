@@ -1320,8 +1320,50 @@ body {
   z-index: 999;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+/* --- RESPONSIVE DESIGN: TABLETS (641px - 1024px) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .home-hero-content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 10px 14px !important;
+  }
+  .luna-fullbody-hero-img {
+    width: 175px !important;
+  }
+  .home-speech-bubble {
+    max-width: 420px !important;
+    padding: 14px 18px !important;
+    text-align: left;
+  }
+  .home-speech-bubble h1 {
+    font-size: 1.65rem;
+  }
+  .stage-tabs-container {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+  }
+  .btn-stage-tab {
+    flex: 1;
+  }
+  .levels-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .speech-target {
+    font-size: 1.25rem;
+  }
+  .speech-target strong {
+    font-size: 1.4rem;
+  }
+}
+
+/* --- RESPONSIVE DESIGN: MOBILE PHONES ONLY (<= 640px) --- */
+@media (max-width: 640px) {
   .game-header {
     padding: 8px 12px;
   }
@@ -1333,10 +1375,11 @@ body {
     gap: 15px;
   }
   .luna-fullbody-hero-img {
-    width: 170px;
+    width: 160px;
   }
   .home-speech-bubble h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
   .stage-tabs-container {
     flex-direction: column;
@@ -1345,10 +1388,10 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
   .speech-target {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
   .speech-target strong {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 }
 

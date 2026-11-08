@@ -2127,8 +2127,28 @@ input:checked + .slider:before {
   z-index: 1000;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1024px) {
+/* Responsive Breakpoints: Tablets (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .color-lab-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .color-reference-panel {
+    grid-column: 1 / -1;
+  }
+  .circuit-lab-layout,
+  .plant-lab-layout,
+  .density-lab-layout,
+  .magnet-lab-layout,
+  .volcano-lab-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* Responsive Breakpoints: Mobile Phones Only (<= 640px) */
+@media (max-width: 640px) {
   .color-lab-layout,
   .circuit-lab-layout,
   .plant-lab-layout,

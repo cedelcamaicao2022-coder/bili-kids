@@ -850,30 +850,83 @@ body {
   transform: translateY(-2px);
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 960px) {
+/* --- RESPONSIVE ADJUSTMENTS: TABLETS (641px - 1024px) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .storybook-frame {
+    padding: 18px 22px;
+    max-width: 96vw;
+    margin: 0 auto;
+  }
+
   .book-content-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 16px;
+    grid-template-columns: 1.08fr 1fr;
+    gap: 18px;
+    padding: 14px;
+    align-items: center;
+  }
+
+  .illustration-pane {
+    max-height: min(440px, calc(100vh - 260px));
+  }
+
+  .story-media-player {
+    max-height: min(420px, calc(100vh - 280px));
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .narrative-pane {
+    max-height: min(460px, calc(100vh - 260px));
+    overflow-y: auto;
+    padding-right: 6px;
   }
 
   .story-page-title {
-    font-size: 22px;
+    font-size: 1.45rem;
+    margin-bottom: 8px;
   }
 
   .story-narrative {
-    font-size: 17px;
+    font-size: 1.02rem;
+    line-height: 1.5;
   }
 
   .dot-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 17px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  #bilikids-mascot-wrapper {
+    bottom: 8px;
+    right: 12px;
+    transform: scale(0.85);
+    transform-origin: bottom right;
   }
 }
 
+/* --- RESPONSIVE ADJUSTMENTS: MOBILE PHONES ONLY (<= 640px) --- */
 @media (max-width: 640px) {
+  .book-content-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .story-page-title {
+    font-size: 20px;
+  }
+
+  .story-narrative {
+    font-size: 16px;
+  }
+
+  .dot-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
   .header-content {
     justify-content: center;
   }

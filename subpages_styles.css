@@ -1374,9 +1374,20 @@ body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   .babies-units-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .baby-unit-card {
+    padding: 0.65rem;
+  }
+  .baby-unit-title {
+    font-size: 1.05rem;
+  }
+  .baby-unit-desc {
+    font-size: 0.8rem;
+    line-height: 1.35;
   }
   .resource-cards-5-grid,
   .resource-cards-6-grid {
