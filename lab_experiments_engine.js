@@ -17,16 +17,70 @@ class ColorMagicSuiteEngine {
     this.paintedZonesCount = 0;
     this.totalZones = 7;
 
-    // Level 3 State (Prisms)
-    this.prismCanvas = null;
-    this.prismCtx = null;
-    this.prisms = [
-      { x: 180, y: 210, angle: 45, type: 'mirror' },
-      { x: 300, y: 210, angle: 135, type: 'splitter' },
-      { x: 420, y: 120, angle: 45, type: 'mirror' },
-      { x: 420, y: 300, angle: 135, type: 'mirror' }
+    // Level 3 State (Color Sorting Baskets - Preschool Classification)
+    this.currentSortingRound = 1;
+    this.selectedSortingItem = null;
+    this.remainingItems = [];
+    this.droppedBasketsCount = {};
+    this.sortingRounds = [
+      {
+        round: 1,
+        title: 'Round 1: Primary Colors 🔴🟡🔵',
+        hint: 'Put Red, Yellow, and Blue items into their matching baskets!',
+        baskets: [
+          { color: 'red', name: 'Red Basket', emoji: '🧺', hex: '#ef4444', class: 'basket-red' },
+          { color: 'yellow', name: 'Yellow Basket', emoji: '🧺', hex: '#eab308', class: 'basket-yellow' },
+          { color: 'blue', name: 'Blue Basket', emoji: '🧺', hex: '#3b82f6', class: 'basket-blue' }
+        ],
+        items: [
+          { id: 'i1', name: 'Red Apple', emoji: '🍎', color: 'red' },
+          { id: 'i2', name: 'Red Strawberry', emoji: '🍓', color: 'red' },
+          { id: 'i3', name: 'Yellow Banana', emoji: '🍌', color: 'yellow' },
+          { id: 'i4', name: 'Yellow Sun', emoji: '☀️', color: 'yellow' },
+          { id: 'i5', name: 'Blue Car', emoji: '🚙', color: 'blue' },
+          { id: 'i6', name: 'Blue Dolphin', emoji: '🐬', color: 'blue' }
+        ]
+      },
+      {
+        round: 2,
+        title: 'Round 2: Secondary Colors 🟢🟠🟣',
+        hint: 'Put Green, Orange, and Purple items into their matching baskets!',
+        baskets: [
+          { color: 'green', name: 'Green Basket', emoji: '🧺', hex: '#10b981', class: 'basket-green' },
+          { color: 'orange', name: 'Orange Basket', emoji: '🧺', hex: '#f97316', class: 'basket-orange' },
+          { color: 'purple', name: 'Purple Basket', emoji: '🧺', hex: '#a855f7', class: 'basket-purple' }
+        ],
+        items: [
+          { id: 'i7', name: 'Green Frog', emoji: '🐸', color: 'green' },
+          { id: 'i8', name: 'Green Leaf', emoji: '🍃', color: 'green' },
+          { id: 'i9', name: 'Orange Carrot', emoji: '🥕', color: 'orange' },
+          { id: 'i10', name: 'Orange Orange', emoji: '🍊', color: 'orange' },
+          { id: 'i11', name: 'Purple Grapes', emoji: '🍇', color: 'purple' },
+          { id: 'i12', name: 'Purple Eggplant', emoji: '🍆', color: 'purple' }
+        ]
+      },
+      {
+        round: 3,
+        title: 'Round 3: Grand Rainbow Challenge 🌈',
+        hint: 'Four colors! Red, Yellow, Blue and Green!',
+        baskets: [
+          { color: 'red', name: 'Red Basket', emoji: '🧺', hex: '#ef4444', class: 'basket-red' },
+          { color: 'yellow', name: 'Yellow Basket', emoji: '🧺', hex: '#eab308', class: 'basket-yellow' },
+          { color: 'blue', name: 'Blue Basket', emoji: '🧺', hex: '#3b82f6', class: 'basket-blue' },
+          { color: 'green', name: 'Green Basket', emoji: '🧺', hex: '#10b981', class: 'basket-green' }
+        ],
+        items: [
+          { id: 'i13', name: 'Red Heart', emoji: '❤️', color: 'red' },
+          { id: 'i14', name: 'Red Balloon', emoji: '🎈', color: 'red' },
+          { id: 'i15', name: 'Yellow Star', emoji: '⭐', color: 'yellow' },
+          { id: 'i16', name: 'Yellow Lemon', emoji: '🍋', color: 'yellow' },
+          { id: 'i17', name: 'Blue Whale', emoji: '🐳', color: 'blue' },
+          { id: 'i18', name: 'Blue Hat', emoji: '🧢', color: 'blue' },
+          { id: 'i19', name: 'Green Tree', emoji: '🌳', color: 'green' },
+          { id: 'i20', name: 'Green Dinosaur', emoji: '🦖', color: 'green' }
+        ]
+      }
     ];
-    this.energizedCrystals = { ruby: false, sapphire: false, emerald: false, amethyst: false };
 
     // Level 4 State (Bubbles)
     this.bubbleCanvas = null;
@@ -46,7 +100,7 @@ class ColorMagicSuiteEngine {
     this.initAudioContext();
     this.bindLevelSwitching();
     this.initPaintingStudio();
-    this.initPrismLab();
+    this.initColorSortingGame();
     this.initBubbleSymphony();
     this.checkUrlLevel();
   }
@@ -154,7 +208,7 @@ class ColorMagicSuiteEngine {
     if (stage4) stage4.style.display = (levelNum === 4) ? 'block' : 'none';
 
     if (levelNum === 3) {
-      setTimeout(() => this.drawPrismChamber(), 50);
+      this.renderSortingRound(this.currentSortingRound);
     } else if (levelNum === 4) {
       this.startBubbleGame();
     } else {
@@ -247,177 +301,271 @@ class ColorMagicSuiteEngine {
   }
 
   /* ==========================================================================
-     LEVEL 3: 💎 OPTICAL PRISM LIGHT PUZZLE
+     LEVEL 3: 🧺 COLOR SORTING BASKETS (PRESCHOOL CLASSIFICATION SYSTEM)
      ========================================================================== */
-  initPrismLab() {
-    this.prismCanvas = document.getElementById('prismCanvas');
-    if (!this.prismCanvas) return;
-    this.prismCtx = this.prismCanvas.getContext('2d');
-
-    // Click canvas to rotate prisms
-    this.prismCanvas.addEventListener('click', (e) => {
-      const rect = this.prismCanvas.getBoundingClientRect();
-      const clickX = (e.clientX - rect.left) * (this.prismCanvas.width / rect.width);
-      const clickY = (e.clientY - rect.top) * (this.prismCanvas.height / rect.height);
-
-      this.prisms.forEach(p => {
-        const dist = Math.hypot(clickX - p.x, clickY - p.y);
-        if (dist < 40) {
-          p.angle = (p.angle + 45) % 360;
-          this.playPopSound(680, 0.08);
-          this.drawPrismChamber();
-        }
-      });
+  initColorSortingGame() {
+    // Round selector buttons
+    [1, 2, 3].forEach(r => {
+      const btn = document.getElementById(`btnRound${r}`);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.sorting-round-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.currentSortingRound = r;
+          this.renderSortingRound(r);
+          this.playPopSound(500, 0.06);
+        });
+      }
     });
 
-    const btnFire = document.getElementById('btnFirePrismBeam');
-    if (btnFire) {
-      btnFire.addEventListener('click', () => {
-        this.drawPrismChamber();
-        this.playChime('G');
+    // Voice instruction button
+    const btnVoice = document.getElementById('btnVoiceInstruction');
+    if (btnVoice) {
+      btnVoice.addEventListener('click', () => {
+        const roundData = this.sortingRounds[this.currentSortingRound - 1];
+        this.speakColor(`Level 3. ${roundData.hint}. Drag or tap each object to its matching basket.`);
+        this.playChime('C');
       });
     }
 
-    const btnReset = document.getElementById('btnResetPrismPuzzle');
-    if (btnReset) {
-      btnReset.addEventListener('click', () => {
-        this.prisms[0].angle = 45;
-        this.prisms[1].angle = 135;
-        this.prisms[2].angle = 45;
-        this.prisms[3].angle = 135;
-        this.drawPrismChamber();
-        this.playPopSound(350, 0.08);
+    // Restart button
+    const btnRestart = document.getElementById('btnRestartRound');
+    if (btnRestart) {
+      btnRestart.addEventListener('click', () => {
+        this.renderSortingRound(this.currentSortingRound);
+        this.playPopSound(380, 0.08);
+      });
+    }
+
+    // Next round action button
+    const btnNextRound = document.getElementById('btnNextRoundAction');
+    if (btnNextRound) {
+      btnNextRound.addEventListener('click', () => {
+        const nextRound = this.currentSortingRound < 3 ? this.currentSortingRound + 1 : 1;
+        this.currentSortingRound = nextRound;
+        const targetBtn = document.getElementById(`btnRound${nextRound}`);
+        if (targetBtn) {
+          document.querySelectorAll('.sorting-round-btn').forEach(b => b.classList.remove('active'));
+          targetBtn.classList.add('active');
+        }
+        this.renderSortingRound(nextRound);
+        this.playChime('G');
       });
     }
   }
 
-  drawPrismChamber() {
-    if (!this.prismCtx || !this.prismCanvas) return;
-    const ctx = this.prismCtx;
-    const w = this.prismCanvas.width;
-    const h = this.prismCanvas.height;
+  renderSortingRound(roundNum) {
+    const roundData = this.sortingRounds[roundNum - 1] || this.sortingRounds[0];
+    const basketsGrid = document.getElementById('sortingBasketsGrid');
+    const itemsContainer = document.getElementById('sortingItemsContainer');
+    const winBanner = document.getElementById('sortingWinBanner');
+    const countEl = document.getElementById('itemsRemainingCount');
+    const titleEl = document.getElementById('sortingMissionTitle');
+    const hintEl = document.getElementById('sortingMissionHint');
 
-    ctx.clearRect(0, 0, w, h);
+    if (!basketsGrid || !itemsContainer) return;
 
-    // Background cosmic grid
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < w; x += 40) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-    }
-    for (let y = 0; y < h; y += 40) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
-    }
+    if (winBanner) winBanner.classList.remove('active');
+    if (titleEl) titleEl.textContent = `${roundData.title}`;
+    if (hintEl) hintEl.textContent = `${roundData.hint}`;
 
-    // Target Gemstone Receptors
-    const gems = [
-      { id: 'ruby', name: 'Ruby', x: 540, y: 80, color: '#ef4444', emoji: '🔴' },
-      { id: 'sapphire', name: 'Sapphire', x: 540, y: 340, color: '#3b82f6', emoji: '🔵' },
-      { id: 'emerald', name: 'Emerald', x: 300, y: 380, color: '#10b981', emoji: '🟢' },
-      { id: 'amethyst', name: 'Amethyst', x: 300, y: 40, color: '#a855f7', emoji: '🟣' }
-    ];
+    this.selectedSortingItem = null;
+    this.remainingItems = [...roundData.items];
+    this.droppedBasketsCount = {};
+    roundData.baskets.forEach(b => { this.droppedBasketsCount[b.color] = []; });
 
-    // Light Source (Laser Crystal at Left)
-    const source = { x: 50, y: 210 };
-    ctx.save();
-    ctx.shadowColor = '#38bdf8';
-    ctx.shadowBlur = 18;
-    ctx.fillStyle = '#38bdf8';
-    ctx.beginPath();
-    ctx.arc(source.x, source.y, 16, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
+    if (countEl) countEl.textContent = this.remainingItems.length;
 
-    // Laser Beam Raycasting
-    ctx.save();
-    ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 4;
-    ctx.shadowColor = '#38bdf8';
-    ctx.shadowBlur = 12;
+    // 1. Render Baskets
+    basketsGrid.innerHTML = '';
+    roundData.baskets.forEach(b => {
+      const card = document.createElement('div');
+      card.className = `color-basket-card ${b.class}`;
+      card.dataset.color = b.color;
+      card.innerHTML = `
+        <div class="basket-icon-wrap">${b.emoji}</div>
+        <h3 class="basket-title" style="color: ${b.hex};">${b.name}</h3>
+        <div class="basket-counter-badge" id="basketBadge_${b.color}">0 items</div>
+        <div class="basket-dropped-preview" id="basketDropped_${b.color}"></div>
+      `;
 
-    ctx.beginPath();
-    ctx.moveTo(source.x, source.y);
-    ctx.lineTo(this.prisms[0].x, this.prisms[0].y);
-    ctx.stroke();
+      // Drag and drop listeners on basket
+      card.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        card.classList.add('drag-over');
+      });
+      card.addEventListener('dragleave', () => {
+        card.classList.remove('drag-over');
+      });
+      card.addEventListener('drop', (e) => {
+        e.preventDefault();
+        card.classList.remove('drag-over');
+        const itemId = e.dataTransfer.getData('text/plain');
+        const itemObj = this.remainingItems.find(it => it.id === itemId);
+        if (itemObj) {
+          this.handleItemDroppedOnBasket(itemObj, b.color, card);
+        }
+      });
 
-    // Beam 1: Reflecting off Prism 0
-    let b1End = { x: this.prisms[1].x, y: this.prisms[1].y };
-    ctx.beginPath();
-    ctx.moveTo(this.prisms[0].x, this.prisms[0].y);
-    ctx.lineTo(b1End.x, b1End.y);
-    ctx.stroke();
+      // Tap-to-drop listener on basket
+      card.addEventListener('click', () => {
+        if (this.selectedSortingItem) {
+          this.handleItemDroppedOnBasket(this.selectedSortingItem, b.color, card);
+        } else {
+          // If no item selected, pronounce basket color
+          this.speakColor(`${b.name}`);
+          this.playPopSound(480, 0.05);
+        }
+      });
 
-    // Beam 2 & 3: Splitting from Prism 1 (Splitter)
-    ctx.strokeStyle = '#ef4444'; // Red branch
-    ctx.shadowColor = '#ef4444';
-    ctx.beginPath();
-    ctx.moveTo(this.prisms[1].x, this.prisms[1].y);
-    ctx.lineTo(this.prisms[2].x, this.prisms[2].y);
-    ctx.lineTo(gems[0].x, gems[0].y);
-    ctx.stroke();
-
-    ctx.strokeStyle = '#3b82f6'; // Blue branch
-    ctx.shadowColor = '#3b82f6';
-    ctx.beginPath();
-    ctx.moveTo(this.prisms[1].x, this.prisms[1].y);
-    ctx.lineTo(this.prisms[3].x, this.prisms[3].y);
-    ctx.lineTo(gems[1].x, gems[1].y);
-    ctx.stroke();
-    ctx.restore();
-
-    // Draw Prisms
-    this.prisms.forEach((p, idx) => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate((p.angle * Math.PI) / 180);
-
-      // Glass body
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.strokeStyle = '#93c5fd';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(-18, -18);
-      ctx.lineTo(18, -18);
-      ctx.lineTo(0, 22);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      // Rotation arrow
-      ctx.fillStyle = '#60a5fa';
-      ctx.beginPath();
-      ctx.arc(0, 0, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
+      basketsGrid.appendChild(card);
     });
 
-    // Draw Gems & Check Energy
-    let energizedCount = 0;
-    gems.forEach((gem, idx) => {
-      const isEnergized = true; // All aligned in this configuration
-      energizedCount++;
+    // 2. Render Items
+    this.renderRemainingItems();
 
-      ctx.save();
-      ctx.shadowColor = gem.color;
-      ctx.shadowBlur = isEnergized ? 25 : 6;
-      ctx.fillStyle = gem.color;
-      ctx.beginPath();
-      ctx.arc(gem.x, gem.y, 16, 0, Math.PI * 2);
-      ctx.fill();
+    // Friendly initial speech cue
+    setTimeout(() => {
+      this.speakColor(`Round ${roundNum}. ${roundData.hint}`);
+    }, 300);
+  }
 
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.restore();
+  renderRemainingItems() {
+    const itemsContainer = document.getElementById('sortingItemsContainer');
+    const countEl = document.getElementById('itemsRemainingCount');
+    if (!itemsContainer) return;
 
-      const statusEl = document.getElementById(`status${gem.name}`);
-      const itemEl = document.getElementById(`gemTarget${gem.name}`);
-      if (statusEl) statusEl.textContent = '⚡ ENERGIZED!';
-      if (itemEl) itemEl.classList.add('energized');
+    itemsContainer.innerHTML = '';
+    if (countEl) countEl.textContent = this.remainingItems.length;
+
+    this.remainingItems.forEach(item => {
+      const itemCard = document.createElement('div');
+      itemCard.className = 'sortable-item-card';
+      itemCard.id = `itemCard_${item.id}`;
+      itemCard.draggable = true;
+
+      itemCard.innerHTML = `
+        <div class="sortable-item-emoji">${item.emoji}</div>
+        <div class="sortable-item-name">${item.name}</div>
+        <button class="sortable-item-audio-btn" title="Listen" aria-label="Listen">🔊</button>
+      `;
+
+      // Audio button
+      const audioBtn = itemCard.querySelector('.sortable-item-audio-btn');
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.speakColor(`${item.name}`);
+        this.playPopSound(540, 0.05);
+      });
+
+      // HTML5 Drag Events
+      itemCard.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', item.id);
+        itemCard.classList.add('dragging');
+        this.speakColor(item.color);
+      });
+      itemCard.addEventListener('dragend', () => {
+        itemCard.classList.remove('dragging');
+      });
+
+      // Tap to Select / Deselect
+      itemCard.addEventListener('click', () => {
+        if (this.selectedSortingItem && this.selectedSortingItem.id === item.id) {
+          // Deselect
+          this.selectedSortingItem = null;
+          itemCard.classList.remove('selected-for-drop');
+        } else {
+          // Select this item
+          document.querySelectorAll('.sortable-item-card').forEach(c => c.classList.remove('selected-for-drop'));
+          this.selectedSortingItem = item;
+          itemCard.classList.add('selected-for-drop');
+          this.speakColor(`${item.name}! Touch the matching basket!`);
+          this.playPopSound(620, 0.06);
+
+          // Highlight matching baskets subtly
+          document.querySelectorAll('.color-basket-card').forEach(b => {
+            b.classList.remove('highlight-target');
+          });
+        }
+      });
+
+      itemsContainer.appendChild(itemCard);
     });
+  }
 
-    const pill = document.getElementById('prismCrystalsPill');
-    if (pill) pill.textContent = `${energizedCount} / 4 Crystals Energized ✨`;
+  handleItemDroppedOnBasket(item, basketColor, basketEl) {
+    if (item.color === basketColor) {
+      // SUCCESS!
+      this.playPopSound(800, 0.1);
+      setTimeout(() => this.playChime('G'), 80);
+      this.speakColor(`${item.name} in ${basketColor}! Awesome!`);
+
+      // Add to dropped preview
+      if (!this.droppedBasketsCount[basketColor]) this.droppedBasketsCount[basketColor] = [];
+      this.droppedBasketsCount[basketColor].push(item);
+
+      const previewEl = document.getElementById(`basketDropped_${basketColor}`);
+      if (previewEl) {
+        const mini = document.createElement('span');
+        mini.className = 'basket-mini-tag';
+        mini.textContent = item.emoji;
+        mini.title = item.name;
+        previewEl.appendChild(mini);
+      }
+
+      const badgeEl = document.getElementById(`basketBadge_${basketColor}`);
+      if (badgeEl) {
+        const total = this.droppedBasketsCount[basketColor].length;
+        badgeEl.textContent = `${total} item${total > 1 ? 's' : ''}`;
+      }
+
+      // Remove from remaining items list
+      this.remainingItems = this.remainingItems.filter(it => it.id !== item.id);
+      this.selectedSortingItem = null;
+      this.renderRemainingItems();
+
+      // Check for round win!
+      if (this.remainingItems.length === 0) {
+        this.triggerRoundWin();
+      }
+    } else {
+      // ERROR (Try Again)
+      basketEl.classList.remove('shake-error');
+      void basketEl.offsetWidth; // trigger reflow
+      basketEl.classList.add('shake-error');
+      setTimeout(() => basketEl.classList.remove('shake-error'), 500);
+
+      this.playPopSound(220, 0.18);
+      this.speakColor(`Oops! ${item.name} is ${item.color}, not ${basketColor}. Try again!`);
+
+      // Deselect
+      this.selectedSortingItem = null;
+      document.querySelectorAll('.sortable-item-card').forEach(c => c.classList.remove('selected-for-drop'));
+    }
+  }
+
+  triggerRoundWin() {
+    const winBanner = document.getElementById('sortingWinBanner');
+    if (winBanner) {
+      winBanner.classList.add('active');
+    }
+
+    // Star award
+    const starsCount = document.getElementById('globalStarsCount');
+    if (starsCount) {
+      const current = parseInt(starsCount.textContent, 10) || 0;
+      starsCount.textContent = current + 3;
+    }
+
+    // Melodic celebration fanfare
+    this.playChime('C');
+    setTimeout(() => this.playChime('E'), 100);
+    setTimeout(() => this.playChime('G'), 200);
+    setTimeout(() => this.playChime('C6'), 300);
+
+    setTimeout(() => {
+      this.speakColor("Congratulations! You sorted all the colors! You did it!");
+    }, 400);
   }
 
   /* ==========================================================================

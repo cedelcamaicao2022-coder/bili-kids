@@ -97,7 +97,7 @@
             </button>
             <button class="lvl-chip" data-level="3">
               <span class="chip-num">Level 3</span>
-              <span class="chip-name">Crystal Prism 💎</span>
+              <span class="chip-name">Color Sorting 🧺</span>
             </button>
             <button class="lvl-chip" data-level="4">
               <span class="chip-num">Level 4</span>
@@ -386,61 +386,60 @@
         </div>
       </div>
 
-      <!-- ================= LEVEL 3: 💎 OPTICAL PRISM LIGHT PUZZLE ================= -->
+      <!-- ================= LEVEL 3: 🧺 COLOR SORTING BASKETS (PRESCHOOL CLASSIFICATION) ================= -->
       <div id="colorStagePrism" class="color-stage-panel" style="display: none;">
-        <div class="mission-target-card">
-          <div class="target-badge">💎 OPTICAL PRISM LAB:</div>
-          <div class="target-desc">Rotate the optical prisms to direct laser beams into all 4 glowing gemstone crystals!</div>
-          <div class="painting-progress-pill" id="prismCrystalsPill">0 / 4 Crystals Energized</div>
+        <!-- Mission Header Card -->
+        <div class="sorting-mission-banner">
+          <div>
+            <div style="font-size:0.8rem; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:0.5px;">🧺 LEVEL 3 • COLOR SORTING MISSION</div>
+            <h2 id="sortingMissionTitle" style="font-family:'Fredoka',cursive,sans-serif; font-size:1.45rem; margin:4px 0; color:#ffffff;">
+              Put each item into its matching color basket! 🍎🍌🚙
+            </h2>
+            <p id="sortingMissionHint" style="font-size:0.92rem; color:#94a3b8; margin:0;">
+              Drag the item or tap it first, then tap the basket of the same color.
+            </p>
+          </div>
+          
+          <div class="sorting-rounds-pills">
+            <button class="sorting-round-btn active" data-round="1" id="btnRound1">Round 1: 3 Colors</button>
+            <button class="sorting-round-btn" data-round="2" id="btnRound2">Round 2: 3 Colors</button>
+            <button class="sorting-round-btn" data-round="3" id="btnRound3">Round 3: 4 Colors ⭐</button>
+          </div>
         </div>
 
-        <div class="prism-lab-layout">
-          <!-- Prisms Control Toolbox -->
-          <div class="prism-tools-card">
-            <h3>💎 Optical Laboratory</h3>
-            <p style="font-size:0.85rem; color:#cbd5e1; margin-top:2px;">Tap any prism on the grid to rotate it 45°:</p>
-            
-            <div class="prism-target-list">
-              <div class="gem-target-item" id="gemTargetRuby">
-                <span class="gem-indicator" style="background:#ef4444; color:#ef4444;"></span>
-                <strong>Ruby Gem 🔴</strong>
-                <span class="gem-status" id="statusRuby">Waiting...</span>
-              </div>
-              <div class="gem-target-item" id="gemTargetSapphire">
-                <span class="gem-indicator" style="background:#3b82f6; color:#3b82f6;"></span>
-                <strong>Sapphire Gem 🔵</strong>
-                <span class="gem-status" id="statusSapphire">Waiting...</span>
-              </div>
-              <div class="gem-target-item" id="gemTargetEmerald">
-                <span class="gem-indicator" style="background:#10b981; color:#10b981;"></span>
-                <strong>Emerald Gem 🟢</strong>
-                <span class="gem-status" id="statusEmerald">Waiting...</span>
-              </div>
-              <div class="gem-target-item" id="gemTargetAmethyst">
-                <span class="gem-indicator" style="background:#a855f7; color:#a855f7;"></span>
-                <strong>Amethyst Gem 🟣</strong>
-                <span class="gem-status" id="statusAmethyst">Waiting...</span>
-              </div>
-            </div>
-
-            <div class="prism-actions-row">
-              <button id="btnFirePrismBeam" class="lab-btn primary" style="width:100%; min-height:44px;">
-                <span>⚡</span> Re-Align Beam
-              </button>
-              <button id="btnResetPrismPuzzle" class="lab-btn secondary" style="width:100%; min-height:40px; margin-top:6px;">
-                <span>🔄</span> Reset Prisms
-              </button>
-            </div>
+        <div class="sorting-lab-layout">
+          <!-- Baskets Area -->
+          <div class="sorting-baskets-grid" id="sortingBasketsGrid">
+            <!-- Baskets dynamically injected by JS -->
           </div>
 
-          <!-- Canvas Optical Stage -->
-          <div class="prism-stage-card">
-            <div class="canvas-header-bar" style="background:#090d16; color:#94a3b8; border-color:rgba(255,255,255,0.1);">
-              <span>🔮 Cosmic Light Chamber</span>
-              <span id="prismLaserStatus" style="color:#38bdf8; font-weight:800;">⚡ Laser Active</span>
+          <!-- Items Shelf Area -->
+          <div class="sorting-shelf-panel">
+            <div class="sorting-shelf-header">
+              <div class="sorting-shelf-title">
+                <span>🧸</span> Items to Sort (<span id="itemsRemainingCount">0</span> left)
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button id="btnVoiceInstruction" class="lab-btn secondary" style="min-height:36px; padding:6px 14px; font-size:0.85rem;" title="Listen to instructions">
+                  <span>🔊</span> Listen
+                </button>
+                <button id="btnRestartRound" class="lab-btn secondary" style="min-height:36px; padding:6px 14px; font-size:0.85rem;" title="Restart this round">
+                  <span>🔄</span> Restart
+                </button>
+              </div>
             </div>
-            <div class="prism-canvas-wrapper" style="position:relative; width:100%; height:420px; background:#070a12; border-radius:18px; overflow:hidden;">
-              <canvas id="prismCanvas" width="600" height="420" style="width:100%; height:100%; display:block;"></canvas>
+
+            <div class="sorting-items-container" id="sortingItemsContainer">
+              <!-- Draggable / Tappable Items dynamically injected by JS -->
+            </div>
+
+            <!-- Round Completion Banner -->
+            <div class="sorting-win-banner" id="sortingWinBanner">
+              <h2 style="font-family:'Fredoka',cursive,sans-serif; font-size:1.8rem; margin-bottom:6px;">🎉 Wonderful Job! You Sorted All Colors!</h2>
+              <p style="font-size:1.05rem; opacity:0.95; margin-bottom:12px;">You matched all objects to their baskets with great precision!</p>
+              <button id="btnNextRoundAction" class="lab-btn primary" style="background:#facc15; color:#78350f; font-weight:900; font-size:1.05rem; padding:10px 28px; border-radius:999px;">
+                Play Next Round ➔
+              </button>
             </div>
           </div>
         </div>

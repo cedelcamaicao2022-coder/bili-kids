@@ -169,55 +169,344 @@
 }
 
 /* ==========================================================================
-   LEVEL 3: 💎 OPTICAL PRISM CHAMBER
+   LEVEL 3: 🧺 COLOR SORTING BASKETS (PRESCHOOL PEDAGOGICAL CLASSIFICATION)
    ========================================================================== */
-.prism-lab-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 1.25rem;
+.sorting-lab-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
-.prism-tools-card, .prism-stage-card {
-  background: #0f172a;
-  color: #ffffff;
-  border-radius: 22px;
-  padding: 1.25rem;
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-}
-
-.prism-target-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 12px 0;
-}
-
-.gem-target-item {
+.sorting-mission-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  font-size: 0.85rem;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2.5px solid #38bdf8;
+  border-radius: 20px;
+  padding: 1.25rem 1.75rem;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sorting-rounds-pills {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sorting-round-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.gem-target-item.energized {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: #10b981;
+.sorting-round-btn.active {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.5);
+  transform: scale(1.04);
 }
 
-.gem-indicator {
-  width: 14px;
-  height: 14px;
+/* Baskets Container */
+.sorting-baskets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.color-basket-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.35rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 3.5px dashed #cbd5e1;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.09);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  min-height: 240px;
+}
+
+.color-basket-card.drag-over,
+.color-basket-card.highlight-target {
+  transform: scale(1.05);
+  border-style: solid;
+  border-width: 4px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+}
+
+.color-basket-card.basket-red {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+.color-basket-card.basket-red.drag-over {
+  border-color: #b91c1c;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.45);
+}
+
+.color-basket-card.basket-yellow {
+  background: #fefce8;
+  border-color: #eab308;
+}
+.color-basket-card.basket-yellow.drag-over {
+  border-color: #a16207;
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.45);
+}
+
+.color-basket-card.basket-blue {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+.color-basket-card.basket-blue.drag-over {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.45);
+}
+
+.color-basket-card.basket-green {
+  background: #f0fdf4;
+  border-color: #22c55e;
+}
+.color-basket-card.basket-green.drag-over {
+  border-color: #15803d;
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.45);
+}
+
+.color-basket-card.basket-orange {
+  background: #fff7ed;
+  border-color: #f97316;
+}
+.color-basket-card.basket-orange.drag-over {
+  border-color: #c2410c;
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.45);
+}
+
+.color-basket-card.basket-purple {
+  background: #faf5ff;
+  border-color: #a855f7;
+}
+.color-basket-card.basket-purple.drag-over {
+  border-color: #7e22ce;
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.45);
+}
+
+.basket-icon-wrap {
+  font-size: 3.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.2));
+  margin-bottom: 8px;
+  transition: transform 0.2s ease;
+}
+
+.color-basket-card:hover .basket-icon-wrap {
+  transform: translateY(-5px) scale(1.08);
+}
+
+.basket-title {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.basket-counter-badge {
+  font-size: 0.88rem;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.basket-dropped-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 54px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px dashed rgba(0, 0, 0, 0.15);
+  margin-top: auto;
+}
+
+.basket-mini-tag {
+  font-size: 1.6rem;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Items Shelf Table */
+.sorting-shelf-panel {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e2e8f0;
+}
+
+.sorting-shelf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 0.75rem;
+}
+
+.sorting-shelf-title {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sorting-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
+  min-height: 140px;
+  padding: 1rem 0;
+}
+
+.sortable-item-card {
+  background: #ffffff;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 140px;
+}
+
+.sortable-item-card:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+  border-color: #38bdf8;
+}
+
+.sortable-item-card.selected-for-drop {
+  transform: scale(1.14);
+  border-color: #3b82f6;
+  border-width: 3.5px;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.55);
+  animation: gentlePulse 1.2s infinite;
+  background: #f0f9ff;
+}
+
+.sortable-item-card.dragging {
+  opacity: 0.45;
+  cursor: grabbing;
+}
+
+.sortable-item-emoji {
+  font-size: 3.6rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.sortable-item-name {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: 0.2px;
+}
+
+.sortable-item-audio-btn {
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
   border-radius: 50%;
-  display: inline-block;
-  margin-right: 6px;
-  box-shadow: 0 0 8px currentColor;
+  width: 32px;
+  height: 32px;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.2s;
+}
+
+.sortable-item-audio-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+  transform: scale(1.15);
+}
+
+/* Shake error animation */
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+.shake-error {
+  animation: shakeError 0.45s ease-in-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1.12); }
+  50% { transform: scale(1.18); }
+}
+
+/* Win modal for round */
+.sorting-win-banner {
+  display: none;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 1.75rem;
+  text-align: center;
+  animation: popIn 0.4s ease;
+  margin-top: 1.25rem;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.35);
+}
+
+.sorting-win-banner.active {
+  display: block;
+}
 }
 
 .gem-status {
