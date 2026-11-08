@@ -1045,9 +1045,10 @@
       const bookStage = document.querySelector('.book-stage');
       if (story.is2dBook) {
         if (bookStage) bookStage.classList.add('book-mode-2d');
-        if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.style.display = '';
-        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = '';
-        if (this.dom.btnRepeatPageAudio) this.dom.btnRepeatPageAudio.style.display = '';
+        // 2D Books are silent picture read-along books: remove narration controls
+        if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.style.display = 'none';
+        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = 'none';
+        if (this.dom.btnRepeatPageAudio) this.dom.btnRepeatPageAudio.style.display = 'none';
         if (this.dom.btnToggleSpanish2d) {
           this.dom.btnToggleSpanish2d.style.display = 'inline-flex';
           this.dom.btnToggleSpanish2d.classList.remove('active');
@@ -1311,20 +1312,17 @@
       this.stopAudio();
       const story = STORIES[this.currentStoryKey];
       if (!story) return;
+
+      // 2D Books are silent picture books per user request (no audio)
+      if (story.is2dBook) {
+        return;
+      }
+
       const page = story.pages[this.currentPageIndex];
       if (!page) return;
 
-      let audioSrc;
-      let textToRead = page.textEn;
-
-      if (story.is2dBook) {
-        const isSpanishActive = this.currentLanguage === 'es' || (this.dom.spanishCard && this.dom.spanishCard.style.display !== 'none' && this.currentLanguage !== 'en');
-        const langCode = isSpanishActive ? 'es' : 'en';
-        textToRead = isSpanishActive ? page.textEs : page.textEn;
-        audioSrc = `assets/stories/books2d/${this.currentStoryKey}/audio/${langCode}_p${page.num}.mp3`;
-      } else {
-        audioSrc = `assets/stories/audio/${page.audioId}.mp3`;
-      }
+      const audioSrc = `assets/stories/audio/${page.audioId}.mp3`;
+      const textToRead = page.textEn;
 
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();

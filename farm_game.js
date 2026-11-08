@@ -16,6 +16,7 @@
       spanish: 'Vaca',
       icon: '🐮',
       soundText: '"Moo! Moo!"',
+      soundFile: 'assets/audio/animals/mugido-vaca.mp3',
       soundFreq: 110,
       food: { name: 'Grass', spanish: 'Pasto', icon: '🌾' },
       baby: { name: 'CALF', spanish: 'Ternero', icon: '🍼🐮' }
@@ -25,6 +26,7 @@
       spanish: 'Cerdo',
       icon: '🐷',
       soundText: '"Oink! Oink!"',
+      soundFile: 'assets/audio/animals/cerdo-8.mp3',
       soundFreq: 220,
       food: { name: 'Apple', spanish: 'Manzana', icon: '🍎' },
       baby: { name: 'PIGLET', spanish: 'Lechón', icon: '🎀🐖' }
@@ -34,6 +36,7 @@
       spanish: 'Oveja',
       icon: '🐑',
       soundText: '"Baa! Baa!"',
+      soundFile: 'assets/audio/animals/ovejas-1.mp3',
       soundFreq: 330,
       food: { name: 'Clover', spanish: 'Trébol', icon: '☘️' },
       baby: { name: 'LAMB', spanish: 'Corderito', icon: '🤍🐑' }
@@ -43,6 +46,7 @@
       spanish: 'Caballo',
       icon: '🐴',
       soundText: '"Neigh! Neigh!"',
+      soundFile: 'assets/audio/animals/caballo-31.mp3',
       soundFreq: 440,
       food: { name: 'Hay', spanish: 'Heno', icon: '🌾' },
       baby: { name: 'FOAL', spanish: 'Potrillo', icon: '🐎' }
@@ -52,6 +56,7 @@
       spanish: 'Pato',
       icon: '🦆',
       soundText: '"Quack! Quack!"',
+      soundFile: 'assets/audio/animals/cuac-pato.mp3',
       soundFreq: 380,
       food: { name: 'Bread', spanish: 'Pan', icon: '🍞' },
       baby: { name: 'DUCKLING', spanish: 'Patito', icon: '🐥' }
@@ -61,6 +66,7 @@
       spanish: 'Gallina',
       icon: '🐔',
       soundText: '"Cluck! Cluck!"',
+      soundFile: 'assets/audio/animals/pollito.mp3',
       soundFreq: 480,
       food: { name: 'Corn', spanish: 'Maíz', icon: '🌽' },
       baby: { name: 'CHICK', spanish: 'Pollito', icon: '🐣' }
@@ -70,6 +76,7 @@
       spanish: 'Gallo',
       icon: '🐓',
       soundText: '"Cock-a-doodle-doo!"',
+      soundFile: 'assets/audio/animals/alarma-gallo-kikiriki.mp3',
       soundFreq: 520,
       food: { name: 'Seeds', spanish: 'Semillas', icon: '🌾' },
       baby: { name: 'CHICK', spanish: 'Pollito', icon: '🐣' }
@@ -79,6 +86,7 @@
       spanish: 'Conejo',
       icon: '🐰',
       soundText: '"Hop! Hop!"',
+      soundFile: null,
       soundFreq: 600,
       food: { name: 'Carrot', spanish: 'Zanahoria', icon: '🥕' },
       baby: { name: 'BUNNY', spanish: 'Conejito', icon: '🐇' }
@@ -88,6 +96,7 @@
       spanish: 'Perro',
       icon: '🐶',
       soundText: '"Woof! Woof!"',
+      soundFile: null,
       soundFreq: 280,
       food: { name: 'Bone', spanish: 'Hueso', icon: '🦴' },
       baby: { name: 'PUPPY', spanish: 'Cachorrito', icon: '🐾🐶' }
@@ -97,6 +106,7 @@
       spanish: 'Gato',
       icon: '🐱',
       soundText: '"Meow! Meow!"',
+      soundFile: 'assets/audio/animals/gatito-cachorro-miau.mp3',
       soundFreq: 540,
       food: { name: 'Fish', spanish: 'Pescado', icon: '🐟' },
       baby: { name: 'KITTEN', spanish: 'Gatito', icon: '🐾🐱' }
@@ -108,6 +118,7 @@
     constructor() {
       this.ctx = null;
       this.muted = false;
+      this.currentAnimalAudio = null;
     }
 
     init() {
@@ -117,6 +128,28 @@
       }
       if (this.ctx.state === 'suspended') {
         this.ctx.resume();
+      }
+    }
+
+    playAnimalSound(animal, onEnded) {
+      if (this.muted) return;
+      if (animal && animal.soundFile) {
+        if (this.currentAnimalAudio) {
+          try {
+            this.currentAnimalAudio.pause();
+            this.currentAnimalAudio.currentTime = 0;
+          } catch(e) {}
+        }
+        const audio = new Audio(animal.soundFile);
+        this.currentAnimalAudio = audio;
+        if (onEnded) audio.onended = onEnded;
+        audio.play().catch(e => {
+          this.playAnimalOno(animal.soundFreq);
+          if (onEnded) setTimeout(onEnded, 700);
+        });
+      } else {
+        this.playAnimalOno(animal ? animal.soundFreq : 220);
+        if (onEnded) setTimeout(onEnded, 400);
       }
     }
 
@@ -407,7 +440,18 @@
         inst_shadow_safari: `assets/leo/audio/inst_shadow_safari.mp3?${v}`,
         inst_animal_families: `assets/leo/audio/inst_animal_families.mp3?${v}`,
         inst_farm_harvest: `assets/leo/audio/inst_farm_harvest.mp3?${v}`,
-        inst_grand_parade: `assets/leo/audio/inst_grand_parade.mp3?${v}`
+        inst_grand_parade: `assets/leo/audio/inst_grand_parade.mp3?${v}`,
+
+        // Feeding animals & Foods
+        feed_rabbit_carrot: `assets/leo/audio/feed_rabbit_carrot.mp3?${v}`,
+        feed_horse_hay: `assets/leo/audio/feed_horse_hay.mp3?${v}`,
+        feed_dog_bone: `assets/leo/audio/feed_dog_bone.mp3?${v}`,
+        feed_pig_apple: `assets/leo/audio/feed_pig_apple.mp3?${v}`,
+        feed_hen_corn: `assets/leo/audio/feed_hen_corn.mp3?${v}`,
+        food_carrot: `assets/leo/audio/food_carrot.mp3?${v}`,
+        food_hay: `assets/leo/audio/food_hay.mp3?${v}`,
+        food_bone: `assets/leo/audio/food_bone.mp3?${v}`,
+        food_corn: `assets/leo/audio/food_corn.mp3?${v}`
       };
 
       this.initVoices();
@@ -473,6 +517,14 @@
         return this.playClip(key, onEnd);
       }
       return this.speak(`Find the ${animalKey}!`, onEnd);
+    }
+
+    playFood(foodName, onEnd) {
+      const key = `food_${String(foodName || '').toLowerCase().trim()}`;
+      if (this.clips[key]) {
+        return this.playClip(key, onEnd);
+      }
+      return this.speak(foodName, onEnd);
     }
 
     speakFallback(clipKey, onEnd) {
@@ -779,6 +831,11 @@
       // Celebration Buttons
       document.getElementById('btnPrintDiploma')?.addEventListener('click', () => window.print());
       document.getElementById('btnPlayAgain')?.addEventListener('click', () => this.showScreen('home'));
+      document.getElementById('btnEditDiplomaName')?.addEventListener('click', () => {
+        this.promptChildNameForDiploma((name) => this.updateDiplomaName(name));
+      });
+      this.updateDiplomaName(localStorage.getItem('bilikids_child_name') || 'Pequeño Granjero');
+
       document.getElementById('btnContinueStage2')?.addEventListener('click', () => {
         if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
         if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
@@ -876,12 +933,12 @@
         this.voice.playClip('inst_feed_animals');
       } else if (lvl === 3) {
         // Play sound clue without spoiling the name!
-        this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+        this.sound.playAnimalSound(this.targetAnimal);
       } else if (lvl === 4) {
         this.voice.playClip('inst_catch_ducks');
       } else if (lvl === 6) {
         // Sound clue without giving away the name!
-        this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+        this.sound.playAnimalSound(this.targetAnimal);
       } else if (lvl === 7) {
         this.voice.playClip('inst_animal_families');
       } else if (lvl === 8) {
@@ -922,6 +979,42 @@
       }, 2000);
     }
 
+    promptChildNameForDiploma(onConfirmed) {
+      const modal = document.getElementById('preDiplomaModal');
+      const input = document.getElementById('preDiplomaInput');
+      const btn = document.getElementById('btnConfirmDiplomaName');
+      if (!modal || !btn) {
+        if (onConfirmed) onConfirmed(localStorage.getItem('bilikids_child_name') || 'Pequeño Granjero');
+        return;
+      }
+      const saved = localStorage.getItem('bilikids_child_name') || '';
+      if (input) input.value = saved;
+      modal.classList.remove('hidden');
+      setTimeout(() => input?.focus(), 250);
+
+      const confirmHandler = () => {
+        const rawName = (input?.value || '').trim();
+        const finalName = rawName || 'Pequeño Granjero';
+        localStorage.setItem('bilikids_child_name', finalName);
+        modal.classList.add('hidden');
+        btn.removeEventListener('click', confirmHandler);
+        input?.removeEventListener('keydown', enterHandler);
+        if (onConfirmed) onConfirmed(finalName);
+      };
+
+      const enterHandler = (e) => {
+        if (e.key === 'Enter') confirmHandler();
+      };
+
+      btn.addEventListener('click', confirmHandler);
+      input?.addEventListener('keydown', enterHandler);
+    }
+
+    updateDiplomaName(name) {
+      const display = document.getElementById('diplomaNameDisplay');
+      if (display) display.textContent = name;
+    }
+
     completeLevel(levelNum) {
       this.sound.playVictory();
       this.confetti.burst(120);
@@ -935,45 +1028,51 @@
         this.progress.stage2Unlocked = true;
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) {
-            btnCont.style.display = 'inline-flex';
-            let secondsLeft = 4;
-            btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
-            if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
-            this.stage2CountdownInterval = setInterval(() => {
-              secondsLeft--;
-              if (secondsLeft > 0 && btnCont) {
-                btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
-              } else {
-                clearInterval(this.stage2CountdownInterval);
-              }
-            }, 1000);
-          }
-          this.confetti.burst(150);
-          this.voice.playClip('diploma_congrats');
-
-          if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
-          this.stage2AutoTimer = setTimeout(() => {
-            if (this.currentScreen === 'celebration') {
-              if (btnCont) {
-                btnCont.style.display = 'none';
-                btnCont.innerHTML = '<span>⭐</span> ¡Continuar a la Etapa 2! 🦁';
-              }
-              this.goToLevel(6);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            const btnCont = document.getElementById('btnContinueStage2');
+            if (btnCont) {
+              btnCont.style.display = 'inline-flex';
+              let secondsLeft = 4;
+              btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
+              if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+              this.stage2CountdownInterval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft > 0 && btnCont) {
+                  btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 6 en ${secondsLeft}s! 🦁 ➔`;
+                } else {
+                  clearInterval(this.stage2CountdownInterval);
+                }
+              }, 1000);
             }
-          }, 4500);
-        }, 1200);
+            this.confetti.burst(150);
+            this.voice.playClip('diploma_congrats');
+
+            if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
+            this.stage2AutoTimer = setTimeout(() => {
+              if (this.currentScreen === 'celebration') {
+                if (btnCont) {
+                  btnCont.style.display = 'none';
+                  btnCont.innerHTML = '<span>⭐</span> ¡Continuar a la Etapa 2! 🦁';
+                }
+                this.goToLevel(6);
+              }
+            }, 4500);
+          });
+        }, 1000);
       } else if (levelNum === 10) {
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) btnCont.style.display = 'none';
-          this.confetti.burst(200);
-          this.voice.playClip('diploma_congrats');
-        }, 1200);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            const btnCont = document.getElementById('btnContinueStage2');
+            if (btnCont) btnCont.style.display = 'none';
+            this.confetti.burst(200);
+            this.voice.playClip('diploma_congrats');
+          });
+        }, 1000);
       } else {
         this.voice.playClip('level_complete');
         this.updateStarUI();
@@ -986,6 +1085,7 @@
     // ===================================================
     startLevel1() {
       this.maxRounds = 4;
+      this.level1Pool = [ANIMALS.COW, ANIMALS.PIG, ANIMALS.SHEEP, ANIMALS.HORSE].sort(() => Math.random() - 0.5);
       this.playRoundLevel1();
     }
 
@@ -994,7 +1094,10 @@
       arena.innerHTML = '';
 
       const pool = [ANIMALS.COW, ANIMALS.PIG, ANIMALS.SHEEP, ANIMALS.HORSE];
-      this.targetAnimal = pool[Math.floor(Math.random() * pool.length)];
+      if (!this.level1Pool || this.level1Pool.length < 4) {
+        this.level1Pool = [...pool].sort(() => Math.random() - 0.5);
+      }
+      this.targetAnimal = this.level1Pool[(this.currentRound - 1) % this.level1Pool.length];
 
       document.getElementById('promptAnimalL1').textContent = this.targetAnimal.name;
       document.getElementById('spanishHintL1').textContent = `(${this.targetAnimal.spanish})`;
@@ -1032,15 +1135,19 @@
           this.sound.playDoorOpen();
 
           if (animal === this.targetAnimal) {
-            this.sound.playAnimalOno(animal.soundFreq);
-            this.showRoundSuccess(animal.name, () => {
-              if (this.currentRound < this.maxRounds) {
-                this.currentRound++;
-                this.playRoundLevel1();
-              } else {
-                this.completeLevel(1);
-              }
-            });
+            this.sound.playAnimalSound(animal);
+            door.style.transform = 'scale(1.08)';
+            // Give the child 1300ms to clearly see the revealed animal before celebration overlay
+            setTimeout(() => {
+              this.showRoundSuccess(animal.name, () => {
+                if (this.currentRound < this.maxRounds) {
+                  this.currentRound++;
+                  this.playRoundLevel1();
+                } else {
+                  this.completeLevel(1);
+                }
+              });
+            }, 1300);
           } else {
             this.sound.playBoing();
             this.voice.playClip('oops_try_again');
@@ -1059,6 +1166,7 @@
     // ===================================================
     startLevel2() {
       this.maxRounds = 4;
+      this.level2Pool = [ANIMALS.RABBIT, ANIMALS.HORSE, ANIMALS.DOG, ANIMALS.PIG, ANIMALS.HEN].sort(() => Math.random() - 0.5);
       this.playRoundLevel2();
     }
 
@@ -1069,7 +1177,10 @@
       trough.innerHTML = '';
 
       const pool = [ANIMALS.RABBIT, ANIMALS.HORSE, ANIMALS.DOG, ANIMALS.PIG, ANIMALS.HEN];
-      this.targetAnimal = pool[Math.floor(Math.random() * pool.length)];
+      if (!this.level2Pool || this.level2Pool.length < 4) {
+        this.level2Pool = [...pool].sort(() => Math.random() - 0.5);
+      }
+      this.targetAnimal = this.level2Pool[(this.currentRound - 1) % this.level2Pool.length];
 
       // Show food name and icon in prompt to match the clickable food targets!
       document.getElementById('promptAnimalL2').textContent = `${this.targetAnimal.food.name} ${this.targetAnimal.food.icon}`;
@@ -1078,7 +1189,15 @@
       document.getElementById('progressFillL2').style.width = `${((this.currentRound - 1) / this.maxRounds) * 100}%`;
       document.getElementById('roundCounterL2').textContent = `Ronda ${this.currentRound} de ${this.maxRounds}`;
 
-      this.voice.playClip('inst_feed_animals');
+      // ElevenLabs prompt with animal and food name
+      const feedClipKey = `feed_${this.targetAnimal.name.toLowerCase()}_${this.targetAnimal.food.name.toLowerCase()}`;
+      if (this.voice.clips[feedClipKey]) {
+        this.voice.playClip(feedClipKey);
+      } else {
+        this.voice.playClip('inst_feed_animals', () => {
+          setTimeout(() => this.voice.speakAnimal(this.targetAnimal.name), 200);
+        });
+      }
 
       container.innerHTML = `
         <div class="feeding-animal-avatar" id="activeHungryAvatar">${this.targetAnimal.icon}</div>
@@ -1090,7 +1209,7 @@
         avatarEl.style.cursor = 'pointer';
         avatarEl.title = '¡Tócame!';
         avatarEl.addEventListener('click', () => {
-          this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+          this.sound.playAnimalSound(this.targetAnimal);
           avatarEl.style.transform = 'scale(1.2) rotate(-8deg)';
           setTimeout(() => { avatarEl.style.transform = ''; }, 300);
         });
@@ -1106,12 +1225,14 @@
       choices.forEach(food => {
         const btn = document.createElement('button');
         btn.className = 'food-card-btn';
-        btn.innerHTML = `<span>${food.icon}</span>`;
+        btn.innerHTML = `<span>${food.icon}</span><span class="food-label-btn" style="font-size:0.9rem; font-weight:800; color:#475569; display:block; margin-top:4px;">${food.name}</span>`;
 
         btn.addEventListener('click', () => {
+          this.voice.playFood(food.name);
+
           if (food.name === this.targetAnimal.food.name) {
             this.sound.playCrunch();
-            this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+            setTimeout(() => this.sound.playAnimalSound(this.targetAnimal), 300);
             btn.style.transform = 'scale(0)';
 
             if (avatarEl) {
@@ -1123,14 +1244,16 @@
               setTimeout(() => heart.remove(), 1200);
             }
 
-            this.showRoundSuccess(this.targetAnimal.name, () => {
-              if (this.currentRound < this.maxRounds) {
-                this.currentRound++;
-                this.playRoundLevel2();
-              } else {
-                this.completeLevel(2);
-              }
-            });
+            setTimeout(() => {
+              this.showRoundSuccess(`${this.targetAnimal.name} loves ${food.name}!`, () => {
+                if (this.currentRound < this.maxRounds) {
+                  this.currentRound++;
+                  this.playRoundLevel2();
+                } else {
+                  this.completeLevel(2);
+                }
+              });
+            }, 900);
           } else {
             this.sound.playBoing();
             this.voice.playClip('oops_try_again');
@@ -1146,6 +1269,7 @@
     // ===================================================
     startLevel3() {
       this.maxRounds = 4;
+      this.level3Pool = [ANIMALS.COW, ANIMALS.SHEEP, ANIMALS.DUCK, ANIMALS.CAT, ANIMALS.PIG, ANIMALS.HORSE, ANIMALS.HEN, ANIMALS.ROOSTER].sort(() => Math.random() - 0.5);
       this.playRoundLevel3();
     }
 
@@ -1153,24 +1277,28 @@
       const choicesContainer = document.getElementById('soundAnimalChoices');
       choicesContainer.innerHTML = '';
 
-      const pool = [ANIMALS.SHEEP, ANIMALS.COW, ANIMALS.DUCK, ANIMALS.DOG, ANIMALS.CAT];
-      pool.sort(() => Math.random() - 0.5);
-      const activeLineup = pool.slice(0, 3);
-      this.targetAnimal = activeLineup[Math.floor(Math.random() * activeLineup.length)];
+      const allSounds = [ANIMALS.COW, ANIMALS.SHEEP, ANIMALS.DUCK, ANIMALS.CAT, ANIMALS.PIG, ANIMALS.HORSE, ANIMALS.HEN, ANIMALS.ROOSTER];
+      if (!this.level3Pool || this.level3Pool.length < 4) {
+        this.level3Pool = [...allSounds].sort(() => Math.random() - 0.5);
+      }
+      this.targetAnimal = this.level3Pool[(this.currentRound - 1) % this.level3Pool.length];
+
+      const others = allSounds.filter(a => a !== this.targetAnimal).sort(() => Math.random() - 0.5);
+      const activeLineup = [this.targetAnimal, others[0], others[1]].sort(() => Math.random() - 0.5);
 
       // Mystery clue without auto-spoiling the name!
       document.getElementById('promptAnimalL3').textContent = '❓ ANIMAL';
-      document.getElementById('spanishHintL3').textContent = '(¡Escucha el sonido!)';
+      document.getElementById('spanishHintL3').textContent = '(¡Escucha el sonido real!)';
       document.getElementById('soundOnomatopoeiaText').textContent = '🎶 ???';
 
       document.getElementById('progressFillL3').style.width = `${((this.currentRound - 1) / this.maxRounds) * 100}%`;
       document.getElementById('roundCounterL3').textContent = `Ronda ${this.currentRound} de ${this.maxRounds}`;
 
-      // Play mystery animal sound
-      this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+      // Play real animal sound
+      this.sound.playAnimalSound(this.targetAnimal);
 
       document.getElementById('btnPlaySoundDetective').onclick = () => {
-        this.sound.playAnimalOno(this.targetAnimal.soundFreq);
+        this.sound.playAnimalSound(this.targetAnimal);
       };
 
       activeLineup.forEach(animal => {
@@ -1188,17 +1316,19 @@
             document.getElementById('spanishHintL3').textContent = `(${animal.spanish})`;
             document.getElementById('soundOnomatopoeiaText').textContent = animal.soundText;
 
-            this.sound.playAnimalOno(animal.soundFreq);
+            this.sound.playAnimalSound(animal);
             this.voice.speakAnimal(animal.name);
 
-            this.showRoundSuccess(animal.name, () => {
-              if (this.currentRound < this.maxRounds) {
-                this.currentRound++;
-                this.playRoundLevel3();
-              } else {
-                this.completeLevel(3);
-              }
-            });
+            setTimeout(() => {
+              this.showRoundSuccess(animal.name, () => {
+                if (this.currentRound < this.maxRounds) {
+                  this.currentRound++;
+                  this.playRoundLevel3();
+                } else {
+                  this.completeLevel(3);
+                }
+              });
+            }, 800);
           } else {
             this.sound.playBoing();
             this.voice.playClip('oops_try_again');
@@ -1359,6 +1489,7 @@
     startLevel5() {
       this.barnDanceCount = 0;
       this.maxRounds = 4;
+      this.level5Pool = [ANIMALS.PIG, ANIMALS.COW, ANIMALS.HORSE, ANIMALS.SHEEP].sort(() => Math.random() - 0.5);
       this.playRoundLevel5();
     }
 
@@ -1367,8 +1498,10 @@
       grid.innerHTML = '';
 
       const pool = [ANIMALS.PIG, ANIMALS.COW, ANIMALS.HORSE, ANIMALS.SHEEP];
-      pool.sort(() => Math.random() - 0.5);
-      this.targetAnimal = pool[Math.floor(Math.random() * pool.length)];
+      if (!this.level5Pool || this.level5Pool.length < 4) {
+        this.level5Pool = [...pool].sort(() => Math.random() - 0.5);
+      }
+      this.targetAnimal = this.level5Pool[this.barnDanceCount % this.level5Pool.length];
 
       document.getElementById('promptAnimalL5').textContent = this.targetAnimal.name;
       document.getElementById('barnDanceCounter').textContent = `${this.barnDanceCount} / ${this.maxRounds}`;
@@ -1384,7 +1517,7 @@
           if (animal === this.targetAnimal) {
             tile.classList.add('dancing');
             this.sound.playDanceBeat();
-            this.sound.playAnimalOno(animal.soundFreq);
+            this.sound.playAnimalSound(animal);
             this.barnDanceCount++;
             document.getElementById('barnDanceCounter').textContent = `${this.barnDanceCount} / ${this.maxRounds}`;
 
@@ -1589,6 +1722,7 @@
     // ===================================================
     startLevel8() {
       this.maxRounds = 3;
+      this.level8Pool = [ANIMALS.PIG, ANIMALS.COW, ANIMALS.HORSE, ANIMALS.SHEEP, ANIMALS.DUCK, ANIMALS.HEN, ANIMALS.RABBIT, ANIMALS.DOG, ANIMALS.CAT].sort(() => Math.random() - 0.5);
       this.playRoundLevel8();
     }
 
@@ -1597,9 +1731,11 @@
       container.innerHTML = '';
 
       const allPool = [ANIMALS.PIG, ANIMALS.COW, ANIMALS.HORSE, ANIMALS.SHEEP, ANIMALS.DUCK, ANIMALS.HEN, ANIMALS.RABBIT, ANIMALS.DOG, ANIMALS.CAT];
-      allPool.sort(() => Math.random() - 0.5);
-      this.targetAnimal = allPool[0];
-      const distractors = [allPool[1], allPool[2]];
+      if (!this.level8Pool || this.level8Pool.length < 3) {
+        this.level8Pool = [...allPool].sort(() => Math.random() - 0.5);
+      }
+      this.targetAnimal = this.level8Pool[(this.currentRound - 1) % this.level8Pool.length];
+      const distractors = allPool.filter(a => a !== this.targetAnimal).sort(() => Math.random() - 0.5).slice(0, 2);
 
       document.getElementById('promptAnimalL8').textContent = `${this.targetAnimal.name} ${this.targetAnimal.icon}`;
       document.getElementById('spanishHintL8').textContent = `(Revienta el globo de ${this.targetAnimal.spanish})`;

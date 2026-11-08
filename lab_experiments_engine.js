@@ -27,42 +27,45 @@ class ColorMagicSuiteEngine {
         round: 1,
         title: 'Round 1: Primary Colors 🔴🟡🔵',
         hint: 'Put Red, Yellow, and Blue items into their matching baskets!',
+        audioHint: 'assets/lab/audio/sort_hint_r1.mp3',
         baskets: [
           { color: 'red', name: 'Red Basket', emoji: '🧺', hex: '#ef4444', class: 'basket-red' },
           { color: 'yellow', name: 'Yellow Basket', emoji: '🧺', hex: '#eab308', class: 'basket-yellow' },
           { color: 'blue', name: 'Blue Basket', emoji: '🧺', hex: '#3b82f6', class: 'basket-blue' }
         ],
         items: [
-          { id: 'i1', name: 'Red Apple', emoji: '🍎', color: 'red' },
-          { id: 'i2', name: 'Red Strawberry', emoji: '🍓', color: 'red' },
-          { id: 'i3', name: 'Yellow Banana', emoji: '🍌', color: 'yellow' },
-          { id: 'i4', name: 'Yellow Sun', emoji: '☀️', color: 'yellow' },
-          { id: 'i5', name: 'Blue Car', emoji: '🚙', color: 'blue' },
-          { id: 'i6', name: 'Blue Dolphin', emoji: '🐬', color: 'blue' }
+          { id: 'i1', name: 'Red Apple', emoji: '🍎', color: 'red', audio: 'assets/lab/audio/item_red_apple.mp3' },
+          { id: 'i2', name: 'Red Strawberry', emoji: '🍓', color: 'red', audio: 'assets/lab/audio/item_red_strawberry.mp3' },
+          { id: 'i3', name: 'Yellow Banana', emoji: '🍌', color: 'yellow', audio: 'assets/lab/audio/item_yellow_banana.mp3' },
+          { id: 'i4', name: 'Yellow Sun', emoji: '☀️', color: 'yellow', audio: 'assets/lab/audio/item_yellow_sun.mp3' },
+          { id: 'i5', name: 'Blue Car', emoji: '🚙', color: 'blue', audio: 'assets/lab/audio/item_blue_car.mp3' },
+          { id: 'i6', name: 'Blue Dolphin', emoji: '🐬', color: 'blue', audio: 'assets/lab/audio/item_blue_dolphin.mp3' }
         ]
       },
       {
         round: 2,
         title: 'Round 2: Secondary Colors 🟢🟠🟣',
         hint: 'Put Green, Orange, and Purple items into their matching baskets!',
+        audioHint: 'assets/lab/audio/sort_hint_r2.mp3',
         baskets: [
           { color: 'green', name: 'Green Basket', emoji: '🧺', hex: '#10b981', class: 'basket-green' },
           { color: 'orange', name: 'Orange Basket', emoji: '🧺', hex: '#f97316', class: 'basket-orange' },
           { color: 'purple', name: 'Purple Basket', emoji: '🧺', hex: '#a855f7', class: 'basket-purple' }
         ],
         items: [
-          { id: 'i7', name: 'Green Frog', emoji: '🐸', color: 'green' },
-          { id: 'i8', name: 'Green Leaf', emoji: '🍃', color: 'green' },
-          { id: 'i9', name: 'Orange Carrot', emoji: '🥕', color: 'orange' },
-          { id: 'i10', name: 'Orange Orange', emoji: '🍊', color: 'orange' },
-          { id: 'i11', name: 'Purple Grapes', emoji: '🍇', color: 'purple' },
-          { id: 'i12', name: 'Purple Eggplant', emoji: '🍆', color: 'purple' }
+          { id: 'i7', name: 'Green Frog', emoji: '🐸', color: 'green', audio: 'assets/lab/audio/item_green_frog.mp3' },
+          { id: 'i8', name: 'Green Leaf', emoji: '🍃', color: 'green', audio: 'assets/lab/audio/item_green_leaf.mp3' },
+          { id: 'i9', name: 'Orange Carrot', emoji: '🥕', color: 'orange', audio: 'assets/lab/audio/item_orange_carrot.mp3' },
+          { id: 'i10', name: 'Orange', emoji: '🍊', color: 'orange', audio: 'assets/lab/audio/item_orange_orange.mp3' },
+          { id: 'i11', name: 'Purple Grapes', emoji: '🍇', color: 'purple', audio: 'assets/lab/audio/item_purple_grapes.mp3' },
+          { id: 'i12', name: 'Purple Eggplant', emoji: '🍆', color: 'purple', audio: 'assets/lab/audio/item_purple_eggplant.mp3' }
         ]
       },
       {
         round: 3,
         title: 'Round 3: Grand Rainbow Challenge 🌈',
         hint: 'Four colors! Red, Yellow, Blue and Green!',
+        audioHint: 'assets/lab/audio/sort_hint_r3.mp3',
         baskets: [
           { color: 'red', name: 'Red Basket', emoji: '🧺', hex: '#ef4444', class: 'basket-red' },
           { color: 'yellow', name: 'Yellow Basket', emoji: '🧺', hex: '#eab308', class: 'basket-yellow' },
@@ -70,14 +73,14 @@ class ColorMagicSuiteEngine {
           { color: 'green', name: 'Green Basket', emoji: '🧺', hex: '#10b981', class: 'basket-green' }
         ],
         items: [
-          { id: 'i13', name: 'Red Heart', emoji: '❤️', color: 'red' },
-          { id: 'i14', name: 'Red Balloon', emoji: '🎈', color: 'red' },
-          { id: 'i15', name: 'Yellow Star', emoji: '⭐', color: 'yellow' },
-          { id: 'i16', name: 'Yellow Lemon', emoji: '🍋', color: 'yellow' },
-          { id: 'i17', name: 'Blue Whale', emoji: '🐳', color: 'blue' },
-          { id: 'i18', name: 'Blue Hat', emoji: '🧢', color: 'blue' },
-          { id: 'i19', name: 'Green Tree', emoji: '🌳', color: 'green' },
-          { id: 'i20', name: 'Green Dinosaur', emoji: '🦖', color: 'green' }
+          { id: 'i13', name: 'Red Heart', emoji: '❤️', color: 'red', audio: 'assets/lab/audio/item_red_heart.mp3' },
+          { id: 'i14', name: 'Red Balloon', emoji: '🎈', color: 'red', audio: 'assets/lab/audio/item_red_balloon.mp3' },
+          { id: 'i15', name: 'Yellow Star', emoji: '⭐', color: 'yellow', audio: 'assets/lab/audio/item_yellow_star.mp3' },
+          { id: 'i16', name: 'Yellow Lemon', emoji: '🍋', color: 'yellow', audio: 'assets/lab/audio/item_yellow_lemon.mp3' },
+          { id: 'i17', name: 'Blue Whale', emoji: '🐳', color: 'blue', audio: 'assets/lab/audio/item_blue_whale.mp3' },
+          { id: 'i18', name: 'Blue Bird', emoji: '🐦', color: 'blue', audio: 'assets/lab/audio/item_blue_bird.mp3' },
+          { id: 'i19', name: 'Green Tree', emoji: '🌳', color: 'green', audio: 'assets/lab/audio/item_green_tree.mp3' },
+          { id: 'i20', name: 'Green Caterpillar', emoji: '🐛', color: 'green', audio: 'assets/lab/audio/item_green_caterpillar.mp3' }
         ]
       }
     ];
@@ -323,7 +326,7 @@ class ColorMagicSuiteEngine {
     if (btnVoice) {
       btnVoice.addEventListener('click', () => {
         const roundData = this.sortingRounds[this.currentSortingRound - 1];
-        this.speakColor(`Level 3. ${roundData.hint}. Drag or tap each object to its matching basket.`);
+        this.playStudioAudio(roundData.audioHint, `Level 3. ${roundData.hint}. Drag or tap each object to its matching basket.`);
         this.playChime('C');
       });
     }
@@ -424,10 +427,24 @@ class ColorMagicSuiteEngine {
     // 2. Render Items
     this.renderRemainingItems();
 
-    // Friendly initial speech cue
+    // Friendly initial speech cue using ElevenLabs Studio Audio
     setTimeout(() => {
-      this.speakColor(`Round ${roundNum}. ${roundData.hint}`);
+      this.playStudioAudio(roundData.audioHint, `Round ${roundNum}. ${roundData.hint}`);
     }, 300);
+  }
+
+  playStudioAudio(audioSrc, fallbackText) {
+    if (audioSrc) {
+      try {
+        const audio = new Audio(audioSrc);
+        audio.volume = 1.0;
+        audio.play().catch(() => {
+          if (fallbackText) this.speakColor(fallbackText);
+        });
+        return;
+      } catch (e) {}
+    }
+    if (fallbackText) this.speakColor(fallbackText);
   }
 
   renderRemainingItems() {
@@ -454,7 +471,7 @@ class ColorMagicSuiteEngine {
       const audioBtn = itemCard.querySelector('.sortable-item-audio-btn');
       audioBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        this.speakColor(`${item.name}`);
+        this.playStudioAudio(item.audio, `${item.name}`);
         this.playPopSound(540, 0.05);
       });
 
@@ -462,7 +479,7 @@ class ColorMagicSuiteEngine {
       itemCard.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', item.id);
         itemCard.classList.add('dragging');
-        this.speakColor(item.color);
+        this.playStudioAudio(item.audio, item.color);
       });
       itemCard.addEventListener('dragend', () => {
         itemCard.classList.remove('dragging');
@@ -479,7 +496,7 @@ class ColorMagicSuiteEngine {
           document.querySelectorAll('.sortable-item-card').forEach(c => c.classList.remove('selected-for-drop'));
           this.selectedSortingItem = item;
           itemCard.classList.add('selected-for-drop');
-          this.speakColor(`${item.name}! Touch the matching basket!`);
+          this.playStudioAudio(item.audio, `${item.name}! Touch the matching basket!`);
           this.playPopSound(620, 0.06);
 
           // Highlight matching baskets subtly

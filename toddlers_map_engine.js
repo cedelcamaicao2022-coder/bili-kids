@@ -347,7 +347,9 @@
     init() {
       this.activeStationId = this.determineCurrentStation();
       this.renderHotspots();
-      this.setupExplorerPin();
+      // Eliminated the small pin on units per user request, keeping only the main bottom Bili
+      const existingPin = document.getElementById('mapBiliExplorerPin');
+      if (existingPin) existingPin.remove();
       this.setupTreasureModal();
       this.setupViewSwitcher();
       this.updateHeaderStats();
@@ -406,8 +408,6 @@
             this.openTreasureModal();
           } else {
             this.playTone(740, 'triangle', 0.15);
-            // Move pin immediately
-            this.moveExplorerPin(station.pinX, station.pinY);
           }
         });
 

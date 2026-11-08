@@ -762,9 +762,49 @@
       document.getElementById('btnPlayAgain').addEventListener('click', () => {
         this.showScreen('home');
       });
+      document.getElementById('btnEditDiplomaName')?.addEventListener('click', () => {
+        this.promptChildNameForDiploma((name) => this.updateDiplomaName(name));
+      });
+      this.updateDiplomaName(localStorage.getItem('bilikids_child_name') || 'Pequeño Campeón');
 
       // Drag & drop handlers for Level 2
       this.initBackpackDropZone();
+    }
+
+    promptChildNameForDiploma(onConfirmed) {
+      const modal = document.getElementById('preDiplomaModal');
+      const input = document.getElementById('preDiplomaInput');
+      const btn = document.getElementById('btnConfirmDiplomaName');
+      if (!modal || !btn) {
+        if (onConfirmed) onConfirmed(localStorage.getItem('bilikids_child_name') || 'Pequeño Campeón');
+        return;
+      }
+      const saved = localStorage.getItem('bilikids_child_name') || '';
+      if (input) input.value = saved;
+      modal.classList.remove('hidden');
+      setTimeout(() => input?.focus(), 250);
+
+      const confirmHandler = () => {
+        const rawName = (input?.value || '').trim();
+        const finalName = rawName || 'Pequeño Campeón';
+        localStorage.setItem('bilikids_child_name', finalName);
+        modal.classList.add('hidden');
+        btn.removeEventListener('click', confirmHandler);
+        input?.removeEventListener('keydown', enterHandler);
+        if (onConfirmed) onConfirmed(finalName);
+      };
+
+      const enterHandler = (e) => {
+        if (e.key === 'Enter') confirmHandler();
+      };
+
+      btn.addEventListener('click', confirmHandler);
+      input?.addEventListener('keydown', enterHandler);
+    }
+
+    updateDiplomaName(name) {
+      const display = document.getElementById('diplomaNameDisplay');
+      if (display) display.textContent = name;
     }
 
     getHighestUnlockedLevel() {
@@ -831,9 +871,18 @@
       }
     }
 
+    getNonRepeatingDeck(levelKey, items) {
+      if (!this._decks) this._decks = {};
+      if (!this._decks[levelKey] || this._decks[levelKey].length === 0) {
+        this._decks[levelKey] = [...items].sort(() => Math.random() - 0.5);
+      }
+      return this._decks[levelKey];
+    }
+
     goToLevel(levelNum) {
       this.currentLevel = levelNum;
       this.currentRound = 1;
+      this._decks = {};
       this.showScreen(`level${levelNum}`);
 
       if (levelNum === 1) this.startLevel1();
@@ -925,24 +974,30 @@
         this.progress.stage2Unlocked = true;
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          this.confetti.burst(150);
-          const played = this.voice.playClip('diploma_congrats');
-          if (!played) {
-            this.voice.speak("Congratulations! You are a Super Color Champion with Bili!");
-          }
-        }, 1200);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            this.confetti.burst(150);
+            const played = this.voice.playClip('diploma_congrats');
+            if (!played) {
+              this.voice.speak("Congratulations! You are a Super Color Champion with Bili!");
+            }
+          });
+        }, 1000);
       } else if (levelNum === 10) {
         // Stage 2 completed! Galaxy Master!
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          this.confetti.burst(200);
-          const played = this.voice.playClip('diploma_congrats');
-          if (!played) {
-            this.voice.speak("Congratulations! You are a Super Color Champion with Bili!");
-          }
-        }, 1200);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            this.confetti.burst(200);
+            const played = this.voice.playClip('diploma_congrats');
+            if (!played) {
+              this.voice.speak("Congratulations! You are a Super Color Champion with Bili!");
+            }
+          });
+        }, 1000);
       } else {
         // Play level complete celebration clip!
         this.voice.playClip('level_complete');
@@ -967,7 +1022,8 @@
 
       // Primary & easy colors for Level 1
       const pool = [COLORS.RED, COLORS.BLUE, COLORS.YELLOW, COLORS.GREEN];
-      this.targetColor = pool[Math.floor(Math.random() * pool.length)];
+      const deck = this.getNonRepeatingDeck('l1', pool);
+      this.targetColor = deck[(this.currentRound - 1) % deck.length];
 
       // Pick 4 options including target
       const choices = [this.targetColor];
@@ -1052,7 +1108,8 @@
 
       // Wider pool including Orange & Purple
       const pool = [COLORS.ORANGE, COLORS.PURPLE, COLORS.PINK, COLORS.GREEN, COLORS.YELLOW, COLORS.RED];
-      this.targetColor = pool[Math.floor(Math.random() * pool.length)];
+      const deck = this.getNonRepeatingDeck('l2', pool);
+      this.targetColor = deck[(this.currentRound - 1) % deck.length];
 
       const promptEl = document.getElementById('promptColorL2');
       promptEl.textContent = this.targetColor.name;
@@ -1162,7 +1219,8 @@
         { object: 'Teddy Bear', icon: '🧸', color: COLORS.BROWN, audioKey: 'paint_bear_brown' }
       ];
 
-      const currentPreset = paintPresets[Math.floor(Math.random() * paintPresets.length)];
+      const deck = this.getNonRepeatingDeck('l3', paintPresets);
+      const currentPreset = deck[(this.currentRound - 1) % deck.length];
       this.targetObject = currentPreset;
       this.targetColor = currentPreset.color;
 
@@ -1239,8 +1297,9 @@
       const pond = document.getElementById('bubblesPond');
       pond.innerHTML = '';
 
-      const pool = Object.values(COLORS);
-      this.targetColor = pool[Math.floor(Math.random() * pool.length)];
+      const pool = [COLORS.BLUE, COLORS.GREEN, COLORS.YELLOW, COLORS.RED, COLORS.PURPLE, COLORS.ORANGE];
+      const deck = this.getNonRepeatingDeck('l4', pool);
+      this.targetColor = deck[(this.currentRound - 1) % deck.length];
       this.bubblesToCatch = 3;
 
       const promptEl = document.getElementById('promptColorL4');
@@ -1331,10 +1390,10 @@
       grid.innerHTML = '';
 
       const pool = [COLORS.ORANGE, COLORS.PURPLE, COLORS.YELLOW, COLORS.BLUE, COLORS.GREEN, COLORS.RED];
-      pool.sort(() => Math.random() - 0.5);
-      const activeColors = pool.slice(0, 4);
-
-      this.targetColor = activeColors[Math.floor(Math.random() * activeColors.length)];
+      const deck = this.getNonRepeatingDeck('l5', pool);
+      this.targetColor = deck[this.discoRoundsWon % deck.length];
+      const others = pool.filter(c => c !== this.targetColor).sort(() => Math.random() - 0.5);
+      const activeColors = [this.targetColor, others[0], others[1], others[2]].sort(() => Math.random() - 0.5);
 
       const promptEl = document.getElementById('promptColorL5');
       promptEl.textContent = this.targetColor.name;
@@ -1391,7 +1450,8 @@
       wagon.innerHTML = '<span class="wagon-placeholder">📦 ¡Carga aquí!</span>';
 
       const pool = [COLORS.BLUE, COLORS.RED, COLORS.YELLOW, COLORS.GREEN, COLORS.ORANGE, COLORS.PURPLE];
-      this.targetColor = pool[Math.floor(Math.random() * pool.length)];
+      const deck = this.getNonRepeatingDeck('l6', pool);
+      this.targetColor = deck[(this.currentRound - 1) % deck.length];
 
       const promptEl = document.getElementById('promptColorL6');
       promptEl.textContent = this.targetColor.name;
@@ -1500,10 +1560,11 @@
         { icon: '🍎', color: COLORS.RED }
       ];
 
-      safariAnimals.sort(() => Math.random() - 0.5);
-      const activeChoices = safariAnimals.slice(0, 4);
-      const targetObj = activeChoices[Math.floor(Math.random() * activeChoices.length)];
+      const deck = this.getNonRepeatingDeck('l7', safariAnimals);
+      const targetObj = deck[(this.currentRound - 1) % deck.length];
       this.targetColor = targetObj.color;
+      const others = safariAnimals.filter(a => a !== targetObj).sort(() => Math.random() - 0.5);
+      const activeChoices = [targetObj, others[0], others[1], others[2]].sort(() => Math.random() - 0.5);
 
       const promptEl = document.getElementById('promptColorL7');
       promptEl.textContent = this.targetColor.name;
@@ -1740,10 +1801,11 @@
         { name: 'ORANGE', icon: '☄️', color: COLORS.ORANGE }
       ];
 
-      planetsPool.sort(() => Math.random() - 0.5);
-      const activePlanets = planetsPool.slice(0, 4);
-      const targetPlanet = activePlanets[Math.floor(Math.random() * activePlanets.length)];
+      const deck = this.getNonRepeatingDeck('l10', planetsPool);
+      const targetPlanet = deck[(this.currentRound - 1) % deck.length];
       this.targetColor = targetPlanet.color;
+      const others = planetsPool.filter(p => p !== targetPlanet).sort(() => Math.random() - 0.5);
+      const activePlanets = [targetPlanet, others[0], others[1], others[2]].sort(() => Math.random() - 0.5);
 
       const promptEl = document.getElementById('promptColorL10');
       promptEl.textContent = this.targetColor.name;

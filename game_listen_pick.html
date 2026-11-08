@@ -547,10 +547,32 @@
         }, 400);
       }
 
+      const ANIMAL_SFX = {
+        cow: 'assets/audio/animals/mugido-vaca.mp3',
+        cat: 'assets/audio/animals/gatito-cachorro-miau.mp3',
+        duck: 'assets/audio/animals/cuac-pato.mp3',
+        sheep: 'assets/audio/animals/ovejas-1.mp3',
+        pig: 'assets/audio/animals/cerdo-8.mp3',
+        horse: 'assets/audio/animals/caballo-31.mp3',
+        lion: 'assets/audio/animals/leon-16.mp3',
+        rooster: 'assets/audio/animals/alarma-gallo-kikiriki.mp3',
+        frog: 'assets/audio/animals/rana-2.mp3',
+        elephant: 'assets/audio/animals/elefante-1.mp3',
+        monkey: 'assets/audio/animals/mono-llamado.mp3'
+      };
+
       function playQuestionAudio() {
         const q = LEVELS[currentLevel].questions[questionIndex];
         lblHeroAction.textContent = "🔊 Escuchando...";
-        BilikidsAudio.speakEnglish(q.audioPhrase);
+        if (ANIMAL_SFX[q.targetId]) {
+          const sfx = new Audio(ANIMAL_SFX[q.targetId]);
+          sfx.play().catch(() => {});
+          setTimeout(() => {
+            BilikidsAudio.speakEnglish(q.audioPhrase);
+          }, 900);
+        } else {
+          BilikidsAudio.speakEnglish(q.audioPhrase);
+        }
         setTimeout(() => {
           lblHeroAction.textContent = "Repetir Audio 🔊";
         }, 2200);
@@ -568,6 +590,10 @@
           localStorage.setItem('bilikids_stars_count', totalStars);
           updateStats();
 
+          if (ANIMAL_SFX[choice.id]) {
+            const sfx = new Audio(ANIMAL_SFX[choice.id]);
+            sfx.play().catch(() => {});
+          }
           BilikidsAudio.playChime('match');
           BilikidsAudio.speakEnglish(`Yes! That is ${choice.name}! Awesome!`);
 

@@ -580,57 +580,92 @@
         </div>
       </section>
 
+      <!-- PRE-DIPLOMA NAME PROMPT MODAL -->
+      <div id="preDiplomaModal" class="pre-diploma-modal hidden">
+        <div class="pre-diploma-card pop-in">
+          <div class="pre-diploma-badge">🎓 ¡GRADUACIÓN BILIKIDS!</div>
+          <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="pre-diploma-logo">
+          <h2 class="pre-diploma-title">¡Felicitaciones! Has completado la aventura</h2>
+          <p class="pre-diploma-subtitle">Escribe tu nombre para personalizar tu diploma oficial:</p>
+          <div class="pre-diploma-input-wrap">
+            <span class="pre-diploma-input-icon">⭐</span>
+            <input type="text" id="preDiplomaInput" class="pre-diploma-input" placeholder="Nombre del Pequeño Campeón" maxlength="24">
+          </div>
+          <button id="btnConfirmDiplomaName" class="btn-confirm-diploma">
+            <span>🎓</span> ¡Generar mi Diploma Oficial! 🌟
+          </button>
+        </div>
+      </div>
+
       <!-- SCREEN: CELEBRATION / CERTIFICATE MODAL -->
       <section id="screenCelebration" class="screen">
         <div class="diploma-card">
-          <div class="diploma-ribbon">🏆 ¡FELICITACIONES! 🏆</div>
+          <div class="diploma-inner-frame">
+            <div class="diploma-ribbon">🏆 ¡CERTIFICADO OFICIAL DE EXCELENCIA! 🏆</div>
 
-          <div class="diploma-header">
-            <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
-            <div class="diploma-titles">
-              <h2>SUPER COLOR CHAMPION</h2>
-              <p>Certificado Oficial de Colores Bilikids</p>
-            </div>
-          </div>
-
-          <div class="diploma-body">
-            <div class="diploma-center-layout">
-              <div class="diploma-bili-fullbody-container">
-                <img src="assets/bili_fullbody.png" alt="Bili" class="diploma-bili-fullbody-img wave-bounce">
-              </div>
-              <div class="diploma-text-content">
-                <p class="awarded-to-text">Otorgado a un increíble explorador de 3 a 5 años por dominar todos los colores en inglés:</p>
-                
-                <div class="child-name-wrapper">
-                  <label for="childNameInput">Nombre del Pequeño:</label>
-                  <input type="text" id="childNameInput" value="Pequeño Campeón" maxlength="24">
-                </div>
-
-                <div class="colors-learned-badges">
-                  <span class="c-tag tag-red">RED</span>
-                  <span class="c-tag tag-blue">BLUE</span>
-                  <span class="c-tag tag-yellow">YELLOW</span>
-                  <span class="c-tag tag-green">GREEN</span>
-                  <span class="c-tag tag-orange">ORANGE</span>
-                  <span class="c-tag tag-purple">PURPLE</span>
-                  <span class="c-tag tag-pink">PINK</span>
-                  <span class="c-tag tag-brown">BROWN</span>
-                </div>
-
-                <div class="diploma-stars-row">
-                  ⭐⭐⭐⭐⭐
-                </div>
+            <div class="diploma-header">
+              <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
+              <div class="diploma-titles">
+                <h2>SUPER COLOR CHAMPION</h2>
+                <p class="diploma-subhead">Bilikids Preschool Academy • Certificado de Logro</p>
               </div>
             </div>
-          </div>
 
-          <div class="diploma-actions">
-            <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
-              <span>🖨️</span> Imprimir Diploma
-            </button>
-            <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
-              <span>🔄</span> Jugar de Nuevo
-            </button>
+            <div class="diploma-body">
+              <div class="diploma-center-layout">
+                <div class="diploma-bili-fullbody-container">
+                  <img src="assets/bili_fullbody.png" alt="Bili" class="diploma-bili-fullbody-img wave-bounce">
+                </div>
+                <div class="diploma-text-content">
+                  <p class="awarded-to-text">Se otorga con honor y alegría este diploma a:</p>
+                  
+                  <div class="diploma-name-highlight">
+                    <span id="diplomaNameDisplay" class="diploma-student-name">Pequeño Campeón</span>
+                    <button id="btnEditDiplomaName" class="btn-edit-name-inline" title="Cambiar nombre">✏️</button>
+                  </div>
+
+                  <p class="diploma-achievement-desc">Por explorar con entusiasmo, superar todos los desafíos y dominar los colores en inglés:</p>
+
+                  <div class="colors-learned-badges">
+                    <span class="c-tag tag-red">RED</span>
+                    <span class="c-tag tag-blue">BLUE</span>
+                    <span class="c-tag tag-yellow">YELLOW</span>
+                    <span class="c-tag tag-green">GREEN</span>
+                    <span class="c-tag tag-orange">ORANGE</span>
+                    <span class="c-tag tag-purple">PURPLE</span>
+                    <span class="c-tag tag-pink">PINK</span>
+                    <span class="c-tag tag-brown">BROWN</span>
+                  </div>
+
+                  <div class="diploma-seal-row">
+                    <div class="diploma-signature">
+                      <div class="sig-line">Prof. Bili</div>
+                      <span class="sig-title">Mascota Guía</span>
+                    </div>
+                    <div class="diploma-gold-seal">
+                      <div class="seal-inner">
+                        <span>⭐</span>
+                        <strong>BILIKIDS</strong>
+                        <small>OFICIAL</small>
+                      </div>
+                    </div>
+                    <div class="diploma-signature">
+                      <div class="sig-line">Academia Bilikids</div>
+                      <span class="sig-title">Dirección Pedagógica</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="diploma-actions">
+              <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
+                <span>🖨️</span> Imprimir Diploma
+              </button>
+              <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
+                <span>🔄</span> Jugar de Nuevo
+              </button>
+            </div>
           </div>
         </div>
       </section>

@@ -570,60 +570,95 @@
         </div>
       </section>
 
+      <!-- PRE-DIPLOMA NAME PROMPT MODAL -->
+      <div id="preDiplomaModal" class="pre-diploma-modal hidden">
+        <div class="pre-diploma-card pop-in">
+          <div class="pre-diploma-badge">🎓 ¡GRADUACIÓN EN LA GRANJA!</div>
+          <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="pre-diploma-logo">
+          <h2 class="pre-diploma-title">¡Gran trabajo! Has recorrido toda la granja</h2>
+          <p class="pre-diploma-subtitle">Escribe tu nombre para personalizar tu diploma oficial:</p>
+          <div class="pre-diploma-input-wrap">
+            <span class="pre-diploma-input-icon">⭐</span>
+            <input type="text" id="preDiplomaInput" class="pre-diploma-input" placeholder="Nombre del Pequeño Granjero" maxlength="24">
+          </div>
+          <button id="btnConfirmDiplomaName" class="btn-confirm-diploma">
+            <span>🎓</span> ¡Generar mi Diploma de Granjero! 🌟
+          </button>
+        </div>
+      </div>
+
       <!-- SCREEN: FARM DIPLOMA CELEBRATION -->
       <section id="screenCelebration" class="screen">
         <div class="diploma-card farm-diploma">
-          <div class="diploma-ribbon farm-ribbon">🏆 ¡GRAN EXPLORADOR DE LA GRANJA! 🏆</div>
+          <div class="diploma-inner-frame">
+            <div class="diploma-ribbon farm-ribbon">🏆 ¡CERTIFICADO OFICIAL DE LA GRANJA! 🏆</div>
 
-          <div class="diploma-header">
-            <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
-            <div class="diploma-titles">
-              <h2>SUPER FARM EXPLORER</h2>
-              <p>Certificado Oficial de Animales Bilikids</p>
-            </div>
-          </div>
-
-          <div class="diploma-body">
-            <div class="diploma-center-layout">
-              <div class="diploma-leo-fullbody-container">
-                <img src="assets/leo/leo_transparent.png" alt="Leo el Leoncito" class="diploma-leo-img wave-bounce">
-              </div>
-              <div class="diploma-text-content">
-                <p class="awarded-to-text">Otorgado a un increíble explorador de 3 a 5 años por dominar todos los animales de la granja en inglés:</p>
-                
-                <div class="child-name-wrapper">
-                  <label for="childNameInput">Nombre del Pequeño Granjero:</label>
-                  <input type="text" id="childNameInput" value="Pequeño Granjero" maxlength="24">
-                </div>
-
-                <div class="animals-learned-badges">
-                  <span class="a-tag">COW 🐮</span>
-                  <span class="a-tag">PIG 🐷</span>
-                  <span class="a-tag">SHEEP 🐑</span>
-                  <span class="a-tag">HORSE 🐴</span>
-                  <span class="a-tag">DUCK 🦆</span>
-                  <span class="a-tag">HEN 🐔</span>
-                  <span class="a-tag">ROOSTER 🐓</span>
-                  <span class="a-tag">RABBIT 🐰</span>
-                </div>
-
-                <div class="diploma-stars-row">
-                  ⭐⭐⭐⭐⭐
-                </div>
+            <div class="diploma-header">
+              <img src="assets/bilikids_logo.png" alt="Bilikids Logo" class="diploma-brand-logo">
+              <div class="diploma-titles">
+                <h2>SUPER FARM EXPLORER</h2>
+                <p class="diploma-subhead">Bilikids Preschool Farm Academy • Certificado de Logro</p>
               </div>
             </div>
-          </div>
 
-          <div class="diploma-actions">
-            <button id="btnContinueStage2" class="btn-action-diploma btn-stage2-continue" style="display: none;">
-              <span>⭐</span> ¡Continuar a la Etapa 2! 🦁
-            </button>
-            <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
-              <span>🖨️</span> Imprimir Diploma
-            </button>
-            <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
-              <span>🔄</span> Jugar de Nuevo
-            </button>
+            <div class="diploma-body">
+              <div class="diploma-center-layout">
+                <div class="diploma-leo-fullbody-container">
+                  <img src="assets/leo/leo_transparent.png" alt="Leo el Leoncito" class="diploma-leo-img wave-bounce">
+                </div>
+                <div class="diploma-text-content">
+                  <p class="awarded-to-text">Se otorga con honor y alegría este diploma a:</p>
+                  
+                  <div class="diploma-name-highlight">
+                    <span id="diplomaNameDisplay" class="diploma-student-name">Pequeño Granjero</span>
+                    <button id="btnEditDiplomaName" class="btn-edit-name-inline" title="Cambiar nombre">✏️</button>
+                  </div>
+
+                  <p class="diploma-achievement-desc">Por cuidar a los animalitos, escuchar sus sonidos y aprender sus nombres en inglés:</p>
+
+                  <div class="animals-learned-badges">
+                    <span class="a-tag">COW 🐮</span>
+                    <span class="a-tag">PIG 🐷</span>
+                    <span class="a-tag">SHEEP 🐑</span>
+                    <span class="a-tag">HORSE 🐴</span>
+                    <span class="a-tag">DUCK 🦆</span>
+                    <span class="a-tag">HEN 🐔</span>
+                    <span class="a-tag">ROOSTER 🐓</span>
+                    <span class="a-tag">CAT 🐱</span>
+                  </div>
+
+                  <div class="diploma-seal-row">
+                    <div class="diploma-signature">
+                      <div class="sig-line">Leo el León</div>
+                      <span class="sig-title">Granjero Líder</span>
+                    </div>
+                    <div class="diploma-gold-seal">
+                      <div class="seal-inner">
+                        <span>⭐</span>
+                        <strong>BILIKIDS</strong>
+                        <small>OFICIAL</small>
+                      </div>
+                    </div>
+                    <div class="diploma-signature">
+                      <div class="sig-line">Academia Bilikids</div>
+                      <span class="sig-title">Dirección Pedagógica</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="diploma-actions">
+              <button id="btnContinueStage2" class="btn-action-diploma btn-stage2-continue" style="display: none;">
+                <span>⭐</span> ¡Continuar a la Etapa 2! 🦁
+              </button>
+              <button id="btnPrintDiploma" class="btn-action-diploma btn-print">
+                <span>🖨️</span> Imprimir Diploma
+              </button>
+              <button id="btnPlayAgain" class="btn-action-diploma btn-replay">
+                <span>🔄</span> Jugar de Nuevo
+              </button>
+            </div>
           </div>
         </div>
       </section>

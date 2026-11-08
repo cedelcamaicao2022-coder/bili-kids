@@ -26,6 +26,34 @@
       <line x1="52" y1="36" x2="56" y2="58" stroke="#d35400" stroke-width="5" stroke-linecap="round"/>
       <line x1="24" y1="36" x2="22" y2="54" stroke="#b95d00" stroke-width="4" stroke-linecap="round"/>
       <line x1="40" y1="36" x2="42" y2="54" stroke="#b95d00" stroke-width="4" stroke-linecap="round"/>
+    </svg>`,
+    // Child bicycle / skateboard safety helmet (Proper garage context, NOT combat army helmet)
+    HELMET: `<svg viewBox="0 0 64 64" class="svg-item-icon" width="72" height="72" fill="none">
+      <defs>
+        <linearGradient id="helmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+      </defs>
+      <path d="M8 34 C8 18 20 10 32 10 C44 10 56 18 56 34 C56 38 52 40 44 40 L20 40 C12 40 8 38 8 34 Z" fill="url(#helmGrad)" stroke="#0369a1" stroke-width="3"/>
+      <!-- Aerodynamic vents -->
+      <ellipse cx="22" cy="24" rx="5" ry="2.5" fill="#0f172a" opacity="0.35"/>
+      <ellipse cx="32" cy="20" rx="5" ry="2.5" fill="#0f172a" opacity="0.35"/>
+      <ellipse cx="42" cy="24" rx="5" ry="2.5" fill="#0f172a" opacity="0.35"/>
+      <!-- Racing stripe -->
+      <path d="M14 26 C22 18 42 18 50 26" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Front visor -->
+      <path d="M8 34 C16 38 48 38 56 34" stroke="#075985" stroke-width="4" stroke-linecap="round"/>
+      <!-- Chin safety straps -->
+      <path d="M16 38 L26 55 L32 56 L38 55 L48 38" stroke="#fbbf24" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <rect x="29" y="53" width="6" height="5" rx="1.5" fill="#ef4444"/>
+    </svg>`,
+    // Toothpaste tube
+    TOOTHPASTE: `<svg viewBox="0 0 64 64" class="svg-item-icon" width="68" height="68" fill="none">
+      <rect x="26" y="8" width="12" height="7" rx="2" fill="#06b6d4" stroke="#0891b2" stroke-width="2"/>
+      <path d="M22 15 L42 15 L45 48 C45 54 41 57 32 57 C23 57 19 54 19 48 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"/>
+      <path d="M21 28 C28 32 36 24 43 28 L44 38 C37 34 29 42 20 38 Z" fill="#ffffff" opacity="0.9"/>
+      <rect x="28" y="4" width="8" height="5" rx="1.5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
     </svg>`
   };
 
@@ -33,6 +61,8 @@
     if (!item) return '';
     if (item.name === 'FORK' || item.id === 'fork') return SVG_ICONS.FORK;
     if (item.name === 'TABLE' || item.id === 'table') return SVG_ICONS.TABLE;
+    if (item.name === 'HELMET' || item.id === 'helmet') return SVG_ICONS.HELMET;
+    if (item.name === 'TOOTHPASTE' || item.id === 'toothpaste') return SVG_ICONS.TOOTHPASTE;
     return item.icon || '';
   }
 
@@ -479,11 +509,11 @@
         act_light_on: `assets/luna/audio/act_light_on.mp3?v=${v}`,
         act_light_off: `assets/luna/audio/act_light_off.mp3?v=${v}`,
         act_ball: `assets/luna/audio/act_ball.mp3?v=${v}`,
-        act_robot: `assets/luna/audio/act_robot.m4a?v=${v}`,
-        act_train: `assets/luna/audio/act_train.m4a?v=${v}`,
-        act_blue_door: `assets/luna/audio/act_blue_door.m4a?v=${v}`,
-        act_red_door: `assets/luna/audio/act_red_door.m4a?v=${v}`,
-        act_yellow_door: `assets/luna/audio/act_yellow_door.m4a?v=${v}`,
+        act_robot: `assets/luna/audio/act_robot.mp3?v=${v}`,
+        act_train: `assets/luna/audio/act_train.mp3?v=${v}`,
+        act_blue_door: `assets/luna/audio/act_blue_door.mp3?v=${v}`,
+        act_red_door: `assets/luna/audio/act_red_door.mp3?v=${v}`,
+        act_yellow_door: `assets/luna/audio/act_yellow_door.mp3?v=${v}`,
         act_strawberry: `assets/luna/audio/act_strawberry.mp3?v=${v}`,
         act_banana: `assets/luna/audio/act_banana.mp3?v=${v}`,
         act_orange: `assets/luna/audio/act_orange.mp3?v=${v}`,
@@ -806,6 +836,11 @@
       // Celebration Buttons
       document.getElementById('btnPrintDiploma')?.addEventListener('click', () => window.print());
       document.getElementById('btnPlayAgain')?.addEventListener('click', () => this.showScreen('home'));
+      document.getElementById('btnEditDiplomaName')?.addEventListener('click', () => {
+        this.promptChildNameForDiploma((name) => this.updateDiplomaName(name));
+      });
+      this.updateDiplomaName(localStorage.getItem('bilikids_child_name') || 'Pequeño Explorador');
+
       document.getElementById('btnContinueStage2')?.addEventListener('click', () => {
         if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
         if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
@@ -880,9 +915,18 @@
       }
     }
 
+    getNonRepeatingDeck(levelKey, items) {
+      if (!this._decks) this._decks = {};
+      if (!this._decks[levelKey] || this._decks[levelKey].length === 0) {
+        this._decks[levelKey] = [...items].sort(() => Math.random() - 0.5);
+      }
+      return this._decks[levelKey];
+    }
+
     goToLevel(levelNum) {
       this.currentLevel = levelNum;
       this.currentRound = 1;
+      this._decks = {};
       this.showScreen('play');
       this.loadLevel(levelNum);
     }
@@ -929,6 +973,42 @@
       }, 1800);
     }
 
+    promptChildNameForDiploma(onConfirmed) {
+      const modal = document.getElementById('preDiplomaModal');
+      const input = document.getElementById('preDiplomaInput');
+      const btn = document.getElementById('btnConfirmDiplomaName');
+      if (!modal || !btn) {
+        if (onConfirmed) onConfirmed(localStorage.getItem('bilikids_child_name') || 'Pequeño Explorador');
+        return;
+      }
+      const saved = localStorage.getItem('bilikids_child_name') || '';
+      if (input) input.value = saved;
+      modal.classList.remove('hidden');
+      setTimeout(() => input?.focus(), 250);
+
+      const confirmHandler = () => {
+        const rawName = (input?.value || '').trim();
+        const finalName = rawName || 'Pequeño Explorador';
+        localStorage.setItem('bilikids_child_name', finalName);
+        modal.classList.add('hidden');
+        btn.removeEventListener('click', confirmHandler);
+        input?.removeEventListener('keydown', enterHandler);
+        if (onConfirmed) onConfirmed(finalName);
+      };
+
+      const enterHandler = (e) => {
+        if (e.key === 'Enter') confirmHandler();
+      };
+
+      btn.addEventListener('click', confirmHandler);
+      input?.addEventListener('keydown', enterHandler);
+    }
+
+    updateDiplomaName(name) {
+      const display = document.getElementById('diplomaNameDisplay');
+      if (display) display.textContent = name;
+    }
+
     completeLevel(levelNum) {
       this.sound.playVictory();
       this.confetti.burst(120);
@@ -942,45 +1022,51 @@
         this.progress.stage2Unlocked = true;
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) {
-            btnCont.style.display = 'inline-flex';
-            let secondsLeft = 4;
-            btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
-            if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
-            this.stage2CountdownInterval = setInterval(() => {
-              secondsLeft--;
-              if (secondsLeft > 0 && btnCont) {
-                btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
-              } else {
-                clearInterval(this.stage2CountdownInterval);
-              }
-            }, 1000);
-          }
-          this.confetti.burst(160);
-          this.voice.playClip('diploma_congrats');
-
-          if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
-          this.stage2AutoTimer = setTimeout(() => {
-            if (this.currentScreen === 'celebration') {
-              if (btnCont) {
-                btnCont.style.display = 'none';
-                btnCont.innerHTML = '<span>⭐</span> ¡Continuar a las Habitaciones Superiores! 🏰';
-              }
-              this.goToLevel(11);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            const btnCont = document.getElementById('btnContinueStage2');
+            if (btnCont) {
+              btnCont.style.display = 'inline-flex';
+              let secondsLeft = 4;
+              btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
+              if (this.stage2CountdownInterval) clearInterval(this.stage2CountdownInterval);
+              this.stage2CountdownInterval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft > 0 && btnCont) {
+                  btnCont.innerHTML = `<span>⭐</span> ¡Pasando al Nivel 11 en ${secondsLeft}s! 🏰 ➔`;
+                } else {
+                  clearInterval(this.stage2CountdownInterval);
+                }
+              }, 1000);
             }
-          }, 4500);
-        }, 1200);
+            this.confetti.burst(160);
+            this.voice.playClip('diploma_congrats');
+
+            if (this.stage2AutoTimer) clearTimeout(this.stage2AutoTimer);
+            this.stage2AutoTimer = setTimeout(() => {
+              if (this.currentScreen === 'celebration') {
+                if (btnCont) {
+                  btnCont.style.display = 'none';
+                  btnCont.innerHTML = '<span>⭐</span> ¡Continuar a las Habitaciones Superiores! 🏰';
+                }
+                this.goToLevel(11);
+              }
+            }, 4500);
+          });
+        }, 1000);
       } else if (levelNum === 20) {
         this.updateStarUI();
         setTimeout(() => {
-          this.showScreen('celebration');
-          const btnCont = document.getElementById('btnContinueStage2');
-          if (btnCont) btnCont.style.display = 'none';
-          this.confetti.burst(200);
-          this.voice.playClip('diploma_congrats');
-        }, 1200);
+          this.promptChildNameForDiploma((childName) => {
+            this.updateDiplomaName(childName);
+            this.showScreen('celebration');
+            const btnCont = document.getElementById('btnContinueStage2');
+            if (btnCont) btnCont.style.display = 'none';
+            this.confetti.burst(200);
+            this.voice.playClip('diploma_congrats');
+          });
+        }, 1000);
       } else {
         this.voice.playClip('level_complete');
         this.updateStarUI();
@@ -1031,10 +1117,12 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.SOFA, HOUSE_ITEMS.TV, HOUSE_ITEMS.LAMP, HOUSE_ITEMS.TABLE];
-      pool.sort(() => Math.random() - 0.5);
-      const activeChoices = pool.slice(0, 3);
-      this.targetItem = activeChoices[Math.floor(Math.random() * activeChoices.length)];
+      const deck = this.getNonRepeatingDeck('l1', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
+
+      const others = pool.filter(item => item !== this.targetItem).sort(() => Math.random() - 0.5);
+      const activeChoices = [this.targetItem, others[0], others[1]].sort(() => Math.random() - 0.5);
 
       this.dom.playIntroText.textContent = 'Find: ';
       this.dom.promptMainWord.innerHTML = `${this.targetItem.name} <span class="prompt-icon-slot">${getItemVisualHtml(this.targetItem)}</span>`;
@@ -1087,8 +1175,8 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.MILK, HOUSE_ITEMS.JUICE, HOUSE_ITEMS.CHEESE, HOUSE_ITEMS.APPLE];
-      pool.sort(() => Math.random() - 0.5);
-      this.targetItem = pool[0];
+      const deck = this.getNonRepeatingDeck('l2', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Find in Fridge: ';
@@ -1155,10 +1243,12 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.BED, HOUSE_ITEMS.LAMP, HOUSE_ITEMS.WINDOW, HOUSE_ITEMS.CLOCK];
-      pool.sort(() => Math.random() - 0.5);
-      const activeChoices = pool.slice(0, 3);
-      this.targetItem = activeChoices[Math.floor(Math.random() * activeChoices.length)];
+      const deck = this.getNonRepeatingDeck('l3', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
+
+      const others = pool.filter(item => item !== this.targetItem).sort(() => Math.random() - 0.5);
+      const activeChoices = [this.targetItem, others[0], others[1]].sort(() => Math.random() - 0.5);
 
       this.dom.playIntroText.textContent = 'Bedtime: ';
       this.dom.promptMainWord.innerHTML = `${this.targetItem.name} <span class="prompt-icon-slot">${getItemVisualHtml(this.targetItem)}</span>`;
@@ -1209,8 +1299,8 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.SOAP, HOUSE_ITEMS.BATHTUB, HOUSE_ITEMS.TOOTHBRUSH, HOUSE_ITEMS.SHAMPOO];
-      pool.sort(() => Math.random() - 0.5);
-      this.targetItem = pool[0];
+      const deck = this.getNonRepeatingDeck('l4', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Pop Bubble: ';
@@ -1435,7 +1525,8 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.CAR, HOUSE_ITEMS.BICYCLE, HOUSE_ITEMS.HELMET];
-      this.targetItem = pool[(this.currentRound - 1) % pool.length];
+      const deck = this.getNonRepeatingDeck('l8', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Garage: ';
@@ -1488,7 +1579,8 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.TEDDY_BEAR, HOUSE_ITEMS.GUITAR, HOUSE_ITEMS.BOOK];
-      this.targetItem = pool[(this.currentRound - 1) % pool.length];
+      const deck = this.getNonRepeatingDeck('l9', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Attic Treasure: ';
@@ -1541,7 +1633,8 @@
       arena.innerHTML = '';
 
       const pool = [HOUSE_ITEMS.PLANT, HOUSE_ITEMS.BIRD, HOUSE_ITEMS.WINDOW];
-      this.targetItem = pool[(this.currentRound - 1) % pool.length];
+      const deck = this.getNonRepeatingDeck('l10', pool);
+      this.targetItem = deck[(this.currentRound - 1) % deck.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Balcony: ';
@@ -1754,17 +1847,26 @@
       const arena = this.dom.playArenaContent;
       arena.innerHTML = '';
 
+      const makeDoorSvg = (color, knobColor = '#facc15') => `
+        <svg viewBox="0 0 60 84" width="58" height="80" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.18));">
+          <rect x="3" y="3" width="54" height="78" rx="6" fill="${color}" stroke="#ffffff" stroke-width="2.5"/>
+          <rect x="8" y="8" width="44" height="30" rx="4" fill="rgba(255,255,255,0.25)"/>
+          <rect x="8" y="44" width="44" height="32" rx="4" fill="rgba(0,0,0,0.12)"/>
+          <circle cx="46" cy="42" r="3.5" fill="${knobColor}" stroke="#ffffff" stroke-width="1.2"/>
+        </svg>
+      `;
+
       const doors = [
-        { id: 'blue_door', name: 'BLUE DOOR', color: '#3498db', friend: 'Mom Bunny 🐰', audioKey: 'blue_door', actKey: 'act_blue_door' },
-        { id: 'red_door', name: 'RED DOOR', color: '#e74c3c', friend: 'Dad Bunny 🐰', audioKey: 'red_door', actKey: 'act_red_door' },
-        { id: 'yellow_door', name: 'YELLOW DOOR', color: '#f1c40f', friend: 'Puppy 🐶', audioKey: 'yellow_door', actKey: 'act_yellow_door' }
+        { id: 'blue_door', name: 'BLUE DOOR', color: '#2563eb', friend: 'Mom Bunny 🐰', audioKey: 'blue_door', actKey: 'act_blue_door' },
+        { id: 'red_door', name: 'RED DOOR', color: '#dc2626', friend: 'Dad Bunny 🐰', audioKey: 'red_door', actKey: 'act_red_door' },
+        { id: 'yellow_door', name: 'YELLOW DOOR', color: '#eab308', friend: 'Puppy 🐶', audioKey: 'yellow_door', actKey: 'act_yellow_door' }
       ];
 
       this.targetItem = doors[(this.currentRound - 1) % doors.length];
       this.currentActionPromptKey = this.targetItem.actKey;
 
       this.dom.playIntroText.textContent = 'Knock on: ';
-      this.dom.promptMainWord.innerHTML = `${this.targetItem.name} 🚪`;
+      this.dom.promptMainWord.innerHTML = `<span style="color:${this.targetItem.color}; font-weight:800;">${this.targetItem.name}</span> <span class="prompt-icon-slot">${makeDoorSvg(this.targetItem.color)}</span>`;
       if (this.dom.promptSpanishHint) this.dom.promptSpanishHint.textContent = '';
 
       this.speakCurrentPrompt();
@@ -1777,8 +1879,8 @@
         btn.className = 'furniture-card-btn';
         btn.style.borderColor = d.color;
         btn.innerHTML = `
-          <span class="fc-icon">🚪</span>
-          <span class="fc-name">${d.name}</span>
+          <span class="fc-icon">${makeDoorSvg(d.color)}</span>
+          <span class="fc-name" style="color:${d.color}; font-weight:800;">${d.name}</span>
         `;
 
         btn.addEventListener('click', () => {
@@ -1787,7 +1889,7 @@
             setTimeout(() => {
               this.sound.playDoorOpen();
               btn.innerHTML = `
-                <span class="fc-icon">✨</span>
+                <span class="fc-icon" style="font-size:2.8rem;">✨</span>
                 <span class="fc-name">${d.friend}</span>
               `;
             }, 300);
@@ -1974,10 +2076,12 @@
       this.speakCurrentPrompt();
 
       const shadowBox = document.createElement('div');
-      shadowBox.style.fontSize = '6.5rem';
-      shadowBox.style.filter = 'brightness(0)';
-      shadowBox.style.margin = '20px auto';
-      shadowBox.textContent = this.targetItem.icon;
+      shadowBox.className = 'mystery-shadow-box';
+      shadowBox.style.cssText = 'font-size:6.5rem; margin:16px auto; width:130px; height:130px; border-radius:24px; background:linear-gradient(135deg, #1e293b, #0f172a); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.25); border:3px solid #334155; transition:all 0.4s ease;';
+      const shadowInner = document.createElement('div');
+      shadowInner.style.cssText = 'filter: brightness(0) invert(0); opacity: 0.15; transform: scale(1.1); user-select:none; transition: all 0.4s ease;';
+      shadowInner.textContent = this.targetItem.icon;
+      shadowBox.appendChild(shadowInner);
 
       const shelf = document.createElement('div');
       shelf.className = 'furniture-shelf-row';
@@ -1992,7 +2096,10 @@
 
         btn.addEventListener('click', () => {
           if (item.name === this.targetItem.name) {
-            shadowBox.style.filter = 'none';
+            shadowInner.style.filter = 'none';
+            shadowInner.style.opacity = '1';
+            shadowBox.style.background = 'linear-gradient(135deg, #e0f2fe, #f0fdf4)';
+            shadowBox.style.borderColor = '#38bdf8';
             this.dom.promptMainWord.textContent = `${item.name} ${item.icon}`;
 
             setTimeout(() => {
