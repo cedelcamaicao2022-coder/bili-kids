@@ -385,3 +385,22 @@
     max-width: 150px;
   }
 }
+
+/* ===================================================
+   PRINT STYLES: HIDE MASCOT WIDGET ON ALL PAGES
+   =================================================== */
+@media print {
+  #bilikids-mascot-wrapper,
+  .bilikids-mascot-bubble,
+  .bilikids-mascot-body-box,
+  .bilikids-mascot-controls,
+  .bilikids-mascot-emote,
+  .bilikids-click-star {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    pointer-events: none !important;
+  }
+}

@@ -1831,25 +1831,240 @@ html, body {
    PRINT STYLES FOR DIPLOMA
    =================================================== */
 
+/* ===================================================
+   OFFICIAL DIPLOMA PRINT STYLES (BILI'S COLORS)
+   =================================================== */
 @media print {
-  body {
-    background: white;
+  @page {
+    size: portrait;
+    margin: 8mm 10mm;
   }
-  .sky-background, .game-header, .bili-sidekick-box, .round-progress, .diploma-actions, #confettiCanvas {
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 1. Hide all screen UI, headers, navigation, footers, sidebars and backgrounds */
+  header,
+  .game-header,
+  .sky-background,
+  .sun,
+  .cloud,
+  .category-nav-bar,
+  .round-progress,
+  .bili-sidekick-box,
+  .stage-tabs-row,
+  .stage-tab-btn,
+  .stage-selector-container,
+  .pre-diploma-modal,
+  .settings-modal,
+  #roundSuccessOverlay,
+  #preDiplomaModal,
+  #settingsModal,
+  #confettiCanvas,
+  #screenHome,
+  #screenModeSelect,
+  #screenLevelPlay,
+  #bilikids-mascot-wrapper,
+  .diploma-actions,
+  .btn-action-diploma,
+  .btn-edit-name-inline,
+  #btnEditDiplomaName,
+  #btnPrintDiploma,
+  #btnPlayAgain,
+  #btnContinueStage2 {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    pointer-events: none !important;
   }
-  .game-container, .game-main, #screenCelebration {
+
+  /* 2. Isolate celebration screen and center the diploma */
+  .game-container,
+  .game-main,
+  #screenCelebration {
     display: block !important;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: auto;
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
+
   .diploma-card {
-    border: 8px solid #ffd32a;
-    box-shadow: none;
-    margin: 20px auto;
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    padding: 8px !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 5px solid #f39c12 !important;
+    border-radius: 24px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
+
+  .diploma-inner-frame {
+    border: 2.5px dashed #ffd32a !important;
+    border-radius: 18px !important;
+    padding: 16px 20px !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .diploma-ribbon {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: linear-gradient(135deg, #ffd32a, #f39c12) !important;
+    color: #ffffff !important;
+    font-size: 0.95rem !important;
+    padding: 4px 18px !important;
+    margin-bottom: 8px !important;
+    box-shadow: none !important;
+  }
+
+  .diploma-brand-logo {
+    max-width: 155px !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .diploma-titles h2 {
+    font-size: 1.65rem !important;
+    color: #c2410c !important;
+    font-weight: 900 !important;
+  }
+
+  .diploma-titles .diploma-subhead {
+    font-size: 0.88rem !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+  }
+
+  .diploma-center-layout {
+    gap: 15px !important;
+  }
+
+  .diploma-bili-fullbody-img {
+    height: 165px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    filter: none !important;
+  }
+
+  .awarded-to-text {
+    font-size: 1.05rem !important;
+    color: #334155 !important;
+    font-weight: 700 !important;
+    margin: 6px 0 !important;
+  }
+
+  /* 3. Child's Name: Official Certificate Presentation (NO PENCIL ICON) */
+  .diploma-name-highlight {
+    background: #fffdf0 !important;
+    border: 2px solid #ea580c !important;
+    border-radius: 999px !important;
+    padding: 5px 28px !important;
+    margin: 8px auto 10px !important;
+    display: inline-block !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .diploma-student-name {
+    font-size: 1.85rem !important;
+    font-weight: 900 !important;
+    color: #9a3412 !important;
+    letter-spacing: 0.5px !important;
+    display: inline-block !important;
+  }
+
+  .btn-edit-name-inline,
+  #btnEditDiplomaName {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .diploma-achievement-desc {
+    font-size: 0.95rem !important;
+    margin: 8px 0 12px !important;
+    color: #1e293b !important;
+    font-weight: 700 !important;
+  }
+
+  .colors-learned-badges {
+    margin-bottom: 10px !important;
+    gap: 5px !important;
+  }
+
+  .colors-learned-badges .c-tag {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 0.78rem !important;
+    padding: 3px 8px !important;
+    box-shadow: none !important;
+  }
+
+  .diploma-seal-row {
+    margin-top: 12px !important;
+    padding-top: 10px !important;
+  }
+
+  .diploma-signature .sig-line {
+    font-size: 0.95rem !important;
+    color: #1e293b !important;
+  }
+
+  .diploma-gold-seal {
+    width: 60px !important;
+    height: 60px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    background: radial-gradient(circle, #fde047 0%, #eab308 60%, #ca8a04 100%) !important;
+  }
+
+  .diploma-gold-seal .seal-inner span { font-size: 0.85rem !important; }
+  .diploma-gold-seal .seal-inner strong { font-size: 0.55rem !important; }
+  .diploma-gold-seal .seal-inner small { font-size: 0.45rem !important; }
 }
 
 /* ===================================================
