@@ -1,0 +1,471 @@
+/* ==========================================================================
+   THE GREAT TREASURE MAP • INTERACTIVE ADVENTURE ROADMAP (TODDLERS 01)
+   ========================================================================== */
+
+.treasure-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  background: #fdfaf3;
+  border-radius: 28px;
+  padding: 1.25rem;
+  border: 3px solid #fde68a;
+  box-shadow: 0 16px 40px rgba(180, 83, 9, 0.16);
+  transition: all 0.3s ease;
+}
+
+/* Map Header Bar */
+.treasure-map-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #78350f 0%, #b45309 60%, #d97706 100%);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 0.9rem 1.4rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 18px rgba(120, 53, 15, 0.25);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.map-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.map-header-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+}
+
+.map-header-title {
+  font-family: 'Fredoka', 'Nunito', cursive, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.map-header-subtitle {
+  font-size: 0.88rem;
+  opacity: 0.92;
+  font-weight: 600;
+}
+
+.map-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.map-action-pill {
+  background: #ffffff;
+  color: #92400e;
+  border: none;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.map-action-pill:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background: #fef3c7;
+}
+
+/* Map Board Wrapper */
+.treasure-map-board {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 2px solid #ecd8ab;
+  background: #f4ecd8;
+}
+
+.treasure-map-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Hotspots Interactive Layer */
+.map-hotspots-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+/* Individual Station Hotspot Button */
+.station-hotspot-btn {
+  position: absolute;
+  border-radius: 18px;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: rgba(255, 255, 255, 0.001);
+  outline: none;
+}
+
+.station-hotspot-btn:hover,
+.station-hotspot-btn:focus-visible {
+  background: rgba(254, 240, 138, 0.42);
+  border-color: #f59e0b;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.7), inset 0 0 14px rgba(255, 255, 255, 0.85);
+  transform: scale(1.05);
+  z-index: 30;
+}
+
+/* Station Status Mini Pill on Badge */
+.station-badge-overlay {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  display: none; /* Can be enabled if desired */
+}
+
+/* Tooltip Popup on Hover */
+.station-map-tooltip {
+  position: absolute;
+  bottom: 102%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  min-width: 190px;
+  max-width: 250px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 50;
+}
+
+.station-map-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(15, 23, 42, 0.94) transparent transparent transparent;
+}
+
+.station-hotspot-btn:hover .station-map-tooltip,
+.station-hotspot-btn:focus-visible .station-map-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.tooltip-station-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #f59e0b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tooltip-station-title {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 3px 0;
+  color: #ffffff;
+}
+
+.tooltip-station-sub {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.tooltip-station-action {
+  background: #f59e0b;
+  color: #78350f;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Bili Explorer Avatar Pin */
+.map-bili-explorer-pin {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  pointer-events: none;
+  z-index: 40;
+  transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translate(-50%, -85%);
+  animation: mapPinBounce 2.2s infinite ease-in-out;
+}
+
+.map-bili-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+
+.map-bili-label {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ea580c;
+  color: #ffffff;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(234, 88, 12, 0.4);
+}
+
+.map-pin-pulse-ring {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 10px;
+  background: rgba(245, 158, 11, 0.5);
+  border-radius: 50%;
+  animation: mapPulseRing 1.8s infinite ease-out;
+}
+
+@keyframes mapPinBounce {
+  0%, 100% { transform: translate(-50%, -85%); }
+  50% { transform: translate(-50%, -95%); }
+}
+
+@keyframes mapPulseRing {
+  0% { transform: translateX(-50%) scale(0.6); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(2.2); opacity: 0; }
+}
+
+/* Golden Treasure Hotspot */
+.station-hotspot-treasure {
+  border-radius: 22px;
+}
+
+.station-hotspot-treasure:hover {
+  background: rgba(251, 191, 36, 0.45);
+  border-color: #d97706;
+  box-shadow: 0 0 32px rgba(245, 158, 11, 0.85), inset 0 0 20px rgba(255, 255, 255, 0.9);
+  transform: scale(1.06);
+}
+
+/* Treasure Chest Modal */
+.treasure-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 1rem;
+}
+
+.treasure-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.treasure-modal-card {
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #fef3c7 100%);
+  border: 3px solid #f59e0b;
+  border-radius: 28px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(180, 83, 9, 0.35);
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.treasure-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f1f5f9;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.treasure-modal-close-btn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.treasure-modal-icon {
+  font-size: 4.8rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 8px 16px rgba(245, 158, 11, 0.45));
+}
+
+.treasure-modal-title {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.8rem;
+  color: #92400e;
+  margin-bottom: 6px;
+}
+
+.treasure-modal-desc {
+  font-size: 0.98rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.treasure-stats-box {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1rem;
+  border: 1.5px solid #fde68a;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.treasure-stat-item strong {
+  display: block;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.5rem;
+  color: #b45309;
+}
+
+.treasure-stat-item span {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.treasure-modal-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  border: none;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.treasure-modal-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.45);
+}
+
+/* View Mode Switcher */
+.view-switch-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.view-switch-btn.active {
+  background: #ffffff;
+  color: #92400e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .treasure-map-container {
+    padding: 0.75rem;
+    border-radius: 20px;
+  }
+  .treasure-map-header-bar {
+    padding: 0.75rem 1rem;
+  }
+  .map-header-title {
+    font-size: 1.15rem;
+  }
+  .map-bili-explorer-pin {
+    width: 44px;
+    height: 44px;
+  }
+  .station-map-tooltip {
+    min-width: 150px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="subpages_styles.css">
   <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
   <link rel="stylesheet" href="toddlers_unit_cards.css?v=20261103_kidsart_v1">
+  <link rel="stylesheet" href="toddlers_map_styles.css?v=20261108">
 </head>
 <body>
 
@@ -124,19 +125,67 @@
 
     <!-- SECTION: 15 UNIDADES CURRICULARES TODDLERS 01 -->
     <section id="toddlersUnitsSection" style="margin: 2rem 0 1.5rem;">
-      <div class="section-headline-row" style="margin-bottom: 1rem;">
+      <div class="section-headline-row" style="margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px;">
         <div>
           <h2 class="section-headline-title" style="display: flex; align-items: center; gap: 8px;">
-            <span>🎒</span> 15 Unidades Curriculares • Toddlers 01
+            <span>🗺️</span> El Gran Mapa del Tesoro • Toddlers 01
           </h2>
           <p style="margin: 4px 0 0; color: #6b7280; font-size: 0.92rem; font-weight: 600;">
-            Plan curricular completo: 24 actividades por unidad, 12 niveles de juego y reto final.
+            Recorre las 15 estaciones curriculares con Bili y encuentra el Cofre Dorado.
           </p>
         </div>
-        <a href="toddlers_units.html" class="link-see-all">Ver todas ➔</a>
+        
+        <div style="display: flex; align-items: center; gap: 10px; margin-left: auto; flex-wrap: wrap;">
+          <div style="background: #f1f5f9; padding: 4px; border-radius: 999px; display: inline-flex; gap: 4px; border: 1px solid #e2e8f0;">
+            <button type="button" class="view-switch-btn active" id="btnViewMap" title="Ver como Mapa Interactivo de Aventura">
+              <span>🗺️ Mapa</span>
+            </button>
+            <button type="button" class="view-switch-btn" id="btnViewGrid" title="Ver como Tarjetas Curriculares">
+              <span>📋 Tarjetas</span>
+            </button>
+          </div>
+          <a href="toddlers_units.html" class="link-see-all">Ver todas ➔</a>
+        </div>
       </div>
 
-      <div class="toddler-course-grid">
+      <!-- VISTA 1: EL GRAN MAPA DEL TESORO INTERACTIVO -->
+      <div id="treasureMapView" class="treasure-map-container">
+        <!-- Barra de progreso superior -->
+        <div class="treasure-map-header-bar">
+          <div class="map-header-info">
+            <span class="map-header-icon">🧭</span>
+            <div>
+              <div class="map-header-title">The Great Treasure Map</div>
+              <div class="map-header-subtitle">Viaja por las 15 estaciones y descubre el tesoro con Bili</div>
+            </div>
+          </div>
+          <div class="map-header-actions">
+            <div class="map-action-pill" id="mapCompletedUnitsBadge" title="Progreso de Estaciones">
+              0 / 15 Unidades
+            </div>
+            <div class="map-action-pill" id="mapTotalStarsBadge" style="background:#fef3c7; color:#b45309;" title="Estrellas Acumuladas">
+              ⭐ 120
+            </div>
+            <a href="toddlers_units.html" class="map-action-pill" style="background:#f59e0b; color:#ffffff;" title="Ver todas las Unidades">
+              Explorar ➔
+            </a>
+          </div>
+        </div>
+
+        <!-- Tablero del Mapa con Hotspots y Bili Explorador -->
+        <div class="treasure-map-board">
+          <picture>
+            <source srcset="assets/toddlers_units/the_great_treasure_map.webp" type="image/webp">
+            <img src="assets/toddlers_units/the_great_treasure_map.jpg" alt="The Great Treasure Map - Bilikids Toddlers 01" class="treasure-map-bg-img" loading="lazy">
+          </picture>
+          <div id="mapHotspotsLayer" class="map-hotspots-layer">
+            <!-- Inyectado interactivamente por toddlers_map_engine.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VISTA 2: CUADRÍCULA DE TARJETAS (ALTERNATIVA) -->
+      <div class="toddler-course-grid" id="toddlerCourseGrid" style="display: none;">
         <a class="toddler-course-card toddler-course-card-featured" href="toddlers_units.html?unit=1" aria-label="Continuar unidad 1: School Objects" style="--unit-accent:#F8B84E; --unit-tint:#FFF1CF;">
           <img class="toddler-course-card-image" src="assets/toddlers_units/cards/unit_01.webp" alt="Ilustración: School Objects" loading="lazy" decoding="async">
           <span class="toddler-course-card-content">
@@ -452,5 +501,6 @@
   <script src="category_nav.js"></script>
   <script src="mobile_audio_unlock.js"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>
+  <script src="toddlers_map_engine.js?v=20261108"></script>
 </body>
 </html>
