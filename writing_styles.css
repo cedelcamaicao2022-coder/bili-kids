@@ -420,7 +420,23 @@ body {
   border-top: 2px solid #cbd5e1;
 }
 
-/* Dashed Guideline Path Overlay (Opacified tracing guide) */
+/* Guide Canvas (Shaded Letters & Dashed Tracing Guidelines) */
+#guideCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+#guideCanvas.hidden {
+  opacity: 0 !important;
+}
+
+/* Dashed Guideline Path Overlay (Invisible DOM layout anchor for validation & coordinates) */
 .dashed-guide-overlay {
   position: absolute;
   inset: 0;
@@ -428,7 +444,8 @@ body {
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  opacity: 0.30; /* Opacified tracing guide */
+  opacity: 0 !important; /* Layout anchor only; canvas renders crisp shaded + dashed letters */
+  z-index: 2;
   transition: opacity 0.3s ease;
 }
 
@@ -436,17 +453,10 @@ body {
   opacity: 0 !important;
 }
 
-.dashed-guide-overlay.prominent {
-  opacity: 0.45 !important;
-}
-
 .guide-text {
   font-size: 9.5rem;
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 3px #475569;
-  text-shadow: 0 0 1px #475569;
-  stroke-dasharray: 8, 8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -457,16 +467,6 @@ body {
 .letter-char {
   display: inline-block;
   transition: all 0.25s ease;
-}
-
-.letter-char.missing-hint {
-  -webkit-text-stroke: 4px #ef4444 !important;
-  animation: pulseLetterHint 0.8s infinite alternate;
-}
-
-@keyframes pulseLetterHint {
-  from { transform: scale(1); filter: drop-shadow(0 0 6px #ef4444); }
-  to { transform: scale(1.15); filter: drop-shadow(0 0 16px #ef4444); }
 }
 
 .guide-text.script-guide {
@@ -488,7 +488,8 @@ body {
   width: 100%;
   height: 100%;
   cursor: crosshair;
-  z-index: 2;
+  z-index: 3;
+  touch-action: none;
 }
 
 /* Feedback Banner in Canvas */

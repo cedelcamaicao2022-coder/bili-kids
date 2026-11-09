@@ -62,8 +62,15 @@
   // DOM Elements
   const canvas = document.getElementById('writingCanvas');
   const ctx = canvas.getContext('2d');
+  const guideCanvas = document.getElementById('guideCanvas');
+  const gctx = guideCanvas.getContext('2d');
   const dashedGuideOverlay = document.getElementById('dashedGuideOverlay');
   const guideText = document.getElementById('guideText');
+
+  // Offscreen Mask Canvas for Strict Letter Boundary Blocking
+  const maskCanvas = document.createElement('canvas');
+  const maskCtx = maskCanvas.getContext('2d');
+  let maskData = null;
   const targetWordText = document.getElementById('targetWordText');
   const currentEmoji = document.getElementById('currentEmoji');
   const wordSubHint = document.getElementById('wordSubHint');
@@ -138,6 +145,7 @@
   function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
+    if (rect.width === 0 || rect.height === 0) return;
     
     // Save existing drawing data if any
     let tempCanvas = null;
@@ -148,14 +156,29 @@
       tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
     }
 
+    // Resize active drawing canvas
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
     ctx.scale(dpr, dpr);
+
+    // Resize guide canvas (shaded letters + dashed lines)
+    guideCanvas.width = rect.width * dpr;
+    guideCanvas.height = rect.height * dpr;
+    guideCanvas.style.width = rect.width + 'px';
+    guideCanvas.style.height = rect.height + 'px';
+    gctx.scale(dpr, dpr);
+
+    // Resize offscreen letter boundary mask
+    maskCanvas.width = rect.width * dpr;
+    maskCanvas.height = rect.height * dpr;
 
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
     }
     setupCanvasContext();
+    renderGuideAndMask();
   }
 
   function setupCanvasContext() {
@@ -163,7 +186,7 @@
     ctx.lineJoin = 'round';
     if (currentTool === 'eraser') {
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.lineWidth = 34;
+      ctx.lineWidth = 36;
     } else {
       ctx.globalCompositeOperation = 'source-over';
       ctx.strokeStyle = strokeColor;
@@ -173,7 +196,113 @@
 
   window.addEventListener('resize', resizeCanvas);
 
-  // --- Drawing Interaction (Touch, Mouse, Stylus) ---
+  // --- Render Shaded Letters & Dotted Tracing Guidelines ---
+  function renderGuideAndMask() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    if (rect.width === 0 || rect.height === 0) return;
+
+    gctx.clearRect(0, 0, rect.width, rect.height);
+    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+
+    const spans = guideText.querySelectorAll('.letter-char');
+    if (!spans || spans.length === 0) return;
+
+    // Use computed font from guideText so sizes/styles automatically sync
+    const computedStyle = window.getComputedStyle(guideText);
+    const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
+
+    // Scale mask context with dpr for crisp hardware compositing
+    maskCtx.save();
+    maskCtx.scale(dpr, dpr);
+
+    spans.forEach(span => {
+      const sr = span.getBoundingClientRect();
+      const ch = span.textContent.trim();
+      const cx = sr.left - rect.left + sr.width / 2;
+      const cy = sr.top - rect.top + sr.height / 2;
+      const isMissing = span.classList.contains('missing-hint');
+
+      // --- A. Render Shaded Letter & Dotted Lines on Guide Canvas ---
+      gctx.save();
+      gctx.font = font;
+      gctx.textAlign = 'center';
+      gctx.textBaseline = 'middle';
+
+      // 1. Shaded letter body ("palabras sombreadas")
+      // Warm, gentle slate-blue tint matching preschool tracing workbooks
+      gctx.fillStyle = 'rgba(148, 163, 184, 0.28)';
+      gctx.strokeStyle = isMissing ? 'rgba(239, 68, 68, 0.45)' : 'rgba(148, 163, 184, 0.38)';
+      gctx.lineWidth = isMissing ? 18 : 14;
+      gctx.lineJoin = 'round';
+      gctx.lineCap = 'round';
+      gctx.strokeText(ch, cx, cy);
+      gctx.fillText(ch, cx, cy);
+
+      // Subtle letter border outline
+      gctx.strokeStyle = isMissing ? '#ef4444' : '#94a3b8';
+      gctx.lineWidth = isMissing ? 3 : 1.5;
+      gctx.strokeText(ch, cx, cy);
+
+      // 2. Dashed / dotted guideline ("dentro de las letras marca líneas puntuadas")
+      // Contrasting dark slate dashed guidelines inside the letter shape
+      gctx.strokeStyle = isMissing ? '#dc2626' : '#475569';
+      gctx.lineWidth = 3.5;
+      gctx.setLineDash([8, 8]);
+      gctx.lineCap = 'round';
+      gctx.lineJoin = 'round';
+      gctx.strokeText(ch, cx, cy);
+      gctx.restore();
+
+      // --- B. Render Exact Writing Zone Mask on Offscreen Canvas ---
+      maskCtx.save();
+      maskCtx.font = font;
+      maskCtx.textAlign = 'center';
+      maskCtx.textBaseline = 'middle';
+      maskCtx.fillStyle = '#ffffff';
+      maskCtx.strokeStyle = '#ffffff';
+      // Preschool writing tolerance: covers shaded letter body with comfortable ~24px margin
+      maskCtx.lineWidth = 26;
+      maskCtx.lineJoin = 'round';
+      maskCtx.lineCap = 'round';
+      maskCtx.strokeText(ch, cx, cy);
+      maskCtx.fillText(ch, cx, cy);
+      maskCtx.restore();
+    });
+
+    maskCtx.restore();
+
+    // Cache typed pixel array for microsecond boundary collision checks
+    try {
+      maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data;
+    } catch (e) {
+      maskData = null;
+    }
+  }
+
+  // --- Fast Microsecond Boundary Check ---
+  function isInsideAllowedZone(x, y) {
+    if (!maskData) return true; // graceful fallback if mask isn't ready
+    const dpr = window.devicePixelRatio || 1;
+    const px = Math.round(x * dpr);
+    const py = Math.round(y * dpr);
+    if (px < 0 || px >= maskCanvas.width || py < 0 || py >= maskCanvas.height) return false;
+    const idx = (py * maskCanvas.width + px) * 4;
+    return maskData[idx + 3] > 18; // alpha channel check
+  }
+
+  // Hardware-accelerated compositing to clip any stray ink outside the letters
+  function applyMaskClipping() {
+    if (!maskCanvas || currentTool === 'eraser') return;
+    const rect = canvas.getBoundingClientRect();
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.drawImage(maskCanvas, 0, 0, rect.width, rect.height);
+    ctx.restore();
+    setupCanvasContext();
+  }
+
+  // --- Drawing Interaction with Boundary Blocking ---
   let isDrawing = false;
   let points = [];
   let strokeCount = 0;
@@ -190,35 +319,74 @@
 
   function startDrawing(e) {
     e.preventDefault();
-    isDrawing = true;
-    points = [];
     const pt = getCanvasCoords(e);
-    points.push(pt);
+
+    // Strict Boundary Check: Block writing outside shaded words/letters
+    if (currentTool !== 'eraser' && !isInsideAllowedZone(pt.x, pt.y)) {
+      isDrawing = false;
+      return;
+    }
+
+    isDrawing = true;
+    points = [pt];
     setupCanvasContext();
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
     ctx.fillStyle = ctx.strokeStyle;
     ctx.fill();
+    applyMaskClipping();
     strokeCount++;
     clearMissingLetterHints();
   }
 
   function drawMove(e) {
-    if (!isDrawing) return;
     e.preventDefault();
     const pt = getCanvasCoords(e);
-    points.push(pt);
+    const inside = isInsideAllowedZone(pt.x, pt.y);
 
-    if (points.length < 3) {
-      const b = points[0];
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, ctx.lineWidth / 2, 0, Math.PI * 2);
-      ctx.fillStyle = ctx.strokeStyle;
-      ctx.fill();
+    if (!isDrawing) {
+      // If user starts touch outside but drags into the shaded letter:
+      if (inside && (e.buttons > 0 || (e.touches && e.touches.length > 0))) {
+        isDrawing = true;
+        points = [pt];
+        setupCanvasContext();
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
+        ctx.fillStyle = ctx.strokeStyle;
+        ctx.fill();
+        applyMaskClipping();
+        strokeCount++;
+      }
       return;
     }
 
-    // Midpoint quadratic interpolation for smooth silky curves
+    // If writing moved outside the shaded letter: clip immediately and pause stroke
+    if (currentTool !== 'eraser' && !inside) {
+      if (points.length > 0) {
+        points.push(pt);
+        renderCurrentStroke();
+        applyMaskClipping();
+      }
+      points = [];
+      return;
+    }
+
+    points.push(pt);
+    renderCurrentStroke();
+    applyMaskClipping();
+  }
+
+  function renderCurrentStroke() {
+    if (points.length < 2) return;
+    if (points.length === 2) {
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      ctx.lineTo(points[1].x, points[1].y);
+      ctx.stroke();
+      return;
+    }
+
+    // Midpoint quadratic interpolation for silky smooth 60fps curves
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
     for (let i = 1; i < points.length - 2; i++) {
@@ -233,9 +401,10 @@
 
   function stopDrawing(e) {
     if (!isDrawing) return;
-    e.preventDefault();
+    try { e.preventDefault(); } catch (err) {}
     isDrawing = false;
     points = [];
+    applyMaskClipping();
   }
 
   canvas.addEventListener('pointerdown', startDrawing);
@@ -247,7 +416,14 @@
   // --- Clear missing letter pulsing hints ---
   function clearMissingLetterHints() {
     const chars = guideText.querySelectorAll('.letter-char');
-    chars.forEach(c => c.classList.remove('missing-hint'));
+    let changed = false;
+    chars.forEach(c => {
+      if (c.classList.contains('missing-hint')) {
+        c.classList.remove('missing-hint');
+        changed = true;
+      }
+    });
+    if (changed) renderGuideAndMask();
   }
 
   // --- Word Loading and Display ---
@@ -284,6 +460,11 @@
     updateFeedbackMessage('✏️ Write the word on the lines below!', 'normal');
     renderWordRibbon();
 
+    // Render shaded letters and dotted guidelines after DOM layout updates
+    requestAnimationFrame(() => {
+      renderGuideAndMask();
+    });
+
     // Auto-pronounce word
     setTimeout(() => {
       playCurrentWordAudio();
@@ -300,15 +481,10 @@
 
   function updateGuideVisibility() {
     if (guideVisible) {
-      dashedGuideOverlay.classList.remove('hidden');
-      if (hasFailedAttempt) {
-        dashedGuideOverlay.classList.add('prominent');
-      } else {
-        dashedGuideOverlay.classList.remove('prominent');
-      }
+      guideCanvas.classList.remove('hidden');
       btnToggleGuide.classList.add('active');
     } else {
-      dashedGuideOverlay.classList.add('hidden');
+      guideCanvas.classList.add('hidden');
       btnToggleGuide.classList.remove('active');
     }
   }
@@ -661,6 +837,7 @@
     if (missingSpan) {
       missingSpan.classList.add('missing-hint');
     }
+    renderGuideAndMask();
 
     playOopsAudio();
   }
