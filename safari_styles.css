@@ -809,43 +809,130 @@ body {
   transform: translateY(-2px);
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 960px) {
-  .book-content-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 16px;
+/* --- CLEAN IMMERSIVE VIEW FOR TABLETS & MOBILE (<= 1024px) --- */
+@media (max-width: 1024px) {
+  /* Hide the entire global navigation bar (brand logo, 7 suite switcher pills, audio/fullscreen actions) */
+  .safari-header {
+    display: none !important;
   }
 
-  .story-page-title {
-    font-size: 22px;
+  /* Expand main container to full viewport height with minimal padding */
+  .safari-main {
+    min-height: 100vh !important;
+    padding: 8px 12px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  .story-narrative {
-    font-size: 17px;
+  .theater-stage {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
-  .dot-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 17px;
+  /* Ultra-clean top row: hide all clutter, badges and titles; leave ONLY the small back button */
+  .story-banner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 0 8px 0 !important;
+    margin-bottom: 6px !important;
+    border-bottom: none !important;
+  }
+
+  .safari-badge,
+  .story-page-title,
+  .page-counter-badge {
+    display: none !important;
+  }
+
+  .banner-title-group,
+  .banner-tag-row {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* The small, elegant return button */
+  .back-to-library-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 14px !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .back-to-library-pill:hover,
+  .back-to-library-pill:active {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-1px) scale(0.98) !important;
   }
 }
 
-@media (max-width: 640px) {
-  .header-content {
-    justify-content: center;
+/* --- RESPONSIVE ADJUSTMENTS: TABLETS (641px - 1024px) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .storybook-frame {
+    padding: 14px 20px;
+    max-width: 96vw;
+    margin: 0 auto;
   }
 
-  .suite-switcher {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    overflow-x: auto;
+  .book-content-grid {
+    grid-template-columns: 1.08fr 1fr;
+    gap: 18px;
+    padding: 14px;
+    align-items: center;
+  }
+
+  .story-narrative {
+    font-size: 1.02rem;
+    line-height: 1.5;
+  }
+
+  .dot-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  #bilikids-mascot-wrapper {
+    bottom: 8px;
+    right: 12px;
+    transform: scale(0.85);
+    transform-origin: bottom right;
+  }
+}
+
+/* --- RESPONSIVE ADJUSTMENTS: MOBILE PHONES ONLY (<= 640px) --- */
+@media (max-width: 640px) {
+  .book-content-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .story-narrative {
+    font-size: 16px;
+  }
+
+  .dot-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
   }
 
   .storybook-frame {
-    padding: 16px;
+    padding: 14px;
     border-radius: 20px;
   }
 

@@ -1575,32 +1575,73 @@ body.reader-open #bilikids-mascot-wrapper:hover {
 }
 
 /* ===================================================================
+   RESPONSIVE DESIGN: CLEAN VIEW FOR READER ON TABLETS & MOBILE (<= 1024px)
+   Hides the top site navbar and clutter; leaves only the small back button
+   =================================================================== */
+@media (max-width: 1024px) {
+  /* Hide the global subpage-navbar completely when reader is open */
+  body.reader-open .subpage-navbar {
+    display: none !important;
+  }
+
+  body.reader-open .main-container.library-page-container {
+    padding-top: 6px !important;
+    margin-top: 0 !important;
+  }
+
+  body.reader-open #screenReader {
+    padding: 6px 14px 14px !important;
+  }
+
+  /* Hide story title and badge at the top so book view is 100% free of clutter */
+  body.reader-open .reader-story-info {
+    display: none !important;
+  }
+
+  /* Ultra-clean top row: small back button */
+  body.reader-open .reader-top-bar {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 auto 8px !important;
+    padding: 0 4px !important;
+    max-width: var(--book-width);
+  }
+
+  .btn-reader-action {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 14px !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .btn-reader-action:hover,
+  .btn-reader-action:active {
+    background: #f8fafc !important;
+    transform: translateY(-1px) scale(0.98) !important;
+  }
+}
+
+/* ===================================================================
    RESPONSIVE DESIGN: TABLETS (641px - 1024px)
    Maintains open double-page spread, 3D spine, ribbon & turning leaf
    =================================================================== */
 @media (min-width: 641px) and (max-width: 1024px) {
   :root {
     --book-width: min(940px, 95vw);
-    --book-height: min(520px, calc(100vh - 175px), 60vw);
+    --book-height: min(530px, calc(100vh - 125px), 62vw);
   }
 
-  #screenReader {
-    padding: 8px 16px 14px;
-  }
-
-  .reader-top-bar {
-    max-width: var(--book-width);
-    margin: 0 auto 10px;
-    padding: 0 4px;
-  }
-
-  .reader-header-title {
-    font-size: 1.25rem;
-  }
-
-  .btn-reader-action {
-    padding: 6px 14px;
-    font-size: 0.9rem;
+  body.reader-open .reader-top-bar {
+    justify-content: space-between !important;
   }
 
   .btn-voice-narrator {
@@ -2117,16 +2158,13 @@ body.reader-open #bilikids-mascot-wrapper:hover {
   .shelf-nav-prev, .shelf-nav-next {
     display: none; /* Native touch swiping is preferred on mobile */
   }
-  .reader-top-bar {
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
+  /* Mobile reader clean layout: ONLY the small back button, zero clutter */
+  body.reader-open .reader-top-bar {
+    justify-content: flex-start !important;
+    margin-bottom: 6px !important;
+    gap: 0 !important;
   }
-  .reader-header-title {
-    font-size: 1.15rem;
-  }
-  .btn-voice-narrator {
-    padding: 6px 14px;
-    font-size: 0.85rem;
+  body.reader-open .reader-playback-controls {
+    display: none !important;
   }
 }
