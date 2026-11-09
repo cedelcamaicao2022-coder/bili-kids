@@ -1027,9 +1027,13 @@
 
       if (name === 'reader') {
         document.body.classList.add('reader-open');
+        const siteNav = document.querySelector('.subpage-navbar');
+        if (siteNav) siteNav.style.display = 'none';
         this.particles.start();
       } else {
         document.body.classList.remove('reader-open');
+        const siteNav = document.querySelector('.subpage-navbar');
+        if (siteNav) siteNav.style.display = '';
         this.particles.stop();
       }
     }

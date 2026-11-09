@@ -39,15 +39,9 @@ body {
   flex-direction: column;
 }
 
-/* --- HEADER BAR --- */
+/* --- HEADER BAR (ALWAYS HIDDEN: Uncluttered immersive book reader) --- */
 .colors-header {
-  background: rgba(18, 28, 40, 0.94);
-  backdrop-filter: blur(12px);
-  border-bottom: 2px solid rgba(241, 196, 15, 0.25);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 10px 20px;
+  display: none !important;
 }
 
 .header-content {

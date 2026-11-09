@@ -547,6 +547,15 @@ body {
   padding: 12px 18px 24px;
 }
 
+/* Hide top global site navbar whenever reader is open across ALL screen sizes */
+body.reader-open .subpage-navbar {
+  display: none !important;
+}
+body.reader-open .main-container.library-page-container {
+  padding-top: 8px !important;
+  margin-top: 0 !important;
+}
+
 /* Minimize floating mascot while reader is active so it never blocks page turn or pagination */
 body.reader-open #bilikids-mascot-wrapper {
   transform: translateY(68px);
