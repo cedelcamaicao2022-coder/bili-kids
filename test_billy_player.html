@@ -186,43 +186,70 @@
       <span>BiliKids • Banco de Voces Latinas</span>
     </div>
 
-    <h1>Elige la Voz Latina de Billi</h1>
-    <p class="subtitle">Prueba oficial generada con Eleven v4 y la voz Leo Curious Character solicitada</p>
+    <h1>Ajuste de Ritmo de Billi 🐻</h1>
+    <p class="subtitle">Compara la versión pausada original contra las nuevas versiones ágiles y fluidas (sin silencios muertos)</p>
 
-    <!-- HERO CARD: INSTRUCCIÓN OFICIAL ELEVENLABS (ELEVEN_V4 + LEO CURIOUS) -->
-    <div style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(15, 23, 42, 0.85)); border: 3px solid #38bdf8; border-radius: 28px; padding: 26px; margin-bottom: 30px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.25); text-align: left;">
-      <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <span style="background: #0284c7; color: #fff; font-weight: 900; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px;">MODELO ELEVEN_V4</span>
-          <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-weight: 900; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; border: 1px solid #38bdf8;">VOZ: Leo (Curious Character)</span>
-          <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-weight: 900; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; border: 1px solid #f59e0b;">Etiquetas de Emoción [tags]</span>
-        </div>
-        <span style="font-size: 1.5rem;">🌟</span>
+    <!-- RITMO CARD: COMPARATIVA ANTES VS AHORA -->
+    <div style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(15, 23, 42, 0.9)); border: 3px solid #38bdf8; border-radius: 28px; padding: 24px; margin-bottom: 30px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.25); text-align: left;">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+        <span style="background: #10b981; color: #fff; font-weight: 900; font-size: 0.85rem; padding: 5px 14px; border-radius: 20px;">⚡ SOLUCIÓN DE RITMO Y VELOCIDAD</span>
+        <span style="font-size: 1.4rem;">🚀</span>
       </div>
 
-      <h2 style="font-family: 'Fredoka One', cursive; font-size: 1.7rem; color: #38bdf8; margin-bottom: 6px;">
-        Billi - Osito que enseña inglés (Prueba con tus instrucciones)
+      <h2 style="font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: #38bdf8; margin-bottom: 6px;">
+        Leo Curious Voice: ¿Cuál ritmo le queda mejor a Billi?
       </h2>
-      <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 16px; font-weight: 600;">
-        Generado con el motor <strong>Eleven v4</strong>, pausas naturales con "..." para repetición infantil y modulación emocional guiada por etiquetas:
+      <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px; font-weight: 600;">
+        Quitamos los puntos suspensivos ("...") que generaban baches de silencio de 2 segundos y aceleramos la cadencia a ritmo alegre de dibujo animado:
       </p>
 
-      <div class="clip-row" id="row_v4" style="background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(56, 189, 248, 0.4); padding: 18px;">
-        <div class="clip-name" style="font-size: 0.95rem;">
-          <span style="color: #f8fafc; font-weight: 900;">🎧 Guion Interpretado por Billi</span>
-          <span class="clip-dur" style="font-size: 0.95rem;">⏱️ 16.4s</span>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+        
+        <!-- VERSIÓN ÁGIL RECOMENDADA (9.3s) -->
+        <div class="clip-row" id="row_fast" style="background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; padding: 18px;">
+          <div class="clip-name" style="font-size: 0.95rem;">
+            <span style="color: #34d399; font-weight: 900;">⭐ 1. Versión Ágil y Fluida (Recomendada - Sin pausas muertas)</span>
+            <span class="clip-dur" style="color: #34d399; font-size: 0.95rem;">⏱️ 9.3s (¡7s más rápida!)</span>
+          </div>
+          <p class="clip-quote" style="font-size: 0.92rem; color: #f1f5f9; margin: 10px 0 14px; line-height: 1.4;">
+            «¡Hola amiguitos! ¡Soy Billi! ¡Vamos a aprender los colores en inglés! ¡Verde, Green! ¡Amarillo, Yellow! ¡Azul, Blue! ¡Lo hiciste genial!»
+          </p>
+          <button class="play-pill-btn" id="btn_fast" onclick="togglePlay('aud_fast', 'btn_fast', 'row_fast')" style="background: linear-gradient(135deg, #059669, #10b981); font-size: 1.05rem; padding: 12px 18px;">
+            <span class="p-icon">▶️</span> <span class="p-txt">Escuchar Versión Ágil (9.3s)</span>
+          </button>
+          <audio id="aud_fast" src="assets/audio/test_billy/billi_v2_speed120.mp3" preload="auto"></audio>
         </div>
-        <p class="clip-quote" style="font-size: 1rem; color: #f1f5f9; line-height: 1.6; margin: 12px 0 16px;">
-          <span style="color: #fbbf24; font-weight: 800;">[excited]</span> ¡Hola, amiguitos! <span style="color: #38bdf8; font-weight: 800;">[cheerfully]</span> ¡Soy Billi, tu osito amigo! <span style="color: #a78bfa; font-weight: 800;">[curious]</span> ¿Están listos para aprender los colores en inglés? Repite conmigo... <br>
-          <span style="color: #38bdf8; font-weight: 800;">[cheerfully]</span> Verde... <strong>Green!</strong> ... <br>
-          <span style="color: #fbbf24; font-weight: 800;">[excited]</span> Amarillo... <strong>Yellow!</strong> ... <br>
-          <span style="color: #38bdf8; font-weight: 800;">[cheerfully]</span> Azul... <strong>Blue!</strong> <br>
-          <span style="color: #fbbf24; font-weight: 800;">[excited]</span> ¡Muy bien, lo hiciste genial!
-        </p>
-        <button class="play-pill-btn" id="btn_v4" onclick="togglePlay('aud_v4', 'btn_v4', 'row_v4')" style="background: linear-gradient(135deg, #0284c7, #2563eb); font-size: 1.1rem; padding: 14px 20px;">
-          <span class="p-icon">▶️</span> <span class="p-txt">Reproducir Audio de Billi (Eleven v4)</span>
-        </button>
-        <audio id="aud_v4" src="assets/audio/test_billy/billi_v4_test.mp3" preload="auto"></audio>
+
+        <!-- VERSIÓN TURBO NATURAL (9.8s) -->
+        <div class="clip-row" id="row_turbo" style="background: rgba(56, 189, 248, 0.12); border: 1px solid #38bdf8; padding: 18px;">
+          <div class="clip-name" style="font-size: 0.95rem;">
+            <span style="color: #38bdf8; font-weight: 900;">✨ 2. Versión Turbo Dinámica (Ritmo intermedio vivo)</span>
+            <span class="clip-dur" style="font-size: 0.95rem;">⏱️ 9.8s</span>
+          </div>
+          <p class="clip-quote" style="font-size: 0.92rem; color: #f1f5f9; margin: 10px 0 14px; line-height: 1.4;">
+            «¡Hola amiguitos! ¡Soy Billi! ¡Vamos a aprender los colores en inglés! ¡Verde, Green! ¡Amarillo, Yellow! ¡Azul, Blue! ¡Lo hiciste genial!»
+          </p>
+          <button class="play-pill-btn" id="btn_turbo" onclick="togglePlay('aud_turbo', 'btn_turbo', 'row_turbo')" style="background: linear-gradient(135deg, #0284c7, #2563eb); font-size: 1.05rem; padding: 12px 18px;">
+            <span class="p-icon">▶️</span> <span class="p-txt">Escuchar Versión Turbo (9.8s)</span>
+          </button>
+          <audio id="aud_turbo" src="assets/audio/test_billy/billi_turbo_speed115.mp3" preload="auto"></audio>
+        </div>
+
+        <!-- VERSIÓN ORIGINAL PAUSADA (16.4s) -->
+        <div class="clip-row" id="row_slow" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); opacity: 0.85; padding: 14px 18px;">
+          <div class="clip-name" style="font-size: 0.9rem;">
+            <span style="color: #94a3b8; font-weight: 800;">🐢 3. Versión Anterior (Con pausas largas "...")</span>
+            <span class="clip-dur" style="color: #f87171;">⏱️ 16.4s (Muy lenta)</span>
+          </div>
+          <p class="clip-quote" style="font-size: 0.85rem; color: #94a3b8; margin: 8px 0 10px;">
+            «¡Hola, amiguitos! ... Soy Billi ... Verde... Green! ... Amarillo... Yellow! ...»
+          </p>
+          <button class="play-pill-btn" id="btn_slow" onclick="togglePlay('aud_slow', 'btn_slow', 'row_slow')" style="background: rgba(71, 85, 105, 0.8); font-size: 0.95rem; padding: 10px 16px;">
+            <span class="p-icon">▶️</span> <span class="p-txt">Escuchar Versión Lenta (16.4s)</span>
+          </button>
+          <audio id="aud_slow" src="assets/audio/test_billy/billi_v4_test.mp3" preload="auto"></audio>
+        </div>
+
       </div>
     </div>
 
