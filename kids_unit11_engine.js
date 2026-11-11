@@ -76,8 +76,8 @@ class KidsUnit11Engine {
   setupFossilDig() {
     const fossils = [
       { name: "Tyrannosaurus Rex", icon: "🦖", period: "Late Cretaceous", fact: "The T-Rex had teeth as large as bananas and powerful jaws!" },
-      { name: "Triceratops", icon: "🦕", period: "Herbivore Giant", fact: "It had three sharp horns on its head to defend against predators." },
-      { name: "Pterodactyl", icon: "🦅", period: "Flying Reptile", fact: "It was not a dinosaur, but a flying reptile with leathery wings." },
+      { name: "Triceratops", icon: `<img src="assets/icons/triceratops.svg" width="48" height="48" alt="Triceratops" style="vertical-align:middle;display:inline-block;">`, period: "Herbivore Giant", fact: "It had three sharp horns on its head to defend against predators." },
+      { name: "Pterodactyl", icon: `<img src="assets/icons/pterodactyl.svg" width="48" height="48" alt="Pterodactyl" style="vertical-align:middle;display:inline-block;">`, period: "Flying Reptile", fact: "It was not a dinosaur, but a flying reptile with leathery wings." },
       { name: "Woolly Mammoth", icon: "🦣", period: "Ice Age", fact: "Mammoths roamed frozen tundras with thick fur and curved tusks." }
     ];
 

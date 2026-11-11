@@ -26,8 +26,16 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
 
   // 1. Check ElevenLabs Studio Audio Manifest
   const key = normalizeAudioKey(text);
-  const manifest = window.BilikidsAudioManifest || {};
-  const audioSrc = manifest[key];
+  const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
+  let audioSrc = manifest[key];
+  if (!audioSrc) {
+    const noSpaces = key.replace(/\s+/g, '');
+    audioSrc = manifest[noSpaces];
+  }
+  if (!audioSrc) {
+    const stripped = key.replace(/^(fossil uncovered the|correct a person from|correct that is in the|correct)\s*/i, '');
+    audioSrc = manifest[stripped] || manifest[stripped.replace(/\s+/g, '')];
+  }
 
   if (audioSrc) {
     try {
