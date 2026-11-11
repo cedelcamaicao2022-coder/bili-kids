@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>Aprende con Billi • Colores en Inglés | BiliKids</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css?v=4.2">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 10%, #1e293b 0%, #0b1120 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Topbar Header */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-category-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-category-back:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      transform: translateX(-3px);
+    }
+
+    .brand-logo {
+      height: 38px;
+      width: auto;
+    }
+
+    .module-pill {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Main Container */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      gap: 24px;
+    }
+
+    /* Left Sidebar: Topics Drawer */
+    .topics-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-self: flex-start;
+    }
+
+    .sidebar-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.15rem;
+      color: #38bdf8;
+      padding: 0 8px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .topic-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .topic-btn.active {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border-color: #38bdf8;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+    }
+
+    .topic-badge {
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .topic-btn.disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .topic-btn.disabled:hover {
+      transform: none;
+      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.4);
+      color: #94a3b8;
+    }
+
+    /* Main Content Area */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    /* Billi Mascot Hero Showcase */
+    .billi-hero-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      border-radius: 28px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .billi-avatar-wrap {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .billi-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .billi-img.speaking {
+      animation: gentle-bounce 0.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes gentle-bounce {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-6px) scale(1.04); }
+    }
+
+    .billi-dialogue {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .speech-bubble {
+      background: #fff;
+      color: #0f172a;
+      border-radius: 20px;
+      padding: 16px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.45;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 12px solid #fff;
+    }
+
+    .bubble-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-lesson-full {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-family: 'Fredoka', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-lesson-full:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    .btn-lesson-full.playing {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .repeat-tip {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Grid of Color Cards */
+    .color-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .color-section-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.4rem;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .color-card {
+      background: rgba(30, 41, 59, 0.65);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: #38bdf8;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .color-card.playing {
+      border-color: #f59e0b;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
+      background: rgba(30, 41, 59, 0.95);
+      animation: pulse-border 1.2s infinite alternate;
+    }
+
+    @keyframes pulse-border {
+      0% { transform: scale(1.02); border-color: #f59e0b; }
+      100% { transform: scale(1.05); border-color: #38bdf8; }
+    }
+
+    .color-splash {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      margin-bottom: 14px;
+      box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s ease;
+    }
+
+    .color-card:hover .color-splash {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .color-names {
+      margin-bottom: 12px;
+    }
+
+    .name-es {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .name-en {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.6rem;
+      color: #fff;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    .btn-card-listen {
+      width: 100%;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      color: #e2e8f0;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .color-card:hover .btn-card-listen {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+    }
+
+    .color-card.playing .btn-card-listen {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border-color: #f59e0b;
+    }
+
+    .repeat-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .color-card.playing .repeat-tag {
+      display: block;
+      animation: pulse 0.8s infinite alternate;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .app-layout {
+        flex-direction: column;
+      }
+      .topics-sidebar {
+        width: 100%;
+        align-self: stretch;
+      }
+      .billi-hero-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .speech-bubble::before {
+        display: none;
+      }
+      .bubble-actions {
+        justify-content: center;
+      }
+      .billi-avatar-wrap {
+        width: 110px;
+        height: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="header-left">
+      <a class="btn-category-back btn-category-back-btn" id="btnCategoryBack" href="babies.html" title="Volver a Babies">
+        <span>←</span>
+        <span class="cat-back-label">Volver a Babies</span>
+      </a>
+      <a href="index.html" title="Inicio Bilikids">
+        <img src="assets/bilikids_logo.png" alt="Bilikids" class="brand-logo">
+      </a>
+    </div>
+
+    <div class="module-pill">
+      <span>🐻</span>
+      <span>Aprende con Billi</span>
+    </div>
+  </header>
+
+  <!-- App Layout -->
+  <main class="app-layout">
+    
+    <!-- Left Drawer / Topics List -->
+    <aside class="topics-sidebar" aria-label="Temas de Aprendizaje">
+      <h2 class="sidebar-title">
+        <span>📚</span>
+        <span>Temas para Aprender</span>
+      </h2>
+
+      <!-- Tema 1: Colores (Activo) -->
+      <div class="topic-btn active" title="Aprender los Colores en Inglés">
+        <span>🎨 Colores (Colors)</span>
+        <span class="topic-badge">10 Vocab</span>
+      </div>
+
+      <!-- Otros temas planificados -->
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>👋 Saludos (Greetings)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>🐶 Animales (Animals)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>👨‍👩‍👧 Familia (Family)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>🏠 La Casa (House)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>🔢 Números (Numbers)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>🍎 Alimentos (Food)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+
+      <div class="topic-btn disabled" title="Próximamente">
+        <span>😊 Emociones (Feelings)</span>
+        <span class="topic-badge" style="background: rgba(255,255,255,0.08);">Próximamente</span>
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <section class="content-area">
+      
+      <!-- Billi Mascot Hero Showcase -->
+      <div class="billi-hero-banner">
+        <div class="billi-avatar-wrap">
+          <img src="assets/bili_fullbody.png" alt="Billi el Osito" class="billi-img" id="billiMascotImg">
+        </div>
+
+        <div class="billi-dialogue">
+          <div class="speech-bubble" id="billiSpeechText">
+            ¡Hola, amiguito! ¡Vamos a aprender los colores en inglés! Toca el botón naranja para escuchar toda la lección, o toca cada color abajo para repetir conmigo. 🐻🎨
+          </div>
+
+          <div class="bubble-actions">
+            <button class="btn-lesson-full" id="btnPlayFullLesson" onclick="playLessonAudio()">
+              <span id="playLessonIcon">▶️</span>
+              <span id="playLessonText">Escuchar Lección Completa de Colores</span>
+            </button>
+            <span class="repeat-tip">⏱️ Billi te dará tiempo para repetir cada color en voz alta.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Grid Section -->
+      <div class="color-section-header">
+        <h3 class="color-section-title">
+          <span>🎨</span>
+          <span>Toca un color para escuchar y repetir</span>
+        </h3>
+      </div>
+
+      <div class="cards-grid">
+        
+        <!-- 1. ROJO -->
+        <div class="color-card" onclick="playColorAudio('color_rojo', 'Rojo', 'RED', '#ef4444')" id="card_color_rojo">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">🍎</div>
+          <div class="color-names">
+            <div class="name-es">Rojo</div>
+            <div class="name-en">RED</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 2. AZUL -->
+        <div class="color-card" onclick="playColorAudio('color_azul', 'Azul', 'BLUE', '#3b82f6')" id="card_color_azul">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">🌊</div>
+          <div class="color-names">
+            <div class="name-es">Azul</div>
+            <div class="name-en">BLUE</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 3. AMARILLO -->
+        <div class="color-card" onclick="playColorAudio('color_amarillo', 'Amarillo', 'YELLOW', '#facc15')" id="card_color_amarillo">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #facc15, #ca8a04); color: #000;">☀️</div>
+          <div class="color-names">
+            <div class="name-es">Amarillo</div>
+            <div class="name-en">YELLOW</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 4. VERDE -->
+        <div class="color-card" onclick="playColorAudio('color_verde', 'Verde', 'GREEN', '#22c55e')" id="card_color_verde">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #22c55e, #15803d);">🍃</div>
+          <div class="color-names">
+            <div class="name-es">Verde</div>
+            <div class="name-en">GREEN</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 5. NARANJA -->
+        <div class="color-card" onclick="playColorAudio('color_naranja', 'Naranja', 'ORANGE', '#f97316')" id="card_color_naranja">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #f97316, #c2410c);">🍊</div>
+          <div class="color-names">
+            <div class="name-es">Naranja</div>
+            <div class="name-en">ORANGE</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 6. MORADO -->
+        <div class="color-card" onclick="playColorAudio('color_morado', 'Morado', 'PURPLE', '#a855f7')" id="card_color_morado">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #a855f7, #7e22ce);">🍇</div>
+          <div class="color-names">
+            <div class="name-es">Morado</div>
+            <div class="name-en">PURPLE</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 7. ROSA -->
+        <div class="color-card" onclick="playColorAudio('color_rosa', 'Rosa', 'PINK', '#ec4899')" id="card_color_rosa">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #ec4899, #be185d);">🌸</div>
+          <div class="color-names">
+            <div class="name-es">Rosa</div>
+            <div class="name-en">PINK</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 8. CAFÉ / MARRÓN -->
+        <div class="color-card" onclick="playColorAudio('color_cafe', 'Café', 'BROWN', '#854d0e')" id="card_color_cafe">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #854d0e, #583101);">🌰</div>
+          <div class="color-names">
+            <div class="name-es">Café</div>
+            <div class="name-en">BROWN</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 9. NEGRO -->
+        <div class="color-card" onclick="playColorAudio('color_negro', 'Negro', 'BLACK', '#334155')" id="card_color_negro">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #334155, #0f172a);">🎩</div>
+          <div class="color-names">
+            <div class="name-es">Negro</div>
+            <div class="name-en">BLACK</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+        <!-- 10. BLANCO -->
+        <div class="color-card" onclick="playColorAudio('color_blanco', 'Blanco', 'WHITE', '#f8fafc')" id="card_color_blanco">
+          <span class="repeat-tag">¡REPITE!</span>
+          <div class="color-splash" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1); color: #0f172a;">☁️</div>
+          <div class="color-names">
+            <div class="name-es">Blanco</div>
+            <div class="name-en">WHITE</div>
+          </div>
+          <button class="btn-card-listen">
+            <span>🔊</span>
+            <span>Escuchar</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Audio Player Controller -->
+  <script src="category_nav.js"></script>
+  <script>
+    let activeAudio = null;
+    let activeCard = null;
+
+    const speechText = document.getElementById('billiSpeechText');
+    const mascotImg = document.getElementById('billiMascotImg');
+    const lessonBtn = document.getElementById('btnPlayFullLesson');
+    const lessonIcon = document.getElementById('playLessonIcon');
+    const lessonText = document.getElementById('playLessonText');
+
+    function stopCurrentAudio() {
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio.currentTime = 0;
+        activeAudio = null;
+      }
+      if (activeCard) {
+        activeCard.classList.remove('playing');
+        activeCard = null;
+      }
+      mascotImg.classList.remove('speaking');
+      lessonBtn.classList.remove('playing');
+      lessonIcon.textContent = '▶️';
+      lessonText.textContent = 'Escuchar Lección Completa de Colores';
+    }
+
+    function playLessonAudio() {
+      if (activeAudio && !activeAudio.paused && lessonBtn.classList.contains('playing')) {
+        stopCurrentAudio();
+        speechText.textContent = '¡Pausa! Toca cuando quieras continuar o prueba tocando cada color abajo. 🐻';
+        return;
+      }
+
+      stopCurrentAudio();
+
+      speechText.innerHTML = '« ¡Vamos a aprender los colores en inglés! Repite después de mí: <strong>Verde... Green! ... Amarillo... Yellow! ... Azul... Blue! ... Rojo... Red!</strong> »';
+      mascotImg.classList.add('speaking');
+      lessonBtn.classList.add('playing');
+      lessonIcon.textContent = '⏸️';
+      lessonText.textContent = 'Pausar Lección';
+
+      const audio = new Audio('assets/audio/billy_learn/colores/colores_intro.mp3');
+      activeAudio = audio;
+
+      audio.play().catch(err => console.error('Audio play error:', err));
+
+      audio.onended = () => {
+        stopCurrentAudio();
+        speechText.textContent = '¡Lo hiciste increíble! 🌟 Ahora toca cada color abajo para practicar uno por uno.';
+      };
+    }
+
+    function playColorAudio(colorId, nameEs, nameEn, hex) {
+      stopCurrentAudio();
+
+      const card = document.getElementById(`card_${colorId}`);
+      if (card) {
+        card.classList.add('playing');
+        activeCard = card;
+      }
+
+      mascotImg.classList.add('speaking');
+      speechText.innerHTML = `Billi dice: « <strong>${nameEs}</strong>... en inglés se dice... <strong>${nameEn}!</strong> » <br><span style="color:#d97706; font-size:0.95rem;">🗣️ ¡Tu turno, repite: <strong>${nameEn}</strong>!</span>`;
+
+      const audio = new Audio(`assets/audio/billy_learn/colores/${colorId}.mp3`);
+      activeAudio = audio;
+
+      audio.play().catch(err => console.error('Audio play error:', err));
+
+      audio.onended = () => {
+        mascotImg.classList.remove('speaking');
+        if (card) card.classList.remove('playing');
+        activeCard = null;
+        activeAudio = null;
+        speechText.innerHTML = `¡Excelente trabajo con el <strong>${nameEs} (${nameEn})</strong>! 🌟 ¿Cuál otro color quieres practicar?`;
+      };
+    }
+  </script>
+</body>
+</html>
