@@ -67,10 +67,6 @@
   const dashedGuideOverlay = document.getElementById('dashedGuideOverlay');
   const guideText = document.getElementById('guideText');
 
-  // Offscreen Mask Canvas for Strict Letter Boundary Blocking
-  const maskCanvas = document.createElement('canvas');
-  const maskCtx = maskCanvas.getContext('2d');
-  let maskData = null;
   const targetWordText = document.getElementById('targetWordText');
   const currentEmoji = document.getElementById('currentEmoji');
   const wordSubHint = document.getElementById('wordSubHint');
@@ -118,35 +114,42 @@
   function playCurrentWordAudio() {
     const list = WORD_BANKS[currentLevel];
     const item = list[wordIndex];
-    if (!item) return;
     if (item.audio) {
       playAudioFile(item.audio);
-      return;
+    } else {
+      speakWordTTS(item.word);
     }
-    if ('speechSynthesis' in window) {
+  }
+
+  function speakWordTTS(word) {
+    if (isMuted || !('speechSynthesis' in window)) return;
+    try {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(item.word.toLowerCase());
+      const utterance = new SpeechSynthesisUtterance(word);
       utterance.lang = 'en-US';
-      utterance.rate = 0.82;
+      utterance.rate = 0.85;
+      utterance.pitch = 1.1;
       window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn('TTS error:', e);
     }
   }
 
   function playRandomCheer() {
-    const randomCheer = CHEER_AUDIOS[Math.floor(Math.random() * CHEER_AUDIOS.length)];
-    playAudioFile(randomCheer);
+    const cheer = CHEER_AUDIOS[Math.floor(Math.random() * CHEER_AUDIOS.length)];
+    playAudioFile(cheer);
   }
 
   function playOopsAudio() {
     playAudioFile(OOPS_AUDIO);
   }
 
-  // --- Canvas Sizing & High DPI ---
+  // --- Dynamic Canvas Resolution Calibration ---
   function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
     if (rect.width === 0 || rect.height === 0) return;
-    
+
     // Save existing drawing data if any
     let tempCanvas = null;
     if (canvas.width > 0 && canvas.height > 0) {
@@ -161,18 +164,14 @@
     canvas.height = rect.height * dpr;
     canvas.style.width = rect.width + 'px';
     canvas.style.height = rect.height + 'px';
-    ctx.scale(dpr, dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // Resize guide canvas (shaded letters + dashed lines)
     guideCanvas.width = rect.width * dpr;
     guideCanvas.height = rect.height * dpr;
     guideCanvas.style.width = rect.width + 'px';
     guideCanvas.style.height = rect.height + 'px';
-    gctx.scale(dpr, dpr);
-
-    // Resize offscreen letter boundary mask
-    maskCanvas.width = rect.width * dpr;
-    maskCanvas.height = rect.height * dpr;
+    gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
@@ -196,14 +195,80 @@
 
   window.addEventListener('resize', resizeCanvas);
 
+  // --- Complete Alphabet Stroke Definitions for Inner Centerline Guidelines ---
+  const LETTER_STROKES = {
+    'A': [[[0.50, 0.12], [0.22, 0.88]], [[0.50, 0.12], [0.78, 0.88]], [[0.32, 0.60], [0.68, 0.60]]],
+    'B': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.55, 0.14], [0.74, 0.26], [0.74, 0.46], [0.52, 0.50], [0.26, 0.50]], [[0.26, 0.50], [0.58, 0.50], [0.76, 0.60], [0.76, 0.74], [0.58, 0.86], [0.26, 0.86]]],
+    'C': [[[0.78, 0.22], [0.50, 0.12], [0.22, 0.26], [0.18, 0.50], [0.22, 0.74], [0.50, 0.88], [0.78, 0.78]]],
+    'D': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.54, 0.14], [0.78, 0.32], [0.78, 0.68], [0.54, 0.86], [0.26, 0.86]]],
+    'E': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.74, 0.14]], [[0.26, 0.50], [0.66, 0.50]], [[0.26, 0.86], [0.74, 0.86]]],
+    'F': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.74, 0.14]], [[0.26, 0.50], [0.64, 0.50]]],
+    'G': [[[0.78, 0.22], [0.50, 0.12], [0.22, 0.26], [0.18, 0.50], [0.22, 0.74], [0.50, 0.88], [0.78, 0.78], [0.78, 0.52], [0.52, 0.52]]],
+    'H': [[[0.24, 0.14], [0.24, 0.86]], [[0.76, 0.14], [0.76, 0.86]], [[0.24, 0.50], [0.76, 0.50]]],
+    'I': [[[0.50, 0.14], [0.50, 0.86]], [[0.30, 0.14], [0.70, 0.14]], [[0.30, 0.86], [0.70, 0.86]]],
+    'J': [[[0.72, 0.14], [0.72, 0.68], [0.62, 0.84], [0.44, 0.86], [0.26, 0.72]]],
+    'K': [[[0.26, 0.14], [0.26, 0.86]], [[0.74, 0.14], [0.28, 0.52]], [[0.40, 0.46], [0.74, 0.86]]],
+    'L': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.86], [0.76, 0.86]]],
+    'M': [[[0.20, 0.86], [0.20, 0.14]], [[0.20, 0.14], [0.50, 0.62]], [[0.50, 0.62], [0.80, 0.14]], [[0.80, 0.14], [0.80, 0.86]]],
+    'N': [[[0.22, 0.86], [0.22, 0.14]], [[0.22, 0.14], [0.78, 0.86]], [[0.78, 0.86], [0.78, 0.14]]],
+    'O': [[[0.50, 0.12], [0.26, 0.26], [0.18, 0.50], [0.26, 0.74], [0.50, 0.88], [0.74, 0.74], [0.82, 0.50], [0.74, 0.26], [0.50, 0.12]]],
+    'P': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.55, 0.14], [0.76, 0.26], [0.76, 0.46], [0.55, 0.52], [0.26, 0.52]]],
+    'Q': [[[0.50, 0.12], [0.26, 0.26], [0.18, 0.50], [0.26, 0.74], [0.50, 0.88], [0.74, 0.74], [0.82, 0.50], [0.74, 0.26], [0.50, 0.12]], [[0.60, 0.68], [0.84, 0.88]]],
+    'R': [[[0.26, 0.14], [0.26, 0.86]], [[0.26, 0.14], [0.55, 0.14], [0.76, 0.26], [0.76, 0.46], [0.55, 0.52], [0.26, 0.52]], [[0.52, 0.52], [0.76, 0.86]]],
+    'S': [[[0.74, 0.24], [0.52, 0.14], [0.28, 0.24], [0.26, 0.38], [0.46, 0.48], [0.68, 0.54], [0.74, 0.68], [0.66, 0.80], [0.48, 0.86], [0.26, 0.78]]],
+    'T': [[[0.16, 0.14], [0.84, 0.14]], [[0.50, 0.14], [0.50, 0.86]]],
+    'U': [[[0.24, 0.14], [0.24, 0.66], [0.34, 0.84], [0.50, 0.86], [0.66, 0.84], [0.76, 0.66], [0.76, 0.14]]],
+    'V': [[[0.22, 0.14], [0.50, 0.86]], [[0.50, 0.86], [0.78, 0.14]]],
+    'W': [[[0.16, 0.14], [0.28, 0.86]], [[0.28, 0.86], [0.50, 0.44]], [[0.50, 0.44], [0.72, 0.86]], [[0.72, 0.86], [0.84, 0.14]]],
+    'X': [[[0.22, 0.14], [0.78, 0.86]], [[0.78, 0.14], [0.22, 0.86]]],
+    'Y': [[[0.22, 0.14], [0.50, 0.50]], [[0.78, 0.14], [0.50, 0.50]], [[0.50, 0.50], [0.50, 0.86]]],
+    'Z': [[[0.24, 0.14], [0.76, 0.14], [0.24, 0.86], [0.76, 0.86]]]
+  };
+
+  const CURSIVE_STROKES = {
+    'a': [[[0.70, 0.38], [0.45, 0.38], [0.28, 0.55], [0.45, 0.78], [0.72, 0.78]], [[0.72, 0.38], [0.72, 0.82]]],
+    'b': [[[0.32, 0.14], [0.32, 0.82]], [[0.32, 0.55], [0.55, 0.55], [0.72, 0.68], [0.55, 0.82], [0.32, 0.82]]],
+    'c': [[[0.75, 0.35], [0.45, 0.32], [0.28, 0.52], [0.38, 0.76], [0.75, 0.76]]],
+    'd': [[[0.68, 0.14], [0.68, 0.82]], [[0.68, 0.45], [0.45, 0.42], [0.26, 0.60], [0.45, 0.82], [0.68, 0.82]]],
+    'e': [[[0.28, 0.58], [0.72, 0.46], [0.50, 0.35], [0.28, 0.55], [0.52, 0.78], [0.72, 0.74]]],
+    'f': [[[0.62, 0.14], [0.44, 0.40], [0.40, 0.86]], [[0.25, 0.46], [0.65, 0.46]]],
+    'g': [[[0.68, 0.36], [0.42, 0.36], [0.26, 0.55], [0.45, 0.75], [0.68, 0.75]], [[0.68, 0.36], [0.68, 0.92], [0.42, 0.98]]],
+    'h': [[[0.30, 0.14], [0.30, 0.82]], [[0.30, 0.50], [0.54, 0.42], [0.72, 0.58], [0.72, 0.82]]],
+    'i': [[[0.50, 0.36], [0.50, 0.78], [0.68, 0.78]], [[0.50, 0.18], [0.50, 0.22]]],
+    'j': [[[0.58, 0.36], [0.58, 0.90], [0.36, 0.98]], [[0.58, 0.18], [0.58, 0.22]]],
+    'k': [[[0.30, 0.14], [0.30, 0.82]], [[0.68, 0.42], [0.32, 0.60]], [[0.44, 0.56], [0.70, 0.82]]],
+    'l': [[[0.46, 0.14], [0.46, 0.78], [0.66, 0.80]]],
+    'm': [[[0.20, 0.45], [0.20, 0.80]], [[0.20, 0.52], [0.46, 0.42], [0.46, 0.80]], [[0.46, 0.52], [0.74, 0.42], [0.74, 0.80]]],
+    'n': [[[0.26, 0.45], [0.26, 0.80]], [[0.26, 0.52], [0.55, 0.42], [0.74, 0.58], [0.74, 0.80]]],
+    'o': [[[0.50, 0.36], [0.26, 0.55], [0.50, 0.78], [0.74, 0.55], [0.50, 0.36]]],
+    'p': [[[0.30, 0.36], [0.30, 0.92]], [[0.30, 0.42], [0.54, 0.38], [0.74, 0.55], [0.54, 0.72], [0.30, 0.72]]],
+    'q': [[[0.68, 0.36], [0.42, 0.36], [0.26, 0.55], [0.45, 0.75], [0.68, 0.75]], [[0.68, 0.36], [0.68, 0.92], [0.82, 0.90]]],
+    'r': [[[0.28, 0.44], [0.28, 0.80]], [[0.28, 0.50], [0.52, 0.38], [0.72, 0.46]]],
+    's': [[[0.46, 0.38], [0.68, 0.48], [0.34, 0.64], [0.62, 0.78]]],
+    't': [[[0.50, 0.18], [0.50, 0.80], [0.68, 0.80]], [[0.28, 0.40], [0.72, 0.40]]],
+    'u': [[[0.26, 0.42], [0.26, 0.74], [0.48, 0.80], [0.70, 0.74]], [[0.70, 0.42], [0.70, 0.80]]],
+    'v': [[[0.24, 0.42], [0.48, 0.80]], [[0.48, 0.80], [0.74, 0.42]]],
+    'w': [[[0.18, 0.42], [0.32, 0.80]], [[0.32, 0.80], [0.50, 0.56]], [[0.50, 0.56], [0.66, 0.80]], [[0.66, 0.80], [0.80, 0.42]]],
+    'x': [[[0.26, 0.42], [0.74, 0.80]], [[0.74, 0.42], [0.26, 0.80]]],
+    'y': [[[0.26, 0.42], [0.46, 0.75]], [[0.68, 0.42], [0.68, 0.86], [0.46, 0.96]]],
+    'z': [[[0.30, 0.42], [0.70, 0.42], [0.38, 0.66], [0.68, 0.80]]]
+  };
+
+  function getLetterStrokes(ch, mode) {
+    if (mode === 'cursive') {
+      const lower = ch.toLowerCase();
+      if (CURSIVE_STROKES[lower]) return CURSIVE_STROKES[lower];
+    }
+    const upper = ch.toUpperCase();
+    return LETTER_STROKES[upper] || null;
+  }
+
   // --- Render Shaded Letters & Dotted Tracing Guidelines ---
   function renderGuideAndMask() {
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
     if (rect.width === 0 || rect.height === 0) return;
 
     gctx.clearRect(0, 0, rect.width, rect.height);
-    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
 
     const spans = guideText.querySelectorAll('.letter-char');
     if (!spans || spans.length === 0) return;
@@ -212,10 +277,6 @@
     const computedStyle = window.getComputedStyle(guideText);
     const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
 
-    // Scale mask context with dpr for crisp hardware compositing
-    maskCtx.save();
-    maskCtx.scale(dpr, dpr);
-
     spans.forEach(span => {
       const sr = span.getBoundingClientRect();
       const ch = span.textContent.trim();
@@ -223,86 +284,76 @@
       const cy = sr.top - rect.top + sr.height / 2;
       const isMissing = span.classList.contains('missing-hint');
 
-      // --- A. Render Shaded Letter & Dotted Lines on Guide Canvas ---
+      // --- A. Render Shaded Letter Body on Guide Canvas ---
       gctx.save();
       gctx.font = font;
       gctx.textAlign = 'center';
       gctx.textBaseline = 'middle';
 
       // 1. Shaded letter body ("palabras sombreadas")
-      // Warm, gentle slate-blue tint matching preschool tracing workbooks
-      gctx.fillStyle = 'rgba(148, 163, 184, 0.28)';
-      gctx.strokeStyle = isMissing ? 'rgba(239, 68, 68, 0.45)' : 'rgba(148, 163, 184, 0.38)';
-      gctx.lineWidth = isMissing ? 18 : 14;
+      // Soft, gentle slate-blue tint matching preschool tracing workbooks
+      gctx.fillStyle = isMissing ? 'rgba(254, 202, 202, 0.75)' : 'rgba(226, 232, 240, 0.70)';
+      gctx.strokeStyle = isMissing ? '#f87171' : 'rgba(148, 163, 184, 0.40)';
+      gctx.lineWidth = isMissing ? 2.5 : 1.5;
       gctx.lineJoin = 'round';
       gctx.lineCap = 'round';
-      gctx.strokeText(ch, cx, cy);
       gctx.fillText(ch, cx, cy);
-
-      // Subtle letter border outline
-      gctx.strokeStyle = isMissing ? '#ef4444' : '#94a3b8';
-      gctx.lineWidth = isMissing ? 3 : 1.5;
       gctx.strokeText(ch, cx, cy);
 
-      // 2. Dashed / dotted guideline ("dentro de las letras marca líneas puntuadas")
-      // Contrasting dark slate dashed guidelines inside the letter shape
-      gctx.strokeStyle = isMissing ? '#dc2626' : '#475569';
-      gctx.lineWidth = 3.5;
-      gctx.setLineDash([8, 8]);
-      gctx.lineCap = 'round';
-      gctx.lineJoin = 'round';
-      gctx.strokeText(ch, cx, cy);
+      // Measure exact glyph bounding box for perfect centerline stroke placement
+      const m = gctx.measureText(ch);
+      const glyphLeft = (m.actualBoundingBoxLeft !== undefined)
+        ? (cx - m.actualBoundingBoxLeft)
+        : (sr.left - rect.left);
+      const glyphTop = (m.actualBoundingBoxAscent !== undefined)
+        ? (cy - m.actualBoundingBoxAscent)
+        : (sr.top - rect.top);
+      const glyphW = (m.actualBoundingBoxLeft !== undefined && m.actualBoundingBoxRight !== undefined)
+        ? (m.actualBoundingBoxLeft + m.actualBoundingBoxRight)
+        : sr.width;
+      const glyphH = (m.actualBoundingBoxAscent !== undefined && m.actualBoundingBoxDescent !== undefined)
+        ? (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
+        : sr.height;
+
+      // 2. Dashed centerline guidelines INSIDE the letter shape ("líneas puntuadas por dentro como guía")
+      const strokes = getLetterStrokes(ch, currentMode);
+      if (strokes && strokes.length > 0) {
+        gctx.strokeStyle = isMissing ? '#dc2626' : '#334155';
+        gctx.lineWidth = 4;
+        gctx.setLineDash([7, 7]);
+        gctx.lineCap = 'round';
+        gctx.lineJoin = 'round';
+
+        strokes.forEach(stroke => {
+          if (!stroke || stroke.length < 2) return;
+          gctx.beginPath();
+          stroke.forEach((pt, pIdx) => {
+            const px = glyphLeft + pt[0] * glyphW;
+            const py = glyphTop + pt[1] * glyphH;
+            if (pIdx === 0) gctx.moveTo(px, py);
+            else gctx.lineTo(px, py);
+          });
+          gctx.stroke();
+
+          // Green starting dot to indicate where to start tracing
+          const startPt = stroke[0];
+          const spx = glyphLeft + startPt[0] * glyphW;
+          const spy = glyphTop + startPt[1] * glyphH;
+          gctx.save();
+          gctx.setLineDash([]);
+          gctx.fillStyle = isMissing ? '#ef4444' : '#10b981';
+          gctx.beginPath();
+          gctx.arc(spx, spy, 4, 0, Math.PI * 2);
+          gctx.fill();
+          gctx.restore();
+        });
+      }
+
       gctx.restore();
-
-      // --- B. Render Exact Writing Zone Mask on Offscreen Canvas ---
-      maskCtx.save();
-      maskCtx.font = font;
-      maskCtx.textAlign = 'center';
-      maskCtx.textBaseline = 'middle';
-      maskCtx.fillStyle = '#ffffff';
-      maskCtx.strokeStyle = '#ffffff';
-      // Preschool writing tolerance: covers shaded letter body with comfortable ~24px margin
-      maskCtx.lineWidth = 26;
-      maskCtx.lineJoin = 'round';
-      maskCtx.lineCap = 'round';
-      maskCtx.strokeText(ch, cx, cy);
-      maskCtx.fillText(ch, cx, cy);
-      maskCtx.restore();
     });
-
-    maskCtx.restore();
-
-    // Cache typed pixel array for microsecond boundary collision checks
-    try {
-      maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data;
-    } catch (e) {
-      maskData = null;
-    }
   }
 
-  // --- Fast Microsecond Boundary Check ---
-  function isInsideAllowedZone(x, y) {
-    if (!maskData) return true; // graceful fallback if mask isn't ready
-    const dpr = window.devicePixelRatio || 1;
-    const px = Math.round(x * dpr);
-    const py = Math.round(y * dpr);
-    if (px < 0 || px >= maskCanvas.width || py < 0 || py >= maskCanvas.height) return false;
-    const idx = (py * maskCanvas.width + px) * 4;
-    return maskData[idx + 3] > 18; // alpha channel check
-  }
-
-  // Hardware-accelerated compositing to clip any stray ink outside the letters
-  function applyMaskClipping() {
-    if (!maskCanvas || currentTool === 'eraser') return;
-    const rect = canvas.getBoundingClientRect();
-    ctx.save();
-    ctx.globalCompositeOperation = 'destination-in';
-    ctx.drawImage(maskCanvas, 0, 0, rect.width, rect.height);
-    ctx.restore();
-    setupCanvasContext();
-  }
-
-  // --- Drawing Interaction with Boundary Blocking ---
+  // --- Drawing Interaction with Natural Responsive Touch ---
   let isDrawing = false;
   let points = [];
   let strokeCount = 0;
@@ -320,13 +371,6 @@
   function startDrawing(e) {
     e.preventDefault();
     const pt = getCanvasCoords(e);
-
-    // Strict Boundary Check: Block writing outside shaded words/letters
-    if (currentTool !== 'eraser' && !isInsideAllowedZone(pt.x, pt.y)) {
-      isDrawing = false;
-      return;
-    }
-
     isDrawing = true;
     points = [pt];
     setupCanvasContext();
@@ -334,46 +378,16 @@
     ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
     ctx.fillStyle = ctx.strokeStyle;
     ctx.fill();
-    applyMaskClipping();
     strokeCount++;
     clearMissingLetterHints();
   }
 
   function drawMove(e) {
+    if (!isDrawing) return;
     e.preventDefault();
     const pt = getCanvasCoords(e);
-    const inside = isInsideAllowedZone(pt.x, pt.y);
-
-    if (!isDrawing) {
-      // If user starts touch outside but drags into the shaded letter:
-      if (inside && (e.buttons > 0 || (e.touches && e.touches.length > 0))) {
-        isDrawing = true;
-        points = [pt];
-        setupCanvasContext();
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
-        ctx.fillStyle = ctx.strokeStyle;
-        ctx.fill();
-        applyMaskClipping();
-        strokeCount++;
-      }
-      return;
-    }
-
-    // If writing moved outside the shaded letter: clip immediately and pause stroke
-    if (currentTool !== 'eraser' && !inside) {
-      if (points.length > 0) {
-        points.push(pt);
-        renderCurrentStroke();
-        applyMaskClipping();
-      }
-      points = [];
-      return;
-    }
-
     points.push(pt);
     renderCurrentStroke();
-    applyMaskClipping();
   }
 
   function renderCurrentStroke() {
@@ -404,7 +418,6 @@
     try { e.preventDefault(); } catch (err) {}
     isDrawing = false;
     points = [];
-    applyMaskClipping();
   }
 
   canvas.addEventListener('pointerdown', startDrawing);
@@ -457,7 +470,7 @@
     // Clear Canvas for new word
     clearDrawingCanvas();
     updateGuideVisibility();
-    updateFeedbackMessage('✏️ Write the word on the lines below!', 'normal');
+    updateFeedbackMessage('✏️ ¡Escribe la palabra con tu dedo o lápiz! / Write the word!', 'normal');
     renderWordRibbon();
 
     // Render shaded letters and dotted guidelines after DOM layout updates
@@ -510,145 +523,89 @@
     });
   }
 
-  // --- Alphabet Waypoint Models for Preschool Handwriting Recognition ---
-  const LETTER_MODELS = {
-    'A': {
-      pts: [[0.22, 0.88], [0.36, 0.52], [0.50, 0.16], [0.64, 0.52], [0.78, 0.88], [0.34, 0.58], [0.66, 0.58]],
-      minHits: 4
-    },
-    'B': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.52, 0.14], [0.74, 0.30], [0.50, 0.50], [0.76, 0.70], [0.52, 0.86]],
-      minHits: 4
-    },
-    'C': {
-      pts: [[0.82, 0.22], [0.55, 0.14], [0.24, 0.26], [0.18, 0.50], [0.24, 0.74], [0.55, 0.86], [0.82, 0.78]],
-      minHits: 4
-    },
-    'D': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.54, 0.14], [0.80, 0.50], [0.54, 0.86]],
-      minHits: 4
-    },
-    'E': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.76, 0.14], [0.64, 0.50], [0.76, 0.86]],
-      minHits: 4
-    },
-    'F': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.76, 0.14], [0.64, 0.50]],
-      minHits: 3
-    },
-    'G': {
-      pts: [[0.82, 0.22], [0.55, 0.14], [0.24, 0.26], [0.18, 0.50], [0.24, 0.74], [0.55, 0.86], [0.82, 0.78], [0.82, 0.54], [0.55, 0.54]],
-      minHits: 4
-    },
-    'H': {
-      pts: [[0.22, 0.14], [0.22, 0.50], [0.22, 0.86], [0.78, 0.14], [0.78, 0.50], [0.78, 0.86], [0.40, 0.50], [0.60, 0.50]],
-      minHits: 4
-    },
-    'I': {
-      pts: [[0.50, 0.16], [0.50, 0.50], [0.50, 0.86], [0.30, 0.16], [0.70, 0.16], [0.30, 0.86], [0.70, 0.86]],
-      minHits: 3
-    },
-    'J': {
-      pts: [[0.74, 0.16], [0.74, 0.54], [0.64, 0.82], [0.38, 0.86], [0.22, 0.68]],
-      minHits: 3
-    },
-    'K': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.76, 0.18], [0.46, 0.50], [0.76, 0.84]],
-      minHits: 4
-    },
-    'L': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.52, 0.86], [0.80, 0.86]],
-      minHits: 3
-    },
-    'M': {
-      pts: [[0.18, 0.86], [0.18, 0.16], [0.50, 0.60], [0.82, 0.16], [0.82, 0.86]],
-      minHits: 4
-    },
-    'N': {
-      pts: [[0.20, 0.86], [0.20, 0.16], [0.50, 0.50], [0.80, 0.86], [0.80, 0.16]],
-      minHits: 4
-    },
-    'O': {
-      pts: [[0.50, 0.14], [0.24, 0.30], [0.18, 0.50], [0.24, 0.72], [0.50, 0.86], [0.76, 0.72], [0.82, 0.50], [0.76, 0.30]],
-      minHits: 4
-    },
-    'P': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.54, 0.14], [0.78, 0.30], [0.54, 0.50]],
-      minHits: 4
-    },
-    'Q': {
-      pts: [[0.50, 0.14], [0.22, 0.50], [0.50, 0.86], [0.78, 0.50], [0.65, 0.72], [0.85, 0.90]],
-      minHits: 4
-    },
-    'R': {
-      pts: [[0.24, 0.14], [0.24, 0.50], [0.24, 0.86], [0.54, 0.14], [0.78, 0.30], [0.54, 0.50], [0.78, 0.86]],
-      minHits: 4
-    },
-    'S': {
-      pts: [[0.78, 0.22], [0.50, 0.14], [0.24, 0.28], [0.50, 0.50], [0.76, 0.72], [0.50, 0.86], [0.22, 0.78]],
-      minHits: 4
-    },
-    'T': {
-      pts: [[0.15, 0.16], [0.50, 0.16], [0.85, 0.16], [0.50, 0.40], [0.50, 0.65], [0.50, 0.88]],
-      minHits: 4
-    },
-    'U': {
-      pts: [[0.22, 0.16], [0.22, 0.60], [0.35, 0.84], [0.50, 0.88], [0.65, 0.84], [0.78, 0.60], [0.78, 0.16]],
-      minHits: 4
-    },
-    'V': {
-      pts: [[0.20, 0.16], [0.35, 0.55], [0.50, 0.88], [0.65, 0.55], [0.80, 0.16]],
-      minHits: 3
-    },
-    'W': {
-      pts: [[0.16, 0.16], [0.28, 0.86], [0.50, 0.45], [0.72, 0.86], [0.84, 0.16]],
-      minHits: 4
-    },
-    'X': {
-      pts: [[0.22, 0.16], [0.50, 0.50], [0.78, 0.86], [0.78, 0.16], [0.22, 0.86]],
-      minHits: 4
-    },
-    'Y': {
-      pts: [[0.22, 0.16], [0.50, 0.50], [0.78, 0.16], [0.50, 0.70], [0.50, 0.88]],
-      minHits: 3
-    },
-    'Z': {
-      pts: [[0.22, 0.16], [0.78, 0.16], [0.50, 0.50], [0.22, 0.86], [0.78, 0.86]],
-      minHits: 4
+  // --- Stroke Checkpoint Sampling & Spatial Validation Helpers ---
+  function sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, step = 9) {
+    const strokeGroups = [];
+    strokes.forEach(stroke => {
+      const pts = [];
+      for (let i = 0; i < stroke.length - 1; i++) {
+        const x1 = glyphLeft + stroke[i][0] * glyphW;
+        const y1 = glyphTop + stroke[i][1] * glyphH;
+        const x2 = glyphLeft + stroke[i + 1][0] * glyphW;
+        const y2 = glyphTop + stroke[i + 1][1] * glyphH;
+        const dist = Math.hypot(x2 - x1, y2 - y1);
+        const steps = Math.max(2, Math.floor(dist / step));
+        for (let s = 0; s < steps; s++) {
+          const t = s / steps;
+          pts.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t });
+        }
+      }
+      pts.push({
+        x: glyphLeft + stroke[stroke.length - 1][0] * glyphW,
+        y: glyphTop + stroke[stroke.length - 1][1] * glyphH
+      });
+      strokeGroups.push(pts);
+    });
+    return strokeGroups;
+  }
+
+  function hasInkNear(data, w, h, sx, sy, dpr, radiusCss) {
+    const cx = Math.round(sx * dpr);
+    const cy = Math.round(sy * dpr);
+    const r = Math.round(radiusCss * dpr);
+    const r2 = r * r;
+
+    const minX = Math.max(0, cx - r);
+    const maxX = Math.min(w - 1, cx + r);
+    const minY = Math.max(0, cy - r);
+    const maxY = Math.min(h - 1, cy + r);
+
+    for (let y = minY; y <= maxY; y += 2) {
+      const dy = y - cy;
+      const dy2 = dy * dy;
+      for (let x = minX; x <= maxX; x += 2) {
+        const dx = x - cx;
+        if (dx * dx + dy2 <= r2) {
+          const idx = (y * w + x) * 4;
+          if (data[idx + 3] > 40) {
+            return true;
+          }
+        }
+      }
     }
-  };
+    return false;
+  }
 
-  // --- Lowercase Cursive Waypoint Models (Calibrated for Caveat / Connected Script) ---
-  const CURSIVE_MODELS = {
-    'a': { pts: [[0.70, 0.35], [0.40, 0.35], [0.25, 0.55], [0.45, 0.78], [0.75, 0.78], [0.75, 0.45], [0.75, 0.82]], minHits: 4 },
-    'b': { pts: [[0.35, 0.18], [0.35, 0.55], [0.35, 0.82], [0.65, 0.55], [0.75, 0.70], [0.55, 0.82]], minHits: 4 },
-    'c': { pts: [[0.75, 0.35], [0.45, 0.32], [0.25, 0.52], [0.35, 0.76], [0.75, 0.78]], minHits: 3 },
-    'd': { pts: [[0.70, 0.18], [0.70, 0.50], [0.70, 0.82], [0.45, 0.40], [0.25, 0.60], [0.45, 0.80]], minHits: 4 },
-    'e': { pts: [[0.30, 0.55], [0.70, 0.45], [0.45, 0.35], [0.25, 0.55], [0.55, 0.78]], minHits: 3 },
-    'f': { pts: [[0.60, 0.18], [0.45, 0.45], [0.40, 0.85], [0.25, 0.45], [0.65, 0.45]], minHits: 3 },
-    'g': { pts: [[0.70, 0.35], [0.40, 0.35], [0.25, 0.55], [0.65, 0.75], [0.70, 0.40], [0.70, 0.88], [0.45, 0.98]], minHits: 4 },
-    'h': { pts: [[0.30, 0.18], [0.30, 0.55], [0.30, 0.82], [0.55, 0.42], [0.70, 0.60], [0.70, 0.82]], minHits: 4 },
-    'i': { pts: [[0.50, 0.25], [0.50, 0.45], [0.50, 0.78], [0.65, 0.78]], minHits: 3 },
-    'j': { pts: [[0.60, 0.25], [0.60, 0.55], [0.60, 0.88], [0.35, 0.98]], minHits: 3 },
-    'k': { pts: [[0.30, 0.18], [0.30, 0.55], [0.30, 0.82], [0.65, 0.45], [0.45, 0.60], [0.70, 0.82]], minHits: 4 },
-    'l': { pts: [[0.45, 0.18], [0.45, 0.55], [0.45, 0.80], [0.65, 0.80]], minHits: 3 },
-    'm': { pts: [[0.20, 0.45], [0.20, 0.78], [0.45, 0.42], [0.45, 0.78], [0.75, 0.42], [0.75, 0.78]], minHits: 4 },
-    'n': { pts: [[0.25, 0.45], [0.25, 0.78], [0.55, 0.42], [0.75, 0.60], [0.75, 0.78]], minHits: 3 },
-    'o': { pts: [[0.50, 0.35], [0.25, 0.55], [0.50, 0.78], [0.75, 0.55]], minHits: 3 },
-    'p': { pts: [[0.30, 0.40], [0.30, 0.88], [0.55, 0.40], [0.75, 0.55], [0.55, 0.72]], minHits: 3 },
-    'q': { pts: [[0.70, 0.35], [0.40, 0.35], [0.25, 0.55], [0.65, 0.75], [0.70, 0.40], [0.70, 0.88], [0.85, 0.95]], minHits: 4 },
-    'r': { pts: [[0.30, 0.45], [0.30, 0.78], [0.55, 0.38], [0.75, 0.48]], minHits: 3 },
-    's': { pts: [[0.45, 0.38], [0.65, 0.50], [0.35, 0.65], [0.60, 0.78]], minHits: 3 },
-    't': { pts: [[0.50, 0.20], [0.50, 0.50], [0.50, 0.80], [0.70, 0.80], [0.25, 0.38], [0.75, 0.38]], minHits: 4 },
-    'u': { pts: [[0.25, 0.42], [0.25, 0.75], [0.50, 0.80], [0.75, 0.50], [0.75, 0.80]], minHits: 3 },
-    'v': { pts: [[0.25, 0.42], [0.50, 0.80], [0.75, 0.42]], minHits: 2 },
-    'w': { pts: [[0.20, 0.42], [0.35, 0.80], [0.50, 0.55], [0.65, 0.80], [0.80, 0.42]], minHits: 3 },
-    'x': { pts: [[0.25, 0.42], [0.50, 0.60], [0.75, 0.78], [0.75, 0.42], [0.25, 0.78]], minHits: 3 },
-    'y': { pts: [[0.25, 0.42], [0.45, 0.75], [0.70, 0.42], [0.70, 0.78], [0.50, 0.95]], minHits: 3 },
-    'z': { pts: [[0.30, 0.42], [0.70, 0.42], [0.40, 0.65], [0.65, 0.80]], minHits: 3 }
-  };
+  function getLetterInkStats(data, w, h, boxX, boxY, boxW, boxH, dpr) {
+    const pad = 12;
+    const startX = Math.max(0, Math.floor((boxX - pad) * dpr));
+    const endX = Math.min(w, Math.ceil((boxX + boxW + pad) * dpr));
+    const startY = Math.max(0, Math.floor((boxY - pad) * dpr));
+    const endY = Math.min(h, Math.ceil((boxY + boxH + pad) * dpr));
 
-  // --- Multi-Criteria Handwriting Validation Algorithm (Waypoint Shape Conformity) ---
+    let inkCount = 0;
+    let minX = endX, maxX = startX, minY = endY, maxY = startY;
+
+    for (let y = startY; y < endY; y += 3) {
+      for (let x = startX; x < endX; x += 3) {
+        const idx = (y * w + x) * 4;
+        if (data[idx + 3] > 40) {
+          inkCount++;
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+
+    const spanW = (inkCount > 0 && boxW > 0) ? (maxX - minX) / (boxW * dpr) : 0;
+    const spanH = (inkCount > 0 && boxH > 0) ? (maxY - minY) / (boxH * dpr) : 0;
+
+    return { inkCount, spanW, spanH };
+  }
+
+  // --- Strict Handwriting Validation Algorithm (Centerline Conformity) ---
   function validateHandwriting() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
@@ -657,7 +614,7 @@
 
     // 1. Must have drawn at least one stroke
     if (strokeCount < 1) {
-      updateFeedbackMessage('⚠️ Write the word before checking! ✏️', 'error');
+      updateFeedbackMessage('✏️ ¡Escribe la palabra con tu dedo o lápiz antes de comprobar!', 'error');
       playOopsAudio();
       return;
     }
@@ -671,93 +628,90 @@
       if (data[i] > 40) totalDrawnPixels++;
     }
 
-    const minInkRequired = 30 * dpr;
+    const minInkRequired = 35 * dpr;
     if (totalDrawnPixels < minInkRequired) {
-      updateFeedbackMessage('✏️ Keep writing! The word needs more strokes.', 'error');
+      updateFeedbackMessage('✏️ ¡Sigue escribiendo! La palabra necesita más trazos.', 'error');
       triggerNeedsImprovement(null);
       return;
     }
 
-    // 2. Measure each letter span & evaluate waypoints
-    const list = WORD_BANKS[currentLevel];
-    const currentWord = list[wordIndex].word;
+    // 2. Measure each letter span & evaluate stroke coverage
     const letterSpans = guideText.querySelectorAll('.letter-char');
     const numLetters = letterSpans.length;
+
+    const computedStyle = window.getComputedStyle(guideText);
+    const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
 
     let validLetterCount = 0;
     let firstMissingChar = null;
     let firstMissingSpan = null;
 
     letterSpans.forEach((span, idx) => {
-      const spanRect = span.getBoundingClientRect();
-      const charRaw = (span.dataset.char || span.textContent.trim());
-      const charStr = charRaw.toUpperCase();
-      let model;
-      if (currentMode === 'cursive' && CURSIVE_MODELS[charRaw.toLowerCase()]) {
-        model = CURSIVE_MODELS[charRaw.toLowerCase()];
-      } else {
-        model = LETTER_MODELS[charStr] || LETTER_MODELS['C'];
-      }
+      const sr = span.getBoundingClientRect();
+      const ch = span.textContent.trim();
+      const cx = sr.left - rect.left + sr.width / 2;
+      const cy = sr.top - rect.top + sr.height / 2;
 
-      const boxX = spanRect.left - rect.left;
-      const boxY = spanRect.top - rect.top;
-      const boxW = spanRect.width;
-      const boxH = spanRect.height;
+      ctx.save();
+      ctx.font = font;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const m = ctx.measureText(ch);
+      ctx.restore();
 
-      // Waypoint hit check:
-      // Search radius R = 20 CSS pixels (scaled by dpr for retina)
-      const R = Math.round(20 * dpr);
-      let hitCount = 0;
+      const glyphLeft = (m.actualBoundingBoxLeft !== undefined)
+        ? (cx - m.actualBoundingBoxLeft)
+        : (sr.left - rect.left);
+      const glyphTop = (m.actualBoundingBoxAscent !== undefined)
+        ? (cy - m.actualBoundingBoxAscent)
+        : (sr.top - rect.top);
+      const glyphW = (m.actualBoundingBoxLeft !== undefined && m.actualBoundingBoxRight !== undefined)
+        ? (m.actualBoundingBoxLeft + m.actualBoundingBoxRight)
+        : sr.width;
+      const glyphH = (m.actualBoundingBoxAscent !== undefined && m.actualBoundingBoxDescent !== undefined)
+        ? (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
+        : sr.height;
 
-      model.pts.forEach(([nx, ny]) => {
-        const tx = Math.round((boxX + nx * boxW) * dpr);
-        const ty = Math.round((boxY + ny * boxH) * dpr);
-        let found = false;
+      // Ink density and spread inside this letter zone
+      const stats = getLetterInkStats(data, w, h, glyphLeft, glyphTop, glyphW, glyphH, dpr);
+      const minInkNeeded = 18 * dpr;
 
-        for (let dy = -R; dy <= R && !found; dy += 3) {
-          for (let dx = -R; dx <= R && !found; dx += 3) {
-            if (dx * dx + dy * dy <= R * R) {
-              const px = tx + dx, py = ty + dy;
-              if (px >= 0 && px < w && py >= 0 && py < h) {
-                if (data[(py * w + px) * 4 + 3] > 40) {
-                  found = true;
-                }
-              }
+      // Letters must have minimal ink and realistic spread (rejects single straight lines or single taps)
+      const hasRealisticSpread = (stats.spanH >= 0.38) && (stats.spanW >= 0.22);
+
+      const strokes = getLetterStrokes(ch, currentMode);
+      let isCharValid = false;
+
+      if (strokes && strokes.length > 0 && stats.inkCount >= minInkNeeded && hasRealisticSpread) {
+        const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 9);
+        const radiusCss = 14; // natural child brush tolerance radius
+        let totalPts = 0;
+        let totalHits = 0;
+        const strokeCoverages = [];
+
+        strokeGroups.forEach(sPts => {
+          let hits = 0;
+          sPts.forEach(pt => {
+            if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
+              hits++;
             }
-          }
-        }
-        if (found) hitCount++;
-      });
+          });
+          totalPts += sPts.length;
+          totalHits += hits;
+          strokeCoverages.push(sPts.length > 0 ? (hits / sPts.length) : 0);
+        });
 
-      // Letter ink density & stroke presence:
-      // Prevents solid block scribbles while ensuring child drew actual strokes
-      let letterInkPixels = 0;
-      let totalLetterSamples = 0;
-      const pad = 10;
-      const startX = Math.max(0, Math.floor(boxX - pad));
-      const endX = Math.min(rect.width, Math.ceil(boxX + boxW + pad));
-      const startY = Math.max(0, Math.floor(boxY - pad));
-      const endY = Math.min(rect.height, Math.ceil(boxY + boxH + pad));
+        const overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
+        const minStrokeCov = strokeCoverages.length > 0 ? Math.min(...strokeCoverages) : 0;
 
-      for (let y = startY; y < endY; y += 4) {
-        for (let x = startX; x < endX; x += 4) {
-          totalLetterSamples++;
-          const idx = (Math.round(y * dpr) * w + Math.round(x * dpr)) * 4;
-          if (data[idx + 3] > 40) {
-            letterInkPixels++;
-          }
-        }
+        // Child must cover at least 58% of overall letter and at least 35% of each component stroke
+        isCharValid = (overallCov >= 0.58) && (minStrokeCov >= 0.35);
       }
-
-      const letterDensity = totalLetterSamples > 0 ? (letterInkPixels / totalLetterSamples) : 0;
-      const minInkNeeded = 18; // At least ~18 sampled points (prevents empty taps)
-      const minHits = model.minHits || Math.max(3, Math.floor(model.pts.length * 0.55));
-      const isCharValid = (hitCount >= minHits) && (letterDensity < 0.58) && (letterInkPixels >= minInkNeeded);
 
       if (isCharValid) {
         validLetterCount++;
       } else if (!firstMissingChar) {
-        firstMissingChar = charStr;
+        firstMissingChar = ch;
         firstMissingSpan = span;
       }
     });
@@ -766,10 +720,10 @@
     // Determine whether user drew heavily outside the entire word area
     const firstSpanRect = letterSpans[0].getBoundingClientRect();
     const lastSpanRect = letterSpans[letterSpans.length - 1].getBoundingClientRect();
-    const totalWordLeft = Math.max(0, (firstSpanRect.left - rect.left) * dpr - 50 * dpr);
-    const totalWordRight = Math.min(w, (lastSpanRect.right - rect.left) * dpr + 50 * dpr);
-    const totalWordTop = Math.max(0, (firstSpanRect.top - rect.top) * dpr - 60 * dpr);
-    const totalWordBottom = Math.min(h, (firstSpanRect.bottom - rect.top) * dpr + 60 * dpr);
+    const totalWordLeft = Math.max(0, (firstSpanRect.left - rect.left) * dpr - 40 * dpr);
+    const totalWordRight = Math.min(w, (lastSpanRect.right - rect.left) * dpr + 40 * dpr);
+    const totalWordTop = Math.max(0, (firstSpanRect.top - rect.top) * dpr - 50 * dpr);
+    const totalWordBottom = Math.min(h, (firstSpanRect.bottom - rect.top) * dpr + 50 * dpr);
 
     let outOfBoundsInk = 0;
     let totalSampledInk = 0;
@@ -786,27 +740,23 @@
     }
 
     const outOfBoundsRatio = totalSampledInk > 0 ? (outOfBoundsInk / totalSampledInk) : 0;
-    if (outOfBoundsRatio > 0.45) {
-      updateFeedbackMessage('💡 Try to write inside the lines or follow the dashed path!', 'error');
+    if (outOfBoundsRatio > 0.40) {
+      updateFeedbackMessage('💡 ¡Intenta trazar siguiendo las líneas puntuadas dentro de las letras!', 'error');
       triggerNeedsImprovement(firstMissingSpan);
       return;
     }
 
-    // 4. Overall Word Validation:
-    // For 3-letter words: all 3 letters must be valid (validLetterCount === 3).
-    // For 4-letter words: at least 3 letters must be valid (validLetterCount >= 3).
-    // For 5-letter words: at least 4 letters must be valid (validLetterCount >= 4).
-    const requiredLetters = numLetters <= 3 ? numLetters : Math.max(3, numLetters - 1);
-    const isWordComplete = validLetterCount >= requiredLetters;
+    // 4. Overall Word Validation: ALL letters must be traced!
+    const isWordComplete = (validLetterCount === numLetters);
 
     if (isWordComplete) {
       clearMissingLetterHints();
       triggerSuccess();
     } else {
       if (firstMissingChar) {
-        updateFeedbackMessage(`Almost! Write the letter '${firstMissingChar.toUpperCase()}' along the path! ✏️`, 'error');
+        updateFeedbackMessage(`✏️ ¡Casi listo! Traza la letra '${firstMissingChar.toUpperCase()}' para completar la palabra.`, 'error');
       } else {
-        updateFeedbackMessage('Follow the dashed guide lines to finish the word!', 'error');
+        updateFeedbackMessage('✏️ Sigue las líneas puntuadas dentro de las letras para completar la palabra.', 'error');
       }
       triggerNeedsImprovement(firstMissingSpan);
     }
@@ -815,7 +765,7 @@
   function triggerSuccess() {
     starsEarned++;
     starsCount.textContent = starsEarned;
-    updateFeedbackMessage('🎉 EXCELLENT JOB! You wrote it! ⭐', 'success');
+    updateFeedbackMessage('🎉 ¡EXCELENTE! ¡Escribiste la palabra genial! ⭐', 'success');
     
     playRandomCheer();
     launchCelebrationConfetti();
@@ -928,7 +878,7 @@
 
   btnClearCanvas.addEventListener('click', () => {
     clearDrawingCanvas();
-    updateFeedbackMessage('🧹 Canvas cleared! Ready to write.', 'normal');
+    updateFeedbackMessage('🧹 ¡Pizarra limpia! Listo para escribir.', 'normal');
   });
 
   btnToggleGuide.addEventListener('click', () => {
