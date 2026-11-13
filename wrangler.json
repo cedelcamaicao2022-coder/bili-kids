@@ -2,7 +2,5 @@
   "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
   "name": "bilikids-adventure",
   "compatibility_date": "2026-11-01",
-  "assets": {
-    "directory": "."
-  }
+  "pages_build_output_dir": "."
 }
