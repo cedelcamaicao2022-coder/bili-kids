@@ -441,9 +441,10 @@ const ObbyStages = [
     hasTerminal: true,
     terminalX: 980,
     terminalY: 260,
-    terminalTargetWord: "SHOP",
+    terminalTargetWord: "STORE",
+    acceptedWords: ["STORE", "SHOP"],
     terminalPromptEn: "Type the missing word: We are having fun in the toy _______!",
-    terminalPromptEs: "Completa la oración con la palabra de tienda en inglés.",
+    terminalPromptEs: "Completa la oración con la palabra 'store' (tienda en inglés).",
     platforms: [
       { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
       { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
@@ -822,9 +823,12 @@ function renderTerminalKeypad() {
 
 function pressTerminalKey(char) {
   sfx.playPop();
-  if (currentTerminalWord.length < targetTerminalAnswer.length) {
+  const maxLen = Math.max(targetTerminalAnswer.length, 6);
+  if (currentTerminalWord.length < maxLen) {
     currentTerminalWord += char;
     updateTerminalDisplay();
+    const physInput = document.getElementById('terminalPhysicalInput');
+    if (physInput) physInput.value = currentTerminalWord;
   }
 }
 
@@ -832,6 +836,8 @@ function pressTerminalDelete() {
   sfx.playPop();
   currentTerminalWord = currentTerminalWord.slice(0, -1);
   updateTerminalDisplay();
+  const physInput = document.getElementById('terminalPhysicalInput');
+  if (physInput) physInput.value = currentTerminalWord;
 }
 
 function handleTerminalInputKey(e) {
@@ -849,7 +855,7 @@ function updateTerminalDisplay() {
   const display = document.getElementById('terminalInputDisplay');
   if (!display) return;
   const remaining = Math.max(0, targetTerminalAnswer.length - currentTerminalWord.length);
-  const text = currentTerminalWord.split('').join(' ') + ' ' + '_ '.repeat(remaining);
+  const text = currentTerminalWord.split('').join(' ') + (remaining > 0 ? ' ' + '_ '.repeat(remaining) : '');
   display.textContent = text.trim();
 }
 
@@ -857,7 +863,11 @@ function submitTerminalWord() {
   const feedback = document.getElementById('terminalFeedbackMsg');
   const stage = ObbyStages[currentObbyStageIndex];
 
-  if (currentTerminalWord.trim() === targetTerminalAnswer) {
+  const wordEntered = currentTerminalWord.trim().toUpperCase();
+  const isCorrect = wordEntered === targetTerminalAnswer || 
+                    (stage.acceptedWords && stage.acceptedWords.map(w => w.toUpperCase()).includes(wordEntered));
+
+  if (isCorrect) {
     sfx.playLaserBeep();
     sfx.playSuccess();
     feedback.innerHTML = `<span style="color:#10b981;">✅ ¡ACCESO AUTORIZADO! Portón de seguridad desbloqueado (+25 pts)</span>`;
@@ -876,6 +886,8 @@ function submitTerminalWord() {
     sfx.playError();
     feedback.innerHTML = `<span style="color:#ef4444;">⚠️ Palabra incorrecta. Inténtalo de nuevo.</span>`;
     currentTerminalWord = "";
+    const physInput = document.getElementById('terminalPhysicalInput');
+    if (physInput) physInput.value = "";
     updateTerminalDisplay();
   }
 }
