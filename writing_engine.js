@@ -67,6 +67,11 @@
   const dashedGuideOverlay = document.getElementById('dashedGuideOverlay');
   const guideText = document.getElementById('guideText');
 
+  // Offscreen Mask Canvas for Strict Letter Boundary Blocking
+  const maskCanvas = document.createElement('canvas');
+  const maskCtx = maskCanvas.getContext('2d');
+  let maskData = null;
+
   const targetWordText = document.getElementById('targetWordText');
   const currentEmoji = document.getElementById('currentEmoji');
   const wordSubHint = document.getElementById('wordSubHint');
@@ -173,6 +178,10 @@
     guideCanvas.style.height = rect.height + 'px';
     gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    // Resize offscreen letter boundary mask
+    maskCanvas.width = rect.width * dpr;
+    maskCanvas.height = rect.height * dpr;
+
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
     }
@@ -266,9 +275,11 @@
   // --- Render Shaded Letters & Dotted Tracing Guidelines ---
   function renderGuideAndMask() {
     const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
     if (rect.width === 0 || rect.height === 0) return;
 
     gctx.clearRect(0, 0, rect.width, rect.height);
+    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
 
     const spans = guideText.querySelectorAll('.letter-char');
     if (!spans || spans.length === 0) return;
@@ -276,6 +287,9 @@
     // Use computed font from guideText so sizes/styles automatically sync
     const computedStyle = window.getComputedStyle(guideText);
     const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
+
+    // Scale mask context with dpr for pixel-perfect hardware clipping
+    maskCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     spans.forEach(span => {
       const sr = span.getBoundingClientRect();
@@ -291,7 +305,6 @@
       gctx.textBaseline = 'middle';
 
       // 1. Shaded letter body ("palabras sombreadas")
-      // Soft, gentle slate-blue tint matching preschool tracing workbooks
       gctx.fillStyle = isMissing ? 'rgba(254, 202, 202, 0.75)' : 'rgba(226, 232, 240, 0.70)';
       gctx.strokeStyle = isMissing ? '#f87171' : 'rgba(148, 163, 184, 0.40)';
       gctx.lineWidth = isMissing ? 2.5 : 1.5;
@@ -315,7 +328,7 @@
         ? (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
         : sr.height;
 
-      // 2. Dashed centerline guidelines INSIDE the letter shape ("líneas puntuadas por dentro como guía")
+      // 2. Dashed centerline guidelines INSIDE the letter shape (Visual Tracing Guide)
       const strokes = getLetterStrokes(ch, currentMode);
       if (strokes && strokes.length > 0) {
         gctx.strokeStyle = isMissing ? '#dc2626' : '#334155';
@@ -350,10 +363,54 @@
       }
 
       gctx.restore();
+
+      // --- B. Render Exact Writing Zone Mask on Offscreen Canvas ---
+      maskCtx.save();
+      maskCtx.font = font;
+      maskCtx.textAlign = 'center';
+      maskCtx.textBaseline = 'middle';
+      maskCtx.fillStyle = '#ffffff';
+      maskCtx.strokeStyle = '#ffffff';
+      // Comfortable preschool writing tolerance matching the shaded letter body
+      maskCtx.lineWidth = 28;
+      maskCtx.lineJoin = 'round';
+      maskCtx.lineCap = 'round';
+      maskCtx.strokeText(ch, cx, cy);
+      maskCtx.fillText(ch, cx, cy);
+      maskCtx.restore();
     });
+
+    // Cache typed pixel array for fast boundary collision checks
+    try {
+      maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data;
+    } catch (e) {
+      maskData = null;
+    }
   }
 
-  // --- Drawing Interaction with Natural Responsive Touch ---
+  // --- Strict Shaded Word Boundary Check ---
+  function isInsideAllowedZone(x, y) {
+    if (!maskData) return true;
+    const dpr = window.devicePixelRatio || 1;
+    const px = Math.round(x * dpr);
+    const py = Math.round(y * dpr);
+    if (px < 0 || px >= maskCanvas.width || py < 0 || py >= maskCanvas.height) return false;
+    const idx = (py * maskCanvas.width + px) * 4;
+    return maskData[idx + 3] > 18;
+  }
+
+  // Hardware-accelerated compositing to clip any ink outside the shaded letters
+  function applyMaskClipping() {
+    if (!maskCanvas || currentTool === 'eraser') return;
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // 1:1 pixel coordinates
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.drawImage(maskCanvas, 0, 0);
+    ctx.restore();
+    setupCanvasContext();
+  }
+
+  // --- Drawing Interaction with Shaded Word Boundary Locking ---
   let isDrawing = false;
   let points = [];
   let strokeCount = 0;
@@ -371,6 +428,13 @@
   function startDrawing(e) {
     e.preventDefault();
     const pt = getCanvasCoords(e);
+
+    // Lock drawing strictly to the shaded word area
+    if (currentTool !== 'eraser' && !isInsideAllowedZone(pt.x, pt.y)) {
+      isDrawing = false;
+      return;
+    }
+
     isDrawing = true;
     points = [pt];
     setupCanvasContext();
@@ -378,16 +442,46 @@
     ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
     ctx.fillStyle = ctx.strokeStyle;
     ctx.fill();
+    applyMaskClipping();
     strokeCount++;
     clearMissingLetterHints();
   }
 
   function drawMove(e) {
-    if (!isDrawing) return;
     e.preventDefault();
     const pt = getCanvasCoords(e);
+    const inside = isInsideAllowedZone(pt.x, pt.y);
+
+    if (!isDrawing) {
+      // If user starts touch outside but drags into the shaded letter, start drawing
+      if (inside && (e.buttons > 0 || (e.touches && e.touches.length > 0))) {
+        isDrawing = true;
+        points = [pt];
+        setupCanvasContext();
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
+        ctx.fillStyle = ctx.strokeStyle;
+        ctx.fill();
+        applyMaskClipping();
+        strokeCount++;
+      }
+      return;
+    }
+
+    // If writing moved outside the shaded letter, clip immediately and pause stroke
+    if (currentTool !== 'eraser' && !inside) {
+      if (points.length > 0) {
+        points.push(pt);
+        renderCurrentStroke();
+        applyMaskClipping();
+      }
+      points = [];
+      return;
+    }
+
     points.push(pt);
     renderCurrentStroke();
+    applyMaskClipping();
   }
 
   function renderCurrentStroke() {
@@ -418,6 +512,7 @@
     try { e.preventDefault(); } catch (err) {}
     isDrawing = false;
     points = [];
+    applyMaskClipping();
   }
 
   canvas.addEventListener('pointerdown', startDrawing);
@@ -470,10 +565,10 @@
     // Clear Canvas for new word
     clearDrawingCanvas();
     updateGuideVisibility();
-    updateFeedbackMessage('✏️ ¡Escribe la palabra con tu dedo o lápiz! / Write the word!', 'normal');
+    updateFeedbackMessage('✏️ ¡Traza la palabra sobre las letras sombreadas!', 'normal');
     renderWordRibbon();
 
-    // Render shaded letters and dotted guidelines after DOM layout updates
+    // Render shaded letters, dotted guidelines and boundary mask
     requestAnimationFrame(() => {
       renderGuideAndMask();
     });
@@ -524,7 +619,7 @@
   }
 
   // --- Stroke Checkpoint Sampling & Spatial Validation Helpers ---
-  function sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, step = 9) {
+  function sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, step = 10) {
     const strokeGroups = [];
     strokes.forEach(stroke => {
       const pts = [];
@@ -560,14 +655,14 @@
     const minY = Math.max(0, cy - r);
     const maxY = Math.min(h - 1, cy + r);
 
-    for (let y = minY; y <= maxY; y += 2) {
+    for (let y = minY; y <= maxY; y += 3) {
       const dy = y - cy;
       const dy2 = dy * dy;
-      for (let x = minX; x <= maxX; x += 2) {
+      for (let x = minX; x <= maxX; x += 3) {
         const dx = x - cx;
         if (dx * dx + dy2 <= r2) {
           const idx = (y * w + x) * 4;
-          if (data[idx + 3] > 40) {
+          if (data[idx + 3] > 35) {
             return true;
           }
         }
@@ -589,7 +684,7 @@
     for (let y = startY; y < endY; y += 3) {
       for (let x = startX; x < endX; x += 3) {
         const idx = (y * w + x) * 4;
-        if (data[idx + 3] > 40) {
+        if (data[idx + 3] > 35) {
           inkCount++;
           if (x < minX) minX = x;
           if (x > maxX) maxX = x;
@@ -605,7 +700,10 @@
     return { inkCount, spanW, spanH };
   }
 
-  // --- Strict Handwriting Validation Algorithm (Centerline Conformity) ---
+  // --- Friendly Preschool Handwriting Validation Algorithm ---
+  // The dashed line is a visual guide, not a rigid force majeure.
+  // We verify that the child traced inside each letter of the shaded word,
+  // without skipping letters or doing flat horizontal swipes.
   function validateHandwriting() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
@@ -625,17 +723,17 @@
     // Total drawn ink count
     let totalDrawnPixels = 0;
     for (let i = 3; i < data.length; i += 16) {
-      if (data[i] > 40) totalDrawnPixels++;
+      if (data[i] > 35) totalDrawnPixels++;
     }
 
-    const minInkRequired = 35 * dpr;
+    const minInkRequired = 25 * dpr;
     if (totalDrawnPixels < minInkRequired) {
-      updateFeedbackMessage('✏️ ¡Sigue escribiendo! La palabra necesita más trazos.', 'error');
+      updateFeedbackMessage('✏️ ¡Sigue escribiendo! Traza las letras de la palabra.', 'error');
       triggerNeedsImprovement(null);
       return;
     }
 
-    // 2. Measure each letter span & evaluate stroke coverage
+    // 2. Measure each letter span & evaluate natural child tracing
     const letterSpans = guideText.querySelectorAll('.letter-char');
     const numLetters = letterSpans.length;
 
@@ -674,38 +772,39 @@
 
       // Ink density and spread inside this letter zone
       const stats = getLetterInkStats(data, w, h, glyphLeft, glyphTop, glyphW, glyphH, dpr);
-      const minInkNeeded = 18 * dpr;
+      const minInkNeeded = 12 * dpr; // at least some genuine ink in this letter
 
-      // Letters must have minimal ink and realistic spread (rejects single straight lines or single taps)
-      const hasRealisticSpread = (stats.spanH >= 0.38) && (stats.spanW >= 0.22);
+      // Spread check: letter must have natural 2D presence (rejects a single horizontal swipe or tiny tap)
+      const hasNaturalSpread = (stats.spanH >= 0.18);
 
       const strokes = getLetterStrokes(ch, currentMode);
       let isCharValid = false;
 
-      if (strokes && strokes.length > 0 && stats.inkCount >= minInkNeeded && hasRealisticSpread) {
-        const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 9);
-        const radiusCss = 14; // natural child brush tolerance radius
-        let totalPts = 0;
-        let totalHits = 0;
-        const strokeCoverages = [];
+      if (stats.inkCount >= minInkNeeded && hasNaturalSpread) {
+        if (strokes && strokes.length > 0) {
+          // Generous preschool guide tolerance: R = 28px
+          // The dashed line is just a guide, so a relaxed 25% proximity is plenty!
+          const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 10);
+          const radiusCss = 28;
+          let totalPts = 0;
+          let totalHits = 0;
 
-        strokeGroups.forEach(sPts => {
-          let hits = 0;
-          sPts.forEach(pt => {
-            if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
-              hits++;
-            }
+          strokeGroups.forEach(sPts => {
+            sPts.forEach(pt => {
+              if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
+                totalHits++;
+              }
+            });
+            totalPts += sPts.length;
           });
-          totalPts += sPts.length;
-          totalHits += hits;
-          strokeCoverages.push(sPts.length > 0 ? (hits / sPts.length) : 0);
-        });
 
-        const overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
-        const minStrokeCov = strokeCoverages.length > 0 ? Math.min(...strokeCoverages) : 0;
-
-        // Child must cover at least 58% of overall letter and at least 35% of each component stroke
-        isCharValid = (overallCov >= 0.58) && (minStrokeCov >= 0.35);
+          const overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
+          // As long as the child traced within the letter body (>= 25% proximity)
+          isCharValid = (overallCov >= 0.25);
+        } else {
+          // Fallback if no strokes defined: ink count + spread is sufficient
+          isCharValid = true;
+        }
       }
 
       if (isCharValid) {
@@ -716,37 +815,7 @@
       }
     });
 
-    // 3. Out-Of-Bounds Check:
-    // Determine whether user drew heavily outside the entire word area
-    const firstSpanRect = letterSpans[0].getBoundingClientRect();
-    const lastSpanRect = letterSpans[letterSpans.length - 1].getBoundingClientRect();
-    const totalWordLeft = Math.max(0, (firstSpanRect.left - rect.left) * dpr - 40 * dpr);
-    const totalWordRight = Math.min(w, (lastSpanRect.right - rect.left) * dpr + 40 * dpr);
-    const totalWordTop = Math.max(0, (firstSpanRect.top - rect.top) * dpr - 50 * dpr);
-    const totalWordBottom = Math.min(h, (firstSpanRect.bottom - rect.top) * dpr + 50 * dpr);
-
-    let outOfBoundsInk = 0;
-    let totalSampledInk = 0;
-    for (let y = 0; y < h; y += 4) {
-      for (let x = 0; x < w; x += 4) {
-        const idx = (y * w + x) * 4;
-        if (data[idx + 3] > 40) {
-          totalSampledInk++;
-          if (x < totalWordLeft || x > totalWordRight || y < totalWordTop || y > totalWordBottom) {
-            outOfBoundsInk++;
-          }
-        }
-      }
-    }
-
-    const outOfBoundsRatio = totalSampledInk > 0 ? (outOfBoundsInk / totalSampledInk) : 0;
-    if (outOfBoundsRatio > 0.40) {
-      updateFeedbackMessage('💡 ¡Intenta trazar siguiendo las líneas puntuadas dentro de las letras!', 'error');
-      triggerNeedsImprovement(firstMissingSpan);
-      return;
-    }
-
-    // 4. Overall Word Validation: ALL letters must be traced!
+    // 3. Overall Word Validation: ALL letters of the word must have been traced!
     const isWordComplete = (validLetterCount === numLetters);
 
     if (isWordComplete) {
@@ -756,7 +825,7 @@
       if (firstMissingChar) {
         updateFeedbackMessage(`✏️ ¡Casi listo! Traza la letra '${firstMissingChar.toUpperCase()}' para completar la palabra.`, 'error');
       } else {
-        updateFeedbackMessage('✏️ Sigue las líneas puntuadas dentro de las letras para completar la palabra.', 'error');
+        updateFeedbackMessage('✏️ Escribe todas las letras de la palabra para completarla.', 'error');
       }
       triggerNeedsImprovement(firstMissingSpan);
     }
