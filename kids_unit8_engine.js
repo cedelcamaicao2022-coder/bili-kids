@@ -306,15 +306,13 @@ const ObbyStages = [
       { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
       { x: 235, y: 300, w: 120, h: 20, type: 'shoe_box' },
       { x: 385, y: 260, w: 130, h: 20, type: 'shoe_box' },
-      // Plataforma de aproximación a los dos puentes
       { x: 545, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes misteriosos (sin pistas ✅ ni ❌)
-      { x: 675, y: 215, w: 250, h: 24, type: 'dual_bridge_solid', label: "These white sneakers are new." },
-      { x: 675, y: 310, w: 250, h: 24, type: 'dual_bridge_wrong', label: "This white sneakers are new." },
-      // Plataforma de aterrizaje post-puente
-      { x: 955, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1105, y: 300, w: 75, h: 18, type: 'jelly' },
-      { x: 1210, y: 320, w: 240, h: 80, type: 'normal' }
+      // Dos puentes misteriosos (TOP es correcto)
+      { x: 675, y: 215, w: 285, h: 28, type: 'dual_bridge_solid', label: "These white sneakers are new." },
+      { x: 675, y: 310, w: 285, h: 28, type: 'dual_bridge_wrong', label: "This white sneakers are new." },
+      { x: 980, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1120, y: 300, w: 75, h: 18, type: 'jelly' },
+      { x: 1220, y: 320, w: 240, h: 80, type: 'normal' }
     ],
     items: [
       { id: "blue_jacket", x: 420, y: 210, name: "This Blue Jacket", icon: "🧥", collected: false }
@@ -323,7 +321,7 @@ const ObbyStages = [
       { x: 280, y: 260, collected: false },
       { x: 580, y: 230, collected: false },
       { x: 1010, y: 210, collected: false },
-      { x: 1140, y: 200, collected: false }
+      { x: 1150, y: 200, collected: false }
     ],
     gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
   },
@@ -343,13 +341,12 @@ const ObbyStages = [
       { x: 215, y: 300, w: 160, h: 20, type: 'conveyor_right', speed: 1.4 },
       { x: 405, y: 270, w: 120, h: 20, type: 'normal' },
       { x: 555, y: 270, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de alimentos (sin pistas)
-      { x: 685, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "We need some milk and three apples." },
-      { x: 685, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "We need a milk and three breads." },
-      // Plataforma receptora con cinta transportadora en reversa
-      { x: 975, y: 250, w: 160, h: 20, type: 'conveyor_left', speed: -1.2 },
-      { x: 1165, y: 280, w: 75, h: 18, type: 'jelly' },
-      { x: 1270, y: 320, w: 240, h: 80, type: 'normal' }
+      // Dos puentes de alimentos (BOTTOM es correcto)
+      { x: 685, y: 215, w: 290, h: 28, type: 'dual_bridge_wrong', label: "We need a milk and three breads." },
+      { x: 685, y: 310, w: 290, h: 28, type: 'dual_bridge_solid', label: "We need some milk and three apples." },
+      { x: 995, y: 250, w: 160, h: 20, type: 'conveyor_left', speed: -1.2 },
+      { x: 1180, y: 280, w: 75, h: 18, type: 'jelly' },
+      { x: 1280, y: 320, w: 240, h: 80, type: 'normal' }
     ],
     items: [
       { id: "red_apples", x: 280, y: 250, name: "These Red Apples", icon: "🍎", collected: false }
@@ -358,9 +355,9 @@ const ObbyStages = [
       { x: 450, y: 225, collected: false },
       { x: 600, y: 220, collected: false },
       { x: 1030, y: 200, collected: false },
-      { x: 1200, y: 190, collected: false }
+      { x: 1210, y: 190, collected: false }
     ],
-    gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
+    gate: { x: 1330, y: 220, w: 30, h: 100, unlocked: false }
   },
   {
     id: 2,
@@ -383,9 +380,7 @@ const ObbyStages = [
       { x: 235, y: 300, w: 120, h: 20, type: 'normal' },
       { x: 385, y: 270, w: 75, h: 18, type: 'jelly' },
       { x: 495, y: 190, w: 140, h: 20, type: 'normal' },
-      // Plataforma de la terminal interactiva
       { x: 675, y: 270, w: 170, h: 20, type: 'normal' },
-      // Plataformas post-terminal hacia el portón de salida
       { x: 885, y: 240, w: 120, h: 20, type: 'normal' },
       { x: 1035, y: 280, w: 75, h: 18, type: 'jelly' },
       { x: 1145, y: 320, w: 250, h: 80, type: 'normal' }
@@ -415,13 +410,12 @@ const ObbyStages = [
       { x: 225, y: 290, w: 110, h: 20, type: 'shoe_box' },
       { x: 365, y: 250, w: 120, h: 20, type: 'shoe_box' },
       { x: 515, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de concordancia singular/plural
-      { x: 645, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "How much is this warm coat?" },
-      { x: 645, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "How much are this warm coat?" },
-      // Plataforma de llegada
-      { x: 935, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1085, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1195, y: 320, w: 250, h: 80, type: 'normal' }
+      // Dos puentes de concordancia singular/plural (BOTTOM es correcto)
+      { x: 645, y: 215, w: 285, h: 28, type: 'dual_bridge_wrong', label: "How much are this warm coat?" },
+      { x: 645, y: 310, w: 285, h: 28, type: 'dual_bridge_solid', label: "How much is this warm coat?" },
+      { x: 950, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1100, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1200, y: 320, w: 250, h: 80, type: 'normal' }
     ],
     items: [
       { id: "warm_scarf", x: 410, y: 200, name: "This Wool Scarf", icon: "🧣", collected: false }
@@ -430,16 +424,16 @@ const ObbyStages = [
       { x: 270, y: 240, collected: false },
       { x: 550, y: 230, collected: false },
       { x: 980, y: 210, collected: false },
-      { x: 1120, y: 200, collected: false }
+      { x: 1130, y: 200, collected: false }
     ],
     gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
   },
   {
     id: 4,
     title: "Stage 5 • The Toy Store Castle & Secret Password 🏆👑",
-    desc: "¡El gran reto final! Elige el puente de cortesía (would like to) y escribe la contraseña final en la caja registradora.",
-    promptEn: "Cross the polite bridge and type the secret password to win the Golden Trophy!",
-    promptEs: "¡Cruza el puente educado ('would like to') y escribe la palabra secreta para ganar el Trofeo!",
+    desc: "¡Cruza el puente de cortesía ('would like to') y escribe la contraseña en la caja registradora!",
+    promptEn: "Cross the polite bridge and type the secret password to win the toy store trophy!",
+    promptEs: "¡Cruza el puente educado ('would like to') y escribe la palabra secreta para desbloquear la tienda!",
     requiredItems: [],
     checkpointX: 40,
     finishX: 1400,
@@ -455,22 +449,131 @@ const ObbyStages = [
       { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
       { x: 350, y: 270, w: 75, h: 18, type: 'jelly' },
       { x: 455, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de cortesía 'would like to'
-      { x: 585, y: 215, w: 260, h: 24, type: 'dual_bridge_solid', label: "I would like to buy that toy robot." },
-      { x: 585, y: 310, w: 260, h: 24, type: 'dual_bridge_wrong', label: "I would like buy that toy robot." },
-      // Plataforma de la terminal final
-      { x: 875, y: 260, w: 190, h: 20, type: 'normal' },
-      { x: 1095, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1205, y: 320, w: 260, h: 80, type: 'normal' }
+      // Dos puentes de cortesía (TOP es correcto)
+      { x: 585, y: 215, w: 290, h: 28, type: 'dual_bridge_solid', label: "I would like to buy that toy robot." },
+      { x: 585, y: 310, w: 290, h: 28, type: 'dual_bridge_wrong', label: "I would like buy that toy robot." },
+      { x: 895, y: 260, w: 190, h: 20, type: 'normal' },
+      { x: 1115, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1215, y: 320, w: 260, h: 80, type: 'normal' }
     ],
     items: [],
     coins: [
       { x: 250, y: 250, collected: false },
       { x: 490, y: 230, collected: false },
       { x: 920, y: 210, collected: false },
-      { x: 1130, y: 200, collected: false }
+      { x: 1150, y: 200, collected: false }
     ],
     gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
+  },
+  {
+    id: 5,
+    title: "Stage 6 • The Electronics Arcade (Comparatives) 📱⚡",
+    desc: "Esquiva lásers y plataformas móviles. Elige el puente con el comparativo correcto en inglés.",
+    promptEn: "Find THIS smart watch and choose the bridge with the correct comparative!",
+    promptEs: "¡Encuentra ESTE reloj inteligente y elige el puente con el comparativo correcto!",
+    requiredItems: ["smart_watch"],
+    checkpointX: 40,
+    finishX: 1450,
+    bgColor: "#092347",
+    hasTerminal: false,
+    platforms: [
+      { x: 0, y: 340, w: 170, h: 60, type: 'normal' },
+      { x: 200, y: 300, w: 110, h: 20, type: 'moving_horizontal', minX: 190, maxX: 330, speed: 1.5, dir: 1 },
+      { x: 380, y: 220, w: 16, h: 120, type: 'laser_hazard', blinking: true },
+      { x: 430, y: 270, w: 110, h: 20, type: 'normal' },
+      { x: 570, y: 270, w: 90, h: 20, type: 'normal' },
+      // Dos puentes de comparativos (BOTTOM es correcto)
+      { x: 680, y: 215, w: 300, h: 28, type: 'dual_bridge_wrong', label: "This tablet is more cheaper than that laptop." },
+      { x: 680, y: 310, w: 300, h: 28, type: 'dual_bridge_solid', label: "This tablet is cheaper than that laptop." },
+      { x: 1000, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1145, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1245, y: 320, w: 250, h: 80, type: 'normal' }
+    ],
+    items: [
+      { id: "smart_watch", x: 470, y: 210, name: "This Smart Watch", icon: "⌚", collected: false }
+    ],
+    coins: [
+      { x: 260, y: 240, collected: false },
+      { x: 610, y: 220, collected: false },
+      { x: 1050, y: 210, collected: false },
+      { x: 1180, y: 190, collected: false }
+    ],
+    gate: { x: 1330, y: 220, w: 30, h: 100, unlocked: false }
+  },
+  {
+    id: 6,
+    title: "Stage 7 • The Rooftop Garden Café (Quantifiers & Plurals) 🧁☕",
+    desc: "Supera plataformas de nubes que colapsan y corrientes de aire. Reconoce los cuantificadores adecuados en inglés.",
+    promptEn: "Collect THESE cupcakes and jump onto the bridge with correct quantifiers!",
+    promptEs: "¡Recoge ESTOS pastelitos y salta al puente con los cuantificadores correctos!",
+    requiredItems: ["cupcake_box"],
+    checkpointX: 40,
+    finishX: 1450,
+    bgColor: "#064e3b",
+    hasTerminal: false,
+    platforms: [
+      { x: 0, y: 340, w: 170, h: 60, type: 'normal' },
+      { x: 200, y: 300, w: 100, h: 20, type: 'crumble' },
+      { x: 330, y: 260, w: 75, h: 18, type: 'jelly' },
+      { x: 440, y: 190, w: 110, h: 20, type: 'normal' },
+      { x: 580, y: 260, w: 90, h: 20, type: 'normal' },
+      // Dos puentes de cuantificadores (TOP es correcto)
+      { x: 690, y: 215, w: 300, h: 28, type: 'dual_bridge_solid', label: "There are a lot of customers in the bakery." },
+      { x: 690, y: 310, w: 300, h: 28, type: 'dual_bridge_wrong', label: "There are much customers in the bakery." },
+      { x: 1010, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1155, y: 280, w: 85, h: 20, type: 'crumble' },
+      { x: 1265, y: 320, w: 250, h: 80, type: 'normal' }
+    ],
+    items: [
+      { id: "cupcake_box", x: 480, y: 140, name: "These Delicious Cupcakes", icon: "🧁", collected: false }
+    ],
+    coins: [
+      { x: 250, y: 250, collected: false },
+      { x: 620, y: 210, collected: false },
+      { x: 1060, y: 210, collected: false },
+      { x: 1200, y: 210, collected: false }
+    ],
+    gate: { x: 1350, y: 220, w: 30, h: 100, unlocked: false }
+  },
+  {
+    id: 7,
+    title: "Stage 8 • The Grand Penthouse & Diamond Trophy (Superlatives) 💎🏆👑",
+    desc: "¡El gran clímax del Obby! Cintas transportadoras, lásers dobles, superlativos y la terminal final para ganar el Gran Trofeo.",
+    promptEn: "Cross the superlative bridge and type the secret password to win the Diamond Trophy!",
+    promptEs: "¡Cruza el puente superlativo y escribe la palabra secreta para ganar el Trofeo de Diamante!",
+    requiredItems: [],
+    checkpointX: 40,
+    finishX: 1550,
+    bgColor: "#4c0519",
+    hasTerminal: true,
+    terminalX: 1100,
+    terminalY: 260,
+    terminalTargetWord: "BEST",
+    terminalPromptEn: "Type the missing word: This golden trophy is the _______ in the world!",
+    terminalPromptEs: "Completa con el superlativo de 'good' en inglés (el mejor).",
+    platforms: [
+      { x: 0, y: 340, w: 160, h: 60, type: 'normal' },
+      { x: 190, y: 300, w: 140, h: 20, type: 'conveyor_right', speed: 1.6 },
+      { x: 360, y: 270, w: 100, h: 20, type: 'moving_horizontal', minX: 350, maxX: 470, speed: 1.8, dir: 1 },
+      { x: 500, y: 180, w: 16, h: 130, type: 'laser_hazard', blinking: true },
+      { x: 540, y: 270, w: 90, h: 20, type: 'normal' },
+      // Dos puentes de superlativos (BOTTOM es correcto)
+      { x: 650, y: 215, w: 300, h: 28, type: 'dual_bridge_wrong', label: "This is the most cheapest toy in the mall." },
+      { x: 650, y: 310, w: 300, h: 28, type: 'dual_bridge_solid', label: "This is the cheapest toy in the mall." },
+      { x: 970, y: 260, w: 120, h: 20, type: 'normal' },
+      { x: 1040, y: 260, w: 150, h: 20, type: 'normal' },
+      { x: 1220, y: 290, w: 75, h: 18, type: 'jelly' },
+      { x: 1320, y: 320, w: 260, h: 80, type: 'normal' }
+    ],
+    items: [],
+    coins: [
+      { x: 260, y: 250, collected: false },
+      { x: 410, y: 220, collected: false },
+      { x: 580, y: 220, collected: false },
+      { x: 1010, y: 210, collected: false },
+      { x: 1260, y: 200, collected: false }
+    ],
+    gate: { x: 1440, y: 220, w: 30, h: 100, unlocked: false }
   }
 ];
 
@@ -546,6 +649,15 @@ function loadObbyStage(index) {
   stage.items.forEach(it => it.collected = false);
   stage.coins.forEach(c => c.collected = false);
   stage.gate.unlocked = false;
+
+  // Reset dynamic platform states
+  stage.platforms.forEach(p => {
+    delete p.crumbleTimer;
+    delete p.broken;
+    delete p.respawnTimer;
+    if (p.origX !== undefined) p.x = p.origX;
+    else p.origX = p.x;
+  });
 
   // Cerrar terminal si estaba abierta
   const termModal = document.getElementById('obbyTerminalModal');
@@ -823,9 +935,65 @@ function obbyGameLoop() {
   Player.x += Player.vx;
   Player.y += Player.vy;
 
+  // Actualizar plataformas dinámicas (móviles y que se desmoronan)
+  stage.platforms.forEach(p => {
+    if (p.type === 'moving_horizontal') {
+      if (p.dir === undefined) p.dir = 1;
+      const spd = (p.speed || 1.5);
+      p.x += spd * p.dir;
+      if (p.x >= p.maxX) p.dir = -1;
+      if (p.x <= p.minX) p.dir = 1;
+    }
+    if (p.type === 'crumble') {
+      if (p.crumbleTimer > 0) {
+        p.crumbleTimer--;
+        if (p.crumbleTimer === 0) {
+          p.broken = true;
+          p.respawnTimer = 150; // ~2.5s
+          sfx.playBoing();
+        }
+      } else if (p.broken) {
+        p.respawnTimer--;
+        if (p.respawnTimer <= 0) {
+          p.broken = false;
+          delete p.crumbleTimer;
+        }
+      }
+    }
+  });
+
   // Colisión con plataformas
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
+    // Si es un obstáculo de láser de seguridad
+    if (p.type === 'laser_hazard') {
+      const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
+      if (laserActive) {
+        if (
+          Player.x + Player.w > p.x &&
+          Player.x < p.x + p.w &&
+          Player.y + Player.h > p.y &&
+          Player.y < p.y + p.h
+        ) {
+          sfx.playLaserBeep();
+          sfx.playError();
+          Player.x = stage.checkpointX;
+          Player.y = 260;
+          Player.vx = 0;
+          Player.vy = 0;
+          Player.jumpsLeft = Player.maxJumps;
+          showObbyFloatingBanner("⚡ ¡Cuidado con el láser de seguridad! Regresando al checkpoint...", 150);
+          return;
+        }
+      }
+      return;
+    }
+
+    // Si es una plataforma crumble que colapsó, ignorar colisión
+    if (p.type === 'crumble' && p.broken) {
+      return;
+    }
+
     // Si es un puente dual incorrecto, colapsa y devuelve a Barnaby al inicio del nivel
     if (p.type === 'dual_bridge_wrong') {
       if (
@@ -882,6 +1050,16 @@ function obbyGameLoop() {
         Player.isGrounded = false;
         sfx.playBoing();
         createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, true);
+      }
+
+      // Plataforma que se desmorona al pisarla
+      if (p.type === 'crumble' && !p.broken) {
+        if (p.crumbleTimer === undefined) p.crumbleTimer = 45; // ~0.75s
+      }
+
+      // Plataforma Móvil
+      if (p.type === 'moving_horizontal') {
+        Player.x += (p.speed || 1.5) * (p.dir || 1);
       }
 
       // Cinta Transportadora
@@ -1035,19 +1213,61 @@ function obbyGameLoop() {
       ctx.font = "bold 11px sans-serif";
       const arrow = p.type === 'conveyor_right' ? '➔➔➔' : '⬅⬅⬅';
       ctx.fillText(arrow, rx + p.w / 2 - 18, p.y + 14);
+    } else if (p.type === 'moving_horizontal') {
+      // Plataforma flotante móvil
+      ctx.fillStyle = "#0284c7";
+      ctx.fillRect(rx, p.y, p.w, p.h);
+      ctx.fillStyle = "#38bdf8";
+      ctx.fillRect(rx, p.y, p.w, 4);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 10px Outfit, sans-serif";
+      ctx.fillText("⚡ HOVER ➔", rx + p.w / 2 - 26, p.y + 14);
+    } else if (p.type === 'crumble') {
+      // Plataforma de nube que colapsa
+      if (p.broken) {
+        ctx.strokeStyle = "rgba(244, 114, 182, 0.4)";
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(rx, p.y, p.w, p.h);
+        ctx.setLineDash([]);
+      } else {
+        const shake = (p.crumbleTimer !== undefined && p.crumbleTimer > 0) ? Math.sin(Date.now() / 20) * 3 : 0;
+        ctx.fillStyle = p.crumbleTimer ? "#f43f5e" : "#ec4899";
+        ctx.fillRect(rx + shake, p.y, p.w, p.h);
+        ctx.fillStyle = "#fbcfe8";
+        ctx.fillRect(rx + shake, p.y, p.w, 4);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 9px Outfit, sans-serif";
+        ctx.fillText(p.crumbleTimer ? "⚠ CRUMBLING!" : "☁ CLOUD", rx + shake + p.w / 2 - 28, p.y + 13);
+      }
+    } else if (p.type === 'laser_hazard') {
+      // Obstáculo de rayo láser
+      const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
+      // Postes emisores arriba y abajo
+      ctx.fillStyle = "#475569";
+      ctx.fillRect(rx - 2, p.y, p.w + 4, 8);
+      ctx.fillRect(rx - 2, p.y + p.h - 8, p.w + 4, 8);
+      if (laserActive) {
+        ctx.fillStyle = "rgba(239, 68, 68, 0.85)";
+        ctx.fillRect(rx + 4, p.y + 8, p.w - 8, p.h - 16);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(rx + 6, p.y + 8, 4, p.h - 16);
+        ctx.fillStyle = "#fee2e2";
+        ctx.font = "bold 9px sans-serif";
+        ctx.fillText("⚡ LASER", rx - 10, p.y + p.h / 2);
+      }
     } else if (p.type === 'dual_bridge_solid' || p.type === 'dual_bridge_wrong') {
       // Dibujar ambos puentes IDÉNTICOS (estilo Roblox Obby: madera morada brillante con texto blanco limpio, SIN SPOILERS)
       ctx.fillStyle = "#312e81";
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#6366f1";
       ctx.fillRect(rx, p.y, p.w, 3);
-      // Texto neutral con la oración en inglés
+      // Texto neutral con la oración en inglés (20% más grande: 13.5px)
       ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 11px Outfit, sans-serif";
-      ctx.fillText(p.label, rx + 12, p.y + 16);
+      ctx.font = "bold 13.5px Outfit, sans-serif";
+      ctx.fillText(p.label, rx + 12, p.y + 19);
       // Icono decorativo de puente
-      ctx.font = "12px sans-serif";
-      ctx.fillText("🌉", rx + p.w - 24, p.y + 16);
+      ctx.font = "bold 14px sans-serif";
+      ctx.fillText("🌉", rx + p.w - 26, p.y + 19);
     } else {
       // Plataforma normal
       ctx.fillStyle = "#475569";
@@ -1262,7 +1482,7 @@ function restartObbyStage() {
 
 function showObbyVictoryScreen() {
   sfx.playApplause();
-  AppState.addStars(50);
+  AppState.addStars(80);
 
   const container = document.querySelector('.obby-game-container');
   if (!container) return;
@@ -1271,10 +1491,10 @@ function showObbyVictoryScreen() {
     <div style="text-align:center; padding:36px 20px; background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-radius:24px; border:3px solid #8b5cf6;">
       <div style="font-size:4rem; margin-bottom:12px; animation:frogJumpSplash 0.8s ease infinite alternate;">🏆👑🛍️</div>
       <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#5b21b6; margin-bottom:10px;">
-        ¡CAMPEÓN DEL MALL OBBY RUN!
+        ¡CAMPEÓN DEL MALL OBBY RUN 2D!
       </h2>
       <p style="font-size:1.15rem; color:#6d28d9; max-width:640px; margin:0 auto 20px; line-height:1.5;">
-        ¡Barnaby superó todas las plataformas, esquivó obstáculos y desbloqueó las 3 tiendas departamentales de Cambridge Movers! Ganaste <strong>+50 pts bonus</strong> y todas las monedas del centro comercial.
+        ¡Barnaby superó todas las plataformas, esquivó lásers y cintas transportadoras, y completó los <strong>8 mundos departamentales</strong> del centro comercial con gramática Cambridge A2 Movers! Ganaste <strong>+80 pts bonus</strong> y la Corona Dorada.
       </p>
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
         <button class="btn-back-map" style="background:#7c3aed; color:#ffffff; border-color:#7c3aed; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('goldquest', document.querySelectorAll('.tab-btn')[1])">

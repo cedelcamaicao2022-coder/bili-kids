@@ -1,5 +1,4 @@
-// Bilikids Audio Manifest (Auto-generated)
-window.BilikidsAudioManifest = {
+window.KIDS_AUDIO_MANIFEST = {
   "hello good morning welcome to bilikids school": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
   "u1_sc_01_alex": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
   "nice to meet you maya are you a new student here": "assets/kids_audio/scenarios/u1_sc_02_alex.mp3",
@@ -717,5 +716,15 @@ window.BilikidsAudioManifest = {
   "stomp your feet": "assets/toddlers_media/audio/bili_toddler_stomp_feet.mp3",
   "stompyourfeet": "assets/toddlers_media/audio/bili_toddler_stomp_feet.mp3",
   "stomp your feet.": "assets/toddlers_media/audio/bili_toddler_stomp_feet.mp3",
-  "toddler_stomp_feet": "assets/toddlers_media/audio/bili_toddler_stomp_feet.mp3"
+  "toddler_stomp_feet": "assets/toddlers_media/audio/bili_toddler_stomp_feet.mp3",
+  "find this smart watch and choose the bridge with the correct comparative": "assets/kids_audio/scenarios/u8_obby_stage6.mp3",
+  "u8_obby_stage6": "assets/kids_audio/scenarios/u8_obby_stage6.mp3",
+  "collect these cupcakes and jump onto the bridge with correct quantifiers": "assets/kids_audio/scenarios/u8_obby_stage7.mp3",
+  "u8_obby_stage7": "assets/kids_audio/scenarios/u8_obby_stage7.mp3",
+  "cross the superlative bridge and type the secret password to win the diamond trophy": "assets/kids_audio/scenarios/u8_obby_stage8.mp3",
+  "u8_obby_stage8": "assets/kids_audio/scenarios/u8_obby_stage8.mp3",
+  "this smart watch": "assets/kids_audio/scenarios/u8_item_smart_watch.mp3",
+  "u8_item_smart_watch": "assets/kids_audio/scenarios/u8_item_smart_watch.mp3",
+  "these delicious cupcakes": "assets/kids_audio/scenarios/u8_item_cupcakes.mp3",
+  "u8_item_cupcakes": "assets/kids_audio/scenarios/u8_item_cupcakes.mp3"
 };
