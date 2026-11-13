@@ -808,6 +808,7 @@
 
         readerStoryBadge: document.getElementById('readerStoryBadge'),
         readerStoryTitle: document.getElementById('readerStoryTitle'),
+        sceneBackdropBlur: document.getElementById('sceneBackdropBlur'),
         sceneImage: document.getElementById('sceneImage'),
         sceneActionLayer: document.getElementById('sceneActionLayer'),
         storyTextEn: document.getElementById('storyTextEn'),
@@ -1132,10 +1133,16 @@
         if (phoneticCard) phoneticCard.style.display = 'none';
       }
 
-      // Update Image with fallback to character avatar
+      // Update Image with fallback to character avatar & atmospheric backdrop blur
       this.dom.sceneImage.src = page.image;
+      if (this.dom.sceneBackdropBlur) {
+        this.dom.sceneBackdropBlur.style.backgroundImage = `url("${page.image}")`;
+      }
       this.dom.sceneImage.onerror = () => {
         this.dom.sceneImage.src = story.mascot;
+        if (this.dom.sceneBackdropBlur) {
+          this.dom.sceneBackdropBlur.style.backgroundImage = `url("${story.mascot}")`;
+        }
       };
 
       // Key Words
@@ -1262,7 +1269,8 @@
           leafBack.innerHTML = `
             <div class="page-inner page-art-layout">
               <div class="illustration-frame">
-                <img class="scene-illustration" src="${nextPage.image}" alt="Page illustration" onerror="this.src='${story.mascot}'">
+                <div class="scene-backdrop-blur" style="background-image: url('${nextPage.image}');"></div>
+                <img class="scene-illustration pixar-scene-art" src="${nextPage.image}" alt="Page illustration" onerror="this.src='${story.mascot}'">
               </div>
               <span class="page-number page-left-num">Pág. ${nextPage.num}</span>
             </div>
