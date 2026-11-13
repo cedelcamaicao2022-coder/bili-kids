@@ -799,20 +799,14 @@ body.reader-open #bilikids-mascot-wrapper:hover {
 }
 
 .scene-backdrop-blur {
-  position: absolute;
-  inset: -25px;
-  background-size: cover;
-  background-position: center;
-  filter: blur(24px) brightness(0.72) saturate(1.2);
-  transform: scale(1.15);
-  z-index: 1;
-  pointer-events: none;
+  display: none !important;
 }
 
 .pixar-scene-art {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover !important;
+  object-position: center center;
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
@@ -830,6 +824,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
   inset: 0;
   pointer-events: none;
   z-index: 10;
+  display: none !important;
 }
 
 /* Live 3D Scene Action Layer */
@@ -838,9 +833,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
   inset: 0;
   pointer-events: none;
   z-index: 12;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none !important;
 }
 
 .scene-diorama {
@@ -1038,7 +1031,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
 
 /* 2D Book Mode Enhancements */
 .book-stage.book-mode-2d .pixar-scene-art {
-  object-fit: contain;
+  object-fit: cover !important;
   object-position: center center;
   background: transparent;
   animation: none;
@@ -1286,7 +1279,8 @@ body.reader-open #bilikids-mascot-wrapper:hover {
 .leaf-back .scene-illustration {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover !important;
+  object-position: center center;
   position: relative;
   z-index: 2;
   display: block;
@@ -1729,7 +1723,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
   .pixar-scene-art {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover !important;
   }
 
   .story-header-ornament {
@@ -1824,7 +1818,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
   .pixar-scene-art {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover !important;
   }
 
   .book-turning-leaf {

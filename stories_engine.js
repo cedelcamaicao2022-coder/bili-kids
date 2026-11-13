@@ -108,55 +108,7 @@
 
 
   // --- SCENE LIVING ANIMATIONS DEFINITION (MATCHING EACH EXACT PAGE) ---
-  const PAGE_SCENE_ELEMENTS = {
-    // BILI
-    bili_p1: { prop: '🌈', class: 'sparkle-pulse', pos: { top: '15%', right: '15%' }, hue: 200, label: 'Rainbow Forest' },
-    bili_p2: { prop: '✨', class: 'prop-float', pos: { top: '25%', right: '20%' }, hue: 60, label: 'Colorless Flowers' },
-    bili_p3: { prop: '🖌️', class: 'sparkle-pulse', pos: { top: '20%', right: '18%' }, hue: 350, label: 'Golden Brush' },
-    bili_p4: { prop: '🦋', class: 'prop-float', pos: { top: '18%', right: '22%' }, hue: 50, label: 'Golden Butterflies' },
-    bili_p5: { prop: '🐸', class: 'prop-bounce', pos: { bottom: '25%', right: '18%' }, hue: 130, label: 'Emerald Frogs' },
-    bili_p6: { prop: '🌊', class: 'prop-wave', pos: { bottom: '20%', right: '25%' }, hue: 210, label: 'Crystal River' },
-    bili_p7: { prop: '☁️', class: 'prop-float', pos: { top: '20%', right: '20%' }, hue: 320, label: 'Blushing Cloud' },
-    bili_p8: { prop: '✨', class: 'sparkle-pulse', pos: { top: '15%', right: '30%' }, hue: 45, label: 'Glitter Rain' },
-    bili_p9: { prop: '🌈', class: 'sparkle-pulse', pos: { top: '12%', right: '15%' }, hue: 300, label: 'Giant Rainbow' },
-    bili_p10: { prop: '⭐', class: 'sparkle-pulse', pos: { top: '15%', right: '15%' }, hue: 230, label: 'Sweet Dreams' },
-
-    // LEO
-    leo_p1: { prop: '☀️', class: 'sparkle-pulse', pos: { top: '12%', right: '15%' }, hue: 45, label: 'Morning Sun' },
-    leo_p2: { prop: '🌾', class: 'prop-float', pos: { top: '25%', right: '15%' }, hue: 35, label: 'Farmer Hat' },
-    leo_p3: { prop: '🍀', class: 'prop-float', pos: { bottom: '30%', right: '20%' }, hue: 110, label: 'Bella the Cow' },
-    leo_p4: { prop: '🍎', class: 'sparkle-pulse', pos: { top: '22%', right: '25%' }, hue: 0, label: 'Sweet Apples' },
-    leo_p5: { prop: '🦆', class: 'prop-bounce', pos: { bottom: '24%', right: '22%' }, hue: 50, label: 'Five Ducklings' },
-    leo_p6: { prop: '💫', class: 'sparkle-pulse', pos: { bottom: '28%', right: '20%' }, hue: 200, label: 'Skipping Stones' },
-    leo_p7: { prop: '🐑', class: 'prop-float', pos: { top: '26%', right: '20%' }, hue: 30, label: 'Woolly the Lamb' },
-    leo_p8: { prop: '🌻', class: 'sparkle-pulse', pos: { top: '18%', right: '18%' }, hue: 48, label: 'Golden Bell' },
-    leo_p9: { prop: '🔔', class: 'sparkle-pulse', pos: { top: '16%', right: '15%' }, hue: 30, label: 'Farm Bell' },
-    leo_p10: { prop: '🌙', class: 'prop-float', pos: { top: '14%', right: '16%' }, hue: 220, label: 'Starry Barn' },
-
-    // LUNA
-    luna_p1: { prop: '🎒', class: 'prop-float', pos: { top: '25%', right: '18%' }, hue: 280, label: 'Quest Backpack' },
-    luna_p2: { prop: '🗺️', class: 'sparkle-pulse', pos: { bottom: '25%', right: '22%' }, hue: 40, label: 'Secret Map' },
-    luna_p3: { prop: '🗝️', class: 'sparkle-pulse', pos: { top: '20%', right: '20%' }, hue: 200, label: 'Silver Key' },
-    luna_p4: { prop: '🍪', class: 'prop-float', pos: { top: '24%', right: '22%' }, hue: 30, label: 'Warm Cookies' },
-    luna_p5: { prop: '🫧', class: 'prop-float', pos: { top: '18%', right: '24%' }, hue: 290, label: 'Bubble Trail' },
-    luna_p6: { prop: '🛁', class: 'prop-bounce', pos: { bottom: '26%', right: '20%' }, hue: 190, label: 'Rubber Duck' },
-    luna_p7: { prop: '🪜', class: 'prop-float', pos: { top: '22%', right: '18%' }, hue: 35, label: 'Attic Stairs' },
-    luna_p8: { prop: '✨', class: 'sparkle-pulse', pos: { top: '20%', right: '22%' }, hue: 50, label: 'Antique Chest' },
-    luna_p9: { prop: '⭐', class: 'sparkle-pulse', pos: { top: '18%', right: '20%' }, hue: 55, label: 'Star Lantern' },
-    luna_p10: { prop: '🧸', class: 'prop-float', pos: { top: '22%', right: '18%' }, hue: 260, label: 'Teddy Bear' },
-
-    // FRIENDS
-    friends_p1: { prop: '🌟', class: 'sparkle-pulse', pos: { top: '15%', right: '20%' }, hue: 50, label: 'Great Valley' },
-    friends_p2: { prop: '💖', class: 'sparkle-pulse', pos: { top: '18%', right: '22%' }, hue: 340, label: 'Trio Hug' },
-    friends_p3: { prop: '💎', class: 'prop-float', pos: { top: '18%', right: '20%' }, hue: 210, label: 'Crystal Tree' },
-    friends_p4: { prop: '📜', class: 'prop-float', pos: { top: '22%', right: '22%' }, hue: 45, label: 'Three Gifts' },
-    friends_p5: { prop: '🌈', class: 'sparkle-pulse', pos: { bottom: '25%', right: '22%' }, hue: 150, label: 'Rainbow Roots' },
-    friends_p6: { prop: '🎵', class: 'prop-float', pos: { top: '20%', right: '20%' }, hue: 40, label: 'Kindness Song' },
-    friends_p7: { prop: '⭐', class: 'sparkle-pulse', pos: { top: '14%', right: '25%' }, hue: 55, label: 'Star on Top' },
-    friends_p8: { prop: '✨', class: 'sparkle-pulse', pos: { top: '12%', right: '18%' }, hue: 280, label: 'Starlight Burst' },
-    friends_p9: { prop: '🎉', class: 'prop-bounce', pos: { top: '16%', right: '20%' }, hue: 330, label: 'Animal Dance' },
-    friends_p10: { prop: '💫', class: 'sparkle-pulse', pos: { top: '15%', right: '20%' }, hue: 180, label: 'Best Friends' }
-  };
+  const PAGE_SCENE_ELEMENTS = {};
 
   // --- STORY DEFINITIONS (4 STORIES * 10 PAGES EACH) ---
   const STORIES = {
@@ -675,13 +627,8 @@
     }
 
     start() {
-      if (this.animId) cancelAnimationFrame(this.animId);
-      const loop = () => {
-        this.update();
-        this.render();
-        this.animId = requestAnimationFrame(loop);
-      };
-      this.animId = requestAnimationFrame(loop);
+      // Disabled to keep illustrations clean without floating particles
+      return;
     }
 
     stop() {
@@ -1159,31 +1106,9 @@
         });
       }
 
-      // Update Living Scene Action Layer (Pixar living animations)
+      // Clear any floating action props
       if (this.dom.sceneActionLayer) {
-        const pageAnim = page.audioId ? PAGE_SCENE_ELEMENTS[page.audioId] : null;
         this.dom.sceneActionLayer.innerHTML = '';
-        if (pageAnim) {
-          const propEl = document.createElement('div');
-          propEl.className = `diorama-prop ${pageAnim.class}`;
-          propEl.textContent = pageAnim.prop;
-          propEl.style.fontSize = '3.2rem';
-          if (pageAnim.pos.top) propEl.style.top = pageAnim.pos.top;
-          if (pageAnim.pos.bottom) propEl.style.bottom = pageAnim.pos.bottom;
-          if (pageAnim.pos.right) propEl.style.right = pageAnim.pos.right;
-          if (pageAnim.pos.left) propEl.style.left = pageAnim.pos.left;
-          propEl.title = pageAnim.label;
-          this.dom.sceneActionLayer.appendChild(propEl);
-
-          // Subtle ambient glow element matching the scene
-          const glowEl = document.createElement('div');
-          glowEl.className = 'scene-dynamic-glow';
-          glowEl.style.position = 'absolute';
-          glowEl.style.inset = '0';
-          glowEl.style.pointerEvents = 'none';
-          glowEl.style.background = `radial-gradient(circle at 65% 35%, hsla(${pageAnim.hue}, 90%, 65%, 0.18), transparent 60%)`;
-          this.dom.sceneActionLayer.appendChild(glowEl);
-        }
       }
 
       // Navigation state
@@ -1269,7 +1194,6 @@
           leafBack.innerHTML = `
             <div class="page-inner page-art-layout">
               <div class="illustration-frame">
-                <div class="scene-backdrop-blur" style="background-image: url('${nextPage.image}');"></div>
                 <img class="scene-illustration pixar-scene-art" src="${nextPage.image}" alt="Page illustration" onerror="this.src='${story.mascot}'">
               </div>
               <span class="page-number page-left-num">Pág. ${nextPage.num}</span>
