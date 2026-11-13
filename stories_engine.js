@@ -744,7 +744,12 @@
       this.currentPageIndex = 0; // 0..9 (10 pages)
       this.currentAudio = null;
       this.isPlayingNarration = false;
-      this.autoTurnEnabled = true;
+      try {
+        this.isNarratorSilenced = localStorage.getItem('bili_narrator_silenced') === 'true';
+      } catch (e) {
+        this.isNarratorSilenced = false;
+      }
+      this.autoTurnEnabled = false;
       this.autoTurnTimer = null;
       this.currentLanguage = 'both'; // 'both', 'en', 'es'
 
@@ -812,6 +817,13 @@
       }
     }
 
+    setNarratorSilenced(silenced) {
+      this.isNarratorSilenced = !!silenced;
+      try {
+        localStorage.setItem('bili_narrator_silenced', this.isNarratorSilenced ? 'true' : 'false');
+      } catch (e) {}
+    }
+
     initEvents() {
       // Audio unlock on first touch
       const unlockAudio = () => {
@@ -874,12 +886,12 @@
         this.toggleNarration();
       });
 
-      this.dom.btnAutoTurn.addEventListener('click', () => {
-        this.autoTurnEnabled = !this.autoTurnEnabled;
-        this.dom.btnAutoTurn.classList.toggle('active', this.autoTurnEnabled);
-      });
+      if (this.dom.btnAutoTurn) {
+        this.dom.btnAutoTurn.style.display = 'none';
+      }
 
       this.dom.btnRepeatPageAudio.addEventListener('click', () => {
+        this.setNarratorSilenced(false);
         this.playPageAudio();
       });
 
@@ -937,7 +949,10 @@
       this.dom.btnSoundToggle.addEventListener('click', () => {
         const muted = this.sound.toggleMute();
         this.dom.soundIcon.textContent = muted ? '🔇' : '🔊';
-        if (muted && this.currentAudio) this.currentAudio.pause();
+        if (muted) {
+          this.setNarratorSilenced(true);
+          this.stopAudio();
+        }
       });
 
       this.dom.btnLangToggle.addEventListener('click', () => {
@@ -1012,7 +1027,7 @@
       } else {
         if (bookStage) bookStage.classList.remove('book-mode-2d');
         if (this.dom.btnPlayNarration) this.dom.btnPlayNarration.style.display = '';
-        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = '';
+        if (this.dom.btnAutoTurn) this.dom.btnAutoTurn.style.display = 'none';
         if (this.dom.btnRepeatPageAudio) this.dom.btnRepeatPageAudio.style.display = '';
         if (this.dom.btnToggleSpanish2d) this.dom.btnToggleSpanish2d.style.display = 'none';
         if (this.dom.spanishCard) this.dom.spanishCard.style.display = '';
@@ -1022,8 +1037,8 @@
       this.showScreen('reader');
       this.renderCurrentPage();
 
-      // Automatically start narration on opening if auto-turn is on, or user requests it
-      if (this.autoTurnEnabled) {
+      // Automatically start narration on opening only if narrator is NOT silenced and sound is NOT muted
+      if (!this.isNarratorSilenced && !this.sound.isMuted) {
         setTimeout(() => {
           this.playPageAudio();
         }, 500);
@@ -1139,7 +1154,7 @@
         this.animatePageFlip('forward', () => {
           this.currentPageIndex++;
           this.renderCurrentPage();
-          if (this.autoTurnEnabled) {
+          if (!this.isNarratorSilenced && !this.sound.isMuted) {
             setTimeout(() => this.playPageAudio(), 300);
           }
         });
@@ -1149,7 +1164,7 @@
         this.animatePageFlip('backward', () => {
           this.currentPageIndex--;
           this.renderCurrentPage();
-          if (this.autoTurnEnabled) {
+          if (!this.isNarratorSilenced && !this.sound.isMuted) {
             setTimeout(() => this.playPageAudio(), 300);
           }
         });
@@ -1157,13 +1172,17 @@
     }
 
     goToPage(index) {
+      if (this.autoTurnTimer) {
+        clearTimeout(this.autoTurnTimer);
+        this.autoTurnTimer = null;
+      }
       this.stopAudio();
       const story = STORIES[this.currentStoryKey];
       this.sound.playPageTurn();
       this.animatePageFlip(index > this.currentPageIndex ? 'forward' : 'backward', () => {
         this.currentPageIndex = index;
         this.renderCurrentPage();
-        if (this.autoTurnEnabled) {
+        if (!this.isNarratorSilenced && !this.sound.isMuted) {
           setTimeout(() => this.playPageAudio(), 300);
         }
       });
@@ -1256,6 +1275,11 @@
         return;
       }
 
+      // If sound is muted globally or narrator voice has been silenced, do not play
+      if (this.sound.isMuted || this.isNarratorSilenced) {
+        return;
+      }
+
       const page = story.pages[this.currentPageIndex];
       if (!page) return;
 
@@ -1284,12 +1308,8 @@
         if (this.dom.voicePlayText) this.dom.voicePlayText.textContent = 'Narrar';
         if (this.dom.storyTextEn) this.dom.storyTextEn.classList.remove('reading-active');
 
-        // Auto-turn to next page if enabled
-        if (this.autoTurnEnabled) {
-          this.autoTurnTimer = setTimeout(() => {
-            this.turnPage('next');
-          }, 1400);
-        }
+        // Auto-turn completely removed per user request:
+        // Reader reads at their own pace and turns pages manually
       };
 
       audio.onerror = () => {
@@ -1347,8 +1367,12 @@
 
     toggleNarration() {
       if (this.isPlayingNarration) {
+        // User explicitly silences the narrator voice
+        this.setNarratorSilenced(true);
         this.stopAudio();
       } else {
+        // User explicitly activates the narrator voice
+        this.setNarratorSilenced(false);
         this.playPageAudio();
       }
     }

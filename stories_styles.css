@@ -654,25 +654,7 @@ body.reader-open #bilikids-mascot-wrapper:hover {
 }
 
 .btn-auto-turn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.85rem;
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.btn-auto-turn.active {
-  background: #f39c12;
-  border-color: #f39c12;
-  box-shadow: 0 2px 10px rgba(243, 156, 18, 0.4);
+  display: none !important;
 }
 
 /* ===================================================================
