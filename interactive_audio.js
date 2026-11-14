@@ -118,9 +118,50 @@
       }
     },
 
+    _currentAudio: null,
+
+    normKey: function(s) {
+      if (!s) return '';
+      return s.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+    },
+
     speakEnglish: function(text, rate = 0.88) {
-      if (isMuted) return;
-      if (!('speechSynthesis' in window)) return;
+      if (isMuted || !text) return;
+
+      const key = this.normKey(text);
+      const manifest = window.InteractiveGamesAudioManifest || {};
+      const clipSrc = manifest[key];
+
+      if (clipSrc) {
+        try {
+          if (this._currentAudio) {
+            this._currentAudio.pause();
+            this._currentAudio.currentTime = 0;
+          }
+          if ('speechSynthesis' in window) {
+            try { window.speechSynthesis.cancel(); } catch (e) {}
+          }
+          const audio = new Audio(clipSrc);
+          audio.volume = 1.0;
+          this._currentAudio = audio;
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              console.warn('[BilikidsAudio] Studio audio play blocked, falling back to speech synthesis:', err);
+              this._fallbackSpeech(text, rate);
+            });
+          }
+          return;
+        } catch (e) {
+          console.warn('[BilikidsAudio] Error playing studio clip, falling back:', e);
+        }
+      }
+
+      this._fallbackSpeech(text, rate);
+    },
+
+    _fallbackSpeech: function(text, rate = 0.88) {
+      if (isMuted || !('speechSynthesis' in window)) return;
       try {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
@@ -192,4 +233,11 @@
   };
 
   window.BilikidsAudio = SoundEngine;
+
+  // Auto-load studio audio manifest if not already included
+  if (!window.InteractiveGamesAudioManifest && typeof document !== 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'assets/games_interactive/interactive_audio_manifest.js?v=20261114';
+    document.head.appendChild(s);
+  }
 })(window);
