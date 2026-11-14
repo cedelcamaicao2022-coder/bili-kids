@@ -744,33 +744,50 @@
       const stats = getLetterInkStats(data, w, h, glyphLeft, glyphTop, glyphW, glyphH, dpr);
 
       // Preschool-friendly letter formation validation:
-      // Rejects single dots, taps or flat line swipes,
+      // Rejects single dots, taps, random zigzags or flat line swipes,
       // while welcoming real, natural (slightly wobbly) child handwriting.
       const isNarrow = ['I', '1', 'L', 'i', 'l', 'j', 't'].includes(ch);
-      const minInkNeeded = 25 * dpr;
+      const minInkNeeded = 35 * dpr;
       const hasEnoughInk = stats.inkCount >= minInkNeeded;
-      const hasVerticalPresence = stats.spanH >= 0.28;
-      const hasHorizontalPresence = isNarrow ? true : (stats.spanW >= 0.20);
+      const hasVerticalPresence = stats.spanH >= (isNarrow ? 0.35 : 0.45);
+      const hasHorizontalPresence = isNarrow ? true : (stats.spanW >= 0.28);
 
       const strokes = getLetterStrokes(ch, currentMode);
       let overallCov = 1.0;
+      let minStrokeCov = 1.0;
+      let totalPts = 0;
+      let totalHits = 0;
+      const strokeCoverages = [];
+
       if (strokes && strokes.length > 0) {
         const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 10);
-        const radiusCss = 26; // generous proximity for preschool motor skills
-        let totalPts = 0;
-        let totalHits = 0;
+        const radiusCss = 16; // strict child brush proximity
+
         strokeGroups.forEach(sPts => {
+          let sHits = 0;
           sPts.forEach(pt => {
             if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
-              totalHits++;
+              sHits++;
             }
           });
+          totalHits += sHits;
           totalPts += sPts.length;
+          const sCov = sPts.length > 0 ? (sHits / sPts.length) : 1;
+          strokeCoverages.push(sCov);
         });
+
         overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
+        minStrokeCov = strokeCoverages.length > 0 ? Math.min(...strokeCoverages) : 0;
       }
 
-      const isCharValid = hasEnoughInk && hasVerticalPresence && hasHorizontalPresence && (overallCov >= 0.30);
+      // Multi-stroke letters (A, T, E, H, etc.) require EVERY component stroke (e.g. left leg, right leg, crossbar)
+      // Single-stroke letters (C, O, S, etc.) require solid continuous coverage + 2D span
+      const isMultiStroke = strokes && strokes.length > 1;
+      const strokeCheckPassed = isMultiStroke
+        ? (minStrokeCov >= 0.30 && overallCov >= 0.45)
+        : (overallCov >= 0.48);
+
+      const isCharValid = hasEnoughInk && hasVerticalPresence && hasHorizontalPresence && strokeCheckPassed;
 
       if (isCharValid) {
         validLetterCount++;
