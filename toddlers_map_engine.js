@@ -383,7 +383,7 @@
         const isComplete = !isTreasure && this.isUnitCompleted(station.id);
         const isActive = this.activeStationId === station.id;
 
-        // Tooltip
+        // Tooltip (pure visual CSS hover / focus, no robotic voice or audio on pointer hover)
         const tooltip = document.createElement('div');
         tooltip.className = 'station-map-tooltip';
         tooltip.innerHTML = `
@@ -393,13 +393,6 @@
           <div class="tooltip-station-action">${isTreasure ? '¡Toca para abrir! ✨' : (isComplete ? '¡Completada! Revisar ➔' : (isActive ? '¡Tu Misión Actual! ➔' : 'Explorar Estación ➔'))}</div>
         `;
         btn.appendChild(tooltip);
-
-        // Sound on hover
-        btn.addEventListener('mouseenter', () => {
-          this.playTone(isTreasure ? 660 : 520, 'sine', 0.08);
-          // Pronounce title in English
-          this.speak(station.title);
-        });
 
         // Click handler
         btn.addEventListener('click', (e) => {
