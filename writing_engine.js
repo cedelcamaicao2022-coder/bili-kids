@@ -67,6 +67,10 @@
   const dashedGuideOverlay = document.getElementById('dashedGuideOverlay');
   const guideText = document.getElementById('guideText');
 
+  // Offscreen Mask Canvas to lock drawing strictly within shaded letters
+  const maskCanvas = document.createElement('canvas');
+  const maskCtx = maskCanvas.getContext('2d');
+
   const targetWordText = document.getElementById('targetWordText');
   const currentEmoji = document.getElementById('currentEmoji');
   const wordSubHint = document.getElementById('wordSubHint');
@@ -173,6 +177,10 @@
     guideCanvas.style.height = rect.height + 'px';
     gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    // Resize offscreen letter boundary mask
+    maskCanvas.width = rect.width * dpr;
+    maskCanvas.height = rect.height * dpr;
+
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
     }
@@ -270,6 +278,8 @@
     if (rect.width === 0 || rect.height === 0) return;
 
     gctx.clearRect(0, 0, rect.width, rect.height);
+    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+    maskCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const spans = guideText.querySelectorAll('.letter-char');
     if (!spans || spans.length === 0) return;
@@ -350,7 +360,33 @@
       }
 
       gctx.restore();
+
+      // --- B. Render Exact Writing Zone Mask on Offscreen Canvas ---
+      // Locks ink strictly within the shaded letter boundary
+      maskCtx.save();
+      maskCtx.font = font;
+      maskCtx.textAlign = 'center';
+      maskCtx.textBaseline = 'middle';
+      maskCtx.fillStyle = '#ffffff';
+      maskCtx.strokeStyle = '#ffffff';
+      maskCtx.lineWidth = 32;
+      maskCtx.lineJoin = 'round';
+      maskCtx.lineCap = 'round';
+      maskCtx.strokeText(ch, cx, cy);
+      maskCtx.fillText(ch, cx, cy);
+      maskCtx.restore();
     });
+  }
+
+  // Hardware-accelerated compositing to clip any ink outside the shaded letters
+  function applyMaskClipping() {
+    if (!maskCanvas || currentTool === 'eraser') return;
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // 1:1 pixel coordinates
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.drawImage(maskCanvas, 0, 0);
+    ctx.restore();
+    setupCanvasContext();
   }
 
   // --- Ultra-Fast, Zero-Latency Instant Drawing Engine ---
@@ -391,11 +427,13 @@
     lastMidY = pt.y;
 
     setupCanvasContext();
-    // Instant initial dot feedback with zero lag
+    // Instant initial dot feedback
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
     ctx.fillStyle = (currentTool === 'eraser') ? 'rgba(0,0,0,1)' : strokeColor;
     ctx.fill();
+
+    applyMaskClipping();
 
     strokeCount++;
     clearMissingLetterHints();
@@ -419,6 +457,8 @@
     lastY = pt.y;
     lastMidX = midX;
     lastMidY = midY;
+
+    applyMaskClipping();
   }
 
   function stopDrawing(e) {
@@ -437,6 +477,7 @@
       ctx.stroke();
     }
 
+    applyMaskClipping();
     isDrawing = false;
   }
 
