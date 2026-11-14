@@ -726,10 +726,9 @@
       if (data[i] > 35) totalDrawnPixels++;
     }
 
-    const minInkRequired = 25 * dpr;
-    if (totalDrawnPixels < minInkRequired) {
-      updateFeedbackMessage('✏️ ¡Sigue escribiendo! Traza las letras de la palabra.', 'error');
-      triggerNeedsImprovement(null);
+    if (totalDrawnPixels < 1) {
+      updateFeedbackMessage('✏️ ¡Escribe la palabra con tu dedo o lápiz antes de comprobar!', 'error');
+      playOopsAudio();
       return;
     }
 
@@ -770,42 +769,9 @@
         ? (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
         : sr.height;
 
-      // Ink density and spread inside this letter zone
+      // Ink density inside this letter zone (any stroke, line or dot inside the shaded letter is valid)
       const stats = getLetterInkStats(data, w, h, glyphLeft, glyphTop, glyphW, glyphH, dpr);
-      const minInkNeeded = 12 * dpr; // at least some genuine ink in this letter
-
-      // Spread check: letter must have natural 2D presence (rejects a single horizontal swipe or tiny tap)
-      const hasNaturalSpread = (stats.spanH >= 0.18);
-
-      const strokes = getLetterStrokes(ch, currentMode);
-      let isCharValid = false;
-
-      if (stats.inkCount >= minInkNeeded && hasNaturalSpread) {
-        if (strokes && strokes.length > 0) {
-          // Generous preschool guide tolerance: R = 28px
-          // The dashed line is just a guide, so a relaxed 25% proximity is plenty!
-          const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 10);
-          const radiusCss = 28;
-          let totalPts = 0;
-          let totalHits = 0;
-
-          strokeGroups.forEach(sPts => {
-            sPts.forEach(pt => {
-              if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
-                totalHits++;
-              }
-            });
-            totalPts += sPts.length;
-          });
-
-          const overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
-          // As long as the child traced within the letter body (>= 25% proximity)
-          isCharValid = (overallCov >= 0.25);
-        } else {
-          // Fallback if no strokes defined: ink count + spread is sufficient
-          isCharValid = true;
-        }
-      }
+      const isCharValid = (stats.inkCount > 0);
 
       if (isCharValid) {
         validLetterCount++;

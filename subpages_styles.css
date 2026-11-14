@@ -1524,3 +1524,90 @@ body {
     height: 90px;
   }
 }
+
+/* ==========================================================================
+   BABIES SCREEN ATMOSPHERIC PASTEL BACKGROUND (BLURRED ORBS)
+   ========================================================================== */
+body.babies-page {
+  background: radial-gradient(circle at 50% 15%, #fef9c3 0%, #f0fdf4 35%, #fdf2f8 70%, #f0f9ff 100%) !important;
+  position: relative;
+  min-height: 100vh;
+}
+
+.babies-bg-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.babies-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.42;
+  pointer-events: none;
+  animation: babiesOrbFloat 16s ease-in-out infinite alternate;
+}
+
+.babies-orb-1 {
+  width: 440px;
+  height: 440px;
+  background: #fde047; /* Sunny honey yellow */
+  top: -60px;
+  left: -80px;
+}
+
+.babies-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: #f472b6; /* Luna pastel pink */
+  top: 30%;
+  right: -100px;
+  animation-duration: 20s;
+  animation-delay: -4s;
+}
+
+.babies-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: #38bdf8; /* Bili friendly sky blue */
+  bottom: 12%;
+  left: -80px;
+  animation-duration: 18s;
+  animation-delay: -6s;
+}
+
+.babies-orb-4 {
+  width: 420px;
+  height: 420px;
+  background: #4ade80; /* Leo fresh pasture green */
+  bottom: -60px;
+  right: 12%;
+  animation-duration: 22s;
+  animation-delay: -8s;
+}
+
+.babies-orb-5 {
+  width: 320px;
+  height: 320px;
+  background: #c084fc; /* Lavender magic sparkle */
+  top: 15%;
+  left: 45%;
+  opacity: 0.28;
+  animation-duration: 24s;
+  animation-delay: -2s;
+}
+
+@keyframes babiesOrbFloat {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-26px) scale(1.05); }
+  100% { transform: translateY(14px) scale(0.96); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .babies-bg-orb {
+    animation: none !important;
+  }
+}
