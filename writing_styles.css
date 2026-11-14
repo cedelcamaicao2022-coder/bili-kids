@@ -701,3 +701,8 @@ body {
     justify-content: center;
   }
 }
+
+/* Elevate companion mascot so it never obstructs writing action buttons */
+#bilikids-mascot-wrapper {
+  bottom: 84px !important;
+}

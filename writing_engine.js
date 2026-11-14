@@ -67,11 +67,6 @@
   const dashedGuideOverlay = document.getElementById('dashedGuideOverlay');
   const guideText = document.getElementById('guideText');
 
-  // Offscreen Mask Canvas for Strict Letter Boundary Blocking
-  const maskCanvas = document.createElement('canvas');
-  const maskCtx = maskCanvas.getContext('2d');
-  let maskData = null;
-
   const targetWordText = document.getElementById('targetWordText');
   const currentEmoji = document.getElementById('currentEmoji');
   const wordSubHint = document.getElementById('wordSubHint');
@@ -178,10 +173,6 @@
     guideCanvas.style.height = rect.height + 'px';
     gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Resize offscreen letter boundary mask
-    maskCanvas.width = rect.width * dpr;
-    maskCanvas.height = rect.height * dpr;
-
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
     }
@@ -279,7 +270,6 @@
     if (rect.width === 0 || rect.height === 0) return;
 
     gctx.clearRect(0, 0, rect.width, rect.height);
-    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
 
     const spans = guideText.querySelectorAll('.letter-char');
     if (!spans || spans.length === 0) return;
@@ -287,9 +277,6 @@
     // Use computed font from guideText so sizes/styles automatically sync
     const computedStyle = window.getComputedStyle(guideText);
     const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
-
-    // Scale mask context with dpr for pixel-perfect hardware clipping
-    maskCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     spans.forEach(span => {
       const sr = span.getBoundingClientRect();
@@ -363,156 +350,94 @@
       }
 
       gctx.restore();
-
-      // --- B. Render Exact Writing Zone Mask on Offscreen Canvas ---
-      maskCtx.save();
-      maskCtx.font = font;
-      maskCtx.textAlign = 'center';
-      maskCtx.textBaseline = 'middle';
-      maskCtx.fillStyle = '#ffffff';
-      maskCtx.strokeStyle = '#ffffff';
-      // Comfortable preschool writing tolerance matching the shaded letter body
-      maskCtx.lineWidth = 28;
-      maskCtx.lineJoin = 'round';
-      maskCtx.lineCap = 'round';
-      maskCtx.strokeText(ch, cx, cy);
-      maskCtx.fillText(ch, cx, cy);
-      maskCtx.restore();
     });
-
-    // Cache typed pixel array for fast boundary collision checks
-    try {
-      maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data;
-    } catch (e) {
-      maskData = null;
-    }
   }
 
-  // --- Strict Shaded Word Boundary Check ---
-  function isInsideAllowedZone(x, y) {
-    if (!maskData) return true;
-    const dpr = window.devicePixelRatio || 1;
-    const px = Math.round(x * dpr);
-    const py = Math.round(y * dpr);
-    if (px < 0 || px >= maskCanvas.width || py < 0 || py >= maskCanvas.height) return false;
-    const idx = (py * maskCanvas.width + px) * 4;
-    return maskData[idx + 3] > 18;
-  }
-
-  // Hardware-accelerated compositing to clip any ink outside the shaded letters
-  function applyMaskClipping() {
-    if (!maskCanvas || currentTool === 'eraser') return;
-    ctx.save();
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // 1:1 pixel coordinates
-    ctx.globalCompositeOperation = 'destination-in';
-    ctx.drawImage(maskCanvas, 0, 0);
-    ctx.restore();
-    setupCanvasContext();
-  }
-
-  // --- Drawing Interaction with Shaded Word Boundary Locking ---
+  // --- Ultra-Fast, Zero-Latency Instant Drawing Engine ---
   let isDrawing = false;
-  let points = [];
   let strokeCount = 0;
+  let lastX = 0;
+  let lastY = 0;
+  let lastMidX = 0;
+  let lastMidY = 0;
+  let activePointerId = null;
 
   function getCanvasCoords(e) {
     const rect = canvas.getBoundingClientRect();
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    let clientX = e.clientX;
+    let clientY = e.clientY;
+    if (clientX === undefined && e.touches && e.touches.length > 0) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    }
     return {
-      x: clientX - rect.left,
-      y: clientY - rect.top
+      x: (clientX !== undefined ? clientX : 0) - rect.left,
+      y: (clientY !== undefined ? clientY : 0) - rect.top
     };
   }
 
   function startDrawing(e) {
     e.preventDefault();
-    const pt = getCanvasCoords(e);
-
-    // Lock drawing strictly to the shaded word area
-    if (currentTool !== 'eraser' && !isInsideAllowedZone(pt.x, pt.y)) {
-      isDrawing = false;
-      return;
+    isDrawing = true;
+    activePointerId = (e.pointerId !== undefined) ? e.pointerId : null;
+    if (activePointerId !== null && canvas.setPointerCapture) {
+      try { canvas.setPointerCapture(activePointerId); } catch (err) {}
     }
 
-    isDrawing = true;
-    points = [pt];
+    const pt = getCanvasCoords(e);
+    lastX = pt.x;
+    lastY = pt.y;
+    lastMidX = pt.x;
+    lastMidY = pt.y;
+
     setupCanvasContext();
+    // Instant initial dot feedback with zero lag
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
-    ctx.fillStyle = ctx.strokeStyle;
+    ctx.fillStyle = (currentTool === 'eraser') ? 'rgba(0,0,0,1)' : strokeColor;
     ctx.fill();
-    applyMaskClipping();
+
     strokeCount++;
     clearMissingLetterHints();
   }
 
   function drawMove(e) {
+    if (!isDrawing) return;
     e.preventDefault();
     const pt = getCanvasCoords(e);
-    const inside = isInsideAllowedZone(pt.x, pt.y);
 
-    if (!isDrawing) {
-      // If user starts touch outside but drags into the shaded letter, start drawing
-      if (inside && (e.buttons > 0 || (e.touches && e.touches.length > 0))) {
-        isDrawing = true;
-        points = [pt];
-        setupCanvasContext();
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, ctx.lineWidth / 2, 0, Math.PI * 2);
-        ctx.fillStyle = ctx.strokeStyle;
-        ctx.fill();
-        applyMaskClipping();
-        strokeCount++;
-      }
-      return;
-    }
+    // Incremental O(1) midpoint quadratic curve for instantaneous 120fps response
+    const midX = (lastX + pt.x) / 2;
+    const midY = (lastY + pt.y) / 2;
 
-    // If writing moved outside the shaded letter, clip immediately and pause stroke
-    if (currentTool !== 'eraser' && !inside) {
-      if (points.length > 0) {
-        points.push(pt);
-        renderCurrentStroke();
-        applyMaskClipping();
-      }
-      points = [];
-      return;
-    }
-
-    points.push(pt);
-    renderCurrentStroke();
-    applyMaskClipping();
-  }
-
-  function renderCurrentStroke() {
-    if (points.length < 2) return;
-    if (points.length === 2) {
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      ctx.lineTo(points[1].x, points[1].y);
-      ctx.stroke();
-      return;
-    }
-
-    // Midpoint quadratic interpolation for silky smooth 60fps curves
     ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    for (let i = 1; i < points.length - 2; i++) {
-      const c = (points[i].x + points[i + 1].x) / 2;
-      const d = (points[i].y + points[i + 1].y) / 2;
-      ctx.quadraticCurveTo(points[i].x, points[i].y, c, d);
-    }
-    const last = points.length - 1;
-    ctx.quadraticCurveTo(points[last - 1].x, points[last - 1].y, points[last].x, points[last].y);
+    ctx.moveTo(lastMidX, lastMidY);
+    ctx.quadraticCurveTo(lastX, lastY, midX, midY);
     ctx.stroke();
+
+    lastX = pt.x;
+    lastY = pt.y;
+    lastMidX = midX;
+    lastMidY = midY;
   }
 
   function stopDrawing(e) {
     if (!isDrawing) return;
     try { e.preventDefault(); } catch (err) {}
+
+    if (activePointerId !== null && canvas.releasePointerCapture) {
+      try { canvas.releasePointerCapture(activePointerId); } catch (err) {}
+    }
+    activePointerId = null;
+
+    if (lastMidX !== lastX || lastMidY !== lastY) {
+      ctx.beginPath();
+      ctx.moveTo(lastMidX, lastMidY);
+      ctx.lineTo(lastX, lastY);
+      ctx.stroke();
+    }
+
     isDrawing = false;
-    points = [];
-    applyMaskClipping();
   }
 
   canvas.addEventListener('pointerdown', startDrawing);
@@ -735,6 +660,11 @@
     // 2. Measure each letter span & evaluate natural child tracing
     const letterSpans = guideText.querySelectorAll('.letter-char');
     const numLetters = letterSpans.length;
+    if (numLetters === 0) {
+      updateFeedbackMessage('✏️ ¡Escribe la palabra con tu dedo o lápiz antes de comprobar!', 'error');
+      playOopsAudio();
+      return;
+    }
 
     const computedStyle = window.getComputedStyle(guideText);
     const font = computedStyle.font || '900 9.5rem "Fredoka One", cursive';
@@ -1024,10 +954,12 @@
     loadCurrentWord();
   };
 
+  initApp();
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(initApp);
-  } else {
-    setTimeout(initApp, 150);
+    document.fonts.ready.then(() => {
+      resizeCanvas();
+      renderGuideAndMask();
+    });
   }
 
 })();
