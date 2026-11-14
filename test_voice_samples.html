@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muestras de Voz ElevenLabs - Bilikids</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.9);
+      --text: #f8fafc;
+      --accent-liam: #3b82f6;
+      --accent-jessica: #ec4899;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 100%);
+      font-family: 'Quicksand', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+    .header {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+    .header h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #a5b4fc, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .header p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .container {
+      width: 100%;
+      max-width: 760px;
+      display: grid;
+      gap: 24px;
+    }
+    .voice-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .voice-card.liam { border-top: 4px solid var(--accent-liam); }
+    .voice-card.jessica { border-top: 4px solid var(--accent-jessica); }
+    
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .card-title h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+    }
+    .badge {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-liam { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .badge-jessica { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    
+    .card-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+    .samples-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .sample-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.2s ease;
+    }
+    .sample-item:hover {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .sample-info {
+      flex: 1;
+    }
+    .sample-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .sample-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .play-btn {
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .play-btn:hover {
+      transform: scale(1.08);
+      background: #4338ca;
+    }
+    .play-btn:active {
+      transform: scale(0.95);
+    }
+    .footer-note {
+      text-align: center;
+      margin-top: 32px;
+      color: #64748b;
+      font-size: 0.9rem;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎧 Muestras de Voz Oficiales de Kids</h1>
+    <p>Escucha cómo suenan las dos voces oficiales de Kids con cadencia pausada, natural y pedagógica para los juegos de Toddlers.</p>
+  </div>
+
+  <div class="container">
+    
+    <!-- Liam Card -->
+    <div class="voice-card liam">
+      <div class="card-title">
+        <h2>👦 Liam</h2>
+        <span class="badge badge-liam">Voz Oficial de Kids</span>
+      </div>
+      <p class="card-desc">Voz de niño enérgica, alegre y clara. Configurada con ritmo pausado para preescolar.</p>
+      
+      <div class="samples-grid">
+        <div class="sample-item">
+          <div class="sample-info">
+            <div class="sample-label">Muestra 1 • Palabra individual</div>
+            <div class="sample-text">"Apple."</div>
+          </div>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample1_liam_apple.mp3')">▶️</button>
+        </div>
+        
+        <div class="sample-item">
+          <div class="sample-info">
+            <div class="sample-label">Muestra 2 • Frase con pausa pedagógica</div>
+            <div class="sample-text">"Awesome... Blue bird."</div>
+          </div>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample2_liam_blue_bird.mp3')">▶️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jessica Card -->
+    <div class="voice-card jessica">
+      <div class="card-title">
+        <h2>👧 Jessica</h2>
+        <span class="badge badge-jessica">Voz Oficial de Kids</span>
+      </div>
+      <p class="card-desc">Voz infantil femenina, dulce, brillante y muy articulada para pronunciación temprana.</p>
+      
+      <div class="samples-grid">
+        <div class="sample-item">
+          <div class="sample-info">
+            <div class="sample-label">Muestra 3 • Palabra individual</div>
+            <div class="sample-text">"Apple."</div>
+          </div>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample3_jessica_apple.mp3')">▶️</button>
+        </div>
+        
+        <div class="sample-item">
+          <div class="sample-info">
+            <div class="sample-label">Muestra 4 • Felicitación y frase</div>
+            <div class="sample-text">"Great job! Red strawberry."</div>
+          </div>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample4_jessica_praise.mp3')">▶️</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    💡 Solo se consumieron 59 caracteres para generar estas muestras. Ningún audio masivo será generado hasta que elijas y apruebes la voz preferida.
+  </div>
+
+  <script>
+    let currentAudio = null;
+    function playAudio(src) {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      currentAudio = new Audio(src);
+      currentAudio.play();
+    }
+  </script>
+
+</body>
+</html>
