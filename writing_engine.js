@@ -180,6 +180,7 @@
     // Resize offscreen letter boundary mask
     maskCanvas.width = rect.width * dpr;
     maskCanvas.height = rect.height * dpr;
+    maskCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     if (tempCanvas) {
       ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
@@ -376,9 +377,30 @@
       maskCtx.fillText(ch, cx, cy);
       maskCtx.restore();
     });
+
+    // C. Apply zero-overhead GPU hardware layer mask to canvas element
+    applyHardwareMask();
   }
 
-  // Hardware-accelerated compositing to clip any ink outside the shaded letters
+  // Native GPU hardware layer masking on canvas element (zero JavaScript overhead during pointermove)
+  function applyHardwareMask() {
+    if (!maskCanvas) return;
+    try {
+      const dataUrl = maskCanvas.toDataURL('image/png');
+      canvas.style.webkitMaskImage = `url(${dataUrl})`;
+      canvas.style.webkitMaskSize = '100% 100%';
+      canvas.style.webkitMaskRepeat = 'no-repeat';
+      canvas.style.webkitMaskPosition = 'center';
+      canvas.style.maskImage = `url(${dataUrl})`;
+      canvas.style.maskSize = '100% 100%';
+      canvas.style.maskRepeat = 'no-repeat';
+      canvas.style.maskPosition = 'center';
+    } catch (e) {
+      console.warn('Could not apply CSS hardware mask:', e);
+    }
+  }
+
+  // Synchronize underlying pixel buffer only on stroke completion for validation
   function applyMaskClipping() {
     if (!maskCanvas || currentTool === 'eraser') return;
     ctx.save();
@@ -433,8 +455,6 @@
     ctx.fillStyle = (currentTool === 'eraser') ? 'rgba(0,0,0,1)' : strokeColor;
     ctx.fill();
 
-    applyMaskClipping();
-
     strokeCount++;
     clearMissingLetterHints();
   }
@@ -457,8 +477,6 @@
     lastY = pt.y;
     lastMidX = midX;
     lastMidY = midY;
-
-    applyMaskClipping();
   }
 
   function stopDrawing(e) {
