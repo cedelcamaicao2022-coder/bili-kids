@@ -769,9 +769,37 @@
         ? (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
         : sr.height;
 
-      // Ink density inside this letter zone (any stroke, line or dot inside the shaded letter is valid)
+      // Ink density and spatial distribution inside this letter zone
       const stats = getLetterInkStats(data, w, h, glyphLeft, glyphTop, glyphW, glyphH, dpr);
-      const isCharValid = (stats.inkCount > 0);
+
+      // Preschool-friendly letter formation validation:
+      // Rejects single dots, taps or flat line swipes,
+      // while welcoming real, natural (slightly wobbly) child handwriting.
+      const isNarrow = ['I', '1', 'L', 'i', 'l', 'j', 't'].includes(ch);
+      const minInkNeeded = 25 * dpr;
+      const hasEnoughInk = stats.inkCount >= minInkNeeded;
+      const hasVerticalPresence = stats.spanH >= 0.28;
+      const hasHorizontalPresence = isNarrow ? true : (stats.spanW >= 0.20);
+
+      const strokes = getLetterStrokes(ch, currentMode);
+      let overallCov = 1.0;
+      if (strokes && strokes.length > 0) {
+        const strokeGroups = sampleStrokeCheckpoints(strokes, glyphLeft, glyphTop, glyphW, glyphH, 10);
+        const radiusCss = 26; // generous proximity for preschool motor skills
+        let totalPts = 0;
+        let totalHits = 0;
+        strokeGroups.forEach(sPts => {
+          sPts.forEach(pt => {
+            if (hasInkNear(data, w, h, pt.x, pt.y, dpr, radiusCss)) {
+              totalHits++;
+            }
+          });
+          totalPts += sPts.length;
+        });
+        overallCov = totalPts > 0 ? (totalHits / totalPts) : 0;
+      }
+
+      const isCharValid = hasEnoughInk && hasVerticalPresence && hasHorizontalPresence && (overallCov >= 0.30);
 
       if (isCharValid) {
         validLetterCount++;
