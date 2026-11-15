@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muestras de Voz ElevenLabs - Bilikids</title>
+  <title>Voz Oficial de Billi (Versión Lenta v4) - Bilikids</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5;
+      --primary: #0284c7;
       --bg: #0f172a;
-      --card-bg: rgba(30, 41, 59, 0.9);
+      --card-bg: rgba(30, 41, 59, 0.92);
       --text: #f8fafc;
-      --accent-liam: #3b82f6;
-      --accent-jessica: #ec4899;
+      --accent-billi: #38bdf8;
+      --accent-gold: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 100%);
+      background: radial-gradient(circle at 50% 20%, #172554 0%, #0f172a 100%);
       font-family: 'Quicksand', sans-serif;
       color: var(--text);
       min-height: 100vh;
@@ -27,15 +27,13 @@
     }
     .header {
       text-align: center;
-      max-width: 680px;
-      margin-bottom: 28px;
+      max-width: 720px;
+      margin-bottom: 24px;
     }
     .header h1 {
       font-family: 'Fredoka One', cursive;
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #a5b4fc, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 2.3rem;
+      color: var(--accent-billi);
       margin-bottom: 8px;
     }
     .header p {
@@ -45,57 +43,65 @@
     }
     .container {
       width: 100%;
-      max-width: 760px;
+      max-width: 780px;
       display: grid;
-      gap: 24px;
+      gap: 20px;
     }
     .voice-card {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.08);
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-top: 5px solid var(--accent-billi);
     }
-    .voice-card.liam { border-top: 4px solid var(--accent-liam); }
-    .voice-card.jessica { border-top: 4px solid var(--accent-jessica); }
-    
+    .voice-card.highlight {
+      border: 2px solid #38bdf8;
+      border-top: 6px solid #38bdf8;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.2);
+    }
     .card-title {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
     .card-title h2 {
       font-family: 'Fredoka One', cursive;
       font-size: 1.5rem;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .badge {
       font-size: 0.78rem;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .badge-liam { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-    .badge-jessica { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    .badge-billi { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+    .badge-gold { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
     
     .card-desc {
-      color: #94a3b8;
+      color: #cbd5e1;
       font-size: 0.95rem;
       margin-bottom: 18px;
+      line-height: 1.45;
     }
     .samples-grid {
       display: grid;
       gap: 12px;
     }
     .sample-item {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 14px;
-      padding: 14px 18px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -103,123 +109,146 @@
       transition: all 0.2s ease;
     }
     .sample-item:hover {
-      background: rgba(15, 23, 42, 0.85);
-      border-color: rgba(255,255,255,0.15);
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(56, 189, 248, 0.4);
     }
     .sample-info {
       flex: 1;
     }
     .sample-label {
       font-size: 0.8rem;
-      color: #64748b;
+      color: #38bdf8;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .sample-text {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #f1f5f9;
+      color: #f8fafc;
+    }
+    .sample-sub {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 2px;
     }
     .play-btn {
-      background: #4f46e5;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 1.25rem;
+      width: 50px;
+      height: 50px;
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
       transition: all 0.2s ease;
       flex-shrink: 0;
     }
     .play-btn:hover {
       transform: scale(1.08);
-      background: #4338ca;
+      background: linear-gradient(135deg, #0369a1, #1d4ed8);
     }
     .play-btn:active {
       transform: scale(0.95);
     }
     .footer-note {
       text-align: center;
-      margin-top: 32px;
-      color: #64748b;
-      font-size: 0.9rem;
-      max-width: 600px;
+      margin-top: 28px;
+      color: #94a3b8;
+      font-size: 0.92rem;
+      max-width: 640px;
+      line-height: 1.5;
+    }
+    .explanation-box {
+      background: rgba(30, 41, 59, 0.7);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <h1>🎧 Muestras de Voz Oficiales de Kids</h1>
-    <p>Escucha cómo suenan las dos voces oficiales de Kids con cadencia pausada, natural y pedagógica para los juegos de Toddlers.</p>
+    <h1>🎧 Tu Voz Elegida: Billi (eleven_v4 Lenta)</h1>
+    <p>Confirmando exactamente la voz y configuración que aprobaste: <strong>🐢 billi_v4_test.mp3 (16.4s)</strong> con motor <strong>eleven_v4</strong>, pausas pedagógicas y modulación tierna y alegre.</p>
   </div>
 
   <div class="container">
     
-    <!-- Liam Card -->
-    <div class="voice-card liam">
+    <!-- ORIGINAL REFERENCE CARD -->
+    <div class="voice-card highlight">
       <div class="card-title">
-        <h2>👦 Liam</h2>
-        <span class="badge badge-liam">Voz Oficial de Kids</span>
+        <h2>🐢 Tu Audio Elegido de Referencia</h2>
+        <span class="badge badge-gold">Aprobado por ti • 16.4s</span>
       </div>
-      <p class="card-desc">Voz de niño enérgica, alegre y clara. Configurada con ritmo pausado para preescolar.</p>
+      <p class="card-desc">
+        Este es el archivo original que guardaste. Escúchalo para confirmar que este es exactamente el tono, ritmo y calidez que buscas:
+      </p>
       
       <div class="samples-grid">
         <div class="sample-item">
           <div class="sample-info">
-            <div class="sample-label">Muestra 1 • Palabra individual</div>
-            <div class="sample-text">"Apple."</div>
+            <div class="sample-label">⭐ Audio Original • Lección de Colores</div>
+            <div class="sample-text">billi_v4_test.mp3</div>
+            <div class="sample-sub">"¡Soy Billi, tu osito amigo! ... Verde... Green! ... Amarillo... Yellow!"</div>
           </div>
-          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample1_liam_apple.mp3')">▶️</button>
-        </div>
-        
-        <div class="sample-item">
-          <div class="sample-info">
-            <div class="sample-label">Muestra 2 • Frase con pausa pedagógica</div>
-            <div class="sample-text">"Awesome... Blue bird."</div>
-          </div>
-          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample2_liam_blue_bird.mp3')">▶️</button>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/billi_v4_original.mp3')">▶️</button>
         </div>
       </div>
     </div>
 
-    <!-- Jessica Card -->
-    <div class="voice-card jessica">
+    <!-- NEW TEST SAMPLES WITH THE EXACT SAME ENGINE -->
+    <div class="voice-card">
       <div class="card-title">
-        <h2>👧 Jessica</h2>
-        <span class="badge badge-jessica">Voz Oficial de Kids</span>
+        <h2>✨ Muestras Aplicadas a los Juegos de Toddlers</h2>
+        <span class="badge badge-billi">Motor eleven_v4 • Con pausas "..."</span>
       </div>
-      <p class="card-desc">Voz infantil femenina, dulce, brillante y muy articulada para pronunciación temprana.</p>
+      <p class="card-desc">
+        Generadas con el mismo Voice ID (<code>ihKwLOjVUMG4lgUI6meZ</code>), el motor <strong>eleven_v4</strong>, etiquetas <code>[cheerfully]</code> / <code>[excited]</code> y pausas de repetición:
+      </p>
       
       <div class="samples-grid">
         <div class="sample-item">
           <div class="sample-info">
-            <div class="sample-label">Muestra 3 • Palabra individual</div>
-            <div class="sample-text">"Apple."</div>
+            <div class="sample-label">Muestra A • Palabra individual con pausa previa</div>
+            <div class="sample-text">"... Apple."</div>
+            <div class="sample-sub">Cadencia pausada y clara para pronunciar objetos en los juegos (1.07s).</div>
           </div>
-          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample3_jessica_apple.mp3')">▶️</button>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample_billi_v4_apple.mp3')">▶️</button>
         </div>
         
         <div class="sample-item">
           <div class="sample-info">
-            <div class="sample-label">Muestra 4 • Felicitación y frase</div>
-            <div class="sample-text">"Great job! Red strawberry."</div>
+            <div class="sample-label">Muestra B • Felicitación y frase interactiva</div>
+            <div class="sample-text">"Awesome! ... Blue bird."</div>
+            <div class="sample-sub">Pausa clara entre la consigna y el objeto para dar tiempo al niño (2.58s).</div>
           </div>
-          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample4_jessica_praise.mp3')">▶️</button>
+          <button class="play-btn" onclick="playAudio('assets/toddlers_media/voice_samples/sample_billi_v4_phrase.mp3')">▶️</button>
         </div>
+      </div>
+
+      <div class="explanation-box">
+        <strong>🔍 ¿Por qué falló la generación anterior?</strong><br>
+        En la tanda anterior se ejecutó con el modelo equivocado (<code>multilingual_v2</code> a palo seco sin tags), lo cual hizo que leyera las palabras en 0.3 segundos sin respiración. Al usar el motor <strong>eleven_v4 con etiquetas y pausas "..."</strong>, mantiene exactamente la ternura, lentitud y ritmo que elegiste en Billi.
       </div>
     </div>
 
   </div>
 
   <div class="footer-note">
-    💡 Solo se consumieron 59 caracteres para generar estas muestras. Ningún audio masivo será generado hasta que elijas y apruebes la voz preferida.
+    💡 Solo se usaron 70 caracteres para esta prueba. No se generará ningún audio masivo hasta que confirmes que esta modulación es la correcta.
   </div>
 
   <script>
