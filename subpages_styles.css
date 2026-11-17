@@ -686,36 +686,162 @@ body {
 .bili-companion-entry span { display: block; padding: 8px 4px; }
 
 /* ==========================================================================
-   KIDS 12 UNITS GRID (CAMBRIDGE A1-A2)
+   KIDS 12 UNITS GRID (CAMBRIDGE A1-A2 • TABLET / APP SCREEN LAUNCHER)
    ========================================================================== */
+.kids-tablet-screen-section {
+  position: relative;
+  margin: 2.25rem 0 3.25rem;
+}
+
+.kids-tablet-container {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%);
+  border: 3px solid #e2e8f0;
+  border-radius: 36px;
+  box-shadow: 
+    0 25px 50px -12px rgba(15, 23, 42, 0.09),
+    0 8px 24px -4px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  padding: 1.75rem 2rem 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.kids-tablet-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px dashed #e2e8f0;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.kids-tablet-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tablet-cam-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+  margin-right: 2px;
+}
+
+.tablet-badge-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.tablet-badge-title {
+  font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.kids-tablet-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.status-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+  animation: pulse-live 2s infinite ease-in-out;
+}
+
+@keyframes pulse-live {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.7; }
+}
+
+.status-live-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
 .kids-units-12-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.15rem;
+  gap: 1.5rem;
 }
 
 .kids-unit-card-btn {
   position: relative;
-  border-radius: var(--radius-md);
+  aspect-ratio: 1 / 1;
+  border-radius: 26px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid #e2e8f0;
   background: #ffffff;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 12px 28px -6px rgba(15, 23, 42, 0.10),
+    0 4px 10px -2px rgba(15, 23, 42, 0.05);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: block;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.kids-unit-card-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.25s ease;
 }
 
 .kids-unit-card-btn:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 
+    0 22px 42px -8px rgba(14, 165, 233, 0.32),
+    0 8px 16px -4px rgba(15, 23, 42, 0.08);
   border-color: #38bdf8;
+}
+
+.kids-unit-card-btn:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease;
 }
 
 .kids-unit-card-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.kids-unit-card-btn:hover .kids-unit-card-img {
+  transform: scale(1.06);
+}
+
+.kids-tablet-home-indicator {
+  width: 140px;
+  height: 5px;
+  background: #cbd5e1;
+  border-radius: 999px;
+  margin: 1.75rem auto 0.25rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* ==========================================================================
@@ -858,7 +984,9 @@ body {
 @media (max-width: 1024px) {
   .categories-5-grid { grid-template-columns: repeat(3, 1fr); }
   .carousel-cards-grid { grid-template-columns: repeat(3, 1fr); }
-  .kids-units-12-grid { grid-template-columns: repeat(2, 1fr); }
+  .kids-tablet-container { padding: 1.5rem; border-radius: 28px; }
+  .kids-units-12-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .kids-unit-card-btn { border-radius: 22px; }
   .teens-hero-card { grid-template-columns: 1fr; }
   .kids-hero-card { flex-direction: column; align-items: center; }
   .kids-action-strip { grid-template-columns: 1fr !important; }
@@ -905,10 +1033,14 @@ body {
   .subpage-container {
     padding: 0.75rem;
   }
+  .kids-tablet-container { padding: 1.15rem; border-radius: 24px; border-width: 2px; }
+  .kids-tablet-top-bar { margin-bottom: 1.25rem; padding-bottom: 0.75rem; }
+  .tablet-badge-title { font-size: 1rem; }
   .kids-units-12-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.85rem;
   }
+  .kids-unit-card-btn { border-radius: 18px; }
   .teens-hero-card {
     grid-template-columns: 1fr;
     padding: 1.25rem;
@@ -947,10 +1079,13 @@ body {
     width: 34px;
     height: 34px;
   }
+  .kids-tablet-container { padding: 0.85rem; border-radius: 20px; }
   .kids-units-12-grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
+  .kids-unit-card-btn { border-radius: 16px; }
+  .kids-tablet-home-indicator { width: 90px; height: 4px; margin-top: 1.25rem; }
   .categories-5-grid {
     grid-template-columns: 1fr;
   }
