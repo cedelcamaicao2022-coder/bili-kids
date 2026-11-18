@@ -61,6 +61,30 @@ class BilikidsMascotCompanion {
       "¡Dame esos cinco! ¡High five! 🖐️"
     ];
 
+    if (typeof window !== 'undefined' && window.location.pathname.includes('kids')) {
+      this.cheerPhrases = [
+        "Don't worry, you can do it! 💪",
+        "Keep going! Try again 🌟",
+        "Let's go together! You can do it! 🚀"
+      ];
+      this.celebratePhrases = [
+        "You did an awesome job! ⭐",
+        "That's it! Awesome! 🎉",
+        "You are so smart! 🏆",
+        "Excellent work! Superstar! 🌟",
+        "You're a champion! 🚀"
+      ];
+      this.greetings = [
+        "Hello there! 🐻🎒",
+        "What do you want to learn today? ✨",
+        "Great to see you again! 💖",
+        "My name is Bili! 🌟",
+        "Let's learn and play! 🎮⭐",
+        "Tap any card to listen to pronunciation! 🔊",
+        "High five! 🖐️"
+      ];
+    }
+
     this.init();
   }
 
@@ -107,7 +131,7 @@ class BilikidsMascotCompanion {
     } else if (path.includes('babies')) {
       welcomeMsg = "¡Hola pequeñito! Bienvenido a explorar 👶🎈";
     } else if (path.includes('kids')) {
-      welcomeMsg = "¡Hola peque! Mi nombre es Bili, ¿listo para aprender? 🎒🚀";
+      welcomeMsg = "Hello! My name is Bili, ready to explore? 🎒🚀";
     } else if (path.includes('teens')) {
       welcomeMsg = "¡Hola! Me gustó verte de nuevo, ¡vamos a subir de nivel! 🚀";
     } else if (path.includes('toddlers')) {
