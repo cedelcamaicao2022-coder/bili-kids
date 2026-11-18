@@ -455,7 +455,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'a green public park' es singular (1 solo parque) ➔ Usa THERE IS!"
+    explanation: "'a green public park' is singular (1 park) ➔ Use THERE IS!"
   },
   {
     id: 1,
@@ -464,7 +464,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'three supermarkets' es plural (3 supermercados) ➔ Usa THERE ARE!"
+    explanation: "'three supermarkets' is plural (3 supermarkets) ➔ Use THERE ARE!"
   },
   {
     id: 2,
@@ -473,7 +473,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'many colorful flowers' es plural contable ➔ Usa THERE ARE!"
+    explanation: "'many colorful flowers' is countable plural ➔ Use THERE ARE!"
   },
   {
     id: 3,
@@ -482,7 +482,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'an ancient stone library' es singular (1 biblioteca) ➔ Usa THERE IS!"
+    explanation: "'an ancient stone library' is singular (1 library) ➔ Use THERE IS!"
   },
   {
     id: 4,
@@ -491,7 +491,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'two big fire trucks' es plural (2 camiones) ➔ Usa THERE ARE!"
+    explanation: "'two big fire trucks' is plural (2 trucks) ➔ Use THERE ARE!"
   },
   {
     id: 5,
@@ -518,7 +518,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'five yellow buses' es plural (5 autobuses) ➔ Usa THERE ARE!"
+    explanation: "'five yellow buses' is plural (5 buses) ➔ Use THERE ARE!"
   },
   {
     id: 8,
@@ -527,7 +527,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'a tall hospital' es singular (1 hospital) ➔ Usa THERE IS!"
+    explanation: "'a tall hospital' is singular (1 hospital) ➔ Use THERE IS!"
   },
   {
     id: 9,
@@ -545,7 +545,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'a quiet cinema' es singular (1 cine) ➔ Usa THERE IS!"
+    explanation: "'a quiet cinema' is singular (1 cinema) ➔ Use THERE IS!"
   },
   {
     id: 11,
@@ -554,7 +554,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'several wooden benches' es plural (varias bancas) ➔ Usa THERE ARE!"
+    explanation: "'several wooden benches' is plural (multiple benches) ➔ Use THERE ARE!"
   },
   {
     id: 12,
@@ -563,7 +563,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'a friendly pet shop' es singular (1 tienda) ➔ Usa THERE IS!"
+    explanation: "'a friendly pet shop' is singular (1 shop) ➔ Use THERE IS!"
   },
   {
     id: 13,
@@ -572,7 +572,7 @@ const buildingPermitsData = [
     sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'twenty clean cars' es plural (20 autos) ➔ Usa THERE ARE!"
+    explanation: "'twenty clean cars' is plural (20 cars) ➔ Use THERE ARE!"
   },
   {
     id: 14,
@@ -591,7 +591,7 @@ function loadInspectorPermit(index) {
   currentInspectorIndex = index;
   const p = buildingPermitsData[index];
 
-  document.getElementById('inspectorCaseNum').textContent = `Permiso ${index + 1} de ${buildingPermitsData.length}`;
+  document.getElementById('inspectorCaseNum').textContent = `Permit ${index + 1} of ${buildingPermitsData.length}`;
   document.getElementById('permitSentenceTarget').innerHTML = p.sentenceTemplate.replace(
     '___',
     `<span id="permitBlankSlot" class="permit-blank-slot">[ ? ]</span>`
@@ -683,7 +683,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "between",
     options: ["between", "behind", "opposite", "in front of"],
-    explanation: "Estar en medio de dos lugares se dice 'between' (entre ambos)!"
+    explanation: "Being in the middle between two places is 'between'!"
   },
   {
     id: 1,
@@ -697,7 +697,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "between", "opposite", "under"],
-    explanation: "Estar inmediatamente al lado se dice 'next to'!"
+    explanation: "Right beside or sharing a wall is 'next to'!"
   },
   {
     id: 2,
@@ -711,7 +711,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "between", "behind", "under"],
-    explanation: "Estar al frente o al otro lado de la calle se dice 'opposite'!"
+    explanation: "Across the street from something is 'opposite'!"
   },
   {
     id: 3,
@@ -726,7 +726,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "between",
     options: ["between", "next to", "in front of", "under"],
-    explanation: "En medio de dos edificios ➔ 'between'!"
+    explanation: "In the middle between two buildings ➔ 'between'!"
   },
   {
     id: 4,
@@ -740,7 +740,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "opposite", "behind", "between"],
-    explanation: "Al lado contiguo ➔ 'next to'!"
+    explanation: "Right next to the adjacent shop ➔ 'next to'!"
   },
   {
     id: 5,
@@ -754,7 +754,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "behind", "between", "next to"],
-    explanation: "Cruzar la calle para estar enfrente ➔ 'opposite'!"
+    explanation: "Across the street facing it ➔ 'opposite'!"
   },
   {
     id: 6,
@@ -783,7 +783,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "behind", "between", "opposite"],
-    explanation: "Pared con pared / al lado ➔ 'next to'!"
+    explanation: "Sharing a wall / side by side ➔ 'next to'!"
   },
   {
     id: 8,
@@ -797,7 +797,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "between", "next to", "behind"],
-    explanation: "Al otro lado de la avenida ➔ 'opposite'!"
+    explanation: "Across the river avenue ➔ 'opposite'!"
   },
   {
     id: 9,
@@ -812,7 +812,7 @@ const gpsStreetChallenges = [
     promptEs: "",
     correctAnswer: "between",
     options: ["between", "next to", "behind", "under"],
-    explanation: "Ubicado en medio de ambos centros culturales ➔ 'between'!"
+    explanation: "Located in the middle between both cultural centers ➔ 'between'!"
   }
 ];
 

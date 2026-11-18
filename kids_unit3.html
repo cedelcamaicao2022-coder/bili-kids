@@ -70,7 +70,7 @@
         <div class="tree-header-row">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a;">
-              <span>🕵️‍♂️</span> Detective de Familia & Amigos (Expedientes Secretos)
+              <span>🕵️‍♂️</span> Family & Friends Detective (Secret Case Files)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
               The case files are face down. Read the detective's clue, flip the cards to read their English descriptions, and solve the mystery!
@@ -82,7 +82,7 @@
         <div class="tree-clue-card" style="align-items:flex-start;">
           <div style="flex-grow:1;">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
-              <span class="clue-badge" id="clueBadgeNum">Caso 1 de 8</span>
+              <span class="clue-badge" id="clueBadgeNum">Case 1 of 8</span>
               <span id="clueCaseTitle" style="font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:#0f172a;">
                 The Mystery of the Vanished Cookies 🍪
               </span>
@@ -112,7 +112,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: MATCH & LINK (LABORATORIO DE CONEXIONES)
+         ACTIVITY 2: MATCH & LINK (CONNECTION LAB)
          ==================================================================== -->
     <section id="view-match" class="activity-view">
       <div class="match-link-box">
@@ -142,7 +142,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: SENTENCE DOCTOR (CAZA-ERRORES GRAMATICAL)
+         ACTIVITY 3: SENTENCE DOCTOR (GRAMMAR LAB)
          ==================================================================== -->
     <section id="view-doctor" class="activity-view">
       <div class="doctor-container">
@@ -184,7 +184,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: TALK SHOW PODCAST SIMULATOR
+         ACTIVITY 4: TALK SHOW PODCAST SIMULATOR
          ==================================================================== -->
     <section id="view-podcast" class="activity-view">
       <div class="podcast-box">
@@ -226,14 +226,12 @@
             <div class="podcast-response-target" id="podcastTargetPhrase">
               "My mother is my favorite person. Her name is Sofia and she is very kind."
             </div>
-            <div style="font-size:0.85rem; color:#64748b; margin-top:4px;" id="podcastTargetEs">
-              Mi madre es mi persona favorita. Su nombre es Sofia y es muy amable.
-            </div>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:4px; display:none;" id="podcastTargetEs"></div>
           </div>
 
           <!-- Broadcast Microphone -->
           <div style="margin:20px 0;">
-            <button class="btn-podcast-mic" id="podcastMicBtn" onclick="togglePodcastMic()" title="Habla al aire en el podcast">
+            <button class="btn-podcast-mic" id="podcastMicBtn" onclick="togglePodcastMic()" title="Speak live on the podcast">
               🎤
             </button>
             <div style="font-size:0.85rem; color:#64748b; margin-top:8px;">
@@ -256,6 +254,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit3_engine.js?v=20261102_voicecheck"></script>

@@ -62,7 +62,7 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: THE HOBBY GEAR LOCKER (CASILLERO DE EQUIPAMIENTO)
+         ACTIVITY 1: THE HOBBY GEAR LOCKER (EQUIPMENT LAB)
          ==================================================================== -->
     <section id="view-locker" class="activity-view active-view">
       <div class="locker-container">
@@ -70,7 +70,7 @@
         <div class="locker-header-row">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🎒</span> Casillero del Club de Hobbies (Gear Locker)
+              <span>🎒</span> Hobby Club Gear Locker
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
               Read the athlete or artist profile. Pack the 3 correct equipment items into the locker.
@@ -120,7 +120,7 @@
 
         <!-- Pool de Equipamiento Disponible -->
         <div style="font-family:var(--font-display); font-weight:700; font-size:1rem; color:#0f172a; margin:16px 0 8px;">
-          🏷️ Selecciona el equipamiento correcto para empacar:
+          🏷️ Select the correct gear to pack:
         </div>
         <div class="gear-pool-grid" id="gearPoolGrid">
           <!-- Inyectados por JS -->
@@ -133,7 +133,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: TACTILE FREQUENCY DJ MIXER (CONSOLA CON CROSSFADER Y SCRATCH)
+         ACTIVITY 2: TACTILE FREQUENCY DJ MIXER (CROSSFADER & SCRATCH)
          ==================================================================== -->
     <section id="view-dj" class="activity-view">
       <div class="dj-console-container">
@@ -144,11 +144,11 @@
               <span>🎚️</span> Master DJ Console: Scratch & Frequency Fader
             </h2>
             <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
-              Revisa la rutina en el calendario semanal, desliza el crossfader al porcentaje correcto y presiona Drop the Beat.
+              Check the routine on the weekly calendar, slide the crossfader to the matching frequency, and drop the beat!
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="djTrackBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Pista 1 de 10</span>
+            <span class="unit-tag-pill" id="djTrackBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Track 1 of 10</span>
             <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextDJTrack()">
               <span>Next Track ➔</span>
             </button>
@@ -201,7 +201,7 @@
             <!-- Crossfader slider -->
             <div class="crossfader-console" style="margin-top:16px;">
               <div style="font-family:var(--font-display); font-weight:700; font-size:0.92rem; color:#cbd5e1; margin-bottom:6px;">
-                🎚️ Desliza el Fader hacia el adverbio de frecuencia correcto:
+                🎚️ Slide the fader to the matching adverb of frequency:
               </div>
 
               <!-- Medidor LED VU Meter -->
@@ -247,7 +247,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: VERB-ING MAGNET FUSION LAB (LABORATORIO -ING)
+         ACTIVITY 3: VERB-ING MAGNET FUSION LAB (SPELLING LAB)
          ==================================================================== -->
     <section id="view-magnet" class="activity-view">
       <div class="magnet-container">
@@ -280,7 +280,7 @@
           </div>
 
           <div class="magnet-rule-clue" id="magnetRuleClue">
-            🧲 Verbo Base: <strong>play</strong>
+            🧲 Base Verb: <strong>play</strong>
           </div>
         </div>
 
@@ -301,7 +301,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: TALENT SHOW AUDITION ("YES, I CAN!" TALENT STAGE)
+         ACTIVITY 4: TALENT SHOW AUDITION ("YES, I CAN!" TALENT STAGE)
          ==================================================================== -->
     <section id="view-talent" class="activity-view">
       <div class="talent-container">
@@ -350,9 +350,7 @@
           <div class="talent-judge-question" id="talentJudgeQuestion">
             Judge asks: "Can you play the acoustic guitar?"
           </div>
-          <div id="talentJudgeQuestionEs" style="font-size:0.88rem; color:#94a3b8; font-style:italic; margin-bottom:14px;">
-            Can you play the acoustic guitar?
-          </div>
+          <div id="talentJudgeQuestionEs" style="display:none;"></div>
 
           <div style="margin:12px 0;">
             <button class="btn-back-map" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:#38bdf8; cursor:pointer; font-size:0.85rem;" onclick="listenJudgeQuestion()">
@@ -367,9 +365,7 @@
           <div class="talent-candidate-answer" id="talentCandidateAnswer">
             "Yes, I can play the guitar very well!"
           </div>
-          <div id="talentCandidateAnswerEs" style="font-size:0.88rem; color:#cbd5e1; font-style:italic; margin-bottom:16px;">
-            Yes, I can play the guitar very well!
-          </div>
+          <div id="talentCandidateAnswerEs" style="display:none;"></div>
 
           <div>
             <button class="btn-back-map" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:#10b981; cursor:pointer; font-size:0.85rem;" onclick="listenCandidateAnswer()">
@@ -380,7 +376,7 @@
 
         <!-- Audition Microphone button -->
         <div style="margin:20px 0;">
-          <button class="btn-talent-mic" id="talentMicBtn" onclick="toggleTalentMic()" title="Responder al jurado">
+          <button class="btn-talent-mic" id="talentMicBtn" onclick="toggleTalentMic()" title="Answer the judges">
             🎙️
           </button>
           <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
@@ -401,6 +397,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit5_engine.js?v=20261102_voicecheck"></script>

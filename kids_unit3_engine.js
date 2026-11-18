@@ -274,59 +274,59 @@ const familyMembersData = [
 const detectiveClues = [
   {
     targetId: 'uncle',
-    title: "Caso 1: The Mystery of the Vanished Cookies 🍪",
+    title: "Case 1: The Mystery of the Vanished Cookies 🍪",
     clueEn: "Someone ate grandmother's chocolate cookies in the kitchen! The suspect has a dark beard and left an electric guitar pick on the table. Who is the cookie thief?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Carlos's brother... has a dark beard and plays the electric guitar.'"
+    hint: "Look for the card with: 'Carlos's brother... has a dark beard and plays the electric guitar.'"
   },
   {
     targetId: 'brother',
-    title: "Caso 2: The Green Dinosaur Footprint 🦕",
+    title: "Case 2: The Green Dinosaur Footprint 🦕",
     clueEn: "A bright green footprint was painted on the living room wall! The suspect is very energetic, loves dinosaurs, and is Carlos's young seven-year-old son. Who left the footprint?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Maya's younger brother... seven years old, loves dinosaurs.'"
+    hint: "Look for the card with: 'Maya's younger brother... seven years old, loves dinosaurs.'"
   },
   {
     targetId: 'grandfather',
-    title: "Caso 3: The Forgotten Silver Glasses 👓",
+    title: "Case 3: The Forgotten Silver Glasses 👓",
     clueEn: "A pair of reading glasses was left on the history encyclopedia. The suspect is seventy-two years old, has silver hair, and loves telling stories to his grandchildren. Who lost the glasses?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Carlos's father... seventy-two years old, wears glasses.'"
+    hint: "Look for the card with: 'Carlos's father... seventy-two years old, wears glasses.'"
   },
   {
     targetId: 'mother',
-    title: "Caso 4: The Emergency Medical Bag 🩺",
+    title: "Case 4: The Emergency Medical Bag 🩺",
     clueEn: "Someone rushed out early in the morning and took the medical bag to the children's hospital. The suspect is forty years old, very kind, and Carlos's wife. Who is the doctor?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Maya's mother... forty years old and works as a kind doctor.'"
+    hint: "Look for the card with: 'Maya's mother... forty years old and works as a kind doctor.'"
   },
   {
     targetId: 'friend_boy',
-    title: "Caso 5: The Basketball in the Flowers 🏀",
+    title: "Case 5: The Basketball in the Flowers 🏀",
     clueEn: "An orange basketball bounced into the garden and knocked down a flower pot! The suspect is ten years old, Maya's funny classmate, and plays basketball after school. Who threw the ball?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Maya's classmate... ten years old, funny, and plays basketball.'"
+    hint: "Look for the card with: 'Maya's classmate... ten years old, funny, and plays basketball.'"
   },
   {
     targetId: 'aunt',
-    title: "Caso 6: The Sunset Painting on the Balcony 🎨",
+    title: "Case 6: The Sunset Painting on the Balcony 🎨",
     clueEn: "A fresh watercolor painting was left drying on the balcony with red paint drops. The suspect is Carlos's sister, thirty-six years old, and a creative landscape painter. Who is the artist?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Carlos's sister... reddish hair and creative landscape painter.'"
+    hint: "Look for the card with: 'Carlos's sister... reddish hair and creative landscape painter.'"
   },
   {
     targetId: 'cousin',
-    title: "Caso 7: The Treehouse Gymnastics Ribbon 🤸‍♀️",
+    title: "Case 7: The Treehouse Gymnastics Ribbon 🤸‍♀️",
     clueEn: "A shiny gymnastics ribbon was found tangled in the treehouse branch. The suspect is ten years old, David's daughter, and practices gymnastics every day. Who is the gymnast?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'David's daughter... ten years old and practices gymnastics.'"
+    hint: "Look for the card with: 'David's daughter... ten years old and practices gymnastics.'"
   },
   {
     targetId: 'grandmother',
-    title: "Caso 8: The Secret Cinnamon Cake Recipe 🍰",
+    title: "Case 8: The Secret Cinnamon Cake Recipe 🍰",
     clueEn: "A handwritten cake recipe with cinnamon sugar was found on the counter. The suspect is Carlos's mother, seventy years old, and Maya's loving grandmother. Who wrote the secret recipe?",
     clueEs: "",
-    hint: "Busca la tarjeta con: 'Carlos's mother... seventy years old, loves baking warm cookies.'"
+    hint: "Look for the card with: 'Carlos's mother... seventy years old, loves baking warm cookies.'"
   }
 ];
 
@@ -344,8 +344,8 @@ function renderFamilyTree() {
         <div class="mystery-card-face mystery-card-front" onclick="flipDetectiveCard('${person.id}')">
           <span class="case-file-badge">📁 FILE #${idx + 1}</span>
           <div class="mystery-silhouette-avatar">🕵️‍♂️</div>
-          <div class="mystery-question-title">Sospechoso #${idx + 1}</div>
-          <span class="mystery-tap-hint">Toca para voltear y leer perfil 🔄</span>
+          <div class="mystery-question-title">Suspect #${idx + 1}</div>
+          <span class="mystery-tap-hint">Tap to flip & read profile 🔄</span>
         </div>
 
         <!-- BACK: ENGLISH PROFILE -->
@@ -449,37 +449,37 @@ function confirmDetectiveTarget(personId) {
     }, 700);
 
     document.getElementById('clueFeedback').innerHTML = `
-      <span style="color:#dc2626; font-weight:600;">❌ No coincide con las pistas del caso. Revisa otro expediente.</span>
+      <span style="color:#dc2626; font-weight:600;">❌ Does not match the clues for this case. Try checking another profile!</span>
     `;
   }
 }
 
 // ============================================================================
-// ACTIVIDAD 2: MATCH & LINK (CONEXIONES INTERACTIVAS)
+// ACTIVITY 2: MATCH & LINK (INTERACTIVE CONNECTIONS)
 // ============================================================================
 const matchRoundsData = [
-  // Ronda 1: Pronombres vs Adjetivos Posesivos
+  // Round 1: Pronouns vs Possessive Adjectives
   {
     title: "Round 1: Subject Pronoun ➔ Possessive Adjective",
-    sub: "Conecta el pronombre con su adjetivo posesivo correcto",
+    sub: "Match the pronoun with its correct possessive adjective",
     left: [
-      { id: 'p1', text: 'I (yo)', matchId: 'm1' },
+      { id: 'p1', text: 'I', matchId: 'm1' },
       { id: 'p2', text: 'You', matchId: 'm2' },
       { id: 'p3', text: 'He', matchId: 'm3' },
-      { id: 'p4', text: 'She (ella)', matchId: 'm4' },
-      { id: 'p5', text: 'We (nosotros)', matchId: 'm5' },
-      { id: 'p6', text: 'They (ellos)', matchId: 'm6' }
+      { id: 'p4', text: 'She', matchId: 'm4' },
+      { id: 'p5', text: 'We', matchId: 'm5' },
+      { id: 'p6', text: 'They', matchId: 'm6' }
     ],
     right: [
-      { id: 'm1', text: 'My (mi / mis)', matchId: 'p1' },
-      { id: 'm2', text: 'Your (tu / tus)', matchId: 'p2' },
+      { id: 'm1', text: 'My', matchId: 'p1' },
+      { id: 'm2', text: 'Your', matchId: 'p2' },
       { id: 'm3', text: 'His', matchId: 'p3' },
-      { id: 'm4', text: 'Her (su de ella)', matchId: 'p4' },
-      { id: 'm5', text: 'Our (nuestro)', matchId: 'p5' },
-      { id: 'm6', text: 'Their (su de ellos)', matchId: 'p6' }
+      { id: 'm4', text: 'Her', matchId: 'p4' },
+      { id: 'm5', text: 'Our', matchId: 'p5' },
+      { id: 'm6', text: 'Their', matchId: 'p6' }
     ]
   },
-  // Ronda 2: Rasgos de Personalidad
+  // Round 2: Personality Traits
   {
     title: "Round 2: Person Description ➔ Personality Trait",
     sub: "Connect each description to its matching adjective",
@@ -492,10 +492,10 @@ const matchRoundsData = [
       { id: 't6', text: 'Plays sports all afternoon', matchId: 'a6' }
     ],
     right: [
-      { id: 'a1', text: 'Funny (Chistoso)', matchId: 't1' },
-      { id: 'a2', text: 'Smart (Inteligente)', matchId: 't2' },
-      { id: 'a3', text: 'Kind (Amable)', matchId: 't3' },
-      { id: 'a4', text: 'Creative (Creativo)', matchId: 't4' },
+      { id: 'a1', text: 'Funny', matchId: 't1' },
+      { id: 'a2', text: 'Smart', matchId: 't2' },
+      { id: 'a3', text: 'Kind', matchId: 't3' },
+      { id: 'a4', text: 'Creative', matchId: 't4' },
       { id: 'a5', text: 'Shy', matchId: 't5' },
       { id: 'a6', text: 'Energetic', matchId: 't6' }
     ]
@@ -662,7 +662,7 @@ const doctorCasesData = [
     wrongWord: "is",
     prescriptionOptions: ["are", "am", "be"],
     correctFix: "are",
-    translation: "Ellos son mis abuelos.",
+    translation: "They are my grandparents.",
     explanation: "The plural pronoun 'They' pairs with 'are'."
   },
   {
@@ -671,7 +671,7 @@ const doctorCasesData = [
     wrongWord: "are",
     prescriptionOptions: ["is", "am", "be"],
     correctFix: "is",
-    translation: "Su nombre es Sophia.",
+    translation: "Her name is Sophia.",
     explanation: "'Her name' is singular, so it takes 'is'."
   },
   {
@@ -689,7 +689,7 @@ const doctorCasesData = [
     wrongWord: "they",
     prescriptionOptions: ["their", "our", "his"],
     correctFix: "their",
-    translation: "Nos encanta la casa nueva de ellos.",
+    translation: "We love their new house.",
     explanation: "The possessive adjective for 'they' is 'their'."
   },
   {
@@ -698,7 +698,7 @@ const doctorCasesData = [
     wrongWord: "It",
     prescriptionOptions: ["They", "He", "She"],
     correctFix: "They",
-    translation: "Alex tiene dos gatos. Son lindos.",
+    translation: "Alex has two cats. They are cute.",
     explanation: "For plural animals (two cats), use 'They', not 'It'."
   },
   {
@@ -734,7 +734,7 @@ const doctorCasesData = [
     wrongWord: "friend",
     prescriptionOptions: ["friendly", "friendship", "friends"],
     correctFix: "friendly",
-    translation: "David es una persona muy amigable.",
+    translation: "David is a very friendly person.",
     explanation: "The descriptive adjective is 'friendly'."
   },
   {
@@ -752,7 +752,7 @@ const doctorCasesData = [
     wrongWord: "are",
     prescriptionOptions: ["is", "am", "be"],
     correctFix: "is",
-    translation: "Nuestra profesora es muy inteligente.",
+    translation: "Our teacher is very smart.",
     explanation: "'Our teacher' is singular, so it takes 'is'."
   },
   {
@@ -770,7 +770,7 @@ const doctorCasesData = [
     wrongWord: "is",
     prescriptionOptions: ["are", "am", "be"],
     correctFix: "are",
-    translation: "Amo a mi familia porque ellos son amables.",
+    translation: "I love my family because they are kind.",
     explanation: "The pronoun 'they' always agrees with 'are'."
   }
 ];

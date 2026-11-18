@@ -17,7 +17,7 @@
   <header class="unit-top-navbar">
     <a href="kids.html" class="btn-back-map">
       <span>⬅</span>
-      <span>Mapa de Misiones</span>
+      <span>Mission Map</span>
     </a>
 
     <div style="display:flex; align-items:center; gap:10px;">
@@ -66,7 +66,7 @@
   <main class="unit-main-container">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (VIDEOJUEGO CANVAS)
+         ACTIVITY 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (VIDEO GAME CANVAS)
          ==================================================================== -->
     <section id="view-obby" class="activity-view active-view">
       <div class="obby-game-container">
@@ -82,7 +82,7 @@
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <button class="btn-back-map" style="background:#f5f3ff; color:#7c3aed; border-color:#ddd6fe; cursor:pointer;" onclick="restartObbyStage()">
-              <span>🔄 Reiniciar Nivel</span>
+              <span>🔄 Restart Level</span>
             </button>
           </div>
         </div>
@@ -100,7 +100,7 @@
             </div>
             <div class="mission-step-chip" id="stepChipGate">
               <span class="step-num">3</span>
-              <span id="stepGateStatusText">🏁 Cruza la Puerta para avanzar</span>
+              <span id="stepGateStatusText">🏁 Pass through the Gate to advance</span>
             </div>
           </div>
         </div>
@@ -114,10 +114,10 @@
             <!-- Injected dynamically: [ ] Item 1 | [ ] Item 2 -->
           </div>
           <div class="obby-hud-item" id="obbyGateStatusBadge" style="color:#fca5a5;">
-            🔒 Puerta: CERRADA (0/2)
+            🔒 Gate: LOCKED (0/2)
           </div>
           <div class="obby-hud-item" id="obbyCoinsBadge">
-            🪙 Monedas: 0
+            🪙 Coins: 0
           </div>
         </div>
 
@@ -176,14 +176,14 @@
         <!-- On-Screen Virtual Touch Controls -->
         <div class="obby-touch-controls">
           <div class="touch-dpad">
-            <button class="touch-btn" id="touchBtnLeft" title="Mover Izquierda">◀</button>
-            <button class="touch-btn" id="touchBtnRight" title="Mover Derecha">▶</button>
+            <button class="touch-btn" id="touchBtnLeft" title="Move Left">◀</button>
+            <button class="touch-btn" id="touchBtnRight" title="Move Right">▶</button>
           </div>
           <div style="font-size:0.85rem; color:#64748b; font-weight:600; text-align:center;">
-            Controles: Flechas o A/D para moverte • Espacio para saltar
+            Controls: Arrow keys or A/D to move • Space to jump
           </div>
           <div>
-            <button class="touch-btn touch-btn-jump" id="touchBtnJump" title="Saltar">⬆ SALTO</button>
+            <button class="touch-btn touch-btn-jump" id="touchBtnJump" title="Jump">⬆ JUMP</button>
           </div>
         </div>
 
@@ -191,7 +191,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
+         ACTIVITY 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
          ==================================================================== -->
     <section id="view-goldquest" class="activity-view">
       <div class="gold-quest-container">
@@ -259,7 +259,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: 🛒 TACTILE CASHIER SCANNER & BAGGING CONVEYOR
+         ACTIVITY 3: 🛒 TACTILE CASHIER SCANNER & BAGGING CONVEYOR
          ==================================================================== -->
     <section id="view-cashier" class="activity-view">
       <div class="cashier-sim-container">
@@ -323,7 +323,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: 🎙️ MALL VLOGGER & SHOPPING INFLUENCER STUDIO
+         ACTIVITY 4: 🎙️ MALL VLOGGER & SHOPPING INFLUENCER STUDIO
          ==================================================================== -->
     <section id="view-vlogger" class="activity-view">
       <div class="vlogger-studio-container">
@@ -361,9 +361,7 @@
           <div class="vlogger-teleprompter" id="vloggerTeleprompterText">
             "Hey everyone! Look at these awesome white sneakers I bought today! They are super comfortable."
           </div>
-          <div id="vloggerTeleprompterEs" style="font-size:0.95rem; color:#fbcfe8; font-style:italic; margin-bottom:18px;">
-            Hello everyone! Look at these awesome white sneakers I bought today! They are super comfortable.
-          </div>
+          <div id="vloggerTeleprompterEs" style="display:none;"></div>
 
           <div>
             <button class="btn-back-map" style="background:rgba(236,72,153,0.25); color:#ffffff; border-color:#ffffff; cursor:pointer;" onclick="listenVloggerModel()">
@@ -389,6 +387,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit8_engine.js?v=20261102_voicecheck"></script>

@@ -1162,12 +1162,12 @@ function loadVlogEpisode(index) {
   const ep = vlogEpisodesData[index];
   document.getElementById('vlogMicBtn').disabled = false;
 
-  document.getElementById('vlogEpisodeNum').textContent = `Episodio ${index + 1} de ${vlogEpisodesData.length}`;
+  document.getElementById('vlogEpisodeNum').textContent = `Episode ${index + 1} of ${vlogEpisodesData.length}`;
   document.getElementById('vlogSceneTag').textContent = ep.scene;
   document.getElementById('vlogPhraseTarget').textContent = ep.targetPhrase;
-  document.getElementById('vlogPhraseEs').textContent = ep.phraseEs;
+  document.getElementById('vlogPhraseEs').textContent = '';
   document.getElementById('vlogChatBox').innerHTML = `
-    <span style="color:#94a3b8; font-size:0.85rem;">💬 Chat en Vivo: ${ep.chatReaction}</span>
+    <span style="color:#94a3b8; font-size:0.85rem;">💬 Live Chat: ${ep.chatReaction}</span>
   `;
   document.getElementById('vlogFeedback').innerHTML = '';
 
@@ -1188,7 +1188,7 @@ function toggleVlogMic() {
 
   if (!SpeechRecognition) {
     feedback.innerHTML = `
-      <div style="font-size:1.1rem; font-weight:700; color:#fbbf24;">📹 Este navegador no puede verificar tu frase.</div>
+      <div style="font-size:1.1rem; font-weight:700; color:#fbbf24;">📹 Speech recognition not supported on this browser.</div>
       <span style="display:inline-block; margin-top:6px; background:rgba(16, 185, 129, 0.2); color:#34d399; font-weight:700; padding:6px 16px; border-radius:999px; border:1px solid #10b981;">
         Practice mode. Listen to native audio and try again.
       </span>

@@ -648,10 +648,10 @@ function loadDJTrack(index) {
   djRewardClaimed = false;
   const track = djMixerTracksData[index];
 
-  document.getElementById('djTrackBadge').textContent = `Pista ${index + 1} de ${djMixerTracksData.length}`;
+  document.getElementById('djTrackBadge').textContent = `Track ${index + 1} of ${djMixerTracksData.length}`;
   document.getElementById('djTrackTitle').textContent = track.title;
   document.getElementById('djRoutineEn').textContent = `"${track.routineEn}"`;
-  document.getElementById('djRoutineEs').textContent = track.routineEs;
+  document.getElementById('djRoutineEs').textContent = '';
 
   // Active weekly days display
   const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -757,7 +757,7 @@ function dropTheDJBeat() {
     feedback.innerHTML = `
       <div style="background:rgba(16, 185, 129, 0.2); border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#34d399; margin-top:16px;">
         <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎧 PERFECT BEAT DROP! Fader at ${track.targetPercentage}% (+20 pts)</div>
-        <div style="font-size:0.95rem; color:#ffffff;">"${track.targetAdverb.toUpperCase()}" calza exactamente con la rutina.</div>
+        <div style="font-size:0.95rem; color:#ffffff;">"${track.targetAdverb.toUpperCase()}" matches this routine perfectly!</div>
         <div style="font-size:0.85rem; color:#a7f3d0; margin-top:4px;">💡 ${track.explanation}</div>
       </div>
     `;
@@ -956,7 +956,7 @@ function loadMagnetChallenge(index) {
     '___',
     `<span id="magnetBlankSlot" class="magnet-blank-pill">[ ? ]</span>`
   );
-  document.getElementById('magnetRuleClue').innerHTML = `🧲 Verbo Base: <strong>${item.baseVerb}</strong>`;
+  document.getElementById('magnetRuleClue').innerHTML = `🧲 Base Verb: <strong>${item.baseVerb}</strong>`;
 
   // Randomize button positions
   const shuffledOptions = [...item.options].sort(() => Math.random() - 0.5);
@@ -1111,11 +1111,11 @@ function loadTalentAudition(index) {
   document.getElementById('talentEpisodeNum').textContent = `Audition ${index + 1} of ${talentAuditionsData.length}`;
   document.getElementById('talentSceneTag').textContent = audition.talentTag;
   document.getElementById('talentJudgeQuestion').textContent = `Judge asks: "${audition.judgeQuestion}"`;
-  document.getElementById('talentJudgeQuestionEs').textContent = audition.judgeQuestionEs;
+  document.getElementById('talentJudgeQuestionEs').textContent = '';
   document.getElementById('talentCandidateAnswer').textContent = `"${audition.candidateAnswer}"`;
-  document.getElementById('talentCandidateAnswerEs').textContent = audition.candidateAnswerEs;
+  document.getElementById('talentCandidateAnswerEs').textContent = '';
   document.getElementById('talentJudgeBox').innerHTML = `
-    <span style="color:#fbbf24; font-size:0.9rem;">⭐ Panel del Jurado: ${audition.judgeFeedback}</span>
+    <span style="color:#fbbf24; font-size:0.9rem;">⭐ Judges Panel: ${audition.judgeFeedback}</span>
   `;
   document.getElementById('talentFeedback').innerHTML = '';
 

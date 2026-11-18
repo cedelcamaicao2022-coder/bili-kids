@@ -58,13 +58,32 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
 
-      // Preservar tono exacto y reproducir a ritmo natural del estudio ElevenLabs
-      audio.preservesPitch = true;
-      audio.mozPreservesPitch = true;
-      audio.webkitPreservesPitch = true;
-      audio.playbackRate = 1.0;
+      // Juvenile formant tuning for child roles vs adult roles
+      const v = (voiceType || '').toLowerCase();
+      const isAdultRole = v === 'teacher' || v === 'clerk' || v === 'officer' || v === 'judge' || v === 'agent' || v === 'waiter' || v === 'librarian' || v === 'cashier' || v === 'host';
 
-      const safeDuration = Math.max(2000, (text.length * 120) / audio.playbackRate);
+      if (!isAdultRole) {
+        // Child roles (Alex, Maya, Kid, Boy, Girl, Student, Vlogger):
+        // Disable pitch preservation to shift formants up into an energetic, bright youthful timbre
+        audio.preservesPitch = false;
+        audio.mozPreservesPitch = false;
+        audio.webkitPreservesPitch = false;
+        if (v === 'maya' || v === 'girl') {
+          audio.playbackRate = 1.25; // Youthful bright girl voice
+        } else {
+          audio.playbackRate = 1.20; // Youthful bright boy / kid voice
+        }
+      } else {
+        // Adult roles (Teacher, Clerk, Officer, etc.):
+        // Maintain natural adult studio pitch and steady pace
+        audio.preservesPitch = true;
+        audio.mozPreservesPitch = true;
+        audio.webkitPreservesPitch = true;
+        audio.playbackRate = 1.0;
+      }
+
+      const rate = audio.playbackRate || 1.0;
+      const safeDuration = Math.max(1800, (text.length * 100) / rate);
       const safeTimer = setTimeout(finish, safeDuration);
 
       audio.onended = () => {
@@ -108,8 +127,19 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.82; // Ritmo pausado y natural
-    utterance.pitch = (voiceType === 'maya' || voiceType === 'girl') ? 1.20 : 1.05;
+    const v = (voiceType || '').toLowerCase();
+    const isAdultRole = v === 'teacher' || v === 'clerk' || v === 'officer' || v === 'judge' || v === 'agent' || v === 'waiter' || v === 'librarian' || v === 'cashier' || v === 'host';
+
+    if (isAdultRole) {
+      utterance.rate = 0.88;
+      utterance.pitch = 1.0;
+    } else if (v === 'maya' || v === 'girl') {
+      utterance.rate = 0.95;
+      utterance.pitch = 1.35; // Bright youthful girl pitch
+    } else {
+      utterance.rate = 0.95;
+      utterance.pitch = 1.25; // Energetic youthful boy / kid pitch
+    }
 
     const voices = window.speechSynthesis.getVoices();
     const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Karen'))) 

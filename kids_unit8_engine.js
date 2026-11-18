@@ -666,8 +666,8 @@ function loadObbyStage(index) {
 
   document.getElementById('obbyStageTitle').textContent = stage.title;
   document.getElementById('obbyGatePromptEn').textContent = `🎯 Mission: "${stage.promptEn}"`;
-  document.getElementById('obbyGatePromptEs').textContent = stage.promptEs;
-  document.getElementById('obbyCoinsBadge').textContent = `🪙 Monedas: ${Player.coinsCollected}`;
+  document.getElementById('obbyGatePromptEs').textContent = '';
+  document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
 
   updateObbyHudChecklist();
   showObbyFloatingBanner(`🎯 MISSION: ${stage.title}`, 200);
@@ -700,7 +700,7 @@ function updateObbyHudChecklist() {
     if (isUnlocked) {
       gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Gate: OPEN! Run to the goal 🏁</span>`;
     } else {
-      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Puerta: CERRADA</span>`;
+      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Gate: LOCKED</span>`;
     }
   }
 
@@ -1138,7 +1138,7 @@ function obbyGameLoop() {
         Player.coinsCollected += 5;
         sfx.playCoin();
         createCoinSparkle(c.x + 10, c.y + 10);
-        document.getElementById('obbyCoinsBadge').textContent = `🪙 Monedas: ${Player.coinsCollected}`;
+        document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
         AppState.addStars(5);
       }
     }
@@ -1309,7 +1309,7 @@ function obbyGameLoop() {
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 9px Outfit, sans-serif";
-    ctx.fillText(stage.gate.unlocked ? "✅ CLAVE CORRECTA" : "⌨️ ESCRIBE LA CLAVE", tx - 56, ty - 10);
+    ctx.fillText(stage.gate.unlocked ? "✅ PASSWORD UNLOCKED" : "⌨️ TYPE PASSWORD", tx - 56, ty - 10);
   }
 
   // Draw mission items with labels and arrows
@@ -1701,8 +1701,8 @@ function displayMysteryChests() {
   chestsGrid.innerHTML = shuffledPrizes.map((prize, i) => `
     <div class="gold-chest-card" onclick="openMysteryChest(this, ${prize.value}, '${prize.icon}', '${prize.msg}')">
       <div class="gold-chest-icon">🎁</div>
-      <div style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:#78350f;">Cofre Secreto #${i + 1}</div>
-      <div style="font-size:0.8rem; color:#b45309; margin-top:4px;">Toca para abrir</div>
+      <div style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:#78350f;">Mystery Chest #${i + 1}</div>
+      <div style="font-size:0.8rem; color:#b45309; margin-top:4px;">Tap to open</div>
     </div>
   `).join('');
 
@@ -1719,7 +1719,7 @@ function openMysteryChest(cardEl, amount, icon, message) {
 
   document.getElementById('goldTotalCounter').textContent = `${userGoldTotal} 🪙`;
 
-  // Deshabilitar todos los cofres
+  // Disable all chests
   document.querySelectorAll('.gold-chest-card').forEach(c => {
     c.style.pointerEvents = 'none';
     if (c !== cardEl) c.style.opacity = '0.5';
@@ -1728,7 +1728,7 @@ function openMysteryChest(cardEl, amount, icon, message) {
   cardEl.innerHTML = `
     <div class="gold-chest-icon" style="transform:scale(1.2);">${icon}</div>
     <div style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:#065f46;">${message}</div>
-    <div style="font-size:0.9rem; color:#047857; font-weight:700; margin-top:4px;">+${amount} estrellas sumadas</div>
+    <div style="font-size:0.9rem; color:#047857; font-weight:700; margin-top:4px;">+${amount} bonus stars!</div>
   `;
   cardEl.style.background = '#ecfdf5';
   cardEl.style.borderColor = '#10b981';

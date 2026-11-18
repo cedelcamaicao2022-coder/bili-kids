@@ -62,7 +62,7 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: INTERACTIVE CITY MAP (NAVEGANTE DEL MAPA DE LA CIUDAD)
+         ACTIVITY 1: INTERACTIVE CITY MAP (PLACES IN TOWN)
          ==================================================================== -->
     <section id="view-map" class="activity-view active-view">
       <div class="city-map-container">
@@ -70,10 +70,10 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🗺️</span> Navegante del Mapa de la Ciudad (Places in Town)
+              <span>🗺️</span> City Map Navigator (Places in Town)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Lee la necesidad del residente del barrio, escucha el audio y toca el pin del lugar correcto en el mapa.
+              Read the town resident's request, listen to the audio, and tap the correct place pin on the map.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
@@ -97,9 +97,7 @@
             <div id="cityPromptEn" style="font-family:var(--font-display); font-size:1.25rem; color:#0f172a; margin-bottom:4px;">
               "I want to buy fresh warm bread and chocolate croissants for breakfast."
             </div>
-            <div id="cityPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic; margin-bottom:8px;">
-              Quiero comprar pan caliente fresco y cruasanes de chocolate para el desayuno.
-            </div>
+            <div id="cityPromptEs" style="display:none;"></div>
 
             <div id="cityMissionClue" style="font-size:0.9rem; color:#0369a1; background:rgba(2,132,199,0.1); padding:6px 14px; border-radius:10px; display:inline-block;">
               💡 <strong>Navigation Clue:</strong> Where do you buy freshly baked bread and pastries?
@@ -131,7 +129,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: THERE IS / THERE ARE BUILDING INSPECTOR (SELLO MUNICIPAL)
+         ACTIVITY 2: THERE IS / THERE ARE BUILDING INSPECTOR (CITY PERMITS)
          ==================================================================== -->
     <section id="view-inspector" class="activity-view">
       <div class="inspector-container">
@@ -139,14 +137,14 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🏢</span> Inspector Municipal: There is vs There are
+              <span>🏢</span> City Building Inspector: There is vs There are
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
               Evaluate urban building permits. Apply the correct stamp: <strong>There is</strong> (singular/uncountable) or <strong>There are</strong> (plural).
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="inspectorCaseNum">Permiso 1 de 15</span>
+            <span class="unit-tag-pill" id="inspectorCaseNum">Permit 1 of 15</span>
             <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextInspectorPermit()">
               <span>Next Permit ➔</span>
             </button>
@@ -163,13 +161,11 @@
           <div class="permit-sentence-target" id="permitSentenceTarget">
             <span id="permitBlankSlot" class="permit-blank-slot">[ ? ]</span> a green public park with a water fountain.
           </div>
-          <div id="permitSentenceEs" style="font-size:0.95rem; color:#78350f; font-style:italic;">
-            There is a green public park with a water fountain.
-          </div>
+          <div id="permitSentenceEs" style="display:none;"></div>
 
           <!-- Explicit Question -->
           <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:20px 0 6px;">
-            ⚖️ Select the official stamp to approve / Selecciona el sello oficial para aprobar:
+            ⚖️ Select the official stamp to approve:
           </div>
 
           <!-- Botones de Sellos Oficiales (Aleatorizados) -->
@@ -315,6 +311,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit6_engine.js?v=20261102_voicecheck"></script>

@@ -62,7 +62,7 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: RELOJ & TIMELINE 24H (ROUTINE CLOCK)
+         ACTIVITY 1: ROUTINE CLOCK & 24H TIMELINE
          ==================================================================== -->
     <section id="view-clock" class="activity-view active-view">
       <div class="clock-container">
@@ -139,7 +139,7 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🗓️</span> Planificador Semanal de Misiones (Weekly Habits)
+              <span>🗓️</span> Weekly Habit Planner (Mission Calendar)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
               Read or listen to the clue, choose the habit sticker below, and place it on the correct day.
@@ -195,7 +195,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: LA BALANZA DE VERBOS (-S BALANCE SCALE)
+         ACTIVITY 3: VERB BALANCE SCALE (-S BALANCE SCALE)
          ==================================================================== -->
     <section id="view-scale" class="activity-view">
       <div class="scale-container">
@@ -203,10 +203,10 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div style="text-align:left;">
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>⚖️</span> La Balanza Gramatical de Verbos (-S / Base Form)
+              <span>⚖️</span> Verb Balance Scale (-S / Base Form)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Equilibra la balanza: escoge la forma verbal que corresponde al sujeto singular o plural.
+              Balance the scale: pick the correct verb form matching singular or plural subjects.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
@@ -262,7 +262,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: MY MORNING VLOG (SIMULADOR DE VLOG EN VIVO)
+         ACTIVITY 4: MY MORNING VLOG (LIVE STREAM SIMULATOR)
          ==================================================================== -->
     <section id="view-vlog" class="activity-view">
       <div class="vlog-container">
@@ -276,7 +276,7 @@
               <span>LIVE • REC</span>
             </div>
             <div>
-              <span id="vlogEpisodeNum">Episodio 1 de 8</span> • 4K 60FPS
+              <span id="vlogEpisodeNum">Episode 1 of 8</span> • 4K 60FPS
             </div>
             <div>
               <span>AUDIO: STEREO 🎙️</span>
@@ -292,9 +292,7 @@
             <div class="vlog-phrase-target" id="vlogPhraseTarget">
               "Good morning guys! I wake up at seven o'clock."
             </div>
-            <div class="vlog-phrase-es" id="vlogPhraseEs">
-              Good morning guys! I wake up at seven o'clock.
-            </div>
+            <div class="vlog-phrase-es" id="vlogPhraseEs" style="display:none;"></div>
 
             <!-- Streamer listen button -->
             <div>
@@ -306,7 +304,7 @@
 
           <!-- Microphone action -->
           <div class="vlog-mic-action">
-            <button class="btn-vlog-mic" id="vlogMicBtn" onclick="toggleVlogMic()" title="Grabar tu frase en vivo">
+            <button class="btn-vlog-mic" id="vlogMicBtn" onclick="toggleVlogMic()" title="Record your phrase live">
               🎙️
             </button>
             <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
@@ -314,9 +312,9 @@
             </div>
           </div>
 
-          <!-- Chat en Vivo Simulado -->
+          <!-- Live Chat -->
           <div id="vlogChatBox" style="text-align:center; padding:8px; background:rgba(0,0,0,0.3); border-radius:12px; margin-top:14px;">
-            <span style="color:#94a3b8; font-size:0.85rem;">💬 Chat en Vivo: 10K viewers connected! 🔥</span>
+            <span style="color:#94a3b8; font-size:0.85rem;">💬 Live Chat: 10K viewers connected! 🔥</span>
           </div>
 
           <!-- Recording feedback -->
@@ -336,6 +334,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit4_engine.js?v=20261102_voicecheck"></script>

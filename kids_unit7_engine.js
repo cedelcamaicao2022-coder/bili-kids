@@ -1073,9 +1073,9 @@ function loadTVBroadcast(index) {
   document.getElementById('tvCityBadge').textContent = `Forecast ${index + 1} of ${tvBroadcastData.length} • ${b.city}`;
   document.getElementById('tvHeadlineBanner').textContent = b.headline;
   document.getElementById('tvTeleprompterText').textContent = `"${b.teleprompterEn}"`;
-  document.getElementById('tvTeleprompterEs').textContent = b.teleprompterEs;
+  document.getElementById('tvTeleprompterEs').textContent = '';
   document.getElementById('tvViewersLiveChat').innerHTML = `
-    <span style="color:#38bdf8; font-size:0.9rem;">💬 En Vivo: ${b.viewerReaction}</span>
+    <span style="color:#38bdf8; font-size:0.9rem;">💬 Live Chat: ${b.viewerReaction}</span>
   `;
   document.getElementById('tvBroadcastFeedback').innerHTML = '';
 

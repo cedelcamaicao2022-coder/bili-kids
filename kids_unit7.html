@@ -62,7 +62,7 @@
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: 🐸 FROGGY STEPPING STONES (EDUCAPLAY RIVER JUMPS)
+         ACTIVITY 1: 🐸 FROGGY STEPPING STONES (EDUCAPLAY RIVER JUMPS)
          ==================================================================== -->
     <section id="view-froggy" class="activity-view active-view">
       <div class="river-stage-container">
@@ -137,7 +137,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: 🎈 CLOUD BALLOON POPPER (WORDWALL & DUOLINGO UNSCRAMBLE)
+         ACTIVITY 2: 🎈 CLOUD BALLOON POPPER (WORDWALL & DUOLINGO UNSCRAMBLE)
          ==================================================================== -->
     <section id="view-balloon" class="activity-view">
       <div class="balloon-sky-container">
@@ -189,7 +189,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: 🎡 WEATHER & WARDROBE FORTUNE WHEEL (BLOOKET & WORDWALL)
+         ACTIVITY 3: 🎡 WEATHER & WARDROBE FORTUNE WHEEL (BLOOKET & WORDWALL)
          ==================================================================== -->
     <section id="view-wheel" class="activity-view">
       <div class="wheel-stage-container">
@@ -200,7 +200,7 @@
               <span>🎡</span> Weather Fortune Wheel & Wardrobe
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Gira la rueda de la fortuna, descubre el clima que te toca y elige la ropa adecuada del armario para vestirte.
+              Spin the fortune wheel, discover the weather forecast, and pick the matching clothes from the wardrobe!
             </div>
           </div>
         </div>
@@ -252,7 +252,7 @@
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: ⚡ LIVE TV WEATHER BROADCAST CON POWER-UPS (QUIZIZZ)
+         ACTIVITY 4: ⚡ LIVE TV WEATHER BROADCAST (POWER-UPS)
          ==================================================================== -->
     <section id="view-tv" class="activity-view">
       <div class="tv-studio-container">
@@ -260,7 +260,7 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
           <div style="text-align:left;">
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#ffffff;">
-              <span>⚡</span> Live TV Weather Broadcast con Potenciadores Quizizz
+              <span>⚡</span> Live TV Weather Broadcast (Quizizz Power-Ups)
             </h2>
             <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
               Broadcast the live TV weather forecast. Use power-ups to earn double stars and bonus points!
@@ -279,15 +279,15 @@
           <span style="font-family:var(--font-display); font-size:0.85rem; color:#fbbf24; align-self:center; font-weight:700;">
             ⚡ QUIZIZZ POWER-UPS:
           </span>
-          <button class="btn-powerup-chip" onclick="triggerPowerUp('double', this)" title="Multiplica por 2 las estrellas de este reporte">
+          <button class="btn-powerup-chip" onclick="triggerPowerUp('double', this)" title="Double your stars for this report">
             <span>🌟</span>
             <span>2X Stars</span>
           </button>
-          <button class="btn-powerup-chip" onclick="triggerPowerUp('freeze', this)" title="Congela el tiempo para leer con calma">
+          <button class="btn-powerup-chip" onclick="triggerPowerUp('freeze', this)" title="Freeze time to read calmly">
             <span>⏱️</span>
             <span>Freeze Time</span>
           </button>
-          <button class="btn-powerup-chip" onclick="triggerPowerUp('5050', this)" title="Optimiza el teleprompter">
+          <button class="btn-powerup-chip" onclick="triggerPowerUp('5050', this)" title="Optimize teleprompter">
             <span>💡</span>
             <span>50/50 Boost</span>
           </button>
@@ -307,9 +307,7 @@
           <div class="tv-teleprompter-text" id="tvTeleprompterText">
             "Attention viewers! Right now in London, it is raining heavily and people are holding colorful umbrellas."
           </div>
-          <div id="tvTeleprompterEs" style="font-size:0.95rem; color:#94a3b8; font-style:italic; margin-bottom:16px;">
-            Attention viewers! Right now in London, it is raining heavily and people are holding colorful umbrellas.
-          </div>
+          <div id="tvTeleprompterEs" style="display:none;"></div>
 
           <div>
             <button class="btn-back-map" style="background:rgba(56,189,248,0.18); color:#38bdf8; border-color:#38bdf8; cursor:pointer;" onclick="listenTVForecast()">
@@ -320,7 +318,7 @@
 
         <!-- Broadcast microphone button -->
         <div style="margin:20px 0;">
-          <button class="btn-tv-mic" id="tvMicBtn" onclick="toggleTVMic()" title="Presentar el clima en vivo">
+          <button class="btn-tv-mic" id="tvMicBtn" onclick="toggleTVMic()" title="Present the weather live">
             🎙️
           </button>
           <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
@@ -330,7 +328,7 @@
 
         <!-- Chat de Espectadores en Vivo -->
         <div id="tvViewersLiveChat" style="text-align:center; padding:10px; background:rgba(0,0,0,0.3); border-radius:12px; margin-top:14px;">
-          <span style="color:#38bdf8; font-size:0.9rem;">💬 En Vivo: 150K live viewers connected! 🔥</span>
+          <span style="color:#38bdf8; font-size:0.9rem;">💬 Live: 150K live viewers connected! 🔥</span>
         </div>
 
         <!-- Broadcast feedback -->
@@ -341,6 +339,7 @@
 
   </main>
 
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261118_bili"></script>
   <script src="kids_unit7_engine.js?v=20261102_voicecheck"></script>
