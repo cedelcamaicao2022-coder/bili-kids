@@ -1,14 +1,23 @@
 /**
  * Bilikids Unified Audio Player
- * Automatically routes speech requests to ElevenLabs studio MP3s when available,
- * playing audio at a natural, calm pedagogical pace (0.88x with pitch preservation),
- * with seamless zero-latency fallback to Web Speech API.
+ * Plays natural studio MP3 recordings (ElevenLabs) at their native recorded pace (1.0x)
+ * with authentic tone. All synthetic browser voices (SpeechSynthesis) are completely disabled.
  */
 function normalizeAudioKey(str) {
   return (str || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
 }
 
 let currentBilikidsAudio = null;
+
+// Permanently silence robotic browser speech synthesis
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  try {
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak = function() {
+      // Neutralized: browser robotic synthesizer is disabled
+    };
+  } catch (e) {}
+}
 
 function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
   let finished = false;
@@ -22,6 +31,13 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
   if (!text || typeof text !== 'string') {
     finish();
     return;
+  }
+
+  // Ensure any browser speech synthesis remains silenced
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch (e) {}
   }
 
   // 1. Check Studio Audio Manifests (Kids, Toddlers, Interactive Games)
@@ -45,11 +61,6 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
 
   if (audioSrc) {
     try {
-      // Cancel any ongoing speech synthesis immediately so it never overlaps with real studio audio
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-
       if (currentBilikidsAudio) {
         currentBilikidsAudio.pause();
         currentBilikidsAudio.currentTime = 0;
@@ -58,32 +69,13 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
 
-      // Juvenile formant tuning for child roles vs adult roles
-      const v = (voiceType || '').toLowerCase();
-      const isAdultRole = v === 'teacher' || v === 'clerk' || v === 'officer' || v === 'judge' || v === 'agent' || v === 'waiter' || v === 'librarian' || v === 'cashier' || v === 'host';
+      // Reproducir voces naturales de estudio a su ritmo y tono original (1.0x exacto)
+      audio.preservesPitch = true;
+      audio.mozPreservesPitch = true;
+      audio.webkitPreservesPitch = true;
+      audio.playbackRate = 1.0;
 
-      if (!isAdultRole) {
-        // Child roles (Alex, Maya, Kid, Boy, Girl, Student, Vlogger):
-        // Disable pitch preservation to shift formants up into an energetic, bright youthful timbre
-        audio.preservesPitch = false;
-        audio.mozPreservesPitch = false;
-        audio.webkitPreservesPitch = false;
-        if (v === 'maya' || v === 'girl') {
-          audio.playbackRate = 1.25; // Youthful bright girl voice
-        } else {
-          audio.playbackRate = 1.20; // Youthful bright boy / kid voice
-        }
-      } else {
-        // Adult roles (Teacher, Clerk, Officer, etc.):
-        // Maintain natural adult studio pitch and steady pace
-        audio.preservesPitch = true;
-        audio.mozPreservesPitch = true;
-        audio.webkitPreservesPitch = true;
-        audio.playbackRate = 1.0;
-      }
-
-      const rate = audio.playbackRate || 1.0;
-      const safeDuration = Math.max(1800, (text.length * 100) / rate);
+      const safeDuration = Math.max(2000, text.length * 120);
       const safeTimer = setTimeout(finish, safeDuration);
 
       audio.onended = () => {
@@ -94,13 +86,11 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       audio.onerror = () => {
         clearTimeout(safeTimer);
         currentBilikidsAudio = null;
-        // Only fallback if the audio file genuinely failed to load (e.g. 404)
-        fallbackSpeechSynthesis(text, voiceType, finish);
+        console.warn("[KidsAudio] Audio could not be loaded:", audioSrc);
+        finish();
       };
       audio.play().catch(err => {
-        // Do NOT blindly trigger speech synthesis on transient play() aborts/delays,
-        // as doing so causes simultaneous overlapping robotic voice with the MP3.
-        console.warn("[KidsAudio] Audio play interrupted or delayed:", err);
+        console.warn("[KidsAudio] Audio play interrupted:", err);
       });
       return;
     } catch (e) {
@@ -108,66 +98,25 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
     }
   }
 
-  // 2. Fallback to Web Speech API only when no audioSrc exists in manifest
-  fallbackSpeechSynthesis(text, voiceType, finish);
+  // 2. Synthesizer permanently disabled: only natural voices are used
+  console.warn("[KidsAudio] Natural studio audio not found for key:", key);
+  finish();
 }
 
 function fallbackSpeechSynthesis(text, voiceType, callback) {
-  if (!('speechSynthesis' in window)) {
-    if (callback) callback();
-    return;
+  // Robotic synthesizer is completely disabled per user instruction
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch (e) {}
   }
-  try {
-    // If studio audio is currently playing, do not speak over it!
-    if (currentBilikidsAudio && !currentBilikidsAudio.paused && !currentBilikidsAudio.ended) {
-      if (callback) callback();
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    const v = (voiceType || '').toLowerCase();
-    const isAdultRole = v === 'teacher' || v === 'clerk' || v === 'officer' || v === 'judge' || v === 'agent' || v === 'waiter' || v === 'librarian' || v === 'cashier' || v === 'host';
-
-    if (isAdultRole) {
-      utterance.rate = 0.88;
-      utterance.pitch = 1.0;
-    } else if (v === 'maya' || v === 'girl') {
-      utterance.rate = 0.95;
-      utterance.pitch = 1.35; // Bright youthful girl pitch
-    } else {
-      utterance.rate = 0.95;
-      utterance.pitch = 1.25; // Energetic youthful boy / kid pitch
-    }
-
-    const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Karen'))) 
-                      || voices.find(v => v.lang.startsWith('en'));
-    if (englishVoice) utterance.voice = englishVoice;
-
-    const safeTimer = setTimeout(() => {
-      if (callback) callback();
-    }, Math.max(1600, text.length * 90));
-
-    utterance.onend = () => {
-      clearTimeout(safeTimer);
-      if (callback) callback();
-    };
-    utterance.onerror = () => {
-      clearTimeout(safeTimer);
-      if (callback) callback();
-    };
-
-    window.speechSynthesis.speak(utterance);
-  } catch (err) {
-    if (callback) callback();
-  }
+  if (callback) callback();
 }
 
 // Explicitly attach to window
 if (typeof window !== 'undefined') {
   window.playStudioOrSynthAudio = playStudioOrSynthAudio;
+  window.fallbackSpeechSynthesis = fallbackSpeechSynthesis;
   window.normalizeAudioKey = normalizeAudioKey;
 }
 
