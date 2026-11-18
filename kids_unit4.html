@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 4: Everyday Life & Daily Routines | Bilikids Kids Club</title>
 
-  <!-- Tipografías modernas -->
+  <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="unit-nav">
     <div class="unit-nav-inner">
       <a href="kids.html" class="btn-back-map">
         <span>←</span>
-        <span>Mapa Kids</span>
+        <span>Kids Map</span>
       </a>
 
       <div class="unit-title-header">
@@ -29,27 +29,27 @@
         <h1 class="unit-name-head">Everyday Life</h1>
       </div>
 
-      <div class="unit-score-pill" title="Tus puntos de misión">
+      <div class="unit-score-pill" title="Mission Points">
         <span>⭐</span>
         <span id="unitStarsCount">140 pts</span>
       </div>
     </div>
   </header>
 
-  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <!-- ACTIVITY TABS -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('clock', this)">
         <span>⏰</span>
-        <span>Reloj & Timeline 24H</span>
+        <span>24H Clock & Timeline</span>
       </button>
       <button class="tab-btn" onclick="switchTab('planner', this)">
         <span>🗓️</span>
-        <span>Planificador Semanal</span>
+        <span>Weekly Planner</span>
       </button>
       <button class="tab-btn" onclick="switchTab('scale', this)">
         <span>⚖️</span>
-        <span>Balanza de Verbos (-S)</span>
+        <span>Verb Scale (-S)</span>
       </button>
       <button class="tab-btn" onclick="switchTab('vlog', this)">
         <span>📹</span>
@@ -58,7 +58,7 @@
     </div>
   </nav>
 
-  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <!-- DYNAMIC WORKSPACE -->
   <main class="unit-workspace">
 
     <!-- ====================================================================
@@ -70,20 +70,20 @@
         <div class="clock-header-row">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>⏰</span> Línea de Tiempo de Rutinas Diarias (24H Timeline)
+              <span>⏰</span> Daily Routines Timeline (24H Timeline)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Explora las horas del día, escucha la narración y escoge la acción correcta en inglés.
+              Explore the hours of the day, listen to the narration, and choose the correct daily routine in English.
             </div>
           </div>
           <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextClockSlot()">
-            <span>Siguiente Hora ➔</span>
+            <span>Next Hour ➔</span>
           </button>
         </div>
 
-        <!-- Línea horizontal de horas (Timeline track) -->
+        <!-- Timeline horizontal track -->
         <div class="timeline-track-wrap" id="clockTimelineTrack">
-          <!-- Generado dinámicamente con las 10 horas -->
+          <!-- Dynamically generated with 10 hours -->
         </div>
 
         <!-- Tarjeta de Escenario Central (Dial + Prompt) -->
@@ -103,35 +103,35 @@
                 "The alarm clock rings! It is 7:00 AM."
               </div>
               <div id="clockPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
-                ¡Suena el despertador! Son las 7:00 AM.
+                The alarm clock rings! It is 7:00 AM.
               </div>
             </div>
           </div>
 
           <div>
             <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenClockPrompt()">
-              🔊 Escuchar Hora
+              🔊 Listen to Time
             </button>
           </div>
         </div>
 
-        <!-- Opciones de Rutina (Aleatorizadas dinámicamente) -->
+        <!-- Routine options (randomized dynamically) -->
         <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:18px 0 10px; display:flex; align-items:center; gap:6px;">
           <span>❓</span>
-          <span>What routine happens at this time? / ¿Qué rutina corresponde a esta hora?:</span>
+          <span>What routine happens at this time?</span>
         </div>
         <div class="clock-options-grid" id="clockOptionsGrid">
           <!-- Botones de opciones inyectados por JS -->
         </div>
 
-        <!-- Caja de Retroalimentación -->
+        <!-- Feedback box -->
         <div id="clockFeedbackBox" style="margin-top:18px; text-align:center;"></div>
 
       </div>
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: WEEKLY MISSION PLANNER (CALENDARIO DE 7 DÍAS)
+         ACTIVITY 2: WEEKLY MISSION PLANNER (7-DAY CALENDAR)
          ==================================================================== -->
     <section id="view-planner" class="activity-view">
       <div class="planner-container">
@@ -142,19 +142,19 @@
               <span>🗓️</span> Planificador Semanal de Misiones (Weekly Habits)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Lee o escucha la pista, escoge el sticker de hábito en la barra inferior y asígnalo al día correspondiente.
+              Read or listen to the clue, choose the habit sticker below, and place it on the correct day.
             </div>
           </div>
           <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextPlannerMission()">
-            <span>Siguiente Misión ➔</span>
+            <span>Next Mission ➔</span>
           </button>
         </div>
 
-        <!-- Tarjeta de Misión Semanal Actual -->
+        <!-- Current Weekly Mission Card -->
         <div style="background:linear-gradient(135deg, #fffbeb, #ffffff); border:2px solid #fde68a; border-radius:18px; padding:18px; margin-bottom:20px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;">
           <div>
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="unit-tag-pill" id="plannerMissionBadge">Misión 1 de 6</span>
+              <span class="unit-tag-pill" id="plannerMissionBadge">Mission 1 of 6</span>
               <strong id="plannerMissionTitle" style="color:#0f172a; font-family:var(--font-display); font-size:1.05rem;">
                 Swimming Practice 🏊‍♂️
               </strong>
@@ -163,32 +163,32 @@
               "On Wednesdays, Leo always goes to swimming practice after school at 4 PM."
             </div>
             <div id="plannerClueEs" style="font-size:0.88rem; color:#64748b; font-style:italic;">
-              Los miércoles, Leo siempre va a práctica de natación después de clases a las 4 PM.
+              On Wednesdays, Leo always goes to swimming practice after school at 4 PM.
             </div>
           </div>
           <div>
             <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenPlannerClue()">
-              🔊 Escuchar Pista
+              🔊 Listen to Clue
             </button>
           </div>
         </div>
 
-        <!-- Tablero de los 7 días (Lunes a Domingo) -->
+        <!-- 7 Days Board (Monday to Sunday) -->
         <div class="days-board-grid" id="daysBoardGrid">
-          <!-- 7 columnas de días inyectadas por JS -->
+          <!-- 7 day columns injected by JS -->
         </div>
 
-        <!-- Pool de Stickers de Hábitos -->
+        <!-- Habit Sticker Pool -->
         <div style="text-align:center; margin-top:16px;">
           <div style="font-family:var(--font-display); font-weight:700; font-size:0.98rem; color:#92400e; margin-bottom:8px;">
-            🏷️ Paso 1: Elige el sticker del hábito ➔ Paso 2: Toca el día de la semana arriba:
+            🏷️ Step 1: Choose the habit sticker ➔ Step 2: Tap the day of the week above:
           </div>
           <div class="habits-pool-bar" id="habitsPoolBar">
             <!-- Stickers inyectados por JS -->
           </div>
         </div>
 
-        <!-- Caja de retroalimentación -->
+        <!-- Feedback box -->
         <div id="plannerFeedbackBox" style="margin-top:16px; text-align:center;"></div>
 
       </div>
@@ -210,14 +210,14 @@
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="scaleCaseNum">Reto 1 de 20</span>
+            <span class="unit-tag-pill" id="scaleCaseNum">Challenge 1 of 20</span>
             <button class="btn-back-map" style="background:#fffbeb; color:#b45309; border-color:#fde68a; cursor:pointer;" onclick="nextScaleChallenge()">
-              <span>Siguiente ➔</span>
+              <span>Next ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Gráfico de Balanza con Platos -->
+        <!-- Balance Scale Graphic -->
         <div class="scale-balance-graphic" id="scaleBalanceGraphic">
           <!-- Plato Izquierdo: Singular Rule -->
           <div class="scale-pan pan-singular">
@@ -240,22 +240,22 @@
           </div>
         </div>
 
-        <!-- Oración Objetivo -->
+        <!-- Target Sentence -->
         <div class="scale-target-sentence" id="scaleTargetSentence">
           He [ ? ] soccer in the afternoon.
         </div>
 
-        <!-- Pregunta Explícita -->
+        <!-- Explicit Question -->
         <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:14px 0 6px;">
-          ⚖️ Which verb form completes the sentence? / ¿Qué forma del verbo equilibra la oración?:
+          ⚖️ Which verb form balances the sentence?:
         </div>
 
-        <!-- Botones de Elección de Verbos (Aleatorizados) -->
+        <!-- Verb option buttons (randomized) -->
         <div class="scale-verb-buttons-row" id="scaleVerbButtonsRow">
           <!-- Inyectados por JS -->
         </div>
 
-        <!-- Retroalimentación de la Balanza -->
+        <!-- Scale feedback -->
         <div id="scaleFeedbackBox" style="text-align:center;"></div>
 
       </div>
@@ -269,7 +269,7 @@
         
         <div class="vlog-viewfinder">
           
-          <!-- Top Bar de la Cámara del Streamer -->
+          <!-- Streamer camera top bar -->
           <div class="vlog-top-bar">
             <div class="vlog-rec-badge">
               <span class="rec-pulse-dot"></span>
@@ -287,30 +287,30 @@
           <div class="vlog-prompt-center">
             <span class="vlog-scene-tag" id="vlogSceneTag">Scene 1 • Morning Wake Up ☀️</span>
             <div style="font-family:var(--font-display); font-size:0.92rem; font-weight:700; color:#fbbf24; margin-bottom:6px;">
-              🎙️ Streamer Challenge • Read aloud into the microphone / Lee en voz alta al micrófono:
+              🎙️ Streamer Challenge • Read aloud into the microphone:
             </div>
             <div class="vlog-phrase-target" id="vlogPhraseTarget">
               "Good morning guys! I wake up at seven o'clock."
             </div>
             <div class="vlog-phrase-es" id="vlogPhraseEs">
-              ¡Buenos días chicos! Me despierto a las siete en punto.
+              Good morning guys! I wake up at seven o'clock.
             </div>
 
-            <!-- Botón para escuchar al streamer -->
+            <!-- Streamer listen button -->
             <div>
               <button class="btn-back-map" style="background:rgba(255,255,255,0.15); color:#ffffff; border-color:rgba(255,255,255,0.3); cursor:pointer;" onclick="listenVlogPhrase()">
-                🔊 Escuchar Frase del Vlog
+                🔊 Listen to Vlog Phrase
               </button>
             </div>
           </div>
 
-          <!-- Acción del Micrófono -->
+          <!-- Microphone action -->
           <div class="vlog-mic-action">
             <button class="btn-vlog-mic" id="vlogMicBtn" onclick="toggleVlogMic()" title="Grabar tu frase en vivo">
               🎙️
             </button>
             <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
-              Toca el micrófono y lee tu frase frente a la cámara
+              Tap the microphone and read your sentence in front of the camera
             </div>
           </div>
 
@@ -319,13 +319,13 @@
             <span style="color:#94a3b8; font-size:0.85rem;">💬 Chat en Vivo: 10K viewers connected! 🔥</span>
           </div>
 
-          <!-- Retroalimentación de la Grabación -->
+          <!-- Recording feedback -->
           <div id="vlogFeedback" style="text-align:center; margin-top:12px;"></div>
 
           <!-- Footer con controles del Vlog -->
           <div class="vlog-stats-footer">
             <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextVlogEpisode()">
-              Siguiente Escena del Stream ➔
+              Next Stream Scene ➔
             </button>
           </div>
 

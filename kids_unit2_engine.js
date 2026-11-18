@@ -176,79 +176,79 @@ function switchTab(tabKey, btn) {
 }
 
 // ============================================================================
-// ACTIVIDAD 1: DIÁLOGO INTERACTIVO (6 ESCENARIOS EN EL COLEGIO)
+// ACTIVITY 1: INTERACTIVE DIALOGUE (6 SCHOOL SCENARIOS)
 // ============================================================================
 const RealWorldScenariosUnit2 = {
-  // 1. PIDIENDO ÚTILES ESCOLARES (12 intercambios)
+  // 1. ASKING FOR SCHOOL SUPPLIES (12 turns)
   supplies: {
     title: "Borrowing School Supplies",
     badge: "Classroom • A1",
-    subtitle: "Prestando útiles escolares, preguntando de quién son y dónde están.",
+    subtitle: "Borrowing school supplies, asking who owns them, and finding where they are.",
     steps: [
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Hi Maya! I forgot my pencil case. May I borrow a blue pen?",
-        es: "¡Hola Maya! Olvidé mi cartuchera. ¿Me prestas un bolígrafo azul?",
+        es: "",
         question: "Maya has two blue pens. What should she reply politely?",
         choices: [
-          { text: "Sure, Alex! Here is a blue pen for you.", es: "¡Claro, Alex! Aquí tienes un bolígrafo azul para ti.", correct: true },
-          { text: "I am eating a pizza.", es: "Estoy comiendo una pizza.", correct: false },
-          { text: "No, today is Saturday.", es: "No, hoy es sábado.", correct: false }
+          { text: "Sure, Alex! Here is a blue pen for you.", es: "", correct: true },
+          { text: "I am eating a pizza.", es: "", correct: false },
+          { text: "No, today is Saturday.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Thank you so much! And do you have an eraser? I made a mistake.",
-        es: "¡Muchas gracias! ¿Y tienes un borrador? Cometí un error.",
+        es: "",
         question: "Maya lends him her white eraser. What does she reply?",
         choices: [
-          { text: "Yes, here is an eraser. You can keep it.", es: "Sí, aquí tienes un borrador. Te lo puedes quedar.", correct: true },
-          { text: "Here is a umbrella.", es: "Aquí hay un paraguas.", correct: false },
-          { text: "My shoes are under the bed.", es: "Mis zapatos están debajo de la cama.", correct: false }
+          { text: "Yes, here is an eraser. You can keep it.", es: "", correct: true },
+          { text: "Here is a umbrella.", es: "", correct: false },
+          { text: "My shoes are under the bed.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where is your ruler? I need to draw a straight line.",
-        es: "¿Dónde está tu regla? Necesito trazar una línea recta.",
+        es: "",
         question: "Maya's ruler is on her desk. How does she point it out?",
         choices: [
-          { text: "It is on my desk, next to the notebook.", es: "Está sobre mi escritorio, al lado del cuaderno.", correct: true },
-          { text: "The ruler is swimming in the pool.", es: "La regla está nadando en la piscina.", correct: false },
-          { text: "I have ten cats.", es: "Tengo diez gatos.", correct: false }
+          { text: "It is on my desk, next to the notebook.", es: "", correct: true },
+          { text: "The ruler is swimming in the pool.", es: "", correct: false },
+          { text: "I have ten cats.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Whose backpack is this under the chair? Is it yours?",
-        es: "¿De quién es esta mochila debajo de la silla? ¿Es tuya?",
+        es: "",
         question: "Maya says it is David's backpack. What does she say?",
         choices: [
-          { text: "No, it is David's backpack. His backpack is green.", es: "No, es la mochila de David. Su mochila es verde.", correct: true },
-          { text: "Yes, they are chairs.", es: "Sí, son sillas.", correct: false },
-          { text: "I am drinking milk.", es: "Estoy tomando leche.", correct: false }
+          { text: "No, it is David's backpack. His backpack is green.", es: "", correct: true },
+          { text: "Yes, they are chairs.", es: "", correct: false },
+          { text: "I am drinking milk.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "And what are these on the shelf? Are these colored markers?",
-        es: "¿Y qué son estos en el estante? ¿Son marcadores de colores?",
+        es: "",
         question: "Maya confirms using 'These'. What does she say?",
         choices: [
-          { text: "Yes! These are the teacher's markers for art class.", es: "¡Sí! Estos son los marcadores de la profesora para clase de arte.", correct: true },
-          { text: "This is a car.", es: "Este es un carro.", correct: false },
-          { text: "No, they are sleeping.", es: "No, están durmiendo.", correct: false }
+          { text: "Yes! These are the teacher's markers for art class.", es: "", correct: true },
+          { text: "This is a car.", es: "", correct: false },
+          { text: "No, they are sleeping.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Great! The teacher is coming. Let's open our English books!",
-        es: "¡Genial! La profesora viene. ¡Abramos nuestros libros de inglés!",
+        es: "",
         question: "How does Maya reply ready to begin the lesson?",
         choices: [
-          { text: "Yes! My book is on page twelve. Let's study!", es: "¡Sí! Mi libro está en la página doce. ¡A estudiar!", correct: true },
-          { text: "Goodbye, I am going home.", es: "Adiós, me voy a casa.", correct: false },
-          { text: "One plus one equals five.", es: "Uno más uno es cinco.", correct: false }
+          { text: "Yes! My book is on page twelve. Let's study!", es: "", correct: true },
+          { text: "Goodbye, I am going home.", es: "", correct: false },
+          { text: "One plus one equals five.", es: "", correct: false }
         ]
       }
     ]
@@ -258,72 +258,72 @@ const RealWorldScenariosUnit2 = {
   lab: {
     title: "In the Science Lab",
     badge: "Science Lab • A1-A2",
-    subtitle: "Instrumentos científicos, microscopios y preposiciones de lugar.",
+    subtitle: "Scientific instruments, microscopes, and prepositions of place.",
     steps: [
       {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Welcome to the science lab, class! Put on your safety glasses.",
-        es: "¡Bienvenidos al laboratorio de ciencias, clase! Pónganse sus lentes de protección.",
+        es: "",
         question: "How does Maya reply respectfully to the teacher?",
         choices: [
-          { text: "Yes, Mr. Clark! We are wearing our safety glasses.", es: "¡Sí, profesor Clark! Ya tenemos puestos nuestros lentes.", correct: true },
-          { text: "I want chocolate cake.", es: "Quiero pastel de chocolate.", correct: false },
-          { text: "The moon is yellow.", es: "La luna es amarilla.", correct: false }
+          { text: "Yes, Mr. Clark! We are wearing our safety glasses.", es: "", correct: true },
+          { text: "I want chocolate cake.", es: "", correct: false },
+          { text: "The moon is yellow.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Alex, what is that machine on the large table?",
-        es: "Alex, ¿qué es esa máquina sobre la mesa grande?",
+        es: "",
         question: "Alex identifies the microscope using 'That is a...'. What does he say?",
         choices: [
-          { text: "That is a microscope! We use it to see tiny cells.", es: "¡Eso es un microscopio! Lo usamos para ver células diminutas.", correct: true },
-          { text: "That are books.", es: "Eso son libros (error de concordancia).", correct: false },
-          { text: "It is a telephone.", es: "Es un teléfono.", correct: false }
+          { text: "That is a microscope! We use it to see tiny cells.", es: "", correct: true },
+          { text: "That are books.", es: "", correct: false },
+          { text: "It is a telephone.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, where are the glass test tubes for our experiment?",
-        es: "Maya, ¿dónde están los tubos de ensayo de vidrio para nuestro experimento?",
+        es: "",
         question: "Maya says they are in the box, behind the microscope. What does she say?",
         choices: [
-          { text: "They are in the blue box, behind the microscope.", es: "Están en la caja azul, detrás del microscopio.", correct: true },
-          { text: "The dog is in the kitchen.", es: "El perro está en la cocina.", correct: false },
-          { text: "They are dancing.", es: "Están bailando.", correct: false }
+          { text: "They are in the blue box, behind the microscope.", es: "", correct: true },
+          { text: "The dog is in the kitchen.", es: "", correct: false },
+          { text: "They are dancing.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Very good! And please be careful: is there water on the floor?",
-        es: "¡Muy bien! Y por favor tengan cuidado: ¿hay agua en el piso?",
+        es: "",
         question: "Maya checks under the table and says the floor is dry. What does she say?",
         choices: [
-          { text: "No, Mr. Clark. The floor under the table is clean and dry.", es: "No, profesor Clark. El piso debajo de la mesa está limpio y seco.", correct: true },
-          { text: "Yes, I am ten years old.", es: "Sí, tengo diez años.", correct: false },
-          { text: "My pencil is broken.", es: "Mi lápiz está roto.", correct: false }
+          { text: "No, Mr. Clark. The floor under the table is clean and dry.", es: "", correct: true },
+          { text: "Yes, I am ten years old.", es: "", correct: false },
+          { text: "My pencil is broken.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Look! This plant leaf has tiny green dots under the lens!",
-        es: "¡Mira! ¡Esta hoja de planta tiene diminutos puntos verdes bajo la lente!",
+        es: "",
         question: "How does Maya react amazed by what she sees?",
         choices: [
-          { text: "Amazing! These are plant cells. Science is so fun!", es: "¡Increíble! Esas son células vegetales. ¡La ciencia es tan divertida!", correct: true },
-          { text: "I don't like homework.", es: "No me gustan las tareas.", correct: false },
-          { text: "Today is Monday.", es: "Hoy es lunes.", correct: false }
+          { text: "Amazing! These are plant cells. Science is so fun!", es: "", correct: true },
+          { text: "I don't like homework.", es: "", correct: false },
+          { text: "Today is Monday.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Mr. Clark (Teacher)', avatar: '🔬',
         text: "Great teamwork, Maya and Alex! Put the slides back in the cabinet.",
-        es: "¡Gran trabajo en equipo, Maya y Alex! Guarden las muestras en el gabinete.",
+        es: "",
         question: "What do they both reply when finishing the lab?",
         choices: [
-          { text: "Yes, sir! We are putting everything in its place. Thank you!", es: "¡Sí, profesor! Estamos poniendo todo en su lugar. ¡Gracias!", correct: true },
-          { text: "Goodbye yesterday.", es: "Adiós ayer.", correct: false },
-          { text: "No, I am asleep.", es: "No, estoy dormido.", correct: false }
+          { text: "Yes, sir! We are putting everything in its place. Thank you!", es: "", correct: true },
+          { text: "Goodbye yesterday.", es: "", correct: false },
+          { text: "No, I am asleep.", es: "", correct: false }
         ]
       }
     ]
@@ -333,72 +333,72 @@ const RealWorldScenariosUnit2 = {
   library: {
     title: "At the School Library",
     badge: "Library • A1",
-    subtitle: "Buscando diccionarios, enciclopedias y respetando el silencio.",
+    subtitle: "Finding dictionaries, encyclopedias, and respecting quiet study time.",
     steps: [
       {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Shh... Welcome to the library. How can I help you two today?",
-        es: "Shh... Bienvenidos a la biblioteca. ¿Cómo les puedo ayudar hoy?",
+        es: "",
         question: "Maya is looking for an English dictionary. How does she ask quietly?",
         choices: [
-          { text: "Hello! We are looking for an English dictionary, please.", es: "¡Hola! Estamos buscando un diccionario de inglés, por favor.", correct: true },
-          { text: "We want to play football loudly.", es: "Queremos jugar fútbol ruidosamente.", correct: false },
-          { text: "I have a bicycle.", es: "Tengo una bicicleta.", correct: false }
+          { text: "Hello! We are looking for an English dictionary, please.", es: "", correct: true },
+          { text: "We want to play football loudly.", es: "", correct: false },
+          { text: "I have a bicycle.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Of course! The dictionaries are on the shelf next to the big window.",
-        es: "¡Por supuesto! Los diccionarios están en el estante junto a la gran ventana.",
+        es: "",
         question: "What does Alex say to thank the librarian?",
         choices: [
-          { text: "Thank you! We will walk quietly to that shelf.", es: "¡Gracias! Caminaremos en silencio hacia ese estante.", correct: true },
-          { text: "I like running fast in the hall.", es: "Me gusta correr rápido en el pasillo.", correct: false },
-          { text: "My dog is white.", es: "Mi perro es blanco.", correct: false }
+          { text: "Thank you! We will walk quietly to that shelf.", es: "", correct: true },
+          { text: "I like running fast in the hall.", es: "", correct: false },
+          { text: "My dog is white.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, look at this huge book! Is this an encyclopedia of animals?",
-        es: "Maya, ¡mira este enorme libro! ¿Es esta una enciclopedia de animales?",
+        es: "",
         question: "Maya looks at the cover and confirms using 'Yes, it is.' What does she say?",
         choices: [
-          { text: "Yes, it is! It has colorful photos of lions and eagles.", es: "¡Sí, lo es! Tiene fotos a color de leones y águilas.", correct: true },
-          { text: "No, they are bananas.", es: "No, son plátanos.", correct: false },
-          { text: "It is nine o'clock at night.", es: "Son las nueve de la noche.", correct: false }
+          { text: "Yes, it is! It has colorful photos of lions and eagles.", es: "", correct: true },
+          { text: "No, they are bananas.", es: "", correct: false },
+          { text: "It is nine o'clock at night.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where can we sit down to read? Those chairs look comfortable.",
-        es: "¿Dónde podemos sentarnos a leer? Esas sillas se ven cómodas.",
+        es: "",
         question: "Maya suggests sitting at the round table near the lamp. What does she say?",
         choices: [
-          { text: "Let's sit at the round table under the warm lamp.", es: "Sentémonos en la mesa redonda debajo de la lámpara cálida.", correct: true },
-          { text: "Let's sit on the roof.", es: "Sentémonos en el tejado.", correct: false },
-          { text: "I am twelve years old.", es: "Tengo doce años.", correct: false }
+          { text: "Let's sit at the round table under the warm lamp.", es: "", correct: true },
+          { text: "Let's sit on the roof.", es: "", correct: false },
+          { text: "I am twelve years old.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Do you have your student library cards to borrow these books?",
-        es: "¿Tienen sus carnets de biblioteca para llevarse estos libros?",
+        es: "",
         question: "Maya shows both student library cards. What does she say?",
         choices: [
-          { text: "Yes, here are our two library cards, ma'am.", es: "Sí, aquí están nuestros dos carnets de biblioteca, señora.", correct: true },
-          { text: "No, I only have five apples.", es: "No, solo tengo cinco manzanas.", correct: false },
-          { text: "Tomorrow is Sunday.", es: "Mañana es domingo.", correct: false }
+          { text: "Yes, here are our two library cards, ma'am.", es: "", correct: true },
+          { text: "No, I only have five apples.", es: "", correct: false },
+          { text: "Tomorrow is Sunday.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Librarian', avatar: '📖',
         text: "Perfect! You can keep the books for two weeks. Enjoy reading!",
-        es: "¡Perfecto! Pueden tener los libros por dos semanas. ¡Disfruten la lectura!",
+        es: "",
         question: "How do Alex and Maya say goodbye politely?",
         choices: [
-          { text: "Thank you very much! Have a wonderful day, goodbye!", es: "¡Muchas gracias! ¡Que tenga un día maravilloso, adiós!", correct: true },
-          { text: "I don't like reading at all.", es: "No me gusta leer para nada.", correct: false },
-          { text: "Zero plus zero is ten.", es: "Cero más cero es diez.", correct: false }
+          { text: "Thank you very much! Have a wonderful day, goodbye!", es: "", correct: true },
+          { text: "I don't like reading at all.", es: "", correct: false },
+          { text: "Zero plus zero is ten.", es: "", correct: false }
         ]
       }
     ]
@@ -408,72 +408,72 @@ const RealWorldScenariosUnit2 = {
   art: {
     title: "In the Art Classroom",
     badge: "Art Class • A1-A2",
-    subtitle: "Pinceles, tijeras, cartulinas y organizando materiales creativos.",
+    subtitle: "Paintbrushes, scissors, cardboard, and organizing creative materials.",
     steps: [
       {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Good afternoon, young artists! Today we are painting landscapes.",
-        es: "¡Buenas tardes, jóvenes artistas! Hoy estamos pintando paisajes.",
+        es: "",
         question: "How does Maya express her excitement for painting?",
         choices: [
-          { text: "Good afternoon! Painting landscapes is my favorite activity.", es: "¡Buenas tardes! Pintar paisajes es mi actividad favorita.", correct: true },
-          { text: "I forgot my shoes today.", es: "Olvidé mis zapatos hoy.", correct: false },
-          { text: "The car is blue.", es: "El carro es azul.", correct: false }
+          { text: "Good afternoon! Painting landscapes is my favorite activity.", es: "", correct: true },
+          { text: "I forgot my shoes today.", es: "", correct: false },
+          { text: "The car is blue.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, are these your paintbrushes on the tray?",
-        es: "Maya, ¿son estos tus pinceles sobre la bandeja?",
+        es: "",
         question: "Maya explains that the thin ones are hers and the thick ones are Alex's. What does she say?",
         choices: [
-          { text: "The thin ones are mine, and the thick brushes are yours!", es: "¡Los delgados son míos, y los pinceles gruesos son tuyos!", correct: true },
-          { text: "These are tomatoes.", es: "Estos son tomates.", correct: false },
-          { text: "I am sleeping in class.", es: "Estoy durmiendo en clase.", correct: false }
+          { text: "The thin ones are mine, and the thick brushes are yours!", es: "", correct: true },
+          { text: "These are tomatoes.", es: "", correct: false },
+          { text: "I am sleeping in class.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Who has the scissors? We need to cut blue paper for the sky.",
-        es: "¿Quién tiene las tijeras? Necesitamos cortar papel azul para el cielo.",
+        es: "",
         question: "Alex says the scissors are on the teacher's desk. What does he say?",
         choices: [
-          { text: "The scissors are on your desk, teacher, next to the glue.", es: "Las tijeras están en su escritorio, profesor, junto al pegamento.", correct: true },
-          { text: "Scissors are eating grass.", es: "Las tijeras están comiendo pasto.", correct: false },
-          { text: "I have four brothers.", es: "Tengo cuatro hermanos.", correct: false }
+          { text: "The scissors are on your desk, teacher, next to the glue.", es: "", correct: true },
+          { text: "Scissors are eating grass.", es: "", correct: false },
+          { text: "I have four brothers.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Look at my mountain drawing! Is this green paint too dark?",
-        es: "¡Mira mi dibujo de la montaña! ¿Es esta pintura verde demasiado oscura?",
+        es: "",
         question: "Maya suggests mixing it with a little yellow. What does she say?",
         choices: [
-          { text: "It is nice, but add a little yellow to make it brighter!", es: "¡Es bonita, pero agrega un poco de amarillo para hacerla más brillante!", correct: true },
-          { text: "Green is a number.", es: "El verde es un número.", correct: false },
-          { text: "I need to take a nap.", es: "Necesito tomar una siesta.", correct: false }
+          { text: "It is nice, but add a little yellow to make it brighter!", es: "", correct: true },
+          { text: "Green is a number.", es: "", correct: false },
+          { text: "I need to take a nap.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Art Teacher', avatar: '🎨',
         text: "Ten minutes left! Please wash your brushes in the sink.",
-        es: "¡Quedan diez minutos! Por favor laven sus pinceles en el lavadero.",
+        es: "",
         question: "How does Maya confirm they will clean their table?",
         choices: [
-          { text: "Yes, teacher! We are cleaning our brushes and palettes.", es: "¡Sí, profesor! Estamos limpiando nuestros pinceles y paletas.", correct: true },
-          { text: "No, we are going to the moon.", es: "No, nos vamos a la luna.", correct: false },
-          { text: "Five times five is twenty.", es: "Cinco por cinco es veinte.", correct: false }
+          { text: "Yes, teacher! We are cleaning our brushes and palettes.", es: "", correct: true },
+          { text: "No, we are going to the moon.", es: "", correct: false },
+          { text: "Five times five is twenty.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Our paintings are drying on the rack. They look wonderful!",
-        es: "Nuestras pinturas se están secando en el estante. ¡Se ven maravillosas!",
+        es: "",
         question: "What does Maya say happy with their artwork?",
         choices: [
-          { text: "Yes! We are proud of our artwork today.", es: "¡Sí! Estamos orgullosos de nuestro trabajo artístico hoy.", correct: true },
-          { text: "I don't like colors.", es: "No me gustan los colores.", correct: false },
-          { text: "The door is purple.", es: "La puerta es morada.", correct: false }
+          { text: "Yes! We are proud of our artwork today.", es: "", correct: true },
+          { text: "I don't like colors.", es: "", correct: false },
+          { text: "The door is purple.", es: "", correct: false }
         ]
       }
     ]
@@ -483,147 +483,147 @@ const RealWorldScenariosUnit2 = {
   lost: {
     title: "The Lost and Found Box",
     badge: "Lost & Found • A1-A2",
-    subtitle: "Identificando pertenencias con el posesivo 's y demostrativos.",
+    subtitle: "Identifying belongings with possessive 's and demonstratives.",
     steps: [
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, someone left a yellow jacket on the bench. Whose jacket is it?",
-        es: "Maya, alguien dejó una chaqueta amarilla en la banca. ¿De quién es?",
+        es: "",
         question: "Maya recognizes Emma's jacket by the name tag. What does she say?",
         choices: [
-          { text: "Look at the tag: it is Emma's jacket! She was looking for it.", es: "Mira la etiqueta: ¡es la chaqueta de Emma! Ella la estaba buscando.", correct: true },
-          { text: "It is a sandwich.", es: "Es un sándwich.", correct: false },
-          { text: "I am twelve years old.", es: "Tengo doce años.", correct: false }
+          { text: "Look at the tag: it is Emma's jacket! She was looking for it.", es: "", correct: true },
+          { text: "It is a sandwich.", es: "", correct: false },
+          { text: "I am twelve years old.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "And what about this blue notebook? Is it the teacher's notebook?",
-        es: "¿Y qué hay de este cuaderno azul? ¿Es el cuaderno de la profesora?",
+        es: "",
         question: "Maya reads Lucas's name on the first page. What does she say?",
         choices: [
-          { text: "No, it is Lucas's English notebook. His name is on the cover.", es: "No, es el cuaderno de inglés de Lucas. Su nombre está en la portada.", correct: true },
-          { text: "The notebook is flying in the sky.", es: "El cuaderno está volando en el cielo.", correct: false },
-          { text: "I have eight dogs.", es: "Tengo ocho perros.", correct: false }
+          { text: "No, it is Lucas's English notebook. His name is on the cover.", es: "", correct: true },
+          { text: "The notebook is flying in the sky.", es: "", correct: false },
+          { text: "I have eight dogs.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "There are two pencil sharpeners in the box. Are these yours?",
-        es: "Hay dos sacapuntas en la caja. ¿Son estos tuyos?",
+        es: "",
         question: "Maya says the red sharpener is hers, but the blue one is not. What does she say?",
         choices: [
-          { text: "The red sharpener is mine, but the blue one is not mine.", es: "El sacapuntas rojo es mío, pero el azul no es mío.", correct: true },
-          { text: "They are elephants.", es: "Son elefantes.", correct: false },
-          { text: "I don't go to school.", es: "No voy a la escuela.", correct: false }
+          { text: "The red sharpener is mine, but the blue one is not mine.", es: "", correct: true },
+          { text: "They are elephants.", es: "", correct: false },
+          { text: "I don't go to school.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'School Secretary', avatar: '📋',
         text: "Hello kids! Are you helping return lost items to their owners?",
-        es: "¡Hola chicos! ¿Están ayudando a devolver los objetos perdidos a sus dueños?",
+        es: "",
         question: "Alex confirms kindly and helpfully. What does he say?",
         choices: [
-          { text: "Yes! We are returning Emma's jacket and Lucas's notebook.", es: "¡Sí! Estamos devolviendo la chaqueta de Emma y el cuaderno de Lucas.", correct: true },
-          { text: "No, we are eating lunch right now.", es: "No, estamos almorzando ahora mismo.", correct: false },
-          { text: "My shoes are wet.", es: "Mis zapatos están mojados.", correct: false }
+          { text: "Yes! We are returning Emma's jacket and Lucas's notebook.", es: "", correct: true },
+          { text: "No, we are eating lunch right now.", es: "", correct: false },
+          { text: "My shoes are wet.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'School Secretary', avatar: '📋',
         text: "That is so kind of you! You are very responsible students.",
-        es: "¡Eso es muy amable de su parte! Son estudiantes muy responsables.",
+        es: "",
         question: "How does Maya reply politely to the staff?",
         choices: [
-          { text: "Thank you! We always like to help our classmates.", es: "¡Gracias! Siempre nos gusta ayudar a nuestros compañeros.", correct: true },
-          { text: "I don't know who I am.", es: "No sé quién soy.", correct: false },
-          { text: "Ten plus five is fifty.", es: "Diez más cinco son cincuenta.", correct: false }
+          { text: "Thank you! We always like to help our classmates.", es: "", correct: true },
+          { text: "I don't know who I am.", es: "", correct: false },
+          { text: "Ten plus five is fifty.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "All items are back with their owners now. Mission accomplished!",
-        es: "Todos los objetos volvieron con sus dueños ahora. ¡Misión cumplida!",
+        es: "",
         question: "How does Maya celebrate with her classmate?",
         choices: [
-          { text: "High five, Alex! Teamwork makes everything easier.", es: "¡Choca los cinco, Alex! El trabajo en equipo hace todo más fácil.", correct: true },
-          { text: "Goodbye yesterday night.", es: "Adiós ayer por la noche.", correct: false },
-          { text: "I lost my hat.", es: "Perdí mi sombrero.", correct: false }
+          { text: "High five, Alex! Teamwork makes everything easier.", es: "", correct: true },
+          { text: "Goodbye yesterday night.", es: "", correct: false },
+          { text: "I lost my hat.", es: "", correct: false }
         ]
       }
     ]
   },
 
-  // 6. EN LA SALA DE CÓMPUTO Y TABLETS (12 intercambios)
+  // 6. IN THE COMPUTER LAB & TABLETS (12 turns)
   tech: {
     title: "In the Computer & Tablet Lab",
     badge: "Tech Lab • A1-A2",
-    subtitle: "Aparatos digitales, audífonos, pantallas y comandos de clase.",
+    subtitle: "Digital devices, headphones, screens, and computer room instructions.",
     steps: [
       {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Good morning! Please sit at your assigned computer desk.",
-        es: "¡Buenos días! Por favor siéntense en su escritorio de computadora asignado.",
+        es: "",
         question: "What does Alex reply as he takes his seat?",
         choices: [
-          { text: "Good morning, teacher! We are at desk number four.", es: "¡Buenos días, profesor! Estamos en el escritorio número cuatro.", correct: true },
-          { text: "I am at the supermarket.", es: "Estoy en el supermercado.", correct: false },
-          { text: "My cat can fly.", es: "Mi gato puede volar.", correct: false }
+          { text: "Good morning, teacher! We are at desk number four.", es: "", correct: true },
+          { text: "I am at the supermarket.", es: "", correct: false },
+          { text: "My cat can fly.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Maya, is this a tablet or a touchscreen monitor?",
-        es: "Maya, ¿esto es una tableta o un monitor de pantalla táctil?",
+        es: "",
         question: "Maya checks the device and explains what it is. What does she say?",
         choices: [
-          { text: "This is a touchscreen monitor connected to the keyboard.", es: "¡Este es un monitor de pantalla táctil conectado al teclado!", correct: true },
-          { text: "This is an apple pie.", es: "Este es un pastel de manzana.", correct: false },
-          { text: "They are pencils.", es: "Son lápices.", correct: false }
+          { text: "This is a touchscreen monitor connected to the keyboard.", es: "", correct: true },
+          { text: "This is an apple pie.", es: "", correct: false },
+          { text: "They are pencils.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "Where are the headphones? We need them for English listening.",
-        es: "¿Dónde están los audífonos? Los necesitamos para la comprensión de inglés.",
+        es: "",
         question: "Maya says the headphones are next to the screen. What does she say?",
         choices: [
-          { text: "They are hanging next to the screen on the right side.", es: "Están colgados al lado de la pantalla en el lado derecho.", correct: true },
-          { text: "The headphones are in the refrigerator.", es: "Los audífonos están en el refrigerador.", correct: false },
-          { text: "I have two dogs.", es: "Tengo dos perros.", correct: false }
+          { text: "They are hanging next to the screen on the right side.", es: "", correct: true },
+          { text: "The headphones are in the refrigerator.", es: "", correct: false },
+          { text: "I have two dogs.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Open the Bilikids Learning App and enter your student username.",
-        es: "Abran la Aplicación de Aprendizaje Bilikids e ingresen su usuario estudiantil.",
+        es: "",
         question: "Maya helps Alex type his name in the app. What does she say?",
         choices: [
-          { text: "I am typing my username now: Maya_Grade4. Done!", es: "Estoy escribiendo mi usuario ahora: Maya_Grade4. ¡Listo!", correct: true },
-          { text: "I am singing a song loudly.", es: "Estoy cantando una canción ruidosamente.", correct: false },
-          { text: "My pencil is under the bed.", es: "Mi lápiz está debajo de la cama.", correct: false }
+          { text: "I am typing my username now: Maya_Grade4. Done!", es: "", correct: true },
+          { text: "I am singing a song loudly.", es: "", correct: false },
+          { text: "My pencil is under the bed.", es: "", correct: false }
         ]
       },
       {
         speaker: 'alex', name: 'Alex', avatar: '👦',
         text: "The audio sounds crystal clear through these headphones!",
-        es: "¡El audio se escucha súper claro a través de estos audífonos!",
+        es: "",
         question: "What does Maya say when listening to the English audio?",
         choices: [
-          { text: "Yes! The pronunciation exercises are very clear and helpful.", es: "¡Sí! Los ejercicios de pronunciación son muy claros y útiles.", correct: true },
-          { text: "I don't like computers at all.", es: "No me gustan las computadoras para nada.", correct: false },
-          { text: "Seven plus seven is forty.", es: "Siete más siete es cuarenta.", correct: false }
+          { text: "Yes! The pronunciation exercises are very clear and helpful.", es: "", correct: true },
+          { text: "I don't like computers at all.", es: "", correct: false },
+          { text: "Seven plus seven is forty.", es: "", correct: false }
         ]
       },
       {
         speaker: 'teacher', name: 'Tech Teacher', avatar: '💻',
         text: "Time is up! Log out of your session and leave your desks neat.",
-        es: "¡Terminó el tiempo! Cierren sesión y dejen sus escritorios ordenados.",
+        es: "",
         question: "How do the students say goodbye to the teacher?",
         choices: [
-          { text: "We logged out and pushed our chairs in. Thank you, teacher!", es: "Ya cerramos sesión y guardamos las sillas. ¡Gracias, profesor!", correct: true },
-          { text: "Goodbye last month.", es: "Adiós el mes pasado.", correct: false },
-          { text: "I am sleeping under the computer.", es: "Estoy durmiendo debajo de la computadora.", correct: false }
+          { text: "We logged out and pushed our chairs in. Thank you, teacher!", es: "", correct: true },
+          { text: "Goodbye last month.", es: "", correct: false },
+          { text: "I am sleeping under the computer.", es: "", correct: false }
         ]
       }
     ]
@@ -677,7 +677,7 @@ function renderStoryCurrentStep() {
   appendStoryChatMessage(step.speaker, step.name, step.avatar, step.text, step.es);
   speakEnglish(step.text, step.speaker);
 
-  // Barajar las 3 opciones para que la correcta esté en posición aleatoria
+  // Shuffle 3 options randomly
   const shuffledChoices = [...step.choices].sort(() => Math.random() - 0.5);
 
   if (decisionContainer) {
@@ -794,7 +794,7 @@ function finishStoryCelebration() {
   const nextSc = RealWorldScenariosUnit2[nextKey];
 
   const scenarioIcons = {
-    supplies: '🎒',
+    supplies: '',
     lab: '🔬',
     library: '📖',
     art: '🎨',
@@ -806,22 +806,22 @@ function finishStoryCelebration() {
     decisionContainer.innerHTML = `
       <div class="story-completed-box">
         <div class="story-complete-icon">🌟</div>
-        <h3 class="story-complete-title">¡Diálogo "${sc.title}" Completado!</h3>
+        <h3 class="story-complete-title">Dialogue "${sc.title}" Completed!</h3>
         <p class="story-complete-desc">
-          ¡Excelente fluidez y vocabulario de clase! Has dominado todos los intercambios de este escenario escolar.
+          Excellent fluency and classroom vocabulary! You mastered all turns in this school scenario.
         </p>
         <div style="display:inline-flex; align-items:center; gap:8px; background:#fef3c7; color:#92400e; font-weight:700; padding:8px 18px; border-radius:999px; margin-bottom:18px;">
           <span>⭐</span>
-          <span>+35 Estrellas Ganadas</span>
+          <span>+35 Stars Earned</span>
         </div>
         <div class="story-actions-row">
           <button class="btn-builder btn-builder-reset" onclick="initInteractiveStory()">
             <span>🔄</span>
-            <span>Repetir este Escenario</span>
+            <span>Replay this Scenario</span>
           </button>
           <button class="btn-builder btn-builder-check" onclick="switchScenario('${nextKey}', document.querySelectorAll('.scenario-chip-btn')[${nextIndex}])">
             <span>${scenarioIcons[nextKey] || '➔'}</span>
-            <span>${isLast ? 'Reiniciar Ciclo: Útiles Escolares ➔' : `Siguiente: ${nextSc.title} ➔`}</span>
+            <span>${isLast ? 'Restart Cycle: School Supplies ➔' : `Next: ${nextSc.title} ➔`}</span>
           </button>
         </div>
       </div>
@@ -830,40 +830,40 @@ function finishStoryCelebration() {
 }
 
 // ============================================================================
-// ACTIVIDAD 2: WORD EXPLORER (24 PALABRAS CLAVE CON FONÉTICA Y AUDIO)
+// ACTIVITY 2: WORD EXPLORER (24 KEY WORDS WITH PHONICS & AUDIO)
 // ============================================================================
 const vocabularyDataUnit2 = [
-  // Útiles Escolares
-  { cat: 'supplies', en: 'Backpack', es: 'Mochila', ipa: '/ˈbækˌpæk/', icon: '🎒', grammar: 'Noun' },
-  { cat: 'supplies', en: 'Pencil case', es: 'Cartuchera', ipa: '/ˈpen.səl keɪs/', icon: '👝', grammar: 'Noun' },
-  { cat: 'supplies', en: 'Eraser', es: 'Borrador', ipa: '/ɪˈreɪ.sər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.ERASER : '🧼'), grammar: 'takes "an"' },
-  { cat: 'supplies', en: 'Ruler', es: 'Regla', ipa: '/ˈruː.lər/', icon: '📏', grammar: 'takes "a"' },
-  { cat: 'supplies', en: 'Sharpener', es: 'Sacapuntas', ipa: '/ˈʃɑːr.pən.ər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.SHARPENER : '✏️'), grammar: 'Noun' },
-  { cat: 'supplies', en: 'Scissors', es: 'Tijeras', ipa: '/ˈsɪz.ərz/', icon: '✂️', grammar: 'Plural' },
-  { cat: 'supplies', en: 'Notebook', es: 'Cuaderno', ipa: '/ˈnoʊt.bʊk/', icon: '📓', grammar: 'takes "a"' },
-  { cat: 'supplies', en: 'Glue', es: 'Pegamento', ipa: '/ɡluː/', icon: '🧴', grammar: 'Uncountable' },
+  // School Supplies
+  { cat: 'supplies', en: 'Backpack', es: '', ipa: '/ˈbækˌpæk/', icon: '🎒', grammar: 'Noun' },
+  { cat: 'supplies', en: 'Pencil case', es: '', ipa: '/ˈpen.səl keɪs/', icon: '👝', grammar: 'Noun' },
+  { cat: 'supplies', en: 'Eraser', es: '', ipa: '/ɪˈreɪ.sər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.ERASER : '🧼'), grammar: 'takes "an"' },
+  { cat: 'supplies', en: 'Ruler', es: '', ipa: '/ˈruː.lər/', icon: '📏', grammar: 'takes "a"' },
+  { cat: 'supplies', en: 'Sharpener', es: '', ipa: '/ˈʃɑːr.pən.ər/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.SHARPENER : '✏️'), grammar: 'Noun' },
+  { cat: 'supplies', en: 'Scissors', es: '', ipa: '/ˈsɪz.ərz/', icon: '✂️', grammar: 'Plural' },
+  { cat: 'supplies', en: 'Notebook', es: '', ipa: '/ˈnoʊt.bʊk/', icon: '📓', grammar: 'takes "a"' },
+  { cat: 'supplies', en: 'Glue', es: '', ipa: '/ɡluː/', icon: '🧴', grammar: 'Uncountable' },
 
   // Mobiliario & Aula
-  { cat: 'furniture', en: 'Desk', es: 'Escritorio', ipa: '/desk/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.DESK : '🪑'), grammar: 'Furniture' },
-  { cat: 'furniture', en: 'Chair', es: 'Silla', ipa: '/tʃer/', icon: '🪑', grammar: 'Furniture' },
-  { cat: 'furniture', en: 'Whiteboard', es: 'Pizarra blanca', ipa: '/ˈwaɪt.bɔːrd/', icon: '📋', grammar: 'Classroom' },
-  { cat: 'furniture', en: 'Clock', es: 'Reloj de pared', ipa: '/klɑːk/', icon: '⏰', grammar: 'takes "a"' },
-  { cat: 'furniture', en: 'Bookshelf', es: 'Estante de libros', ipa: '/ˈbʊk.ʃelf/', icon: '📚', grammar: 'Furniture' },
-  { cat: 'furniture', en: 'Tablet', es: 'Tableta digital', ipa: '/ˈtæb.lət/', icon: '📱', grammar: 'Technology' },
+  { cat: 'furniture', en: 'Desk', es: '', ipa: '/desk/', icon: (window.BILIKIDS_ICONS ? window.BILIKIDS_ICONS.DESK : '🪑'), grammar: 'Furniture' },
+  { cat: 'furniture', en: 'Chair', es: '', ipa: '/tʃer/', icon: '🪑', grammar: 'Furniture' },
+  { cat: 'furniture', en: 'Whiteboard', es: '', ipa: '/ˈwaɪt.bɔːrd/', icon: '📋', grammar: 'Classroom' },
+  { cat: 'furniture', en: 'Clock', es: '', ipa: '/klɑːk/', icon: '⏰', grammar: 'takes "a"' },
+  { cat: 'furniture', en: 'Bookshelf', es: '', ipa: '/ˈbʊk.ʃelf/', icon: '📚', grammar: 'Furniture' },
+  { cat: 'furniture', en: 'Tablet', es: '', ipa: '/ˈtæb.lət/', icon: '📱', grammar: 'Technology' },
 
   // Preposiciones de Lugar
-  { cat: 'prepositions', en: 'In', es: 'Dentro de', ipa: '/ɪn/', icon: '📥', grammar: 'Preposition' },
-  { cat: 'prepositions', en: 'On', es: 'Sobre / Encima', ipa: '/ɑːn/', icon: '🔝', grammar: 'Preposition' },
-  { cat: 'prepositions', en: 'Under', es: 'Debajo de', ipa: '/ˈʌn.dər/', icon: '🔽', grammar: 'Preposition' },
-  { cat: 'prepositions', en: 'Next to', es: 'Al lado de', ipa: '/nekst tuː/', icon: '↔️', grammar: 'Preposition' },
-  { cat: 'prepositions', en: 'Behind', es: 'Detrás de', ipa: '/bɪˈhaɪnd/', icon: '🔙', grammar: 'Preposition' },
-  { cat: 'prepositions', en: 'In front of', es: 'Frente a', ipa: '/ɪn frʌnt ʌv/', icon: '👀', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'In', es: '', ipa: '/ɪn/', icon: '📥', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'On', es: '', ipa: '/ɑːn/', icon: '🔝', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'Under', es: '', ipa: '/ˈʌn.dər/', icon: '🔽', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'Next to', es: '', ipa: '/nekst tuː/', icon: '↔️', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'Behind', es: '', ipa: '/bɪˈhaɪnd/', icon: '🔙', grammar: 'Preposition' },
+  { cat: 'prepositions', en: 'In front of', es: '', ipa: '/ɪn frʌnt ʌv/', icon: '👀', grammar: 'Preposition' },
 
-  // Artículos & Demostrativos
-  { cat: 'grammar', en: 'This', es: 'Este / Esta (singular cerca)', ipa: '/ðɪs/', icon: '👉', grammar: 'Singular' },
-  { cat: 'grammar', en: 'These', es: 'Estos / Estas (plural cerca)', ipa: '/ðiːz/', icon: '👐', grammar: 'Plural' },
-  { cat: 'grammar', en: 'That', es: 'Ese / Aquel (singular lejos)', ipa: '/ðæt/', icon: '👉', grammar: 'Singular' },
-  { cat: 'grammar', en: 'Those', es: 'Esos / Aquellos (plural lejos)', ipa: '/ðoʊz/', icon: '🙌', grammar: 'Plural' }
+  // Articles & Demonstratives
+  { cat: 'grammar', en: 'This', es: '', ipa: '/ðɪs/', icon: '👉', grammar: 'Singular' },
+  { cat: 'grammar', en: 'These', es: '', ipa: '/ðiːz/', icon: '👐', grammar: 'Plural' },
+  { cat: 'grammar', en: 'That', es: '', ipa: '/ðæt/', icon: '👉', grammar: 'Singular' },
+  { cat: 'grammar', en: 'Those', es: '', ipa: '/ðoʊz/', icon: '🙌', grammar: 'Plural' }
 ];
 
 function renderWordCards(filterCat = 'all') {
@@ -879,7 +879,7 @@ function renderWordCards(filterCat = 'all') {
       <div class="word-icon">${item.icon}</div>
       <div class="word-english">${item.en}</div>
       <div class="word-ipa">${item.ipa}</div>
-      <div class="word-spanish">${item.es}</div>
+      
       <span class="word-grammar-badge">${item.grammar}</span>
       <span class="word-audio-btn">🔊 Listen</span>
     </div>
@@ -910,7 +910,7 @@ function renderWordRecallQuiz(items) {
     }
     const target = questions[index];
     const options = [target, ...items.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
-    quiz.innerHTML = `<h3 style="margin:0 0 6px;color:#075985;">🧠 Quick word recall</h3><p style="margin:0 0 12px;">What is the English word for <strong>“${target.es}”</strong>? Question ${index + 1} of ${questions.length}.</p><div class="recall-options" style="display:flex;flex-wrap:wrap;gap:8px;"></div><p class="recall-feedback" role="status" aria-live="polite"></p><p>Correct: ${score}/${questions.length}</p>`;
+    quiz.innerHTML = `<h3 style="margin:0 0 6px;color:#075985;">🧠 Quick word recall</h3><p style="margin:0 0 12px;">What is the correct English word for <strong style="font-size:1.4rem;">${target.icon}</strong>? Question ${index + 1} of ${questions.length}.</p><div class="recall-options" style="display:flex;flex-wrap:wrap;gap:8px;"></div><p class="recall-feedback" role="status" aria-live="polite"></p><p>Correct: ${score}/${questions.length}</p>`;
     const optionsEl = quiz.querySelector('.recall-options');
     options.forEach(option => {
       const button = document.createElement('button');
@@ -954,164 +954,164 @@ function speakWordCard(text, cardEl) {
 // ACTIVIDAD 3: SENTENCE BUILDER (25 RETOS GRAMATICALES - UNIT 2)
 // ============================================================================
 const sentenceChallengesUnit2 = [
-  // 1-5: Artículos A / AN y sustantivos singulares
+  // 1-5: Articles A / AN and Singular Nouns
   {
-    es: "Este es un cuaderno azul.",
+    es: "",
     target: ["This", "is", "a", "blue", "notebook."],
     pool: ["This", "is", "a", "an", "blue", "notebook."],
-    tip: "Usa el artículo 'a' antes de sonidos consonánticos (blue notebook)."
+    tip: "Use the article 'a' before consonant sounds (blue notebook)."
   },
   {
-    es: "Ella tiene un borrador.",
+    es: "",
     target: ["She", "has", "an", "eraser."],
     pool: ["She", "has", "an", "a", "eraser.", "have"],
-    tip: "Usa 'an' antes de palabras que inician con vocal (eraser)."
+    tip: "Use 'an' before words starting with vowel sounds (eraser)."
   },
   {
-    es: "La pizarra está limpia.",
+    es: "",
     target: ["The", "whiteboard", "is", "clean."],
     pool: ["The", "whiteboard", "is", "clean.", "are", "am"],
-    tip: "'The whiteboard' es singular, por lo tanto usamos 'is'."
+    tip: "'The whiteboard' is singular, so we use 'is'."
   },
   {
-    es: "Él es nuestro profesor.",
+    es: "",
     target: ["He", "is", "our", "teacher."],
     pool: ["He", "is", "our", "are", "teacher.", "my"],
-    tip: "Con el pronombre 'He' usamos la forma singular 'is'."
+    tip: "With the pronoun 'He', use the singular form 'is'."
   },
   {
-    es: "Ellos están en el salón.",
+    es: "",
     target: ["They", "are", "in", "the", "classroom."],
     pool: ["They", "are", "in", "the", "classroom.", "is", "on"],
-    tip: "El pronombre plural 'They' se conjuga con 'are'."
+    tip: "The plural pronoun 'They' pairs with 'are'."
   },
 
   // 6-10: Demostrativos THIS vs THESE
   {
-    es: "Esta es mi mochila.",
+    es: "",
     target: ["This", "is", "my", "backpack."],
     pool: ["This", "is", "my", "These", "backpack.", "are"],
-    tip: "'This is' se usa para un solo objeto cercano."
+    tip: "'This is' refers to a single object close by."
   },
   {
-    es: "Estos son mis lápices.",
+    es: "",
     target: ["These", "are", "my", "pencils."],
     pool: ["These", "are", "my", "pencils.", "This", "is"],
-    tip: "'These are' se usa para varios objetos cercanos (plural)."
+    tip: "'These are' refers to multiple objects close by (plural)."
   },
   {
-    es: "Ese es el reloj de pared.",
+    es: "",
     target: ["That", "is", "the", "clock."],
     pool: ["That", "is", "the", "clock.", "Those", "are"],
-    tip: "'That is' indica un solo objeto a distancia."
+    tip: "'That is' points to a single object far away."
   },
   {
-    es: "Esos son libros de inglés.",
+    es: "",
     target: ["Those", "are", "English", "books."],
     pool: ["Those", "are", "English", "books.", "That", "is"],
-    tip: "'Those are' indica varios objetos a distancia."
+    tip: "'Those are' points to multiple objects far away."
   },
   {
-    es: "¿Son estos tus marcadores?",
+    es: "",
     target: ["Are", "these", "your", "markers?"],
     pool: ["Are", "these", "your", "markers?", "Is", "this"],
-    tip: "En preguntas en plural, 'Are' va al inicio antes de 'these'."
+    tip: "In plural questions, 'Are' comes first before 'these'."
   },
 
   // 11-15: Preposiciones de Lugar (IN, ON, UNDER, NEXT TO, BEHIND)
   {
-    es: "El bolígrafo está en la cartuchera.",
+    es: "",
     target: ["The", "pen", "is", "in", "the", "pencil", "case."],
     pool: ["The", "pen", "is", "in", "the", "pencil", "case.", "on"],
-    tip: "Usamos 'in' para indicar que algo está dentro de un contenedor."
+    tip: "Use 'in' to indicate that something is inside a container."
   },
   {
-    es: "La regla está sobre el escritorio.",
+    es: "",
     target: ["The", "ruler", "is", "on", "the", "desk."],
     pool: ["The", "ruler", "is", "on", "the", "desk.", "in", "under"],
-    tip: "Usamos 'on' para objetos apoyados sobre una superficie."
+    tip: "Use 'on' for objects placed on a surface."
   },
   {
-    es: "La mochila está debajo de la silla.",
+    es: "",
     target: ["The", "backpack", "is", "under", "the", "chair."],
     pool: ["The", "backpack", "is", "under", "the", "chair.", "on", "next"],
-    tip: "'Under' significa debajo de."
+    tip: "Use 'under' to indicate something below an object."
   },
   {
-    es: "El reloj está al lado de la ventana.",
+    es: "",
     target: ["The", "clock", "is", "next", "to", "the", "window."],
     pool: ["The", "clock", "is", "next", "to", "the", "window.", "in"],
-    tip: "La preposición compuesta 'next to' significa al lado de."
+    tip: "The compound preposition 'next to' means beside."
   },
   {
-    es: "El borrador está detrás del libro.",
+    es: "",
     target: ["The", "eraser", "is", "behind", "the", "book."],
     pool: ["The", "eraser", "is", "behind", "the", "book.", "front", "under"],
-    tip: "'Behind' significa detrás de."
+    tip: "Use 'behind' to indicate at the back of."
   },
 
   // 16-20: Posesivo 'S (Emma's, Alex's, Teacher's)
   {
-    es: "Es la cartuchera de Maya.",
+    es: "",
     target: ["It", "is", "Maya's", "pencil", "case."],
     pool: ["It", "is", "Maya's", "pencil", "case.", "Maya", "are"],
-    tip: "Agrega apóstrofe y s ('s) al dueño: Maya's pencil case."
+    tip: "Add apostrophe-s ('s) to show possession: Maya's pencil case."
   },
   {
-    es: "Este es el libro de Alex.",
+    es: "",
     target: ["This", "is", "Alex's", "book."],
     pool: ["This", "is", "Alex's", "book.", "Alex", "are"],
-    tip: "Alex's book = el libro de Alex."
+    tip: "Alex's book = the book belonging to Alex."
   },
   {
-    es: "¿De quién es esta regla?",
+    es: "",
     target: ["Whose", "ruler", "is", "this?"],
     pool: ["Whose", "ruler", "is", "this?", "Who", "are"],
-    tip: "'Whose' se usa para preguntar de quién es algo."
+    tip: "Use 'Whose' to ask who owns an item."
   },
   {
-    es: "Es la mesa de la profesora.",
+    es: "",
     target: ["It", "is", "the", "teacher's", "desk."],
     pool: ["It", "is", "the", "teacher's", "desk.", "teacher", "are"],
-    tip: "The teacher's desk = el escritorio de la maestra."
+    tip: "The teacher's desk = the desk belonging to the teacher."
   },
   {
-    es: "¿De quién son estas tijeras?",
+    es: "",
     target: ["Whose", "scissors", "are", "these?"],
     pool: ["Whose", "scissors", "are", "these?", "is", "this?"],
-    tip: "Como scissors es plural, usamos 'are these?'."
+    tip: "Because 'scissors' is plural, ask 'are these?'."
   },
 
   // 21-25: Comandos de clase y expresiones escolares
   {
-    es: "Abran sus libros, por favor.",
+    es: "",
     target: ["Open", "your", "books,", "please."],
     pool: ["Open", "your", "books,", "please.", "Close", "read"],
-    tip: "Comando escolar imperativo con 'Open'."
+    tip: "Classroom imperative command with 'Open'."
   },
   {
-    es: "Cierren la puerta con cuidado.",
+    es: "",
     target: ["Close", "the", "door", "carefully."],
     pool: ["Close", "the", "door", "carefully.", "Open", "window"],
-    tip: "Instrucción de aula con 'Close'."
+    tip: "Classroom instruction with 'Close'."
   },
   {
-    es: "¿Puedo pedir prestada tu regla?",
+    es: "",
     target: ["May", "I", "borrow", "your", "ruler?"],
     pool: ["May", "I", "borrow", "your", "ruler?", "Can", "have"],
-    tip: "'May I borrow...?' es la forma más educada de pedir algo prestado."
+    tip: "'May I borrow...?' is a polite way to ask for an item."
   },
   {
-    es: "Levanten la mano para hablar.",
+    es: "",
     target: ["Raise", "your", "hand", "to", "speak."],
     pool: ["Raise", "your", "hand", "to", "speak.", "Put", "down"],
-    tip: "Regla clásica de convivencia en el salón de clases."
+    tip: "Polite classroom rule for listening carefully."
   },
   {
-    es: "Nosotros cuidamos nuestro salón de clases.",
+    es: "",
     target: ["We", "take", "care", "of", "our", "classroom."],
     pool: ["We", "take", "care", "of", "our", "classroom.", "clean", "are"],
-    tip: "'Take care of' significa cuidar o proteger."
+    tip: "'Take care of' means to look after school supplies."
   }
 ];
 
@@ -1123,15 +1123,15 @@ function loadSentenceChallenge(index) {
   userPlacedWords = [];
 
   const challenge = sentenceChallengesUnit2[index];
-  document.getElementById('challengeNum').textContent = `Reto ${index + 1} de ${sentenceChallengesUnit2.length}`;
-  document.getElementById('promptTranslation').textContent = `"${challenge.es}"`;
-  document.getElementById('grammarTip').textContent = `💡 Pista gramatical: ${challenge.tip}`;
+  document.getElementById('challengeNum').textContent = `Challenge ${index + 1} of ${sentenceChallengesUnit2.length}`;
+  document.getElementById('promptTranslation').textContent = `🎯 Build: "${challenge.target.join(' ')}"`;
+  document.getElementById('grammarTip').textContent = `💡 Grammar tip: ${challenge.tip}`;
 
   const dropzone = document.getElementById('sentenceDropzone');
   dropzone.className = 'dropzone-target';
-  dropzone.innerHTML = '<span style="color:#94a3b8; font-size:0.9rem;">Toca las palabras abajo para colocarlas aquí en orden...</span>';
+  dropzone.innerHTML = '<span style="color:#94a3b8; font-size:0.9rem;">Tap the words below to arrange them in order...</span>';
 
-  // Barajar el banco de palabras
+  // Shuffle word bank
   const shuffled = [...challenge.pool].sort(() => Math.random() - 0.5);
   const poolContainer = document.getElementById('wordBankContainer');
   poolContainer.innerHTML = shuffled.map((word, wIdx) => `
@@ -1169,7 +1169,7 @@ function renderDropzone() {
   dropzone.className = 'dropzone-target';
 
   if (userPlacedWords.length === 0) {
-    dropzone.innerHTML = '<span style="color:#94a3b8; font-size:0.9rem;">Toca las palabras abajo para colocarlas aquí en orden...</span>';
+    dropzone.innerHTML = '<span style="color:#94a3b8; font-size:0.9rem;">Tap the words below to arrange them in order...</span>';
     return;
   }
 
@@ -1203,9 +1203,9 @@ function checkSentence() {
     nextBtn.style.display = 'inline-flex';
 
     if (currentChallengeIndex === sentenceChallengesUnit2.length - 1) {
-      nextBtn.textContent = '¡Completado! Repetir retos 🔄';
+      nextBtn.textContent = 'Completed! Restart challenges 🔄';
     } else {
-      nextBtn.textContent = 'Siguiente Reto ➔';
+      nextBtn.textContent = 'Next Challenge ➔';
     }
   } else {
     sfx.playError();
@@ -1224,17 +1224,17 @@ function nextSentenceChallenge() {
 }
 
 // ============================================================================
-// ACTIVIDAD 4: SPEAKING QUEST (PRONUNCIACIÓN DE AULA)
+// ACTIVITY 4: SPEAKING QUEST (CLASSROOM PRONUNCIATION)
 // ============================================================================
 const speakingPromptsUnit2 = [
-  { phrase: "This is a blue notebook.", es: "Este es un cuaderno azul." },
-  { phrase: "These are my colored pencils.", es: "Estos son mis lápices de colores." },
-  { phrase: "The eraser is on the desk.", es: "El borrador está sobre el escritorio." },
-  { phrase: "May I borrow your ruler, please?", es: "¿Puedo pedir prestada tu regla, por favor?" },
-  { phrase: "The backpack is under the chair.", es: "La mochila está debajo de la silla." },
-  { phrase: "Open your English book on page ten.", es: "Abre tu libro de inglés en la página diez." },
-  { phrase: "They are students in my class.", es: "Ellos son estudiantes en mi clase." },
-  { phrase: "This is Maya's pencil case.", es: "Esta es la cartuchera de Maya." }
+  { phrase: "This is a blue notebook.", es: "" },
+  { phrase: "These are my colored pencils.", es: "" },
+  { phrase: "The eraser is on the desk.", es: "" },
+  { phrase: "May I borrow your ruler, please?", es: "" },
+  { phrase: "The backpack is under the chair.", es: "" },
+  { phrase: "Open your English book on page ten.", es: "" },
+  { phrase: "They are students in my class.", es: "" },
+  { phrase: "This is Maya's pencil case.", es: "" }
 ];
 
 let currentSpeakingIndex = 0;
@@ -1246,7 +1246,7 @@ function loadSpeakingPrompt(index) {
   const item = speakingPromptsUnit2[index];
   document.getElementById('micRecordBtn').disabled = false;
   document.getElementById('speakingTarget').textContent = `"${item.phrase}"`;
-  document.getElementById('speakingHint').textContent = item.es;
+  document.getElementById('speakingHint').textContent = '';
   document.getElementById('speakingFeedback').innerHTML = '';
 }
 
@@ -1265,9 +1265,9 @@ function toggleVoiceRecord() {
   if (!SpeechRecognition) {
     sfx.playPop();
     feedback.innerHTML = `
-      <div class="speech-result-text">🎙️ Este navegador no puede verificar lo que dices.</div>
+      <div class="speech-result-text">🎙️ This browser does not support speech recognition.</div>
       <span class="speech-score-badge" style="background:#fef3c7; color:#92400e;">
-        Práctica sin puntuación. Escucha el modelo y repite con un adulto.
+        Practice mode. Listen to native audio and repeat aloud.
       </span>
     `;
     btn.disabled = true;
@@ -1288,7 +1288,7 @@ function toggleVoiceRecord() {
     recognitionInstance.onstart = () => {
       isRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#0ea5e9; font-weight:600;">Te estoy escuchando... ¡Pronuncia ahora! 🎧</span>`;
+      feedback.innerHTML = `<span style="color:#0ea5e9; font-weight:600;">Listening... Speak now! 🎧</span>`;
     };
 
     recognitionInstance.onresult = (event) => {
@@ -1306,18 +1306,18 @@ function toggleVoiceRecord() {
       if (isMatch) {
         sfx.playSuccess();
         feedback.innerHTML = `
-          <div class="speech-result-text">Dijiste: "<strong>${transcript}</strong>"</div>
+          <div class="speech-result-text">You said: "<strong>${transcript}</strong>"</div>
           <span class="speech-score-badge" style="background:#dcfce7; color:#15803d;">
-            🌟 Frase reconocida (+15 pts). Esto no mide la calidad de pronunciación.
+            🌟 Great speaking! Phrase recognized (+15 pts).
           </span>
         `;
         AppState.addStars(15);
       } else {
         sfx.playPop();
         feedback.innerHTML = `
-          <div class="speech-result-text">Dijiste: "${transcript}"</div>
+          <div class="speech-result-text">You said: "${transcript}"</div>
           <span class="speech-score-badge" style="background:#fef3c7; color:#92400e;">
-            👍 No se reconoció la frase. Escucha el modelo e intenta de nuevo; sin puntos.
+            👍 Keep trying! Listen to native audio and repeat again.
           </span>
         `;
       }
@@ -1325,7 +1325,7 @@ function toggleVoiceRecord() {
 
     recognitionInstance.onerror = (err) => {
       console.warn("Speech recognition error:", err);
-      feedback.innerHTML = `<span style="color:#64748b; font-size:0.85rem;">No logramos escuchar claramente. Presiona el micrófono e intenta otra vez.</span>`;
+      feedback.innerHTML = `<span style="color:#64748b; font-size:0.85rem;">Could not hear clearly. Tap the microphone and try again.</span>`;
     };
 
     recognitionInstance.onend = () => {
@@ -1348,21 +1348,21 @@ function nextSpeakingPrompt() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 2
+// INITIALIZATION DE LA UNIDAD 2
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');
   if (starEl) starEl.textContent = `${AppState.stars} pts`;
 
-  // Inicializar Diálogo Interactivo con el escenario 1
+  // Initialize Interactive Dialogue with scenario 1
   initInteractiveStory();
 
-  // Renderizar vocabulario con fonética y audio
+  // Render vocabulary with phonics and audio
   renderWordCards('all');
 
-  // Cargar primer reto de Sentence Builder
+  // Load first Sentence Builder challenge
   loadSentenceChallenge(0);
 
-  // Cargar primera frase de pronunciación
+  // Load first pronunciation phrase
   loadSpeakingPrompt(0);
 });

@@ -4,7 +4,7 @@
  * Innovative, Highly Distinct Activities:
  * 1. 🎒 The Hobby Gear Locker (Casillero de Equipamiento de Hobbies)
  * 2. 🎚️ Tactile Frequency DJ Mixer (Consola con Fader Deslizante & Scratch)
- * 3. 🧪 Verb-ING Magnet Fusion Lab (Laboratorio Ortográfico -ING)
+ * 3. 🧪 Verb-ING Magnet Fusion Lab (Spelling Lab -ING)
  * 4. 🏆 Talent Show Audition ("Yes, I can!" Talent Stage & Golden Buzzer)
  */
 
@@ -270,7 +270,7 @@ function switchTab(tabId, btnElement) {
 
 // ============================================================================
 // ACTIVIDAD 1: THE HOBBY GEAR LOCKER (CASILLERO DE EQUIPAMIENTO)
-// 8 misiones de preparación de equipamiento deportivo y hobbies
+// 8 sports equipment & hobbies missions
 // ============================================================================
 const lockerMissionsData = [
   {
@@ -279,14 +279,14 @@ const lockerMissionsData = [
     hobby: "Skateboarding",
     avatar: "🛹",
     promptEn: "Leo is packing his gear bag to go skateboarding at the skatepark this afternoon.",
-    promptEs: "Leo está empacando su maletín para montar patineta en el skatepark esta tarde.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "skate", name: "Skateboard", icon: "🛹", isCorrect: true, es: "Patineta" },
-      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "Casco de seguridad" },
-      { id: "kneepads", name: "Knee Pads", icon: "🛡️", isCorrect: true, es: "Rodilleras de protección" },
-      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "Sartén (¡No pertenece!)" },
-      { id: "snorkel", name: "Snorkel Mask", icon: "🤿", isCorrect: false, es: "Máscara de buceo" }
+      { id: "skate", name: "Skateboard", icon: "🛹", isCorrect: true, es: "" },
+      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "" },
+      { id: "kneepads", name: "Knee Pads", icon: "🛡️", isCorrect: true, es: "" },
+      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "" },
+      { id: "snorkel", name: "Snorkel Mask", icon: "🤿", isCorrect: false, es: "" }
     ]
   },
   {
@@ -295,14 +295,14 @@ const lockerMissionsData = [
     hobby: "Painting",
     avatar: "🎨",
     promptEn: "Maya is organizing her studio locker for watercolor painting class.",
-    promptEs: "Maya está organizando su casillero para la clase de pintura en acuarela.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "palette", name: "Color Palette", icon: "🎨", isCorrect: true, es: "Paleta de colores" },
-      { id: "brushes", name: "Paint Brushes", icon: "🖌️", isCorrect: true, es: "Pinceles" },
-      { id: "canvas", name: "Canvas Easel", icon: "🖼️", isCorrect: true, es: "Lienzo de pintura" },
-      { id: "ball", name: "Soccer Ball", icon: "⚽", isCorrect: false, es: "Balón de fútbol" },
-      { id: "brush", name: "Toothbrush", icon: "🪥", isCorrect: false, es: "Cepillo de dientes" }
+      { id: "palette", name: "Color Palette", icon: "🎨", isCorrect: true, es: "" },
+      { id: "brushes", name: "Paint Brushes", icon: "🖌️", isCorrect: true, es: "" },
+      { id: "canvas", name: "Canvas Easel", icon: "🖼️", isCorrect: true, es: "" },
+      { id: "ball", name: "Soccer Ball", icon: "⚽", isCorrect: false, es: "" },
+      { id: "brush", name: "Toothbrush", icon: "🪥", isCorrect: false, es: "" }
     ]
   },
   {
@@ -311,14 +311,14 @@ const lockerMissionsData = [
     hobby: "Playing Guitar",
     avatar: "🎸",
     promptEn: "Lucas is getting ready for rock band rehearsal in the music room.",
-    promptEs: "Lucas se prepara para el ensayo de su banda de rock en el salón de música.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "guitar", name: "Electric Guitar", icon: "🎸", isCorrect: true, es: "Guitarra eléctrica" },
-      { id: "amp", name: "Sound Amplifier", icon: "🔊", isCorrect: true, es: "Amplificador de sonido" },
-      { id: "picks", name: "Guitar Picks", icon: "🎵", isCorrect: true, es: "Púas de guitarra" },
-      { id: "bball", name: "Basketball", icon: "🏀", isCorrect: false, es: "Balón de baloncesto" },
-      { id: "goggles", name: "Swim Goggles", icon: "🏊‍♂️", isCorrect: false, es: "Gafas de natación" }
+      { id: "guitar", name: "Electric Guitar", icon: "🎸", isCorrect: true, es: "" },
+      { id: "amp", name: "Sound Amplifier", icon: "🔊", isCorrect: true, es: "" },
+      { id: "picks", name: "Guitar Picks", icon: "🎵", isCorrect: true, es: "" },
+      { id: "bball", name: "Basketball", icon: "🏀", isCorrect: false, es: "" },
+      { id: "goggles", name: "Swim Goggles", icon: "🏊‍♂️", isCorrect: false, es: "" }
     ]
   },
   {
@@ -327,14 +327,14 @@ const lockerMissionsData = [
     hobby: "Swimming",
     avatar: "🏊‍♀️",
     promptEn: "Chloe is packing her sports backpack for swimming practice at the heated pool.",
-    promptEs: "Chloe empaca su mochila deportiva para la práctica de natación en la piscina climatizada.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "swimsuit", name: "Swimsuit", icon: "🩱", isCorrect: true, es: "Traje de baño" },
-      { id: "goggles", name: "Swimming Goggles", icon: "🤿", isCorrect: true, es: "Gafas de natación" },
-      { id: "cap", name: "Silicone Swim Cap", icon: "🧢", isCorrect: true, es: "Gorro de natación" },
-      { id: "roller", name: "Rollerblade", icon: "🛼", isCorrect: false, es: "Patín en línea" },
-      { id: "book", name: "Dictionary", icon: "📖", isCorrect: false, es: "Diccionario escolar" }
+      { id: "swimsuit", name: "Swimsuit", icon: "🩱", isCorrect: true, es: "" },
+      { id: "goggles", name: "Swimming Goggles", icon: "🤿", isCorrect: true, es: "" },
+      { id: "cap", name: "Silicone Swim Cap", icon: "🧢", isCorrect: true, es: "" },
+      { id: "roller", name: "Rollerblade", icon: "🛼", isCorrect: false, es: "" },
+      { id: "book", name: "Dictionary", icon: "📖", isCorrect: false, es: "" }
     ]
   },
   {
@@ -343,14 +343,14 @@ const lockerMissionsData = [
     hobby: "Playing Chess",
     avatar: "♟️",
     promptEn: "Ben is preparing his tactical equipment for the school chess tournament.",
-    promptEs: "Ben prepara su equipamiento táctico para el torneo escolar de ajedrez.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "board", name: "Chess Board", icon: "♟️", isCorrect: true, es: "Tablero y piezas de ajedrez" },
-      { id: "clock", name: "Chess Digital Clock", icon: "⏱️", isCorrect: true, es: "Reloj cronómetro de ajedrez" },
-      { id: "notebook", name: "Score Notebook", icon: "📝", isCorrect: true, es: "Libreta de jugadas" },
-      { id: "boxing", name: "Boxing Gloves", icon: "🥊", isCorrect: false, es: "Guantes de boxeo" },
-      { id: "skis", name: "Snow Skis", icon: "🎿", isCorrect: false, es: "Esquís de nieve" }
+      { id: "board", name: "Chess Board", icon: "♟️", isCorrect: true, es: "" },
+      { id: "clock", name: "Chess Digital Clock", icon: "⏱️", isCorrect: true, es: "" },
+      { id: "notebook", name: "Score Notebook", icon: "📝", isCorrect: true, es: "" },
+      { id: "boxing", name: "Boxing Gloves", icon: "🥊", isCorrect: false, es: "" },
+      { id: "skis", name: "Snow Skis", icon: "🎿", isCorrect: false, es: "" }
     ]
   },
   {
@@ -359,14 +359,14 @@ const lockerMissionsData = [
     hobby: "Playing Tennis",
     avatar: "🎾",
     promptEn: "Sarah is checking her locker before her tennis match on the clay court.",
-    promptEs: "Sarah revisa su casillero antes de su partido de tenis en la cancha de arcilla.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "racket", name: "Tennis Racket", icon: "🎾", isCorrect: true, es: "Raqueta de tenis" },
-      { id: "balls", name: "Tennis Balls Can", icon: "🟡", isCorrect: true, es: "Tubo de pelotas de tenis" },
-      { id: "visor", name: "Sun Visor Cap", icon: "🧢", isCorrect: true, es: "Visera para el sol" },
-      { id: "pan", name: "Cooking Pan", icon: "🍳", isCorrect: false, es: "Sartén de cocina" },
-      { id: "guitar", name: "Acoustic Guitar", icon: "🎸", isCorrect: false, es: "Guitarra acústica" }
+      { id: "racket", name: "Tennis Racket", icon: "🎾", isCorrect: true, es: "" },
+      { id: "balls", name: "Tennis Balls Can", icon: "🟡", isCorrect: true, es: "" },
+      { id: "visor", name: "Sun Visor Cap", icon: "🧢", isCorrect: true, es: "" },
+      { id: "pan", name: "Cooking Pan", icon: "🍳", isCorrect: false, es: "" },
+      { id: "guitar", name: "Acoustic Guitar", icon: "🎸", isCorrect: false, es: "" }
     ]
   },
   {
@@ -375,14 +375,14 @@ const lockerMissionsData = [
     hobby: "Photography",
     avatar: "📷",
     promptEn: "Oliver is packing his equipment bag to take wildlife photos of birds in the forest.",
-    promptEs: "Oliver empaca su bolso para tomar fotografías de aves silvestres en el bosque.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "camera", name: "Digital Camera", icon: "📷", isCorrect: true, es: "Cámara digital" },
-      { id: "lens", name: "Telephoto Zoom Lens", icon: "🔭", isCorrect: true, es: "Lente teleobjetivo" },
-      { id: "tripod", name: "Camera Tripod", icon: "📐", isCorrect: true, es: "Trípode para cámara" },
-      { id: "soccer", name: "Soccer Cleats", icon: "👟", isCorrect: false, es: "Guayos de fútbol" },
-      { id: "mic", name: "Stage Microphone", icon: "🎤", isCorrect: false, es: "Micrófono de escenario" }
+      { id: "camera", name: "Digital Camera", icon: "📷", isCorrect: true, es: "" },
+      { id: "lens", name: "Telephoto Zoom Lens", icon: "🔭", isCorrect: true, es: "" },
+      { id: "tripod", name: "Camera Tripod", icon: "📐", isCorrect: true, es: "" },
+      { id: "soccer", name: "Soccer Cleats", icon: "👟", isCorrect: false, es: "" },
+      { id: "mic", name: "Stage Microphone", icon: "🎤", isCorrect: false, es: "" }
     ]
   },
   {
@@ -391,14 +391,14 @@ const lockerMissionsData = [
     hobby: "Rollerblading",
     avatar: "🛼",
     promptEn: "Sofia is getting her protective gear ready to rollerblade along the sunny beach promenade.",
-    promptEs: "Sofía alista su equipo de protección para patinar por el paseo marítimo soleado.",
+    promptEs: "",
     requiredCount: 3,
     itemsPool: [
-      { id: "roller", name: "Rollerblades", icon: "🛼", isCorrect: true, es: "Patines en línea" },
-      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "Casco de patinaje" },
-      { id: "guards", name: "Wrist Guards", icon: "🧤", isCorrect: true, es: "Muñequeras de protección" },
-      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "Sartén de cocina" },
-      { id: "chess", name: "Chess Clock", icon: "⏱️", isCorrect: false, es: "Reloj de ajedrez" }
+      { id: "roller", name: "Rollerblades", icon: "🛼", isCorrect: true, es: "" },
+      { id: "helmet", name: "Safety Helmet", icon: "⛑️", isCorrect: true, es: "" },
+      { id: "guards", name: "Wrist Guards", icon: "🧤", isCorrect: true, es: "" },
+      { id: "pan", name: "Frying Pan", icon: "🍳", isCorrect: false, es: "" },
+      { id: "chess", name: "Chess Clock", icon: "⏱️", isCorrect: false, es: "" }
     ]
   }
 ];
@@ -411,7 +411,7 @@ function loadLockerMission(index) {
   packedLockerItems = [];
   const m = lockerMissionsData[index];
 
-  document.getElementById('lockerMissionBadge').textContent = `Misión ${index + 1} de ${lockerMissionsData.length}`;
+  document.getElementById('lockerMissionBadge').textContent = `Mission ${index + 1} of ${lockerMissionsData.length}`;
   document.getElementById('lockerMemberName').textContent = `${m.avatar} ${m.member} (${m.hobby})`;
   document.getElementById('lockerPromptEn').textContent = `"${m.promptEn}"`;
   document.getElementById('lockerPromptEs').textContent = m.promptEs;
@@ -448,8 +448,8 @@ function renderLockerSlotsTray() {
       return `
         <div class="locker-slot-box">
           <div style="font-size:2rem; opacity:0.3; margin-bottom:4px;">📦</div>
-          <div style="font-family:var(--font-display); font-size:0.95rem; font-weight:700;">Espacio Vacío ${i + 1}</div>
-          <div style="font-size:0.75rem; color:#64748b;">Selecciona un artículo abajo</div>
+          <div style="font-family:var(--font-display); font-size:0.95rem; font-weight:700;">Empty Slot ${i + 1}</div>
+          <div style="font-size:0.75rem; color:#64748b;">Select an item below</div>
         </div>
       `;
     }
@@ -494,8 +494,8 @@ function handleGearItemClick(cardEl, itemId, isCorrect, itemName, itemIcon) {
       sfx.playSuccess();
       feedback.innerHTML = `
         <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px;">
-          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🔒 ¡CASILLERO COMPLETO Y ASEGURADO! (+25 pts)</div>
-          <div>Empacaste todo el equipamiento necesario para este deporte. ¡Excelente vocabulario!</div>
+          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🔒 LOCKER COMPLETE & SECURED! (+25 pts)</div>
+          <div>You packed all the necessary equipment for this sport. Excellent vocabulary!</div>
         </div>
       `;
       AppState.addStars(25);
@@ -508,7 +508,7 @@ function handleGearItemClick(cardEl, itemId, isCorrect, itemName, itemIcon) {
     } else {
       feedback.innerHTML = `
         <div style="color:#059669; font-weight:700; font-size:0.95rem; margin-top:10px;">
-          🎒 ¡${itemIcon} ${itemName} empacado! Llevas ${packedLockerItems.length} de 3 artículos.
+          🎒 ${itemIcon} ${itemName} packed! ${packedLockerItems.length} of 3 items packed.
         </div>
       `;
     }
@@ -520,7 +520,7 @@ function handleGearItemClick(cardEl, itemId, isCorrect, itemName, itemIcon) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡${itemName} no pertenece a este deporte o hobby! Elige el equipamiento adecuado.
+        ⚠️ ${itemName} does not belong to this sport or hobby! Choose the right equipment.
       </div>
     `;
   }
@@ -541,101 +541,101 @@ const djMixerTracksData = [
     id: 0,
     title: "Track 1 • The Daily Gamer 🎮",
     routineEn: "Max plays video games on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.",
-    routineEs: "Max juega videojuegos los 7 días de la semana (Lunes a Domingo sin falta).",
+    routineEs: "",
     activeDays: [1, 2, 3, 4, 5, 6, 7], // 7/7
     targetPercentage: 100,
     targetAdverb: "always",
-    explanation: "7 de 7 días ➔ 100% de frecuencia es ALWAYS (siempre)!"
+    explanation: "7 of 7 days ➔ 100% frequency is ALWAYS!"
   },
   {
     id: 1,
     title: "Track 2 • Zero Skateboarding 🛹",
     routineEn: "Emma doesn't have a skateboard and she has never tried it in her life (0 days).",
-    routineEs: "Emma no tiene patineta y jamás la ha probado en su vida (0 días).",
+    routineEs: "",
     activeDays: [], // 0/7
     targetPercentage: 0,
     targetAdverb: "never",
-    explanation: "0 veces ➔ 0% de frecuencia es NEVER (nunca)!"
+    explanation: "0 times ➔ 0% frequency is NEVER!"
   },
   {
     id: 2,
     title: "Track 3 • Casual Acoustic Guitar 🎸",
     routineEn: "Lucas plays the acoustic guitar only on Saturday afternoons (1 or 2 times a month).",
-    routineEs: "Lucas toca la guitarra acústica solo de vez en cuando (1 o 2 veces al mes).",
+    routineEs: "",
     activeDays: [6],
     targetPercentage: 25,
     targetAdverb: "sometimes",
-    explanation: "Ocasionalmente ➔ Alrededor del 25% es SOMETIMES (a veces)!"
+    explanation: "Occasionally ➔ Around 25% is SOMETIMES!"
   },
   {
     id: 3,
     title: "Track 4 • Regular Swimmer 🏊‍♂️",
     routineEn: "Chloe swims at the heated pool on Monday, Wednesday, Friday, and Saturday (4 days a week).",
-    routineEs: "Chloe nada en la piscina 4 días por semana con regularidad.",
+    routineEs: "",
     activeDays: [1, 3, 5, 6],
     targetPercentage: 50,
     targetAdverb: "often",
-    explanation: "Con bastante regularidad (4 días) ➔ 50% es OFTEN (a menudo)!"
+    explanation: "With regular frequency (4 days) ➔ 50% is OFTEN!"
   },
   {
     id: 4,
     title: "Track 5 • School Bus Traveler 🚌",
     routineEn: "David rides the yellow bus from Monday through Friday (almost every day).",
-    routineEs: "David toma el autobús escolar casi todos los días (5 días por semana).",
+    routineEs: "",
     activeDays: [1, 2, 3, 4, 5],
     targetPercentage: 75,
     targetAdverb: "usually",
-    explanation: "Casi toda la semana (5 días) ➔ 75% es USUALLY (usualmente)!"
+    explanation: "Almost all week (5 days) ➔ 75% is USUALLY!"
   },
   {
     id: 5,
     title: "Track 6 • Toothbrush Champion 🪥",
     routineEn: "Sofia brushes her teeth every morning and evening without exception (every single day).",
-    routineEs: "Sofía se cepilla los dientes todos los días sin falta.",
+    routineEs: "",
     activeDays: [1, 2, 3, 4, 5, 6, 7],
     targetPercentage: 100,
     targetAdverb: "always",
-    explanation: "Todos los días sin excepción ➔ 100% es ALWAYS!"
+    explanation: "Every day without exception ➔ 100% is ALWAYS!"
   },
   {
     id: 6,
     title: "Track 7 • No Coffee Kid ☕",
     routineEn: "Kids don't drink black coffee. Liam drinks warm milk or juice (0 times coffee).",
-    routineEs: "Los niños no toman café negro. Liam toma leche o jugo (0 veces café).",
+    routineEs: "",
     activeDays: [],
     targetPercentage: 0,
     targetAdverb: "never",
-    explanation: "Cero veces ➔ 0% es NEVER!"
+    explanation: "Zero times ➔ 0% is NEVER!"
   },
   {
     id: 7,
     title: "Track 8 • Weekend Cyclist 🚲",
     routineEn: "On sunny Saturdays and Sundays, Sarah and her dad ride bicycles in the park.",
-    routineEs: "Los fines de semana soleados, Sarah y su papá montan bicicleta.",
+    routineEs: "",
     activeDays: [6, 7],
     targetPercentage: 25,
     targetAdverb: "sometimes",
-    explanation: "Solo los fines de semana ➔ 25% es SOMETIMES!"
+    explanation: "Only on weekends ➔ 25% is SOMETIMES!"
   },
   {
     id: 8,
     title: "Track 9 • Comic Book Reader 📚",
     routineEn: "Leo reads superhero comic books on Monday, Tuesday, Thursday, and Sunday evening.",
-    routineEs: "Leo lee cómics de superhéroes 4 días a la semana frecuentemente.",
+    routineEs: "",
     activeDays: [1, 2, 4, 7],
     targetPercentage: 50,
     targetAdverb: "often",
-    explanation: "Frecuentemente (4 días) ➔ 50% es OFTEN!"
+    explanation: "Frequently (4 days) ➔ 50% is OFTEN!"
   },
   {
     id: 9,
     title: "Track 10 • Homework Champion 📝",
     routineEn: "Oliver finishes his homework from Monday to Friday right after arriving home.",
-    routineEs: "Oliver hace sus tareas de lunes a viernes en cuanto llega a casa.",
+    routineEs: "",
     activeDays: [1, 2, 3, 4, 5],
     targetPercentage: 75,
     targetAdverb: "usually",
-    explanation: "Casi toda la semana (5 días) ➔ 75% es USUALLY!"
+    explanation: "Almost all week (5 days) ➔ 75% is USUALLY!"
   }
 ];
 
@@ -654,7 +654,7 @@ function loadDJTrack(index) {
   document.getElementById('djRoutineEs').textContent = track.routineEs;
 
   // Active weekly days display
-  const dayNames = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+  const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const calBar = document.getElementById('djCalendarFrequencyBar');
   calBar.innerHTML = dayNames.map((d, i) => {
     const isActive = track.activeDays.includes(i + 1);
@@ -756,7 +756,7 @@ function dropTheDJBeat() {
 
     feedback.innerHTML = `
       <div style="background:rgba(16, 185, 129, 0.2); border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#34d399; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎧 ¡BEAT DROP PERFECTO! Fader en ${track.targetPercentage}% (+20 pts)</div>
+        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎧 PERFECT BEAT DROP! Fader at ${track.targetPercentage}% (+20 pts)</div>
         <div style="font-size:0.95rem; color:#ffffff;">"${track.targetAdverb.toUpperCase()}" calza exactamente con la rutina.</div>
         <div style="font-size:0.85rem; color:#a7f3d0; margin-top:4px;">💡 ${track.explanation}</div>
       </div>
@@ -776,7 +776,7 @@ function dropTheDJBeat() {
 
     feedback.innerHTML = `
       <div style="background:rgba(239, 68, 68, 0.2); border:1px solid #ef4444; border-radius:14px; padding:12px 18px; color:#f87171; font-weight:700; margin-top:16px;">
-        ⚠️ ¡El beat no calza! Tu fader está en ${currentSliderValue}%. Revisa cuántos días marcados en verde tiene el calendario arriba.
+        ⚠️ The beat doesn't match! Your fader is at ${currentSliderValue}%. Check how many green days are marked above.
       </div>
     `;
   }
@@ -790,14 +790,14 @@ function nextDJTrack() {
 
 // ============================================================================
 // ACTIVIDAD 3: VERB-ING MAGNET FUSION LAB
-// 15 retos de fusión ortográfica con verbos de gusto (like/love/enjoy/hate + -ing)
+// 15 spelling fusion challenges with verbs of preference
 // ============================================================================
 const magnetLabChallenges = [
   {
     id: 0,
     baseVerb: "play",
     ruleType: "normal",
-    ruleDescription: "Verbo normal ➔ Agrega -ING directamente: play + ing = playing",
+    ruleDescription: "Regular verb ➔ Add -ING directly: play + ing = playing",
     sentenceTemplate: "I love ___ soccer with my friends in the park.",
     sentenceComplete: "I love playing soccer with my friends in the park.",
     correctAnswer: "playing",
@@ -807,7 +807,7 @@ const magnetLabChallenges = [
     id: 1,
     baseVerb: "dance",
     ruleType: "drop-e",
-    ruleDescription: "Termina en 'e' muda ➔ Elimina la 'e' y agrega -ING: dance ➔ dancing",
+    ruleDescription: "Ends in silent 'e' ➔ Drop 'e' and add -ING: dance ➔ dancing",
     sentenceTemplate: "She enjoys ___ hip-hop music in her room.",
     sentenceComplete: "She enjoys dancing hip-hop music in her room.",
     correctAnswer: "dancing",
@@ -817,7 +817,7 @@ const magnetLabChallenges = [
     id: 2,
     baseVerb: "swim",
     ruleType: "double-consonant",
-    ruleDescription: "Consonante + Vocal + Consonante (CVC) ➔ Duplica la consonante: swim ➔ swimming",
+    ruleDescription: "Consonant + Vowel + Consonant (CVC) ➔ Double the consonant: swim ➔ swimming",
     sentenceTemplate: "They like ___ in the Olympic swimming pool.",
     sentenceComplete: "They like swimming in the Olympic swimming pool.",
     correctAnswer: "swimming",
@@ -827,7 +827,7 @@ const magnetLabChallenges = [
     id: 3,
     baseVerb: "ride",
     ruleType: "drop-e",
-    ruleDescription: "Termina en 'e' muda ➔ Elimina la 'e': ride ➔ riding",
+    ruleDescription: "Ends in silent 'e' ➔ Drop 'e': ride ➔ riding",
     sentenceTemplate: "He loves ___ his bicycle down the green hill.",
     sentenceComplete: "He loves riding his bicycle down the green hill.",
     correctAnswer: "riding",
@@ -837,7 +837,7 @@ const magnetLabChallenges = [
     id: 4,
     baseVerb: "read",
     ruleType: "normal",
-    ruleDescription: "Tiene doble vocal 'ea' ➔ Agrega -ING directamente: read ➔ reading",
+    ruleDescription: "Double vowel 'ea' ➔ Add -ING directly: read ➔ reading",
     sentenceTemplate: "We enjoy ___ adventure mystery books.",
     sentenceComplete: "We enjoy reading adventure mystery books.",
     correctAnswer: "reading",
@@ -847,7 +847,7 @@ const magnetLabChallenges = [
     id: 5,
     baseVerb: "run",
     ruleType: "double-consonant",
-    ruleDescription: "Una sílaba CVC ➔ Duplica la 'n': run ➔ running",
+    ruleDescription: "Single syllable CVC ➔ Double the 'n': run ➔ running",
     sentenceTemplate: "The dog hates ___ in the cold rain.",
     sentenceComplete: "The dog hates running in the cold rain.",
     correctAnswer: "running",
@@ -857,7 +857,7 @@ const magnetLabChallenges = [
     id: 6,
     baseVerb: "watch",
     ruleType: "normal",
-    ruleDescription: "Verbo normal ➔ Agrega -ING: watch ➔ watching",
+    ruleDescription: "Regular verb ➔ Add -ING: watch ➔ watching",
     sentenceTemplate: "My brother likes ___ cartoon movies on Friday.",
     sentenceComplete: "My brother likes watching cartoon movies on Friday.",
     correctAnswer: "watching",
@@ -867,7 +867,7 @@ const magnetLabChallenges = [
     id: 7,
     baseVerb: "skate",
     ruleType: "drop-e",
-    ruleDescription: "Termina en 'e' muda ➔ Elimina la 'e': skate ➔ skating",
+    ruleDescription: "Ends in silent 'e' ➔ Drop 'e': skate ➔ skating",
     sentenceTemplate: "Sarah loves ___ at the ice rink in winter.",
     sentenceComplete: "Sarah loves skating at the ice rink in winter.",
     correctAnswer: "skating",
@@ -877,7 +877,7 @@ const magnetLabChallenges = [
     id: 8,
     baseVerb: "draw",
     ruleType: "normal",
-    ruleDescription: "Termina en 'w' ➔ Agrega -ING directamente: draw ➔ drawing",
+    ruleDescription: "Ends in 'w' ➔ Add -ING directly: draw ➔ drawing",
     sentenceTemplate: "Leo is great at ___ comic superheroes.",
     sentenceComplete: "Leo is great at drawing comic superheroes.",
     correctAnswer: "drawing",
@@ -887,7 +887,7 @@ const magnetLabChallenges = [
     id: 9,
     baseVerb: "make",
     ruleType: "drop-e",
-    ruleDescription: "Termina en 'e' muda ➔ Elimina la 'e': make ➔ making",
+    ruleDescription: "Ends in silent 'e' ➔ Drop 'e': make ➔ making",
     sentenceTemplate: "We enjoy ___ delicious banana pancakes.",
     sentenceComplete: "We enjoy making delicious banana pancakes.",
     correctAnswer: "making",
@@ -897,7 +897,7 @@ const magnetLabChallenges = [
     id: 10,
     baseVerb: "sing",
     ruleType: "normal",
-    ruleDescription: "Verbo normal ➔ Agrega -ING: sing ➔ singing",
+    ruleDescription: "Regular verb ➔ Add -ING: sing ➔ singing",
     sentenceTemplate: "They love ___ English pop songs together.",
     sentenceComplete: "They love singing English pop songs together.",
     correctAnswer: "singing",
@@ -907,7 +907,7 @@ const magnetLabChallenges = [
     id: 11,
     baseVerb: "take",
     ruleType: "drop-e",
-    ruleDescription: "Termina en 'e' muda ➔ Elimina la 'e': take ➔ taking",
+    ruleDescription: "Ends in silent 'e' ➔ Drop 'e': take ➔ taking",
     sentenceTemplate: "Dad likes ___ photos of wild birds in the forest.",
     sentenceComplete: "Dad likes taking photos of wild birds in the forest.",
     correctAnswer: "taking",
@@ -917,7 +917,7 @@ const magnetLabChallenges = [
     id: 12,
     baseVerb: "paint",
     ruleType: "normal",
-    ruleDescription: "Verbo normal ➔ Agrega -ING: paint ➔ painting",
+    ruleDescription: "Regular verb ➔ Add -ING: paint ➔ painting",
     sentenceTemplate: "Maya loves ___ wooden boxes with bright colors.",
     sentenceComplete: "Maya loves painting wooden boxes with bright colors.",
     correctAnswer: "painting",
@@ -927,7 +927,7 @@ const magnetLabChallenges = [
     id: 13,
     baseVerb: "stop",
     ruleType: "double-consonant",
-    ruleDescription: "Una sílaba CVC ➔ Duplica la 'p': stop ➔ stopping",
+    ruleDescription: "Single syllable CVC ➔ Double the 'p': stop ➔ stopping",
     sentenceTemplate: "He keeps playing without ___ for lunch.",
     sentenceComplete: "He keeps playing without stopping for lunch.",
     correctAnswer: "stopping",
@@ -937,7 +937,7 @@ const magnetLabChallenges = [
     id: 14,
     baseVerb: "cook",
     ruleType: "normal",
-    ruleDescription: "Doble vocal 'oo' ➔ Agrega -ING directamente: cook ➔ cooking",
+    ruleDescription: "Double vowel 'oo' ➔ Add -ING directly: cook ➔ cooking",
     sentenceTemplate: "Grandmother enjoys ___ vegetable soup on Sunday.",
     sentenceComplete: "Grandmother enjoys cooking vegetable soup on Sunday.",
     correctAnswer: "cooking",
@@ -951,7 +951,7 @@ function loadMagnetChallenge(index) {
   currentMagnetIndex = index;
   const item = magnetLabChallenges[index];
 
-  document.getElementById('magnetCaseBadge').textContent = `Fusión ${index + 1} de ${magnetLabChallenges.length}`;
+  document.getElementById('magnetCaseBadge').textContent = `Fusion ${index + 1} of ${magnetLabChallenges.length}`;
   document.getElementById('magnetSentenceDisplay').innerHTML = item.sentenceTemplate.replace(
     '___',
     `<span id="magnetBlankSlot" class="magnet-blank-pill">[ ? ]</span>`
@@ -988,7 +988,7 @@ function fuseMagnetVerb(btnEl, chosenOpt, correctOpt, sentenceComplete, ruleDesc
 
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px 18px; color:#065f46; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🧲 ¡FUSIÓN ORTOGRÁFICA EXITOSA! (+15 pts)</div>
+        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🧲 SPELLING FUSION SUCCESSFUL! (+15 pts)</div>
         <div style="font-size:1.05rem;">"${sentenceComplete}"</div>
         <div style="font-size:0.85rem; color:#047857; margin-top:6px; font-weight:600;">💡 Regla: ${ruleDesc}</div>
       </div>
@@ -1009,7 +1009,7 @@ function fuseMagnetVerb(btnEl, chosenOpt, correctOpt, sentenceComplete, ruleDesc
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:16px;">
-        ⚠️ Revisa la regla ortográfica: ¿lleva 'e' muda que se elimina o duplica la consonante CVC?
+        ⚠️ Check the spelling rule: does it drop a silent 'e' or double the CVC consonant?
       </div>
     `;
   }
@@ -1023,79 +1023,79 @@ function nextMagnetChallenge() {
 
 // ============================================================================
 // ACTIVIDAD 4: TALENT SHOW AUDITION ("YES, I CAN!" TALENT STAGE)
-// 8 audiciones de talentos con botón de Golden Buzzer y práctica oral
+// 8 talent auditions with Golden Buzzer and speaking practice
 // ============================================================================
 const talentAuditionsData = [
   {
     id: 0,
     talentTag: "Audition 1 • Acoustic Guitar 🎸",
     judgeQuestion: "Can you play the acoustic guitar?",
-    judgeQuestionEs: "¿Puedes tocar la guitarra acústica?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can play the guitar very well!",
-    candidateAnswerEs: "¡Sí, puedo tocar la guitarra muy bien!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge Simon: Outstanding rhythm and clean chords! 🌟"
   },
   {
     id: 1,
     talentTag: "Audition 2 • Skateboard Tricks 🛹",
     judgeQuestion: "Can you do tricks on a skateboard?",
-    judgeQuestionEs: "¿Puedes hacer trucos en patineta?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can jump and ride fast on my skateboard!",
-    candidateAnswerEs: "¡Sí, puedo saltar y montar rápido en mi patineta!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge Paula: Fearless balance on four wheels! 🛹🔥"
   },
   {
     id: 2,
     talentTag: "Audition 3 • English Singing 🎤",
     judgeQuestion: "Can you sing pop songs in English?",
-    judgeQuestionEs: "¿Puedes cantar canciones pop en inglés?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can sing with energy and joy!",
-    candidateAnswerEs: "¡Sí, puedo cantar con energía y alegría!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge David: Fantastic vocal pitch and smile! 🎵✨"
   },
   {
     id: 3,
     talentTag: "Audition 4 • Swimming Distance 🏊‍♂️",
     judgeQuestion: "Can you swim fifty meters in the pool?",
-    judgeQuestionEs: "¿Puedes nadar cincuenta metros en la piscina?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can swim fast like a dolphin!",
-    candidateAnswerEs: "¡Sí, puedo nadar rápido como un delfín!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge Simon: Incredible stamina in the water! 🐬🏆"
   },
   {
     id: 4,
     talentTag: "Audition 5 • Juggling Skills 🤹",
     judgeQuestion: "Can you juggle three tennis balls?",
-    judgeQuestionEs: "¿Puedes hacer malabares con tres pelotas de tenis?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can juggle without dropping any ball!",
-    candidateAnswerEs: "¡Sí, puedo hacer malabares sin dejar caer ninguna pelota!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge Paula: Amazing hand-eye coordination! 🎾⭐"
   },
   {
     id: 5,
     talentTag: "Audition 6 • Comic Illustration 🎨",
     judgeQuestion: "Can you draw comic cartoon characters?",
-    judgeQuestionEs: "¿Puedes dibujar personajes de caricaturas?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can draw funny heroes and monsters!",
-    candidateAnswerEs: "¡Sí, puedo dibujar héroes graciosos y monstruos!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge David: High level creative imagination! 🖌️🌟"
   },
   {
     id: 6,
     talentTag: "Audition 7 • Cooking Breakfast 🥞",
     judgeQuestion: "Can you make sweet banana pancakes?",
-    judgeQuestionEs: "¿Puedes preparar panqueques dulces de plátano?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can cook delicious pancakes for my family!",
-    candidateAnswerEs: "¡Sí, puedo cocinar panqueques deliciosos para mi familia!",
+    candidateAnswerEs: "",
     judgeFeedback: "Judge Simon: Delicious recipe presentation! 🥞❤️"
   },
   {
     id: 7,
     talentTag: "Audition 8 • Grand Finale Languages 🌍",
     judgeQuestion: "Can you speak English and Spanish fluently?",
-    judgeQuestionEs: "¿Puedes hablar inglés y español con fluidez?",
+    judgeQuestionEs: "",
     candidateAnswer: "Yes, I can speak both languages with confidence!",
-    candidateAnswerEs: "¡Sí, puedo hablar ambos idiomas con confianza!",
+    candidateAnswerEs: "",
     judgeFeedback: "All Judges: GOLDEN BUZZER! You are a Bilikids Superstar! 🔔✨"
   }
 ];
@@ -1108,7 +1108,7 @@ function loadTalentAudition(index) {
   const audition = talentAuditionsData[index];
   document.getElementById('talentMicBtn').disabled = false;
 
-  document.getElementById('talentEpisodeNum').textContent = `Audición ${index + 1} de ${talentAuditionsData.length}`;
+  document.getElementById('talentEpisodeNum').textContent = `Audition ${index + 1} of ${talentAuditionsData.length}`;
   document.getElementById('talentSceneTag').textContent = audition.talentTag;
   document.getElementById('talentJudgeQuestion').textContent = `Judge asks: "${audition.judgeQuestion}"`;
   document.getElementById('talentJudgeQuestionEs').textContent = audition.judgeQuestionEs;
@@ -1142,9 +1142,9 @@ function toggleTalentMic() {
 
   if (!SpeechRecognition) {
     feedback.innerHTML = `
-      <div style="font-size:1.15rem; font-weight:700; color:#fbbf24;">🔔 ¡GOLDEN BUZZER ACTIVADO!</div>
+      <div style="font-size:1.15rem; font-weight:700; color:#fbbf24;">🔔 GOLDEN BUZZER ACTIVATED!</div>
       <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.25); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-      Práctica sin puntuación. Escucha el modelo y responde en voz alta.
+      Practice mode. Listen to native audio and reply aloud.
       </span>
     `;
     btn.disabled = true;
@@ -1162,7 +1162,7 @@ function toggleTalentMic() {
     recognition.onstart = () => {
       isTalentRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🎤 ¡EN EL ESCENARIO! Responde al jurado en inglés...</span>`;
+      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🎤 ON STAGE! Reply to the judges in English...</span>`;
     };
 
     recognition.onresult = (event) => {
@@ -1170,13 +1170,13 @@ function toggleTalentMic() {
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Dijiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.25); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-          🔔 Transcripción de práctica; la respuesta y pronunciación no se evalúan.
+          🔔 Audition practice transcript.
         </span>
       `;
     };
 
     recognition.onerror = () => {
-      feedback.innerHTML = `<span style="color:#94a3b8;">Toca el micrófono de nuevo e inténtalo.</span>`;
+      feedback.innerHTML = `<span style="color:#94a3b8;">Tap the microphone again to try.</span>`;
     };
 
     recognition.onend = () => {
@@ -1198,7 +1198,7 @@ function nextTalentAudition() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 5
+// UNIT 5 INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');

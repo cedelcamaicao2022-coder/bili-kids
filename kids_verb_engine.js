@@ -396,7 +396,7 @@ class KidsVerbEngine {
       btnElement.classList.add('incorrect');
       allButtons[currentQ.correct].classList.add('correct');
       this.playWrongSound();
-      this.showFloatingIndicator('¡Ups!', '#ef4444');
+      this.showFloatingIndicator('Oops!', '#ef4444');
     }
 
     this.history.push({
@@ -445,21 +445,21 @@ class KidsVerbEngine {
     const accuracy = this.totalAnswered > 0 ? Math.round((this.correctCount / this.totalAnswered) * 100) : 0;
     
     // Title & Medals
-    let title = "¡Gran Esfuerzo!";
+    let title = "Great Effort!";
     let medal = "🥉";
-    let message = "Sigue practicando para aumentar tu racha de verbos.";
+    let message = "Keep practicing to build your verb streak.";
     if (this.score >= 500) {
-      title = "¡Maestro de Verbos Cambridge!";
+      title = "Cambridge Verb Master!";
       medal = "👑";
-      message = "¡Increíble reflejo y dominio perfecto de los tiempos verbales!";
+      message = "Incredible reflexes and perfect command of verb tenses!";
     } else if (this.score >= 300) {
-      title = "¡Súper Atleta de Verbos!";
+      title = "Super Verb Athlete!";
       medal = "🥇";
-      message = "¡Fantástica velocidad y precisión gramatical en 60 segundos!";
+      message = "Fantastic speed and grammatical accuracy in 60 seconds!";
     } else if (this.score >= 150) {
-      title = "¡Muy Buen Trabajo!";
+      title = "Well Done!";
       medal = "🥈";
-      message = "Has acertado la mayoría de los verbos con muy buena energía.";
+      message = "You got most verbs correct with great energy.";
     }
 
     const modal = document.createElement('div');
@@ -482,32 +482,32 @@ class KidsVerbEngine {
           <div class="verb-summary-box">
             <div class="verb-stat-tile">
               <span class="verb-tile-num">${this.score}</span>
-              <span class="verb-tile-lbl">⭐ Puntos Totales</span>
+              <span class="verb-tile-lbl">⭐ Total Points</span>
             </div>
             <div class="verb-stat-tile">
               <span class="verb-tile-num">${this.correctCount} / ${this.totalAnswered}</span>
-              <span class="verb-tile-lbl">🎯 Aciertos</span>
+              <span class="verb-tile-lbl">🎯 Correct</span>
             </div>
             <div class="verb-stat-tile">
               <span class="verb-tile-num">${this.bestStreak} 🔥</span>
-              <span class="verb-tile-lbl">Mejor Racha</span>
+              <span class="verb-tile-lbl">Best Streak</span>
             </div>
             <div class="verb-stat-tile">
               <span class="verb-tile-num">${accuracy}%</span>
-              <span class="verb-tile-lbl">Precisión</span>
+              <span class="verb-tile-lbl">Accuracy</span>
             </div>
           </div>
 
           <!-- Mistakes review -->
           ${this.history.some(h => !h.isCorrect) ? `
             <div style="margin-top: 1.25rem;">
-              <h4 style="margin: 0 0 8px; font-size: 1rem; color: #065f46;">💡 Repaso de Verbos para Aprender:</h4>
+              <h4 style="margin: 0 0 8px; font-size: 1rem; color: #065f46;">💡 Verb Review & Learning:</h4>
               <div class="verb-review-list">
                 ${this.history.filter(h => !h.isCorrect).slice(0, 4).map(h => `
                   <div class="verb-review-item">
                     <strong>${h.question.replace('_____', `[${h.correctAnswer}]`)}</strong>
                     <div style="font-size: 0.85rem; color: #047857; margin-top: 2px;">
-                      ✓ Correcto: <b>${h.correctAnswer}</b> • Tu respuesta: <s>${h.userAnswer}</s>
+                      ✓ Correct: <b>${h.correctAnswer}</b> • Your answer: <s>${h.userAnswer}</s>
                     </div>
                     <div style="font-size: 0.8rem; color: #4b5563; margin-top: 2px;">
                       ${h.explanation}
@@ -518,17 +518,17 @@ class KidsVerbEngine {
             </div>
           ` : `
             <div style="text-align: center; margin-top: 1rem; color: #059669; font-weight: 700;">
-              🎉 ¡Felicidades! Tuviste cero errores en todas tus respuestas.
+              🎉 Congratulations! Zero errors across all your answers.
             </div>
           `}
         </div>
 
         <footer class="verb-modal-footer">
           <button id="btnExitToKids" class="verb-btn-secondary">
-            Volver a Kids
+            Back to Kids
           </button>
           <button id="btnPlayAgainSprint" class="verb-btn-primary">
-            ⚡ Jugar Otra Ronda (60s)
+            ⚡ Play Another Round (60s)
           </button>
         </footer>
       </div>

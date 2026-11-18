@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 1: All About You | Bilikids Kids Club</title>
 
-  <!-- Tipografías modernas -->
+  <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="unit-nav">
     <div class="unit-nav-inner">
       <a href="kids.html" class="btn-back-map">
         <span>←</span>
-        <span>Mapa Kids</span>
+        <span>Kids Map</span>
       </a>
 
       <div class="unit-title-header">
@@ -29,23 +29,23 @@
         <h1 class="unit-name-head">All About You</h1>
       </div>
 
-      <div class="unit-score-pill" title="Tus puntos de misión">
+      <div class="unit-score-pill" title="Mission Points">
         <span>⭐</span>
         <span id="unitStarsCount">120 pts</span>
       </div>
     </div>
   </header>
 
-  <!-- PESTAÑAS DE ACTIVIDADES (ECOSISTEMA INTEGRADO) -->
+  <!-- ACTIVITY TABS -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('comic', this)">
         <span>💬</span>
-        <span>Diálogo Interactivo</span>
+        <span>Interactive Dialogue</span>
       </button>
       <button class="tab-btn" onclick="switchTab('words', this)">
         <span>📚</span>
-        <span>Palabras Clave</span>
+        <span>Key Words</span>
       </button>
       <button class="tab-btn" onclick="switchTab('builder', this)">
         <span>🧩</span>
@@ -58,11 +58,11 @@
     </div>
   </nav>
 
-  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <!-- DYNAMIC WORKSPACE -->
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: DIÁLOGO INTERACTIVO (ESCENARIOS DE LA VIDA REAL)
+         ACTIVITY 1: INTERACTIVE DIALOGUE (REAL-LIFE SCENARIOS)
          ==================================================================== -->
     <section id="view-comic" class="activity-view active-view">
       <div class="story-container">
@@ -70,38 +70,38 @@
         <!-- Selector de Escenarios de la Vida Real -->
         <div class="scenarios-selector-wrap">
           <div class="scenarios-label">
-            <span>🎭 Elige un Escenario de Conversación:</span>
-            <span style="font-size:0.75rem; color:#6366f1; text-transform:none;">10 a 14 turnos por diálogo</span>
+            <span>🎭 Choose a Conversation Scenario:</span>
+            <span style="font-size:0.75rem; color:#6366f1; text-transform:none;">10 to 14 turns per dialogue</span>
           </div>
           <div class="scenarios-chips-row">
             <button class="scenario-chip-btn active" onclick="switchScenario('school', this)">
               <span>🏫</span>
-              <span>1. Primer Día en la Escuela</span>
+              <span>1. First Day at School</span>
             </button>
             <button class="scenario-chip-btn" onclick="switchScenario('shopping', this)">
               <span>🛍️</span>
-              <span>2. De Compras</span>
+              <span>2. Going Shopping</span>
             </button>
             <button class="scenario-chip-btn" onclick="switchScenario('cinema', this)">
               <span>🎬</span>
-              <span>3. En el Cine</span>
+              <span>3. At the Cinema</span>
             </button>
             <button class="scenario-chip-btn" onclick="switchScenario('airport', this)">
               <span>✈️</span>
-              <span>4. En el Aeropuerto</span>
+              <span>4. At the Airport</span>
             </button>
             <button class="scenario-chip-btn" onclick="switchScenario('pizza', this)">
               <span>🍕</span>
-              <span>5. En la Pizzería</span>
+              <span>5. At the Pizzeria</span>
             </button>
             <button class="scenario-chip-btn" onclick="switchScenario('hobbies', this)">
               <span>🎮</span>
-              <span>6. Gustos y Hobbies</span>
+              <span>6. Likes & Hobbies</span>
             </button>
           </div>
         </div>
         
-        <!-- Header de la Historia -->
+        <!-- Story Header -->
         <div class="story-header">
           <div class="story-title-wrap">
             <span class="story-badge" id="storyLevelBadge">Mission • A1</span>
@@ -118,19 +118,19 @@
           </div>
         </div>
 
-        <!-- Flujo del Diálogo Vivo -->
+        <!-- Live Dialogue Chat Flow -->
         <div class="story-chat-flow" id="storyChatFlow">
-          <!-- Se inyecta dinámicamente con animaciones y audio -->
+          <!-- Dynamically injected with animations and audio -->
         </div>
 
-        <!-- Contenedor del Quiz / Pregunta de decisión para el estudiante -->
+        <!-- Quiz Container / Decision Prompt for Student -->
         <div id="storyDecisionContainer"></div>
 
       </div>
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 2: PALABRAS CLAVE (FLASHCARDS CON FONÉTICA)
+         ACTIVITY 2: KEY WORDS (PHONICS FLASHCARDS)
          ==================================================================== -->
     <section id="view-words" class="activity-view">
       <div class="words-container">
@@ -140,19 +140,19 @@
             <h2 class="intro-title">
               <span>📚</span> Word Explorer • Unit 1
             </h2>
-            <p class="intro-desc">Escucha y aprende cada palabra; luego comprueba si la recuerdas con el reto breve de recuperación.</p>
+            <p class="intro-desc">Listen and learn each word, then test your memory with the quick recall challenge.</p>
           </div>
         </div>
 
         <div class="category-filter-chips">
-          <button class="category-chip active" onclick="filterWordCards('all', this)">Todas las palabras</button>
-          <button class="category-chip" onclick="filterWordCards('greetings', this)">👋 Saludos</button>
-          <button class="category-chip" onclick="filterWordCards('personal', this)">🏷️ Datos Personales</button>
-          <button class="category-chip" onclick="filterWordCards('numbers', this)">🔢 Números 0–10</button>
+          <button class="category-chip active" onclick="filterWordCards('all', this)">All Words</button>
+          <button class="category-chip" onclick="filterWordCards('greetings', this)">👋 Greetings</button>
+          <button class="category-chip" onclick="filterWordCards('personal', this)">🏷️ Personal Details</button>
+          <button class="category-chip" onclick="filterWordCards('numbers', this)">🔢 Numbers 0–10</button>
         </div>
 
         <div class="words-grid" id="wordsGridContainer">
-          <!-- Tarjetas renderizadas dinámicamente -->
+          <!-- Dynamically rendered cards -->
         </div>
 
       </div>
@@ -164,32 +164,32 @@
     <section id="view-builder" class="activity-view">
       <div class="sentence-builder-box">
         
-        <span class="challenge-counter" id="challengeNum">Reto 1 de 25</span>
+        <span class="challenge-counter" id="challengeNum">Challenge 1 of 25</span>
         <h2 class="prompt-translation" id="promptTranslation">"Hola, yo soy Maya."</h2>
         <p class="grammar-tip" id="grammarTip">💡 Pista gramatical: Usa el pronombre 'I' con el verbo 'am'.</p>
 
         <!-- Zona donde se forman las oraciones -->
         <div class="dropzone-target" id="sentenceDropzone">
-          <span style="color:#94a3b8; font-size:0.9rem;">Toca las palabras abajo para colocarlas aquí en orden...</span>
+          <span style="color:#94a3b8; font-size:0.9rem;">Tap the words below to arrange them in order...</span>
         </div>
 
-        <!-- Banco de palabras -->
+        <!-- Word Bank -->
         <div class="word-bank" id="wordBankContainer">
-          <!-- Palabras generadas dinámicamente -->
+          <!-- Dynamically generated words -->
         </div>
 
         <!-- Botones de control -->
         <div class="builder-controls">
           <button class="btn-builder btn-builder-reset" onclick="resetCurrentSentence()">
             <span>🔄</span>
-            <span>Reiniciar</span>
+            <span>Reset</span>
           </button>
           <button class="btn-builder btn-builder-check" id="btnCheckSentence" onclick="checkSentence()">
             <span>✅</span>
-            <span>Comprobar Oración</span>
+            <span>Check Sentence</span>
           </button>
           <button class="btn-builder btn-builder-next" id="btnNextSentence" onclick="nextSentenceChallenge()">
-            <span>Siguiente Reto ➔</span>
+            <span>Next Challenge ➔</span>
           </button>
         </div>
 
@@ -208,25 +208,25 @@
           </span>
 
           <h2 class="speaking-target-phrase" id="speakingTarget">"Hello! My name is Alex."</h2>
-          <p class="speaking-spanish-hint" id="speakingHint">¡Hola! Mi nombre es Alex.</p>
+          <p class="speaking-spanish-hint" id="speakingHint" style="display:none;"></p>
 
           <button class="listen-sample-btn" onclick="listenSpeakingSample()">
             <span>🔊</span>
-            <span>Escuchar Ejemplo Nativo</span>
+            <span>Listen to Native Audio</span>
           </button>
 
           <div class="mic-action-box">
             <button class="btn-record-mic" id="micRecordBtn" onclick="toggleVoiceRecord()" title="Presiona para hablar">
               🎤
             </button>
-            <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">Presiona el micrófono y pronuncia la frase en inglés</div>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">Tap the microphone and speak the sentence in English</div>
           </div>
 
           <div class="speaking-feedback-area" id="speakingFeedback"></div>
 
           <div style="margin-top:24px;">
             <button class="btn-builder btn-builder-reset" onclick="nextSpeakingPrompt()">
-              <span>Siguiente Frase ➔</span>
+              <span>Next Phrase ➔</span>
             </button>
           </div>
         </div>

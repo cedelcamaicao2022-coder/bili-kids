@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verb Sprint 60s | Cambridge A1-A2 Reto de Verbos - Bilikids</title>
+  <title>Verb Sprint 60s | Cambridge A1-A2 Verb Challenge - Bilikids</title>
   <link rel="icon" type="image/png" href="assets/home/logo_bilikids_2x.png">
   <link rel="stylesheet" href="subpages_styles.css">
   <link rel="stylesheet" href="kids_verb_styles.css">
@@ -16,14 +16,14 @@
        ======================================================================== -->
   <header class="subpage-navbar">
     <div class="nav-left-brand">
-      <a href="kids.html" class="brand-link" title="Volver al Portal Kids">
+      <a href="kids.html" class="brand-link" title="Back to Kids Portal">
         <img src="assets/bilikids_logo.png" alt="Bilikids Adventure" class="brand-logo-img">
         <span class="brand-subtitle-tag" style="color: #10b981;">VERB SPRINT 60s</span>
       </a>
     </div>
 
     <nav class="nav-center-menu">
-      <a href="kids.html" class="nav-pill-item" title="Volver a Kids">
+      <a href="kids.html" class="nav-pill-item" title="Back to Kids">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -47,11 +47,11 @@
     </nav>
 
     <div class="nav-right-actions">
-      <a href="kids.html" class="nav-circle-btn" title="Volver a Kids">
+      <a href="kids.html" class="nav-circle-btn" title="Back to Kids">
         ✕
       </a>
-      <div class="user-profile-badge" title="Estudiante: Sofía">
-        <img src="assets/home/avatar_matias_2x.png" alt="Estudiante" class="user-avatar-circle">
+      <div class="user-profile-badge" title="Student: Sofia">
+        <img src="assets/home/avatar_matias_2x.png" alt="Student" class="user-avatar-circle">
         <span class="user-greeting-name">Kids • A1/A2</span>
       </div>
     </div>
@@ -65,7 +65,7 @@
     <!-- HUD STATS STRIP -->
     <header class="verb-hud-bar">
       <div class="verb-hud-stat">
-        <span class="verb-stat-label">Puntos:</span>
+        <span class="verb-stat-label">Points:</span>
         <span class="verb-stat-value" id="sprintScoreVal">0</span>
       </div>
 
@@ -75,17 +75,17 @@
       </div>
 
       <div class="verb-hud-stat">
-        <span class="verb-stat-label">Racha:</span>
+        <span class="verb-stat-label">Streak:</span>
         <span class="verb-stat-value" id="sprintStreakVal">0 🔥</span>
       </div>
 
       <div class="verb-hud-stat">
-        <span class="verb-stat-label">Aciertos:</span>
+        <span class="verb-stat-label">Correct:</span>
         <span class="verb-stat-value" id="sprintCountVal">0/0</span>
       </div>
 
       <button id="btnSoundSprint" class="verb-btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
-        🔊 Sonido: ON
+        🔊 Sound: ON
       </button>
     </header>
 
@@ -99,17 +99,17 @@
       <span class="verb-intro-badge">⚡ Cambridge Young Learners & A2 Key</span>
       <h1 class="verb-intro-title">Verb Sprint Challenge!</h1>
       <p class="verb-intro-desc">
-        ¡Tienes exactamente <b>60 segundos</b> para completar la mayor cantidad de oraciones en inglés con el verbo correcto! Acumula rachas de fuego 🔥 y gana estrellas ⭐.
+        You have exactly <b>60 seconds</b> to complete as many English sentences as possible with the correct verb! Build fire streaks 🔥 and earn stars ⭐.
       </p>
 
       <div class="verb-features-row">
-        <div class="verb-feature-pill">⏱️ 1 Minuto sin parar</div>
-        <div class="verb-feature-pill">🎯 Presente, Pasado y Continuo</div>
-        <div class="verb-feature-pill">⭐ Hasta 500+ Puntos</div>
+        <div class="verb-feature-pill">⏱️ 1 Non-Stop Minute</div>
+        <div class="verb-feature-pill">🎯 Present, Past & Continuous</div>
+        <div class="verb-feature-pill">⭐ Up to 500+ Points</div>
       </div>
 
       <button id="btnStartSprint" class="verb-btn-primary" style="font-size: 1.25rem; padding: 16px 38px;">
-        ▶ ¡Iniciar Verb Sprint Ahora!
+        ▶ Start Verb Sprint Now!
       </button>
     </section>
 
@@ -117,7 +117,7 @@
     <section class="verb-game-card" id="sprintGameCard" style="display: none;">
       <div class="verb-question-header">
         <span class="verb-cat-pill" id="sprintCategoryBadge">Present Simple</span>
-        <span style="font-size: 0.85rem; color: #64748b; font-weight: 700;">¡Elige el verbo correcto rápido!</span>
+        <span style="font-size: 0.85rem; color: #64748b; font-weight: 700;">Pick the correct verb quickly!</span>
       </div>
 
       <!-- Sentence Box -->

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 6: Neighborhoods | Bilikids Kids Club</title>
 
-  <!-- Tipografías modernas -->
+  <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="unit-nav">
     <div class="unit-nav-inner">
       <a href="kids.html" class="btn-back-map">
         <span>←</span>
-        <span>Mapa Kids</span>
+        <span>Kids Map</span>
       </a>
 
       <div class="unit-title-header">
@@ -29,27 +29,27 @@
         <h1 class="unit-name-head">Neighborhoods</h1>
       </div>
 
-      <div class="unit-score-pill" title="Tus puntos de misión">
+      <div class="unit-score-pill" title="Mission Points">
         <span>⭐</span>
         <span id="unitStarsCount">180 pts</span>
       </div>
     </div>
   </header>
 
-  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <!-- ACTIVITY TABS -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('map', this)">
         <span>🗺️</span>
-        <span>Mapa de la Ciudad</span>
+        <span>City Map Explorer</span>
       </button>
       <button class="tab-btn" onclick="switchTab('inspector', this)">
         <span>🏢</span>
-        <span>Sello del Inspector</span>
+        <span>Inspector Stamp</span>
       </button>
       <button class="tab-btn" onclick="switchTab('gps', this)">
         <span>🧭</span>
-        <span>Brújula GPS</span>
+        <span>GPS Compass</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tour', this)">
         <span>🚌</span>
@@ -58,7 +58,7 @@
     </div>
   </nav>
 
-  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <!-- DYNAMIC WORKSPACE -->
   <main class="unit-workspace">
 
     <!-- ====================================================================
@@ -77,14 +77,14 @@
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="cityMissionBadge">Misión 1 de 8</span>
+            <span class="unit-tag-pill" id="cityMissionBadge">Mission 1 of 8</span>
             <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextCityMission()">
-              <span>Siguiente Misión ➔</span>
+              <span>Next Mission ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Tarjeta de Misión del Residente -->
+        <!-- Resident Mission Card -->
         <div class="city-mission-card">
           <div style="flex-grow:1;">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
@@ -102,21 +102,21 @@
             </div>
 
             <div id="cityMissionClue" style="font-size:0.9rem; color:#0369a1; background:rgba(2,132,199,0.1); padding:6px 14px; border-radius:10px; display:inline-block;">
-              💡 <strong>Pista de Navegación:</strong> ¿Dónde se compra pan recién horneado y pasteles?
+              💡 <strong>Navigation Clue:</strong> Where do you buy freshly baked bread and pastries?
             </div>
           </div>
 
           <div>
             <button class="btn-back-map" style="padding:8px 16px; font-size:0.88rem; cursor:pointer;" onclick="listenCityPrompt()">
-              🔊 Escuchar Petición
+              🔊 Listen to Request
             </button>
           </div>
         </div>
 
-        <!-- Pregunta Explícita del Mapa -->
+        <!-- Map Explicit Question -->
         <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#0369a1; margin:16px 0 8px; display:flex; align-items:center; gap:6px;">
           <span>📍</span>
-          <span>Where should the resident go? / ¿A qué lugar debe dirigirse el residente?:</span>
+          <span>Where should the resident go?</span>
         </div>
 
         <!-- Grid de Pines de Lugares en la Ciudad -->
@@ -124,7 +124,7 @@
           <!-- Inyectados por JS -->
         </div>
 
-        <!-- Caja de Retroalimentación -->
+        <!-- Feedback box -->
         <div id="cityFeedbackBox" style="text-align:center;"></div>
 
       </div>
@@ -142,18 +142,18 @@
               <span>🏢</span> Inspector Municipal: There is vs There are
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Evalúa los permisos de construcción urbana. Aplica el sello correcto: <strong>There is</strong> (singular/incontable) o <strong>There are</strong> (plural).
+              Evaluate urban building permits. Apply the correct stamp: <strong>There is</strong> (singular/uncountable) or <strong>There are</strong> (plural).
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="unit-tag-pill" id="inspectorCaseNum">Permiso 1 de 15</span>
             <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextInspectorPermit()">
-              <span>Siguiente Permiso ➔</span>
+              <span>Next Permit ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Tarjeta Oficial de Permiso de Construcción -->
+        <!-- Official Building Permit Card -->
         <div class="permit-document-card">
           <div class="permit-official-stamp">OFFICIAL PERMIT</div>
           <div style="font-family:monospace; font-size:0.82rem; color:#92400e; letter-spacing:1px; margin-bottom:6px;">
@@ -164,10 +164,10 @@
             <span id="permitBlankSlot" class="permit-blank-slot">[ ? ]</span> a green public park with a water fountain.
           </div>
           <div id="permitSentenceEs" style="font-size:0.95rem; color:#78350f; font-style:italic;">
-            Hay un parque público verde con una fuente de agua.
+            There is a green public park with a water fountain.
           </div>
 
-          <!-- Pregunta Explícita -->
+          <!-- Explicit Question -->
           <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#92400e; margin:20px 0 6px;">
             ⚖️ Select the official stamp to approve / Selecciona el sello oficial para aprobar:
           </div>
@@ -178,14 +178,14 @@
           </div>
         </div>
 
-        <!-- Retroalimentación del Inspector -->
+        <!-- Inspector feedback -->
         <div id="inspectorFeedbackBox" style="text-align:center;"></div>
 
       </div>
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 3: PREPOSITION COMPASS GPS (BRÚJULA GPS DE POSICIONES)
+         ACTIVITY 3: PREPOSITION COMPASS GPS
          ==================================================================== -->
     <section id="view-gps" class="activity-view">
       <div class="gps-container">
@@ -196,24 +196,24 @@
               <span>🧭</span> Preposition Compass: GPS Street Directions
             </h2>
             <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
-              Observa la posición de los edificios en la pantalla GPS y elige la preposición de lugar correcta.
+              Observe the building positions on the GPS screen and choose the correct preposition of place.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="gpsStageBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Ubicación 1 de 10</span>
+            <span class="unit-tag-pill" id="gpsStageBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Location 1 of 10</span>
             <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextGPSChallenge()">
-              <span>Siguiente Ubicación ➔</span>
+              <span>Next Location ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Pantalla de Navegación GPS -->
+        <!-- GPS Navigation Screen -->
         <div class="gps-street-view">
           <span class="unit-tag-pill" id="gpsSceneTag" style="background:rgba(56,189,248,0.2); color:#38bdf8; margin-bottom:8px;">
             Street Corner A • Main Avenue
           </span>
 
-          <!-- Vista gráfica de los edificios de la calle -->
+          <!-- Street buildings visual layout -->
           <div class="gps-buildings-scene" id="gpsBuildingsScene">
             <!-- Inyectados por JS -->
           </div>
@@ -222,12 +222,12 @@
             The Toy Store is <span id="gpsBlankSlot" style="display:inline-block; min-width:90px; padding:2px 12px; background:#0284c7; border-radius:6px; color:#ffffff; font-weight:700;">[ ? ]</span> the Bakery and the Library.
           </div>
           <div id="gpsTargetPromptEs" style="font-size:0.88rem; color:#94a3b8; font-style:italic;">
-            La juguetería está entre la panadería y la biblioteca.
+            The toy store is between the bakery and the library.
           </div>
 
-          <!-- Pregunta Explícita -->
+          <!-- Explicit Question -->
           <div style="font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:#38bdf8; margin:18px 0 8px;">
-            🧭 Choose the correct GPS preposition / Elige la preposición de posición correcta:
+            🧭 Choose the correct GPS preposition:
           </div>
 
           <!-- Botones de Preposiciones (Aleatorizados) -->
@@ -236,14 +236,14 @@
           </div>
         </div>
 
-        <!-- Retroalimentación del GPS -->
+        <!-- GPS feedback -->
         <div id="gpsFeedbackBox" style="text-align:center;"></div>
 
       </div>
     </section>
 
     <!-- ====================================================================
-         ACTIVIDAD 4: "LET'S GO!" TOWN TOUR GUIDE (GUÍA TURÍSTICO CON MICRÓFONO)
+         ACTIVITY 4: "LET'S GO!" TOWN TOUR GUIDE (SPEAKING QUEST)
          ==================================================================== -->
     <section id="view-tour" class="activity-view">
       <div class="tour-container">
@@ -254,18 +254,18 @@
               <span>🚌</span> Double-Decker Tour Guide: "Let's Go!"
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Eres el guía oficial del autobús turístico de dos pisos. Haz sugerencias con <strong>"Let's..."</strong> frente al micrófono.
+              You are the official tour guide of the double-decker bus. Make friendly suggestions with <strong>"Let's..."</strong> into the microphone.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="unit-tag-pill" id="tourStopBadge">Parada 1 de 8</span>
             <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer;" onclick="nextTourPrompt()">
-              <span>Siguiente Parada ➔</span>
+              <span>Next Stop ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Tarjeta del Autobús Turístico -->
+        <!-- Tour Bus Card -->
         <div class="tour-bus-card">
           <div class="tour-megaph-badge">
             <span>📢</span>
@@ -282,32 +282,32 @@
             "It is sunny today! Let's ride our bicycles in the park."
           </div>
           <div id="tourGuidePhraseEs" style="font-size:0.95rem; color:#64748b; font-style:italic; margin-bottom:16px;">
-            ¡Está soleado hoy! Paseemos en bicicleta en el parque.
+            It is sunny today! Let's ride our bikes in the park.
           </div>
 
           <div>
             <button class="btn-back-map" style="background:#f0f9ff; color:#0284c7; border-color:#bae6fd; cursor:pointer; font-size:0.88rem;" onclick="listenTourPhrase()">
-              🔊 Escuchar Sugerencia del Guía
+              🔊 Listen to Guide Suggestion
             </button>
           </div>
         </div>
 
-        <!-- Acción del Micrófono -->
+        <!-- Microphone Action -->
         <div style="margin:20px 0;">
           <button class="btn-tour-mic" id="tourMicBtn" onclick="toggleTourMic()" title="Anunciar sugerencia">
             🎙️
           </button>
           <div style="font-size:0.85rem; color:#64748b; margin-top:10px;">
-            Toca el micrófono y pronuncia tu sugerencia con "Let's..." a los turistas
+            Tap the microphone and speak your suggestion with "Let's..." to the tourists
           </div>
         </div>
 
-        <!-- Reacción de los Pasajeros -->
+        <!-- Passengers Reaction -->
         <div id="touristCheerBox" style="text-align:center; padding:10px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:12px; margin-top:14px;">
-          <span style="color:#0369a1; font-weight:600; font-size:0.9rem;">📢 Pasajeros del Bus: ¡Esperando la sugerencia del guía!</span>
+          <span style="color:#0369a1; font-weight:600; font-size:0.9rem;">📢 Bus Passengers: Waiting for the guide's suggestion!</span>
         </div>
 
-        <!-- Retroalimentación de la Locución -->
+        <!-- Speaking feedback -->
         <div id="tourFeedback" style="text-align:center; margin-top:12px;"></div>
 
       </div>

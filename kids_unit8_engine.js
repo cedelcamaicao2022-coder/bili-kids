@@ -1,13 +1,13 @@
 /**
  * ============================================================================
  * BILIKIDS KIDS CLUB - UNIDAD 8: SHOPPING & THE MALL OBBY RUN
- * Motor Interactivo de Videojuego 2D Canvas, Blooket Gold Quest, Cajero Táctil y Vlogger
+ * Interactive 2D Canvas Game Engine, Blooket Gold Quest, POS Scanner & Vlogger
  * Compatible con Cambridge Young Learners Movers A2 (CEFR Pre-A1 / A1-A2)
  * ============================================================================
  */
 
 // ============================================================================
-// GESTIÓN DE ESTADO GLOBAL Y ESTRELLAS (Local Storage)
+// GLOBAL STATE MANAGEMENT & STARS (Local Storage)
 // ============================================================================
 const AppState = {
   stars: parseInt(localStorage.getItem('bili_kids_stars') || '0', 10),
@@ -264,7 +264,7 @@ if ('speechSynthesis' in window) {
 }
 
 // ============================================================================
-// SISTEMA DE NAVEGACIÓN POR PESTAÑAS
+// TAB NAVIGATION SYSTEM
 // ============================================================================
 function switchTab(tabId, btnElement) {
   sfx.playPop();
@@ -280,7 +280,7 @@ function switchTab(tabId, btnElement) {
     target.classList.add('active-view');
   }
 
-  // Si abrimos la pestaña del Obby, asegurarnos de que el Canvas y el loop estén activos
+  // Ensure Canvas and loop are active when Obby tab is open
   if (tabId === 'obby') {
     startObbyEngine();
   }
@@ -294,9 +294,9 @@ const ObbyStages = [
   {
     id: 0,
     title: "Stage 1 • The Sneaker Boutique (This vs These) 👟",
-    desc: "Salta cajas de zapatos y percheros. Elige el puente correcto: si caes en el puente incorrecto, colapsará.",
+    desc: "Jump across shoe boxes and clothes racks. Pick the right bridge: the incorrect bridge collapses!",
     promptEn: "Find THIS blue jacket and choose the correct bridge to cross!",
-    promptEs: "¡Encuentra ESTA chaqueta azul y elige el puente gramaticalmente correcto para cruzar!",
+    promptEs: "",
     requiredItems: ["blue_jacket"],
     checkpointX: 40,
     finishX: 1350,
@@ -328,9 +328,9 @@ const ObbyStages = [
   {
     id: 1,
     title: "Stage 2 • The Food Court Conveyor Rush (Some vs A/An) 🛒",
-    desc: "Cintas transportadoras en movimiento. Distingue sustantivos contables e incontables en los puentes.",
+    desc: "Conveyor belts in motion. Distinguish countable and uncountable nouns on the bridges.",
     promptEn: "Collect THESE red apples and step on the bridge with correct food grammar!",
-    promptEs: "¡Recoge ESTAS manzanas rojas y pisa el puente con la gramática correcta de comida!",
+    promptEs: "",
     requiredItems: ["red_apples"],
     checkpointX: 40,
     finishX: 1400,
@@ -362,9 +362,9 @@ const ObbyStages = [
   {
     id: 2,
     title: "Stage 3 • The Keypad Security Vault (Typing Challenge) 💻🔒",
-    desc: "¡Nivel de escritura interactiva! Acércate a la terminal y escribe la palabra en inglés que falta.",
+    desc: "Interactive spelling level! Approach the security terminal and type the missing English word.",
     promptEn: "Approach the security keypad terminal and type the missing question word!",
-    promptEs: "¡Acércate a la terminal de seguridad y escribe la palabra en inglés que falta para desbloquear!",
+    promptEs: "",
     requiredItems: [],
     checkpointX: 40,
     finishX: 1300,
@@ -374,7 +374,7 @@ const ObbyStages = [
     terminalY: 260,
     terminalTargetWord: "MUCH",
     terminalPromptEn: "Type the missing word: How _______ is this video game?",
-    terminalPromptEs: "Completa la pregunta para consultar el precio del videojuego.",
+    terminalPromptEs: "",
     platforms: [
       { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
       { x: 235, y: 300, w: 120, h: 20, type: 'normal' },
@@ -397,9 +397,9 @@ const ObbyStages = [
   {
     id: 3,
     title: "Stage 4 • The Winter Fashion Department (How Much Is/Are) 🧥❄️",
-    desc: "Concordancia de preguntas de precio en singular y plural. ¡Descubre el puente sólido!",
+    desc: "Singular and plural price questions agreement. Find the solid bridge!",
     promptEn: "Find THIS warm scarf and choose the bridge with correct singular price grammar!",
-    promptEs: "¡Encuentra ESTA bufanda abrigada y elige el puente con la pregunta de precio correcta!",
+    promptEs: "",
     requiredItems: ["warm_scarf"],
     checkpointX: 40,
     finishX: 1350,
@@ -431,9 +431,9 @@ const ObbyStages = [
   {
     id: 4,
     title: "Stage 5 • The Toy Store Castle & Secret Password 🏆👑",
-    desc: "¡Cruza el puente de cortesía ('would like to') y escribe la contraseña en la caja registradora!",
+    desc: "Cross the polite bridge ('would like to') and type the secret password at the cash register!",
     promptEn: "Cross the polite bridge and type the secret password to win the toy store trophy!",
-    promptEs: "¡Cruza el puente educado ('would like to') y escribe la palabra secreta para desbloquear la tienda!",
+    promptEs: "",
     requiredItems: [],
     checkpointX: 40,
     finishX: 1400,
@@ -444,13 +444,13 @@ const ObbyStages = [
     terminalTargetWord: "STORE",
     acceptedWords: ["STORE", "SHOP"],
     terminalPromptEn: "Type the missing word: We are having fun in the toy _______!",
-    terminalPromptEs: "Completa la oración con la palabra 'store' (tienda en inglés).",
+    terminalPromptEs: "",
     platforms: [
       { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
       { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
       { x: 350, y: 270, w: 75, h: 18, type: 'jelly' },
       { x: 455, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de cortesía (TOP es correcto)
+      // Two bridges (TOP is correct)
       { x: 585, y: 215, w: 290, h: 28, type: 'dual_bridge_solid', label: "I would like to buy that toy robot." },
       { x: 585, y: 310, w: 290, h: 28, type: 'dual_bridge_wrong', label: "I would like buy that toy robot." },
       { x: 895, y: 260, w: 190, h: 20, type: 'normal' },
@@ -469,9 +469,9 @@ const ObbyStages = [
   {
     id: 5,
     title: "Stage 6 • The Electronics Arcade (Comparatives) 📱⚡",
-    desc: "Esquiva lásers y plataformas móviles. Elige el puente con el comparativo correcto en inglés.",
+    desc: "Dodge security lasers and moving platforms. Choose the bridge with the correct English comparative.",
     promptEn: "Find THIS smart watch and choose the bridge with the correct comparative!",
-    promptEs: "¡Encuentra ESTE reloj inteligente y elige el puente con el comparativo correcto!",
+    promptEs: "",
     requiredItems: ["smart_watch"],
     checkpointX: 40,
     finishX: 1450,
@@ -503,10 +503,10 @@ const ObbyStages = [
   },
   {
     id: 6,
-    title: "Stage 7 • The Rooftop Garden Café (Quantifiers & Plurals) 🧁☕",
-    desc: "Supera plataformas de nubes que colapsan y corrientes de aire. Reconoce los cuantificadores adecuados en inglés.",
+    title: "Stage 7 • The Rooftop Garden Cafe (Quantifiers & Plurals) 🧁☕",
+    desc: "Conquer cloud platforms and wind currents. Identify the correct English quantifiers.",
     promptEn: "Collect THESE cupcakes and jump onto the bridge with correct quantifiers!",
-    promptEs: "¡Recoge ESTOS pastelitos y salta al puente con los cuantificadores correctos!",
+    promptEs: "",
     requiredItems: ["cupcake_box"],
     checkpointX: 40,
     finishX: 1450,
@@ -539,9 +539,9 @@ const ObbyStages = [
   {
     id: 7,
     title: "Stage 8 • The Grand Penthouse & Diamond Trophy (Superlatives) 💎🏆👑",
-    desc: "¡El gran clímax del Obby! Cintas transportadoras, lásers dobles, superlativos y la terminal final para ganar el Gran Trofeo.",
+    desc: "The grand Obby climax! Conveyor belts, double lasers, superlatives, and the final terminal to claim the Grand Trophy.",
     promptEn: "Cross the superlative bridge and type the secret password to win the Diamond Trophy!",
-    promptEs: "¡Cruza el puente superlativo y escribe la palabra secreta para ganar el Trofeo de Diamante!",
+    promptEs: "",
     requiredItems: [],
     checkpointX: 40,
     finishX: 1550,
@@ -551,7 +551,7 @@ const ObbyStages = [
     terminalY: 260,
     terminalTargetWord: "BEST",
     terminalPromptEn: "Type the missing word: This golden trophy is the _______ in the world!",
-    terminalPromptEs: "Completa con el superlativo de 'good' en inglés (el mejor).",
+    terminalPromptEs: "",
     platforms: [
       { x: 0, y: 340, w: 160, h: 60, type: 'normal' },
       { x: 190, y: 300, w: 140, h: 20, type: 'conveyor_right', speed: 1.6 },
@@ -620,7 +620,7 @@ function startObbyEngine() {
   const canvas = document.getElementById('obbyCanvas');
   if (!canvas) return;
 
-  // Ajustar resolución nativa
+  // Adjust native resolution
   canvas.width = canvas.parentElement.clientWidth || 800;
   canvas.height = 400;
 
@@ -670,7 +670,7 @@ function loadObbyStage(index) {
   document.getElementById('obbyCoinsBadge').textContent = `🪙 Monedas: ${Player.coinsCollected}`;
 
   updateObbyHudChecklist();
-  showObbyFloatingBanner(`🎯 MISIÓN: ${stage.promptEs}`, 200);
+  showObbyFloatingBanner(`🎯 MISSION: ${stage.title}`, 200);
 
   speakEnglish(stage.promptEn, 'guide');
 }
@@ -684,7 +684,7 @@ function updateObbyHudChecklist() {
 
   if (checklistEl) {
     if (stage.hasTerminal) {
-      checklistEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">💻 Terminal: ${stage.gate.unlocked ? '✅ Desbloqueada' : '🔒 Requiere Contraseña'}</span>`;
+      checklistEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">💻 Terminal: ${stage.gate.unlocked ? '✅ Unlocked' : '🔒 Password Required'}</span>`;
     } else {
       checklistEl.innerHTML = stage.items.map(it => `
         <span style="${it.collected ? 'color:#10b981; font-weight:800;' : 'color:#fef08a;'}">
@@ -698,7 +698,7 @@ function updateObbyHudChecklist() {
 
   if (gateBadgeEl) {
     if (isUnlocked) {
-      gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Puerta: ¡ABIERTA! Corre a la meta 🏁</span>`;
+      gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Gate: OPEN! Run to the goal 🏁</span>`;
     } else {
       gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Puerta: CERRADA</span>`;
     }
@@ -735,7 +735,7 @@ function tryPlayerJump() {
 function setupObbyEventListeners() {
   // Controles de teclado
   window.addEventListener('keydown', (e) => {
-    // Si la terminal modal está abierta, no mover a Barnaby
+    // Do not move Barnaby when terminal modal is open
     const modal = document.getElementById('obbyTerminalModal');
     if (modal && modal.style.display === 'flex') return;
 
@@ -759,7 +759,7 @@ function setupObbyEventListeners() {
     if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === ' ') ObbyControls.jump = false;
   });
 
-  // Controles táctiles de botones en pantalla
+  // On-screen touch button controls
   const btnLeft = document.getElementById('touchBtnLeft');
   const btnRight = document.getElementById('touchBtnRight');
   const btnJump = document.getElementById('touchBtnJump');
@@ -783,7 +783,7 @@ function setupObbyEventListeners() {
 }
 
 // ============================================================================
-// GESTIÓN DE LA TERMINAL DE ESCRITURA EN INGLÉS
+// ENGLISH SPELLING TERMINAL MANAGEMENT
 // ============================================================================
 function openTerminalGate(targetWord, promptEn, promptEs) {
   currentTerminalWord = "";
@@ -870,12 +870,12 @@ function submitTerminalWord() {
   if (isCorrect) {
     sfx.playLaserBeep();
     sfx.playSuccess();
-    feedback.innerHTML = `<span style="color:#10b981;">✅ ¡ACCESO AUTORIZADO! Portón de seguridad desbloqueado (+25 pts)</span>`;
+    feedback.innerHTML = `<span style="color:#10b981;">✅ ACCESS GRANTED! Security gate unlocked (+25 pts)</span>`;
     AppState.addStars(25);
 
     stage.gate.unlocked = true;
     updateObbyHudChecklist();
-    showObbyFloatingBanner("🔓 ¡PORTÓN DESBLOQUEADO! ¡CRUZA LA META! ➔➔➔", 220);
+    showObbyFloatingBanner("🔓 GATE UNLOCKED! CROSS THE FINISH LINE! ➔➔➔", 220);
 
     setTimeout(() => {
       const modal = document.getElementById('obbyTerminalModal');
@@ -884,7 +884,7 @@ function submitTerminalWord() {
 
   } else {
     sfx.playError();
-    feedback.innerHTML = `<span style="color:#ef4444;">⚠️ Palabra incorrecta. Inténtalo de nuevo.</span>`;
+    feedback.innerHTML = `<span style="color:#ef4444;">⚠️ Incorrect word. Try again.</span>`;
     currentTerminalWord = "";
     const physInput = document.getElementById('terminalPhysicalInput');
     if (physInput) physInput.value = "";
@@ -928,7 +928,7 @@ function obbyGameLoop() {
   const ctx = canvas.getContext('2d');
   const stage = ObbyStages[currentObbyStageIndex];
 
-  // 1. FÍSICAS DEL JUGADOR
+  // 1. PLAYER PHYSICS
   if (ObbyControls.left) {
     Player.vx = -Player.speed;
     Player.facing = 'left';
@@ -936,7 +936,7 @@ function obbyGameLoop() {
     Player.vx = Player.speed;
     Player.facing = 'right';
   } else {
-    Player.vx *= 0.8; // Fricción suave
+    Player.vx *= 0.8; // Smooth friction
   }
 
   // Gravedad
@@ -947,7 +947,7 @@ function obbyGameLoop() {
   Player.x += Player.vx;
   Player.y += Player.vy;
 
-  // Actualizar plataformas dinámicas (móviles y que se desmoronan)
+  // Update dynamic platforms
   stage.platforms.forEach(p => {
     if (p.type === 'moving_horizontal') {
       if (p.dir === undefined) p.dir = 1;
@@ -974,10 +974,10 @@ function obbyGameLoop() {
     }
   });
 
-  // Colisión con plataformas
+  // Platform collisions
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
-    // Si es un obstáculo de láser de seguridad
+    // Security laser obstacle
     if (p.type === 'laser_hazard') {
       const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
       if (laserActive) {
@@ -994,14 +994,14 @@ function obbyGameLoop() {
           Player.vx = 0;
           Player.vy = 0;
           Player.jumpsLeft = Player.maxJumps;
-          showObbyFloatingBanner("⚡ ¡Cuidado con el láser de seguridad! Regresando al checkpoint...", 150);
+          showObbyFloatingBanner("⚡ Watch out for the security laser! Returning to checkpoint...", 150);
           return;
         }
       }
       return;
     }
 
-    // Si es una plataforma crumble que colapsó, ignorar colisión
+    // Crumble platform collision
     if (p.type === 'crumble' && p.broken) {
       return;
     }
@@ -1021,12 +1021,12 @@ function obbyGameLoop() {
         Player.vx = 0;
         Player.vy = 0;
         Player.jumpsLeft = Player.maxJumps;
-        showObbyFloatingBanner("💥 ¡Ese puente era gramaticalmente incorrecto y colapsó! Regresando al inicio del nivel...", 180);
+        showObbyFloatingBanner("💥 That bridge was grammatically incorrect and collapsed! Returning to stage start...", 180);
         return;
       }
     }
 
-    // Puentes duales sólidos (Gramática correcta)
+    // Dual solid bridges (Correct grammar)
     if (p.type === 'dual_bridge_solid') {
       if (
         Player.x + Player.w > p.x &&
@@ -1043,7 +1043,7 @@ function obbyGameLoop() {
       return;
     }
 
-    // Plataformas sólidas
+    // Solid platforms
     if (
       Player.x + Player.w > p.x &&
       Player.x < p.x + p.w &&
@@ -1056,9 +1056,9 @@ function obbyGameLoop() {
       Player.isGrounded = true;
       Player.jumpsLeft = Player.maxJumps; // Restaura doble salto al tocar suelo
 
-      // Trampolín de Gelatina
+      // Jelly Spring
       if (p.type === 'jelly') {
-        Player.vy = -16.0; // Súper impulso
+        Player.vy = -16.0; // Super bounce
         Player.isGrounded = false;
         sfx.playBoing();
         createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, true);
@@ -1069,7 +1069,7 @@ function obbyGameLoop() {
         if (p.crumbleTimer === undefined) p.crumbleTimer = 45; // ~0.75s
       }
 
-      // Plataforma Móvil
+      // Moving platform
       if (p.type === 'moving_horizontal') {
         Player.x += (p.speed || 1.5) * (p.dir || 1);
       }
@@ -1083,7 +1083,7 @@ function obbyGameLoop() {
     }
   });
 
-  // Detección de proximidad con Terminal de Escritura
+  // Proximity detection with Spelling Terminal
   if (stage.hasTerminal && !stage.gate.unlocked) {
     if (Math.abs(Player.x - stage.terminalX) < 45 && Math.abs(Player.y - stage.terminalY) < 60) {
       const modal = document.getElementById('obbyTerminalModal');
@@ -1093,7 +1093,7 @@ function obbyGameLoop() {
     }
   }
 
-  // Colisión con objetos requeridos
+  // Collision with required items
   stage.items.forEach(it => {
     if (!it.collected) {
       if (
@@ -1111,21 +1111,21 @@ function obbyGameLoop() {
         // Actualizar HUD
         updateObbyHudChecklist();
 
-        // Verificar si se recolectaron todos los artículos requeridos
+        // Verify all required items collected
         const allCollected = stage.items.every(item => item.collected);
         if (allCollected) {
           stage.gate.unlocked = true;
           sfx.playSuccess();
-          showObbyFloatingBanner("🎉 ¡TODOS LOS ARTÍCULOS RECOGIDOS! ¡LA PUERTA ESTÁ ABIERTA! ➔➔➔", 220);
+          showObbyFloatingBanner("🎉 ALL ITEMS COLLECTED! THE GATE IS OPEN! ➔➔➔", 220);
           updateObbyHudChecklist();
         } else {
-          showObbyFloatingBanner(`✨ ¡Recogiste ${it.name}! Falta 1 artículo...`, 160);
+          showObbyFloatingBanner(`✨ You collected ${it.name}! 1 item remaining...`, 160);
         }
       }
     }
   });
 
-  // Colisión con monedas flotantes
+  // Collision with floating coins
   stage.coins.forEach(c => {
     if (!c.collected) {
       if (
@@ -1144,10 +1144,10 @@ function obbyGameLoop() {
     }
   });
 
-  // Colisión con la Puerta del Checkpoint/Meta
+  // Collision with Goal/Checkpoint Gate
   if (stage.gate.unlocked) {
     if (Player.x > stage.gate.x) {
-      // ¡Etapa completada!
+      // Stage completed!
       sfx.playSuccess();
       sfx.playApplause();
       AppState.addStars(30);
@@ -1161,7 +1161,7 @@ function obbyGameLoop() {
     }
   }
 
-  // Caída al vacío (Respawn en checkpoint)
+  // Fall into abyss (Respawn at checkpoint)
   if (Player.y > 420) {
     sfx.playError();
     Player.x = Player.respawnX;
@@ -1169,10 +1169,10 @@ function obbyGameLoop() {
     Player.vx = 0;
     Player.vy = 0;
     Player.jumpsLeft = Player.maxJumps;
-    showObbyFloatingBanner("⚠️ ¡Caíste al agua! Reapareciendo en el checkpoint...", 100);
+    showObbyFloatingBanner("⚠️ You fell! Respawning at checkpoint...", 100);
   }
 
-  // 2. CÁMARA DINÁMICA
+  // 2. DYNAMIC CAMERA
   const targetCameraX = Player.x - canvas.width * 0.35;
   cameraX += (targetCameraX - cameraX) * 0.1;
   if (cameraX < 0) cameraX = 0;
@@ -1181,7 +1181,7 @@ function obbyGameLoop() {
   ctx.fillStyle = stage.bgColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Fondo con cuadrícula decorativa estilo Roblox
+  // Roblox-style decorative background grid
   ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
   ctx.lineWidth = 1;
   const gridSize = 40;
@@ -1199,7 +1199,7 @@ function obbyGameLoop() {
     if (rx + p.w < 0 || rx > canvas.width) return;
 
     if (p.type === 'jelly') {
-      // Trampolín verde brillante
+      // Bright green spring
       ctx.fillStyle = "#10b981";
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#34d399";
@@ -1220,13 +1220,13 @@ function obbyGameLoop() {
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#f59e0b";
       ctx.fillRect(rx, p.y, p.w, 3);
-      // Flechas de dirección animadas
+      // Animated directional arrows
       ctx.fillStyle = "#fde047";
       ctx.font = "bold 11px sans-serif";
       const arrow = p.type === 'conveyor_right' ? '➔➔➔' : '⬅⬅⬅';
       ctx.fillText(arrow, rx + p.w / 2 - 18, p.y + 14);
     } else if (p.type === 'moving_horizontal') {
-      // Plataforma flotante móvil
+      // Floating moving platform
       ctx.fillStyle = "#0284c7";
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#38bdf8";
@@ -1252,7 +1252,7 @@ function obbyGameLoop() {
         ctx.fillText(p.crumbleTimer ? "⚠ CRUMBLING!" : "☁ CLOUD", rx + shake + p.w / 2 - 28, p.y + 13);
       }
     } else if (p.type === 'laser_hazard') {
-      // Obstáculo de rayo láser
+      // Laser beam obstacle
       const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
       // Postes emisores arriba y abajo
       ctx.fillStyle = "#475569";
@@ -1268,12 +1268,12 @@ function obbyGameLoop() {
         ctx.fillText("⚡ LASER", rx - 10, p.y + p.h / 2);
       }
     } else if (p.type === 'dual_bridge_solid' || p.type === 'dual_bridge_wrong') {
-      // Dibujar ambos puentes IDÉNTICOS (estilo Roblox Obby: madera morada brillante con texto blanco limpio, SIN SPOILERS)
+      // Draw both IDENTICAL bridges (Roblox Obby stylepio, SIN SPOILERS)
       ctx.fillStyle = "#312e81";
       ctx.fillRect(rx, p.y, p.w, p.h);
       ctx.fillStyle = "#6366f1";
       ctx.fillRect(rx, p.y, p.w, 3);
-      // Texto neutral con la oración en inglés (20% más grande: 13.5px)
+      // Neutral text with English sentence
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 13.5px Outfit, sans-serif";
       ctx.fillText(p.label, rx + 12, p.y + 19);
@@ -1312,7 +1312,7 @@ function obbyGameLoop() {
     ctx.fillText(stage.gate.unlocked ? "✅ CLAVE CORRECTA" : "⌨️ ESCRIBE LA CLAVE", tx - 56, ty - 10);
   }
 
-  // Dibujar artículos de misión con etiquetas de texto y flechas flotantes
+  // Draw mission items with labels and arrows
   stage.items.forEach(it => {
     if (!it.collected) {
       const ix = it.x - cameraX;
@@ -1329,7 +1329,7 @@ function obbyGameLoop() {
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Etiqueta de texto superior (Nombre del artículo en inglés)
+      // Top text label (English item name)
       ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
       ctx.roundRect(ix - 36, it.y - 18 + floatY, 100, 20, 6);
       ctx.fill();
@@ -1374,7 +1374,7 @@ function obbyGameLoop() {
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 11px Outfit, sans-serif";
-    ctx.fillText("🔓 ¡META ABIERTA! ➔➔➔", gx - 70, stage.gate.y - 20);
+    ctx.fillText("🔓 GOAL OPEN! ➔➔➔", gx - 70, stage.gate.y - 20);
   } else {
     // Puerta Bloqueada en Rojo
     ctx.fillStyle = "#ef4444";
@@ -1388,7 +1388,7 @@ function obbyGameLoop() {
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 10px Outfit, sans-serif";
-    ctx.fillText("🔒 BLOQUEADA: Recoge los ítems", gx - 68, stage.gate.y - 14);
+    ctx.fillText("🔒 LOCKED: Collect items", gx - 68, stage.gate.y - 14);
   }
 
   // 4. DIBUJAR A BARNABY (PERSONAJE JUGADOR EN 2D)
@@ -1404,7 +1404,7 @@ function obbyGameLoop() {
   }
 
   // Cuerpo de Barnaby (Osito tierno con gorro de chef o shopping)
-  ctx.fillStyle = "#92400e"; // Pelo castaño de osito
+  ctx.fillStyle = "#92400e"; // Brown bear fur
   ctx.beginPath();
   ctx.roundRect(px + 4, py + 12, Player.w - 8, Player.h - 14, 8);
   ctx.fill();
@@ -1447,7 +1447,7 @@ function obbyGameLoop() {
     ctx.fillRect(px + Player.w - 12, py + Player.h - 2, 6, 4);
   }
 
-  // 5. RENDERIZAR PARTÍCULAS
+  // 5. RENDER PARTICLES
   obbyParticles.forEach((p, idx) => {
     p.x += p.vx;
     p.y += p.vy;
@@ -1475,7 +1475,7 @@ function obbyGameLoop() {
     ctx.font = "bold 13px Outfit, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(obbyBannerMessage, canvas.width / 2, 39);
-    ctx.textAlign = "left"; // Restablecer alineación
+    ctx.textAlign = "left"; // Reset text align
   }
 
   requestAnimationFrame(obbyGameLoop);
@@ -1503,17 +1503,17 @@ function showObbyVictoryScreen() {
     <div style="text-align:center; padding:36px 20px; background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-radius:24px; border:3px solid #8b5cf6;">
       <div style="font-size:4rem; margin-bottom:12px; animation:frogJumpSplash 0.8s ease infinite alternate;">🏆👑🛍️</div>
       <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#5b21b6; margin-bottom:10px;">
-        ¡CAMPEÓN DEL MALL OBBY RUN 2D!
+        MALL OBBY RUN 2D CHAMPION!
       </h2>
       <p style="font-size:1.15rem; color:#6d28d9; max-width:640px; margin:0 auto 20px; line-height:1.5;">
-        ¡Barnaby superó todas las plataformas, esquivó lásers y cintas transportadoras, y completó los <strong>8 mundos departamentales</strong> del centro comercial con gramática Cambridge A2 Movers! Ganaste <strong>+80 pts bonus</strong> y la Corona Dorada.
+        Barnaby cleared all platforms, dodged lasers and conveyor belts, and completed all <strong>8 department stages</strong> of the shopping mall with Cambridge A2 Movers grammar! You won <strong>+80 bonus pts</strong> and the Golden Crown.
       </p>
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
         <button class="btn-back-map" style="background:#7c3aed; color:#ffffff; border-color:#7c3aed; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('goldquest', document.querySelectorAll('.tab-btn')[1])">
-          💎 Siguiente Actividad: Blooket Gold Quest ➔
+          💎 Next Activity: Blooket Gold Quest ➔
         </button>
         <button class="btn-back-map" style="background:#ffffff; color:#7c3aed; border-color:#ddd6fe; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="location.reload()">
-          🔄 Volver a Jugar el Obby
+          🔄 Play Obby Again
         </button>
       </div>
     </div>
@@ -1522,87 +1522,87 @@ function showObbyVictoryScreen() {
 
 // ============================================================================
 // ACTIVIDAD 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
-// 8 rondas con preguntas de gramática de compras y apertura de cofres misteriosos
+// 8 rounds of shopping grammar questions and mystery chests
 // ============================================================================
 const GoldQuestRounds = [
   {
     id: 0,
     questionEn: "Look at the sweater in my hands! How do we describe it?",
-    questionEs: "¡Mira el suéter en mis manos! ¿Cómo lo describimos?",
+    questionEs: "",
     options: [
-      { text: "This warm sweater", isCorrect: true, hint: "Cerca y singular (en mis manos)" },
-      { text: "Those warm sweater", isCorrect: false, hint: "Those es para plural lejano" },
-      { text: "These warm sweater", isCorrect: false, hint: "These es para plural cercano" }
+      { text: "This warm sweater", isCorrect: true, hint: "" },
+      { text: "Those warm sweater", isCorrect: false, hint: "" },
+      { text: "These warm sweater", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 1,
     questionEn: "Look at the shoes over there in the shop window! How do we ask the price?",
-    questionEs: "¿Cómo preguntamos el precio de los zapatos que están allá en la vitrina?",
+    questionEs: "",
     options: [
-      { text: "How much is that shoes?", isCorrect: false, hint: "Shoes es plural, requiere 'are'" },
-      { text: "How much are those shoes?", isCorrect: true, hint: "Plural y lejano: 'are those'" },
-      { text: "How many is those shoes?", isCorrect: false, hint: "El precio se pregunta con 'How much'" }
+      { text: "How much is that shoes?", isCorrect: false, hint: "" },
+      { text: "How much are those shoes?", isCorrect: true, hint: "" },
+      { text: "How many is those shoes?", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 2,
     questionEn: "At the bookstore, you want to buy a comic. What is the polite request?",
-    questionEs: "En la librería quieres un cómic. ¿Cuál es la petición educada?",
+    questionEs: "",
     options: [
-      { text: "I would like to buy that comic book.", isCorrect: true, hint: "Petición educada con 'would like'" },
-      { text: "I wants that comic book now.", isCorrect: false, hint: "Gramática incorrecta y descortés" },
-      { text: "Give me comic book.", isCorrect: false, hint: "Demasiado rudo" }
+      { text: "I would like to buy that comic book.", isCorrect: true, hint: "" },
+      { text: "I wants that comic book now.", isCorrect: false, hint: "" },
+      { text: "Give me comic book.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 3,
     questionEn: "The cashier asks: 'Can I help you?' What do you say?",
-    questionEs: "El cajero pregunta: '¿Puedo ayudarte?' ¿Qué respondes?",
+    questionEs: "",
     options: [
-      { text: "Yes, please. I am looking for a jacket.", isCorrect: true, hint: "Respuesta natural y educada" },
-      { text: "No, you cannot swimming.", isCorrect: false, hint: "No tiene sentido en una tienda" },
-      { text: "Yes, I am sleeping today.", isCorrect: false, hint: "No encaja en la situación" }
+      { text: "Yes, please. I am looking for a jacket.", isCorrect: true, hint: "" },
+      { text: "No, you cannot swimming.", isCorrect: false, hint: "" },
+      { text: "Yes, I am sleeping today.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 4,
     questionEn: "These pants are too small! What do you need?",
-    questionEs: "¡Estos pantalones son muy pequeños! ¿Qué necesitas?",
+    questionEs: "",
     options: [
-      { text: "I need a bigger size, please.", isCorrect: true, hint: "Una talla más grande" },
-      { text: "I need yesterday morning.", isCorrect: false, hint: "Tiempo pasado no es ropa" },
-      { text: "I need five books.", isCorrect: false, hint: "Los libros no son pantalones" }
+      { text: "I need a bigger size, please.", isCorrect: true, hint: "" },
+      { text: "I need yesterday morning.", isCorrect: false, hint: "" },
+      { text: "I need five books.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 5,
     questionEn: "How much is this bottle of strawberry milkshake?",
-    questionEs: "¿Cuánto cuesta esta botella de batido de fresa?",
+    questionEs: "",
     options: [
-      { text: "They are fifteen books.", isCorrect: false, hint: "Botella es singular y es dinero" },
-      { text: "It is three dollars and fifty cents.", isCorrect: true, hint: "Respuesta exacta de precio singular" },
-      { text: "It is ten kilometers.", isCorrect: false, hint: "Kilómetros es distancia" }
+      { text: "They are fifteen books.", isCorrect: false, hint: "" },
+      { text: "It is three dollars and fifty cents.", isCorrect: true, hint: "" },
+      { text: "It is ten kilometers.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 6,
     questionEn: "Which sentence uses 'some' correctly for food shopping?",
-    questionEs: "¿Cuál oración usa 'some' correctamente para compras de comida?",
+    questionEs: "",
     options: [
-      { text: "We need some apples and some milk.", isCorrect: true, hint: "Some para plurales e incontables" },
-      { text: "We need an milks.", isCorrect: false, hint: "Milk es incontable, no lleva 'an'" },
-      { text: "We need some a apple.", isCorrect: false, hint: "No se mezclan 'some' y 'a'" }
+      { text: "We need some apples and some milk.", isCorrect: true, hint: "" },
+      { text: "We need an milks.", isCorrect: false, hint: "" },
+      { text: "We need some a apple.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 7,
     questionEn: "You are paying at the cash register. What does the cashier say?",
-    questionEs: "Estás pagando en la caja registradora. ¿Qué dice el cajero?",
+    questionEs: "",
     options: [
-      { text: "Here is your change and receipt. Have a great day!", isCorrect: true, hint: "Cambio y recibo" },
-      { text: "Please do your homework now.", isCorrect: false, hint: "Eso lo dice el profesor" },
-      { text: "It is snowing in the mountains.", isCorrect: false, hint: "Eso es del clima" }
+      { text: "Here is your change and receipt. Have a great day!", isCorrect: true, hint: "" },
+      { text: "Please do your homework now.", isCorrect: false, hint: "" },
+      { text: "It is snowing in the mountains.", isCorrect: false, hint: "" }
     ]
   }
 ];
@@ -1658,7 +1658,7 @@ function handleGoldAnswer(btnEl, isCorrect) {
 
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:12px 18px; color:#065f46; font-weight:700; margin-top:14px;">
-        ✨ ¡RESPUESTA CORRECTA! ¡Abriendo los 3 Cofres Misteriosos del Mall!...
+        ✨ CORRECT ANSWER! Opening the 3 Mystery Mall Chests!...
       </div>
     `;
 
@@ -1676,7 +1676,7 @@ function handleGoldAnswer(btnEl, isCorrect) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ Revisa bien el sujeto y el uso de this/that/these/those. ¡Intenta con otra opción!
+        ⚠️ Check the subject and the use of this/that/these/those. Try another option!
       </div>
     `;
   }
@@ -1689,10 +1689,10 @@ function displayMysteryChests() {
 
   // Generar 3 cofres con premios sorpresa aleatorios
   const prizePool = [
-    { title: "+40 Gold Coins", value: 40, icon: "💰", msg: "¡Bolsa de 40 monedas de oro!" },
-    { title: "+75 Royal Gold", value: 75, icon: "🪙", msg: "¡Cofre Real con 75 monedas!" },
-    { title: "💎 Diamond Card (+100)", value: 100, icon: "💎", msg: "¡Tarjeta Diamante VIP +100 puntos!" },
-    { title: "2X Multiplier", value: 50, icon: "✨", msg: "¡Multiplicador de oro activado!" }
+    { title: "+40 Gold Coins", value: 40, icon: "💰", msg: "" },
+    { title: "+75 Royal Gold", value: 75, icon: "🪙", msg: "" },
+    { title: "💎 Diamond Card (+100)", value: 100, icon: "💎", msg: "" },
+    { title: "2X Multiplier", value: 50, icon: "✨", msg: "" }
   ];
 
   const shuffledPrizes = [...prizePool].sort(() => Math.random() - 0.5).slice(0, 3);
@@ -1739,7 +1739,7 @@ function openMysteryChest(cardEl, amount, icon, message) {
   feedback.innerHTML = `
     <div style="margin-top:16px; font-weight:700; color:#047857; display:flex; align-items:center; justify-content:center; gap:8px;">
       <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>
-      <span>${!isFinalRound ? 'Avanzando a la siguiente ronda de preguntas...' : '¡Calculando tu botín de oro final!...'}</span>
+      <span>${!isFinalRound ? 'Moving to the next question round...' : 'Calculating your final gold stash!...'}</span>
     </div>
   `;
 
@@ -1764,17 +1764,17 @@ function showGoldQuestVictory() {
     <div style="text-align:center; padding:36px 20px; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-radius:24px; border:3px solid #f59e0b;">
       <div style="font-size:4rem; margin-bottom:12px; animation:frogJumpSplash 0.8s ease infinite alternate;">👑💎💰</div>
       <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#92400e; margin-bottom:10px;">
-        ¡BOTÍN SUPREMO DE ORO CONSEGUIDO!
+        SUPREME GOLD STASH ACHIEVED!
       </h2>
       <p style="font-size:1.15rem; color:#b45309; max-width:640px; margin:0 auto 20px; line-height:1.5;">
-        ¡Acumulaste un total de <strong>${userGoldTotal} monedas de oro</strong> en el Blooket Gold Quest del Centro Comercial! Ganaste <strong>+50 pts de bonificación</strong> de gran comprador.
+        You accumulated a total of <strong>${userGoldTotal} gold coins</strong> in the Shopping Mall Blooket Gold Quest! You won <strong>+50 bonus pts</strong> as a master shopper.
       </p>
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
         <button class="btn-back-map" style="background:#d97706; color:#ffffff; border-color:#d97706; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('cashier', document.querySelectorAll('.tab-btn')[2])">
-          🛒 Siguiente Actividad: El Cajero Táctil ➔
+          🛒 Next Activity: POS Touch Register ➔
         </button>
         <button class="btn-back-map" style="background:#ffffff; color:#b45309; border-color:#fde68a; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="userGoldTotal = 0; loadGoldQuestRound(0);">
-          🔄 Volver a Jugar Gold Quest
+          🔄 Play Gold Quest Again
         </button>
       </div>
     </div>
@@ -1783,14 +1783,14 @@ function showGoldQuestVictory() {
 
 // ============================================================================
 // ACTIVIDAD 3: 🛒 TACTILE CASHIER SCANNER & BAGGING CONVEYOR
-// Simulador interactivo de escáner láser de código de barras y cobro en inglés
+// Interactive barcode scanner and POS checkout simulator
 // ============================================================================
 const CashierOrdersData = [
   {
     id: 0,
     customerName: "Emma 👧",
     customerSpeechEn: "Hello! I would like to buy this green shirt and that blue watch, please.",
-    customerSpeechEs: "¡Hola! Me gustaría comprar esta camisa verde y ese reloj azul, por favor.",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "Green Shirt", icon: "👕", price: 15.00, scanned: false },
       { name: "Blue Watch", icon: "⌚", price: 25.00, scanned: false }
@@ -1803,7 +1803,7 @@ const CashierOrdersData = [
     id: 1,
     customerName: "Lucas 👦",
     customerSpeechEn: "Good morning! I need these cool white sneakers and a warm winter hat.",
-    customerSpeechEs: "¡Buenos días! Necesito estas zapatillas blancas y un gorro abrigado de invierno.",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "White Sneakers", icon: "👟", price: 35.00, scanned: false },
       { name: "Winter Hat", icon: "🧢", price: 12.00, scanned: false }
@@ -1816,7 +1816,7 @@ const CashierOrdersData = [
     id: 2,
     customerName: "Grandma Rose 👵",
     customerSpeechEn: "Excuse me, dear. I want this loaf of fresh bread and two bottles of milk.",
-    customerSpeechEs: "Disculpe, querido. Quiero este pan fresco y dos botellas de leche.",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "Fresh Bread", icon: "🍞", price: 4.50, scanned: false },
       { name: "Bottle of Milk", icon: "🥛", price: 3.50, scanned: false }
@@ -1829,7 +1829,7 @@ const CashierOrdersData = [
     id: 3,
     customerName: "Liam 👨‍🦱",
     customerSpeechEn: "Hi! How much are these headphones and this comic book?",
-    customerSpeechEs: "¡Hola! ¿Cuánto cuestan estos auriculares y este libro de cómics?",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "Headphones", icon: "🎧", price: 45.00, scanned: false },
       { name: "Comic Book", icon: "📚", price: 8.00, scanned: false }
@@ -1842,7 +1842,7 @@ const CashierOrdersData = [
     id: 4,
     customerName: "Sophia 👩",
     customerSpeechEn: "Good afternoon! I would like this yellow raincoat for my little brother.",
-    customerSpeechEs: "¡Buenas tardes! Me gustaría este impermeable amarillo para mi hermanito.",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "Yellow Raincoat", icon: "🧥", price: 30.00, scanned: false },
       { name: "Red Umbrella", icon: "☂️", price: 14.00, scanned: false }
@@ -1855,7 +1855,7 @@ const CashierOrdersData = [
     id: 5,
     customerName: "Chef Barnaby 🐻",
     customerSpeechEn: "Ribbit! I need three fresh apples and this delicious cheese for my pizza!",
-    customerSpeechEs: "¡Hola! ¡Necesito tres manzanas frescas y este delicioso queso para mi pizza!",
+    customerSpeechEs: "",
     requiredItems: [
       { name: "Fresh Apples", icon: "🍎", price: 5.00, scanned: false },
       { name: "Tasty Cheese", icon: "🧀", price: 7.50, scanned: false }
@@ -1883,7 +1883,7 @@ function loadCashierOrder(index) {
   updateRegisterScreenDisplay();
   speakEnglish(order.customerSpeechEn, 'cashier');
 
-  // Pool de artículos en la cinta transportadora (requeridos + distractores mezclados)
+  // Conveyor belt items pool
   const conveyorItems = [...order.requiredItems, ...order.distractors].sort(() => Math.random() - 0.5);
   conveyorItems.forEach(it => it.scanned = false);
 
@@ -1918,8 +1918,8 @@ function scanConveyorItem(cardEl, itemName, price, isRequired) {
 
       feedback.innerHTML = `
         <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:14px;">
-          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🧾 ¡TOTAL COBRADO CON ÉXITO! (+25 pts)</div>
-          <div>El cliente pagó el total de <strong>$${currentRegisterTotal.toFixed(2)}</strong>. ¡Excelente cajero en inglés!</div>
+          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🧾 TOTAL CHARGED SUCCESSFULLY! (+25 pts)</div>
+          <div>The customer paid the total of <strong>$${currentRegisterTotal.toFixed(2)}</strong>. Excellent English cashier skills!</div>
         </div>
       `;
 
@@ -1934,7 +1934,7 @@ function scanConveyorItem(cardEl, itemName, price, isRequired) {
     } else {
       feedback.innerHTML = `
         <div style="color:#0369a1; font-weight:700; font-size:0.95rem;">
-          🛒 ¡BEEP! ${itemName} escaneado ($${price.toFixed(2)}). Escanea el siguiente artículo del pedido.
+          🛒 BEEP! ${itemName} scanned ($${price.toFixed(2)}). Scan the next requested item.
         </div>
       `;
     }
@@ -1946,7 +1946,7 @@ function scanConveyorItem(cardEl, itemName, price, isRequired) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡El cliente no pidió ese artículo! Escucha de nuevo lo que necesita.
+        ⚠️ The customer did not ask for that item! Listen again to what they need.
       </div>
     `;
   }
@@ -1986,14 +1986,14 @@ function showCashierVictory() {
     <div style="text-align:center; padding:36px 20px; background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius:24px; border:3px solid #10b981;">
       <div style="font-size:4rem; margin-bottom:12px; animation:frogJumpSplash 0.8s ease infinite alternate;">🛒🧾🌟</div>
       <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#065f46; margin-bottom:10px;">
-        ¡JEFE DE CAJAS REGISTRADORAS DEL MALL!
+        MALL CASHIER MASTER!
       </h2>
       <p style="font-size:1.15rem; color:#047857; max-width:640px; margin:0 auto 20px; line-height:1.5;">
-        ¡Atendiste a todos los clientes del supermercado a la perfección usando preguntas de compras y precios en inglés! Ganaste <strong>+50 pts bonus</strong>.
+        You served all supermarket customers to perfection using shopping and price questions in English! You won <strong>+50 bonus pts</strong>.
       </p>
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
         <button class="btn-back-map" style="background:#059669; color:#ffffff; border-color:#059669; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('vlogger', document.querySelectorAll('.tab-btn')[3])">
-          🎙️ Siguiente Actividad: Mall Vlogger Studio ➔
+          🎙️ Next Activity: Mall Vlogger Studio ➔
         </button>
         <button class="btn-back-map" style="background:#ffffff; color:#065f46; border-color:#a7f3d0; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="loadCashierOrder(0)">
           🔄 Volver a Atender Clientes
@@ -2005,49 +2005,49 @@ function showCashierVictory() {
 
 // ============================================================================
 // ACTIVIDAD 4: 🎙️ MALL VLOGGER & SHOPPING INFLUENCER STUDIO
-// Speaking Quest interactivo con Web Speech Recognition y transmisión en vivo
+// Interactive Speaking Quest with Web Speech Recognition and live stream
 // ============================================================================
 const VloggerHaulData = [
   {
     id: 0,
     title: "Mall Haul • Weekend Sneakers",
     scriptEn: "Hey everyone! Look at these awesome white sneakers I bought today! They are super comfortable.",
-    scriptEs: "¡Hola a todos! ¡Miren estas increíbles zapatillas blancas que compré hoy! Son supercómodas.",
+    scriptEs: "",
     viewersCount: "120K Viewers Live 🔥"
   },
   {
     id: 1,
     title: "Fashion Review • Winter Jacket",
     scriptEn: "Welcome back friends! This warm red jacket was thirty dollars and it has huge cozy pockets.",
-    scriptEs: "¡Bienvenidos de nuevo amigos! Esta chaqueta roja abrigada costó 30 dólares y tiene bolsillos enormes.",
+    scriptEs: "",
     viewersCount: "185K Viewers Live ✨"
   },
   {
     id: 2,
     title: "Gadget Unboxing • Cool Headphones",
     scriptEn: "Check out that electronics shop! I would like to show you these wireless blue headphones.",
-    scriptEs: "¡Miren esa tienda de tecnología! Me gustaría mostrarles estos auriculares inalámbricos azules.",
+    scriptEs: "",
     viewersCount: "250K Viewers Live 🎧"
   },
   {
     id: 3,
     title: "Bookstore Hunt • Comic Adventures",
     scriptEn: "Look at this superhero comic book! The drawings are colorful and the story is fantastic.",
-    scriptEs: "¡Miren este cómic de superhéroes! Los dibujos son coloridos y la historia es fantástica.",
+    scriptEs: "",
     viewersCount: "210K Viewers Live 📚"
   },
   {
     id: 4,
     title: "Food Court Tasting • Fruit Smoothie",
     scriptEn: "We are at the food court! This cold strawberry smoothie is fresh and tastes delicious.",
-    scriptEs: "¡Estamos en la plaza de comidas! Este batido frío de fresa está fresco y sabe delicioso.",
+    scriptEs: "",
     viewersCount: "300K Viewers Live 🍓"
   },
   {
     id: 5,
     title: "Grand Mall Tour • Shopping Finale",
     scriptEn: "Thank you for shopping with me today! Remember to like, subscribe and practice your English!",
-    scriptEs: "¡Gracias por acompañarme de compras hoy! ¡Recuerden suscribirse y practicar su inglés!",
+    scriptEs: "",
     viewersCount: "500K Viewers Live 🏆"
   }
 ];
@@ -2081,7 +2081,7 @@ function toggleVloggerMic() {
   if (!SpeechRecognition) {
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px; color:#065f46; font-weight:700;">
-        🎤 Este navegador no puede verificar tu respuesta. Práctica sin puntuación; escucha el modelo.
+        🎤 This browser cannot verify your voice. Practice mode; listen to native audio.
       </div>
     `;
     btn.disabled = true;
@@ -2099,7 +2099,7 @@ function toggleVloggerMic() {
     recognition.onstart = () => {
       isVloggerRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#ec4899; font-weight:700;">🔴 ¡EN VIVO EN EL CANAL! Lee el guion frente a tu audiencia...</span>`;
+      feedback.innerHTML = `<span style="color:#ec4899; font-weight:700;">🔴 LIVE ON THE CHANNEL! Read the script in front of your audience...</span>`;
     };
 
     recognition.onresult = (event) => {
@@ -2107,13 +2107,13 @@ function toggleVloggerMic() {
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Dijiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(236, 72, 153, 0.25); color:#f472b6; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #ec4899;">
-          🌟 Transcripción de práctica; respuesta y pronunciación no evaluadas.
+          🌟 Live review practice transcript.
         </span>
       `;
     };
 
     recognition.onerror = () => {
-      feedback.innerHTML = `<span style="color:#94a3b8;">Toca el micrófono de nuevo e inténtalo.</span>`;
+      feedback.innerHTML = `<span style="color:#94a3b8;">Tap the microphone again to try.</span>`;
     };
 
     recognition.onend = () => {
@@ -2135,7 +2135,7 @@ function nextVloggerScript() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 8
+// UNIT 8 INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');
@@ -2147,7 +2147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Iniciar Gold Quest
   loadGoldQuestRound(0);
 
-  // 3. Iniciar Cajero Táctil
+  // 3. Start POS Touch Register
   loadCashierOrder(0);
 
   // 4. Iniciar Vlogger Studio

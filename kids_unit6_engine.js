@@ -4,8 +4,8 @@
  * Innovative, Highly Distinct Activities:
  * 1. 🗺️ Interactive City Map (Navegante del Mapa de la Ciudad)
  * 2. 🏢 Inspector Stamp: There is vs There are (Sello del Inspector Municipal)
- * 3. 🧭 Preposition Compass GPS (Brújula GPS de Posiciones: next to, between)
- * 4. 🚌 "Let's Go!" Town Tour Guide (Guía del Autobús Turístico con Micrófono)
+ * 3. 🧭 Preposition Compass GPS
+ * 4. 🚌 "Let's Go!" Town Tour Guide
  */
 
 // ============================================================================
@@ -271,17 +271,17 @@ function switchTab(tabId, btnElement) {
 
 // ============================================================================
 // ACTIVIDAD 1: INTERACTIVE CITY MAP (NAVEGANTE DEL MAPA DE LA CIUDAD)
-// 8 misiones de orientación urbana y lugares del barrio
+// 8 urban orientation and neighborhood missions
 // ============================================================================
 const cityPlacesData = [
-  { id: "bakery", name: "Bakery", icon: "🥖", es: "Panadería" },
-  { id: "library", name: "Library", icon: "📚", es: "Biblioteca" },
-  { id: "park", name: "Central Park", icon: "🌳", es: "Parque Central" },
-  { id: "toystore", name: "Toy Store", icon: "🧸", es: "Juguetería" },
-  { id: "supermarket", name: "Supermarket", icon: "🛒", es: "Supermercado" },
-  { id: "cinema", name: "Cinema", icon: "🎬", es: "Cine" },
-  { id: "petshop", name: "Pet Shop", icon: "🐶", es: "Tienda de Mascotas" },
-  { id: "firestation", name: "Fire Station", icon: "🚒", es: "Estación de Bomberos" }
+  { id: "bakery", name: "Bakery", icon: "🥖", es: "" },
+  { id: "library", name: "Library", icon: "📚", es: "" },
+  { id: "park", name: "Central Park", icon: "🌳", es: "" },
+  { id: "toystore", name: "Toy Store", icon: "🧸", es: "" },
+  { id: "supermarket", name: "Supermarket", icon: "🛒", es: "" },
+  { id: "cinema", name: "Cinema", icon: "🎬", es: "" },
+  { id: "petshop", name: "Pet Shop", icon: "🐶", es: "" },
+  { id: "firestation", name: "Fire Station", icon: "🚒", es: "" }
 ];
 
 const cityMissionsData = [
@@ -291,8 +291,8 @@ const cityMissionsData = [
     targetPlaceId: "bakery",
     targetPlaceName: "Bakery",
     promptEn: "I want to buy fresh warm bread and chocolate croissants for breakfast.",
-    promptEs: "Quiero comprar pan caliente fresco y cruasanes de chocolate para el desayuno.",
-    clue: "¿Dónde se compra pan recién horneado y pasteles?"
+    promptEs: "",
+    clue: "Where do you buy freshly baked bread and pastries?"
   },
   {
     id: 1,
@@ -300,8 +300,8 @@ const cityMissionsData = [
     targetPlaceId: "library",
     targetPlaceName: "Library",
     promptEn: "We need to borrow quiet mystery books for our school reading homework.",
-    promptEs: "Necesitamos pedir prestados libros de misterio para nuestra tarea escolar de lectura.",
-    clue: "¿Dónde puedes leer en silencio y pedir libros prestados?"
+    promptEs: "",
+    clue: "Where can you read quietly and borrow books?"
   },
   {
     id: 2,
@@ -309,8 +309,8 @@ const cityMissionsData = [
     targetPlaceId: "park",
     targetPlaceName: "Central Park",
     promptEn: "It is a sunny afternoon! Children are riding bicycles and flying kites.",
-    promptEs: "¡Es una tarde soleada! Los niños están montando bicicleta y elevando cometas.",
-    clue: "¿Dónde hay árboles, bancas verdes y juegos al aire libre?"
+    promptEs: "",
+    clue: "Where are there trees, green benches, and outdoor playgrounds?"
   },
   {
     id: 3,
@@ -318,8 +318,8 @@ const cityMissionsData = [
     targetPlaceId: "toystore",
     targetPlaceName: "Toy Store",
     promptEn: "My little sister wants a robotic dinosaur and a wooden puzzle for her birthday.",
-    promptEs: "Mi hermanita quiere un dinosaurio robótico y un rompecabezas de madera de cumpleaños.",
-    clue: "¿Dónde venden juegos de mesa, muñecos y pistas de autos?"
+    promptEs: "",
+    clue: "Where do they sell board games, dolls, and toy car tracks?"
   },
   {
     id: 4,
@@ -327,8 +327,8 @@ const cityMissionsData = [
     targetPlaceId: "supermarket",
     targetPlaceName: "Supermarket",
     promptEn: "Mom is pushing a shopping cart to buy milk, apples, cereal, and soap.",
-    promptEs: "Mamá empuja un carrito de compras para comprar leche, manzanas, cereal y jabón.",
-    clue: "¿Dónde compras alimentos, bebidas y productos para el hogar?"
+    promptEs: "",
+    clue: "Where do you buy groceries, drinks, and household items?"
   },
   {
     id: 5,
@@ -336,8 +336,8 @@ const cityMissionsData = [
     targetPlaceId: "cinema",
     targetPlaceName: "Cinema",
     promptEn: "We bought tickets and sweet butter popcorn to watch the superhero movie.",
-    promptEs: "Compramos boletos y palomitas de mantequilla para ver la película de superhéroes.",
-    clue: "¿Dónde hay una gran pantalla oscura para ver estrenos de películas?"
+    promptEs: "",
+    clue: "Where is there a big screen for watching new movie releases?"
   },
   {
     id: 6,
@@ -345,8 +345,8 @@ const cityMissionsData = [
     targetPlaceId: "petshop",
     targetPlaceName: "Pet Shop",
     promptEn: "Our new puppy needs a soft bed, crunchy dog food, and a rubber ball.",
-    promptEs: "Nuestro nuevo cachorrito necesita una camita suave, comida para perros y una pelota de goma.",
-    clue: "¿Dónde compras artículos y alimentos para animales de compañía?"
+    promptEs: "",
+    clue: "Where do you buy supplies and pet food for animals?"
   },
   {
     id: 7,
@@ -354,8 +354,8 @@ const cityMissionsData = [
     targetPlaceId: "firestation",
     targetPlaceName: "Fire Station",
     promptEn: "Brave firefighters in yellow coats and tall ladders help people during emergencies.",
-    promptEs: "Valientes bomberos con abrigos amarillos y escaleras altas ayudan durante emergencias.",
-    clue: "¿Dónde descansan los camiones rojos de bomberos con sirenas?"
+    promptEs: "",
+    clue: "Where do red fire engines with sirens rest?"
   }
 ];
 
@@ -365,11 +365,11 @@ function loadCityMission(index) {
   currentCityMission = index;
   const m = cityMissionsData[index];
 
-  document.getElementById('cityMissionBadge').textContent = `Misión ${index + 1} de ${cityMissionsData.length}`;
+  document.getElementById('cityMissionBadge').textContent = `Mission ${index + 1} of ${cityMissionsData.length}`;
   document.getElementById('cityMissionTitle').textContent = m.title;
   document.getElementById('cityPromptEn').textContent = `"${m.promptEn}"`;
   document.getElementById('cityPromptEs').textContent = m.promptEs;
-  document.getElementById('cityMissionClue').innerHTML = `💡 <strong>Pista de Navegación:</strong> ${m.clue}`;
+  document.getElementById('cityMissionClue').innerHTML = `💡 <strong>Navigation Clue:</strong> ${m.clue}`;
 
   speakEnglish(m.promptEn, 'guide');
   renderCityMapGrid();
@@ -411,7 +411,7 @@ function handleCityPinClick(btnEl, placeId, placeName, placeIcon) {
 
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">📍 ¡DESTINO ALCANZADO! (+20 pts)</div>
+        <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">📍 DESTINATION REACHED! (+20 pts)</div>
         <div>Navegaste correctamente hacia <strong>${placeIcon} ${placeName}</strong>.</div>
       </div>
     `;
@@ -431,7 +431,7 @@ function handleCityPinClick(btnEl, placeId, placeName, placeIcon) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡Ese no es el lugar correcto! Revisa la pista de navegación en la tarjeta arriba.
+        ⚠️ That is not the right place! Check the navigation clue on the card above.
       </div>
     `;
   }
@@ -452,7 +452,7 @@ const buildingPermitsData = [
     id: 0,
     sentenceTemplate: "___ a green public park with a water fountain.",
     sentenceComplete: "There is a green public park with a water fountain.",
-    sentenceEs: "Hay un parque público verde con una fuente de agua.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
     explanation: "'a green public park' es singular (1 solo parque) ➔ Usa THERE IS!"
@@ -461,7 +461,7 @@ const buildingPermitsData = [
     id: 1,
     sentenceTemplate: "___ three modern supermarkets in our neighborhood.",
     sentenceComplete: "There are three modern supermarkets in our neighborhood.",
-    sentenceEs: "Hay tres supermercados modernos en nuestro barrio.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'three supermarkets' es plural (3 supermercados) ➔ Usa THERE ARE!"
@@ -470,7 +470,7 @@ const buildingPermitsData = [
     id: 2,
     sentenceTemplate: "___ many colorful flowers along the street.",
     sentenceComplete: "There are many colorful flowers along the street.",
-    sentenceEs: "Hay muchas flores coloridas a lo largo de la calle.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'many colorful flowers' es plural contable ➔ Usa THERE ARE!"
@@ -479,7 +479,7 @@ const buildingPermitsData = [
     id: 3,
     sentenceTemplate: "___ an ancient stone library in the town square.",
     sentenceComplete: "There is an ancient stone library in the town square.",
-    sentenceEs: "Hay una antigua biblioteca de piedra en la plaza central.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
     explanation: "'an ancient stone library' es singular (1 biblioteca) ➔ Usa THERE IS!"
@@ -488,7 +488,7 @@ const buildingPermitsData = [
     id: 4,
     sentenceTemplate: "___ two big red fire trucks at the station.",
     sentenceComplete: "There are two big red fire trucks at the station.",
-    sentenceEs: "Hay dos grandes camiones rojos de bomberos en la estación.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'two big fire trucks' es plural (2 camiones) ➔ Usa THERE ARE!"
@@ -497,25 +497,25 @@ const buildingPermitsData = [
     id: 5,
     sentenceTemplate: "___ a cozy cafe next to the bookstore.",
     sentenceComplete: "There is a cozy cafe next to the bookstore.",
-    sentenceEs: "Hay una cafetería acogedora al lado de la librería.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'a cozy cafe' es singular (1 cafetería) ➔ Usa THERE IS!"
+    explanation: "'a cozy cafe' is singular (1 cafe) ➔ Use THERE IS!"
   },
   {
     id: 6,
     sentenceTemplate: "___ some fresh bread inside the warm bakery.",
     sentenceComplete: "There is some fresh bread inside the warm bakery.",
-    sentenceEs: "Hay algo de pan fresco dentro de la panadería.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'bread' es un sustantivo incontable en inglés ➔ Usa THERE IS!"
+    explanation: "'bread' is an uncountable noun in English ➔ Use THERE IS!"
   },
   {
     id: 7,
     sentenceTemplate: "___ five yellow buses waiting at the terminal.",
     sentenceComplete: "There are five yellow buses waiting at the terminal.",
-    sentenceEs: "Hay cinco autobuses amarillos esperando en la terminal.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'five yellow buses' es plural (5 autobuses) ➔ Usa THERE ARE!"
@@ -524,7 +524,7 @@ const buildingPermitsData = [
     id: 8,
     sentenceTemplate: "___ a tall hospital with emergency doctors.",
     sentenceComplete: "There is a tall hospital with emergency doctors.",
-    sentenceEs: "Hay un hospital alto con médicos de emergencia.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
     explanation: "'a tall hospital' es singular (1 hospital) ➔ Usa THERE IS!"
@@ -533,16 +533,16 @@ const buildingPermitsData = [
     id: 9,
     sentenceTemplate: "___ ten noisy birds singing in the oak tree.",
     sentenceComplete: "There are ten noisy birds singing in the oak tree.",
-    sentenceEs: "Hay diez pájaros ruidosos cantando en el roble.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
-    explanation: "'ten noisy birds' es plural (10 pájaros) ➔ Usa THERE ARE!"
+    explanation: "'ten noisy birds' is plural (10 birds) ➔ Use THERE ARE!"
   },
   {
     id: 10,
     sentenceTemplate: "___ a quiet cinema showing 3D movies.",
     sentenceComplete: "There is a quiet cinema showing 3D movies.",
-    sentenceEs: "Hay un cine tranquilo proyectando películas en 3D.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
     explanation: "'a quiet cinema' es singular (1 cine) ➔ Usa THERE IS!"
@@ -551,7 +551,7 @@ const buildingPermitsData = [
     id: 11,
     sentenceTemplate: "___ several wooden benches for people to rest.",
     sentenceComplete: "There are several wooden benches for people to rest.",
-    sentenceEs: "Hay varias bancas de madera para que la gente descanse.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'several wooden benches' es plural (varias bancas) ➔ Usa THERE ARE!"
@@ -560,7 +560,7 @@ const buildingPermitsData = [
     id: 12,
     sentenceTemplate: "___ a friendly pet shop with playful kittens.",
     sentenceComplete: "There is a friendly pet shop with playful kittens.",
-    sentenceEs: "Hay una tienda de mascotas amigable con gatitos juguetones.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
     explanation: "'a friendly pet shop' es singular (1 tienda) ➔ Usa THERE IS!"
@@ -569,7 +569,7 @@ const buildingPermitsData = [
     id: 13,
     sentenceTemplate: "___ twenty clean cars parked in the lot.",
     sentenceComplete: "There are twenty clean cars parked in the lot.",
-    sentenceEs: "Hay veinte autos limpios estacionados en el lote.",
+    sentenceEs: "",
     correctAnswer: "There are",
     countType: "plural",
     explanation: "'twenty clean cars' es plural (20 autos) ➔ Usa THERE ARE!"
@@ -578,10 +578,10 @@ const buildingPermitsData = [
     id: 14,
     sentenceTemplate: "___ an underground train station below the road.",
     sentenceComplete: "There is an underground train station below the road.",
-    sentenceEs: "Hay una estación de metro subterránea debajo de la calle.",
+    sentenceEs: "",
     correctAnswer: "There is",
     countType: "singular",
-    explanation: "'an underground train station' es singular (1 estación) ➔ Usa THERE IS!"
+    explanation: "'an underground train station' is singular (1 station) ➔ Use THERE IS!"
   }
 ];
 
@@ -635,7 +635,7 @@ function stampPermit(btnEl, isCorrect, chosenText, sentenceComplete, explanation
 
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px 18px; color:#065f46; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">📜 ¡PERMISO MUNICIPAL APROBADO! (+15 pts)</div>
+        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">📜 BUILDING PERMIT APPROVED! (+15 pts)</div>
         <div style="font-size:1.05rem;">"${sentenceComplete}"</div>
         <div style="font-size:0.85rem; color:#047857; margin-top:6px; font-weight:600;">💡 Regla: ${explanation}</div>
       </div>
@@ -653,7 +653,7 @@ function stampPermit(btnEl, isCorrect, chosenText, sentenceComplete, explanation
     sfx.playError();
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡Sello denegado! Revisa si el sustantivo es Singular (1 solo) o Plural (2 o más).
+        ⚠️ Stamp denied! Check if the noun is Singular (1 item) or Plural (2 or more).
       </div>
     `;
   }
@@ -666,7 +666,7 @@ function nextInspectorPermit() {
 }
 
 // ============================================================================
-// ACTIVIDAD 3: PREPOSITION COMPASS GPS (BRÚJULA GPS DE POSICIONES)
+// ACTIVITY 3: PREPOSITION COMPASS GPS
 // 10 retos de relaciones espaciales (between, next to, opposite, behind, in front of)
 // ============================================================================
 const gpsStreetChallenges = [
@@ -680,7 +680,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Toy Store is ___ the Bakery and the Library.",
     promptComplete: "The Toy Store is between the Bakery and the Library.",
-    promptEs: "La juguetería está entre la panadería y la biblioteca.",
+    promptEs: "",
     correctAnswer: "between",
     options: ["between", "behind", "opposite", "in front of"],
     explanation: "Estar en medio de dos lugares se dice 'between' (entre ambos)!"
@@ -694,7 +694,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Supermarket is right ___ the Pharmacy.",
     promptComplete: "The Supermarket is right next to the Pharmacy.",
-    promptEs: "El supermercado está justo al lado de la farmacia.",
+    promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "between", "opposite", "under"],
     explanation: "Estar inmediatamente al lado se dice 'next to'!"
@@ -708,7 +708,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Cinema is across the road, ___ the Central Park.",
     promptComplete: "The Cinema is across the road, opposite the Central Park.",
-    promptEs: "El cine está al otro lado de la calle, enfrente del parque central.",
+    promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "between", "behind", "under"],
     explanation: "Estar al frente o al otro lado de la calle se dice 'opposite'!"
@@ -723,7 +723,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Town Hall is located ___ the Fire Station and the Police Office.",
     promptComplete: "The Town Hall is located between the Fire Station and the Police Office.",
-    promptEs: "El ayuntamiento está ubicado entre la estación de bomberos y la estación de policía.",
+    promptEs: "",
     correctAnswer: "between",
     options: ["between", "next to", "in front of", "under"],
     explanation: "En medio de dos edificios ➔ 'between'!"
@@ -737,7 +737,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Cozy Cafe has tables outside, right ___ the Flower Shop.",
     promptComplete: "The Cozy Cafe has tables outside, right next to the Flower Shop.",
-    promptEs: "El café acogedor tiene mesas afuera, justo al lado de la floristería.",
+    promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "opposite", "behind", "between"],
     explanation: "Al lado contiguo ➔ 'next to'!"
@@ -751,7 +751,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "Cross the street! The Bus Terminal is ___ the Train Station.",
     promptComplete: "Cross the street! The Bus Terminal is opposite the Train Station.",
-    promptEs: "¡Cruza la calle! La terminal de autobuses está enfrente de la estación de tren.",
+    promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "behind", "between", "next to"],
     explanation: "Cruzar la calle para estar enfrente ➔ 'opposite'!"
@@ -766,10 +766,10 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Ice Cream Parlor is situated ___ the Pet Shop and the Bakery.",
     promptComplete: "The Ice Cream Parlor is situated between the Pet Shop and the Bakery.",
-    promptEs: "La heladería está situada entre la tienda de mascotas y la panadería.",
+    promptEs: "",
     correctAnswer: "between",
     options: ["between", "in front of", "opposite", "under"],
-    explanation: "En el medio de la tienda de mascotas y la panadería ➔ 'between'!"
+    explanation: "In the middle between the pet store and the bakery ➔ 'between'!"
   },
   {
     id: 7,
@@ -780,7 +780,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Music Store shares a wall, sitting ___ the Bookstore.",
     promptComplete: "The Music Store shares a wall, sitting next to the Bookstore.",
-    promptEs: "La tienda de música comparte pared, situada al lado de la librería.",
+    promptEs: "",
     correctAnswer: "next to",
     options: ["next to", "behind", "between", "opposite"],
     explanation: "Pared con pared / al lado ➔ 'next to'!"
@@ -794,7 +794,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "Across the river avenue, the Sports Arena is ___ the Swimming Pool.",
     promptComplete: "Across the river avenue, the Sports Arena is opposite the Swimming Pool.",
-    promptEs: "Cruzando la avenida del río, el estadio deportivo está enfrente de la piscina.",
+    promptEs: "",
     correctAnswer: "opposite",
     options: ["opposite", "between", "next to", "behind"],
     explanation: "Al otro lado de la avenida ➔ 'opposite'!"
@@ -809,7 +809,7 @@ const gpsStreetChallenges = [
     ],
     promptEn: "The Art Gallery is located ___ the Museum and the Theater.",
     promptComplete: "The Art Gallery is located between the Museum and the Theater.",
-    promptEs: "La galería de arte está ubicada entre el museo y el teatro.",
+    promptEs: "",
     correctAnswer: "between",
     options: ["between", "next to", "behind", "under"],
     explanation: "Ubicado en medio de ambos centros culturales ➔ 'between'!"
@@ -822,7 +822,7 @@ function loadGPSChallenge(index) {
   currentGPSIndex = index;
   const c = gpsStreetChallenges[index];
 
-  document.getElementById('gpsStageBadge').textContent = `Ubicación ${index + 1} de ${gpsStreetChallenges.length}`;
+  document.getElementById('gpsStageBadge').textContent = `Location ${index + 1} of ${gpsStreetChallenges.length}`;
   document.getElementById('gpsSceneTag').textContent = c.sceneTag;
   document.getElementById('gpsTargetPrompt').innerHTML = c.promptEn.replace(
     '___',
@@ -872,7 +872,7 @@ function checkGPSPreposition(btnEl, chosenOpt, correctOpt, promptComplete, expla
 
     feedback.innerHTML = `
       <div style="background:rgba(16, 185, 129, 0.2); border:1px solid #10b981; border-radius:14px; padding:12px 18px; color:#34d399; margin-top:16px;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🧭 ¡GPS SINCRONIZADO! (+20 pts)</div>
+        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">🧭 GPS SYNCHRONIZED! (+20 pts)</div>
         <div style="font-size:1.05rem; color:#ffffff;">"${promptComplete}"</div>
         <div style="font-size:0.85rem; color:#a7f3d0; margin-top:6px;">💡 ${explanation}</div>
       </div>
@@ -893,7 +893,7 @@ function checkGPSPreposition(btnEl, chosenOpt, correctOpt, promptComplete, expla
 
     feedback.innerHTML = `
       <div style="background:rgba(239, 68, 68, 0.2); border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#f87171; font-weight:700; margin-top:16px;">
-        ⚠️ Posición incorrecta. Observa el orden de los edificios en la pantalla del GPS.
+        ⚠️ Incorrect position. Observe the building layout on the GPS screen.
       </div>
     `;
   }
@@ -906,64 +906,64 @@ function nextGPSChallenge() {
 }
 
 // ============================================================================
-// ACTIVIDAD 4: "LET'S GO!" TOWN TOUR GUIDE (GUÍA TURÍSTICO CON MICRÓFONO)
-// 8 sugerencias urbanas con Let's + Verbo Base y práctica oral
+// ACTIVITY 4: "LET'S GO!" TOWN TOUR GUIDE (SPEAKING QUEST)
+// 8 urban suggestions with Let's + Base Verb
 // ============================================================================
 const tourGuidePromptsData = [
   {
     id: 0,
     sceneTag: "Tour Stop 1 • Central Park 🌳",
     targetPhrase: "It is sunny today! Let's ride our bicycles in the park.",
-    phraseEs: "¡Está soleado hoy! Paseemos en bicicleta en el parque.",
+    phraseEs: "",
     touristCheer: "Tourists say: Yes! Let's ride through the flowers! 🚲🌸"
   },
   {
     id: 1,
     sceneTag: "Tour Stop 2 • French Bakery 🥐",
     targetPhrase: "I am hungry! Let's buy warm croissants at the bakery.",
-    phraseEs: "¡Tengo hambre! Compremos cruasanes calientes en la panadería.",
+    phraseEs: "",
     touristCheer: "Tourists say: Delicious idea! Smells incredible! 🥖❤️"
   },
   {
     id: 2,
     sceneTag: "Tour Stop 3 • Rainy Day Cinema 🎬",
     targetPhrase: "It is raining outside. Let's watch a funny movie at the cinema.",
-    phraseEs: "Está lloviendo afuera. Veamos una película divertida en el cine.",
+    phraseEs: "",
     touristCheer: "Tourists cheer: Get the sweet popcorn ready! 🍿✨"
   },
   {
     id: 3,
     sceneTag: "Tour Stop 4 • Peaceful Library 📚",
     targetPhrase: "We have a science project. Let's study at the quiet library.",
-    phraseEs: "Tenemos un proyecto de ciencias. Estudiemos en la biblioteca tranquila.",
+    phraseEs: "",
     touristCheer: "Tourists whisper: Shh, let's read together! 📖🔬"
   },
   {
     id: 4,
     sceneTag: "Tour Stop 5 • Cheerful Pet Shop 🐶",
     targetPhrase: "Look at that cute puppy! Let's visit the colorful pet shop.",
-    phraseEs: "¡Mira ese lindo cachorrito! Visitemos la tienda de mascotas.",
+    phraseEs: "",
     touristCheer: "Tourists say: Aww! Such adorable kittens and pups! 🐾⭐"
   },
   {
     id: 5,
     sceneTag: "Tour Stop 6 • Fresh Supermarket 🛒",
     targetPhrase: "We need apples and juice. Let's shop at the big supermarket.",
-    phraseEs: "Necesitamos manzanas y jugo. Compremos en el gran supermercado.",
+    phraseEs: "",
     touristCheer: "Tourists say: Fresh fruit for everyone! 🍎🍊"
   },
   {
     id: 6,
     sceneTag: "Tour Stop 7 • Downtown Toy Store 🧸",
     targetPhrase: "Look at the model trains! Let's explore the toy store.",
-    phraseEs: "¡Mira los trenes a escala! Exploremos la juguetería.",
+    phraseEs: "",
     touristCheer: "Tourists cheer: Fantastic toys for our kids! 🚂🎉"
   },
   {
     id: 7,
     sceneTag: "Tour Stop 8 • Historic Town Hall 🏛️",
     targetPhrase: "Our tour is fantastic! Let's take a photo in front of town hall.",
-    phraseEs: "¡Nuestro tour es fantástico! Tomémonos una foto frente al ayuntamiento.",
+    phraseEs: "",
     touristCheer: "Tourists shout: CHEESE! Thank you guide! 📸🎆"
   }
 ];
@@ -1002,9 +1002,9 @@ function toggleTourMic() {
 
   if (!SpeechRecognition) {
     feedback.innerHTML = `
-      <div style="font-size:1.15rem; font-weight:700; color:#0284c7;">📢 ¡SUGERENCIA ANUNCIADA POR EL ALTAVOZ!</div>
+      <div style="font-size:1.15rem; font-weight:700; color:#0284c7;">📢 SUGGESTION ANNOUNCED ON BUS SPEAKER!</div>
       <span style="display:inline-block; margin-top:8px; background:#e0f2fe; color:#0369a1; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #7dd3fc;">
-        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
+        Practice mode. Listen to native audio and try again.
       </span>
     `;
     btn.disabled = true;
@@ -1022,7 +1022,7 @@ function toggleTourMic() {
     recognition.onstart = () => {
       isTourRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">📢 ¡AL HABLA EL GUÍA! Haz tu sugerencia con "Let's..."</span>`;
+      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">📢 TOUR GUIDE SPEAKING! Speak your suggestion with "Let's..."</span>`;
     };
 
     recognition.onresult = (event) => {
@@ -1030,13 +1030,13 @@ function toggleTourMic() {
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#0f172a;">Anunciaste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:#ecfdf5; color:#065f46; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #10b981;">
-          🚌 Transcripción de práctica; el contenido y la estructura no se evalúan.
+          🚌 Tour guide practice transcript.
         </span>
       `;
     };
 
     recognition.onerror = () => {
-      feedback.innerHTML = `<span style="color:#64748b;">Presiona el micrófono y vuelve a intentarlo.</span>`;
+      feedback.innerHTML = `<span style="color:#64748b;">Tap the microphone and try again.</span>`;
     };
 
     recognition.onend = () => {
@@ -1058,7 +1058,7 @@ function nextTourPrompt() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 6
+// UNIT 6 INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');

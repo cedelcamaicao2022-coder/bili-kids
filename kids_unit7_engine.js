@@ -2,7 +2,7 @@
  * BILIKIDS KIDS CLUB - UNIT 7 ENGINE: OUT AND ABOUT (A2 LEVEL)
  * Age: 7-10 years (Cambridge Movers A1-A2)
  * Innovative Game Mechanics:
- * 1. 🐸 Froggy Stepping Stones (Educaplay Jumps - Salto de Lirios Acuáticos)
+ * 1. 🐸 Froggy Stepping Stones (River Jumps)
  * 2. 🎈 Cloud Balloon Popper (Wordwall Balloon Burst - Sentence Unscramble)
  * 3. 🎡 Weather & Wardrobe Fortune Wheel (Blooket/Wordwall Random Wheel)
  * 4. ⚡ Live TV Weather Broadcast con Power-Ups estilo Quizizz (50/50, 2X Stars)
@@ -272,103 +272,103 @@ function switchTab(tabId, btnElement) {
 
 // ============================================================================
 // ACTIVIDAD 1: 🐸 FROGGY STEPPING STONES (EDUCAPLAY RIVER JUMPS)
-// 8 etapas de cruce de río según el clima y la acción en Presente Continuo
+// 8 river crossing stages based on weather and Present Continuous
 // ============================================================================
 const froggyStagesData = [
   {
     id: 0,
     weatherTitle: "Stage 1 • Heavy Winter Snowfall ❄️",
     weatherPromptEn: "Look outside! Thick white snow is falling from the grey clouds.",
-    weatherPromptEs: "¡Mira afuera! Gruesa nieve blanca está cayendo de las nubes grises.",
+    weatherPromptEs: "",
     questionEn: "What is Barnaby doing right now in the cold snow?",
     pads: [
-      { text: "He is wearing a warm winter coat and making a snowman.", isCorrect: true, hint: "Abrigo de invierno y muñeco de nieve" },
-      { text: "He is swimming in cold water in summer shorts.", isCorrect: false, hint: "¡En traje de baño en la nieve se congelaría!" },
-      { text: "He is sunbathing with dark sunglasses on the sand.", isCorrect: false, hint: "Eso es para la playa soleada" }
+      { text: "He is wearing a warm winter coat and making a snowman.", isCorrect: true, hint: "" },
+      { text: "He is swimming in cold water in summer shorts.", isCorrect: false, hint: "" },
+      { text: "He is sunbathing with dark sunglasses on the sand.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 1,
     weatherTitle: "Stage 2 • Summer Heatwave ☀️",
     weatherPromptEn: "The sun is shining brightly and the temperature is thirty-two degrees.",
-    weatherPromptEs: "El sol brilla intensamente y la temperatura es de 32 grados.",
+    weatherPromptEs: "",
     questionEn: "What are the children doing at the beach right now?",
     pads: [
-      { text: "They are putting on heavy wool scarves and boots.", isCorrect: false, hint: "Bufandas en pleno calor no" },
-      { text: "They are swimming in the sea and eating lemon ice cream.", isCorrect: true, hint: "Nadando en el mar y comiendo helado" },
-      { text: "They are holding umbrellas inside a rainstorm.", isCorrect: false, hint: "No hay tormenta de lluvia" }
+      { text: "They are putting on heavy wool scarves and boots.", isCorrect: false, hint: "" },
+      { text: "They are swimming in the sea and eating lemon ice cream.", isCorrect: true, hint: "" },
+      { text: "They are holding umbrellas inside a rainstorm.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 2,
     weatherTitle: "Stage 3 • Autumn Rainstorm 🌧️",
     weatherPromptEn: "Large raindrops are pouring down on the city streets.",
-    weatherPromptEs: "Grandes gotas de lluvia están cayendo sobre las calles de la ciudad.",
+    weatherPromptEs: "",
     questionEn: "What is Maya doing to stay dry?",
     pads: [
-      { text: "She is wearing a yellow raincoat and holding an umbrella.", isCorrect: true, hint: "Impermeable amarillo y paraguas" },
-      { text: "She is reading sunglasses under the blazing sun.", isCorrect: false, hint: "Gafas de sol bajo la lluvia no" },
-      { text: "She is flying a paper kite in the stormy sky.", isCorrect: false, hint: "Peligroso volar cometa con lluvia" }
+      { text: "She is wearing a yellow raincoat and holding an umbrella.", isCorrect: true, hint: "" },
+      { text: "She is reading sunglasses under the blazing sun.", isCorrect: false, hint: "" },
+      { text: "She is flying a paper kite in the stormy sky.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 3,
     weatherTitle: "Stage 4 • Windy Hilltop 💨",
     weatherPromptEn: "A strong cool breeze is blowing the colorful tree leaves.",
-    weatherPromptEs: "Una fuerte brisa fresca está soplando las hojas coloridas de los árboles.",
+    weatherPromptEs: "",
     questionEn: "What are Leo and Tom doing in the meadow?",
     pads: [
-      { text: "They are sleeping underwater in the pond.", isCorrect: false, hint: "No son peces" },
-      { text: "They are making a snowman with white ice.", isCorrect: false, hint: "No hay nieve, hay viento" },
-      { text: "They are flying a high dragon kite in the wind.", isCorrect: true, hint: "Volando una cometa en el viento" }
+      { text: "They are sleeping underwater in the pond.", isCorrect: false, hint: "" },
+      { text: "They are making a snowman with white ice.", isCorrect: false, hint: "" },
+      { text: "They are flying a high dragon kite in the wind.", isCorrect: true, hint: "" }
     ]
   },
   {
     id: 4,
     weatherTitle: "Stage 5 • Thunderstorm Lightning ⛈️",
     weatherPromptEn: "Dark storm clouds are rumbling with loud thunder.",
-    weatherPromptEs: "Nubes oscuras de tormenta están retumbando con truenos fuertes.",
+    weatherPromptEs: "",
     questionEn: "What is the family doing for safety right now?",
     pads: [
-      { text: "They are staying inside the house and drinking hot tea.", isCorrect: true, hint: "Refugiados en casa tomando té caliente" },
-      { text: "They are swimming in the deep outdoor pool.", isCorrect: false, hint: "Prohibido nadar con rayos" },
-      { text: "They are riding rollerblades on the wet road.", isCorrect: false, hint: "Peligroso resbalar en la tormenta" }
+      { text: "They are staying inside the house and drinking hot tea.", isCorrect: true, hint: "" },
+      { text: "They are swimming in the deep outdoor pool.", isCorrect: false, hint: "" },
+      { text: "They are riding rollerblades on the wet road.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 5,
     weatherTitle: "Stage 6 • Foggy Morning 🌫️",
     weatherPromptEn: "Thick grey fog is covering the mountain roads.",
-    weatherPromptEs: "Una espesa niebla gris está cubriendo las carreteras de montaña.",
+    weatherPromptEs: "",
     questionEn: "What are the cars doing on the foggy road?",
     pads: [
-      { text: "They are turning on their bright fog lights and driving slowly.", isCorrect: true, hint: "Luces antiniebla encendidas y conduciendo despacio" },
-      { text: "They are swimming across the mountain river.", isCorrect: false, hint: "Los autos no nadan" },
-      { text: "They are turning off all their lights in darkness.", isCorrect: false, hint: "Sin luces chocarían" }
+      { text: "They are turning on their bright fog lights and driving slowly.", isCorrect: true, hint: "" },
+      { text: "They are swimming across the mountain river.", isCorrect: false, hint: "" },
+      { text: "They are turning off all their lights in darkness.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 6,
     weatherTitle: "Stage 7 • Sunny Spring Garden 🌸",
     weatherPromptEn: "Warm sunshine is warming the green grass and pink flowers are blooming.",
-    weatherPromptEs: "El sol tibio calienta el pasto y las flores rosadas están floreciendo.",
+    weatherPromptEs: "",
     questionEn: "What is Grandmother doing in the garden?",
     pads: [
-      { text: "She is wearing winter boots and shoveling ice.", isCorrect: false, hint: "No hay hielo en primavera" },
-      { text: "She is watering the red roses with a green garden hose.", isCorrect: true, hint: "Regando las rosas con manguera de jardín" },
-      { text: "She is lighting a fireplace in the snow.", isCorrect: false, hint: "Es primavera templada" }
+      { text: "She is wearing winter boots and shoveling ice.", isCorrect: false, hint: "" },
+      { text: "She is watering the red roses with a green garden hose.", isCorrect: true, hint: "" },
+      { text: "She is lighting a fireplace in the snow.", isCorrect: false, hint: "" }
     ]
   },
   {
     id: 7,
     weatherTitle: "Stage 8 • Final Golden Island Celebration 🏆",
     weatherPromptEn: "A magnificent colorful rainbow is stretching across the clear blue sky!",
-    weatherPromptEs: "¡Un magnífico arcoíris colorido se extiende por el cielo azul claro!",
+    weatherPromptEs: "",
     questionEn: "What are all the friends doing at the finish line?",
     pads: [
-      { text: "They are crying in the cold darkness.", isCorrect: false, hint: "¡Están felices en la meta!" },
-      { text: "They are celebrating and taking victory photos under the rainbow.", isCorrect: true, hint: "Celebrando y tomando fotos bajo el arcoíris" },
-      { text: "They are shoveling heavy snow in summer.", isCorrect: false, hint: "No tiene sentido" }
+      { text: "They are crying in the cold darkness.", isCorrect: false, hint: "" },
+      { text: "They are celebrating and taking victory photos under the rainbow.", isCorrect: true, hint: "" },
+      { text: "They are shoveling heavy snow in summer.", isCorrect: false, hint: "" }
     ]
   }
 ];
@@ -469,19 +469,19 @@ function handleLilypadJump(btnEl, isCorrect, sentenceText) {
       <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:16px; box-shadow:0 6px 20px rgba(16,185,129,0.25);">
         <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px; display:flex; align-items:center; justify-content:center; gap:8px;">
           <span>🐸💦</span>
-          <span>¡SALTO SEGURO AL LIRIO ACUÁTICO! (+20 pts)</span>
+          <span>SAFE JUMP TO THE LILY PAD! (+20 pts)</span>
         </div>
         <div style="font-size:1.05rem; font-weight:600; margin:6px 0;">"${sentenceText}"</div>
         <div style="font-size:0.88rem; color:#059669; font-weight:700; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:6px;">
           <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>
-          <span>${!isFinalStage ? 'Avanzando a la siguiente piedra del río...' : '¡Llegando a la Isla Dorada Final!...'}</span>
+          <span>${!isFinalStage ? 'Moving to the next river stone...' : 'Reaching the Golden Island!...'}</span>
         </div>
       </div>
     `;
     AppState.addStars(20);
     speakEnglish(sentenceText, 'frog');
 
-    // Transición fluida y automática garantizada
+    // Smooth automatic transition
     setTimeout(() => {
       isFrogAdvancing = false;
       if (currentFrogStage < froggyStagesData.length - 1) {
@@ -498,7 +498,7 @@ function handleLilypadJump(btnEl, isCorrect, sentenceText) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡Cuidado, ese lirio se hunde! Esa acción no coincide con el clima actual. ¡Intenta de nuevo con otro lirio!
+        ⚠️ Watch out, that lily pad sinks! That action doesn't match the current weather. Try again!
       </div>
     `;
   }
@@ -513,7 +513,7 @@ function showFroggyGoldenIslandVictory() {
   const feedback = document.getElementById('riverFeedbackBox');
 
   if (questionPrompt) {
-    questionPrompt.innerHTML = `🏆 <strong>¡ISLA DORADA ALCANZADA CON ÉXITO!</strong>`;
+    questionPrompt.innerHTML = `🏆 <strong>GOLDEN ISLAND REACHED WITH SUCCESS!</strong>`;
   }
 
   if (padsGrid) {
@@ -521,17 +521,17 @@ function showFroggyGoldenIslandVictory() {
       <div style="grid-column: 1 / -1; background:linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border:3px solid #f59e0b; border-radius:24px; padding:28px 20px; text-align:center; color:#92400e; box-shadow:0 12px 32px rgba(245, 158, 11, 0.35);">
         <div style="font-size:3.5rem; margin-bottom:8px; animation:frogJumpSplash 0.8s ease infinite alternate;">🏝️🐸👑</div>
         <h3 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:#78350f; margin-bottom:8px;">
-          ¡FELICITACIONES! ¡CRUZASTE TODO EL RÍO CLIMÁTICO!
+          CONGRATULATIONS! YOU CROSSED THE WEATHER RIVER!
         </h3>
         <p style="font-size:1.05rem; max-width:620px; margin:0 auto 18px; color:#92400e; line-height:1.5;">
-          ¡Barnaby y Froggy dominaron el Presente Continuo y los estados del clima de Movers A2! Ganaste <strong>+50 pts de bonificación</strong> de gran explorador.
+          Barnaby and Froggy mastered Present Continuous and weather states for Movers A2! You won <strong>+50 bonus pts</strong>!
         </p>
         <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
           <button class="btn-back-map" style="background:#0284c7; color:#ffffff; border-color:#0284c7; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('balloon', document.querySelectorAll('.tab-btn')[1])">
-            🎈 Siguiente Actividad: Globos de Nubes ➔
+            🎈 Next Activity: Cloud Balloons ➔
           </button>
           <button class="btn-back-map" style="background:#ffffff; color:#b45309; border-color:#f59e0b; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="loadFroggyStage(0)">
-            🔄 Volver a Cruzar el Río
+            🔄 Cross the River Again
           </button>
         </div>
       </div>
@@ -555,70 +555,70 @@ const balloonSentencesData = [
   {
     id: 0,
     targetSentence: "The girls are eating ice cream in the park.",
-    sentenceEs: "Las chicas están comiendo helado en el parque.",
+    sentenceEs: "",
     correctTokens: ["The girls", "are", "eating", "ice cream", "in the park."],
     distractors: ["swimming"]
   },
   {
     id: 1,
     targetSentence: "My brother is riding his bicycle right now.",
-    sentenceEs: "Mi hermano está montando su bicicleta en este momento.",
+    sentenceEs: "",
     correctTokens: ["My brother", "is", "riding", "his bicycle", "right now."],
     distractors: ["sleeps"]
   },
   {
     id: 2,
     targetSentence: "They are wearing warm jackets in the snow.",
-    sentenceEs: "Ellos están usando chaquetas abrigadas en la nieve.",
+    sentenceEs: "",
     correctTokens: ["They", "are", "wearing", "warm jackets", "in the snow."],
     distractors: ["is"]
   },
   {
     id: 3,
     targetSentence: "The little dog is chasing a yellow butterfly.",
-    sentenceEs: "El perrito está persiguiendo una mariposa amarilla.",
+    sentenceEs: "",
     correctTokens: ["The little dog", "is", "chasing", "a yellow butterfly."],
     distractors: ["are"]
   },
   {
     id: 4,
     targetSentence: "We are swimming in the cool blue pool.",
-    sentenceEs: "Nosotros estamos nadando en la piscina fresca y azul.",
+    sentenceEs: "",
     correctTokens: ["We", "are", "swimming", "in the cool", "blue pool."],
     distractors: ["snowing"]
   },
   {
     id: 5,
     targetSentence: "Look! It is raining outside our classroom window.",
-    sentenceEs: "¡Mira! Está lloviendo afuera de la ventana de nuestra clase.",
+    sentenceEs: "",
     correctTokens: ["Look!", "It is", "raining", "outside our", "classroom window."],
     distractors: ["sun"]
   },
   {
     id: 6,
     targetSentence: "Oliver is taking photos of the colorful birds.",
-    sentenceEs: "Oliver está tomando fotos de las aves coloridas.",
+    sentenceEs: "",
     correctTokens: ["Oliver", "is", "taking", "photos of", "the colorful birds."],
     distractors: ["cooks"]
   },
   {
     id: 7,
     targetSentence: "Grandmother is drinking warm tea by the fire.",
-    sentenceEs: "La abuela está tomando té caliente junto al fuego.",
+    sentenceEs: "",
     correctTokens: ["Grandmother", "is", "drinking", "warm tea", "by the fire."],
     distractors: ["running"]
   },
   {
     id: 8,
     targetSentence: "The children are building a tall sandcastle.",
-    sentenceEs: "Los niños están construyendo un alto castillo de arena.",
+    sentenceEs: "",
     correctTokens: ["The children", "are", "building", "a tall", "sandcastle."],
     distractors: ["is"]
   },
   {
     id: 9,
     targetSentence: "Listen! The birds are singing in the garden.",
-    sentenceEs: "¡Escucha! Los pájaros están cantando en el jardín.",
+    sentenceEs: "",
     correctTokens: ["Listen!", "The birds", "are", "singing", "in the garden."],
     distractors: ["barking"]
   }
@@ -635,7 +635,7 @@ function loadBalloonChallenge(index) {
   collectedTokens = [];
   const b = balloonSentencesData[index];
 
-  document.getElementById('balloonCaseBadge').textContent = `Misión ${index + 1} de ${balloonSentencesData.length}`;
+  document.getElementById('balloonCaseBadge').textContent = `Mission ${index + 1} of ${balloonSentencesData.length}`;
   document.getElementById('balloonTargetSentenceEs').textContent = `🎯 Objetivo: "${b.sentenceEs}"`;
 
   // Combine correct tokens and distractors, then shuffle
@@ -651,7 +651,7 @@ function renderSentenceCollector() {
   if (!tray) return;
 
   if (collectedTokens.length === 0) {
-    tray.innerHTML = `<span style="color:#94a3b8; font-size:0.95rem; font-style:italic;">Toca los globos de nubes en el orden correcto para formar la oración...</span>`;
+    tray.innerHTML = `<span style="color:#94a3b8; font-size:0.95rem; font-style:italic;">Tap the cloud balloons in the correct order to form the sentence...</span>`;
   } else {
     tray.innerHTML = collectedTokens.map((tok, i) => `
       <span class="collected-word-tile" onclick="removeLastCollectedToken(${i})">${tok}</span>
@@ -700,12 +700,12 @@ function popCloudBalloon(btnEl, tokenText, tokenIndex) {
         <div style="background:#ecfdf5; border:2px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:14px; box-shadow:0 6px 20px rgba(16,185,129,0.25);">
           <div style="font-weight:700; font-size:1.18rem; margin-bottom:4px; display:flex; align-items:center; justify-content:center; gap:8px;">
             <span>🎈💥</span>
-            <span>¡ORACIÓN COMPLETA EXPLOTADA CON ÉXITO! (+20 pts)</span>
+            <span>FULL SENTENCE POPPED SUCCESSFULLY! (+20 pts)</span>
           </div>
           <div style="font-size:1.05rem; font-weight:600; margin:6px 0;">"${b.targetSentence}"</div>
           <div style="font-size:0.88rem; color:#059669; font-weight:700; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:6px;">
             <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>
-            <span>${!isFinalMission ? 'Avanzando a la siguiente oración de globos...' : '¡Completando todas las misiones aéreas!...'}</span>
+            <span>${!isFinalMission ? 'Moving to the next balloon sentence...' : 'Completing all sky missions!...'}</span>
           </div>
         </div>
       `;
@@ -731,7 +731,7 @@ function popCloudBalloon(btnEl, tokenText, tokenIndex) {
     const feedback = document.getElementById('balloonFeedbackBox');
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ Ese globo no es el siguiente en orden. Revisa el sujeto, verbo 'to be' (is/are) y el verbo con -ING.
+        ⚠️ That balloon is not next in order. Check the subject, verb 'to be' (is/are), and the -ING verb.
       </div>
     `;
   }
@@ -746,7 +746,7 @@ function showBalloonVictory() {
   const feedback = document.getElementById('balloonFeedbackBox');
 
   if (targetEs) {
-    targetEs.innerHTML = `🏆 <strong>¡TODAS LAS ORACIONES COMPLETADAS! (+50 pts bonus)</strong>`;
+    targetEs.innerHTML = `🏆 <strong>ALL SENTENCES COMPLETED! (+50 pts bonus)</strong>`;
   }
 
   if (cloudsRow) {
@@ -754,17 +754,17 @@ function showBalloonVictory() {
       <div style="width:100%; background:linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border:3px solid #3b82f6; border-radius:24px; padding:28px 20px; text-align:center; color:#1e40af; box-shadow:0 12px 32px rgba(59, 130, 246, 0.25);">
         <div style="font-size:3.5rem; margin-bottom:8px; animation:frogJumpSplash 0.8s ease infinite alternate;">🎈🌈⭐</div>
         <h3 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:#1e3a8a; margin-bottom:8px;">
-          ¡MAESTRO DEL PRESENTE CONTINUO EN EL AIRE!
+          PRESENT CONTINUOUS SKY MASTER!
         </h3>
         <p style="font-size:1.05rem; max-width:620px; margin:0 auto 18px; color:#1e40af; line-height:1.5;">
-          ¡Explotaste exitosamente las 10 oraciones en el orden gramatical perfecto! Ganaste <strong>+50 pts extra</strong>.
+          You successfully popped all 10 sentences in the perfect grammatical order! You won <strong>+50 bonus pts</strong>.
         </p>
         <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
           <button class="btn-back-map" style="background:#2563eb; color:#ffffff; border-color:#2563eb; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('fortune', document.querySelectorAll('.tab-btn')[2])">
-            🎡 Siguiente Actividad: Rueda de Guardarropa ➔
+            🎡 Next Activity: Wardrobe Wheel ➔
           </button>
           <button class="btn-back-map" style="background:#ffffff; color:#1d4ed8; border-color:#93c5fd; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="loadBalloonChallenge(0)">
-            🔄 Volver a Jugar Globos
+            🔄 Play Balloons Again
           </button>
         </div>
       </div>
@@ -791,7 +791,7 @@ function nextBalloonChallenge() {
 
 // ============================================================================
 // ACTIVIDAD 3: 🎡 WEATHER & WARDROBE FORTUNE WHEEL (BLOOKET & WORDWALL)
-// 6 zonas climáticas en rueda giratoria y selección de guardarropa
+// 6 climate zones on fortune wheel and wardrobe selection
 // ============================================================================
 const wardrobeSeasonsData = [
   {
@@ -799,13 +799,13 @@ const wardrobeSeasonsData = [
     icon: "🌧️",
     degree: 30, // conic section
     promptEn: "It is raining heavily! We need water-resistant clothes and gear.",
-    promptEs: "¡Está lloviendo fuerte! Necesitamos ropa impermeable y accesorios para el agua.",
+    promptEs: "",
     requiredItems: ["Raincoat", "Umbrella"],
     itemsPool: [
-      { name: "Raincoat", icon: "🧥", isCorrect: true, es: "Impermeable" },
-      { name: "Umbrella", icon: "☂️", isCorrect: true, es: "Paraguas" },
-      { name: "Sunglasses", icon: "🕶️", isCorrect: false, es: "Gafas de sol" },
-      { name: "Swimsuit", icon: "🩱", isCorrect: false, es: "Traje de baño" }
+      { name: "Raincoat", icon: "🧥", isCorrect: true, es: "" },
+      { name: "Umbrella", icon: "☂️", isCorrect: true, es: "" },
+      { name: "Sunglasses", icon: "🕶️", isCorrect: false, es: "" },
+      { name: "Swimsuit", icon: "🩱", isCorrect: false, es: "" }
     ]
   },
   {
@@ -813,13 +813,13 @@ const wardrobeSeasonsData = [
     icon: "❄️",
     degree: 90,
     promptEn: "Freezing snow is covering the ground! We need warm protection.",
-    promptEs: "¡Nieve helada cubre el suelo! Necesitamos protección muy abrigada.",
+    promptEs: "",
     requiredItems: ["Wool Scarf", "Winter Boots"],
     itemsPool: [
-      { name: "Wool Scarf", icon: "🧣", isCorrect: true, es: "Bufanda de lana" },
-      { name: "Winter Boots", icon: "🥾", isCorrect: true, es: "Botas de invierno" },
-      { name: "Sun Hat", icon: "👒", isCorrect: false, es: "Sombrero de sol" },
-      { name: "Flip Flops", icon: "🩴", isCorrect: false, es: "Sandalias de playa" }
+      { name: "Wool Scarf", icon: "🧣", isCorrect: true, es: "" },
+      { name: "Winter Boots", icon: "🥾", isCorrect: true, es: "" },
+      { name: "Sun Hat", icon: "👒", isCorrect: false, es: "" },
+      { name: "Flip Flops", icon: "🩴", isCorrect: false, es: "" }
     ]
   },
   {
@@ -827,13 +827,13 @@ const wardrobeSeasonsData = [
     icon: "☀️",
     degree: 150,
     promptEn: "The hot summer sun is shining at the beach! Time to cool down.",
-    promptEs: "¡El cálido sol de verano brilla en la playa! Hora de refrescarse.",
+    promptEs: "",
     requiredItems: ["Sunglasses", "Sun Hat"],
     itemsPool: [
-      { name: "Sunglasses", icon: "🕶️", isCorrect: true, es: "Gafas de sol" },
-      { name: "Sun Hat", icon: "👒", isCorrect: true, es: "Sombrero para el sol" },
-      { name: "Heavy Winter Coat", icon: "🧥", isCorrect: false, es: "Abrigo grueso" },
-      { name: "Wool Gloves", icon: "🧤", isCorrect: false, es: "Guantes de lana" }
+      { name: "Sunglasses", icon: "🕶️", isCorrect: true, es: "" },
+      { name: "Sun Hat", icon: "👒", isCorrect: true, es: "" },
+      { name: "Heavy Winter Coat", icon: "🧥", isCorrect: false, es: "" },
+      { name: "Wool Gloves", icon: "🧤", isCorrect: false, es: "" }
     ]
   },
   {
@@ -841,13 +841,13 @@ const wardrobeSeasonsData = [
     icon: "💨",
     degree: 210,
     promptEn: "A chilly wind is blowing dry leaves across the park.",
-    promptEs: "Un viento fresco está soplando hojas secas por el parque.",
+    promptEs: "",
     requiredItems: ["Windbreaker Jacket", "Beanie Cap"],
     itemsPool: [
-      { name: "Windbreaker Jacket", icon: "🧥", isCorrect: true, es: "Chaqueta cortavientos" },
-      { name: "Beanie Cap", icon: "🧢", isCorrect: true, es: "Gorro abrigado" },
-      { name: "Swimsuit", icon: "🩱", isCorrect: false, es: "Traje de baño" },
-      { name: "Beach Towel", icon: "🏖️", isCorrect: false, es: "Toalla de playa" }
+      { name: "Windbreaker Jacket", icon: "🧥", isCorrect: true, es: "" },
+      { name: "Beanie Cap", icon: "🧢", isCorrect: true, es: "" },
+      { name: "Swimsuit", icon: "🩱", isCorrect: false, es: "" },
+      { name: "Beach Towel", icon: "🏖️", isCorrect: false, es: "" }
     ]
   },
   {
@@ -855,13 +855,13 @@ const wardrobeSeasonsData = [
     icon: "⛈️",
     degree: 270,
     promptEn: "Dark thunderclouds are flashing with lightning! Stay safe inside.",
-    promptEs: "¡Nubes de tormenta están destellando con rayos! Mantente seguro dentro.",
+    promptEs: "",
     requiredItems: ["Rubber Boots", "Waterproof Hood"],
     itemsPool: [
-      { name: "Rubber Boots", icon: "👢", isCorrect: true, es: "Botas de goma" },
-      { name: "Waterproof Hood", icon: "🧥", isCorrect: true, es: "Capucha impermeable" },
-      { name: "Straw Hat", icon: "👒", isCorrect: false, es: "Sombrero de paja" },
-      { name: "Shorts", icon: "🩳", isCorrect: false, es: "Pantalones cortos" }
+      { name: "Rubber Boots", icon: "👢", isCorrect: true, es: "" },
+      { name: "Waterproof Hood", icon: "🧥", isCorrect: true, es: "" },
+      { name: "Straw Hat", icon: "👒", isCorrect: false, es: "" },
+      { name: "Shorts", icon: "🩳", isCorrect: false, es: "" }
     ]
   },
   {
@@ -869,13 +869,13 @@ const wardrobeSeasonsData = [
     icon: "🌸",
     degree: 330,
     promptEn: "Fresh spring air with gentle warmth and blooming flowers.",
-    promptEs: "Aire fresco de primavera con suave calidez y flores abiertas.",
+    promptEs: "",
     requiredItems: ["Light Cardigan", "Comfortable Sneakers"],
     itemsPool: [
-      { name: "Light Cardigan", icon: "🧥", isCorrect: true, es: "Suéter ligero" },
-      { name: "Comfortable Sneakers", icon: "👟", isCorrect: true, es: "Tenis cómodos" },
-      { name: "Snow Goggles", icon: "🥽", isCorrect: false, es: "Gafas de esquí" },
-      { name: "Heavy Scarf", icon: "🧣", isCorrect: false, es: "Bufanda pesada" }
+      { name: "Light Cardigan", icon: "🧥", isCorrect: true, es: "" },
+      { name: "Comfortable Sneakers", icon: "👟", isCorrect: true, es: "" },
+      { name: "Snow Goggles", icon: "🥽", isCorrect: false, es: "" },
+      { name: "Heavy Scarf", icon: "🧣", isCorrect: false, es: "" }
     ]
   }
 ];
@@ -944,7 +944,7 @@ function displaySeasonWardrobeMission(season) {
 
   document.getElementById('wheelFeedbackBox').innerHTML = `
     <div style="color:#0369a1; font-weight:700; font-size:0.95rem;">
-      👗 Elige los 2 artículos de ropa adecuados para este clima en el armario:
+      👗 Choose the 2 matching clothing items for this weather in the wardrobe:
     </div>
   `;
 }
@@ -965,15 +965,15 @@ function handleWardrobeItemClick(cardEl, itemName, isCorrect, itemIcon) {
       sfx.playSuccess();
       feedback.innerHTML = `
         <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:16px; padding:14px 20px; color:#065f46; margin-top:14px;">
-          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎉 ¡PERSONAJE VESTIDO PERFECTAMENTE! (+25 pts)</div>
-          <div>Elegiste la ropa adecuada para <strong>${season.weatherName}</strong>. ¡Gira la rueda de nuevo para otro clima!</div>
+          <div style="font-weight:700; font-size:1.15rem; margin-bottom:4px;">🎉 CHARACTER DRESSED PERFECTLY! (+25 pts)</div>
+          <div>You selected the right outfit for <strong>${season.weatherName}</strong>. Spin the wheel again to dress for another climate!</div>
         </div>
       `;
       AppState.addStars(25);
     } else {
       feedback.innerHTML = `
         <div style="color:#059669; font-weight:700; font-size:0.95rem;">
-          🧥 ¡${itemIcon} ${itemName} seleccionado! Elige 1 prenda más.
+          🧥 ${itemIcon} ${itemName} selected! Choose 1 more item.
         </div>
       `;
     }
@@ -985,7 +985,7 @@ function handleWardrobeItemClick(cardEl, itemName, isCorrect, itemIcon) {
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; color:#991b1b; font-weight:700; margin-top:14px;">
-        ⚠️ ¡Esa prenda no protege adecuadamente contra ${season.weatherName}! Elige otra.
+        ⚠️ That item does not protect properly against ${season.weatherName}! Choose another item.
       </div>
     `;
   }
@@ -993,7 +993,7 @@ function handleWardrobeItemClick(cardEl, itemName, isCorrect, itemIcon) {
 
 // ============================================================================
 // ACTIVIDAD 4: ⚡ LIVE TV WEATHER BROADCAST CON POWER-UPS (QUIZIZZ)
-// 8 boletines meteorológicos televisivos con potenciadores 50/50 y 2X
+// 8 TV weather forecasts with 50/50 and 2X power-ups
 // ============================================================================
 const tvBroadcastData = [
   {
@@ -1001,7 +1001,7 @@ const tvBroadcastData = [
     city: "London 🌧️",
     headline: "Breaking Weather • London Downpour",
     teleprompterEn: "Attention viewers! Right now in London, it is raining heavily and people are holding colorful umbrellas.",
-    teleprompterEs: "¡Atención televidentes! Ahora mismo en Londres, está lloviendo fuerte y la gente sostiene paraguas coloridos.",
+    teleprompterEs: "",
     viewerReaction: "150K live viewers: Stay dry London! ☔✨"
   },
   {
@@ -1009,7 +1009,7 @@ const tvBroadcastData = [
     city: "New York ❄️",
     headline: "Central Park Winter Storm",
     teleprompterEn: "Good evening! In New York, soft snowflakes are falling and children are building snowmen.",
-    teleprompterEs: "¡Buenas noches! En Nueva York, suaves copos de nieve están cayendo y los niños construyen muñecos de nieve.",
+    teleprompterEs: "",
     viewerReaction: "200K viewers: Magical snowy Central Park! ⛄❄️"
   },
   {
@@ -1017,7 +1017,7 @@ const tvBroadcastData = [
     city: "Miami ☀️",
     headline: "Sunny Coastline Heatwave",
     teleprompterEn: "Welcome back! In sunny Miami, people are swimming in the ocean and wearing dark sunglasses.",
-    teleprompterEs: "¡Bienvenidos de vuelta! En la soleada Miami, la gente está nadando en el océano y usando gafas oscuras.",
+    teleprompterEs: "",
     viewerReaction: "180K viewers: Sunscreen and cool waves! 🌊🕶️"
   },
   {
@@ -1025,7 +1025,7 @@ const tvBroadcastData = [
     city: "Tokyo 🌸",
     headline: "Spring Cherry Blossom Breeze",
     teleprompterEn: "Live from Tokyo! Gentle spring wind is blowing and families are walking under pink cherry trees.",
-    teleprompterEs: "¡En vivo desde Tokio! Un suave viento primaveral está soplando y las familias caminan bajo los cerezos rosados.",
+    teleprompterEs: "",
     viewerReaction: "300K viewers: Breathtaking spring blossoms! 🌸🎎"
   },
   {
@@ -1033,7 +1033,7 @@ const tvBroadcastData = [
     city: "Chicago 💨",
     headline: "The Windy City Alert",
     teleprompterEn: "Weather update! In Chicago, strong autumn wind is howling and yellow leaves are flying in the air.",
-    teleprompterEs: "¡Reporte meteorológico! En Chicago, un fuerte viento otoñal está aullando y hojas amarillas vuelan en el aire.",
+    teleprompterEs: "",
     viewerReaction: "220K viewers: Hold on to your hats Chicago! 🍃🎩"
   },
   {
@@ -1041,7 +1041,7 @@ const tvBroadcastData = [
     city: "Sydney 🏖️",
     headline: "Summer Beach Action",
     teleprompterEn: "Good morning Australia! Surfers are riding giant waves at Bondi Beach under the warm sun.",
-    teleprompterEs: "¡Buenos días Australia! Los surfistas están montando olas gigantes en Bondi Beach bajo el sol cálido.",
+    teleprompterEs: "",
     viewerReaction: "250K viewers: Awesome surfing conditions! 🏄‍♂️🇦🇺"
   },
   {
@@ -1049,7 +1049,7 @@ const tvBroadcastData = [
     city: "Paris ☕",
     headline: "Cozy Autumn Afternoon",
     teleprompterEn: "Live in Paris! People are drinking hot chocolate at street cafes while cool rain is tapping on windows.",
-    teleprompterEs: "¡En vivo en París! La gente toma chocolate caliente en cafés mientras la lluvia fresca repiquetea en las ventanas.",
+    teleprompterEs: "",
     viewerReaction: "190K viewers: So cozy and charming! 🥐☕"
   },
   {
@@ -1057,7 +1057,7 @@ const tvBroadcastData = [
     city: "Global Final 🌍",
     headline: "World Weather Spectacular",
     teleprompterEn: "Thank you for watching Bilikids Weather Live! Have a fantastic day wherever you are!",
-    teleprompterEs: "¡Gracias por sintonizar Bilikids Weather en vivo! ¡Que tengan un día fantástico dondequiera que estén!",
+    teleprompterEs: "",
     viewerReaction: "1 MILLION VIEWERS: Best weather reporter ever! 🌟🎉"
   }
 ];
@@ -1070,7 +1070,7 @@ function loadTVBroadcast(index) {
   const b = tvBroadcastData[index];
   document.getElementById('tvMicBtn').disabled = false;
 
-  document.getElementById('tvCityBadge').textContent = `Boletín ${index + 1} de ${tvBroadcastData.length} • ${b.city}`;
+  document.getElementById('tvCityBadge').textContent = `Forecast ${index + 1} of ${tvBroadcastData.length} • ${b.city}`;
   document.getElementById('tvHeadlineBanner').textContent = b.headline;
   document.getElementById('tvTeleprompterText').textContent = `"${b.teleprompterEn}"`;
   document.getElementById('tvTeleprompterEs').textContent = b.teleprompterEs;
@@ -1099,19 +1099,19 @@ function triggerPowerUp(type, btnEl) {
     AppState.activeMultiplier = 2;
     feedback.innerHTML = `
       <div style="display:inline-block; background:rgba(245, 158, 11, 0.25); border:1px solid #f59e0b; padding:8px 18px; border-radius:999px; color:#fbbf24; font-weight:700;">
-        🌟 ¡POWER-UP ACTIVADO: 2X PUNTOS! Tu siguiente reporte valdrá doble (50 pts).
+        🌟 POWER-UP ACTIVATED: 2X POINTS! Your next report earns double points (50 pts).
       </div>
     `;
   } else if (type === 'freeze') {
     feedback.innerHTML = `
       <div style="display:inline-block; background:rgba(56, 189, 248, 0.25); border:1px solid #38bdf8; padding:8px 18px; border-radius:999px; color:#38bdf8; font-weight:700;">
-        ⏱️ ¡TIEMPO CONGELADO! Lee con calma y buena entonación frente a la cámara.
+        ⏱️ TIME FROZEN! Read calmly with clear intonation into the camera.
       </div>
     `;
   } else if (type === '5050') {
     feedback.innerHTML = `
       <div style="display:inline-block; background:rgba(16, 185, 129, 0.25); border:1px solid #10b981; padding:8px 18px; border-radius:999px; color:#34d399; font-weight:700;">
-        💡 ¡50/50 ACTIVADO! Pronunciación guiada con teleprónter optimizado.
+        💡 50/50 ACTIVATED! Guided teleprompter with key phrases.
       </div>
     `;
   }
@@ -1125,9 +1125,9 @@ function toggleTVMic() {
 
   if (!SpeechRecognition) {
     feedback.innerHTML = `
-      <div style="font-size:1.15rem; font-weight:700; color:#38bdf8;">📺 ¡BOLETÍN METEOROLÓGICO TRANSMITIDO CON ÉXITO!</div>
+      <div style="font-size:1.15rem; font-weight:700; color:#38bdf8;">📺 LIVE WEATHER FORECAST BROADCASTED!</div>
       <span style="display:inline-block; margin-top:8px; background:rgba(16, 185, 129, 0.2); color:#34d399; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #10b981;">
-        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
+        Practice mode. Listen to native audio and try again.
       </span>
     `;
     btn.disabled = true;
@@ -1145,7 +1145,7 @@ function toggleTVMic() {
     recognition.onstart = () => {
       isTVRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🔴 ¡AL AIRE EN TELEVISIÓN NACIONAL! Lee tu boletín en inglés...</span>`;
+      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🔴 ON AIR ON NATIONAL TELEVISION! Read your forecast in English...</span>`;
     };
 
     recognition.onresult = (event) => {
@@ -1153,13 +1153,13 @@ function toggleTVMic() {
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Transmitiste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(59, 130, 246, 0.25); color:#60a5fa; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #3b82f6;">
-          📺 Transcripción de práctica; contenido y pronunciación no evaluados.
+          📺 Weather broadcast practice transcript.
         </span>
       `;
     };
 
     recognition.onerror = () => {
-      feedback.innerHTML = `<span style="color:#94a3b8;">Toca el micrófono de nuevo e inténtalo.</span>`;
+      feedback.innerHTML = `<span style="color:#94a3b8;">Tap the microphone again to try.</span>`;
     };
 
     recognition.onend = () => {
@@ -1181,7 +1181,7 @@ function nextTVBroadcast() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 7
+// UNIT 7 INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');

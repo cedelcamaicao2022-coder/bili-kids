@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 3: Favorite People | Bilikids Kids Club</title>
 
-  <!-- Tipografías modernas -->
+  <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="unit-nav">
     <div class="unit-nav-inner">
       <a href="kids.html" class="btn-back-map">
         <span>←</span>
-        <span>Mapa Kids</span>
+        <span>Kids Map</span>
       </a>
 
       <div class="unit-title-header">
@@ -29,19 +29,19 @@
         <h1 class="unit-name-head">Favorite People</h1>
       </div>
 
-      <div class="unit-score-pill" title="Tus puntos de misión">
+      <div class="unit-score-pill" title="Mission Points">
         <span>⭐</span>
         <span id="unitStarsCount">120 pts</span>
       </div>
     </div>
   </header>
 
-  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (NUEVAS DINÁMICAS) -->
+  <!-- ACTIVITY TABS -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('tree', this)">
         <span>🌳</span>
-        <span>Árbol & Detective</span>
+        <span>Family Tree Detective</span>
       </button>
       <button class="tab-btn" onclick="switchTab('match', this)">
         <span>⚡</span>
@@ -49,7 +49,7 @@
       </button>
       <button class="tab-btn" onclick="switchTab('doctor', this)">
         <span>🩺</span>
-        <span>Doctor de Oraciones</span>
+        <span>Sentence Doctor</span>
       </button>
       <button class="tab-btn" onclick="switchTab('podcast', this)">
         <span>🎙️</span>
@@ -58,11 +58,11 @@
     </div>
   </nav>
 
-  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <!-- DYNAMIC WORKSPACE -->
   <main class="unit-workspace">
 
     <!-- ====================================================================
-         ACTIVIDAD 1: ÁRBOL GENEALÓGICO & DETECTIVE "WHO'S WHO"
+         ACTIVITY 1: FAMILY TREE & "WHO'S WHO" DETECTIVE
          ==================================================================== -->
     <section id="view-tree" class="activity-view active-view">
       <div class="family-tree-box">
@@ -73,7 +73,7 @@
               <span>🕵️‍♂️</span> Detective de Familia & Amigos (Expedientes Secretos)
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Los archivos están volteados. Lee la pista del detective, voltea las tarjetas para leer sus descripciones en inglés y descubre quién es.
+              The case files are face down. Read the detective's clue, flip the cards to read their English descriptions, and solve the mystery!
             </div>
           </div>
         </div>
@@ -91,21 +91,21 @@
               "Someone ate grandmother's chocolate cookies in the kitchen! The suspect has a dark beard and left an electric guitar pick."
             </div>
             <div class="clue-sub" id="clueTextEs" style="font-size:0.85rem; color:#64748b; font-style:italic;">
-              ¡Alguien se comió las galletas en la cocina! Pistas: el sospechoso tiene barba oscura y toca la guitarra eléctrica.
+              Someone ate the chocolate cookies in the kitchen! Clues: the suspect has a dark beard and plays the electric guitar.
             </div>
           </div>
           <div>
             <button class="chat-listen-btn" style="padding:8px 14px; font-size:0.85rem; white-space:nowrap;" onclick="speakEnglish(document.getElementById('clueTextEn').textContent, 'host')">
-              🔊 Escuchar Pistas
+              🔊 Listen to Clues
             </button>
           </div>
         </div>
 
         <div id="clueFeedback" style="min-height:28px; margin-bottom:14px; text-align:center;"></div>
 
-        <!-- Cuadrícula interactiva de personajes de la familia y amigos -->
+        <!-- Interactive family & friends grid -->
         <div class="family-tree-grid" id="familyTreeGrid">
-          <!-- Personajes inyectados dinámicamente -->
+          <!-- Dynamically injected characters -->
         </div>
 
       </div>
@@ -122,7 +122,7 @@
             Round 1: Subject Pronoun ➔ Possessive Adjective
           </h2>
           <p style="font-size:0.9rem; color:#64748b; margin-top:2px;" id="matchRoundSub">
-            Selecciona un elemento de la izquierda y conéctalo con su pareja correcta de la derecha.
+            Select an item on the left and match it with the correct pair on the right.
           </p>
         </div>
 
@@ -149,29 +149,29 @@
         
         <div class="doctor-badge-status" id="doctorCaseCounter">
           <span>🩺</span>
-          <span>Caso Clínico 1 de 15</span>
+          <span>Clinic Case 1 of 15</span>
         </div>
 
         <h2 style="font-family:var(--font-display); font-size:1.4rem; color:#0f172a; margin-bottom:6px;">
-          ¡Esta oración tiene una palabra infectada de error!
+          This sentence has a grammar error!
         </h2>
         <p style="font-size:0.92rem; color:#64748b; margin-bottom:18px;">
-          Toca la palabra incorrecta para diagnosticarla y recetarle su forma correcta en inglés.
+          Tap the incorrect word to diagnose it and prescribe the correct English replacement.
         </p>
 
         <div style="font-size:1.1rem; font-weight:600; color:#475569; margin-bottom:14px;" id="doctorSentenceEs">
-          "Él está jugando con su perro."
+          "He is playing with his dog."
         </div>
 
-        <!-- Envoltorio de la oración con chips interactivos -->
+        <!-- Sentence wrapper with interactive chips -->
         <div class="doctor-sentence-wrap" id="doctorSentenceWrap">
-          <!-- Palabras como chips interactivos -->
+          <!-- Words as interactive chips -->
         </div>
 
-        <!-- Panel de Curación / Medicamento -->
+        <!-- Prescription Panel -->
         <div class="doctor-correction-panel" id="doctorCorrectionPanel">
           <div style="font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:#db2777;" id="doctorPrescriptionDesc">
-            ¿Con qué palabra correcta curamos el error?
+            Which correct word fixes the error?
           </div>
           <div class="doctor-options-row" id="doctorOptionsRow">
             <!-- Botones con medicamentos gramaticales -->
@@ -205,22 +205,22 @@
                 "Welcome to Bilikids Talk Show! Tell our audience: who is your favorite person in your family?"
               </div>
               <div class="podcast-question-es" id="podcastHostQuestionEs">
-                ¡Bienvenidos al Talk Show! Cuéntanos: ¿quién es tu persona favorita en tu familia?
+                Welcome to the Talk Show! Tell us: who is your favorite person in your family?
               </div>
               <div style="margin-top:8px;">
                 <button class="chat-listen-btn" onclick="listenHostQuestion()">
-                  🔊 Escuchar al Presentador
+                  🔊 Listen to Host
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Guía de Respuesta para el Invitado (El Niño) -->
+          <!-- Speaking Guide for Guest -->
           <div class="podcast-response-guide">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:#1e293b;">💡 Guía de Respuesta para tu turno:</span>
+              <span style="font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:#1e293b;">💡 Speaking Guide for your turn:</span>
               <button class="chat-listen-btn" onclick="listenAnswerSample()">
-                🔊 Escuchar Modelo
+                🔊 Listen to Model
               </button>
             </div>
             <div class="podcast-response-target" id="podcastTargetPhrase">
@@ -231,13 +231,13 @@
             </div>
           </div>
 
-          <!-- Micrófono para Hablar al Aire -->
+          <!-- Broadcast Microphone -->
           <div style="margin:20px 0;">
             <button class="btn-podcast-mic" id="podcastMicBtn" onclick="togglePodcastMic()" title="Habla al aire en el podcast">
               🎤
             </button>
             <div style="font-size:0.85rem; color:#64748b; margin-top:8px;">
-              Presiona el micrófono y responde al aire en inglés
+              Tap the microphone and speak on the air in English
             </div>
           </div>
 
@@ -245,7 +245,7 @@
 
           <div style="margin-top:20px;">
             <button class="btn-back-map" style="background:#fce7f3; font-size:0.95rem; padding:8px 20px;" onclick="nextPodcastInterview()">
-              <span>Siguiente Pregunta del Talk Show ➔</span>
+              <span>Next Talk Show Question ➔</span>
             </button>
           </div>
 

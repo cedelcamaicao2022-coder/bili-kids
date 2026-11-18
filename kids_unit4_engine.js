@@ -246,13 +246,13 @@ const routineClockData = [
     dialIcon: "⏰",
     tag: "Morning Awakening",
     sentenceEn: "The alarm clock rings! It is 7:00 AM.",
-    sentenceEs: "¡Suena el despertador! Son las 7:00 AM.",
+    sentenceEs: "",
     targetPhrase: "I wake up at seven o'clock.",
     correctIndex: 0,
     choices: [
-      { text: "I wake up and get out of bed", icon: "🌅", isCorrect: true, hint: "Despertarse y levantarse" },
-      { text: "I go to sleep and close my eyes", icon: "😴", isCorrect: false, hint: "Eso es en la noche" },
-      { text: "I eat dinner with my family", icon: "🍲", isCorrect: false, hint: "Eso es a las 8:00 PM" }
+      { text: "I wake up and get out of bed", icon: "🌅", isCorrect: true, hint: "" },
+      { text: "I go to sleep and close my eyes", icon: "😴", isCorrect: false, hint: "" },
+      { text: "I eat dinner with my family", icon: "🍲", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -262,13 +262,13 @@ const routineClockData = [
     dialIcon: "🥛",
     tag: "Breakfast Time",
     sentenceEn: "Mom is in the kitchen pouring orange juice.",
-    sentenceEs: "Mamá está en la cocina sirviendo jugo de naranja.",
+    sentenceEs: "",
     targetPhrase: "I eat breakfast with cereal and fruit.",
     correctIndex: 1,
     choices: [
-      { text: "I take off my shoes for bed", icon: "🧦", isCorrect: false, hint: "Eso es para dormir" },
-      { text: "I eat delicious cereal for breakfast", icon: "🥣", isCorrect: true, hint: "Desayunar cereal" },
-      { text: "I watch the stars in the dark sky", icon: "✨", isCorrect: false, hint: "De noche" }
+      { text: "I take off my shoes for bed", icon: "🧦", isCorrect: false, hint: "" },
+      { text: "I eat delicious cereal for breakfast", icon: "🥣", isCorrect: true, hint: "" },
+      { text: "I watch the stars in the dark sky", icon: "✨", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -278,13 +278,13 @@ const routineClockData = [
     dialIcon: "🚌",
     tag: "School Journey",
     sentenceEn: "The yellow school bus stops in front of my house.",
-    sentenceEs: "El autobús amarillo para frente a mi casa.",
+    sentenceEs: "",
     targetPhrase: "I catch the bus to go to school.",
     correctIndex: 0,
     choices: [
-      { text: "I go to school by bus with my friends", icon: "🎒", isCorrect: true, hint: "Ir a la escuela" },
-      { text: "I take a warm shower in the bathroom", icon: "🚿", isCorrect: false, hint: "Bañarse" },
-      { text: "I do my math homework at my desk", icon: "📐", isCorrect: false, hint: "Hacer tareas" }
+      { text: "I go to school by bus with my friends", icon: "🎒", isCorrect: true, hint: "" },
+      { text: "I take a warm shower in the bathroom", icon: "🚿", isCorrect: false, hint: "" },
+      { text: "I do my math homework at my desk", icon: "📐", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -294,13 +294,13 @@ const routineClockData = [
     dialIcon: "🥪",
     tag: "Lunch Break",
     sentenceEn: "The school bell rings for the midday break!",
-    sentenceEs: "¡Suena la campana para el descanso de mediodía!",
+    sentenceEs: "",
     targetPhrase: "I eat lunch in the cafeteria.",
     correctIndex: 2,
     choices: [
-      { text: "I brush my teeth before sleeping", icon: "🪥", isCorrect: false, hint: "Antes de dormir" },
-      { text: "I put on my cozy pajamas", icon: "👕", isCorrect: false, hint: "Ponerse la pijama para dormir" },
-      { text: "I eat lunch and drink fresh water", icon: "🥪", isCorrect: true, hint: "Almorzar con amigos" }
+      { text: "I brush my teeth before sleeping", icon: "🪥", isCorrect: false, hint: "" },
+      { text: "I put on my cozy pajamas", icon: "👕", isCorrect: false, hint: "" },
+      { text: "I eat lunch and drink fresh water", icon: "🥪", isCorrect: true, hint: "" }
     ]
   },
   {
@@ -310,13 +310,13 @@ const routineClockData = [
     dialIcon: "🏡",
     tag: "School Ends",
     sentenceEn: "Classes are finished for today! Goodbye teacher!",
-    sentenceEs: "¡Las clases terminaron por hoy! ¡Adiós profe!",
+    sentenceEs: "",
     targetPhrase: "I come back home in the afternoon.",
     correctIndex: 1,
     choices: [
-      { text: "I eat breakfast with warm pancakes", icon: "🥞", isCorrect: false, hint: "Desayuno matutino" },
-      { text: "I arrive home and take off my backpack", icon: "🚪", isCorrect: true, hint: "Llegar a casa" },
-      { text: "I dream about flying dragons in bed", icon: "🐉", isCorrect: false, hint: "Soñar de noche" }
+      { text: "I eat breakfast with warm pancakes", icon: "🥞", isCorrect: false, hint: "" },
+      { text: "I arrive home and take off my backpack", icon: "🚪", isCorrect: true, hint: "" },
+      { text: "I dream about flying dragons in bed", icon: "🐉", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -326,13 +326,13 @@ const routineClockData = [
     dialIcon: "📚",
     tag: "Homework & Study",
     sentenceEn: "I sit at my desk with my notebook and pencil.",
-    sentenceEs: "Me siento en mi escritorio con mi libreta y lápiz.",
+    sentenceEs: "",
     targetPhrase: "I do my homework and read stories.",
     correctIndex: 0,
     choices: [
-      { text: "I do my homework carefully", icon: "✏️", isCorrect: true, hint: "Hacer las tareas" },
-      { text: "I wake up and greet the sunshine", icon: "🌞", isCorrect: false, hint: "Despertarse" },
-      { text: "I eat breakfast before school", icon: "🍳", isCorrect: false, hint: "Desayunar" }
+      { text: "I do my homework carefully", icon: "✏️", isCorrect: true, hint: "" },
+      { text: "I wake up and greet the sunshine", icon: "🌞", isCorrect: false, hint: "" },
+      { text: "I eat breakfast before school", icon: "🍳", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -342,13 +342,13 @@ const routineClockData = [
     dialIcon: "⚽",
     tag: "Play & Outdoor Fun",
     sentenceEn: "The weather is lovely outside in the park.",
-    sentenceEs: "El clima está encantador afuera en el parque.",
+    sentenceEs: "",
     targetPhrase: "I play soccer and ride my bicycle.",
     correctIndex: 2,
     choices: [
-      { text: "I sleep eight hours in darkness", icon: "🌙", isCorrect: false, hint: "Dormir" },
-      { text: "I catch the morning school bus", icon: "🚌", isCorrect: false, hint: "Autobús de la mañana" },
-      { text: "I play football with my classmates", icon: "⚽", isCorrect: true, hint: "Jugar fútbol" }
+      { text: "I sleep eight hours in darkness", icon: "🌙", isCorrect: false, hint: "" },
+      { text: "I catch the morning school bus", icon: "🚌", isCorrect: false, hint: "" },
+      { text: "I play football with my classmates", icon: "⚽", isCorrect: true, hint: "" }
     ]
   },
   {
@@ -358,13 +358,13 @@ const routineClockData = [
     dialIcon: "🍝",
     tag: "Family Dinner",
     sentenceEn: "The whole family sits together around the table.",
-    sentenceEs: "Toda la familia se reúne alrededor de la mesa.",
+    sentenceEs: "",
     targetPhrase: "We have dinner and talk about our day.",
     correctIndex: 1,
     choices: [
-      { text: "I wake up and stretch my arms", icon: "🙆", isCorrect: false, hint: "Despertarse" },
-      { text: "We have a warm dinner together", icon: "🍲", isCorrect: true, hint: "Cenar en familia" },
-      { text: "I put on my school uniform", icon: "👔", isCorrect: false, hint: "Vestirse para la escuela" }
+      { text: "I wake up and stretch my arms", icon: "🙆", isCorrect: false, hint: "" },
+      { text: "We have a warm dinner together", icon: "🍲", isCorrect: true, hint: "" },
+      { text: "I put on my school uniform", icon: "👔", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -374,13 +374,13 @@ const routineClockData = [
     dialIcon: "🪥",
     tag: "Evening Hygiene",
     sentenceEn: "It is bedtime soon. I go to the bathroom to get ready.",
-    sentenceEs: "Pronto es hora de dormir. Voy al baño a prepararme.",
+    sentenceEs: "",
     targetPhrase: "I brush my teeth and wash my face.",
     correctIndex: 0,
     choices: [
-      { text: "I brush my teeth for two minutes", icon: "🪥", isCorrect: true, hint: "Cepillarse los dientes" },
-      { text: "I play soccer in the stadium", icon: "🏟️", isCorrect: false, hint: "Jugar deporte" },
-      { text: "I eat lunch in the cafeteria", icon: "🥪", isCorrect: false, hint: "Almorzar" }
+      { text: "I brush my teeth for two minutes", icon: "🪥", isCorrect: true, hint: "" },
+      { text: "I play soccer in the stadium", icon: "🏟️", isCorrect: false, hint: "" },
+      { text: "I eat lunch in the cafeteria", icon: "🥪", isCorrect: false, hint: "" }
     ]
   },
   {
@@ -390,13 +390,13 @@ const routineClockData = [
     dialIcon: "🛏️",
     tag: "Bedtime & Sweet Dreams",
     sentenceEn: "The stars are shining and the house is quiet.",
-    sentenceEs: "Las estrellas brillan y la casa está tranquila.",
+    sentenceEs: "",
     targetPhrase: "I go to bed and sleep peacefully.",
     correctIndex: 2,
     choices: [
-      { text: "I catch the yellow school bus", icon: "🚌", isCorrect: false, hint: "Autobús matutino" },
-      { text: "I do my math homework at my desk", icon: "📖", isCorrect: false, hint: "Hacer tareas" },
-      { text: "I go to bed and turn off the light", icon: "🛌", isCorrect: true, hint: "Ir a dormir" }
+      { text: "I catch the yellow school bus", icon: "🚌", isCorrect: false, hint: "" },
+      { text: "I do my math homework at my desk", icon: "📖", isCorrect: false, hint: "" },
+      { text: "I go to bed and turn off the light", icon: "🛌", isCorrect: true, hint: "" }
     ]
   }
 ];
@@ -506,16 +506,16 @@ function nextClockSlot() {
 }
 
 // ============================================================================
-// ACTIVIDAD 2: WEEKLY MISSION PLANNER (CALENDARIO DE 7 DÍAS)
+// ACTIVITY 2: WEEKLY MISSION PLANNER (7-DAY CALENDAR)
 // Draggable / Click-to-place habit stickers across Monday - Sunday
 // ============================================================================
 const weeklyDaysData = [
   { id: 'mon', name: 'Monday', es: 'Lunes', icon: '🚀' },
   { id: 'tue', name: 'Tuesday', es: 'Martes', icon: '🎨' },
-  { id: 'wed', name: 'Wednesday', es: 'Miércoles', icon: '🏊‍♂️' },
+  { id: 'wed', name: 'Wednesday', es: '', icon: '🏊‍♂️' },
   { id: 'thu', name: 'Thursday', es: 'Jueves', icon: '🎸' },
   { id: 'fri', name: 'Friday', es: 'Viernes', icon: '🍿' },
-  { id: 'sat', name: 'Saturday', es: 'Sábado', icon: '🏕️' },
+  { id: 'sat', name: 'Saturday', es: '', icon: '🏕️' },
   { id: 'sun', name: 'Sunday', es: 'Domingo', icon: '🚲' }
 ];
 
@@ -526,7 +526,7 @@ const weeklyMissionsData = [
     targetDayName: 'Wednesday',
     title: "Mission 1 • After-School Sport 🏅",
     clueEn: "On Wednesdays, Leo always goes to swimming practice after school at 4 PM.",
-    clueEs: "Los miércoles, Leo siempre va a práctica de natación después de clases a las 4 PM.",
+    clueEs: "",
     targetHabit: "Swimming Practice",
     habitIcon: "🏊‍♂️"
   },
@@ -536,7 +536,7 @@ const weeklyMissionsData = [
     targetDayName: 'Friday',
     title: "Mission 2 • Friday Family Tradition 🎬",
     clueEn: "Every Friday evening, our whole family watches animated movies and eats sweet popcorn.",
-    clueEs: "Todos los viernes por la noche, nuestra familia ve películas animadas y come palomitas.",
+    clueEs: "",
     targetHabit: "Movie & Popcorn Night",
     habitIcon: "🍿"
   },
@@ -546,7 +546,7 @@ const weeklyMissionsData = [
     targetDayName: 'Saturday',
     title: "Mission 3 • Weekend Nature Trip 🌲",
     clueEn: "On Saturdays, Sarah and her cousins camp in the countryside and roast marshmallows.",
-    clueEs: "Los sábados, Sarah y sus primos acampan en el campo y asan malvaviscos.",
+    clueEs: "",
     targetHabit: "Camp in Countryside",
     habitIcon: "🏕️"
   },
@@ -556,7 +556,7 @@ const weeklyMissionsData = [
     targetDayName: 'Tuesday',
     title: "Mission 4 • Creative Art Workshop 🖌️",
     clueEn: "On Tuesdays, Maya has art workshop and paints colorful birds with watercolors.",
-    clueEs: "Los martes, Maya tiene taller de arte y pinta aves coloridas con acuarelas.",
+    clueEs: "",
     targetHabit: "Art Workshop Class",
     habitIcon: "🎨"
   },
@@ -566,7 +566,7 @@ const weeklyMissionsData = [
     targetDayName: 'Sunday',
     title: "Mission 5 • Sunny Outdoor Exercise 🌳",
     clueEn: "Every Sunday morning, we ride bicycles around the green park with our dog.",
-    clueEs: "Cada domingo por la mañana, paseamos en bicicleta por el parque verde con nuestro perro.",
+    clueEs: "",
     targetHabit: "Bicycle Park Ride",
     habitIcon: "🚲"
   },
@@ -576,7 +576,7 @@ const weeklyMissionsData = [
     targetDayName: 'Monday',
     title: "Mission 6 • New School Week Start 🏫",
     clueEn: "On Mondays, we start the school week with science experiments and magnifying glasses.",
-    clueEs: "Los lunes, empezamos la semana escolar con experimentos de ciencia y lupas.",
+    clueEs: "",
     targetHabit: "Science Experiments",
     habitIcon: "🔬"
   }
@@ -606,7 +606,7 @@ function renderPlannerBoard() {
             ? `<div style="font-size:1.8rem; margin-bottom:4px;">${placed.icon}</div>
                <div style="font-size:0.8rem; font-weight:700; color:#065f46;">${placed.habit}</div>`
             : `<div style="font-size:1.5rem; opacity:0.35;">${day.icon}</div>
-               <div style="font-size:0.72rem; color:#94a3b8; margin-top:4px;">Vacío</div>`
+               <div style="font-size:0.72rem; color:#94a3b8; margin-top:4px;">Empty</div>`
           }
         </div>
       </div>
@@ -644,7 +644,7 @@ function loadPlannerMission(index) {
   currentPlannerMission = index;
   const mission = weeklyMissionsData[index];
 
-  document.getElementById('plannerMissionBadge').textContent = `Misión ${index + 1} de ${weeklyMissionsData.length}`;
+  document.getElementById('plannerMissionBadge').textContent = `Mission ${index + 1} of ${weeklyMissionsData.length}`;
   document.getElementById('plannerMissionTitle').textContent = mission.title;
   document.getElementById('plannerClueEn').textContent = `"${mission.clueEn}"`;
   document.getElementById('plannerClueEs').textContent = mission.clueEs;
@@ -678,7 +678,7 @@ function selectHabitSticker(targetDayId, habit, icon) {
   const feedback = document.getElementById('plannerFeedbackBox');
   feedback.innerHTML = `
     <div style="font-size:0.9rem; color:#92400e; font-weight:600;">
-      Has seleccionado <strong>${icon} ${habit}</strong>. Ahora toca el día correcto de la semana arriba.
+      Selected <strong>${icon} ${habit}</strong>. Now tap the correct day of the week above.
     </div>
   `;
 }
@@ -689,7 +689,7 @@ function handleDayColumnClick(dayId) {
     const feedback = document.getElementById('plannerFeedbackBox');
     feedback.innerHTML = `
       <div style="font-size:0.9rem; color:#b91c1c; font-weight:700;">
-        👇 Primero selecciona un sticker de hábito en la barra inferior.
+        👇 First select a habit sticker from the bottom bar.
       </div>
     `;
     return;
@@ -708,7 +708,7 @@ function handleDayColumnClick(dayId) {
 
     feedback.innerHTML = `
       <div style="display:inline-flex; align-items:center; gap:8px; background:#ecfdf5; border:1px solid #10b981; padding:8px 18px; border-radius:999px; color:#065f46; font-weight:700;">
-        <span>🎯 ¡Perfecto! Asignaste ${selectedHabitSticker.icon} a ${mission.targetDayName}</span>
+        <span>🎯 Perfect! You placed ${selectedHabitSticker.icon} on ${mission.targetDayName}</span>
         <span>(+20 pts)</span>
       </div>
     `;
@@ -729,7 +729,7 @@ function handleDayColumnClick(dayId) {
     sfx.playError();
     feedback.innerHTML = `
       <div style="display:inline-flex; align-items:center; gap:8px; background:#fef2f2; border:1px solid #ef4444; padding:8px 18px; border-radius:999px; color:#b91c1c; font-weight:700;">
-        <span>❌ No coincide con la pista de la misión. ¡Revisa qué día dice la oración!</span>
+        <span>❌ That does not match the mission clue. Check the day mentioned in the sentence!</span>
       </div>
     `;
   }
@@ -756,7 +756,7 @@ const verbScaleChallenges = [
     verbBase: "play",
     verbSingular: "plays",
     correctAnswer: "plays",
-    ruleNote: "Con He / She / It usamos terminación con -S ➔ He plays!"
+    ruleNote: "With He / She / It use -S ending ➔ He plays!"
   },
   {
     id: 1,
@@ -768,7 +768,7 @@ const verbScaleChallenges = [
     verbBase: "watch",
     verbSingular: "watches",
     correctAnswer: "watch",
-    ruleNote: "Con They / We / I usamos el verbo base sin -s ➔ They watch!"
+    ruleNote: "With They / We / I use base verb without -s ➔ They watch!"
   },
   {
     id: 2,
@@ -780,7 +780,7 @@ const verbScaleChallenges = [
     verbBase: "go",
     verbSingular: "goes",
     correctAnswer: "goes",
-    ruleNote: "Go termina en vocal 'o', agregamos -ES ➔ She goes!"
+    ruleNote: "'Go' ends in vowel 'o', add -ES ➔ She goes!"
   },
   {
     id: 3,
@@ -792,7 +792,7 @@ const verbScaleChallenges = [
     verbBase: "study",
     verbSingular: "studies",
     correctAnswer: "studies",
-    ruleNote: "Study cambia consonante + y por -IES ➔ My brother studies!"
+    ruleNote: "'Study' changes consonant + y to -IES ➔ My brother studies!"
   },
   {
     id: 4,
@@ -804,7 +804,7 @@ const verbScaleChallenges = [
     verbBase: "eat",
     verbSingular: "eats",
     correctAnswer: "eat",
-    ruleNote: "Con We (nosotros) usamos la forma base ➔ We eat!"
+    ruleNote: "With We use base verb form ➔ We eat!"
   },
   {
     id: 5,
@@ -816,7 +816,7 @@ const verbScaleChallenges = [
     verbBase: "sleep",
     verbSingular: "sleeps",
     correctAnswer: "sleeps",
-    ruleNote: "The cat es singular (It) ➔ The cat sleeps!"
+    ruleNote: "'The cat' is singular (It) ➔ The cat sleeps!"
   },
   {
     id: 6,
@@ -828,7 +828,7 @@ const verbScaleChallenges = [
     verbBase: "brush",
     verbSingular: "brushes",
     correctAnswer: "brush",
-    ruleNote: "Con I (yo) el verbo va en su forma base ➔ I brush!"
+    ruleNote: "With I use base verb form ➔ I brush!"
   },
   {
     id: 7,
@@ -840,7 +840,7 @@ const verbScaleChallenges = [
     verbBase: "run",
     verbSingular: "runs",
     correctAnswer: "runs",
-    ruleNote: "Leo es 3ra persona singular ➔ Leo runs!"
+    ruleNote: "Leo is third-person singular (He) ➔ Leo runs!"
   },
   {
     id: 8,
@@ -852,7 +852,7 @@ const verbScaleChallenges = [
     verbBase: "read",
     verbSingular: "reads",
     correctAnswer: "read",
-    ruleNote: "The students es plural (They) ➔ The students read!"
+    ruleNote: "'The students' is plural (They) ➔ The students read!"
   },
   {
     id: 9,
@@ -864,7 +864,7 @@ const verbScaleChallenges = [
     verbBase: "make",
     verbSingular: "makes",
     correctAnswer: "makes",
-    ruleNote: "Mom (She) lleva -s ➔ Mom makes!"
+    ruleNote: "Mom (She) takes -s ➔ Mom makes!"
   },
   {
     id: 10,
@@ -876,7 +876,7 @@ const verbScaleChallenges = [
     verbBase: "play",
     verbSingular: "plays",
     correctAnswer: "play",
-    ruleNote: "Con You siempre usamos verbo base ➔ You play!"
+    ruleNote: "With You always use base verb ➔ You play!"
   },
   {
     id: 11,
@@ -888,7 +888,7 @@ const verbScaleChallenges = [
     verbBase: "fix",
     verbSingular: "fixes",
     correctAnswer: "fixes",
-    ruleNote: "Fix termina en 'x', agregamos -ES ➔ The mechanic fixes!"
+    ruleNote: "'Fix' ends in 'x', add -ES ➔ The mechanic fixes!"
   },
   {
     id: 12,
@@ -900,7 +900,7 @@ const verbScaleChallenges = [
     verbBase: "fly",
     verbSingular: "flies",
     correctAnswer: "fly",
-    ruleNote: "Birds es plural (They) ➔ Birds fly!"
+    ruleNote: "'Birds' is plural (They) ➔ Birds fly!"
   },
   {
     id: 13,
@@ -912,7 +912,7 @@ const verbScaleChallenges = [
     verbBase: "catch",
     verbSingular: "catches",
     correctAnswer: "catches",
-    ruleNote: "Catch termina en 'ch', agregamos -ES ➔ The dog catches!"
+    ruleNote: "'Catch' ends in 'ch', add -ES ➔ The dog catches!"
   },
   {
     id: 14,
@@ -924,7 +924,7 @@ const verbScaleChallenges = [
     verbBase: "do",
     verbSingular: "does",
     correctAnswer: "do",
-    ruleNote: "My friends es plural ➔ My friends do!"
+    ruleNote: "'My friends' is plural (They) ➔ My friends do!"
   },
   {
     id: 15,
@@ -936,7 +936,7 @@ const verbScaleChallenges = [
     verbBase: "wash",
     verbSingular: "washes",
     correctAnswer: "washes",
-    ruleNote: "Wash termina en 'sh', agregamos -ES ➔ Dad washes!"
+    ruleNote: "'Wash' ends in 'sh', add -ES ➔ Dad washes!"
   },
   {
     id: 16,
@@ -948,7 +948,7 @@ const verbScaleChallenges = [
     verbBase: "don't",
     verbSingular: "doesn't",
     correctAnswer: "doesn't",
-    ruleNote: "En negativo con He / She / It usamos DOESN'T + verbo base ➔ He doesn't like!"
+    ruleNote: "In negative with He / She / It use DOESN'T + base verb ➔ He doesn't like!"
   },
   {
     id: 17,
@@ -960,7 +960,7 @@ const verbScaleChallenges = [
     verbBase: "don't",
     verbSingular: "doesn't",
     correctAnswer: "don't",
-    ruleNote: "En negativo con They / We / I / You usamos DON'T + verbo base ➔ They don't walk!"
+    ruleNote: "In negative with They / We / I / You use DON'T + base verb ➔ They don't walk!"
   },
   {
     id: 18,
@@ -972,7 +972,7 @@ const verbScaleChallenges = [
     verbBase: "teach",
     verbSingular: "teaches",
     correctAnswer: "teaches",
-    ruleNote: "Teach termina en 'ch', agregamos -ES ➔ The teacher teaches!"
+    ruleNote: "'Teach' ends in 'ch', add -ES ➔ The teacher teaches!"
   },
   {
     id: 19,
@@ -984,7 +984,7 @@ const verbScaleChallenges = [
     verbBase: "run",
     verbSingular: "runs",
     correctAnswer: "run",
-    ruleNote: "Con We usamos verbo base ➔ We run!"
+    ruleNote: "With We use base verb ➔ We run!"
   }
 ];
 
@@ -996,7 +996,7 @@ function loadScaleChallenge(index) {
   scaleAnswered = false;
   const challenge = verbScaleChallenges[index];
 
-  document.getElementById('scaleCaseNum').textContent = `Reto ${index + 1} de ${verbScaleChallenges.length}`;
+  document.getElementById('scaleCaseNum').textContent = `Challenge ${index + 1} of ${verbScaleChallenges.length}`;
   document.getElementById('scaleTargetSentence').innerHTML = `
     <span style="font-size:1.5rem; margin-right:6px;">${challenge.subjectIcon}</span>
     ${challenge.sentenceTemplate.replace('___', '<span id="scaleBlankSlot" style="display:inline-block; min-width:80px; padding:2px 12px; background:#fef3c7; border-bottom:3px solid #f59e0b; border-radius:6px; color:#b45309; font-weight:700;">[ ? ]</span>')}
@@ -1051,7 +1051,7 @@ function checkScaleVerb(btnEl, isCorrect, chosenText, sentenceComplete, ruleNote
 
     feedback.innerHTML = `
       <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:14px; padding:12px 18px; margin-top:14px; color:#065f46; font-size:0.95rem;">
-        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">⚖️ ¡Balanza Equilibrada! (+15 pts)</div>
+        <div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">⚖️ Scale Balanced! (+15 pts)</div>
         <div>"${sentenceComplete}"</div>
         <div style="font-size:0.82rem; color:#047857; margin-top:6px; font-weight:600;">💡 Regla: ${ruleNote}</div>
       </div>
@@ -1079,7 +1079,7 @@ function checkScaleVerb(btnEl, isCorrect, chosenText, sentenceComplete, ruleNote
 
     feedback.innerHTML = `
       <div style="background:#fef2f2; border:1px solid #ef4444; border-radius:14px; padding:10px 16px; margin-top:14px; color:#b91c1c; font-size:0.92rem; font-weight:700;">
-        ⚠️ ¡La balanza se desequilibró! Mira si el sujeto es Singular (He/She/It) o Plural/I/You/We/They.
+        ⚠️ Scale unbalanced! Check if the subject is Singular (He/She/It) or Plural / I / You / We / They.
       </div>
     `;
   }
@@ -1093,63 +1093,63 @@ function nextScaleChallenge() {
 
 // ============================================================================
 // ACTIVIDAD 4: MY MORNING VLOG (SIMULADOR DE VLOG EN VIVO)
-// 8 Real-world Streamer Prompts con grabación Web Speech API y feedback
+// 8 Real-world Streamer Prompts with Web Speech API recording and feedback
 // ============================================================================
 const vlogEpisodesData = [
   {
     id: 0,
     scene: "Scene 1 • Morning Wake Up ☀️",
     targetPhrase: "Good morning guys! I wake up at seven o'clock.",
-    phraseEs: "¡Buenos días chicos! Me despierto a las siete en punto.",
+    phraseEs: "",
     chatReaction: "10K viewers say: Rise and shine streamer! ☀️"
   },
   {
     id: 1,
     scene: "Scene 2 • Bathroom Routine 🪥",
     targetPhrase: "First, I wash my face and brush my teeth.",
-    phraseEs: "Primero, me lavo la cara y me cepillo los dientes.",
+    phraseEs: "",
     chatReaction: "Chat says: Super fresh smile! ✨"
   },
   {
     id: 2,
     scene: "Scene 3 • Kitchen Breakfast 🥣",
     targetPhrase: "For breakfast, I eat cereal and drink orange juice.",
-    phraseEs: "Para el desayuno, como cereal y tomo jugo de naranja.",
+    phraseEs: "",
     chatReaction: "Chat spam: Delicious breakfast! 🍊🥣"
   },
   {
     id: 3,
     scene: "Scene 4 • Backpack Prep 🎒",
     targetPhrase: "Then, I put on my uniform and pack my backpack.",
-    phraseEs: "Luego, me pongo mi uniforme y empaco mi mochila.",
+    phraseEs: "",
     chatReaction: "Chat: Ready for school! 📚"
   },
   {
     id: 4,
     scene: "Scene 5 • Sibling Routine 👦",
     targetPhrase: "My brother doesn't walk; he takes the yellow bus.",
-    phraseEs: "Mi hermano no camina; toma el autobús amarillo.",
+    phraseEs: "",
     chatReaction: "Chat: Excellent grammar with doesn't! 🚌🔥"
   },
   {
     id: 5,
     scene: "Scene 6 • Afternoon Homework 📝",
     targetPhrase: "In the afternoon, she finishes her homework before dinner.",
-    phraseEs: "En la tarde, ella termina sus tareas antes de cenar.",
+    phraseEs: "",
     chatReaction: "Chat: Big brain energy! 🧠🌟"
   },
   {
     id: 6,
     scene: "Scene 7 • Dinner Table 🍝",
     targetPhrase: "At eight PM, our whole family has dinner together.",
-    phraseEs: "A las 8 PM, toda nuestra familia cena junta.",
+    phraseEs: "",
     chatReaction: "Chat: Wholesome family dinner time! 👨‍👩‍👧‍👦❤️"
   },
   {
     id: 7,
     scene: "Scene 8 • Goodnight Stream 🌙",
     targetPhrase: "Finally, I turn off the lights and go to bed. Good night!",
-    phraseEs: "Finalmente, apago las luces y voy a dormir. ¡Buenas noches!",
+    phraseEs: "",
     chatReaction: "Chat: Sweet dreams streamer! See you tomorrow! 💤⭐"
   }
 ];
@@ -1190,7 +1190,7 @@ function toggleVlogMic() {
     feedback.innerHTML = `
       <div style="font-size:1.1rem; font-weight:700; color:#fbbf24;">📹 Este navegador no puede verificar tu frase.</div>
       <span style="display:inline-block; margin-top:6px; background:rgba(16, 185, 129, 0.2); color:#34d399; font-weight:700; padding:6px 16px; border-radius:999px; border:1px solid #10b981;">
-        Práctica sin puntuación. Escucha el modelo y vuelve a intentarlo.
+        Practice mode. Listen to native audio and try again.
       </span>
     `;
     btn.disabled = true;
@@ -1208,7 +1208,7 @@ function toggleVlogMic() {
     recognition.onstart = () => {
       isVlogRecording = true;
       btn.classList.add('recording');
-      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🔴 ¡EN EL AIRE! Lee la frase con buena pronunciación...</span>`;
+      feedback.innerHTML = `<span style="color:#ef4444; font-weight:700;">🔴 ON AIR! Read the sentence with clear pronunciation...</span>`;
     };
 
     recognition.onresult = (event) => {
@@ -1216,13 +1216,13 @@ function toggleVlogMic() {
       feedback.innerHTML = `
         <div style="font-size:1.05rem; font-weight:600; color:#ffffff;">Grabaste: "<strong>${transcript}</strong>"</div>
         <span style="display:inline-block; margin-top:8px; background:rgba(245, 158, 11, 0.2); color:#fbbf24; font-weight:700; padding:6px 18px; border-radius:999px; border:1px solid #f59e0b;">
-          🔥 Transcripción de práctica; no se evalúa precisión ni pronunciación.
+          🔥 Streamer practice transcript.
         </span>
       `;
     };
 
     recognition.onerror = () => {
-      feedback.innerHTML = `<span style="color:#94a3b8;">Toca el micrófono de nuevo e inténtalo.</span>`;
+      feedback.innerHTML = `<span style="color:#94a3b8;">Tap the microphone again to try.</span>`;
     };
 
     recognition.onend = () => {
@@ -1244,7 +1244,7 @@ function nextVlogEpisode() {
 }
 
 // ============================================================================
-// INICIALIZACIÓN DE LA UNIDAD 4
+// UNIT 4 INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const starEl = document.getElementById('unitStarsCount');

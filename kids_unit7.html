@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unit 7: Out and About | Bilikids Kids Club</title>
 
-  <!-- Tipografías modernas -->
+  <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <!-- TOP NAVIGATION BAR -->
   <header class="unit-nav">
     <div class="unit-nav-inner">
       <a href="kids.html" class="btn-back-map">
         <span>←</span>
-        <span>Mapa Kids</span>
+        <span>Kids Map</span>
       </a>
 
       <div class="unit-title-header">
@@ -29,14 +29,14 @@
         <h1 class="unit-name-head">Out and About</h1>
       </div>
 
-      <div class="unit-score-pill" title="Tus puntos de misión">
+      <div class="unit-score-pill" title="Mission Points">
         <span>⭐</span>
         <span id="unitStarsCount">200 pts</span>
       </div>
     </div>
   </header>
 
-  <!-- PESTAÑAS DE ACTIVIDADES INNOVADORAS (DUOLINGO, WORDWALL, EDUCAPLAY, QUIZIZZ) -->
+  <!-- ACTIVITY TABS -->
   <nav class="activity-tabs-bar">
     <div class="tabs-track">
       <button class="tab-btn active" onclick="switchTab('froggy', this)">
@@ -58,7 +58,7 @@
     </div>
   </nav>
 
-  <!-- ESPACIO DE TRABAJO DINÁMICO -->
+  <!-- DYNAMIC WORKSPACE -->
   <main class="unit-workspace">
 
     <!-- ====================================================================
@@ -70,21 +70,21 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🐸</span> Salto de Lirios Acuáticos (Froggy Weather Jumps)
+              <span>🐸</span> Froggy River Jumps
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Ayuda a la ranita a saltar de lirio en lirio cruzando el río. Elige la acción en Presente Continuo adecuada al clima.
+              Help the froggy jump from lily pad to lily pad across the river. Choose the Present Continuous action matching the weather.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="unit-tag-pill" id="riverStageBadge">Etapa 1 de 8</span>
             <button class="btn-back-map" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; cursor:pointer;" onclick="nextFroggyStage()">
-              <span>Siguiente Etapa ➔</span>
+              <span>Next Stage ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Tarjeta del Escenario Climático -->
+        <!-- Weather Scenario Card -->
         <div class="river-weather-scene">
           <div style="flex-grow:1;">
             <div class="river-frog-hero">
@@ -98,39 +98,39 @@
               "Look outside! Thick white snow is falling from the grey clouds."
             </div>
             <div id="riverWeatherPromptEs" style="font-size:0.9rem; color:#e0f2fe; font-style:italic;">
-              ¡Mira afuera! Gruesa nieve blanca está cayendo de las nubes grises.
+              Look outside! Heavy white snow is falling from gray clouds.
             </div>
           </div>
 
           <div>
             <button class="btn-back-map" style="background:rgba(255,255,255,0.25); color:#ffffff; border-color:#ffffff; cursor:pointer;" onclick="listenRiverWeather()">
-              🔊 Escuchar Clima
+              🔊 Listen to Weather
             </button>
           </div>
         </div>
 
-        <!-- Curso del Río con Barra de Progreso de Piedras -->
+        <!-- River Course with Stepping Stones Progress -->
         <div class="river-water-course">
           <div style="font-family:var(--font-display); font-size:0.88rem; font-weight:700; color:#e0f2fe; margin-bottom:8px; text-align:center;">
-            🌊 Progreso de Cruce del Río (8 Piedras):
+            🌊 River Crossing Progress (8 Stones):
           </div>
           
           <div class="river-path-progress" id="riverPathProgress">
-            <!-- 8 puntos de piedras inyectados por JS -->
+            <!-- 8 stepping stones injected by JS -->
           </div>
 
-          <!-- Pregunta Explícita -->
+          <!-- Explicit Question -->
           <div id="froggyQuestionPrompt" style="font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:#ffffff; text-align:center; margin:16px 0 12px;">
             ❓ What is Barnaby doing right now in the cold snow?
           </div>
 
-          <!-- Lirios Acuáticos de Opciones (Educaplay style) -->
+          <!-- Option Lily Pads -->
           <div class="lilypads-grid" id="lilypadsGrid">
             <!-- Inyectados por JS -->
           </div>
         </div>
 
-        <!-- Retroalimentación del Salto -->
+        <!-- Jump feedback -->
         <div id="riverFeedbackBox" style="text-align:center;"></div>
 
       </div>
@@ -145,44 +145,44 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🎈</span> Explosión de Globos: Oraciones en Acción (Sentence Popper)
+              <span>🎈</span> Cloud Balloon Popper: Actions in Motion
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
-              Toca los globos de nubes en el orden gramatical exacto para explotarlos y construir la oración en Presente Continuo.
+              Tap the cloud balloons in the exact grammatical order to pop them and build the Present Continuous sentence.
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="balloonCaseBadge">Misión 1 de 10</span>
+            <span class="unit-tag-pill" id="balloonCaseBadge">Mission 1 of 10</span>
             <button class="btn-back-map" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; cursor:pointer;" onclick="nextBalloonChallenge()">
-              <span>Siguiente Oración ➔</span>
+              <span>Next Sentence ➔</span>
             </button>
           </div>
         </div>
 
-        <!-- Objetivo en Español -->
+        <!-- Sentence Target -->
         <div id="balloonTargetSentenceEs" style="font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:#0369a1; background:#e0f2fe; border:1px solid #bae6fd; padding:10px 18px; border-radius:14px; margin-bottom:16px;">
-          🎯 Objetivo: "Las chicas están comiendo helado en el parque."
+          🎯 Build the sentence: "The girls are eating ice cream in the park."
         </div>
 
-        <!-- Bandeja Colectora de Palabras Reventadas -->
+        <!-- Popped Words Tray -->
         <div style="font-family:var(--font-display); font-size:0.92rem; font-weight:700; color:#475569; margin-bottom:6px;">
-          📥 Oración construida (Toca una palabra para devolverla si te equivocas):
+          📥 Built sentence (Tap a word to remove it if you make a mistake):
         </div>
         <div class="sentence-collector-tray" id="sentenceCollectorTray">
-          <!-- Palabras recolectadas inyectadas por JS -->
+          <!-- Collected words injected by JS -->
         </div>
 
         <!-- Campo Celeste con Globos Flotantes -->
         <div class="sky-playfield">
           <div style="font-family:var(--font-display); font-size:1rem; font-weight:700; color:#0369a1; margin-bottom:10px; background:rgba(255,255,255,0.85); padding:4px 16px; border-radius:999px;">
-            ☁️ Toca el siguiente globo de nube en orden:
+            ☁️ Tap the next cloud balloon in order:
           </div>
           <div class="balloon-clouds-row" id="balloonCloudsRow">
             <!-- Globos inyectados por JS -->
           </div>
         </div>
 
-        <!-- Retroalimentación de la Explosión -->
+        <!-- Popper feedback -->
         <div id="balloonFeedbackBox" style="text-align:center;"></div>
 
       </div>
@@ -197,7 +197,7 @@
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div>
             <h2 style="font-family:var(--font-display); font-size:1.35rem; color:#0f172a;">
-              <span>🎡</span> Rueda de la Fortuna Climática & Armario (Weather Wheel)
+              <span>🎡</span> Weather Fortune Wheel & Wardrobe
             </h2>
             <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
               Gira la rueda de la fortuna, descubre el clima que te toca y elige la ropa adecuada del armario para vestirte.
@@ -218,7 +218,7 @@
             
             <button class="btn-spin-wheel" id="spinWheelBtn" onclick="spinFortuneWheel()">
               <span>🎡</span>
-              <span>¡GIRAR LA RUEDA!</span>
+              <span>SPIN THE WHEEL!</span>
             </button>
           </div>
 
@@ -234,15 +234,15 @@
               "It is raining heavily! We need water-resistant clothes and gear."
             </div>
             <div id="wheelPromptEs" style="font-size:0.88rem; color:#64748b; font-style:italic; margin-bottom:14px;">
-              ¡Está lloviendo fuerte! Necesitamos ropa impermeable y accesorios para el agua.
+              It is raining heavily! We need waterproof clothes and rain gear.
             </div>
 
-            <!-- Grilla de Artículos del Armario -->
+            <!-- Wardrobe Items Grid -->
             <div class="wardrobe-items-grid" id="wardrobeItemsGrid">
               <!-- Inyectados por JS -->
             </div>
 
-            <!-- Caja de Retroalimentación del Armario -->
+            <!-- Wardrobe feedback box -->
             <div id="wheelFeedbackBox" style="text-align:center; margin-top:14px;"></div>
           </div>
 
@@ -263,13 +263,13 @@
               <span>⚡</span> Live TV Weather Broadcast con Potenciadores Quizizz
             </h2>
             <div style="font-size:0.88rem; color:#94a3b8; margin-top:2px;">
-              Presenta el boletín del tiempo en televisión en vivo. Usa tus potenciadores para ganar estrellas dobles o tiempo extra.
+              Broadcast the live TV weather forecast. Use power-ups to earn double stars and bonus points!
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="unit-tag-pill" id="tvCityBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Boletín 1 de 8 • London 🌧️</span>
+            <span class="unit-tag-pill" id="tvCityBadge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid #38bdf8;">Forecast 1 of 8 • London 🌧️</span>
             <button class="btn-back-map" style="background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); cursor:pointer;" onclick="nextTVBroadcast()">
-              <span>Siguiente Ciudad ➔</span>
+              <span>Next City ➔</span>
             </button>
           </div>
         </div>
@@ -293,7 +293,7 @@
           </button>
         </div>
 
-        <!-- Pantalla de Estudio Verde con Teleprónter -->
+        <!-- Green Screen Studio with Teleprompter -->
         <div class="tv-green-screen-box">
           <div class="tv-on-air-badge">
             <span style="width:8px; height:8px; border-radius:50%; background:#ef4444; display:inline-block; animation:pulsePin 1s infinite;"></span>
@@ -308,23 +308,23 @@
             "Attention viewers! Right now in London, it is raining heavily and people are holding colorful umbrellas."
           </div>
           <div id="tvTeleprompterEs" style="font-size:0.95rem; color:#94a3b8; font-style:italic; margin-bottom:16px;">
-            ¡Atención televidentes! Ahora mismo en Londres, está lloviendo fuerte y la gente sostiene paraguas coloridos.
+            Attention viewers! Right now in London, it is raining heavily and people are holding colorful umbrellas.
           </div>
 
           <div>
             <button class="btn-back-map" style="background:rgba(56,189,248,0.18); color:#38bdf8; border-color:#38bdf8; cursor:pointer;" onclick="listenTVForecast()">
-              🔊 Escuchar Modelo del Presentador
+              🔊 Listen to Weather Host
             </button>
           </div>
         </div>
 
-        <!-- Botón de Micrófono para Locución -->
+        <!-- Broadcast microphone button -->
         <div style="margin:20px 0;">
           <button class="btn-tv-mic" id="tvMicBtn" onclick="toggleTVMic()" title="Presentar el clima en vivo">
             🎙️
           </button>
           <div style="font-size:0.85rem; color:#94a3b8; margin-top:10px;">
-            Toca el micrófono y lee el pronóstico del clima frente a la audiencia
+            Tap the microphone and read the weather forecast to the audience
           </div>
         </div>
 
@@ -333,7 +333,7 @@
           <span style="color:#38bdf8; font-size:0.9rem;">💬 En Vivo: 150K live viewers connected! 🔥</span>
         </div>
 
-        <!-- Retroalimentación de la Transmisión -->
+        <!-- Broadcast feedback -->
         <div id="tvBroadcastFeedback" style="text-align:center; margin-top:14px;"></div>
 
       </div>
