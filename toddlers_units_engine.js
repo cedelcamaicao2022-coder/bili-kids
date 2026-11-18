@@ -214,7 +214,7 @@ class ToddlersUnitsEngine {
   playAudio(text, voice = 'kid') {
     if (!text || typeof text !== 'string') return;
 
-    const manifest = window.ToddlersAudioManifest || window.BilikidsAudioManifest || {};
+    const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {}, window.KIDS_AUDIO_MANIFEST || {});
     
     // Priority candidates for manifest audio lookup
     const candidates = [];

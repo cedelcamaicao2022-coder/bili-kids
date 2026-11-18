@@ -24,9 +24,15 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
     return;
   }
 
-  // 1. Check ElevenLabs Studio Audio Manifest
+  // 1. Check Studio Audio Manifests (Kids, Toddlers, Interactive Games)
   const key = normalizeAudioKey(text);
-  const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
+  const manifest = Object.assign(
+    {},
+    window.ToddlersAudioManifest || {},
+    window.BilikidsAudioManifest || {},
+    window.KIDS_AUDIO_MANIFEST || {},
+    window.InteractiveGamesAudioManifest || {}
+  );
   let audioSrc = manifest[key];
   if (!audioSrc) {
     const noSpaces = key.replace(/\s+/g, '');
@@ -52,11 +58,11 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       const audio = new Audio(audioSrc);
       currentBilikidsAudio = audio;
 
-      // Preservar tono exacto y reproducir a ritmo natural y claro para niños
+      // Preservar tono exacto y reproducir a ritmo natural del estudio ElevenLabs
       audio.preservesPitch = true;
       audio.mozPreservesPitch = true;
       audio.webkitPreservesPitch = true;
-      audio.playbackRate = 0.96; // Ritmo claro, natural y perfectamente modulado
+      audio.playbackRate = 1.0;
 
       const safeDuration = Math.max(2000, (text.length * 120) / audio.playbackRate);
       const safeTimer = setTimeout(finish, safeDuration);
@@ -126,5 +132,20 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
     window.speechSynthesis.speak(utterance);
   } catch (err) {
     if (callback) callback();
+  }
+}
+
+// Explicitly attach to window
+if (typeof window !== 'undefined') {
+  window.playStudioOrSynthAudio = playStudioOrSynthAudio;
+  window.normalizeAudioKey = normalizeAudioKey;
+}
+
+// Auto-load studio audio manifest if not already included on the page
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (!window.BilikidsAudioManifest && !window.KIDS_AUDIO_MANIFEST) {
+    const s = document.createElement('script');
+    s.src = 'assets/kids_audio/kids_audio_manifest.js?v=20261118_bili';
+    document.head.appendChild(s);
   }
 }

@@ -1,4 +1,5 @@
-window.KIDS_AUDIO_MANIFEST = {
+// Bilikids Kids Audio Manifest (ElevenLabs Studio Voice Engine)
+window.BilikidsAudioManifest = window.KIDS_AUDIO_MANIFEST = {
   "hello good morning welcome to bilikids school": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
   "u1_sc_01_alex": "assets/kids_audio/scenarios/u1_sc_01_alex.mp3",
   "nice to meet you maya are you a new student here": "assets/kids_audio/scenarios/u1_sc_02_alex.mp3",
