@@ -3,7 +3,7 @@
  * Plays natural studio MP3 recordings (ElevenLabs) at their native recorded pace (1.0x)
  * with authentic tone. All synthetic browser voices (SpeechSynthesis) are completely disabled.
  */
-const BILIKIDS_AUDIO_VERSION = '20261120_relaxed_v3';
+const BILIKIDS_AUDIO_VERSION = '20261120_keywords_v1';
 
 function normalizeAudioKey(str) {
   return (str || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
