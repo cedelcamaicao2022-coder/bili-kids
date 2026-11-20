@@ -437,19 +437,47 @@ body {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 0.72rem;
+  padding: 3px 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
   color: #475569;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  transition: all 0.15s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .chat-listen-btn:hover {
   background: #ede9fe;
   color: #6d28d9;
+  border-color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+.chat-listen-btn.pulse-listen-cta {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #ffffff !important;
+  border: 1px solid #4338ca;
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  animation: pulseListenCTA 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseListenCTA {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  70% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 9px rgba(99, 102, 241, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
 }
 
 /* Caja de Decisión / Quiz para el Alumno */

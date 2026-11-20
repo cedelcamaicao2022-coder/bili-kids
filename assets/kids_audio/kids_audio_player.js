@@ -3,11 +3,44 @@
  * Plays natural studio MP3 recordings (ElevenLabs) at their native recorded pace (1.0x)
  * with authentic tone. All synthetic browser voices (SpeechSynthesis) are completely disabled.
  */
+const BILIKIDS_AUDIO_VERSION = '20261120_leo_jessica_v2';
+
 function normalizeAudioKey(str) {
   return (str || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
 }
 
 let currentBilikidsAudio = null;
+let userHasInteractedWithDoc = false;
+let pendingAutoplayAudio = null;
+
+// User gesture detection to unlock audio playback across the entire session
+function registerFirstUserGesture() {
+  if (userHasInteractedWithDoc) return;
+  userHasInteractedWithDoc = true;
+  
+  // Resume any suspended AudioContext if present
+  if (typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext)) {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (window.__biliSharedAudioCtx && window.__biliSharedAudioCtx.state === 'suspended') {
+        window.__biliSharedAudioCtx.resume();
+      }
+    } catch (e) {}
+  }
+
+  // If there was a pending audio blocked by initial autoplay policy, play it now
+  if (pendingAutoplayAudio) {
+    const pending = pendingAutoplayAudio;
+    pendingAutoplayAudio = null;
+    playStudioOrSynthAudio(pending.text, pending.voiceType, pending.onComplete);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  ['click', 'touchstart', 'touchend', 'keydown'].forEach(evt => {
+    window.addEventListener(evt, registerFirstUserGesture, { once: false, passive: true });
+  });
+}
 
 // Permanently silence robotic browser speech synthesis
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -66,7 +99,13 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
         currentBilikidsAudio.currentTime = 0;
         currentBilikidsAudio = null;
       }
-      const audio = new Audio(audioSrc);
+
+      // Cache-busting URL to ensure fresh audio files (Leo Kid & Jessica) are always loaded
+      const finalSrc = audioSrc.includes('?v=')
+        ? audioSrc
+        : `${audioSrc}${audioSrc.includes('?') ? '&' : '?'}v=${BILIKIDS_AUDIO_VERSION}`;
+
+      const audio = new Audio(finalSrc);
       currentBilikidsAudio = audio;
 
       // Reproducir voces naturales de estudio a su ritmo y tono original (1.0x exacto)
@@ -75,7 +114,7 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       audio.webkitPreservesPitch = true;
       audio.playbackRate = 1.0;
 
-      const safeDuration = Math.max(2000, text.length * 120);
+      const safeDuration = Math.max(2500, text.length * 130);
       const safeTimer = setTimeout(finish, safeDuration);
 
       audio.onended = () => {
@@ -86,12 +125,27 @@ function playStudioOrSynthAudio(text, voiceType = 'kid', onComplete = null) {
       audio.onerror = () => {
         clearTimeout(safeTimer);
         currentBilikidsAudio = null;
-        console.warn("[KidsAudio] Audio could not be loaded:", audioSrc);
+        console.warn("[KidsAudio] Audio could not be loaded:", finalSrc);
         finish();
       };
-      audio.play().catch(err => {
-        console.warn("[KidsAudio] Audio play interrupted:", err);
-      });
+
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Playback started successfully
+          userHasInteractedWithDoc = true;
+          pendingAutoplayAudio = null;
+        }).catch(err => {
+          console.warn("[KidsAudio] Audio play interrupted:", err);
+          if (err && err.name === 'NotAllowedError') {
+            // Autoplay blocked: remember audio and notify page to show tap-to-listen indicator
+            pendingAutoplayAudio = { text, voiceType, onComplete };
+            if (typeof window.__onAutoplayBlocked === 'function') {
+              window.__onAutoplayBlocked(text, voiceType, onComplete);
+            }
+          }
+        });
+      }
       return;
     } catch (e) {
       console.warn("Audio exception:", e);
@@ -113,18 +167,31 @@ function fallbackSpeechSynthesis(text, voiceType, callback) {
   if (callback) callback();
 }
 
+function stopBilikidsAudio() {
+  pendingAutoplayAudio = null;
+  if (currentBilikidsAudio) {
+    try {
+      currentBilikidsAudio.pause();
+      currentBilikidsAudio.currentTime = 0;
+    } catch (e) {}
+    currentBilikidsAudio = null;
+  }
+}
+
 // Explicitly attach to window
 if (typeof window !== 'undefined') {
   window.playStudioOrSynthAudio = playStudioOrSynthAudio;
+  window.stopBilikidsAudio = stopBilikidsAudio;
   window.fallbackSpeechSynthesis = fallbackSpeechSynthesis;
   window.normalizeAudioKey = normalizeAudioKey;
+  window.BILIKIDS_AUDIO_VERSION = BILIKIDS_AUDIO_VERSION;
 }
 
 // Auto-load studio audio manifest if not already included on the page
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (!window.BilikidsAudioManifest && !window.KIDS_AUDIO_MANIFEST) {
     const s = document.createElement('script');
-    s.src = 'assets/kids_audio/kids_audio_manifest.js?v=20261118_bili';
+    s.src = `assets/kids_audio/kids_audio_manifest.js?v=${BILIKIDS_AUDIO_VERSION}`;
     document.head.appendChild(s);
   }
 }

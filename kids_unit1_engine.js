@@ -15,6 +15,7 @@ class SoundEffects {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       this.ctx = new AudioCtx();
+      window.__biliSharedAudioCtx = this.ctx;
     }
     if (this.ctx.state === 'suspended') {
       this.ctx.resume();
@@ -725,7 +726,7 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
     <div class="chat-message-bubble">
       <div class="chat-sender-name">
         <span>${charName}</span>
-        <button class="chat-listen-btn" onclick="replayChatAudio('${textEn.replace(/'/g, "\\'")}', '${charKey}', 'avatar-${msgId}')">
+        <button class="chat-listen-btn" id="btn-listen-${msgId}" onclick="replayChatAudio('${textEn.replace(/'/g, "\\'")}', '${charKey}', 'avatar-${msgId}', 'btn-listen-${msgId}')">
           🔊 Listen
         </button>
       </div>
@@ -738,19 +739,47 @@ function appendStoryChatMessage(charKey, charName, charAvatar, textEn, textEs) {
   chatFlow.scrollTop = chatFlow.scrollHeight;
 }
 
-function replayChatAudio(text, charKey, avatarId) {
+function replayChatAudio(text, charKey, avatarId, btnId) {
   sfx.playPop();
   const avatar = document.getElementById(avatarId);
+  const btn = btnId ? document.getElementById(btnId) : null;
   if (avatar) avatar.classList.add('talking');
+  if (btn) {
+    btn.classList.remove('pulse-listen-cta');
+    btn.innerHTML = '🔊 Playing...';
+  }
   speakEnglish(text, charKey, () => {
     if (avatar) avatar.classList.remove('talking');
+    if (btn) btn.innerHTML = '🔊 Listen';
   });
+}
+
+// Handler when browser blocks autoplay before user gesture
+if (typeof window !== 'undefined') {
+  window.__onAutoplayBlocked = function(text, voiceType, onComplete) {
+    const latestBtn = document.querySelector('.chat-bubble-row:last-child .chat-listen-btn');
+    if (latestBtn) {
+      latestBtn.classList.add('pulse-listen-cta');
+      latestBtn.innerHTML = '▶️ Tap to listen';
+    }
+  };
 }
 
 function selectShuffledChoice(isCorrect, btnEl, textEn, textEs) {
   if (isCorrect) {
+    // Stop any previous speech or pending autoplay so it never collides
+    if (typeof window.stopBilikidsAudio === 'function') {
+      window.stopBilikidsAudio();
+    }
+
     sfx.playSuccess();
     btnEl.classList.add('correct-choice');
+
+    // Remove any pulsing on listen buttons
+    document.querySelectorAll('.pulse-listen-cta').forEach(b => {
+      b.classList.remove('pulse-listen-cta');
+      b.innerHTML = '🔊 Listen';
+    });
 
     // Disable all buttons to prevent double click
     document.querySelectorAll('.prompt-option-btn').forEach(b => b.style.pointerEvents = 'none');
