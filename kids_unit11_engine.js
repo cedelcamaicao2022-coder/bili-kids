@@ -3617,7 +3617,7 @@ class KidsUnit11Engine {
     this.stars = 210;
     this.soundEnabled = true;
     this.audioCtx = null;
-    this.quizStates = {}; // key: category_index -> { currentQ: 0, score: 0 }
+    this.masterQuizStates = {};
     window.unit11Engine = this;
   }
 
@@ -3683,110 +3683,158 @@ class KidsUnit11Engine {
     if (el) el.textContent = `${this.stars} pts`;
   }
 
-  toggleCardQuiz(categoryKey, cardIdx) {
-    const prefix = categoryKey === 'museum' ? 'tour' : (categoryKey === 'invention' ? 'inv' : 'fossil');
-    const quizContainer = document.getElementById(`${prefix}-quiz-${cardIdx}`);
-    const btn = document.getElementById(`${prefix}-quiz-btn-${cardIdx}`);
-    if (!quizContainer) return;
-
-    const isHidden = (quizContainer.style.display === 'none' || !quizContainer.style.display);
-    if (isHidden) {
-      quizContainer.style.display = 'flex';
-      if (btn) {
-        btn.classList.add('active');
-        btn.innerHTML = '<span>✖ Close Quiz</span>';
-      }
-    } else {
-      quizContainer.style.display = 'none';
-      if (btn) {
-        btn.classList.remove('active');
-        btn.innerHTML = '<span>🧩 Quiz (5 Qs)</span>';
-      }
+  generateMasterQuestions(items, categoryKey) {
+    if (!this.masterQuizStates[categoryKey]) {
+      this.masterQuizStates[categoryKey] = {
+        currentQ: 0,
+        score: 0,
+        answered: false,
+        questionHadError: false,
+        questions: [],
+        lastIndices: {}
+      };
     }
+    const st = this.masterQuizStates[categoryKey];
+    if (!st.lastIndices) st.lastIndices = {};
+
+    const selectedQuestions = [];
+
+    items.forEach((item, itemIdx) => {
+      if (!item.quiz || item.quiz.length === 0) return;
+      const totalQ = item.quiz.length;
+      const prevIdx = st.lastIndices[itemIdx];
+
+      // Pick question index different from prevIdx (guarantees different questions on retry)
+      let candidates = [];
+      for (let i = 0; i < totalQ; i++) {
+        if (prevIdx === undefined || i !== prevIdx || totalQ === 1) {
+          candidates.push(i);
+        }
+      }
+      if (candidates.length === 0) candidates = [0];
+
+      const chosenIdx = candidates[Math.floor(Math.random() * candidates.length)];
+      st.lastIndices[itemIdx] = chosenIdx;
+
+      const qObj = item.quiz[chosenIdx];
+      selectedQuestions.push({
+        cardTitle: item.name || item.item || item.title,
+        cardIcon: item.icon || '🦖',
+        cardSubtitle: item.period || item.date || item.room || '',
+        q: qObj.q,
+        options: [...qObj.options],
+        correct: qObj.correct,
+        exp: qObj.exp || ''
+      });
+    });
+
+    // Shuffle the 20 questions so the order is randomized on every try
+    for (let i = selectedQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [selectedQuestions[i], selectedQuestions[j]] = [selectedQuestions[j], selectedQuestions[i]];
+    }
+
+    return selectedQuestions;
   }
 
-  // --- REUSABLE INTERACTIVE 5-QUESTION QUIZ RENDERER ---
-  renderCardQuiz(containerEl, quizList, categoryKey, cardIdx) {
-    const stateKey = `${categoryKey}_${cardIdx}`;
-    if (!this.quizStates[stateKey]) {
-      this.quizStates[stateKey] = { currentQ: 0, score: 0, answered: false };
+  // --- REUSABLE 20-QUESTION MASTER QUIZ AT THE END OF ALL CARDS ---
+  setupMasterQuiz(containerId, items, categoryKey, titleText, subtitleText, themeColor = '#6366f1') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (!this.masterQuizStates[categoryKey]) {
+      this.masterQuizStates[categoryKey] = {
+        currentQ: 0,
+        score: 0,
+        answered: false,
+        questionHadError: false,
+        questions: [],
+        lastIndices: {}
+      };
     }
-    const st = this.quizStates[stateKey];
+    const st = this.masterQuizStates[categoryKey];
 
-    const updateUI = () => {
-      const total = quizList.length;
+    // Initialize questions
+    if (!st.questions || st.questions.length === 0) {
+      st.questions = this.generateMasterQuestions(items, categoryKey);
+    }
 
-      // Completion view
+    const render = () => {
+      const total = st.questions.length;
+
+      // Completion screen
       if (st.currentQ >= total) {
-        containerEl.innerHTML = `
-          <div class="card-quiz-complete">
-            <div class="card-quiz-complete-title">⭐ 5/5 Questions Solved!</div>
-            <div class="card-quiz-complete-sub">Mastery accomplished! +50 Bonus Stars Awarded!</div>
-            <div style="display:flex;gap:8px;justify-content:center;margin-top:6px;flex-wrap:wrap;">
-              <button type="button" class="card-quiz-retry-btn" aria-label="Replay quiz">🔄 Replay Quiz</button>
-              <button type="button" class="card-quiz-close-btn" aria-label="Close quiz">✔ Close</button>
-            </div>
+        container.innerHTML = `
+          <div class="kids-master-quiz-complete" style="border-color:${themeColor};">
+            <div class="kids-master-quiz-complete-icon">🏆</div>
+            <h3 class="kids-master-quiz-complete-title">⭐ ${titleText} Complete!</h3>
+            <p class="kids-master-quiz-complete-sub">You scored ${st.score} out of ${total} correct! +100 Bonus Stars Awarded!</p>
+            <button type="button" class="kids-master-quiz-retry-btn" style="background:${themeColor};" aria-label="Try again with new questions">
+              <span>🔄 Try Again with New Questions</span>
+            </button>
           </div>
         `;
-        const retryBtn = containerEl.querySelector('.card-quiz-retry-btn');
+        const retryBtn = container.querySelector('.kids-master-quiz-retry-btn');
         if (retryBtn) {
-          retryBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+          retryBtn.addEventListener('click', () => {
+            this.playSuccess();
+            st.questions = this.generateMasterQuestions(items, categoryKey);
             st.currentQ = 0;
             st.score = 0;
             st.answered = false;
-            updateUI();
-          });
-        }
-        const closeBtn = containerEl.querySelector('.card-quiz-close-btn');
-        if (closeBtn) {
-          closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleCardQuiz(categoryKey, cardIdx);
+            st.questionHadError = false;
+            render();
           });
         }
         return;
       }
 
       // Active question view
-      const cur = quizList[st.currentQ];
-      const dotsHtml = quizList.map((_, i) => {
-        let cls = 'card-quiz-dot';
-        if (i < st.currentQ) cls += ' done';
-        else if (i === st.currentQ) cls += ' active';
-        return `<span class="${cls}"></span>`;
-      }).join('');
+      const cur = st.questions[st.currentQ];
+      const progressPct = Math.round(((st.currentQ) / total) * 100);
 
-      containerEl.innerHTML = `
-        <div class="card-quiz-header">
-          <span class="card-quiz-title">🧩 Quiz: Question ${st.currentQ + 1} of ${total}</span>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <div class="card-quiz-dots">${dotsHtml}</div>
-            <button type="button" class="card-quiz-close-x" aria-label="Close quiz">✕</button>
+      container.innerHTML = `
+        <div class="kids-master-quiz-header">
+          <div class="kids-master-quiz-title-box">
+            <h3 class="kids-master-quiz-title" style="color:${themeColor};">
+              <span>🧩 ${titleText}</span>
+            </h3>
+            <span class="kids-master-quiz-subtitle">${subtitleText}</span>
+          </div>
+          <div class="kids-master-quiz-stats">
+            <span class="kids-master-quiz-qcount">Question ${st.currentQ + 1} of ${total}</span>
+            <span class="kids-master-quiz-scorebadge">⭐ Score: ${st.score}/${total}</span>
           </div>
         </div>
-        <div class="card-quiz-qtext">${cur.q}</div>
-        <div class="card-quiz-options">
-          ${cur.options.map((opt, optIdx) => `
-            <button type="button" class="card-quiz-opt" data-opt="${optIdx}">
-              <strong style="color:#2563eb;margin-right:6px;">${['A', 'B', 'C'][optIdx]}.</strong>
-              <span>${opt}</span>
-            </button>
-          `).join('')}
+
+        <div class="kids-master-quiz-progressbar">
+          <div class="kids-master-quiz-progressfill" style="width:${progressPct}%;background:${themeColor};"></div>
         </div>
-        <div class="card-quiz-feedback" style="font-size:0.78rem;font-weight:700;margin-top:6px;display:none;"></div>
+
+        <div class="kids-master-quiz-qbody">
+          <div class="kids-master-quiz-badge">
+            <span>${cur.cardIcon}</span>
+            <strong>${cur.cardTitle}</strong>
+            ${cur.cardSubtitle ? `<span style="opacity:0.75;margin-left:4px;">(${cur.cardSubtitle})</span>` : ''}
+          </div>
+          <h4 class="kids-master-quiz-qtext">${cur.q}</h4>
+          <div class="kids-master-quiz-options">
+            ${cur.options.map((opt, optIdx) => `
+              <button type="button" class="kids-master-quiz-opt" data-opt="${optIdx}">
+                <strong style="color:${themeColor};margin-right:8px;font-size:1.05rem;">${['A', 'B', 'C'][optIdx]}.</strong>
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+          <div class="kids-master-quiz-feedback"></div>
+        </div>
       `;
 
-      const closeX = containerEl.querySelector('.card-quiz-close-x');
-      if (closeX) {
-        closeX.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.toggleCardQuiz(categoryKey, cardIdx);
-        });
-      }
+      st.answered = false;
+      st.questionHadError = false;
 
-      const fb = containerEl.querySelector('.card-quiz-feedback');
-      const optButtons = containerEl.querySelectorAll('.card-quiz-opt');
+      const fb = container.querySelector('.kids-master-quiz-feedback');
+      const optButtons = container.querySelectorAll('.kids-master-quiz-opt');
 
       optButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -3797,7 +3845,9 @@ class KidsUnit11Engine {
 
           if (isCorrect) {
             st.answered = true;
-            st.score++;
+            if (!st.questionHadError) {
+              st.score++;
+            }
             btn.classList.add('correct');
             this.playSuccess();
             this.addStars(10);
@@ -3808,13 +3858,13 @@ class KidsUnit11Engine {
             }
             setTimeout(() => {
               st.currentQ++;
-              st.answered = false;
               if (st.currentQ >= total) {
-                this.addStars(50);
+                this.addStars(100);
               }
-              updateUI();
+              render();
             }, 750);
           } else {
+            st.questionHadError = true;
             btn.classList.add('incorrect');
             btn.disabled = true;
             this.playError();
@@ -3828,7 +3878,7 @@ class KidsUnit11Engine {
       });
     };
 
-    updateUI();
+    render();
   }
 
   // 1. FOSSIL DIG SITE (20 Prehistoric Creatures)
@@ -3847,21 +3897,15 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">${f.fact}</p>
         <div class="kids-unit11-audio-row">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button type="button" class="kids-audio-play-btn fossil-audio-btn" data-text="${f.speechText}" aria-label="Listen to ${f.name} fact">
-              🔊 Hear Dinosaur Fact
-            </button>
-            <button type="button" class="kids-quiz-trigger-btn" id="fossil-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('fossil', ${i})" aria-label="Open quiz for ${f.name}">
-              <span>🧩 Quiz (5 Qs)</span>
-            </button>
-          </div>
+          <button type="button" class="kids-audio-play-btn fossil-audio-btn" data-text="${f.speechText}" aria-label="Listen to ${f.name} fact">
+            🔊 Hear Dinosaur Fact
+          </button>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+20 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="fossil-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
-    // Attach audio and quiz
+    // Attach audio
     grid.querySelectorAll('.kids-unit11-card').forEach((cardEl, i) => {
       const f = U11_FOSSILS[i];
       const audioBtn = cardEl.querySelector('.fossil-audio-btn');
@@ -3873,11 +3917,17 @@ class KidsUnit11Engine {
           this.addStars(20);
         });
       }
-      const quizContainer = cardEl.querySelector(`#fossil-quiz-${i}`);
-      if (quizContainer && f.quiz) {
-        this.renderCardQuiz(quizContainer, f.quiz, 'fossil', i);
-      }
     });
+
+    // 20-Question Master Quiz at the end of the cards
+    this.setupMasterQuiz(
+      'fossilMasterQuiz',
+      U11_FOSSILS,
+      'fossil',
+      'Prehistoric Creatures Master Quiz',
+      '20 questions covering all prehistoric dinosaurs and creatures from the excavation!',
+      '#059669'
+    );
   }
 
   // 2. ANCIENT INVENTIONS (20 Great Inventions)
@@ -3896,21 +3946,15 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">${inv.desc}</p>
         <div class="kids-unit11-audio-row">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button type="button" class="kids-audio-play-btn inv-audio-btn" data-text="${inv.speechText}" aria-label="Listen to ${inv.item} discovery story">
-              🔊 Hear Discovery Story
-            </button>
-            <button type="button" class="kids-quiz-trigger-btn" id="inv-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('invention', ${i})" aria-label="Open quiz for ${inv.item}">
-              <span>🧩 Quiz (5 Qs)</span>
-            </button>
-          </div>
+          <button type="button" class="kids-audio-play-btn inv-audio-btn" data-text="${inv.speechText}" aria-label="Listen to ${inv.item} discovery story">
+            🔊 Hear Discovery Story
+          </button>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+20 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="inv-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
-    // Attach audio and quiz
+    // Attach audio
     container.querySelectorAll('.kids-unit11-card').forEach((cardEl, i) => {
       const inv = U11_INVENTIONS[i];
       const audioBtn = cardEl.querySelector('.inv-audio-btn');
@@ -3922,108 +3966,17 @@ class KidsUnit11Engine {
           this.addStars(20);
         });
       }
-      const quizContainer = cardEl.querySelector(`#inv-quiz-${i}`);
-      if (quizContainer && inv.quiz) {
-        this.renderCardQuiz(quizContainer, inv.quiz, 'invention', i);
-      }
     });
 
-    // Memory Recall Section
-    const existingRecall = document.getElementById('inventionRecallCheck');
-    if (!existingRecall) {
-      const recall = document.createElement('section');
-      recall.id = 'inventionRecallCheck';
-      recall.style.cssText = 'grid-column:1/-1;margin-top:24px;padding:20px;border:2px solid #c4b5fd;border-radius:18px;background:#f5f3ff;';
-      recall.setAttribute('aria-labelledby', 'inventionRecallTitle');
-      recall.innerHTML = `
-        <h3 id="inventionRecallTitle" style="margin:0 0 6px;color:#5b21b6;font-size:1.2rem;">🧠 Invention Recall Challenge</h3>
-        <p style="font-size:0.92rem;color:#4c1d95;margin-bottom:12px;">Test your memory across all 20 historical inventions! Match each clue to the correct world-changing invention.</p>
-        <button type="button" class="kids-audio-play-btn" data-action="start" style="background:#7c3aed;color:#ffffff;border:none;padding:8px 18px;font-size:0.95rem;">
-          🚀 Start 5-Question Recall Challenge
-        </button>
-        <div class="invention-recall-question" role="status" aria-live="polite" style="margin-top:14px;"></div>
-      `;
-      container.after(recall);
-
-      const recallBox = recall.querySelector('.invention-recall-question');
-      const startBtn = recall.querySelector('[data-action="start"]');
-
-      startBtn.addEventListener('click', () => {
-        let index = 0;
-        let score = 0;
-        const shuffledPool = [...U11_INVENTIONS].sort(() => Math.random() - 0.5).slice(0, 5);
-
-        const renderQuestion = () => {
-          if (index >= shuffledPool.length) {
-            recallBox.innerHTML = `
-              <div style="background:#dcfce7;border:1.5px solid #86efac;padding:14px;border-radius:12px;margin-top:10px;">
-                <p style="font-weight:800;color:#166534;font-size:1.05rem;margin:0 0 8px;">
-                  🎉 Recall Complete: ${score}/${shuffledPool.length} Correct!
-                </p>
-                <button type="button" class="kids-audio-play-btn" data-action="restart" style="background:#166534;color:#ffffff;border:none;">
-                  🔄 Play Another Recall Challenge
-                </button>
-              </div>
-            `;
-            this.addStars(score * 15);
-            recallBox.querySelector('[data-action="restart"]').addEventListener('click', () => startBtn.click());
-            return;
-          }
-
-          const target = shuffledPool[index];
-          const distractorPool = U11_INVENTIONS.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2);
-          const options = [target, ...distractorPool].sort(() => Math.random() - 0.5);
-
-          recallBox.innerHTML = `
-            <div style="background:#ffffff;border:1.5px solid #cbd5e1;border-radius:14px;padding:14px;">
-              <p style="font-weight:700;color:#1e293b;font-size:0.96rem;margin-bottom:10px;">
-                <strong>Clue ${index + 1} of ${shuffledPool.length}:</strong> "${target.desc}"
-              </p>
-              <div class="invention-recall-options" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
-              <p class="invention-recall-feedback" style="font-weight:700;font-size:0.86rem;margin-top:10px;display:none;"></p>
-            </div>
-          `;
-
-          const optionsBox = recallBox.querySelector('.invention-recall-options');
-          const fb = recallBox.querySelector('.invention-recall-feedback');
-
-          options.forEach(option => {
-            const choice = document.createElement('button');
-            choice.type = 'button';
-            choice.className = 'kids-tile-btn';
-            choice.style.cssText = 'flex:1 1 200px;padding:10px;font-size:0.9rem;border-radius:12px;';
-            choice.innerHTML = `<span style="font-size:1.4rem;display:block;">${option.icon}</span><strong>${option.item}</strong>`;
-
-            choice.addEventListener('click', () => {
-              if (option === target) {
-                score++;
-                choice.classList.add('correct');
-                fb.style.display = 'block';
-                fb.style.color = '#15803d';
-                fb.textContent = `⭐ Correct: ${target.item}!`;
-                this.speak(target.speechText);
-                this.playSuccess();
-                optionsBox.querySelectorAll('button').forEach(b => { b.disabled = true; });
-                setTimeout(() => {
-                  index++;
-                  renderQuestion();
-                }, 1200);
-              } else {
-                choice.classList.add('incorrect');
-                choice.disabled = true;
-                this.playError();
-                fb.style.display = 'block';
-                fb.style.color = '#b91c1c';
-                fb.textContent = 'Not that invention! Try another choice.';
-              }
-            });
-            optionsBox.appendChild(choice);
-          });
-        };
-
-        renderQuestion();
-      });
-    }
+    // 20-Question Master Quiz at the end of the cards
+    this.setupMasterQuiz(
+      'inventionsMasterQuiz',
+      U11_INVENTIONS,
+      'invention',
+      'Ancient Inventions Master Quiz',
+      '20 questions covering world-changing discoveries from ancient civilization!',
+      '#7c3aed'
+    );
   }
 
   // 3. PAST TENSE STORY WEAVER
@@ -4108,21 +4061,15 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">"${ex.desc}"</p>
         <div class="kids-unit11-audio-row">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button type="button" class="kids-audio-play-btn tour-audio-btn" data-text="${ex.speechText}" aria-label="Listen to ${ex.title} docent narration">
-              🔊 Hear Tour Narration
-            </button>
-            <button type="button" class="kids-quiz-trigger-btn" id="tour-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('museum', ${i})" aria-label="Open quiz for ${ex.title}">
-              <span>🧩 Quiz (5 Qs)</span>
-            </button>
-          </div>
+          <button type="button" class="kids-audio-play-btn tour-audio-btn" data-text="${ex.speechText}" aria-label="Listen to ${ex.title} docent narration">
+            🔊 Hear Tour Narration
+          </button>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+30 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="tour-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
-    // Attach audio and quiz
+    // Attach audio
     container.querySelectorAll('.kids-unit11-card').forEach((cardEl, i) => {
       const ex = U11_MUSEUM[i];
       const audioBtn = cardEl.querySelector('.tour-audio-btn');
@@ -4134,11 +4081,17 @@ class KidsUnit11Engine {
           this.addStars(30);
         });
       }
-      const quizContainer = cardEl.querySelector(`#tour-quiz-${i}`);
-      if (quizContainer && ex.quiz) {
-        this.renderCardQuiz(quizContainer, ex.quiz, 'museum', i);
-      }
     });
+
+    // 20-Question Master Quiz at the end of the cards
+    this.setupMasterQuiz(
+      'museumMasterQuiz',
+      U11_MUSEUM,
+      'museum',
+      'Museum History Master Quiz',
+      '20 questions covering all 20 legendary exhibits and gallery docent tours!',
+      '#2563eb'
+    );
   }
 }
 
