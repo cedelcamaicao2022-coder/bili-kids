@@ -405,6 +405,37 @@ body {
   justify-content: space-between;
   gap: 8px;
   margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+/* Quiz Trigger Button on Cards */
+.kids-quiz-trigger-btn {
+  background: #fdf2f8;
+  border: 1.5px solid #fbcfe8;
+  color: #db2777;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+}
+
+.kids-quiz-trigger-btn:hover {
+  background: #fce7f3;
+  border-color: #f472b6;
+  color: #be185d;
+  transform: translateY(-1px);
+}
+
+.kids-quiz-trigger-btn.active {
+  background: #e11d48;
+  border-color: #e11d48;
+  color: #ffffff;
 }
 
 /* Card Quiz Section (5-Question Quiz at the end of card description) */
@@ -429,6 +460,41 @@ body {
   gap: 8px;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 6px;
+}
+
+.card-quiz-close-x {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.card-quiz-close-x:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.card-quiz-close-btn {
+  background: #ffffff;
+  border: 1px solid #10b981;
+  color: #047857;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.card-quiz-close-btn:hover {
+  background: #10b981;
+  color: #ffffff;
 }
 
 .card-quiz-title {

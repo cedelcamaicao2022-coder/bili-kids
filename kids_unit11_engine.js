@@ -9,7 +9,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-trex",
     "name": "Tyrannosaurus Rex",
-    "icon": "🦖",
+    "icon": "\ud83e\udd96",
     "period": "Late Cretaceous",
     "fact": "The T-Rex had teeth as large as bananas and powerful jaws!",
     "speechText": "Fossil uncovered! The Tyrannosaurus Rex! The T-Rex had teeth as large as bananas and powerful jaws!",
@@ -17,39 +17,39 @@ const U11_FOSSILS = [
       {
         "q": "How big were the teeth of a T-Rex?",
         "options": [
+          "Like pine needles",
           "As large as bananas",
-          "Tiny like rice grains",
-          "Like pine needles"
+          "Tiny like rice grains"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "T-Rex teeth could reach 30 centimeters (banana-sized)!"
       },
       {
         "q": "In which geologic period did T-Rex rule?",
         "options": [
-          "Late Cretaceous",
           "Ice Age",
-          "Modern era"
+          "Modern era",
+          "Late Cretaceous"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "T-Rex lived at the end of the Cretaceous period."
       },
       {
         "q": "What kind of jaws did T-Rex have?",
         "options": [
-          "Crushing, powerful jaws",
           "Soft weak jaws",
+          "Crushing, powerful jaws",
           "No teeth at all"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It had the strongest bite force of any land animal!"
       },
       {
         "q": "Was Tyrannosaurus Rex an herbivore or a carnivore?",
         "options": [
           "Carnivore (meat-eater)",
-          "Herbivore (plant-eater)",
-          "Insectivore"
+          "Insectivore",
+          "Herbivore (plant-eater)"
         ],
         "correct": 0,
         "exp": "It was a ferocious apex meat-eater."
@@ -77,49 +77,49 @@ const U11_FOSSILS = [
       {
         "q": "How many horns did a Triceratops have on its head?",
         "options": [
-          "Three sharp horns",
+          "Ten horns",
           "Only one horn",
-          "Ten horns"
+          "Three sharp horns"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Two large brow horns and one smaller nose horn!"
       },
       {
         "q": "What diet did Triceratops eat?",
         "options": [
-          "Plants (herbivore)",
           "Meat and fish",
-          "Only seeds"
+          "Only seeds",
+          "Plants (herbivore)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It grazed on prehistoric shrubs and palms."
       },
       {
         "q": "Why did Triceratops use its horns?",
         "options": [
+          "To climb trees",
           "To defend against predators",
-          "To dig deep swimming pools",
-          "To climb trees"
+          "To dig deep swimming pools"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Horns defended it against hungry predators like T-Rex."
       },
       {
         "q": "What large bony feature protected its neck?",
         "options": [
-          "A solid neck frill",
           "Spiky wings",
+          "A solid neck frill",
           "A thick fur collar"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The frill shielded its neck from lethal bites."
       },
       {
         "q": "What prefix in its name means 'three'?",
         "options": [
           "Tri-",
-          "Bi-",
-          "Penta-"
+          "Penta-",
+          "Bi-"
         ],
         "correct": 0,
         "exp": "'Tri' means three in Greek (three-horned face)!"
@@ -137,11 +137,11 @@ const U11_FOSSILS = [
       {
         "q": "Was the Pterodactyl a dinosaur or a flying reptile?",
         "options": [
-          "A flying reptile (pterosaur)",
+          "A modern songbird",
           "A mammal",
-          "A modern songbird"
+          "A flying reptile (pterosaur)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Pterosaurs were flying reptiles, distinct from dinosaurs."
       },
       {
@@ -157,19 +157,19 @@ const U11_FOSSILS = [
       {
         "q": "Where did Pterodactyls live and hunt?",
         "options": [
-          "Near ancient coastlines and cliffs",
           "Deep underground caves",
-          "Underwater reefs"
+          "Underwater reefs",
+          "Near ancient coastlines and cliffs"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "They nested on sea cliffs and hunted over water."
       },
       {
         "q": "What did Pterodactyls often catch to eat?",
         "options": [
           "Fish and small animals",
-          "Leaves and berries",
-          "Grass only"
+          "Grass only",
+          "Leaves and berries"
         ],
         "correct": 0,
         "exp": "They skimmed coastal waters for fish and small prey."
@@ -177,11 +177,11 @@ const U11_FOSSILS = [
       {
         "q": "Could Pterodactyls glide through the prehistoric sky?",
         "options": [
-          "Yes, they soared gracefully",
           "No, they only hopped",
+          "Yes, they soared gracefully",
           "No, they only swam"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "They were skilled gliders and fliers."
       }
     ]
@@ -189,7 +189,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-mammoth",
     "name": "Woolly Mammoth",
-    "icon": "🦣",
+    "icon": "\ud83e\udda3",
     "period": "Ice Age",
     "fact": "Mammoths roamed frozen tundras with thick fur and curved tusks.",
     "speechText": "Fossil uncovered! The Woolly Mammoth! Mammoths roamed frozen tundras with thick fur and curved tusks.",
@@ -198,8 +198,8 @@ const U11_FOSSILS = [
         "q": "During which cold era did Woolly Mammoths roam?",
         "options": [
           "The Ice Age (Pleistocene)",
-          "The Jurassic Period",
-          "The Space Age"
+          "The Space Age",
+          "The Jurassic Period"
         ],
         "correct": 0,
         "exp": "Mammoths were adapted to glacial Ice Age climates."
@@ -207,29 +207,29 @@ const U11_FOSSILS = [
       {
         "q": "What protected mammoths from freezing cold?",
         "options": [
+          "Warm sweaters",
           "Thick woolly fur and dense fat",
-          "Scaly skin",
-          "Warm sweaters"
+          "Scaly skin"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Two layers of dense fur and a 10cm fat layer kept them warm."
       },
       {
         "q": "What distinctive feature curved out of their heads?",
         "options": [
+          "Antler crowns",
           "Long curved ivory tusks",
-          "Bull horns",
-          "Antler crowns"
+          "Bull horns"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Their tusks could reach over 4 meters in length!"
       },
       {
         "q": "What modern living animal is the mammoth's closest cousin?",
         "options": [
           "The Asian Elephant",
-          "The Rhinoceros",
-          "The Horse"
+          "The Horse",
+          "The Rhinoceros"
         ],
         "correct": 0,
         "exp": "Asian elephants share over 99% of mammoth DNA."
@@ -237,11 +237,11 @@ const U11_FOSSILS = [
       {
         "q": "What did Woolly Mammoths graze on?",
         "options": [
-          "Grasses, shrubs, and tundra moss",
           "Fish and seals",
-          "Other large animals"
+          "Other large animals",
+          "Grasses, shrubs, and tundra moss"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "They spent hours each day grazing on tundra vegetation."
       }
     ]
@@ -249,7 +249,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-velociraptor",
     "name": "Velociraptor",
-    "icon": "🦖",
+    "icon": "\ud83e\udd96",
     "period": "Late Cretaceous",
     "fact": "A swift hunter with sharp curved claws on its feet.",
     "speechText": "Fossil uncovered! The Velociraptor! A swift hunter with sharp curved claws on its feet.",
@@ -257,49 +257,49 @@ const U11_FOSSILS = [
       {
         "q": "What special weapon did Velociraptor have on each foot?",
         "options": [
-          "A sharp curved sickle claw",
           "Webbed duck feet",
+          "A sharp curved sickle claw",
           "Flat wooden hooves"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its deadly second toe bore an 8cm retractable sickle claw!"
       },
       {
         "q": "Was the Velociraptor slow or swift?",
         "options": [
-          "Swift and agile runner",
+          "Could only crawl",
           "Extremely slow",
-          "Could only crawl"
+          "Swift and agile runner"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Velociraptor ran swiftly with a stiff balancing tail."
       },
       {
         "q": "What body covering did Velociraptor have in life?",
         "options": [
-          "Feathers",
           "Heavy steel scales",
-          "Thick wool fur"
+          "Thick wool fur",
+          "Feathers"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Fossils show clear quill knobs on its forearm bones!"
       },
       {
         "q": "Did Velociraptors hunt alone or in smart packs?",
         "options": [
+          "They did not hunt",
           "In smart cooperative packs",
-          "Always underwater",
-          "They did not hunt"
+          "Always underwater"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "They were intelligent social hunters."
       },
       {
         "q": "What does the name 'Velociraptor' mean?",
         "options": [
           "Swift seizer or thief",
-          "Lazy sleeper",
-          "Big green giant"
+          "Big green giant",
+          "Lazy sleeper"
         ],
         "correct": 0,
         "exp": "'Velox' (swift) and 'raptor' (robber or thief) in Latin."
@@ -309,7 +309,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-stegosaurus",
     "name": "Stegosaurus",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Late Jurassic",
     "fact": "It had large bony plates on its back and sharp tail spikes.",
     "speechText": "Fossil uncovered! The Stegosaurus! It had large bony plates on its back and sharp tail spikes.",
@@ -317,29 +317,29 @@ const U11_FOSSILS = [
       {
         "q": "What stood upright along the back of a Stegosaurus?",
         "options": [
-          "Large bony triangular plates",
           "Fluffy white wings",
+          "Large bony triangular plates",
           "Pointy shark fins"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Up to 17 alternating bony plates lined its spine!"
       },
       {
         "q": "What defensive weapon was at the end of its tail?",
         "options": [
-          "Four sharp tail spikes (thagomizer)",
           "A soft sponge",
-          "A glowing lantern"
+          "A glowing lantern",
+          "Four sharp tail spikes (thagomizer)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "The spikes defended it against predators like Allosaurus."
       },
       {
         "q": "What size was the brain of a Stegosaurus?",
         "options": [
           "About the size of a walnut",
-          "As big as a car",
-          "Bigger than a basketball"
+          "Bigger than a basketball",
+          "As big as a car"
         ],
         "correct": 0,
         "exp": "Despite weighing 5 tons, its brain was walnut-sized!"
@@ -347,19 +347,19 @@ const U11_FOSSILS = [
       {
         "q": "Did Stegosaurus eat plants or meat?",
         "options": [
-          "Low plants and ferns",
+          "Fish only",
           "Other dinosaurs",
-          "Fish only"
+          "Low plants and ferns"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Stegosaurus was a low-browsing herbivore."
       },
       {
         "q": "In which geologic period did Stegosaurus live?",
         "options": [
           "Late Jurassic",
-          "Ice Age",
-          "Modern era"
+          "Modern era",
+          "Ice Age"
         ],
         "correct": 0,
         "exp": "Stegosaurus lived 150 million years ago in the Jurassic."
@@ -369,7 +369,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-brachiosaurus",
     "name": "Brachiosaurus",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Late Jurassic",
     "fact": "A gentle giant with a long neck that reached tall trees.",
     "speechText": "Fossil uncovered! The Brachiosaurus! A gentle giant with a long neck that reached tall trees.",
@@ -377,29 +377,29 @@ const U11_FOSSILS = [
       {
         "q": "Why did Brachiosaurus have such a towering neck?",
         "options": [
-          "To reach high treetop foliage",
           "To swim deep underwater",
+          "To reach high treetop foliage",
           "To sleep on rocks"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its neck allowed it to feed on conifer canopies 13 meters high."
       },
       {
         "q": "Were its front legs longer or shorter than its hind legs?",
         "options": [
-          "Front legs were longer",
           "Hind legs were longer",
+          "Front legs were longer",
           "All legs were identical"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "'Brachiosaurus' means 'arm lizard' due to its longer front legs."
       },
       {
         "q": "What did Brachiosaurus eat daily?",
         "options": [
           "Hundreds of kilos of leaves and branches",
-          "Small fish",
-          "Insects and beetles"
+          "Insects and beetles",
+          "Small fish"
         ],
         "correct": 0,
         "exp": "It consumed massive amounts of vegetation every day."
@@ -417,11 +417,11 @@ const U11_FOSSILS = [
       {
         "q": "Was Brachiosaurus a fast runner or a gentle giant?",
         "options": [
-          "A gentle, slow-moving giant",
           "A fast sprinter",
-          "An acrobatic hopper"
+          "An acrobatic hopper",
+          "A gentle, slow-moving giant"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its immense weight required steady, elephantine walking."
       }
     ]
@@ -429,7 +429,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-spinosaurus",
     "name": "Spinosaurus",
-    "icon": "🐊",
+    "icon": "\ud83d\udc0a",
     "period": "Cretaceous River Hunter",
     "fact": "A huge swimming dinosaur with a giant sail on its back.",
     "speechText": "Fossil uncovered! The Spinosaurus! A huge swimming dinosaur with a giant sail on its back.",
@@ -437,41 +437,41 @@ const U11_FOSSILS = [
       {
         "q": "What dramatic structure rose from Spinosaurus's spine?",
         "options": [
-          "A giant dorsal neural sail",
+          "A rocky hump",
           "Two feathered wings",
-          "A rocky hump"
+          "A giant dorsal neural sail"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its sail was supported by spines up to 1.8 meters tall."
       },
       {
         "q": "Where did Spinosaurus spend much of its hunting time?",
         "options": [
-          "In ancient rivers and water deltas",
           "High on mountain peaks",
+          "In ancient rivers and water deltas",
           "In snowy glaciers"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It was semi-aquatic with paddle-like tail swimming."
       },
       {
         "q": "What was its long snout shaped like?",
         "options": [
+          "A round beak",
           "A crocodile snout with conical teeth",
-          "A duck bill with no teeth",
-          "A round beak"
+          "A duck bill with no teeth"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its crocodile snout was built to seize slippery fish."
       },
       {
         "q": "What was Spinosaurus's favorite prey?",
         "options": [
-          "Giant prehistoric river fish",
+          "Cave bears",
           "Acorns and apples",
-          "Cave bears"
+          "Giant prehistoric river fish"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It hunted giant sawfish (Onchopristis) and lungfish."
       },
       {
@@ -489,7 +489,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-ankylosaurus",
     "name": "Ankylosaurus",
-    "icon": "🛡️",
+    "icon": "\ud83d\udee1\ufe0f",
     "period": "Armored Herbivore",
     "fact": "An armored tank with a heavy bone club on its tail.",
     "speechText": "Fossil uncovered! The Ankylosaurus! An armored tank with a heavy bone club on its tail.",
@@ -497,21 +497,21 @@ const U11_FOSSILS = [
       {
         "q": "What covered the top of an Ankylosaurus's body?",
         "options": [
-          "Bony armor plates (osteoderms)",
+          "Silky fur",
           "Soft down feathers",
-          "Silky fur"
+          "Bony armor plates (osteoderms)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Tough bone plates embedded in its skin protected it from bites."
       },
       {
         "q": "What powerful weapon was at the tip of its tail?",
         "options": [
-          "A heavy solid bone club",
           "A stinging barb",
-          "A soft brush"
+          "A soft brush",
+          "A heavy solid bone club"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its tail club could shatter the legs of attacking predators."
       },
       {
@@ -537,11 +537,11 @@ const U11_FOSSILS = [
       {
         "q": "Why is Ankylosaurus nicknamed the 'living tank'?",
         "options": [
+          "Because it fired cannonballs",
           "Its heavy armored shield and tail club",
-          "Because it had wheels",
-          "Because it fired cannonballs"
+          "Because it had wheels"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its impregnable armor resembled a military tank."
       }
     ]
@@ -549,7 +549,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-sabertooth",
     "name": "Saber-Toothed Cat",
-    "icon": "🐯",
+    "icon": "\ud83d\udc2f",
     "period": "Ice Age Mammal",
     "fact": "A powerful hunter with long curved canine teeth.",
     "speechText": "Fossil uncovered! The Saber-Toothed Cat! A powerful hunter with long curved canine teeth.",
@@ -557,11 +557,11 @@ const U11_FOSSILS = [
       {
         "q": "What made the saber-toothed cat's teeth so famous?",
         "options": [
+          "Blue glowing teeth",
           "Long curved serrated canine teeth",
-          "Tiny blunt molars",
-          "Blue glowing teeth"
+          "Tiny blunt molars"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its canine teeth reached up to 28 cm (11 inches) long!"
       },
       {
@@ -577,11 +577,11 @@ const U11_FOSSILS = [
       {
         "q": "What animal family did Smilodon belong to?",
         "options": [
+          "The bear family",
           "The cat family (Felidae)",
-          "The dog family",
-          "The bear family"
+          "The dog family"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Smilodon was a prehistoric feline predator."
       },
       {
@@ -597,11 +597,11 @@ const U11_FOSSILS = [
       {
         "q": "What famous asphalt seeps preserved thousands of Smilodon fossils?",
         "options": [
-          "La Brea Tar Pits in Los Angeles",
+          "Death Valley",
           "The Grand Canyon",
-          "Death Valley"
+          "La Brea Tar Pits in Los Angeles"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Thousands of skeletons were preserved in La Brea asphalt."
       }
     ]
@@ -609,7 +609,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-plesiosaurus",
     "name": "Plesiosaurus",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Prehistoric Ocean",
     "fact": "A sea creature with four flippers and a slender neck.",
     "speechText": "Fossil uncovered! The Plesiosaurus! A sea creature with four flippers and a slender neck.",
@@ -617,29 +617,29 @@ const U11_FOSSILS = [
       {
         "q": "Where did the Plesiosaurus live and swim?",
         "options": [
-          "In prehistoric oceans and seas",
+          "In snowy tree branches",
           "In desert sand dunes",
-          "In snowy tree branches"
+          "In prehistoric oceans and seas"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Plesiosaurs ruled Mesozoic marine waters."
       },
       {
         "q": "How did Plesiosaurus propel itself through the ocean?",
         "options": [
+          "By walking on claws",
           "With four large paddle flippers",
-          "With a propeller",
-          "By walking on claws"
+          "With a propeller"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It 'flew' underwater using four large limb paddles."
       },
       {
         "q": "What shaped its long, graceful upper body?",
         "options": [
           "A slender flexible neck",
-          "A giant bony horn",
-          "A wide turtle shell"
+          "A wide turtle shell",
+          "A giant bony horn"
         ],
         "correct": 0,
         "exp": "Its neck allowed it to dart its head into schools of fish."
@@ -647,21 +647,21 @@ const U11_FOSSILS = [
       {
         "q": "What did Plesiosaurus catch in the water?",
         "options": [
-          "Fish, squid, and ammonites",
+          "Flying insects",
           "Seaweed and kelp only",
-          "Flying insects"
+          "Fish, squid, and ammonites"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Interlocking needle teeth trapped slippery marine prey."
       },
       {
         "q": "Did Plesiosaurus breathe air like modern whales and turtles?",
         "options": [
+          "No, it did not breathe",
           "Yes, it surfaced to breathe air",
-          "No, it had fish gills",
-          "No, it did not breathe"
+          "No, it had fish gills"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It had lungs and surfaced regularly for air."
       }
     ]
@@ -669,7 +669,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-allosaurus",
     "name": "Allosaurus",
-    "icon": "🦖",
+    "icon": "\ud83e\udd96",
     "period": "Jurassic Predator",
     "fact": "A fierce Jurassic hunter with sharp serrated teeth.",
     "speechText": "Fossil uncovered! The Allosaurus! A fierce Jurassic hunter with sharp serrated teeth.",
@@ -697,31 +697,31 @@ const U11_FOSSILS = [
       {
         "q": "How many claws did each of its strong hands have?",
         "options": [
-          "Three sharp curved claws",
+          "Ten fingers",
           "One single thumb",
-          "Ten fingers"
+          "Three sharp curved claws"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It had three-fingered forelimbs with large curved claws."
       },
       {
         "q": "What did Allosaurus hunt in the Jurassic floodplains?",
         "options": [
-          "Sauropods and Stegosaurus",
           "Grass and fruits",
+          "Sauropods and Stegosaurus",
           "Tree bark only"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Bite marks show it hunted large Jurassic herbivores."
       },
       {
         "q": "What small bony feature sat above each eye?",
         "options": [
-          "Short bony crests or horns",
           "A flower crown",
-          "A long metal spike"
+          "A long metal spike",
+          "Short bony crests or horns"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Small bony horns sat above its eyes, possibly for display."
       }
     ]
@@ -729,7 +729,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-parasaurolophus",
     "name": "Parasaurolophus",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Crested Herbivore",
     "fact": "It used its long head crest to blow trumpeting sounds.",
     "speechText": "Fossil uncovered! The Parasaurolophus! It used its long head crest to blow trumpeting sounds.",
@@ -747,19 +747,19 @@ const U11_FOSSILS = [
       {
         "q": "What did scientists discover its hollow crest was used for?",
         "options": [
-          "Making deep resonant trumpet sounds",
           "Storing extra water",
-          "Catching flying birds"
+          "Catching flying birds",
+          "Making deep resonant trumpet sounds"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Air resonated inside the cranial crest like a brass trombone."
       },
       {
         "q": "What family of duck-billed dinosaurs did it belong to?",
         "options": [
           "Hadrosaurs",
-          "Ceratopsians",
-          "Theropods"
+          "Theropods",
+          "Ceratopsians"
         ],
         "correct": 0,
         "exp": "It was a hadrosaur (duck-billed dinosaur)."
@@ -767,21 +767,21 @@ const U11_FOSSILS = [
       {
         "q": "What did Parasaurolophus grind with its tooth battery?",
         "options": [
-          "Leaves, twigs, and pine needles",
           "Meat and bones",
+          "Leaves, twigs, and pine needles",
           "Sea shells only"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Hundreds of grinding teeth pulverized tough plant matter."
       },
       {
         "q": "Could Parasaurolophus walk on both two and four legs?",
         "options": [
+          "No, it hopped like a rabbit",
           "Yes, it could walk on 2 or 4 limbs",
-          "No, it only crawled",
-          "No, it hopped like a rabbit"
+          "No, it only crawled"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It grazed on all fours and could run on two hind legs."
       }
     ]
@@ -789,7 +789,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-archaeopteryx",
     "name": "Archaeopteryx",
-    "icon": "🦅",
+    "icon": "\ud83e\udd85",
     "period": "Dino-Bird Transition",
     "fact": "The famous winged fossil linking dinosaurs and birds.",
     "speechText": "Fossil uncovered! The Archaeopteryx! The famous winged fossil linking dinosaurs and birds.",
@@ -807,41 +807,41 @@ const U11_FOSSILS = [
       {
         "q": "What covered Archaeopteryx's wings and body?",
         "options": [
-          "True flight feathers",
+          "Fur like a rabbit",
           "Hard turtle shells",
-          "Fur like a rabbit"
+          "True flight feathers"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its feathers were aerodynamically asymmetrical, built for flight."
       },
       {
         "q": "What dinosaur reptilian features did it still have?",
         "options": [
+          "A horn on its nose",
           "Toothed jaws, wing claws, and long bony tail",
-          "Gills and fins",
-          "A horn on its nose"
+          "Gills and fins"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Unlike modern birds, it had teeth and a long bony tail."
       },
       {
         "q": "In which country's limestone was it discovered in 1861?",
         "options": [
-          "Germany (Solnhofen limestone)",
           "Brazil",
-          "Australia"
+          "Australia",
+          "Germany (Solnhofen limestone)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Solnhofen quarries preserved delicate feather impressions."
       },
       {
         "q": "About what size was an Archaeopteryx?",
         "options": [
+          "Tiny as a mosquito",
           "About the size of a raven or pigeon",
-          "As big as a bus",
-          "Tiny as a mosquito"
+          "As big as a bus"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It was roughly the size of a modern magpie or raven."
       }
     ]
@@ -849,7 +849,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-diplodocus",
     "name": "Diplodocus",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Late Jurassic",
     "fact": "One of the longest creatures ever with a whip-like tail.",
     "speechText": "Fossil uncovered! The Diplodocus! One of the longest creatures ever with a whip-like tail.",
@@ -857,11 +857,11 @@ const U11_FOSSILS = [
       {
         "q": "What was remarkable about Diplodocus's body length?",
         "options": [
-          "It was over 85 feet (26 meters) long",
+          "It was shaped like a cube",
           "It was only three feet long",
-          "It was shaped like a cube"
+          "It was over 85 feet (26 meters) long"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Diplodocus was one of the longest land animals to ever exist."
       },
       {
@@ -877,29 +877,29 @@ const U11_FOSSILS = [
       {
         "q": "What did its peg-like front teeth do to food?",
         "options": [
-          "Strip leaves cleanly from branches",
           "Crush heavy bones",
-          "Chew steak"
+          "Chew steak",
+          "Strip leaves cleanly from branches"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its peg teeth combed foliage straight off conifer twigs."
       },
       {
         "q": "How did Diplodocus hold its long neck most of the time?",
         "options": [
+          "Coiled like a spring",
           "Mostly horizontal to sweep low ferns",
-          "Straight up into clouds",
-          "Coiled like a spring"
+          "Straight up into clouds"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its vertebrae kept the neck extending forward horizontally."
       },
       {
         "q": "How did Diplodocus reproduce?",
         "options": [
           "Laid clutches of round eggs in nests",
-          "Gave live birth",
-          "Built nests high in trees"
+          "Built nests high in trees",
+          "Gave live birth"
         ],
         "correct": 0,
         "exp": "Sauropods laid clutches of hard-shelled eggs in ground nests."
@@ -909,7 +909,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-dimetrodon",
     "name": "Dimetrodon",
-    "icon": "🦎",
+    "icon": "\ud83e\udd8e",
     "period": "Permian Apex",
     "fact": "It lived before dinosaurs with a sun-catching back sail.",
     "speechText": "Fossil uncovered! The Dimetrodon! It lived before dinosaurs with a sun-catching back sail.",
@@ -917,29 +917,29 @@ const U11_FOSSILS = [
       {
         "q": "Did Dimetrodon live before or after dinosaurs?",
         "options": [
+          "During the Ice Age",
           "Before dinosaurs (Permian period)",
-          "After dinosaurs died out",
-          "During the Ice Age"
+          "After dinosaurs died out"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Dimetrodon lived 295 million years ago, 50M years before dinosaurs!"
       },
       {
         "q": "What supported its iconic dorsal sail?",
         "options": [
+          "Stiff wooden poles",
           "Elongated neural spine bones",
-          "Paper feathers",
-          "Stiff wooden poles"
+          "Paper feathers"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Extremely tall neural spines supported the vascular skin sail."
       },
       {
         "q": "What was one main purpose of its back sail?",
         "options": [
           "Thermoregulation (warming in the sun)",
-          "Sailing on ocean waves",
-          "Flying in air"
+          "Flying in air",
+          "Sailing on ocean waves"
         ],
         "correct": 0,
         "exp": "Blood flowing through the sail heated or cooled its body."
@@ -957,11 +957,11 @@ const U11_FOSSILS = [
       {
         "q": "What does 'Dimetrodon' mean?",
         "options": [
-          "Two measures of teeth",
+          "King of rocks",
           "Giant red lizard",
-          "King of rocks"
+          "Two measures of teeth"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It had two distinct tooth types: shearing canines and molars."
       }
     ]
@@ -969,7 +969,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-megalodon",
     "name": "Megalodon",
-    "icon": "🦈",
+    "icon": "\ud83e\udd88",
     "period": "Cenozoic Apex",
     "fact": "A colossal ancient shark that ruled prehistoric oceans.",
     "speechText": "Fossil uncovered! The Megalodon! A colossal ancient shark that ruled prehistoric oceans.",
@@ -987,41 +987,41 @@ const U11_FOSSILS = [
       {
         "q": "How large could a Megalodon tooth grow?",
         "options": [
-          "Over 7 inches (18 cm) long",
           "Less than 1 millimeter",
+          "Over 7 inches (18 cm) long",
           "As big as a submarine"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its fossil teeth are bigger than an adult human's open hand."
       },
       {
         "q": "What was Megalodon's skeleton made of?",
         "options": [
-          "Cartilage (which rarely fossilizes)",
           "Solid steel",
-          "Carved granite rock"
+          "Carved granite rock",
+          "Cartilage (which rarely fossilizes)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Like modern sharks, its skeleton was cartilage, so teeth fossilize best."
       },
       {
         "q": "What was Megalodon's primary food source?",
         "options": [
-          "Ancient whales and large marine mammals",
           "Kelp and seaweed",
+          "Ancient whales and large marine mammals",
           "Plankton only"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its massive jaws could crush whale ribs and flippers."
       },
       {
         "q": "What does 'Megalodon' translate to in Greek?",
         "options": [
-          "Big tooth (megas + odon)",
           "Fast fin",
-          "Ocean monster"
+          "Ocean monster",
+          "Big tooth (megas + odon)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "'Megas' (big) + 'odous/odont' (tooth) = Big Tooth!"
       }
     ]
@@ -1029,7 +1029,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-iguanodon",
     "name": "Iguanodon",
-    "icon": "🦕",
+    "icon": "\ud83e\udd95",
     "period": "Early Cretaceous",
     "fact": "A peaceful plant-eater with conical spikes on its thumbs.",
     "speechText": "Fossil uncovered! The Iguanodon! A peaceful plant-eater with conical spikes on its thumbs.",
@@ -1037,29 +1037,29 @@ const U11_FOSSILS = [
       {
         "q": "What unique feature did Iguanodon have on each thumb?",
         "options": [
-          "A sharp conical thumb spike",
           "A poisonous claw",
-          "A sixth finger"
+          "A sixth finger",
+          "A sharp conical thumb spike"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its sturdy thumb spike was used for defense and cracking seeds."
       },
       {
         "q": "Where did early paleontologists first mistakenly place its thumb spike?",
         "options": [
+          "Inside its ear",
           "On its nose like a horn",
-          "On its tail",
-          "Inside its ear"
+          "On its tail"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Gideon Mantell first reconstructed it as a horn on the nose!"
       },
       {
         "q": "What modern reptile did its teeth closely resemble?",
         "options": [
           "An iguana lizard",
-          "A chameleon",
-          "A crocodile"
+          "A crocodile",
+          "A chameleon"
         ],
         "correct": 0,
         "exp": "Its fossil teeth resembled giant iguana teeth, inspiring its name."
@@ -1077,11 +1077,11 @@ const U11_FOSSILS = [
       {
         "q": "Could Iguanodon move on two and four feet?",
         "options": [
-          "Yes, it walked on 4 feet and ran on 2",
+          "No, it could only roll",
           "No, only on 2 legs",
-          "No, it could only roll"
+          "Yes, it walked on 4 feet and ran on 2"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its three middle fingers had hoof-like pads for four-legged walking."
       }
     ]
@@ -1089,7 +1089,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-carnotaurus",
     "name": "Carnotaurus",
-    "icon": "🦖",
+    "icon": "\ud83e\udd96",
     "period": "Late Cretaceous",
     "fact": "A fast running predator with bull horns above its eyes.",
     "speechText": "Fossil uncovered! The Carnotaurus! A fast running predator with bull horns above its eyes.",
@@ -1097,21 +1097,21 @@ const U11_FOSSILS = [
       {
         "q": "What unusual feature sat right above Carnotaurus's eyes?",
         "options": [
+          "Long rabbit ears",
           "Two thick bull-like horns",
-          "A giant glowing lamp",
-          "Long rabbit ears"
+          "A giant glowing lamp"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It is the only known meat-eating dinosaur with thick skull horns."
       },
       {
         "q": "What were Carnotaurus's front arms like?",
         "options": [
-          "Extremely tiny and vestigial",
           "Long with sharp wings",
-          "Muscular and heavy"
+          "Muscular and heavy",
+          "Extremely tiny and vestigial"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its arms were even smaller than T-Rex arms, without wrist bones."
       },
       {
@@ -1127,11 +1127,11 @@ const U11_FOSSILS = [
       {
         "q": "How fast was Carnotaurus compared to other dinosaurs?",
         "options": [
+          "Could not run",
           "One of the fastest large theropods",
-          "Slower than a snail",
-          "Could not run"
+          "Slower than a snail"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Giant caudofemoralis tail muscles powered explosive sprints."
       },
       {
@@ -1149,7 +1149,7 @@ const U11_FOSSILS = [
   {
     "id": "fossil-megatherium",
     "name": "Megatherium",
-    "icon": "🦥",
+    "icon": "\ud83e\udda5",
     "period": "Pleistocene Ice Age",
     "fact": "A giant ground sloth that stood as tall as an elephant.",
     "speechText": "Fossil uncovered! The Megatherium! A giant ground sloth that stood as tall as an elephant.",
@@ -1167,41 +1167,41 @@ const U11_FOSSILS = [
       {
         "q": "How tall could Megatherium stand when rearing up?",
         "options": [
-          "Up to 6 meters (20 feet) tall",
+          "As tall as a skyscraper",
           "Only 1 foot tall",
-          "As tall as a skyscraper"
+          "Up to 6 meters (20 feet) tall"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "When rearing on its hind legs, it matched the height of an elephant!"
       },
       {
         "q": "Did Megatherium live in trees or on the ground?",
         "options": [
-          "On the ground (giant ground sloth)",
           "High in treetops",
+          "On the ground (giant ground sloth)",
           "Deep underwater"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Weighing 4 tons, it was far too massive to climb trees."
       },
       {
         "q": "What did Megatherium use its massive curved claws for?",
         "options": [
-          "Pulling down leafy branches to eat",
           "Swimming across oceans",
+          "Pulling down leafy branches to eat",
           "Digging coal mines"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its claws gripped high tree limbs to strip nutritious foliage."
       },
       {
         "q": "During which epoch did Megatherium roam the Americas?",
         "options": [
-          "The Pleistocene (Ice Age)",
+          "The Carboniferous",
           "The Triassic dawn",
-          "The Carboniferous"
+          "The Pleistocene (Ice Age)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It flourished during the Ice Age until around 10,000 years ago."
       }
     ]
@@ -1212,36 +1212,36 @@ const U11_INVENTIONS = [
     "id": "inv-clock",
     "item": "The Mechanical Clock",
     "date": "14th Century Europe",
-    "icon": "🕰️",
+    "icon": "\ud83d\udd70\ufe0f",
     "desc": "Allowed towns to measure hours with gears and bells.",
     "speechText": "The mechanical clock was invented in 14th century europe. Allowed towns to measure hours with gears and bells.",
     "quiz": [
       {
         "q": "What did the mechanical clock allow medieval towns to measure?",
         "options": [
+          "The weight of gold",
           "Hours and minutes with gears",
-          "The speed of the wind",
-          "The weight of gold"
+          "The speed of the wind"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Mechanical gears and bells divided the day into equal hours."
       },
       {
         "q": "In which century were weight-driven clocks built in Europe?",
         "options": [
-          "14th Century",
           "21st Century",
-          "Stone Age"
+          "Stone Age",
+          "14th Century"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "The first public clock towers arose in 14th-century European cities."
       },
       {
         "q": "What moved the hands and rang the bells in town towers?",
         "options": [
           "Weights, gears, and escapements",
-          "Digital batteries",
-          "Water fountains only"
+          "Water fountains only",
+          "Digital batteries"
         ],
         "correct": 0,
         "exp": "Heavy falling weights turned toothed gears regulated by an escapement."
@@ -1249,11 +1249,11 @@ const U11_INVENTIONS = [
       {
         "q": "Why was measuring time so important for communities?",
         "options": [
-          "For market hours, church bells, and daily work",
           "To change the weather",
+          "For market hours, church bells, and daily work",
           "To sail across space"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It synchronized daily trade, prayer schedules, and civic work."
       },
       {
@@ -1272,38 +1272,38 @@ const U11_INVENTIONS = [
     "id": "inv-paper",
     "item": "Paper & Printing",
     "date": "Ancient China",
-    "icon": "📜",
+    "icon": "\ud83d\udcdc",
     "desc": "Revolutionized human knowledge, storytelling and books.",
     "speechText": "Paper & printing was invented in ancient china. Revolutionized human knowledge, storytelling and books.",
     "quiz": [
       {
         "q": "Where were paper and early woodblock printing first invented?",
         "options": [
-          "Ancient China",
+          "Medieval England",
           "Ancient Egypt",
-          "Medieval England"
+          "Ancient China"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Cai Lun perfected papermaking in Han Dynasty China."
       },
       {
         "q": "What did paper and printing revolutionize for humanity?",
         "options": [
-          "Sharing knowledge, storytelling, and books",
           "Cooking recipes only",
-          "Building stone walls"
+          "Building stone walls",
+          "Sharing knowledge, storytelling, and books"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Books and learning could be preserved and shared across nations."
       },
       {
         "q": "What fibers were used by ancient papermakers?",
         "options": [
-          "Mulberry bark, hemp, and rags",
           "Plastics and glass",
+          "Mulberry bark, hemp, and rags",
           "Crushed rock"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Macerated plant fibers were pressed into flat sheets on wire screens."
       },
       {
@@ -1319,11 +1319,11 @@ const U11_INVENTIONS = [
       {
         "q": "Why was printing better than copying books by hand?",
         "options": [
+          "It used invisible ink",
           "It produced many exact copies swiftly",
-          "It was much slower",
-          "It used invisible ink"
+          "It was much slower"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Printing allowed hundreds of books to be produced in days."
       }
     ]
@@ -1332,28 +1332,28 @@ const U11_INVENTIONS = [
     "id": "inv-compass",
     "item": "The Magnetic Compass",
     "date": "Han Dynasty",
-    "icon": "🧭",
+    "icon": "\ud83e\udded",
     "desc": "Helped courageous explorers sail across vast oceans without getting lost.",
     "speechText": "The magnetic compass was invented in han dynasty. Helped courageous explorers sail across vast oceans without getting lost.",
     "quiz": [
       {
         "q": "What mineral did ancient Han inventors use to make the first compass?",
         "options": [
-          "Lodestone (naturally magnetic iron ore)",
+          "Clear diamond",
           "Pure gold",
-          "Clear diamond"
+          "Lodestone (naturally magnetic iron ore)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Carved lodestone spoons balanced on bronze plates pointed South."
       },
       {
         "q": "How did the compass help sailors and explorers?",
         "options": [
-          "Showed constant direction on open seas",
           "Forecasted ocean rain",
-          "Sped up the sailing ship"
+          "Sped up the sailing ship",
+          "Showed constant direction on open seas"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Sailors could navigate even when clouds hid the sun and stars."
       },
       {
@@ -1370,8 +1370,8 @@ const U11_INVENTIONS = [
         "q": "Before compasses, what did sailors rely on at night?",
         "options": [
           "The stars and constellations",
-          "Flashlights",
-          "Road street signs"
+          "Road street signs",
+          "Flashlights"
         ],
         "correct": 0,
         "exp": "Navigators tracked the North Star (Polaris) across clear skies."
@@ -1379,11 +1379,11 @@ const U11_INVENTIONS = [
       {
         "q": "What historic age expanded greatly because of the compass?",
         "options": [
-          "The Age of Exploration and Discovery",
           "The Stone Age",
+          "The Age of Exploration and Discovery",
           "The Dinosaur Era"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It enabled trans-oceanic voyages across the Atlantic and Pacific."
       }
     ]
@@ -1392,36 +1392,36 @@ const U11_INVENTIONS = [
     "id": "inv-telescope",
     "item": "The Telescope",
     "date": "1608 Netherlands",
-    "icon": "🔭",
+    "icon": "\ud83d\udd2d",
     "desc": "Galileo looked through it and discovered the moons of Jupiter!",
     "speechText": "The telescope was invented in 1608 netherlands. Galileo looked through it and discovered the moons of jupiter!",
     "quiz": [
       {
         "q": "What famous astronomer turned the telescope toward Jupiter in 1609?",
         "options": [
-          "Galileo Galilei",
           "Isaac Newton",
+          "Galileo Galilei",
           "Christopher Columbus"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Galileo built his own telescope and observed the heavens."
       },
       {
         "q": "What did Galileo discover orbiting Jupiter with his telescope?",
         "options": [
-          "Four large moons (Galilean moons)",
+          "Rings of pure ice",
           "A giant space station",
-          "Rings of pure ice"
+          "Four large moons (Galilean moons)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Io, Europa, Ganymede, and Callisto orbit around Jupiter."
       },
       {
         "q": "What optical components work together inside a refracting telescope?",
         "options": [
           "Curved optical glass lenses",
-          "Wooden mirrors",
-          "Clear water tubes"
+          "Clear water tubes",
+          "Wooden mirrors"
         ],
         "correct": 0,
         "exp": "An objective lens gathers light and an eyepiece magnifies the image."
@@ -1429,19 +1429,19 @@ const U11_INVENTIONS = [
       {
         "q": "In which country was the first patented spyglass made in 1608?",
         "options": [
-          "The Netherlands (Hans Lippershey)",
           "Spain",
+          "The Netherlands (Hans Lippershey)",
           "Brazil"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Spectacle-maker Hans Lippershey applied for the first patent in 1608."
       },
       {
         "q": "How does a telescope transform distant stars and planets?",
         "options": [
           "Makes them appear closer and brighter",
-          "Makes them smaller and darker",
-          "Makes them invisible"
+          "Makes them invisible",
+          "Makes them smaller and darker"
         ],
         "correct": 0,
         "exp": "It collects more photons than human eyes, magnifying distant details."
@@ -1452,26 +1452,26 @@ const U11_INVENTIONS = [
     "id": "inv-wheel",
     "item": "The Wheel",
     "date": "3500 BC Mesopotamia",
-    "icon": "🎡",
+    "icon": "\ud83c\udfa1",
     "desc": "The wheel revolutionized transportation and crafting forever.",
     "speechText": "The wheel was invented in 3500 bc. The wheel revolutionized transportation and crafting forever.",
     "quiz": [
       {
         "q": "Where and when was the wheel first invented?",
         "options": [
-          "Mesopotamia around 3500 BC",
           "America in 1900",
-          "Rome in 500 AD"
+          "Rome in 500 AD",
+          "Mesopotamia around 3500 BC"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Sumerian craftsmen in Mesopotamia created the first wheels."
       },
       {
         "q": "What was the wheel first used for before transport carts?",
         "options": [
           "A potter's wheel for shaping clay",
-          "A clock gear",
-          "A bicycle tire"
+          "A bicycle tire",
+          "A clock gear"
         ],
         "correct": 0,
         "exp": "Potters first spun horizontal wheels to mold clay bowls and jars."
@@ -1479,31 +1479,31 @@ const U11_INVENTIONS = [
       {
         "q": "What did adding wheels to carts allow humans to achieve?",
         "options": [
-          "Transport heavy cargo over long distances",
           "Fly over mountains",
+          "Transport heavy cargo over long distances",
           "Dig deep under water"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Friction dropped drastically, letting animals pull massive loads."
       },
       {
         "q": "What central rod connects a pair of wheels together?",
         "options": [
-          "An axle",
           "A nail",
-          "A rubber band"
+          "A rubber band",
+          "An axle"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "The wheel-and-axle mechanism is a foundational simple machine."
       },
       {
         "q": "What innovation made chariot wheels lighter and faster?",
         "options": [
+          "Making square corners",
           "Spokes instead of solid wood disks",
-          "Carving from stone",
-          "Making square corners"
+          "Carving from stone"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Spoked wheels around 2000 BC made chariots fast and agile."
       }
     ]
@@ -1512,7 +1512,7 @@ const U11_INVENTIONS = [
     "id": "inv-lightbulb",
     "item": "The Lightbulb",
     "date": "1879 America",
-    "icon": "💡",
+    "icon": "\ud83d\udca1",
     "desc": "Homes and streets were illuminated safely through the night.",
     "speechText": "The lightbulb was invented in 1879. Homes and streets were illuminated safely through the night.",
     "quiz": [
@@ -1539,31 +1539,31 @@ const U11_INVENTIONS = [
       {
         "q": "What condition inside the glass bulb kept the filament from burning up?",
         "options": [
-          "A vacuum or inert gas",
           "Pure oxygen",
+          "A vacuum or inert gas",
           "Liquid water"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Without oxygen, the hot carbon or tungsten filament cannot burn."
       },
       {
         "q": "How did electric lightbulbs improve everyday life in cities?",
         "options": [
-          "Made homes, schools, and streets bright and safe",
           "Cooled down hot houses",
-          "Made cars drive faster"
+          "Made cars drive faster",
+          "Made homes, schools, and streets bright and safe"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Replaced dangerous open gas flames and smoke in homes."
       },
       {
         "q": "What energy-saving lights do modern homes mostly use today?",
         "options": [
-          "LED lights",
+          "Gas lamps",
           "Candle lanterns",
-          "Gas lamps"
+          "LED lights"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "LEDs produce bright light using a fraction of the electricity."
       }
     ]
@@ -1572,46 +1572,46 @@ const U11_INVENTIONS = [
     "id": "inv-astrolabe",
     "item": "The Astrolabe",
     "date": "Ancient Greece & Islamic Golden Age",
-    "icon": "🧭",
+    "icon": "\ud83e\udded",
     "desc": "The astrolabe was invented by ancient astronomers to navigate using the stars.",
     "speechText": "The astrolabe was invented by ancient astronomers to navigate using the stars.",
     "quiz": [
       {
         "q": "What celestial bodies did the astrolabe measure to find time and latitude?",
         "options": [
-          "The altitude of the sun and stars",
           "The speed of ocean fish",
+          "The altitude of the sun and stars",
           "The shape of clouds"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "By sighting stars through the alidade, it computed local time and position."
       },
       {
         "q": "What civilization brought the astrolabe to artistic and scientific perfection?",
         "options": [
+          "Medieval blacksmiths",
           "Astronomers of the Islamic Golden Age",
-          "Cave dwellers",
-          "Medieval blacksmiths"
+          "Cave dwellers"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Scholars in Baghdad, Damascus, and Cordoba added intricate star maps."
       },
       {
         "q": "What was the astrolabe known as in the ancient world?",
         "options": [
-          "A handheld analog astronomical computer",
+          "The ocean compass",
           "The magic lantern",
-          "The ocean compass"
+          "A handheld analog astronomical computer"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It could solve hundreds of astronomical and geometric problems."
       },
       {
         "q": "What metal was most commonly engraved to make astrolabe plates?",
         "options": [
           "Cast and engraved brass",
-          "Soft pine wood",
-          "Clay"
+          "Clay",
+          "Soft pine wood"
         ],
         "correct": 0,
         "exp": "Brass resisted corrosion and held precise engraved degree marks."
@@ -1620,8 +1620,8 @@ const U11_INVENTIONS = [
         "q": "Could an astrolabe calculate the exact moment of dawn and sunset?",
         "options": [
           "Yes, with remarkable accuracy",
-          "No, it only showed weather",
-          "No, it only weighed coins"
+          "No, it only weighed coins",
+          "No, it only showed weather"
         ],
         "correct": 0,
         "exp": "Rotating the rete against the plate gave exact sunrise and sunset times."
@@ -1632,48 +1632,48 @@ const U11_INVENTIONS = [
     "id": "inv-sundial",
     "item": "The Sundial",
     "date": "Ancient Egypt",
-    "icon": "☀️",
+    "icon": "\u2600\ufe0f",
     "desc": "The sundial was created in ancient Egypt to tell time by tracking the shadow of the sun.",
     "speechText": "The sundial was created in ancient Egypt to tell time by tracking the shadow of the sun.",
     "quiz": [
       {
         "q": "How does a sundial measure hours during the day?",
         "options": [
-          "By tracking a moving shadow cast by the sun",
           "By dripping drops of water",
+          "By tracking a moving shadow cast by the sun",
           "By ringing loud bells"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "As the sun traverses the sky, the shadow rotates around hour lines."
       },
       {
         "q": "What is the upright pointer that casts the shadow called?",
         "options": [
-          "A gnomon",
           "A pendulum",
+          "A gnomon",
           "A piston"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The gnomon's angled edge points toward the celestial pole."
       },
       {
         "q": "Where were early sundials and monumental shadow obelisks erected?",
         "options": [
-          "Ancient Egypt",
           "Modern Canada",
-          "Antarctica"
+          "Antarctica",
+          "Ancient Egypt"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Egyptian shadow clocks date back to 1500 BC."
       },
       {
         "q": "What is one limitation of a traditional outdoor sundial?",
         "options": [
-          "It cannot tell time at night or on rainy days",
+          "It ticks too loudly",
           "It runs out of battery",
-          "It ticks too loudly"
+          "It cannot tell time at night or on rainy days"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Without direct sunlight, no shadow is cast on the dial plate."
       },
       {
@@ -1692,26 +1692,26 @@ const U11_INVENTIONS = [
     "id": "inv-aqueduct",
     "item": "The Roman Aqueduct",
     "date": "Ancient Rome",
-    "icon": "🏛️",
+    "icon": "\ud83c\udfdb\ufe0f",
     "desc": "The Roman aqueduct carried fresh water from distant mountains into cities using stone arches.",
     "speechText": "The Roman aqueduct carried fresh water from distant mountains into cities using stone arches.",
     "quiz": [
       {
         "q": "What was the purpose of a Roman aqueduct?",
         "options": [
-          "To carry clean mountain water into cities",
           "To defend against enemy armies",
-          "To keep horses warm"
+          "To keep horses warm",
+          "To carry clean mountain water into cities"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Aqueducts supplied millions of liters of freshwater daily."
       },
       {
         "q": "What architectural feature allowed aqueducts to cross valleys?",
         "options": [
           "Stacked stone arches",
-          "Rope suspension bridges",
-          "Wooden rafts"
+          "Wooden rafts",
+          "Rope suspension bridges"
         ],
         "correct": 0,
         "exp": "Tiered stone arches distributed immense weight across wide canyons."
@@ -1719,19 +1719,19 @@ const U11_INVENTIONS = [
       {
         "q": "What natural force moved water through the aqueduct channel?",
         "options": [
-          "Gravity along a steady gentle downhill slope",
           "Electric motor pumps",
-          "Wind sails"
+          "Wind sails",
+          "Gravity along a steady gentle downhill slope"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Engineers maintained a gradient of just a few inches per mile!"
       },
       {
         "q": "Where did freshwater arrive inside Roman cities?",
         "options": [
           "Public fountains, thermal baths, and homes",
-          "Only to the emperor's palace",
-          "Into deep caves"
+          "Into deep caves",
+          "Only to the emperor's palace"
         ],
         "correct": 0,
         "exp": "Fountains provided free clean drinking water to all citizens."
@@ -1739,12 +1739,12 @@ const U11_INVENTIONS = [
       {
         "q": "What famous 3-tier Roman aqueduct bridge still stands in France?",
         "options": [
+          "Golden Gate",
           "Pont du Gard",
-          "London Bridge",
-          "Golden Gate"
+          "London Bridge"
         ],
-        "correct": 0,
-        "exp": "The Pont du Gard near Nîmes is over 2,000 years old!"
+        "correct": 1,
+        "exp": "The Pont du Gard near N\u00eemes is over 2,000 years old!"
       }
     ]
   },
@@ -1752,26 +1752,26 @@ const U11_INVENTIONS = [
     "id": "inv-gunpowder",
     "item": "Gunpowder",
     "date": "9th Century Tang China",
-    "icon": "💥",
+    "icon": "\ud83d\udca5",
     "desc": "Gunpowder was discovered in China and was first used for colorful fireworks and festivals.",
     "speechText": "Gunpowder was discovered in China and was first used for colorful fireworks and festivals.",
     "quiz": [
       {
         "q": "Where was gunpowder originally discovered in the 9th century?",
         "options": [
-          "China during the Tang Dynasty",
+          "Medieval Scandinavia",
           "Ancient Greece",
-          "Medieval Scandinavia"
+          "China during the Tang Dynasty"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Chinese alchemists discovered black powder during the Tang period."
       },
       {
         "q": "What was gunpowder first celebrated for in public ceremonies?",
         "options": [
           "Colorful fireworks and lantern festivals",
-          "Making baking flour",
-          "Painting walls"
+          "Painting walls",
+          "Making baking flour"
         ],
         "correct": 0,
         "exp": "Loud firecrackers and colorful displays warded off evil spirits."
@@ -1780,8 +1780,8 @@ const U11_INVENTIONS = [
         "q": "What three substances made up traditional black powder?",
         "options": [
           "Saltpeter (potassium nitrate), sulfur, and charcoal",
-          "Salt, sugar, and flour",
-          "Sand, clay, and water"
+          "Sand, clay, and water",
+          "Salt, sugar, and flour"
         ],
         "correct": 0,
         "exp": "The exact proportion created explosive combustion when ignited."
@@ -1789,21 +1789,21 @@ const U11_INVENTIONS = [
       {
         "q": "Who stumbled upon the formula while seeking immortality elixirs?",
         "options": [
+          "Viking sailors",
           "Daoist alchemists",
-          "Roman legionnaires",
-          "Viking sailors"
+          "Roman legionnaires"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Alchemists experimenting with sulfur and saltpeter discovered the mix."
       },
       {
         "q": "What trade network carried gunpowder knowledge across Eurasia?",
         "options": [
+          "The Polar Express",
           "The Silk Road",
-          "The Atlantic Canal",
-          "The Polar Express"
+          "The Atlantic Canal"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Traders and diplomats spread fireworks knowledge along the Silk Road."
       }
     ]
@@ -1812,48 +1812,48 @@ const U11_INVENTIONS = [
     "id": "inv-eyeglasses",
     "item": "Eyeglasses",
     "date": "1286 Italy",
-    "icon": "👓",
+    "icon": "\ud83d\udc53",
     "desc": "Eyeglasses were invented in Italy so scholars and readers could see small letters clearly.",
     "speechText": "Eyeglasses were invented in Italy so scholars and readers could see small letters clearly.",
     "quiz": [
       {
         "q": "Where were the first wearable reading spectacles invented around 1286?",
         "options": [
+          "Australia",
           "Northern Italy (Pisa and Venice)",
-          "Ancient Japan",
-          "Australia"
+          "Ancient Japan"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Italian glass craftsmen in Pisa and Venice created the first pairs."
       },
       {
         "q": "Who benefited first from convex glass lenses?",
         "options": [
-          "Scholars, monks, scribes, and elderly readers",
           "Blacksmiths only",
-          "Marathon runners"
+          "Marathon runners",
+          "Scholars, monks, scribes, and elderly readers"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It extended the productive reading lives of scholars and artisans."
       },
       {
         "q": "What island near Venice was world-renowned for crystal glassblowing?",
         "options": [
+          "Santorini",
           "Murano",
-          "Corsica",
-          "Santorini"
+          "Corsica"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Murano master glassmakers excelled at clear quartz crystal lenses."
       },
       {
         "q": "How were early spectacles held in place on the face?",
         "options": [
-          "Rivet frames pinched onto the bridge of the nose",
           "Ear hooks like today",
-          "Glued to eyebrows"
+          "Glued to eyebrows",
+          "Rivet frames pinched onto the bridge of the nose"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Two framed lenses were riveted together to grip the nose bridge."
       },
       {
@@ -1872,26 +1872,26 @@ const U11_INVENTIONS = [
     "id": "inv-waterwheel",
     "item": "The Water Wheel",
     "date": "Ancient Greece & Rome",
-    "icon": "⚙️",
+    "icon": "\u2699\ufe0f",
     "desc": "The water wheel harnessed river currents to grind grain into flour and power workshops.",
     "speechText": "The water wheel harnessed river currents to grind grain into flour and power workshops.",
     "quiz": [
       {
         "q": "What natural energy source turns the paddles of a water wheel?",
         "options": [
-          "Flowing river or stream currents",
           "Steam pressure",
+          "Flowing river or stream currents",
           "Solar radiation"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The kinetic momentum of rushing water turns the paddle blades."
       },
       {
         "q": "What was one of the most important tasks of early watermills?",
         "options": [
           "Grinding grain into flour for bread",
-          "Carrying passengers",
-          "Printing daily news"
+          "Printing daily news",
+          "Carrying passengers"
         ],
         "correct": 0,
         "exp": "Gristmills ground sacks of grain in minutes rather than hours."
@@ -1899,11 +1899,11 @@ const U11_INVENTIONS = [
       {
         "q": "What mechanical parts transmit rotary power inside a watermill?",
         "options": [
-          "Driveshafts, gears, and millstones",
+          "A leather strap only",
           "A metal wire",
-          "A leather strap only"
+          "Driveshafts, gears, and millstones"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Wood and iron gear wheels turned the heavy upper runner stone."
       },
       {
@@ -1919,11 +1919,11 @@ const U11_INVENTIONS = [
       {
         "q": "What modern renewable power station evolved from the water wheel?",
         "options": [
-          "Hydroelectric dam turbines",
+          "Coal stoves",
           "Nuclear reactors",
-          "Coal stoves"
+          "Hydroelectric dam turbines"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Modern hydro turbines use the exact same fluid dynamics principle!"
       }
     ]
@@ -1932,18 +1932,18 @@ const U11_INVENTIONS = [
     "id": "inv-abacus",
     "item": "The Abacus",
     "date": "Ancient Mesopotamia & Asia",
-    "icon": "🧮",
+    "icon": "\ud83e\uddee",
     "desc": "The abacus was the first calculating machine using sliding wooden beads on rods.",
     "speechText": "The abacus was the first calculating machine using sliding wooden beads on rods.",
     "quiz": [
       {
         "q": "What is an abacus used for in commerce and accounting?",
         "options": [
-          "Rapid arithmetic calculations and counting",
           "Playing melodies",
+          "Rapid arithmetic calculations and counting",
           "Weighing heavy stones"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Merchants calculated additions, subtractions, and multiplications swiftly."
       },
       {
@@ -1959,29 +1959,29 @@ const U11_INVENTIONS = [
       {
         "q": "What math operations can an expert calculate on an abacus?",
         "options": [
-          "Addition, subtraction, multiplication, and division",
+          "Drawing maps",
           "Only spelling letters",
-          "Drawing maps"
+          "Addition, subtraction, multiplication, and division"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Skilled users can even calculate square roots and cube roots!"
       },
       {
         "q": "What famous Asian counting frame uses 1 upper and 4 lower beads?",
         "options": [
-          "The Japanese Soroban",
           "The Compass",
+          "The Japanese Soroban",
           "The Astrolabe"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The Soroban is a base-10 abacus widely taught in Asian schools."
       },
       {
         "q": "Why is the abacus considered an ancestor of modern computers?",
         "options": [
           "It processes, registers, and stores numeric data mechanically",
-          "Because it had a screen",
-          "Because it connected to wifi"
+          "Because it connected to wifi",
+          "Because it had a screen"
         ],
         "correct": 0,
         "exp": "It was humanity's first mechanical device for numeric processing."
@@ -1992,26 +1992,26 @@ const U11_INVENTIONS = [
     "id": "inv-windmill",
     "item": "The Windmill",
     "date": "7th Century Persia",
-    "icon": "💨",
+    "icon": "\ud83d\udca8",
     "desc": "The windmill was invented in Persia to capture the power of the wind and pump water.",
     "speechText": "The windmill was invented in Persia to capture the power of the wind and pump water.",
     "quiz": [
       {
         "q": "What clean atmospheric force drives windmill blades?",
         "options": [
-          "The kinetic energy of the wind",
+          "Falling rain",
           "River water",
-          "Falling rain"
+          "The kinetic energy of the wind"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Air currents strike tilted sails to turn a central drive shaft."
       },
       {
         "q": "Where were vertical-axis windmills first constructed to grind corn?",
         "options": [
           "Ancient Persia (modern Iran)",
-          "Ancient Iceland",
-          "The Amazon"
+          "The Amazon",
+          "Ancient Iceland"
         ],
         "correct": 0,
         "exp": "Persian panemone windmills caught strong regional desert winds."
@@ -2019,31 +2019,31 @@ const U11_INVENTIONS = [
       {
         "q": "What country famously built thousands of windmills to pump polder water?",
         "options": [
-          "The Netherlands (Holland)",
           "Switzerland",
+          "The Netherlands (Holland)",
           "Greece"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Dutch windmills pumped water out of lowlands to reclaim farmland."
       },
       {
         "q": "What did windmills grind inside their mill houses?",
         "options": [
-          "Wheat, barley, and corn into flour",
           "Iron into gold",
-          "Stone into water"
+          "Stone into water",
+          "Wheat, barley, and corn into flour"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Heavy rotating millstones crushed grains into fine flour."
       },
       {
         "q": "What modern clean energy generators are direct descendants of windmills?",
         "options": [
+          "Water towers",
           "Modern wind turbines",
-          "Steam locomotives",
-          "Water towers"
+          "Steam locomotives"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Giant wind turbines generate clean electricity around the world today."
       }
     ]
@@ -2052,28 +2052,28 @@ const U11_INVENTIONS = [
     "id": "inv-papyrus",
     "item": "Papyrus",
     "date": "Ancient Egypt",
-    "icon": "📄",
+    "icon": "\ud83d\udcc4",
     "desc": "Papyrus was made from river reeds in ancient Egypt to write scrolls with dark ink.",
     "speechText": "Papyrus was made from river reeds in ancient Egypt to write scrolls with dark ink.",
     "quiz": [
       {
         "q": "What plant harvested along the Nile River was made into papyrus?",
         "options": [
-          "The Cyperus papyrus sedge reed",
           "Pine wood trees",
-          "Cactus leaves"
+          "Cactus leaves",
+          "The Cyperus papyrus sedge reed"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Tall papyrus reeds grew abundantly in the Nile delta marshes."
       },
       {
         "q": "How were papyrus strips bonded into flexible sheets?",
         "options": [
+          "Sewn with copper wire",
           "Pressed overlapping strips welded by natural plant sap",
-          "With synthetic plastic tape",
-          "Sewn with copper wire"
+          "With synthetic plastic tape"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Beating and heavy pressing released natural sticky juices that bound them."
       },
       {
@@ -2089,11 +2089,11 @@ const U11_INVENTIONS = [
       {
         "q": "What modern English word derives directly from the word papyrus?",
         "options": [
-          "Paper",
+          "Pencil",
           "Book",
-          "Pencil"
+          "Paper"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Papyrus passed through Greek and Latin into our word 'paper'."
       },
       {
@@ -2112,7 +2112,7 @@ const U11_INVENTIONS = [
     "id": "inv-microscope",
     "item": "The Microscope",
     "date": "1590 Netherlands",
-    "icon": "🔬",
+    "icon": "\ud83d\udd2c",
     "desc": "The microscope opened a hidden world by making microscopic cells and droplets visible.",
     "speechText": "The microscope opened a hidden world by making microscopic cells and droplets visible.",
     "quiz": [
@@ -2120,8 +2120,8 @@ const U11_INVENTIONS = [
         "q": "What does an optical microscope do to tiny objects?",
         "options": [
           "Magnifies microscopic specimens for human eyes",
-          "Shrinks them smaller",
-          "Turns them into sound"
+          "Turns them into sound",
+          "Shrinks them smaller"
         ],
         "correct": 0,
         "exp": "Curved lenses refract light to magnify specimens hundreds of times."
@@ -2130,8 +2130,8 @@ const U11_INVENTIONS = [
         "q": "Who was the Dutch pioneer who first observed living microbes in water?",
         "options": [
           "Antonie van Leeuwenhoek",
-          "Thomas Edison",
-          "Isaac Newton"
+          "Isaac Newton",
+          "Thomas Edison"
         ],
         "correct": 0,
         "exp": "Leeuwenhoek made tiny spherical lenses and discovered 'animalcules'."
@@ -2139,31 +2139,31 @@ const U11_INVENTIONS = [
       {
         "q": "What did Robert Hooke name the tiny honeycomb boxes he saw in cork?",
         "options": [
+          "Atoms",
           "Cells",
-          "Bricks",
-          "Atoms"
+          "Bricks"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "He thought they resembled monks' monastery rooms called 'cells'."
       },
       {
         "q": "What two optical lens groups are combined in a compound microscope?",
         "options": [
-          "The objective lens and the eyepiece ocular",
           "Two flat wooden boards",
+          "The objective lens and the eyepiece ocular",
           "Two iron mirrors"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The objective creates a magnified image, which the eyepiece magnifies further."
       },
       {
         "q": "How did the microscope transform medicine and biology?",
         "options": [
-          "Revealed bacteria and viruses to defeat infectious diseases",
+          "Made weather warmer",
           "Helped cars drive faster",
-          "Made weather warmer"
+          "Revealed bacteria and viruses to defeat infectious diseases"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It gave birth to microbiology, modern pathology, and lifesaving vaccines."
       }
     ]
@@ -2172,48 +2172,48 @@ const U11_INVENTIONS = [
     "id": "inv-pottery",
     "item": "Pottery Kiln",
     "date": "6000 BC Mesopotamia & East Asia",
-    "icon": "🏺",
+    "icon": "\ud83c\udffa",
     "desc": "Pottery kilns hardened wet clay into waterproof pots to store food and fresh water.",
     "speechText": "Pottery kilns hardened wet clay into waterproof pots to store food and fresh water.",
     "quiz": [
       {
         "q": "What is a pottery kiln?",
         "options": [
-          "A high-temperature thermal oven for firing ceramics",
           "A boat for sailing",
+          "A high-temperature thermal oven for firing ceramics",
           "A musical drum"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Kilns trap intense heat to bake clay into durable ceramic."
       },
       {
         "q": "What chemical transformation happens to clay in a firing kiln?",
         "options": [
-          "Water evaporates and minerals fuse into solid stone-hard ceramic",
+          "It turns into rubber",
           "It dissolves into water",
-          "It turns into rubber"
+          "Water evaporates and minerals fuse into solid stone-hard ceramic"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Silica particles vitrify, turning fragile mud into permanent ceramic."
       },
       {
         "q": "Why was waterproof ceramic pottery essential for settled civilizations?",
         "options": [
-          "To store grain, olive oil, and drinking water securely",
+          "To make lightbulbs",
           "To build airplane wings",
-          "To make lightbulbs"
+          "To store grain, olive oil, and drinking water securely"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Pots protected food reserves from moisture, insects, and rodents."
       },
       {
         "q": "What glassy coat is fired onto pottery to make it shiny and colorful?",
         "options": [
-          "Ceramic glaze",
           "Oil paint",
+          "Ceramic glaze",
           "Sand"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Glazes seal pores and produce lustrous colorful finishes."
       },
       {
@@ -2224,7 +2224,7 @@ const U11_INVENTIONS = [
           "Room temperature"
         ],
         "correct": 0,
-        "exp": "Stoneware and porcelain require temperatures from 1,200°C to 1,400°C."
+        "exp": "Stoneware and porcelain require temperatures from 1,200\u00b0C to 1,400\u00b0C."
       }
     ]
   },
@@ -2232,7 +2232,7 @@ const U11_INVENTIONS = [
     "id": "inv-hourglass",
     "item": "The Hourglass",
     "date": "8th Century Europe",
-    "icon": "⏳",
+    "icon": "\u23f3",
     "desc": "The hourglass measured time accurately as fine sand trickled between two glass bulbs.",
     "speechText": "The hourglass measured time accurately as fine sand trickled between two glass bulbs.",
     "quiz": [
@@ -2249,39 +2249,39 @@ const U11_INVENTIONS = [
       {
         "q": "Why was the hourglass indispensable aboard ocean sailing ships?",
         "options": [
-          "It kept accurate time despite the rolling rocking waves",
           "It was made of gold",
-          "It pointed north"
+          "It pointed north",
+          "It kept accurate time despite the rolling rocking waves"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Water clocks sloshed and pendulums swung irregularly, but sand flowed steadily."
       },
       {
         "q": "How did sailors measure ship speed using a sandglass and knotted rope?",
         "options": [
-          "By timing knots passing overboard with a half-minute glass",
           "By looking at clouds",
-          "By shouting into a horn"
+          "By shouting into a horn",
+          "By timing knots passing overboard with a half-minute glass"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "This is why ocean speed is still measured in 'knots' today!"
       },
       {
         "q": "What do you do once all sand empties into the lower glass bulb?",
         "options": [
-          "Flip the hourglass upside down to start timing again",
           "Explode it with fireworks",
+          "Flip the hourglass upside down to start timing again",
           "Ring a telephone bell"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Inverting the bulbs begins the time interval anew."
       },
       {
         "q": "What property of the sand was critical for exact timekeeping?",
         "options": [
           "Perfect dryness and uniform rounded grains",
-          "Color of the sand",
-          "Smell of the sand"
+          "Smell of the sand",
+          "Color of the sand"
         ],
         "correct": 0,
         "exp": "Any moisture would cause grains to clump and clog the orifice."
@@ -2292,26 +2292,26 @@ const U11_INVENTIONS = [
     "id": "inv-steam",
     "item": "The Steam Engine",
     "date": "18th Century Industrial Revolution",
-    "icon": "🚂",
+    "icon": "\ud83d\ude82",
     "desc": "The steam engine turned boiling water into powerful motion that moved trains and ships.",
     "speechText": "The steam engine turned boiling water into powerful motion that moved trains and ships.",
     "quiz": [
       {
         "q": "What pushes the pistons to generate mechanical power in a steam engine?",
         "options": [
-          "High-pressure expanding steam from boiling water",
           "Cold river water",
+          "High-pressure expanding steam from boiling water",
           "Compressed air only"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Water boils into steam, expanding over 1,600 times in volume!"
       },
       {
         "q": "What Scottish engineer patented the separate condenser in 1769?",
         "options": [
           "James Watt",
-          "Alexander Fleming",
-          "Charles Darwin"
+          "Charles Darwin",
+          "Alexander Fleming"
         ],
         "correct": 0,
         "exp": "Watt's condenser saved 75% of fuel, making steam universally practical."
@@ -2319,21 +2319,21 @@ const U11_INVENTIONS = [
       {
         "q": "What fossil fuel was burned to boil water in industrial steam boilers?",
         "options": [
-          "Coal",
+          "Plastic",
           "Solar electricity",
-          "Plastic"
+          "Coal"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Abundant coal powered the boilers of factories, trains, and mills."
       },
       {
         "q": "What world-changing transit machines were powered by steam engines?",
         "options": [
+          "Electric bicycles",
           "Steam railway trains and steamships",
-          "Space rockets",
-          "Electric bicycles"
+          "Space rockets"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Locomotives and ocean liners crossed continents and oceans in days."
       },
       {
@@ -2352,7 +2352,7 @@ const U11_INVENTIONS = [
     "id": "inv-plow",
     "item": "The Agricultural Plow",
     "date": "4000 BC Fertile Crescent",
-    "icon": "🚜",
+    "icon": "\ud83d\ude9c",
     "desc": "The plow transformed agriculture by preparing vast fields to grow abundant food crops.",
     "speechText": "The plow transformed agriculture by preparing vast fields to grow abundant food crops.",
     "quiz": [
@@ -2369,41 +2369,41 @@ const U11_INVENTIONS = [
       {
         "q": "What draft animals pulled heavy plows in ancient fields?",
         "options": [
+          "Camels and monkeys",
           "Oxen, horses, and water buffalo",
-          "Lions and wolves",
-          "Camels and monkeys"
+          "Lions and wolves"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Yoked oxen provided immense steady pulling force."
       },
       {
         "q": "Why was the plow critical for the emergence of great cities?",
         "options": [
-          "Farmers produced surplus food to support urban populations",
           "It kept weeds from growing forever",
-          "It made rain fall"
+          "It made rain fall",
+          "Farmers produced surplus food to support urban populations"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Food surpluses freed artisans, scholars, and builders to build civilizations."
       },
       {
         "q": "What curved blade on a plowshare rolls over the soil slice?",
         "options": [
+          "The wooden rope",
           "The moldboard",
-          "The steering wheel",
-          "The wooden rope"
+          "The steering wheel"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The curved moldboard lifts and flips the furrow upside down."
       },
       {
         "q": "Where did some of the earliest ard scratch plows originate?",
         "options": [
-          "Mesopotamia and the Nile Valley",
           "The Arctic Circle",
-          "Greenland"
+          "Greenland",
+          "Mesopotamia and the Nile Valley"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Farmers in the Fertile Crescent developed ox-drawn ards by 4000 BC."
       }
     ]
@@ -2414,18 +2414,18 @@ const U11_MUSEUM = [
     "id": "tour-golden-mask",
     "title": "The Egyptian Golden Mask",
     "room": "Ancient Egypt Hall",
-    "icon": "👑",
+    "icon": "\ud83d\udc51",
     "desc": "Welcome travelers to the Ancient History Museum! Follow me to see the Egyptian Golden Mask.",
     "speechText": "Welcome travelers to the ancient history museum! Follow me to see the egyptian golden mask.",
     "quiz": [
       {
         "q": "Whose world-famous royal tomb contained this golden funerary mask?",
         "options": [
-          "Pharaoh Tutankhamun",
+          "Alexander the Great",
           "Julius Caesar",
-          "Alexander the Great"
+          "Pharaoh Tutankhamun"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Boy King Tutankhamun ruled Egypt in the 14th century BC."
       },
       {
@@ -2441,11 +2441,11 @@ const U11_MUSEUM = [
       {
         "q": "What blue gemstone formed the royal stripes of Tutankhamun's nemes headdress?",
         "options": [
+          "Clear diamond",
           "Lapis lazuli",
-          "Green emerald",
-          "Clear diamond"
+          "Green emerald"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Deep blue lapis lazuli was imported from ancient Afghanistan."
       },
       {
@@ -2461,11 +2461,11 @@ const U11_MUSEUM = [
       {
         "q": "What protective emblems guard the pharaoh's forehead on the mask?",
         "options": [
+          "Two soaring eagles",
           "The vulture (Nekhbet) and cobra (Wadjet)",
-          "Two roaring lions",
-          "Two soaring eagles"
+          "Two roaring lions"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "They symbolized divine protection over Upper and Lower Egypt."
       }
     ]
@@ -2474,7 +2474,7 @@ const U11_MUSEUM = [
     "id": "tour-triceratops-skeleton",
     "title": "The Triceratops Skeleton",
     "room": "Paleontology Pavilion",
-    "icon": "🦖",
+    "icon": "\ud83e\udd96",
     "desc": "Look at this giant fossil of a Triceratops! It lived millions of years ago on Earth.",
     "speechText": "Look at this giant fossil of a triceratops! It lived millions of years ago on earth.",
     "quiz": [
@@ -2491,41 +2491,41 @@ const U11_MUSEUM = [
       {
         "q": "How long ago did Triceratops live during the Late Cretaceous?",
         "options": [
-          "Around 66 to 68 million years ago",
           "100 years ago",
-          "5,000 years ago"
+          "5,000 years ago",
+          "Around 66 to 68 million years ago"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It lived right up until the asteroid impact 66 million years ago."
       },
       {
         "q": "What massive bone plate protected the Triceratops neck?",
         "options": [
-          "A wide bony frill",
+          "A spiky tail",
           "A feathered collar",
-          "A spiky tail"
+          "A wide bony frill"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Its solid bone neck frill could be over 2 meters across!"
       },
       {
         "q": "What did this prehistoric giant eat with its sharp shearing beak?",
         "options": [
-          "Fibrous palm leaves, cycads, and ferns",
           "Fish and clams",
+          "Fibrous palm leaves, cycads, and ferns",
           "Other dinosaurs"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Its scissor-like tooth batteries sliced tough prehistoric vegetation."
       },
       {
         "q": "What apex predator frequently clashed with Triceratops?",
         "options": [
+          "Saber-Toothed Cat",
           "Tyrannosaurus Rex",
-          "Woolly Mammoth",
-          "Saber-Toothed Cat"
+          "Woolly Mammoth"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Fossil frills and horns show healed puncture wounds from T-Rex teeth!"
       }
     ]
@@ -2534,36 +2534,36 @@ const U11_MUSEUM = [
     "id": "tour-ancient-temples",
     "title": "Ancient Civilization Temples",
     "room": "Monumental Architecture",
-    "icon": "🏛️",
+    "icon": "\ud83c\udfdb\ufe0f",
     "desc": "Thousands of years ago, ancient civilizations built monumental pyramids and magnificent temples.",
     "speechText": "Thousands of years ago, ancient civilizations built monumental pyramids and magnificent temples.",
     "quiz": [
       {
         "q": "What monumental geometric structures did Egyptians construct at Giza?",
         "options": [
-          "The Great Pyramids",
           "Wooden skyscrapers",
-          "Deep submarine tunnels"
+          "Deep submarine tunnels",
+          "The Great Pyramids"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "The Great Pyramid of Khufu was the tallest human-made structure for 3,800 years."
       },
       {
         "q": "What stones were ancient temples and pyramids primarily carved from?",
         "options": [
-          "Massive blocks of limestone and granite",
           "Paper and cardboard",
+          "Massive blocks of limestone and granite",
           "Glass and plastic"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Multi-ton limestone blocks were quarried and transported on Nile barges."
       },
       {
         "q": "What celestial markers guided the alignment of ancient temple gates?",
         "options": [
           "Sun equinoxes, solstices, and star positions",
-          "GPS satellites",
-          "Random chance"
+          "Random chance",
+          "GPS satellites"
         ],
         "correct": 0,
         "exp": "Temples were aligned with mathematical precision to astronomical events."
@@ -2571,11 +2571,11 @@ const U11_MUSEUM = [
       {
         "q": "What sacred pictorial script covered temple walls in ancient Egypt?",
         "options": [
-          "Hieroglyphs",
           "Morse code",
-          "Computer code"
+          "Computer code",
+          "Hieroglyphs"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Hieroglyphic carvings told stories of gods, kings, and sacred rituals."
       },
       {
@@ -2594,7 +2594,7 @@ const U11_MUSEUM = [
     "id": "tour-rosetta-stone",
     "title": "The Rosetta Stone",
     "room": "Ancient Egypt & Languages",
-    "icon": "📜",
+    "icon": "\ud83d\udcdc",
     "desc": "The Rosetta Stone held three ancient languages that unlocked the secrets of Egyptian hieroglyphs.",
     "speechText": "The Rosetta Stone held three ancient languages that unlocked the secrets of Egyptian hieroglyphs.",
     "quiz": [
@@ -2602,8 +2602,8 @@ const U11_MUSEUM = [
         "q": "How many scripts are carved into the dark granodiorite Rosetta Stone?",
         "options": [
           "Three (Hieroglyphic, Demotic, and Ancient Greek)",
-          "Only one script",
-          "Ten different scripts"
+          "Ten different scripts",
+          "Only one script"
         ],
         "correct": 0,
         "exp": "The decree was inscribed in three scripts for priests, officials, and rulers."
@@ -2611,17 +2611,17 @@ const U11_MUSEUM = [
       {
         "q": "Why was Ancient Greek on the stone the key to unlocking hieroglyphs?",
         "options": [
-          "Scholars knew Greek and could translate the unknown hieroglyphs",
           "It was written in gold",
-          "It was a modern language"
+          "It was a modern language",
+          "Scholars knew Greek and could translate the unknown hieroglyphs"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Scholars compared Greek royal names with the Egyptian cartouches."
       },
       {
         "q": "What French linguist deciphered the hieroglyphic script in 1822?",
         "options": [
-          "Jean-François Champollion",
+          "Jean-Fran\u00e7ois Champollion",
           "Napoleon Bonaparte",
           "Leonardo da Vinci"
         ],
@@ -2631,21 +2631,21 @@ const U11_MUSEUM = [
       {
         "q": "Where in Egypt was the stone discovered in 1799?",
         "options": [
+          "Underwater in the Red Sea",
           "Near the port city of Rashid (Rosetta)",
-          "Inside the Great Pyramid",
-          "Underwater in the Red Sea"
+          "Inside the Great Pyramid"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "French soldiers discovered it embedded in a fort wall in Rashid."
       },
       {
         "q": "In which world-famous London museum can you see the Rosetta Stone?",
         "options": [
-          "The British Museum",
           "The Louvre",
+          "The British Museum",
           "The Metropolitan Museum"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It has been displayed in the British Museum since 1802."
       }
     ]
@@ -2654,7 +2654,7 @@ const U11_MUSEUM = [
     "id": "tour-parthenon",
     "title": "Parthenon Sculptures",
     "room": "Classical Greece Gallery",
-    "icon": "🏛️",
+    "icon": "\ud83c\udfdb\ufe0f",
     "desc": "These classical marble statues once decorated the Parthenon temple high above ancient Athens.",
     "speechText": "These classical marble statues once decorated the Parthenon temple high above ancient Athens.",
     "quiz": [
@@ -2671,41 +2671,41 @@ const U11_MUSEUM = [
       {
         "q": "To which Greek patron goddess was the Parthenon temple dedicated?",
         "options": [
-          "Athena, goddess of wisdom and battle",
           "Aphrodite",
-          "Hera"
+          "Hera",
+          "Athena, goddess of wisdom and battle"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "A colossal 12-meter chryselephantine statue of Athena stood inside."
       },
       {
         "q": "What fine white stone was used to sculpt the Parthenon friezes?",
         "options": [
-          "Pentelic marble",
+          "Carved oak wood",
           "Soft sandstone",
-          "Carved oak wood"
+          "Pentelic marble"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Pentelic marble has fine grains that gleam golden in Athenian sunlight."
       },
       {
         "q": "What legendary master sculptor directed the Parthenon's art program?",
         "options": [
-          "Phidias",
           "Michelangelo",
+          "Phidias",
           "Socrates"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Phidias designed the pediments, metopes, and friezes around 440 BC."
       },
       {
         "q": "Were classical Greek marble statues originally plain white or painted?",
         "options": [
-          "Painted in vivid reds, blues, and gold",
           "Always plain white",
+          "Painted in vivid reds, blues, and gold",
           "Covered in mud"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Chemical analysis reveals bright polychrome paint covered the marbles!"
       }
     ]
@@ -2714,36 +2714,36 @@ const U11_MUSEUM = [
     "id": "tour-terracotta",
     "title": "The Terracotta Army",
     "room": "Imperial China Gallery",
-    "icon": "🗿",
+    "icon": "\ud83d\uddff",
     "desc": "Thousands of life-sized clay soldiers stood underground guarding the tomb of the first Chinese emperor.",
     "speechText": "Thousands of life-sized clay soldiers stood underground guarding the tomb of the first Chinese emperor.",
     "quiz": [
       {
         "q": "Whose imperial mausoleum does the underground Terracotta Army guard?",
         "options": [
-          "Qin Shi Huang, First Emperor of China",
+          "Marco Polo",
           "Confucius",
-          "Marco Polo"
+          "Qin Shi Huang, First Emperor of China"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Emperor Qin unified China in 221 BC and built this vast funerary army."
       },
       {
         "q": "What material were these thousands of life-sized warriors sculpted from?",
         "options": [
-          "Terracotta baked clay",
           "Melted bronze",
-          "Carved ice"
+          "Carved ice",
+          "Terracotta baked clay"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Craftsmen molded, assembled, and kiln-fired yellow clay figures."
       },
       {
         "q": "What makes every individual terracotta soldier astonishing to view?",
         "options": [
           "Each warrior has unique facial features, hair, and uniforms",
-          "They are all identical",
-          "They are made of plastic"
+          "They are made of plastic",
+          "They are all identical"
         ],
         "correct": 0,
         "exp": "Sculptors custom-carved individual faces, ears, and military ranks."
@@ -2751,19 +2751,19 @@ const U11_MUSEUM = [
       {
         "q": "Who discovered the underground pits near Xi'an in 1974?",
         "options": [
-          "Local farmers digging a water well",
           "Tourists on a bus",
+          "Local farmers digging a water well",
           "Submarine explorers"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Farmers struck clay fragments while digging a well during a drought."
       },
       {
         "q": "What other military figures stand in the underground pits?",
         "options": [
           "Cavalry horses, war chariots, and generals",
-          "Dinosaur skeletons",
-          "Toy airplanes"
+          "Toy airplanes",
+          "Dinosaur skeletons"
         ],
         "correct": 0,
         "exp": "Hundreds of life-sized horses, bronze chariots, and officers guard the pits."
@@ -2774,7 +2774,7 @@ const U11_MUSEUM = [
     "id": "tour-colosseum",
     "title": "The Roman Colosseum Model",
     "room": "Imperial Rome Gallery",
-    "icon": "🏟️",
+    "icon": "\ud83c\udfdf\ufe0f",
     "desc": "This model shows the Roman Colosseum where fifty thousand spectators cheered at great spectacles.",
     "speechText": "This model shows the Roman Colosseum where fifty thousand spectators cheered at great spectacles.",
     "quiz": [
@@ -2791,19 +2791,19 @@ const U11_MUSEUM = [
       {
         "q": "How many spectators could gather inside the Colosseum tiers?",
         "options": [
-          "Over 50,000 spectators",
           "Only 100 people",
-          "Two million people"
+          "Two million people",
+          "Over 50,000 spectators"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It had 80 arched entrances to rapidly seat up to 65,000 Romans."
       },
       {
         "q": "What public events were held on the sand-covered arena floor?",
         "options": [
           "Gladiatorial contests, animal hunts, and dramas",
-          "Quiet library reading",
-          "Modern soccer games"
+          "Modern soccer games",
+          "Quiet library reading"
         ],
         "correct": 0,
         "exp": "'Arena' is Latin for sand, which absorbed spilled blood during games."
@@ -2811,21 +2811,21 @@ const U11_MUSEUM = [
       {
         "q": "What was the multi-level underground labyrinth beneath the floor called?",
         "options": [
-          "The hypogeum with trapdoors and elevators",
           "The catacombs",
+          "The hypogeum with trapdoors and elevators",
           "The pantry"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Pulleys and elevators hoisted gladiators and wild animals onto the stage."
       },
       {
         "q": "What revolutionary building material made its massive walls possible?",
         "options": [
-          "Roman concrete (pozzolana) and travertine",
           "Straw and mud only",
+          "Roman concrete (pozzolana) and travertine",
           "Pure glass"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Roman volcanic ash concrete set underwater and lasted for millennia."
       }
     ]
@@ -2834,18 +2834,18 @@ const U11_MUSEUM = [
     "id": "tour-aztec-sun",
     "title": "The Aztec Sun Stone",
     "room": "Mesoamerican Treasury",
-    "icon": "☀️",
+    "icon": "\u2600\ufe0f",
     "desc": "The Aztec Sun Stone is a giant carved calendar recording the eras and movements of the sun.",
     "speechText": "The Aztec Sun Stone is a giant carved calendar recording the eras and movements of the sun.",
     "quiz": [
       {
         "q": "What Mesoamerican civilization carved the colossal basalt Sun Stone?",
         "options": [
+          "The Romans",
           "The Aztec (Mexica) Empire",
-          "The Vikings",
-          "The Romans"
+          "The Vikings"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Carved in Tenochtitlan (Mexico City) in the early 16th century."
       },
       {
@@ -2861,31 +2861,31 @@ const U11_MUSEUM = [
       {
         "q": "What do the four rectangular reliefs surrounding the center represent?",
         "options": [
-          "The four past solar eras (Four Suns)",
           "The four seasons of winter",
+          "The four past solar eras (Four Suns)",
           "Four royal banquets"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "In Aztec mythology, the world passed through four previous creation cycles."
       },
       {
         "q": "How much does this monolithic volcanic basalt disk weigh?",
         "options": [
-          "About 24 metric tons",
           "About 5 pounds",
-          "Less than a bicycle"
+          "Less than a bicycle",
+          "About 24 metric tons"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It measures 3.6 meters in diameter and weighs over 24 tonnes!"
       },
       {
         "q": "In which city's central square was the stone rediscovered in 1790?",
         "options": [
-          "Mexico City (the Zócalo)",
+          "Havana, Cuba",
           "Lima, Peru",
-          "Havana, Cuba"
+          "Mexico City (the Z\u00f3calo)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Workers excavating the Plaza Mayor unearthed the buried monolith."
       }
     ]
@@ -2894,7 +2894,7 @@ const U11_MUSEUM = [
     "id": "tour-cuneiform",
     "title": "The Cuneiform Tablet",
     "room": "Mesopotamia & The Dawn of Writing",
-    "icon": "📜",
+    "icon": "\ud83d\udcdc",
     "desc": "These ancient clay tablets show cuneiform writing, one of the earliest writing systems in human history.",
     "speechText": "These ancient clay tablets show cuneiform writing, one of the earliest writing systems in human history.",
     "quiz": [
@@ -2902,8 +2902,8 @@ const U11_MUSEUM = [
         "q": "What tool did Mesopotamian scribes press into damp clay?",
         "options": [
           "A wedge-tipped reed stylus",
-          "A metal hammer",
-          "A paintbrush"
+          "A paintbrush",
+          "A metal hammer"
         ],
         "correct": 0,
         "exp": "The cut reed pressed triangular impressions into soft alluvial clay."
@@ -2911,29 +2911,29 @@ const U11_MUSEUM = [
       {
         "q": "What does the Latin root 'cuneus' mean in 'cuneiform'?",
         "options": [
+          "Wave",
           "Wedge",
-          "Circle",
-          "Wave"
+          "Circle"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "'Cuneus' means wedge; cuneiform means 'wedge-shaped writing'."
       },
       {
         "q": "What ancient civilization first created cuneiform around 3200 BC?",
         "options": [
-          "The Sumerians of Mesopotamia",
+          "The Mayans",
           "The Vikings",
-          "The Mayans"
+          "The Sumerians of Mesopotamia"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Sumerians in southern Iraq invented writing for commerce and laws."
       },
       {
         "q": "What world-famous ancient epic poem was recorded on cuneiform tablets?",
         "options": [
           "The Epic of Gilgamesh",
-          "Romeo and Juliet",
-          "The Odyssey"
+          "The Odyssey",
+          "Romeo and Juliet"
         ],
         "correct": 0,
         "exp": "The tale of King Gilgamesh and Enkidu is humanity's oldest epic."
@@ -2941,11 +2941,11 @@ const U11_MUSEUM = [
       {
         "q": "Why did clay tablets endure for thousands of years in the desert?",
         "options": [
-          "Baking in kiln fires turned clay into durable stone-like ceramic",
           "They melted in liquid",
-          "They dissolved into smoke"
+          "They dissolved into smoke",
+          "Baking in kiln fires turned clay into durable stone-like ceramic"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Baked clay resists water, rot, and insects unlike paper and papyrus."
       }
     ]
@@ -2954,7 +2954,7 @@ const U11_MUSEUM = [
     "id": "tour-knight-armor",
     "title": "Medieval Knight Armor",
     "room": "Medieval Arms & Armor",
-    "icon": "🛡️",
+    "icon": "\ud83d\udee1\ufe0f",
     "desc": "This polished steel suit of armor protected medieval knights in tournaments and battles.",
     "speechText": "This polished steel suit of armor protected medieval knights in tournaments and battles.",
     "quiz": [
@@ -2962,8 +2962,8 @@ const U11_MUSEUM = [
         "q": "What metal was hammered by armories to create full plate armor?",
         "options": [
           "Hardened steel and wrought iron",
-          "Gold and silver",
-          "Soft tin"
+          "Soft tin",
+          "Gold and silver"
         ],
         "correct": 0,
         "exp": "Master armorers hammered curved steel plates to deflect sword strikes."
@@ -2972,8 +2972,8 @@ const U11_MUSEUM = [
         "q": "What interlocking mesh of metal rings was worn under plate joints?",
         "options": [
           "Chainmail (maille)",
-          "Leather strap only",
-          "Heavy wool sweaters"
+          "Heavy wool sweaters",
+          "Leather strap only"
         ],
         "correct": 0,
         "exp": "Chainmail protected exposed armpits, elbows, and groins."
@@ -2981,31 +2981,31 @@ const U11_MUSEUM = [
       {
         "q": "What hinged part of a knight's helmet opened for vision and fresh air?",
         "options": [
+          "The chin strap",
           "The visor",
-          "The plume feather",
-          "The chin strap"
+          "The plume feather"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The visor could be raised between clashes and lowered in combat."
       },
       {
         "q": "Could a knight move agilely and mount a horse in full plate armor?",
         "options": [
-          "Yes, articulated joints allowed full running and agility",
+          "No, they fell over immediately",
           "No, they could not move an inch",
-          "No, they fell over immediately"
+          "Yes, articulated joints allowed full running and agility"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Evenly distributed across the body, a 25kg suit allowed full mobility."
       },
       {
         "q": "What colorful heraldic designs on shields identified knights on the battlefield?",
         "options": [
+          "National flags with stars",
           "Coats of arms and crests",
-          "Barcodes",
-          "National flags with stars"
+          "Barcodes"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Heraldry displayed family lions, eagles, and colors to distinguish allies."
       }
     ]
@@ -3014,56 +3014,56 @@ const U11_MUSEUM = [
     "id": "tour-viking-longship",
     "title": "Viking Dragon Longship",
     "room": "Norse Seafarers Gallery",
-    "icon": "⛵",
+    "icon": "\u26f5",
     "desc": "Viking longships had carved wooden dragon heads and square sails to cross stormy northern seas.",
     "speechText": "Viking longships had carved wooden dragon heads and square sails to cross stormy northern seas.",
     "quiz": [
       {
         "q": "What fierce wooden carving often decorated the bow of a Viking warship?",
         "options": [
-          "A carved dragon or serpent head",
           "A golden crown",
-          "A sleeping cat"
+          "A sleeping cat",
+          "A carved dragon or serpent head"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Dragon heads struck fear into foes and protected against sea spirits."
       },
       {
         "q": "What kind of sail powered Viking longships across northern seas?",
         "options": [
-          "A large square woolen sail",
           "Three triangular sails",
+          "A large square woolen sail",
           "An electric motor"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Woven wool sails treated with animal fat caught strong ocean gales."
       },
       {
         "q": "What shipbuilding technique used overlapping oak planks for the hull?",
         "options": [
+          "Steel welding",
           "Clinker (lapstrake) hull construction",
-          "Flat cement pouring",
-          "Steel welding"
+          "Flat cement pouring"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Clinker planks flexed with ocean waves, keeping the ship seaworthy."
       },
       {
         "q": "Could Viking longships travel up shallow rivers as well as open ocean?",
         "options": [
-          "Yes, their shallow draft allowed river raids and beaching",
+          "No, they sank in rivers",
           "No, only in deep oceans",
-          "No, they sank in rivers"
+          "Yes, their shallow draft allowed river raids and beaching"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Drawing only 1 meter of water, longships sailed directly onto beaches!"
       },
       {
         "q": "What Norse explorer sailed to North America 500 years before Columbus?",
         "options": [
           "Leif Erikson",
-          "Christopher Columbus",
-          "Ferdinand Magellan"
+          "Ferdinand Magellan",
+          "Christopher Columbus"
         ],
         "correct": 0,
         "exp": "Leif Erikson established the Norse settlement at Vinland (Newfoundland)."
@@ -3074,26 +3074,26 @@ const U11_MUSEUM = [
     "id": "tour-maya-mask",
     "title": "Royal Maya Jade Mask",
     "room": "Maya Civilizations Gallery",
-    "icon": "🎭",
+    "icon": "\ud83c\udfad",
     "desc": "This royal Maya mask was made of precious green jade to honor kings in sacred ceremonies.",
     "speechText": "This royal Maya mask was made of precious green jade to honor kings in sacred ceremonies.",
     "quiz": [
       {
         "q": "What precious green gemstone did Maya artisans carve for funerary masks?",
         "options": [
-          "Jadeite (jade)",
           "Turquoise",
-          "Clear quartz"
+          "Clear quartz",
+          "Jadeite (jade)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Jade was the most valuable material in the ancient Maya world."
       },
       {
         "q": "Why was green jade considered so sacred in Maya beliefs?",
         "options": [
           "It symbolized life, breath, sacred water, and maize sprouts",
-          "It was the softest stone",
-          "It glowed red in dark rooms"
+          "It glowed red in dark rooms",
+          "It was the softest stone"
         ],
         "correct": 0,
         "exp": "Its vibrant green mirrored young corn shoots and eternal renewal."
@@ -3101,29 +3101,29 @@ const U11_MUSEUM = [
       {
         "q": "What celebrated Maya king of Palenque wore a legendary jade mosaic mask?",
         "options": [
-          "K'inich Janaab' Pakal (Pakal the Great)",
+          "Atahualpa",
           "Montezuma",
-          "Atahualpa"
+          "K'inich Janaab' Pakal (Pakal the Great)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Pakal ruled Palenque for 68 years and was entombed inside the Temple of Inscriptions."
       },
       {
         "q": "How were hundreds of polished jade tesserae fitted together on the mask?",
         "options": [
+          "Carved from one giant rock",
           "As a mosaic over a stucco core",
-          "Poured as hot liquid glass",
-          "Carved from one giant rock"
+          "Poured as hot liquid glass"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Over 200 carved jade pieces formed a lifelike mosaic portrait."
       },
       {
         "q": "What iridescent shell material was inlaid to create the eyes of the royal mask?",
         "options": [
           "Mother-of-pearl shell and obsidian pupils",
-          "Plastic beads",
-          "Blue paint only"
+          "Blue paint only",
+          "Plastic beads"
         ],
         "correct": 0,
         "exp": "White conch shells and volcanic obsidian created piercing, lifelike eyes."
@@ -3134,7 +3134,7 @@ const U11_MUSEUM = [
     "id": "tour-ishtar-gate",
     "title": "The Ishtar Gate",
     "room": "Ancient Babylon Gallery",
-    "icon": "🦁",
+    "icon": "\ud83e\udd81",
     "desc": "The Ishtar Gate welcomed visitors to Babylon with brilliant blue tiles and golden lions.",
     "speechText": "The Ishtar Gate welcomed visitors to Babylon with brilliant blue tiles and golden lions.",
     "quiz": [
@@ -3142,8 +3142,8 @@ const U11_MUSEUM = [
         "q": "What ancient imperial Mesopotamian metropolis did the Ishtar Gate guard?",
         "options": [
           "Babylon",
-          "Nineveh",
-          "Ur"
+          "Ur",
+          "Nineveh"
         ],
         "correct": 0,
         "exp": "The gate was the eighth inner gate to the city of Babylon."
@@ -3151,19 +3151,19 @@ const U11_MUSEUM = [
       {
         "q": "What color glazed bricks made the towering walls glow under the sun?",
         "options": [
-          "Vibrant lapis-lazuli blue",
           "Bright purple",
+          "Vibrant lapis-lazuli blue",
           "Pitch black"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Cobalt glazes produced a brilliant blue sheen across the brick facade."
       },
       {
         "q": "What magnificent creatures were sculpted in relief along the walls?",
         "options": [
-          "Golden lions, young bulls, and dragons (mušḫuššu)",
-          "Elephants and giraffes",
-          "Penguins and seals"
+          "Golden lions, young bulls, and dragons (mu\u0161\u1e2bu\u0161\u0161u)",
+          "Penguins and seals",
+          "Elephants and giraffes"
         ],
         "correct": 0,
         "exp": "Lions honored Ishtar, bulls Adad, and horned dragons Marduk."
@@ -3171,21 +3171,21 @@ const U11_MUSEUM = [
       {
         "q": "Which famous Babylonian king built the grand gate around 575 BC?",
         "options": [
-          "Nebuchadnezzar II",
           "Hammurabi",
+          "Nebuchadnezzar II",
           "Alexander the Great"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Nebuchadnezzar II also commissioned the legendary Hanging Gardens."
       },
       {
         "q": "What Mesopotamian goddess was this ceremonial gate dedicated to?",
         "options": [
-          "Ishtar, goddess of love, beauty, and war",
           "Hera",
-          "Venus"
+          "Venus",
+          "Ishtar, goddess of love, beauty, and war"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Processions entered Babylon through the gate along the Processional Way."
       }
     ]
@@ -3194,56 +3194,56 @@ const U11_MUSEUM = [
     "id": "tour-sarcophagus",
     "title": "Painted Egyptian Sarcophagus",
     "room": "Tomb of the Pharaohs",
-    "icon": "⚰️",
+    "icon": "\u26b0\ufe0f",
     "desc": "This painted Egyptian sarcophagus protected the mummified pharaoh with protective hieroglyphic spells.",
     "speechText": "This painted Egyptian sarcophagus protected the mummified pharaoh with protective hieroglyphic spells.",
     "quiz": [
       {
         "q": "What was the spiritual purpose of an Egyptian sarcophagus?",
         "options": [
-          "To protect the royal mummy and guide the soul in the afterlife",
           "To store grain harvests",
+          "To protect the royal mummy and guide the soul in the afterlife",
           "To sail across the Nile"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It served as a physical home and protective fortress for the eternal spirit (Ka)."
       },
       {
         "q": "What texts and magical spells were inscribed on its painted panels?",
         "options": [
+          "Tax ledgers",
           "Spells from the Book of the Dead",
-          "Cooking recipes",
-          "Tax ledgers"
+          "Cooking recipes"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Spells protected the deceased against perilous afterlife monsters."
       },
       {
         "q": "What winged goddess often stretched her wings across the chest to offer protection?",
         "options": [
-          "Isis or Nut",
+          "Cleopatra",
           "Medusa",
-          "Cleopatra"
+          "Isis or Nut"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Goddess Isis or sky goddess Nut wrapped their wings in divine embrace."
       },
       {
         "q": "What fine wood imported from Lebanon was prized for royal coffins?",
         "options": [
-          "Cedar of Lebanon",
           "Soft pine",
-          "Cardboard"
+          "Cardboard",
+          "Cedar of Lebanon"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Resinous cedar wood resisted rot, moisture, and desert termites."
       },
       {
         "q": "What sacred eye symbol painted on the side allowed the mummy to view the sun?",
         "options": [
           "The Eye of Horus (Wedjat)",
-          "The All-Seeing Triangle",
-          "The Solar Compass"
+          "The Solar Compass",
+          "The All-Seeing Triangle"
         ],
         "correct": 0,
         "exp": "The Eye of Horus symbolized healing, protection, and eternal sight."
@@ -3254,18 +3254,18 @@ const U11_MUSEUM = [
     "id": "tour-renaissance",
     "title": "Renaissance Art Gallery",
     "room": "Italian Renaissance Hall",
-    "icon": "🎨",
+    "icon": "\ud83c\udfa8",
     "desc": "Welcome to the Renaissance gallery, where masters like Leonardo painted with light and perspective.",
     "speechText": "Welcome to the Renaissance gallery, where masters like Leonardo painted with light and perspective.",
     "quiz": [
       {
         "q": "What does the word 'Renaissance' mean in European history?",
         "options": [
-          "Rebirth of classical art, learning, and culture",
+          "End of the world",
           "Quiet evening",
-          "End of the world"
+          "Rebirth of classical art, learning, and culture"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "A cultural rebirth spanning the 14th to 17th centuries in Europe."
       },
       {
@@ -3291,21 +3291,21 @@ const U11_MUSEUM = [
       {
         "q": "What Italian city was the cradle of the early Renaissance?",
         "options": [
-          "Florence (Firenze)",
           "Venice only",
+          "Florence (Firenze)",
           "Naples"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Patronage from the Medici family fostered artists in Florence."
       },
       {
         "q": "What medium made from pigments and linseed oil allowed subtle soft blending?",
         "options": [
-          "Oil paint on canvas",
+          "Charcoal on bark",
           "Watercolors on sand",
-          "Charcoal on bark"
+          "Oil paint on canvas"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Oil paint dried slowly, allowing Leonardo's famous 'sfumato' blending."
       }
     ]
@@ -3314,7 +3314,7 @@ const U11_MUSEUM = [
     "id": "tour-ming-porcelain",
     "title": "Ming Dynasty Porcelain",
     "room": "Imperial China Ceramic Arts",
-    "icon": "🏺",
+    "icon": "\ud83c\udffa",
     "desc": "These Ming dynasty vases were painted with fine cobalt blue and traded across the globe.",
     "speechText": "These Ming dynasty vases were painted with fine cobalt blue and traded across the globe.",
     "quiz": [
@@ -3322,8 +3322,8 @@ const U11_MUSEUM = [
         "q": "What distinctive two colors define famous Ming imperial porcelain?",
         "options": [
           "Cobalt blue on pure white porcelain",
-          "Green on orange",
-          "Black on yellow"
+          "Black on yellow",
+          "Green on orange"
         ],
         "correct": 0,
         "exp": "Cobalt blue brushwork beneath a clear glaze on white kaolin clay."
@@ -3331,19 +3331,19 @@ const U11_MUSEUM = [
       {
         "q": "What mineral pigment created the brilliant blue brushwork under the glaze?",
         "options": [
-          "Cobalt oxide",
           "Crushed emerald",
+          "Cobalt oxide",
           "Liquid indigo ink"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Finely ground cobalt was imported along ancient trade routes from Persia."
       },
       {
         "q": "What Chinese city was the world-famous imperial porcelain capital?",
         "options": [
           "Jingdezhen",
-          "Beijing",
-          "Hong Kong"
+          "Hong Kong",
+          "Beijing"
         ],
         "correct": 0,
         "exp": "Jingdezhen's kilns supplied the Forbidden City and royal courts worldwide."
@@ -3351,21 +3351,21 @@ const U11_MUSEUM = [
       {
         "q": "What imperial creature symbolizing the Emperor often wound around Ming jars?",
         "options": [
-          "Five-clawed dragons swirling among clouds",
+          "Giant sea turtles",
           "Flying horses with wings",
-          "Giant sea turtles"
+          "Five-clawed dragons swirling among clouds"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Only the Chinese Emperor had the right to five-clawed dragon porcelain!"
       },
       {
         "q": "Why were Ming vases prized like treasure across Europe and Asia?",
         "options": [
+          "Because they could float",
           "For their translucent beauty, hardness, and ringing tone",
-          "Because they were unbreakable",
-          "Because they could float"
+          "Because they were unbreakable"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "European kings built entire 'porcelain cabinets' to showcase their collections."
       }
     ]
@@ -3374,36 +3374,36 @@ const U11_MUSEUM = [
     "id": "tour-cyrus-cylinder",
     "title": "The Cyrus Cylinder",
     "room": "Ancient Persian Empire",
-    "icon": "📜",
+    "icon": "\ud83d\udcdc",
     "desc": "The Cyrus Cylinder is a famous Persian inscription promoting peace, tolerance, and freedom.",
     "speechText": "The Cyrus Cylinder is a famous Persian inscription promoting peace, tolerance, and freedom.",
     "quiz": [
       {
         "q": "What Persian ruler ordered the royal decree on this clay cylinder in 539 BC?",
         "options": [
-          "Cyrus the Great (Cyrus II)",
+          "Xerxes",
           "Darius III",
-          "Xerxes"
+          "Cyrus the Great (Cyrus II)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Cyrus the Great founded the Achaemenid Persian Empire."
       },
       {
         "q": "What humanitarian deed did Cyrus decree upon capturing Babylon?",
         "options": [
-          "Freeing displaced peoples and restoring their sacred temples",
           "Building a giant wall",
-          "Closing all city gates"
+          "Closing all city gates",
+          "Freeing displaced peoples and restoring their sacred temples"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "He allowed captive peoples, including the Jewish exiles, to return home."
       },
       {
         "q": "What ancient script was pressed into the baked clay cylinder?",
         "options": [
           "Babylonian cuneiform script",
-          "Latin letters",
-          "Arabic calligraphy"
+          "Arabic calligraphy",
+          "Latin letters"
         ],
         "correct": 0,
         "exp": "Scribes pressed 45 lines of Akkadian cuneiform into the clay."
@@ -3411,21 +3411,21 @@ const U11_MUSEUM = [
       {
         "q": "What modern landmark declaration does the Cyrus Cylinder foreshadow?",
         "options": [
+          "The World Bank Accord",
           "The Universal Declaration of Human Rights",
-          "The Olympic Charter",
-          "The World Bank Accord"
+          "The Olympic Charter"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "A replica is displayed at the United Nations headquarters in New York."
       },
       {
         "q": "What geometric shape makes this inscription distinct among royal stelae?",
         "options": [
-          "A barrel-shaped curved clay cylinder",
           "A flat square brick",
+          "A barrel-shaped curved clay cylinder",
           "A hollow round sphere"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "It was designed as a foundation deposit buried under city walls."
       }
     ]
@@ -3434,7 +3434,7 @@ const U11_MUSEUM = [
     "id": "tour-cave-art",
     "title": "Prehistoric Cave Art",
     "room": "Paleolithic Origins",
-    "icon": "🖐️",
+    "icon": "\ud83d\udd90\ufe0f",
     "desc": "Early humans made these painted hand stencils on cave walls forty thousand years ago.",
     "speechText": "Early humans made these painted hand stencils on cave walls forty thousand years ago.",
     "quiz": [
@@ -3442,8 +3442,8 @@ const U11_MUSEUM = [
         "q": "How many years ago did Ice Age humans paint these cave hand stencils?",
         "options": [
           "Over 30,000 to 40,000 years ago",
-          "500 years ago",
-          "100 years ago"
+          "100 years ago",
+          "500 years ago"
         ],
         "correct": 0,
         "exp": "Cave art in Spain, France, and Indonesia dates back over 40,000 years."
@@ -3451,31 +3451,31 @@ const U11_MUSEUM = [
       {
         "q": "How did Paleolithic artists create the distinctive negative hand stencils?",
         "options": [
-          "By blowing powdered pigment over a hand pressed to stone",
+          "Carving with scissors",
           "Using rubber stamps",
-          "Carving with scissors"
+          "By blowing powdered pigment over a hand pressed to stone"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "They blew liquid ochre through hollow bird bones or straight from the mouth!"
       },
       {
         "q": "What natural earth minerals provided vibrant red and black colors?",
         "options": [
+          "Crushed glass",
           "Red ochre iron oxide and black charcoal",
-          "Chemical acrylic paints",
-          "Crushed glass"
+          "Chemical acrylic paints"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Natural ochre, hematite, and manganese provided rich mineral pigments."
       },
       {
         "q": "What majestic Ice Age beasts are painted across caves like Lascaux and Altamira?",
         "options": [
-          "Bison, horses, mammoths, and deer",
+          "Dolphins and whales",
           "Lions and giraffes only",
-          "Dolphins and whales"
+          "Bison, horses, mammoths, and deer"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Artists captured the power, movement, and muscle of herds in torchlight."
       },
       {
@@ -3494,18 +3494,18 @@ const U11_MUSEUM = [
     "id": "tour-olympic-torch",
     "title": "Ancient Olympic Torch & Cauldron",
     "room": "Classical Athletics & Olympia",
-    "icon": "🔥",
+    "icon": "\ud83d\udd25",
     "desc": "This bronze vessel carried the sacred flame during the ancient athletic games in Olympia.",
     "speechText": "This bronze vessel carried the sacred flame during the ancient athletic games in Olympia.",
     "quiz": [
       {
         "q": "In which ancient Greek sanctuary were the Olympic games celebrated?",
         "options": [
-          "Olympia in the Peloponnese",
           "Sparta",
+          "Olympia in the Peloponnese",
           "Corinth"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Athletes gathered at the sanctuary of Zeus in Olympia starting in 776 BC."
       },
       {
@@ -3531,21 +3531,21 @@ const U11_MUSEUM = [
       {
         "q": "What sacred treaty stopped all wars between Greek city-states for the games?",
         "options": [
-          "The Olympic Truce (Ekecheiria)",
+          "The Spartan Treaty",
           "The Athenian Pact",
-          "The Spartan Treaty"
+          "The Olympic Truce (Ekecheiria)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Heralds proclaimed the truce so athletes and spectators could travel safely."
       },
       {
         "q": "How often were the ancient Olympic games celebrated?",
         "options": [
-          "Every four years (an Olympiad)",
           "Every month",
+          "Every four years (an Olympiad)",
           "Every ten years"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "The four-year interval was called an 'Olympiad', used to count historical years."
       }
     ]
@@ -3554,28 +3554,28 @@ const U11_MUSEUM = [
     "id": "tour-silk-road",
     "title": "The Silk Road Caravan",
     "room": "Global Trade Routes",
-    "icon": "🐪",
+    "icon": "\ud83d\udc2a",
     "desc": "The Silk Road was an immense trade route connecting Asia and Europe with spices and silk.",
     "speechText": "The Silk Road was an immense trade route connecting Asia and Europe with spices and silk.",
     "quiz": [
       {
         "q": "What continents were linked by the historic overland and maritime Silk Road?",
         "options": [
-          "Asia and Europe (and North Africa)",
           "North and South America",
-          "Australia and Antarctica"
+          "Australia and Antarctica",
+          "Asia and Europe (and North Africa)"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "It stretched over 6,400 kilometers from Chang'an (China) to Rome and Venice."
       },
       {
         "q": "What luxurious lightweight Chinese fabric gave this trade network its name?",
         "options": [
-          "Lustrous mulberry silk",
           "Wool sweaters",
+          "Lustrous mulberry silk",
           "Cotton denim"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Silk was so prized in Rome that it was traded ounce-for-ounce for gold."
       },
       {
@@ -3591,21 +3591,21 @@ const U11_MUSEUM = [
       {
         "q": "Besides merchandise like spices and silk, what else traveled along the Silk Road?",
         "options": [
-          "Scientific ideas, inventions, philosophy, and art",
           "Only desert sand",
-          "Nothing else"
+          "Nothing else",
+          "Scientific ideas, inventions, philosophy, and art"
         ],
-        "correct": 0,
+        "correct": 2,
         "exp": "Papermaking, printing, compasses, mathematics, and religions spread globally."
       },
       {
         "q": "What Venetian traveler wrote a famous travelogue of his Silk Road journey to China?",
         "options": [
+          "Ferdinand Magellan",
           "Marco Polo",
-          "Christopher Columbus",
-          "Ferdinand Magellan"
+          "Christopher Columbus"
         ],
-        "correct": 0,
+        "correct": 1,
         "exp": "Marco Polo served at the court of Kublai Khan and published his memoirs in 1300."
       }
     ]
@@ -3618,6 +3618,7 @@ class KidsUnit11Engine {
     this.soundEnabled = true;
     this.audioCtx = null;
     this.quizStates = {}; // key: category_index -> { currentQ: 0, score: 0 }
+    window.unit11Engine = this;
   }
 
   init() {
@@ -3682,6 +3683,28 @@ class KidsUnit11Engine {
     if (el) el.textContent = `${this.stars} pts`;
   }
 
+  toggleCardQuiz(categoryKey, cardIdx) {
+    const prefix = categoryKey === 'museum' ? 'tour' : (categoryKey === 'invention' ? 'inv' : 'fossil');
+    const quizContainer = document.getElementById(`${prefix}-quiz-${cardIdx}`);
+    const btn = document.getElementById(`${prefix}-quiz-btn-${cardIdx}`);
+    if (!quizContainer) return;
+
+    const isHidden = (quizContainer.style.display === 'none' || !quizContainer.style.display);
+    if (isHidden) {
+      quizContainer.style.display = 'flex';
+      if (btn) {
+        btn.classList.add('active');
+        btn.innerHTML = '<span>✖ Close Quiz</span>';
+      }
+    } else {
+      quizContainer.style.display = 'none';
+      if (btn) {
+        btn.classList.remove('active');
+        btn.innerHTML = '<span>🧩 Quiz (5 Qs)</span>';
+      }
+    }
+  }
+
   // --- REUSABLE INTERACTIVE 5-QUESTION QUIZ RENDERER ---
   renderCardQuiz(containerEl, quizList, categoryKey, cardIdx) {
     const stateKey = `${categoryKey}_${cardIdx}`;
@@ -3699,7 +3722,10 @@ class KidsUnit11Engine {
           <div class="card-quiz-complete">
             <div class="card-quiz-complete-title">⭐ 5/5 Questions Solved!</div>
             <div class="card-quiz-complete-sub">Mastery accomplished! +50 Bonus Stars Awarded!</div>
-            <button type="button" class="card-quiz-retry-btn" aria-label="Replay quiz">🔄 Replay Quiz</button>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:6px;flex-wrap:wrap;">
+              <button type="button" class="card-quiz-retry-btn" aria-label="Replay quiz">🔄 Replay Quiz</button>
+              <button type="button" class="card-quiz-close-btn" aria-label="Close quiz">✔ Close</button>
+            </div>
           </div>
         `;
         const retryBtn = containerEl.querySelector('.card-quiz-retry-btn');
@@ -3710,6 +3736,13 @@ class KidsUnit11Engine {
             st.score = 0;
             st.answered = false;
             updateUI();
+          });
+        }
+        const closeBtn = containerEl.querySelector('.card-quiz-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleCardQuiz(categoryKey, cardIdx);
           });
         }
         return;
@@ -3727,7 +3760,10 @@ class KidsUnit11Engine {
       containerEl.innerHTML = `
         <div class="card-quiz-header">
           <span class="card-quiz-title">🧩 Quiz: Question ${st.currentQ + 1} of ${total}</span>
-          <div class="card-quiz-dots">${dotsHtml}</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="card-quiz-dots">${dotsHtml}</div>
+            <button type="button" class="card-quiz-close-x" aria-label="Close quiz">✕</button>
+          </div>
         </div>
         <div class="card-quiz-qtext">${cur.q}</div>
         <div class="card-quiz-options">
@@ -3740,6 +3776,14 @@ class KidsUnit11Engine {
         </div>
         <div class="card-quiz-feedback" style="font-size:0.78rem;font-weight:700;margin-top:6px;display:none;"></div>
       `;
+
+      const closeX = containerEl.querySelector('.card-quiz-close-x');
+      if (closeX) {
+        closeX.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleCardQuiz(categoryKey, cardIdx);
+        });
+      }
 
       const fb = containerEl.querySelector('.card-quiz-feedback');
       const optButtons = containerEl.querySelectorAll('.card-quiz-opt');
@@ -3803,12 +3847,17 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">${f.fact}</p>
         <div class="kids-unit11-audio-row">
-          <button type="button" class="kids-audio-play-btn fossil-audio-btn" data-text="${f.speechText}" aria-label="Listen to ${f.name} fact">
-            🔊 Hear Dinosaur Fact
-          </button>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="kids-audio-play-btn fossil-audio-btn" data-text="${f.speechText}" aria-label="Listen to ${f.name} fact">
+              🔊 Hear Dinosaur Fact
+            </button>
+            <button type="button" class="kids-quiz-trigger-btn" id="fossil-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('fossil', ${i})" aria-label="Open quiz for ${f.name}">
+              <span>🧩 Quiz (5 Qs)</span>
+            </button>
+          </div>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+20 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="fossil-quiz-${i}"></div>
+        <div class="card-quiz-wrapper" id="fossil-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
@@ -3847,12 +3896,17 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">${inv.desc}</p>
         <div class="kids-unit11-audio-row">
-          <button type="button" class="kids-audio-play-btn inv-audio-btn" data-text="${inv.speechText}" aria-label="Listen to ${inv.item} discovery story">
-            🔊 Hear Discovery Story
-          </button>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="kids-audio-play-btn inv-audio-btn" data-text="${inv.speechText}" aria-label="Listen to ${inv.item} discovery story">
+              🔊 Hear Discovery Story
+            </button>
+            <button type="button" class="kids-quiz-trigger-btn" id="inv-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('invention', ${i})" aria-label="Open quiz for ${inv.item}">
+              <span>🧩 Quiz (5 Qs)</span>
+            </button>
+          </div>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+20 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="inv-quiz-${i}"></div>
+        <div class="card-quiz-wrapper" id="inv-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
@@ -4054,12 +4108,17 @@ class KidsUnit11Engine {
         </div>
         <p class="kids-unit11-card-desc">"${ex.desc}"</p>
         <div class="kids-unit11-audio-row">
-          <button type="button" class="kids-audio-play-btn tour-audio-btn" data-text="${ex.speechText}" aria-label="Listen to ${ex.title} docent narration">
-            🔊 Hear Tour Narration
-          </button>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="kids-audio-play-btn tour-audio-btn" data-text="${ex.speechText}" aria-label="Listen to ${ex.title} docent narration">
+              🔊 Hear Tour Narration
+            </button>
+            <button type="button" class="kids-quiz-trigger-btn" id="tour-quiz-btn-${i}" onclick="window.unit11Engine.toggleCardQuiz('museum', ${i})" aria-label="Open quiz for ${ex.title}">
+              <span>🧩 Quiz (5 Qs)</span>
+            </button>
+          </div>
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">+30 ⭐</span>
         </div>
-        <div class="card-quiz-wrapper" id="tour-quiz-${i}"></div>
+        <div class="card-quiz-wrapper" id="tour-quiz-${i}" style="display:none;"></div>
       </div>
     `).join('');
 
