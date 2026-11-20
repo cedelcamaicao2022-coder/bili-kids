@@ -765,6 +765,39 @@ if (typeof window !== 'undefined') {
   };
 }
 
+// Typing indicators for natural conversational pacing
+function showTypingIndicator(charKey, charName, charAvatar) {
+  removeTypingIndicator();
+  const chatFlow = document.getElementById('storyChatFlow');
+  if (!chatFlow) return;
+
+  const isMaya = charKey === 'maya';
+  const isClerk = charKey === 'clerk';
+  const typingRow = document.createElement('div');
+  typingRow.className = `chat-bubble-row ${isMaya ? 'from-maya' : isClerk ? 'from-clerk' : 'from-alex'}`;
+  typingRow.id = 'chatTypingIndicatorRow';
+
+  typingRow.innerHTML = `
+    <div class="character-avatar-bubble ${isMaya ? 'maya' : isClerk ? 'clerk' : ''}">
+      ${charAvatar}
+    </div>
+    <div class="chat-typing-indicator">
+      <span>${charName} is replying</span>
+      <div class="chat-typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  `;
+
+  chatFlow.appendChild(typingRow);
+  chatFlow.scrollTop = chatFlow.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const existing = document.getElementById('chatTypingIndicatorRow');
+  if (existing) existing.remove();
+}
+
 function selectShuffledChoice(isCorrect, btnEl, textEn, textEs) {
   if (isCorrect) {
     // Stop any previous speech or pending autoplay so it never collides
@@ -784,16 +817,23 @@ function selectShuffledChoice(isCorrect, btnEl, textEn, textEs) {
     // Disable all buttons to prevent double click
     document.querySelectorAll('.prompt-option-btn').forEach(b => b.style.pointerEvents = 'none');
 
-    // Maya speaks her response in chat
+    // Show Maya typing indicator for a natural human reaction pause
+    showTypingIndicator('maya', 'Maya', '👧');
+
+    // Maya speaks her response in chat after a natural 600ms reaction pause
     setTimeout(() => {
+      removeTypingIndicator();
       appendStoryChatMessage('maya', 'Maya', '👧', textEn, textEs);
       
-      // Play with safe callback that never hangs
+      // Play with safe callback
       speakEnglish(textEn, 'maya', () => {
-        advanceStoryStep();
+        // Natural conversational pause: wait 950ms after Maya finishes before Alex replies
+        setTimeout(() => {
+          advanceStoryStep();
+        }, 950);
       });
       AppState.addStars(10);
-    }, 300);
+    }, 600);
 
   } else {
     sfx.playError();
@@ -806,9 +846,15 @@ function advanceStoryStep() {
   const sc = RealWorldScenarios[currentScenarioKey];
   if (currentStoryStep < sc.steps.length - 1) {
     currentStoryStep++;
+
+    const nextStep = sc.steps[currentStoryStep];
+    // Show Alex (or Clerk) typing indicator
+    showTypingIndicator(nextStep.speaker, nextStep.name, nextStep.avatar);
+
     setTimeout(() => {
+      removeTypingIndicator();
       renderStoryCurrentStep();
-    }, 400);
+    }, 850);
   } else {
     finishStoryCelebration();
   }
