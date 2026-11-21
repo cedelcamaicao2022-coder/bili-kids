@@ -5,7 +5,7 @@
  * 1. Reading & Textual Comprehension (21 Passages per Level)
  * 2. Use of English & Grammar Cloze (20 Drills per Level)
  * 3. Vocabulary, Phrasal Verbs & Collocation Matrix (20 Drills per Level)
- * 4. 90-Second Timed Writing Challenge
+ * 4. 3-Minute Timed Writing Challenge
  */
 
 function getLevelReading(levelKey, defaultTitle, defaultBadge) {
@@ -91,9 +91,9 @@ const TEENS_LEVELS_DATA = {
       writing: {
         id: "a1_writing",
         type: "writing",
-        title: "90-Second Sprint: Introduce Your Typical Day",
+        title: "3-Minute Sprint: Introduce Your Typical Day",
         badge: "Timed Fluency • A1",
-        instruction: "You have 90 seconds. Write at least 25 words describing what you do on a normal school day.",
+        instruction: "You have 3 minutes. Write at least 25 words describing what you do on a normal school day.",
         prompt: "Write about: What time you wake up, what you eat for breakfast, and what your favorite class at school is.",
         minWords: 25,
         targetVocabulary: ["wake up", "breakfast", "school", "because", "like"],
@@ -133,9 +133,9 @@ const TEENS_LEVELS_DATA = {
       writing: {
         id: "a2_writing",
         type: "writing",
-        title: "90-Second Sprint: A Memorable Weekend Event",
+        title: "3-Minute Sprint: A Memorable Weekend Event",
         badge: "Narrative Sprint • A2",
-        instruction: "You have 90 seconds. Write at least 35 words describing a memorable trip or weekend activity.",
+        instruction: "You have 3 minutes. Write at least 35 words describing a memorable trip or weekend activity.",
         prompt: "Describe: Where did you go, who did you go with, and what was the most exciting thing you did?",
         minWords: 35,
         targetVocabulary: ["went", "because", "exciting", "with my", "enjoyed"],
@@ -175,9 +175,9 @@ const TEENS_LEVELS_DATA = {
       writing: {
         id: "b1_writing",
         type: "writing",
-        title: "90-Second Sprint: Persuasive Argumentation",
+        title: "3-Minute Sprint: Persuasive Argumentation",
         badge: "Timed Debate • B1",
-        instruction: "You have 90 seconds. Formulate a persuasive paragraph of at least 50 words on the prompt.",
+        instruction: "You have 3 minutes. Formulate a persuasive paragraph of at least 50 words on the prompt.",
         prompt: "Prompt: Should secondary schools replace printed textbooks with digital tablets completely? State your stance clearly.",
         minWords: 50,
         targetVocabulary: ["in my opinion", "furthermore", "however", "consequently", "benefits"],
@@ -217,9 +217,9 @@ const TEENS_LEVELS_DATA = {
       writing: {
         id: "b2_writing",
         type: "writing",
-        title: "90-Second Sprint: Argumentative Thesis & Synthesis",
+        title: "3-Minute Sprint: Argumentative Thesis & Synthesis",
         badge: "Academic Synthesis • B2",
-        instruction: "You have 90 seconds. Formulate a structured thesis and synthesis of at least 70 words.",
+        instruction: "You have 3 minutes. Formulate a structured thesis and synthesis of at least 70 words.",
         prompt: "Prompt: Can generative AI tools enhance critical thinking in teenagers, or do they undermine intellectual independence? Synthesize both perspectives.",
         minWords: 70,
         targetVocabulary: ["while proponents argue", "on the other hand", "consequently", "paradoxically", "fundamental"],
