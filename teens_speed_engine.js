@@ -58,8 +58,8 @@ class TeensSpeedEngine {
   constructor() {
     this.prompts = SPEED_WRITING_PROMPTS;
     this.currentPromptIndex = 0;
-    this.timeLimit = 60; // 60 seconds
-    this.timeRemaining = 60;
+    this.timeLimit = 90; // 90 seconds
+    this.timeRemaining = 90;
     this.timerInterval = null;
     this.hasStarted = false;
     this.isFinished = false;
@@ -144,7 +144,7 @@ class TeensSpeedEngine {
 
     const textarea = document.getElementById('studentTextInput');
     textarea.value = "";
-    textarea.placeholder = `Escribe aquí tu párrafo en inglés en 60 segundos... Tip: Inicia con "${p.starter}"`;
+    textarea.placeholder = `Escribe aquí tu párrafo en inglés en 90 segundos... Tip: Inicia con "${p.starter}"`;
     textarea.disabled = true;
 
     document.getElementById('startChallengeBtn').style.display = 'inline-flex';
@@ -458,7 +458,7 @@ class TeensSpeedEngine {
             <span style="font-size:2rem;">📝</span>
             <div>
               <h2 style="margin:0; font-family:var(--font-display); font-size:1.45rem; color:#1e1b4b;">
-                Evaluación de Escritura Rápida (1 Minuto)
+                Evaluación de Escritura Rápida (90 Segundos)
               </h2>
               <p style="margin:2px 0 0; font-size:0.85rem; color:#64748b;">
                 Tiempo: ${result.elapsedSeconds}s • Velocidad: ${result.wpm} PPM • ${result.wordCount} Palabras
@@ -478,7 +478,7 @@ class TeensSpeedEngine {
                 </span>
                 <h3 style="margin:8px 0 4px; font-size:1.35rem; color:#0f172a;">${result.levelLabel}</h3>
                 <p style="margin:0; font-size:0.85rem; color:#475569;">
-                  ${result.isTimeout ? '⏰ Se agotó el minuto de escritura.' : '⚡ Completaste el reto antes de que expirara el tiempo.'}
+                  ${result.isTimeout ? '⏰ Se agotaron los 90 segundos de escritura.' : '⚡ Completaste el reto antes de que expirara el tiempo.'}
                 </p>
               </div>
               <div class="speed-score-circle">

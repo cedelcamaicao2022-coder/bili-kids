@@ -4,7 +4,7 @@
  * 1. Reading
  * 2. Grammar Cloze
  * 3. Vocabulary Matrix
- * 4. Timed Writing Sprint (60s)
+ * 4. Timed Writing Sprint (90s)
  */
 
 const TEENS_LEVEL_CARDS = {
@@ -37,11 +37,11 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "writing",
         icon: "⚡",
-        badge: "60s SPRINT",
+        badge: "90s SPRINT",
         badgeBg: "#ffedd5",
         badgeColor: "#9a3412",
         title: "Timed Writing: Introduce Your Day",
-        desc: "Formulate a 25+ word structured paragraph under the 60s countdown using target daily routine connectors.",
+        desc: "Formulate a 25+ word structured paragraph under the 90s countdown using target daily routine connectors.",
         actionText: "Start Sprint",
         actionColor: "#ea580c"
       },
@@ -87,11 +87,11 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "writing",
         icon: "⚡",
-        badge: "60s SPRINT",
+        badge: "90s SPRINT",
         badgeBg: "#ffedd5",
         badgeColor: "#9a3412",
         title: "Timed Writing: Memorable Weekend",
-        desc: "Write 35+ words describing a trip or weekend activity with target past tense verbs and connectors.",
+        desc: "Write 35+ words describing a trip or weekend activity under the 90s countdown with target past tense verbs and connectors.",
         actionText: "Start Sprint",
         actionColor: "#ea580c"
       },
@@ -139,11 +139,11 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "writing",
         icon: "⚡",
-        badge: "60s SYNTHESIS",
+        badge: "90s SYNTHESIS",
         badgeBg: "#ffedd5",
         badgeColor: "#9a3412",
         title: "Timed Argumentation: Tech & Society",
-        desc: "Formulate structured thesis statements, cohesive connectors, and arguments under high-pressure countdowns.",
+        desc: "Formulate structured thesis statements, cohesive connectors, and arguments under high-pressure 90s countdowns.",
         actionText: "Start Sprint",
         actionColor: "#ea580c",
         extLink: "teens_speed_writing.html",
@@ -195,11 +195,11 @@ const TEENS_LEVEL_CARDS = {
       {
         type: "writing",
         icon: "⚡",
-        badge: "60s SYNTHESIS",
+        badge: "90s SYNTHESIS",
         badgeBg: "#ffedd5",
         badgeColor: "#9a3412",
         title: "Timed Argumentation",
-        desc: "Formulate structured thesis statements, cohesive connectors, and arguments under high-pressure countdowns.",
+        desc: "Formulate structured thesis statements, cohesive connectors, and arguments under high-pressure 90s countdowns.",
         actionText: "Start Sprint",
         actionColor: "#ea580c",
         extLink: "teens_speed_writing.html",
@@ -1085,7 +1085,7 @@ class TeensLevelsEngine {
       <div class="level-exercise-stage">
         <div class="exercise-header-strip">
           <div class="exercise-tag-row">
-            <span class="exercise-type-pill" style="background:#fee2e2; color:#b91c1c;">⏱️ 60-SECOND WRITING CHALLENGE</span>
+            <span class="exercise-type-pill" style="background:#fee2e2; color:#b91c1c;">⏱️ 90-SECOND WRITING CHALLENGE</span>
             <span class="exercise-level-pill">${this.currentLevel.toUpperCase()}</span>
           </div>
           <h3 class="exercise-main-title">${exercise.title}</h3>
@@ -1095,7 +1095,7 @@ class TeensLevelsEngine {
         <div class="writing-prompt-card">
           <div class="writing-prompt-header">
             <strong>Target Task (${this.currentLevel.toUpperCase()} Rubric • Min ${exercise.minWords} words):</strong>
-            <div class="writing-timer-badge" id="writingTimerBadge">⏱️ 01:00</div>
+            <div class="writing-timer-badge" id="writingTimerBadge">⏱️ 01:30</div>
           </div>
           <p class="writing-prompt-body">${exercise.prompt}</p>
           <div class="target-vocab-row">
@@ -1107,14 +1107,14 @@ class TeensLevelsEngine {
         <div class="writing-workspace-box">
           <div class="writing-toolbar-row">
             <button class="btn-start-writing-timer" id="btnStartWriting">
-              ▶ Start 60s Countdown
+              ▶ Start 90s Countdown
             </button>
             <div class="word-counter-tag" id="liveWordCount">0 words (Goal: ${exercise.minWords}+)</div>
           </div>
           <textarea 
             id="writingTextarea" 
             class="writing-input-textarea" 
-            placeholder="Click 'Start 60s Countdown' and start typing your English response here..." 
+            placeholder="Click 'Start 90s Countdown' and start typing your English response here..." 
             disabled
           ></textarea>
         </div>
@@ -1181,7 +1181,7 @@ class TeensLevelsEngine {
   }
 
   startWritingTimer(timerBadge, onComplete) {
-    this.timeLeft = 60;
+    this.timeLeft = 90;
     this.timerRunning = true;
     this.timerInterval = setInterval(() => {
       this.timeLeft--;
@@ -1225,7 +1225,7 @@ class TeensLevelsEngine {
     fbBox.style.display = 'block';
     fbBox.innerHTML = `
       <div class="fb-callout ${meetsLength ? 'good' : 'bad'}">
-        <h4>${meetsLength ? '✓ 60s Sprint Successfully Completed!' : '⚠️ Word Count Short of Goal'}</h4>
+        <h4>${meetsLength ? '✓ 90s Sprint Successfully Completed!' : '⚠️ Word Count Short of Goal'}</h4>
         <p><strong>Words Written:</strong> ${words} (Minimum required: ${exercise.minWords})</p>
         <p><strong>Target Lexicon Employed:</strong> ${targetHits} of ${exercise.targetVocabulary.length} recommended expressions.</p>
         <p><strong>Overall Synthesis Rating:</strong> ${scorePercent}/100 (${this.currentLevel.toUpperCase()} Band)</p>
