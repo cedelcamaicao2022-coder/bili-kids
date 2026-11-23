@@ -1190,10 +1190,10 @@ body {
 }
 
 .audio-choice-btn:hover {
-  filter: brightness(1.18);
-  border-color: #ffffff;
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  background: #4338ca;
+  border-color: #a855f7;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(168, 85, 247, 0.3);
 }
 
 .audio-choice-icon {

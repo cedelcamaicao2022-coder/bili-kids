@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barnaby Little Explorers • Rainbow Color World (Ages 4-5)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="explorers_styles.css?v=20261123_explorers">
+  <link rel="stylesheet" href="kids_responsive.css?v=20261102_navfix">
+  <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="unit-top-navbar">
+    <a href="babies.html" class="btn-back-map" id="btnBackHome">
+      <span>⬅</span>
+      <span id="btnBackText">Volver</span>
+    </a>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="unit-tag-pill" style="background: linear-gradient(135deg, #7c3aed, #ec4899); color: #fff;">Barnaby Little Explorers • Ages 4-5</span>
+      <div class="unit-stars-pill">
+        <span>⭐</span>
+        <span id="unitStarsCount">0 pts</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO DE BARNABY LITTLE EXPLORERS -->
+  <section class="unit-hero">
+    <div class="unit-hero-content">
+      <div class="unit-hero-subtitle">Preschool Educational Video Game • Ages 4-5</div>
+      <h1 class="unit-hero-title">🌈 Barnaby Little Explorers</h1>
+      <p class="unit-hero-desc">
+        Join Leo 🦁, Bili 🐻, and Luna 🐰 on an educational 2D platformer adventure! Run, jump, collect shiny red stars, cross the Rainbow Bridge, and restore colors to The Color Monster!
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTENEDOR PRINCIPAL DE ACTIVIDADES -->
+  <main class="unit-main-container">
+
+    <!-- ====================================================================
+         ACTIVITY 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (VIDEO GAME CANVAS)
+         ==================================================================== -->
+    <section id="view-obby" class="activity-view active-view">
+      <div class="obby-game-container">
+
+        <!-- WORLD SELECTION NAVIGATION (BARNABY 8 WORLDS) -->
+        <nav class="obby-world-nav" id="obbyWorldNav">
+          <button class="world-nav-tab active" id="tabWorld1" onclick="selectWorld(1)">
+            <span>🌈</span>
+            <span>World 1 • Rainbow Color World</span>
+            <span class="world-badge-status" id="badgeWorld1" style="background:#059669; color:#fff;">UNLOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld2" onclick="selectWorld(2)">
+            <span>🦁</span>
+            <span>World 2 • Animal Forest</span>
+            <span class="world-badge-status" id="badgeWorld2" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld3" onclick="selectWorld(3)">
+            <span>🔢</span>
+            <span>World 3 • Number Kingdom</span>
+            <span class="world-badge-status" id="badgeWorld3" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld4" onclick="selectWorld(4)">
+            <span>🏠</span>
+            <span>World 4 • My Little House</span>
+            <span class="world-badge-status" id="badgeWorld4" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld5" onclick="selectWorld(5)">
+            <span>🍎</span>
+            <span>World 5 • Yummy Garden</span>
+            <span class="world-badge-status" id="badgeWorld5" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld6" onclick="selectWorld(6)">
+            <span>🚗</span>
+            <span>World 6 • Vehicle City</span>
+            <span class="world-badge-status" id="badgeWorld6" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld7" onclick="selectWorld(7)">
+            <span>🧸</span>
+            <span>World 7 • Toy Wonder Park</span>
+            <span class="world-badge-status" id="badgeWorld7" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld8" onclick="selectWorld(8)">
+            <span>🪐</span>
+            <span>World 8 • Little Cosmos</span>
+            <span class="world-badge-status" id="badgeWorld8" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+        </nav>
+
+        <div class="obby-stage-header">
+          <div>
+            <h2 id="obbyStageTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#4c1d95;">
+              🌈 Stage 1 • The Rainbow Hills & Color Jump 🌈
+            </h2>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;">
+              Use keyboard arrows or touch buttons to run, jump, and restore beautiful rainbow colors!
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="btn-back-map" style="background:#f5f3ff; color:#7c3aed; border-color:#ddd6fe; cursor:pointer;" onclick="restartObbyStage()">
+              <span>🔄 Restart Level</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Objective Banner -->
+        <div class="obby-mission-objective-banner">
+          <div class="obby-mission-steps">
+            <div class="mission-step-chip active" id="stepChipJump">
+              <span class="step-num">1</span>
+              <span>🏃 Jump with Leo, Bili or Luna (Double Jump in mid-air! 👟✨)</span>
+            </div>
+            <div class="mission-step-chip" id="stepChipCollect">
+              <span class="step-num">2</span>
+              <span id="stepChipText">🎨 Listen to English & solve color challenges</span>
+            </div>
+            <div class="mission-step-chip" id="stepChipGate">
+              <span class="step-num">3</span>
+              <span id="stepGateStatusText">🌈 Enter the Warp Portal to advance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra HUD del Obby con Checklist en Vivo -->
+        <div class="obby-hud-bar" id="obbyHudBar">
+          <div class="obby-hud-item">
+            <button type="button" class="btn-hud-hero-select" id="btnHudHeroSelect" onclick="openHeroSelectOverlay()" title="Cambiar de personaje">
+              <span id="hudHeroIcon">🦁</span>
+              <span id="hudHeroName">Leo</span>
+              <span class="hud-hero-change-pill">Cambiar 🎭</span>
+            </button>
+          </div>
+          <div class="obby-hud-item" id="obbyItemsChecklist" style="color:#fde047; font-size:0.88rem;">
+            <!-- Injected dynamically: [ ] Item 1 | [ ] Item 2 -->
+          </div>
+          <div class="obby-hud-item" id="obbyGateStatusBadge" style="color:#fca5a5;">
+            🔒 Gate: LOCKED (0/2)
+          </div>
+          <div class="obby-hud-item" id="obbyCoinsBadge">
+            🪙 Coins: 0
+          </div>
+        </div>
+
+        <!-- BOSS BATTLE ARENA HUD (APARECE EN EL ENCUENTRO CON EL JEFE) -->
+        <div class="boss-hud-bar" id="bossHudBar">
+          <div class="boss-hud-header">
+            <div class="boss-avatar-box">
+              <span class="boss-avatar-icon" id="bossAvatarIcon">👾</span>
+              <div>
+                <div class="boss-name" id="bossNameTitle">The Color Monster</div>
+                <div style="font-size:0.75rem; color:#f472b6; font-weight:700;" id="bossSubtitle">World 1 Boss • Feed Me Colors!</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:0.85rem; font-weight:800; color:#cbd5e1;"><span id="bossPlayerHeroName">Leo</span>: <span id="playerHeartsDisplay">❤️❤️❤️</span></div>
+            </div>
+          </div>
+          <div class="boss-hp-track">
+            <div class="boss-hp-fill" id="bossHpFill" style="width:100%;"></div>
+            <div class="boss-hp-text" id="bossHpText">BOSS HP: 100 / 100</div>
+          </div>
+        </div>
+
+        <!-- Canvas del Videojuego 2D -->
+        <div class="obby-canvas-wrapper">
+          <canvas id="obbyCanvas" width="800" height="400"></canvas>
+
+          <!-- HERO SELECT IN-CANVAS OVERLAY (SOLO DENTRO DE LA PANTALLA DEL JUEGO) -->
+          <div id="heroSelectModal" class="hero-select-modal active" role="dialog" aria-modal="true" aria-labelledby="heroMainTitle">
+            <div class="hero-canvas-inner">
+              <button type="button" class="btn-hero-close" id="btnHeroClose" onclick="closeHeroSelectOverlay()" title="Cerrar y continuar jugando" style="display:none;">✕</button>
+
+              <div class="hero-canvas-header">
+                <div class="hero-mini-badge">
+                  <span class="pulse-dot"></span>
+                  <span>16-BIT RETRO HEROES</span>
+                </div>
+                <h3 class="hero-canvas-title" id="heroMainTitle">¡Elige a tu Personaje!</h3>
+                <p class="hero-canvas-sub">Selecciona con quién jugar la aventura</p>
+              </div>
+
+              <!-- 3 HERO COMPACT CARDS -->
+              <div class="hero-canvas-grid">
+                <!-- LEO -->
+                <div class="hero-mini-card hero-card-leo selected" id="cardHeroLeo" onclick="selectHero('leo')">
+                  <div class="hero-mini-header">🦁 LEO</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_leo_walk.gif" alt="Leo" class="hero-mini-avatar" id="heroAnimLeo">
+                  </div>
+                  <div class="hero-mini-title">El León Valiente</div>
+                  <div class="hero-mini-tags">
+                    <span>Gorra 'L'</span>
+                    <span>Hoodie Azul</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickLeo">
+                    <span class="pick-check">✓</span> <span class="pick-text">LISTO</span>
+                  </button>
+                </div>
+
+                <!-- BILI -->
+                <div class="hero-mini-card hero-card-bili" id="cardHeroBili" onclick="selectHero('bili')">
+                  <div class="hero-mini-header">🐻 BILI</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_bili_walk.gif" alt="Bili" class="hero-mini-avatar" id="heroAnimBili">
+                  </div>
+                  <div class="hero-mini-title">El Oso Explorador</div>
+                  <div class="hero-mini-tags">
+                    <span>Gorra 'B'</span>
+                    <span>Hoodie Amarillo</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickBili">
+                    <span class="pick-text">Elegir</span>
+                  </button>
+                </div>
+
+                <!-- LUNA -->
+                <div class="hero-mini-card hero-card-luna" id="cardHeroLuna" onclick="selectHero('luna')">
+                  <div class="hero-mini-header">🐰 LUNA</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_luna_walk.gif" alt="Luna" class="hero-mini-avatar" id="heroAnimLuna">
+                  </div>
+                  <div class="hero-mini-title">La Conejita Veloz</div>
+                  <div class="hero-mini-tags">
+                    <span>Lazo Rosa</span>
+                    <span>Mochila Morada</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickLuna">
+                    <span class="pick-text">Elegir</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- FOOTER ACTION BAR -->
+              <div class="hero-canvas-footer">
+                <div class="hero-summary-inline" id="heroSelectionSummary">
+                  <span>Héroe:</span> <strong id="summaryHeroName">🦁 Leo • El León Valiente</strong>
+                </div>
+                <button type="button" class="btn-canvas-start" id="btnStartAdventure" onclick="confirmHeroAndStart()">
+                  <span>¡JUGAR CON LEO! 🚀</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- BOSS COMBAT CHALLENGE MODAL (FEED THE COLOR MONSTER) -->
+        <div id="bossChallengeModal" class="boss-challenge-modal">
+          <div class="boss-challenge-card" style="border: 3px solid #ec4899; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(236, 72, 153, 0.35);">
+            <div id="challengePhasePill" class="challenge-phase-pill phase-listening" style="background:#ec4899;">
+              <span id="challengePhaseIcon">🎨</span>
+              <span id="challengePhaseName">FEED THE COLOR MONSTER!</span>
+            </div>
+
+            <h3 id="challengeBossPrompt" style="font-family:var(--font-display); font-size:1.35rem; color:#fde047; margin-bottom:12px;">
+              "I'm hungry for colors! Feed me RED!"
+            </h3>
+
+            <!-- Audio button for Listening -->
+            <div id="challengeAudioRow" style="margin-bottom:14px;">
+              <button class="btn-back-map" style="background:#7c3aed; color:#fff; border-color:#a855f7; cursor:pointer; font-size:1rem; padding:8px 18px;" onclick="playBossChallengeAudio()">
+                <span>🔊 Listen Sound</span>
+              </button>
+            </div>
+
+            <!-- Area 1: Listening 3 Large Color Cards Grid -->
+            <div id="challengeListeningArea" class="audio-choice-grid">
+              <!-- Injected dynamically: 3 choice buttons -->
+            </div>
+
+            <!-- Area 2: Writing Keypad (hidden for preschool) -->
+            <div id="challengeWritingArea" style="display:none;"></div>
+
+            <!-- Area 3: Sentence Builder (hidden for preschool) -->
+            <div id="challengeSentenceArea" style="display:none;"></div>
+
+            <!-- Area 4: Speaking Final Finisher -->
+            <div id="challengeSpeakingArea" style="display:none;">
+              <p id="bossSpeakingPrompt" style="font-size:1.1rem; font-weight:800; color:#38bdf8; margin:14px 0;">
+                "Red! Blue! Yellow!"
+              </p>
+              <button id="btnBossFinisher" class="btn-vlogger-mic" style="margin:8px auto;" onclick="triggerSpeakingFinisher()">
+                🎙️
+              </button>
+            </div>
+
+            <div id="bossChallengeFeedback" style="margin-top:12px; font-weight:800; font-size:1rem; min-height:24px;"></div>
+          </div>
+        </div>
+
+        <!-- WORLD CONQUEST & VICTORY MODAL -->
+        <div id="worldVictoryModal" class="world-victory-modal">
+          <div class="world-victory-card">
+            <div style="font-size:3.5rem; margin-bottom:10px;">👑🌈🏆✨</div>
+            <h2 id="worldVictoryTitle" style="font-family:var(--font-display); font-size:1.8rem; color:#fde047; margin-bottom:6px;">
+              WORLD 1 CONQUERED! 🌈🏆
+            </h2>
+            <p id="worldVictoryDesc" style="font-size:1.05rem; color:#e0e7ff; margin-bottom:16px;">
+              You restored all colors to Rainbow Color World and became best friends with The Color Monster!
+            </p>
+            <div style="display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:9999px; background:#059669; color:#fff; font-weight:900; font-size:1.1rem; margin-bottom:20px;">
+              <span>⭐ +50 English Stars Earned!</span>
+            </div>
+            <div>
+              <button class="btn-back-map" id="btnNextWorldUnlock" style="background:#f59e0b; color:#0f172a; border-color:#fbbf24; font-size:1.1rem; padding:12px 28px; cursor:pointer;" onclick="proceedToNextWorld()">
+                <span>🚀 Enter World 2: Animal Forest! ➔</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Password Modal -->
+        <div id="obbyTerminalModal" class="obby-terminal-modal" style="display:none;">
+          <div class="terminal-card" style="position:relative;">
+            <button type="button" class="btn-terminal-close" onclick="closeTerminalModal()" title="Close Terminal">✕</button>
+            <div style="font-size:2rem; margin-bottom:8px;">💻🔒</div>
+            <h3 id="terminalTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#f472b6; margin-bottom:4px;">
+              Mall Security Keypad Terminal
+            </h3>
+            <p id="terminalPromptEn" style="font-size:1.05rem; font-weight:700; color:#e0e7ff; margin-bottom:6px;">
+              "Type the clothing word: J _ _ _ E T (Barnaby's warm clothes)"
+            </p>
+            <div style="margin-bottom:10px;">
+              <button type="button" class="btn-listen-audio" onclick="listenTerminalHint()" style="background:#4338ca; border:1px solid #818cf8; border-radius:10px; padding:6px 16px; color:#e0e7ff; font-size:0.88rem; font-weight:800; cursor:pointer;">
+                🔊 Listen to Word Clue
+              </button>
+            </div>
+
+            <!-- Illuminated Digital Slot Boxes -->
+            <div class="terminal-input-display" id="terminalInputDisplay"></div>
+
+            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+              <input type="text" id="terminalPhysicalInput" placeholder="Type letters on keyboard..." autocomplete="off" autocapitalize="characters" spellcheck="false" style="background:#0f172a; border:1px solid #6366f1; border-radius:8px; padding:8px 12px; color:#ffffff; font-size:0.95rem; width:220px; text-align:center;" oninput="handleTerminalInputChange(event)" onkeydown="handleTerminalInputKey(event)">
+              <button class="terminal-key key-action" onclick="submitTerminalWord()">ENTER ↵</button>
+              <button class="terminal-key key-del" onclick="clearTerminalWord()">CLEAR</button>
+            </div>
+
+            <!-- Teclado en pantalla interactivo para Tablets y Celulares -->
+            <div class="terminal-keypad" id="terminalKeypadContainer">
+              <!-- Injected dynamically: Letters A-Z + Backspace -->
+            </div>
+
+            <div id="terminalFeedbackMsg" style="margin-top:10px; font-weight:700; font-size:0.9rem; min-height:24px;"></div>
+          </div>
+        </div>
+
+        <!-- Mystery Question Block Modal [ ? ] -->
+        <div id="obbyMysteryModal" class="obby-terminal-modal" style="display:none;">
+          <div class="terminal-card" style="border-color:#f59e0b; background:#1c1917; max-width:520px; position:relative;">
+            <button type="button" class="btn-terminal-close" onclick="closeMysteryBlockModal()" title="Close">✕</button>
+            <div style="font-size:2.4rem; margin-bottom:4px; animation: bouncePop 0.4s ease;">⭐❓</div>
+            <h3 id="mysteryModalTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#fde047; margin-bottom:6px;">
+              Mystery Question Block [ ? ]
+            </h3>
+            <div id="mysteryModalPromptEn" style="font-size:1.05rem; font-weight:700; color:#f8fafc; margin-bottom:12px; line-height:1.4;">
+              "Barnaby has ONE warm jacket in his hands. Which demonstrative word is correct?"
+            </div>
+            
+            <div style="margin-bottom:14px;">
+              <button type="button" class="btn-listen-audio" id="btnMysteryAudio" onclick="playMysteryModalAudio()" style="background:#d97706; border:1px solid #fde047; border-radius:12px; padding:8px 18px; color:#ffffff; font-weight:800; cursor:pointer;">
+                🔊 Listen to Example
+              </button>
+            </div>
+
+            <!-- Interactive Choice Cards -->
+            <div id="mysteryModalOptions" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+              <!-- Injected dynamically -->
+            </div>
+
+            <div id="mysteryModalFeedback" style="min-height:28px; font-weight:800; font-size:0.95rem;"></div>
+          </div>
+        </div>
+
+        <!-- Gatekeeper Checkpoint Modal -->
+        <div id="obbyGatekeeperModal" class="obby-terminal-modal" style="display:none;">
+          <div class="terminal-card" style="border-color:#10b981; background:#064e3b; max-width:520px; position:relative;">
+            <button type="button" class="btn-terminal-close" onclick="closeGatekeeperModal()" title="Close">✕</button>
+            <div style="font-size:2.4rem; margin-bottom:4px;">🛡️🚪</div>
+            <h3 id="gatekeeperModalTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#6ee7b7; margin-bottom:6px;">
+              Gatekeeper Checkpoint Challenge
+            </h3>
+            <div id="gatekeeperModalPromptEn" style="font-size:1.05rem; font-weight:700; color:#f0fdf4; margin-bottom:12px; line-height:1.4;">
+              "Before entering the Warp Pipe, choose the sentence that correctly uses THIS or THESE!"
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <button type="button" class="btn-listen-audio" id="btnGatekeeperAudio" onclick="playGatekeeperAudio()" style="background:#059669; border:1px solid #34d399; border-radius:12px; padding:8px 18px; color:#ffffff; font-weight:800; cursor:pointer;">
+                🔊 Listen to Sentence
+              </button>
+            </div>
+
+            <div id="gatekeeperModalOptions" style="display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:12px;">
+              <!-- Injected dynamically -->
+            </div>
+
+            <div id="gatekeeperModalFeedback" style="min-height:28px; font-weight:800; font-size:0.95rem;"></div>
+          </div>
+        </div>
+
+        <!-- Pedagogical Mission -->
+        <div class="obby-gate-challenge-box">
+          <div style="flex-grow:1;">
+            <div id="obbyGatePromptEn" class="obby-gate-prompt-en">
+              🎯 Mission: "Jump on Blue, Yellow, and Red platforms to restore world colors!"
+            </div>
+            <div id="obbyGatePromptEs" class="obby-gate-prompt-es" style="display:none;"></div>
+          </div>
+          <div>
+            <button class="btn-back-map" style="background:#7c3aed; color:#ffffff; border-color:#7c3aed; cursor:pointer;" onclick="listenObbyPrompt()">
+              🔊 Listen to Mission
+            </button>
+          </div>
+        </div>
+
+        <!-- On-Screen Virtual Touch Controls -->
+        <div class="obby-touch-controls">
+          <div class="touch-dpad">
+            <button class="touch-btn" id="touchBtnLeft" title="Move Left">◀</button>
+            <button class="touch-btn" id="touchBtnRight" title="Move Right">▶</button>
+          </div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; text-align:center;">
+            Controls: Arrow keys or A/D to move • Space to jump
+          </div>
+          <div>
+            <button class="touch-btn touch-btn-jump" id="touchBtnJump" title="Jump">⬆ JUMP</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    
+
+
+  </main>
+
+  <script>
+    // Dinámicamente adaptar el botón Volver según ?cat=toddlers o ?cat=babies
+    (function() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const cat = params.get('cat');
+        const btn = document.getElementById('btnBackHome');
+        const text = document.getElementById('btnBackText');
+        if (btn) {
+          if (cat === 'toddlers') {
+            btn.href = 'toddlers.html';
+            if (text) text.textContent = 'Toddlers';
+          } else {
+            btn.href = 'babies.html';
+            if (text) text.textContent = 'Babies';
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
+  <script src="assets/kids_audio/kids_audio_manifest.js?v=20261120_keywords_v1"></script>
+  <script src="assets/kids_audio/kids_audio_player.js?v=20261120_keywords_v1"></script>
+  <script src="explorers_engine.js?v=20261123_explorers"></script>
+  <script src="bilikids_mascot.js?v=20261102"></script>
+</body>
+</html>

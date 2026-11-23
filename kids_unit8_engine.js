@@ -204,23 +204,6 @@ class SoundEffects {
       osc.stop(this.ctx.currentTime + delay + 0.08);
     }
   }
-
-  playRainbowNote(freq = 440) {
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.32);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.32);
-    } catch(e) {}
-  }
 }
 
 const _rawSfx = new SoundEffects();
@@ -237,63 +220,6 @@ const sfx = new Proxy(_rawSfx, {
 // ============================================================================
 // SPEECH SYNTHESIS ENGINE (Safe Callback + Timeout Fallback)
 // ============================================================================
-
-// ============================================================================
-// PRESCHOOL AUDIO & SPARKLE HELPERS (BARNABY LITTLE EXPLORERS)
-// ============================================================================
-function playColorAudio(colorName) {
-  const colorMap = {
-    'red': 'assets/games_interactive/audio/leo_red_ee38e4d5.mp3',
-    'blue': 'assets/games_interactive/audio/leo_blue_9594eec9.mp3',
-    'yellow': 'assets/games_interactive/audio/leo_yellow_51e6cd92.mp3',
-    'green': 'assets/games_interactive/audio/leo_green_d382816a.mp3',
-    'orange': 'assets/games_interactive/audio/leo_orange_909cea0c.mp3',
-    'purple': 'assets/games_interactive/audio/leo_purple_b9ba865f.mp3',
-    'pink': 'assets/games_interactive/audio/leo_pink_8dc5344b.mp3'
-  };
-  const path = colorMap[(colorName || '').toLowerCase()];
-  if (path) {
-    const snd = new Audio(path);
-    snd.play().catch(() => speakEnglish(colorName, 'guide'));
-  } else {
-    speakEnglish(colorName, 'guide');
-  }
-}
-
-function playCountingAudio(num) {
-  const countMap = {
-    1: 'assets/kids_audio/keywords/bili_kw_u1_one.mp3',
-    2: 'assets/kids_audio/keywords/bili_kw_u1_two.mp3',
-    3: 'assets/kids_audio/keywords/bili_kw_u1_three.mp3'
-  };
-  const path = countMap[num];
-  if (path) {
-    const snd = new Audio(path);
-    snd.play().catch(() => speakEnglish(num.toString(), 'guide'));
-  } else {
-    speakEnglish(num.toString(), 'guide');
-  }
-}
-
-function createRainbowSparkles(x, y) {
-  const colors = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#a855f7", "#ec4899", "#ffffff"];
-  for (let i = 0; i < 22; i++) {
-    const angle = (Math.PI * 2 / 22) * i + Math.random() * 0.2;
-    const speed = 2.5 + Math.random() * 4.5;
-    if (typeof obbyParticles !== 'undefined') {
-      obbyParticles.push({
-        x: x,
-        y: y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 2.5,
-        life: 1.0,
-        size: Math.random() * 5 + 3,
-        color: colors[i % colors.length]
-      });
-    }
-  }
-}
-
 function speakEnglish(text, voiceType = 'guide', onComplete = null) {
   if (typeof playStudioOrSynthAudio === "function") {
     return playStudioOrSynthAudio(arguments[0], arguments[1], arguments[2]);
@@ -540,298 +466,463 @@ let currentStageIndex = 0;
 const WORLDS_DATA = [
   {
     id: 1,
-    name: "World 1 • Rainbow Color World",
-    icon: "🌈",
-    subtitle: "Learn Colors: Red, Blue, Yellow, Green, Purple! 🎨",
+    name: "World 1 • Sunny Meadows",
+    icon: "🌱",
+    subtitle: "Colinas Soleadas & Bloques de Pregunta [ ? ]",
     boss: {
-      name: "The Color Monster",
-      icon: "👾",
-      subtitle: "Adorable Rainbow Eater • Feed Me Colors!",
+      name: "Giga Clockwork Mech",
+      icon: "🤖",
+      subtitle: "World 1 Boss Guardian • Steampunk Giant",
       maxHp: 100,
       challenges: [
         {
           type: "listening",
-          promptEn: "I'm hungry for colors! Feed me RED!",
-          audioFile: "assets/games_interactive/audio/leo_red_ee38e4d5.mp3",
-          audioText: "Red",
-          tryAgainAudio: "assets/games_interactive/audio/leo_try_again_that_is_not_red_2250513d.mp3",
+          promptEn: "Listen and find THIS blue jacket to charge your blaster!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+          audioText: "This blue jacket",
           options: [
-            { id: "red", name: "RED", icon: "🔴", colorHex: "#ef4444", correct: true },
-            { id: "blue", name: "BLUE", icon: "🔵", colorHex: "#3b82f6", correct: false },
-            { id: "yellow", name: "YELLOW", icon: "🟡", colorHex: "#eab308", correct: false }
+            { id: "jacket", name: "This Blue Jacket", icon: "🧥", correct: true },
+            { id: "boots", name: "These Boots", icon: "👢", correct: false },
+            { id: "cap", name: "This Red Cap", icon: "🧢", correct: false }
           ]
         },
         {
-          type: "listening",
-          promptEn: "I want more colors! Feed me BLUE!",
-          audioFile: "assets/games_interactive/audio/leo_blue_9594eec9.mp3",
-          audioText: "Blue",
-          tryAgainAudio: "assets/games_interactive/audio/leo_try_again_that_is_not_blue_41cdb59f.mp3",
-          options: [
-            { id: "green", name: "GREEN", icon: "🟢", colorHex: "#22c55e", correct: false },
-            { id: "blue", name: "BLUE", icon: "🔵", colorHex: "#3b82f6", correct: true },
-            { id: "purple", name: "PURPLE", icon: "🟣", colorHex: "#a855f7", correct: false }
-          ]
+          type: "writing",
+          promptEn: "Type the missing word: How _______ is this video game?",
+          targetWord: "MUCH",
+          hint: "M _ _ H"
         },
         {
-          type: "listening",
-          promptEn: "So yummy! Now feed me YELLOW!",
-          audioFile: "assets/games_interactive/audio/leo_yellow_51e6cd92.mp3",
-          audioText: "Yellow",
-          tryAgainAudio: "assets/games_interactive/audio/leo_try_again_that_is_not_yellow_08544965.mp3",
-          options: [
-            { id: "yellow", name: "YELLOW", icon: "🟡", colorHex: "#eab308", correct: true },
-            { id: "red", name: "RED", icon: "🔴", colorHex: "#ef4444", correct: false },
-            { id: "orange", name: "ORANGE", icon: "🟠", colorHex: "#f97316", correct: false }
-          ]
+          type: "sentence",
+          promptEn: "Put the words in order to form the sentence:",
+          words: ["These", "white", "sneakers", "are", "cool"],
+          correctSentence: "These white sneakers are cool"
         },
         {
-          type: "listening",
-          promptEn: "Almost full! Feed me GREEN!",
-          audioFile: "assets/games_interactive/audio/leo_green_d382816a.mp3",
-          audioText: "Green",
-          tryAgainAudio: "assets/games_interactive/audio/leo_try_again_that_is_not_green_316e6301.mp3",
-          options: [
-            { id: "pink", name: "PINK", icon: "🌸", colorHex: "#ec4899", correct: false },
-            { id: "blue", name: "BLUE", icon: "🔵", colorHex: "#3b82f6", correct: false },
-            { id: "green", name: "GREEN", icon: "🟢", colorHex: "#22c55e", correct: true }
-          ]
+          type: "speaking",
+          promptEn: "I would like to buy these sneakers!",
+          displaySentence: "I would like to buy these sneakers!"
         }
       ]
     },
     stages: [
       {
         id: 0,
-        title: "Stage 1 • The Rainbow Hills & Color Jump 🌈",
-        promptEn: "Jump on Blue, Yellow, and Red platforms to restore world colors!",
-        bgTheme: "rainbow",
-        colorSequence: ["blue", "yellow", "red"],
-        currentColorIndex: 0,
+        title: "Stage 1 • The Sunny Hills & Mystery Blocks [ ? ] 👟",
+        promptEn: "Hit the [ ? ] blocks with Barnaby's head to solve grammar challenges!",
+        bgTheme: "meadow",
+        requiredItems: ["blue_jacket"],
         checkpointX: 40,
         finishX: 1350,
         platforms: [
           { x: 0, y: 340, w: 220, h: 60, type: 'grass' },
-          { x: 260, y: 280, w: 120, h: 35, type: 'color_pad', color: 'blue', colorHex: '#3b82f6', label: 'BLUE' },
-          { x: 480, y: 280, w: 120, h: 35, type: 'color_pad', color: 'yellow', colorHex: '#eab308', label: 'YELLOW' },
-          { x: 640, y: 300, w: 100, h: 35, type: 'trampoline' },
-          { x: 780, y: 240, w: 120, h: 35, type: 'color_pad', color: 'red', colorHex: '#ef4444', label: 'RED' },
-          { x: 940, y: 270, w: 120, h: 35, type: 'color_pad', color: 'green', colorHex: '#22c55e', label: 'GREEN' },
-          { x: 1100, y: 320, w: 260, h: 80, type: 'rainbow_ground' }
+          { x: 260, y: 290, w: 120, h: 35, type: 'grass' },
+          { x: 420, y: 240, w: 110, h: 35, type: 'trampoline' },
+          { x: 570, y: 270, w: 120, h: 35, type: 'grass' },
+          { x: 740, y: 230, w: 130, h: 35, type: 'grass' },
+          { x: 920, y: 280, w: 110, h: 35, type: 'trampoline' },
+          { x: 1080, y: 320, w: 260, h: 80, type: 'pipe_ground' }
         ],
         mysteryBlocks: [
-          { x: 420, y: 170, w: 45, h: 45, type: 'paint_block', content: 'PAINT 🎨', hit: false, bumpY: 0 }
+          {
+            x: 300, y: 190, w: 42, h: 42, content: "THIS", hit: false, bumpY: 0, icon: "🧥",
+            challenge: {
+              title: "Grammar Mystery Block: THIS vs THESE",
+              promptEn: "Barnaby has ONE warm jacket in his hands. Which demonstrative word is correct for 1 item close to us?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+              audioText: "This blue jacket",
+              options: [
+                { text: "🧥 THIS (One item / Singular)", correct: true },
+                { text: "👟 THESE (Two or more / Plural)", correct: false }
+              ],
+              rule: "We use 'THIS' for ONE singular object near us!"
+            }
+          },
+          {
+            x: 610, y: 170, w: 42, h: 42, content: "THESE", hit: false, bumpY: 0, icon: "👟",
+            challenge: {
+              title: "Grammar Mystery Block: THESE vs THIS",
+              promptEn: "Look at the cool sneakers! There are TWO sneakers (Plural pair). Which word do we use for items close to us?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_white_sneakers.mp3",
+              audioText: "These white sneakers",
+              options: [
+                { text: "👟 THESE (Plural items close)", correct: true },
+                { text: "🧥 THIS (Only one item)", correct: false }
+              ],
+              rule: "We use 'THESE' for TWO or more plural objects near us!"
+            }
+          }
+        ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Before entering the Warp Pipe, identify the item Barnaby is wearing:",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+          audioText: "This blue jacket",
+          options: [
+            { text: "🧥 This blue jacket is very warm and stylish", correct: true },
+            { text: "👢 These white boots are very warm and stylish", correct: false }
+          ]
+        },
+        items: [
+          { id: "blue_jacket", x: 780, y: 170, name: "This Blue Jacket", icon: "🧥", collected: false }
         ],
         coins: [
-          { x: 300, y: 220, collected: false },
-          { x: 520, y: 220, collected: false },
-          { x: 820, y: 180, collected: false }
+          { x: 290, y: 240, collected: false },
+          { x: 470, y: 170, collected: false },
+          { x: 630, y: 210, collected: false },
+          { x: 960, y: 210, collected: false }
         ],
-        gate: { x: 1240, y: 215, w: 40, h: 105, unlocked: false }
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
       },
       {
         id: 1,
-        title: "Stage 2 • Starlight Meadow & Red Stars ⭐",
-        promptEn: "Collect three shiny Red Stars (One, Two, Three!)",
-        bgTheme: "rainbow",
-        totalStars: 3,
-        starsCollected: 0,
+        title: "Stage 2 • The Green Pipe Valley & Keypad Terminal 💻",
+        promptEn: "Approach the cyber terminal or security gate to enter the password!",
+        bgTheme: "meadow",
+        hasTerminal: true,
+        terminalX: 720,
+        terminalY: 260,
+        terminalTargetWord: "JACKET",
+        terminalPromptEn: "Type the clothing word: J _ _ _ E T (Barnaby's warm clothes)",
+        terminalAudio: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+        terminalAudioText: "Jacket",
+        requiredItems: [],
         checkpointX: 40,
         finishX: 1350,
         platforms: [
           { x: 0, y: 340, w: 200, h: 60, type: 'grass' },
-          { x: 240, y: 290, w: 120, h: 35, type: 'cloud_bounce' },
-          { x: 410, y: 250, w: 130, h: 35, type: 'grass' },
-          { x: 580, y: 280, w: 110, h: 35, type: 'mushroom_red' },
-          { x: 740, y: 220, w: 130, h: 35, type: 'cloud_bounce' },
-          { x: 920, y: 270, w: 130, h: 35, type: 'grass' },
-          { x: 1100, y: 320, w: 260, h: 80, type: 'rainbow_ground' }
+          { x: 240, y: 300, w: 120, h: 35, type: 'grass' },
+          { x: 400, y: 250, w: 110, h: 35, type: 'trampoline' },
+          { x: 550, y: 200, w: 130, h: 35, type: 'grass' },
+          { x: 720, y: 290, w: 180, h: 35, type: 'grass' },
+          { x: 950, y: 250, w: 120, h: 35, type: 'trampoline' },
+          { x: 1120, y: 320, w: 260, h: 80, type: 'pipe_ground' }
         ],
-        items: [
-          { id: "star_1", type: "color_star", color: "red", x: 475, y: 190, name: "Red Star", icon: "⭐", collected: false },
-          { id: "star_2", type: "color_star", color: "red", x: 805, y: 160, name: "Red Star", icon: "⭐", collected: false },
-          { id: "star_3", type: "color_star", color: "red", x: 985, y: 210, name: "Red Star", icon: "⭐", collected: false }
+        mysteryBlocks: [
+          {
+            x: 590, y: 120, w: 42, h: 42, content: "SNEAKERS", hit: false, bumpY: 0, icon: "👟",
+            challenge: {
+              title: "Vocabulary Mystery Block: Footwear",
+              promptEn: "Which word describes Barnaby's comfortable running shoes?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_white_sneakers.mp3",
+              audioText: "These white sneakers",
+              options: [
+                { text: "👟 White Sneakers", correct: true },
+                { text: "🧣 Wool Scarf", correct: false }
+              ],
+              rule: "Sneakers are comfortable athletic shoes!"
+            }
+          }
         ],
+        items: [],
         coins: [
-          { x: 280, y: 240, collected: false },
-          { x: 630, y: 210, collected: false }
+          { x: 280, y: 250, collected: false },
+          { x: 450, y: 180, collected: false },
+          { x: 790, y: 230, collected: false },
+          { x: 1000, y: 190, collected: false }
         ],
-        gate: { x: 1240, y: 215, w: 40, h: 105, unlocked: false }
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
       },
       {
         id: 2,
-        title: "Stage 3 • The Rainbow Bridge & Color Doors 🚪🌈",
-        promptEn: "Cross the Rainbow Bridge steps and find the Yellow Door!",
-        bgTheme: "rainbow",
-        targetDoorColor: "yellow",
-        doorWarping: false,
-        checkpointX: 40,
-        finishX: 1400,
-        platforms: [
-          { x: 0, y: 340, w: 150, h: 60, type: 'grass' },
-          { x: 180, y: 310, w: 85, h: 25, type: 'rainbow_step', colorHex: '#ef4444', noteFreq: 261.63, name: 'RED' },
-          { x: 285, y: 270, w: 85, h: 25, type: 'rainbow_step', colorHex: '#f97316', noteFreq: 293.66, name: 'ORANGE' },
-          { x: 390, y: 230, w: 85, h: 25, type: 'rainbow_step', colorHex: '#eab308', noteFreq: 329.63, name: 'YELLOW' },
-          { x: 495, y: 230, w: 85, h: 25, type: 'rainbow_step', colorHex: '#22c55e', noteFreq: 349.23, name: 'GREEN' },
-          { x: 600, y: 270, w: 85, h: 25, type: 'rainbow_step', colorHex: '#3b82f6', noteFreq: 392.00, name: 'BLUE' },
-          { x: 705, y: 310, w: 85, h: 25, type: 'rainbow_step', colorHex: '#a855f7', noteFreq: 440.00, name: 'PURPLE' },
-          { x: 820, y: 340, w: 560, h: 60, type: 'rainbow_ground' }
-        ],
-        doors: [
-          { x: 910, y: 255, w: 55, h: 85, color: 'red', colorHex: '#ef4444', label: 'RED DOOR', icon: '🔴', isTarget: false },
-          { x: 1040, y: 255, w: 55, h: 85, color: 'yellow', colorHex: '#eab308', label: 'YELLOW DOOR', icon: '🟡', isTarget: true },
-          { x: 1170, y: 255, w: 55, h: 85, color: 'blue', colorHex: '#3b82f6', label: 'BLUE DOOR', icon: '🔵', isTarget: false }
-        ],
-        gate: null
-      },
-      {
-        id: 3,
-        title: "Stage 4 • 👑 BOSS ARENA: The Color Monster 👾🎨",
-        promptEn: "Feed yummy colors to The Color Monster to restore the world!",
-        bgTheme: "rainbow",
+        title: "Stage 3 • 👑 BOSS BATTLE ARENA: Giga Clockwork Mech 🤖⚔️",
+        promptEn: "Defeat the Giant Mech using your English attacks to unlock World 2!",
+        bgTheme: "meadow",
         isBossArena: true,
         checkpointX: 60,
         finishX: 1400,
         platforms: [
-          { x: 0, y: 340, w: 1400, h: 60, type: 'rainbow_ground' }
+          { x: 0, y: 340, w: 300, h: 60, type: 'grass' },
+          { x: 340, y: 270, w: 140, h: 30, type: 'grass' },
+          { x: 520, y: 220, w: 130, h: 30, type: 'trampoline' },
+          { x: 690, y: 270, w: 140, h: 30, type: 'grass' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'pipe_ground' }
         ],
+        mysteryBlocks: [],
         items: [],
-        coins: [],
-        gate: { x: 1320, y: 215, w: 40, h: 105, unlocked: false }
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
       }
     ]
   },
   {
     id: 2,
-    name: "World 2 • Animal Forest",
-    icon: "🦁",
-    subtitle: "Animals & Nature Sounds: Lion, Elephant, Monkey, Bird!",
+    name: "World 2 • Tropical Beach",
+    icon: "🏖️",
+    subtitle: "Océano Turquesa & El Pulpo Pirata Captain Squiddy",
     boss: {
-      name: "The Sleepy Lion",
-      icon: "🦁",
-      subtitle: "Wobbly Big Kitty • Wake Up With Sounds!",
+      name: "Captain Squiddy",
+      icon: "🐙",
+      subtitle: "World 2 Boss • Pirate Kraken of the Seas",
       maxHp: 100,
       challenges: [
         {
           type: "listening",
-          promptEn: "Listen and find the elephant!",
-          audioFile: "assets/games_interactive/audio/leo_elephant_a5f3c6a1.mp3",
-          audioText: "Elephant",
+          promptEn: "Listen and find SOME fresh apples for the crew!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_fresh_apples.mp3",
+          audioText: "Fresh apples",
           options: [
-            { id: "elephant", name: "ELEPHANT", icon: "🐘", correct: true },
-            { id: "cat", name: "CAT", icon: "🐱", correct: false },
-            { id: "dog", name: "DOG", icon: "🐶", correct: false }
+            { id: "apples", name: "These Fresh Apples", icon: "🍎", correct: true },
+            { id: "milk", name: "A Bottle of Milk", icon: "🥛", correct: false },
+            { id: "bread", name: "Some Bread", icon: "🥖", correct: false }
           ]
+        },
+        {
+          type: "writing",
+          promptEn: "Type the food word: A P _ _ _ S (Barnaby's fruit)",
+          targetWord: "APPLES",
+          hint: "A P P L E S"
+        },
+        {
+          type: "sentence",
+          promptEn: "Order the sentence correctly to break Squiddy's water shield:",
+          words: ["We", "need", "some", "milk", "and", "apples"],
+          correctSentence: "We need some milk and apples"
+        },
+        {
+          type: "speaking",
+          promptEn: "These red apples are very delicious!",
+          displaySentence: "These red apples are very delicious!"
         }
       ]
     },
     stages: [
       {
         id: 0,
-        title: "Stage 1 • The Emerald Canopy 🌿",
-        promptEn: "Find friendly animal friends in the deep forest!",
-        bgTheme: "meadow",
+        title: "Stage 1 • The Sand Dunes & Coconut Pier 🍎",
+        promptEn: "Find THESE red apples and leap across the wooden piers!",
+        bgTheme: "beach",
+        requiredItems: ["red_apples"],
         checkpointX: 40,
         finishX: 1350,
         platforms: [
-          { x: 0, y: 340, w: 220, h: 60, type: 'grass' },
+          { x: 0, y: 340, w: 220, h: 60, type: 'sand' },
           { x: 260, y: 290, w: 130, h: 25, type: 'wood_pier' },
           { x: 430, y: 240, w: 110, h: 35, type: 'trampoline' },
           { x: 580, y: 270, w: 120, h: 25, type: 'wood_pier' },
           { x: 740, y: 230, w: 130, h: 25, type: 'wood_pier' },
           { x: 920, y: 280, w: 110, h: 35, type: 'trampoline' },
-          { x: 1080, y: 320, w: 260, h: 80, type: 'grass' }
+          { x: 1080, y: 320, w: 260, h: 80, type: 'sand' }
         ],
-        gate: { x: 1240, y: 215, w: 40, h: 105, unlocked: true }
+        mysteryBlocks: [
+          {
+            x: 310, y: 190, w: 42, h: 42, content: "SOME", hit: false, bumpY: 0, icon: "🥛",
+            challenge: {
+              title: "Grammar Mystery Block: Quantifier SOME",
+              promptEn: "We want milk to drink. Which quantifier do we use for food and drinks?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_bottle_of_milk.mp3",
+              audioText: "Some fresh milk",
+              options: [
+                { text: "🥛 SOME milk (Quantifier)", correct: true },
+                { text: "❌ AN milk (Incorrect)", correct: false }
+              ],
+              rule: "We use 'SOME' with uncountable drinks like milk!"
+            }
+          },
+          {
+            x: 620, y: 170, w: 42, h: 42, content: "AN", hit: false, bumpY: 0, icon: "🍎",
+            challenge: {
+              title: "Grammar Mystery Block: Article AN vs A",
+              promptEn: "Apple starts with the vowel letter 'A'. Which article is correct?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_red_apple.mp3",
+              audioText: "An apple",
+              options: [
+                { text: "🍎 AN apple (Vowel sound)", correct: true },
+                { text: "❌ A apple (Incorrect)", correct: false }
+              ],
+              rule: "We use 'AN' before words starting with vowel sounds!"
+            }
+          }
+        ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Before entering the Warp Pipe, what fruit did Barnaby find?",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_these_red_apples.mp3",
+          audioText: "These red apples",
+          options: [
+            { text: "🍎 These red apples are fresh and tasty", correct: true },
+            { text: "🥖 That dry bread is fresh and tasty", correct: false }
+          ]
+        },
+        items: [
+          { id: "red_apples", x: 790, y: 170, name: "These Red Apples", icon: "🍎", collected: false }
+        ],
+        coins: [
+          { x: 300, y: 240, collected: false },
+          { x: 480, y: 170, collected: false },
+          { x: 640, y: 210, collected: false },
+          { x: 970, y: 210, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 1,
+        title: "Stage 2 • 👑 BOSS BATTLE ARENA: Captain Squiddy 🐙⚓",
+        promptEn: "Use your English skills to defeat Captain Squiddy and unlock World 3!",
+        bgTheme: "beach",
+        isBossArena: true,
+        checkpointX: 60,
+        finishX: 1400,
+        platforms: [
+          { x: 0, y: 340, w: 300, h: 60, type: 'sand' },
+          { x: 340, y: 270, w: 140, h: 25, type: 'wood_pier' },
+          { x: 520, y: 220, w: 130, h: 35, type: 'trampoline' },
+          { x: 690, y: 270, w: 140, h: 25, type: 'wood_pier' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'sand' }
+        ],
+        mysteryBlocks: [],
+        items: [],
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
       }
     ]
   },
   {
     id: 3,
-    name: "World 3 • Number Kingdom",
-    icon: "🔢",
-    subtitle: "Count 1 to 10 with Stars, Balloons & Blocks!",
+    name: "World 3 • Sweet Cloud Kingdom",
+    icon: "☁️",
+    subtitle: "Cielo de Nubes Dulces & El Dragón King Gummy Dragon",
     boss: {
-      name: "The Number Giant",
-      icon: "🗿",
-      subtitle: "Friendly Stone Giant • Give Me Numbers!",
+      name: "King Gummy Dragon",
+      icon: "🐉",
+      subtitle: "World 3 Boss • Candy Gummy Sovereign",
       maxHp: 100,
-      challenges: []
+      challenges: [
+        {
+          type: "listening",
+          promptEn: "Listen and identify THIS wool scarf to extinguish dragon fire!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_wool_scarf.mp3",
+          audioText: "This wool scarf",
+          options: [
+            { id: "scarf", name: "This Wool Scarf", icon: "🧣", correct: true },
+            { id: "watch", name: "This Smart Watch", icon: "⌚", correct: false },
+            { id: "hat", name: "A Winter Hat", icon: "👒", correct: false }
+          ]
+        },
+        {
+          type: "writing",
+          promptEn: "Type the place word: S T _ _ E (Where we buy toys)",
+          targetWord: "STORE",
+          hint: "S T O R E"
+        },
+        {
+          type: "sentence",
+          promptEn: "Arrange the polite sentence for the shopkeeper:",
+          words: ["I", "would", "like", "to", "buy", "this", "toy"],
+          correctSentence: "I would like to buy this toy"
+        },
+        {
+          type: "speaking",
+          promptEn: "How much is this beautiful toy?",
+          displaySentence: "How much is this beautiful toy?"
+        }
+      ]
     },
-    stages: []
-  },
-  {
-    id: 4,
-    name: "World 4 • My Little House",
-    icon: "🏠",
-    subtitle: "House & Rooms: Bedroom, Kitchen, Living Room!",
-    boss: {
-      name: "The Messy House Monster",
-      icon: "🧹",
-      subtitle: "Tidy Up the Toys & Furniture!",
-      maxHp: 100,
-      challenges: []
-    },
-    stages: []
-  },
-  {
-    id: 5,
-    name: "World 5 • Yummy Garden",
-    icon: "🍎",
-    subtitle: "Delicious Fruits: Apple, Banana, Grapes, Strawberry!",
-    boss: {
-      name: "The Hungry Caterpillar",
-      icon: "🐛",
-      subtitle: "Yummy Yummy Fruits!",
-      maxHp: 100,
-      challenges: []
-    },
-    stages: []
-  },
-  {
-    id: 6,
-    name: "World 6 • Vehicle City",
-    icon: "🚗",
-    subtitle: "Vehicles & Speed: Car, Bus, Train, Plane, Boat!",
-    boss: {
-      name: "The Traffic Robot",
-      icon: "🚦",
-      subtitle: "Red Light, Green Light!",
-      maxHp: 100,
-      challenges: []
-    },
-    stages: []
-  },
-  {
-    id: 7,
-    name: "World 7 • Toy Wonder Park",
-    icon: "🧸",
-    subtitle: "Action Verbs: Jump, Run, Dance, Sing & Play!",
-    boss: {
-      name: "The Wind-Up King",
-      icon: "👑",
-      subtitle: "Dance with the Wind-Up King!",
-      maxHp: 100,
-      challenges: []
-    },
-    stages: []
-  },
-  {
-    id: 8,
-    name: "World 8 • Little Cosmos",
-    icon: "🪐",
-    subtitle: "Cosmic Wonders: Sun, Moon, Stars, Rockets & Planets!",
-    boss: {
-      name: "The Cosmic Nova",
-      icon: "✨",
-      subtitle: "Galaxy Light Guardian!",
-      maxHp: 100,
-      challenges: []
-    },
-    stages: []
+    stages: [
+      {
+        id: 0,
+        title: "Stage 1 • Marshmallow Clouds & Cookie Bridges 🧣",
+        promptEn: "Collect THIS wool scarf and jump across chocolate wafers!",
+        bgTheme: "clouds",
+        requiredItems: ["wool_scarf"],
+        checkpointX: 40,
+        finishX: 1350,
+        platforms: [
+          { x: 0, y: 340, w: 220, h: 60, type: 'cloud' },
+          { x: 260, y: 290, w: 130, h: 30, type: 'candy_cookie' },
+          { x: 430, y: 240, w: 120, h: 35, type: 'cloud_bounce' },
+          { x: 590, y: 270, w: 120, h: 30, type: 'candy_cookie' },
+          { x: 750, y: 230, w: 130, h: 30, type: 'candy_cookie' },
+          { x: 930, y: 280, w: 110, h: 35, type: 'cloud_bounce' },
+          { x: 1090, y: 320, w: 260, h: 80, type: 'cloud' }
+        ],
+        mysteryBlocks: [
+          {
+            x: 310, y: 190, w: 42, h: 42, content: "MUCH", hit: false, bumpY: 0, icon: "🪙",
+            challenge: {
+              title: "Shopping Mystery Block: HOW MUCH",
+              promptEn: "To ask the PRICE of a toy or souvenir at a shop, what question do we use?",
+              audioText: "How much is it?",
+              options: [
+                { text: "🪙 How MUCH is it? (Asking for price)", correct: true },
+                { text: "⭐ How MANY is it? (Counting objects)", correct: false }
+              ],
+              rule: "'How much' is used to ask for the price of something!"
+            }
+          },
+          {
+            x: 630, y: 170, w: 42, h: 42, content: "MANY", hit: false, bumpY: 0, icon: "⭐",
+            challenge: {
+              title: "Shopping Mystery Block: HOW MANY",
+              promptEn: "To COUNT how many toys or cookies are on the shelf, what do we ask?",
+              audioText: "How many toys are there?",
+              options: [
+                { text: "⭐ How MANY toys? (Countable count)", correct: true },
+                { text: "🪙 How MUCH toys? (Incorrect for counting)", correct: false }
+              ],
+              rule: "'How many' is used to count quantities of countable items!"
+            }
+          }
+        ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Which warm winter accessory did Barnaby find in the clouds?",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_wool_scarf.mp3",
+          audioText: "This wool scarf",
+          options: [
+            { text: "🧣 This wool scarf keeps me cozy", correct: true },
+            { text: "🧢 This beach hat keeps me cozy", correct: false }
+          ]
+        },
+        items: [
+          { id: "wool_scarf", x: 790, y: 170, name: "This Wool Scarf", icon: "🧣", collected: false }
+        ],
+        coins: [
+          { x: 300, y: 240, collected: false },
+          { x: 480, y: 170, collected: false },
+          { x: 640, y: 210, collected: false },
+          { x: 970, y: 210, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 1,
+        title: "Stage 2 • 👑 GRAND FINALE: King Gummy Dragon 🐉🏆",
+        promptEn: "Conquer the Grand Candy Dragon and claim the Cambridge Trophy!",
+        bgTheme: "clouds",
+        isBossArena: true,
+        checkpointX: 60,
+        finishX: 1400,
+        platforms: [
+          { x: 0, y: 340, w: 300, h: 60, type: 'cloud' },
+          { x: 340, y: 270, w: 140, h: 30, type: 'candy_cookie' },
+          { x: 520, y: 220, w: 130, h: 35, type: 'cloud_bounce' },
+          { x: 690, y: 270, w: 140, h: 30, type: 'candy_cookie' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'cloud' }
+        ],
+        mysteryBlocks: [],
+        items: [],
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
+      }
+    ]
   }
 ];
 window.WORLDS_DATA = WORLDS_DATA;
 
+// Active Game Engine Variables
 let currentObbyStage = null;
 let obbyCanvas = null;
 let obbyCtx = null;
@@ -917,7 +1008,7 @@ function startObbyEngine() {
 
 function updateWorldNavUI() {
   unlockedWorlds = parseInt(localStorage.getItem('bili_unlocked_worlds') || '1', 10);
-  for (let w = 1; w <= 8; w++) {
+  for (let w = 1; w <= 3; w++) {
     const tab = document.getElementById(`tabWorld${w}`);
     const badge = document.getElementById(`badgeWorld${w}`);
     if (tab && badge) {
@@ -978,30 +1069,6 @@ function loadCurrentWorldStage() {
   if (stage.coins) stage.coins.forEach(c => c.collected = false);
   if (stage.mysteryBlocks) stage.mysteryBlocks.forEach(b => { b.hit = false; b.bumpY = 0; });
   if (stage.gate) stage.gate.unlocked = false;
-  stage.isPainted = false;
-  stage.doorWarping = false;
-
-  if (stage.colorSequence) {
-    stage.currentColorIndex = 0;
-    const firstCol = stage.colorSequence[0];
-    setTimeout(() => {
-      playColorAudio(firstCol);
-      showObbyFloatingBanner(`🎯 JUMP ON ${firstCol.toUpperCase()}! 🌈`);
-    }, 600);
-  } else if (stage.items && stage.items.length > 0) {
-    stage.starsCollected = 0;
-    setTimeout(() => {
-      const starSnd = new Audio('assets/games_interactive/audio/leo_star_26f93e6e.mp3');
-      starSnd.play().catch(() => speakEnglish("Collect three red stars!", "guide"));
-      showObbyFloatingBanner("⭐ COLLECT THREE RED STARS! 🔴");
-    }, 600);
-  } else if (stage.doors) {
-    setTimeout(() => {
-      const yellowSnd = new Audio('assets/games_interactive/audio/leo_yellow_51e6cd92.mp3');
-      yellowSnd.play().catch(() => speakEnglish("Find the yellow door!", "guide"));
-      showObbyFloatingBanner("🚪 FIND THE YELLOW DOOR! 🌟");
-    }, 600);
-  }
 
   // Setup Boss if Boss Arena
   const bossHud = document.getElementById('bossHudBar');
@@ -1031,14 +1098,9 @@ function loadCurrentWorldStage() {
   }
 
   // Update Headers
-  const titleEl = document.getElementById('obbyStageTitle');
-  if (titleEl) titleEl.textContent = `${world.icon} ${stage.title}`;
-  const promptEnEl = document.getElementById('obbyGatePromptEn');
-  if (promptEnEl) promptEnEl.textContent = `🎯 Mission: "${stage.promptEn}"`;
-  const promptEsEl = document.getElementById('obbyGatePromptEs');
-  if (promptEsEl) promptEsEl.style.display = 'none';
-  const coinsBadge = document.getElementById('obbyCoinsBadge');
-  if (coinsBadge) coinsBadge.textContent = `🪙 Coins: ${Player.coinsCollected}`;
+  document.getElementById('obbyStageTitle').textContent = `${world.icon} ${stage.title}`;
+  document.getElementById('obbyGatePromptEn').textContent = `🎯 Mission: "${stage.promptEn}"`;
+  document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
 
   updateObbyHudChecklist();
   updatePlayerHeartsUI();
@@ -1066,35 +1128,32 @@ function updateObbyHudChecklist() {
   if (!container || !currentObbyStage) return;
 
   if (currentObbyStage.isBossArena) {
-    container.innerHTML = `<span style="color:#f472b6; font-weight:800; font-size:1rem;">👾 THE COLOR MONSTER: FEED COLORS!</span>`;
-  } else if (currentObbyStage.colorSequence) {
-    const isDone = currentObbyStage.currentColorIndex >= currentObbyStage.colorSequence.length;
-    const curr = isDone ? 'COMPLETED' : currentObbyStage.colorSequence[currentObbyStage.currentColorIndex];
-    container.innerHTML = `<span style="color:${isDone ? '#34d399' : '#fde047'}; font-weight:800; font-size:0.95rem;">
-      ${isDone ? '🎉 ALL COLORS JUMPED!' : `🎯 JUMP ON: ${curr.toUpperCase()} (${currentObbyStage.currentColorIndex}/${currentObbyStage.colorSequence.length})`}
-    </span>`;
-  } else if (currentObbyStage.items && currentObbyStage.items.length > 0) {
-    const count = currentObbyStage.items.filter(i => i.collected).length;
-    const total = currentObbyStage.items.length;
-    container.innerHTML = `<span style="color:${count >= total ? '#34d399' : '#f87171'}; font-weight:800; font-size:0.95rem;">
-      ⭐ RED STARS: ${count} / ${total}
-    </span>`;
-  } else if (currentObbyStage.doors) {
-    container.innerHTML = `<span style="color:#fde047; font-weight:800; font-size:0.95rem;">
-      🚪 FIND: YELLOW DOOR
-    </span>`;
+    container.innerHTML = `<span style="color:#f472b6; font-weight:800;">👑 BOSS ARENA ACTIVE</span>`;
+    return;
+  }
+
+  if (currentObbyStage.requiredItems && currentObbyStage.requiredItems.length > 0) {
+    const html = currentObbyStage.items.map(it => {
+      const isDone = it.collected;
+      return `<span style="margin-right:8px; font-weight:700; color:${isDone ? '#34d399' : '#fef08a'};">
+        ${isDone ? '✅' : '⬜'} ${it.icon} ${it.name}
+      </span>`;
+    }).join('');
+    container.innerHTML = html;
+  } else if (currentObbyStage.hasTerminal) {
+    container.innerHTML = `<span style="color:#38bdf8; font-weight:700;">💻 Password Terminal Active</span>`;
   } else {
     container.innerHTML = `<span style="color:#38bdf8; font-weight:700;">Explore & Reach Goal</span>`;
   }
 
   const gateBadge = document.getElementById('obbyGateStatusBadge');
-  if (gateBadge) {
-    if (currentObbyStage.gate && currentObbyStage.gate.unlocked) {
-      gateBadge.innerHTML = `<span style="color:#34d399; font-weight:800;">🌈 PORTAL: OPEN!</span>`;
-    } else if (currentObbyStage.doors) {
-      gateBadge.innerHTML = `<span style="color:#fde047; font-weight:800;">🚪 WARP DOORS ACTIVE</span>`;
+  if (gateBadge && currentObbyStage.gate) {
+    if (currentObbyStage.gate.unlocked) {
+      gateBadge.innerHTML = "🔓 Gate: OPEN!";
+      gateBadge.style.color = "#34d399";
     } else {
-      gateBadge.innerHTML = `<span style="color:#fca5a5; font-weight:700;">🔒 PORTAL: LOCKED</span>`;
+      gateBadge.innerHTML = "🔒 Gate: LOCKED";
+      gateBadge.style.color = "#fca5a5";
     }
   }
 }
@@ -1269,15 +1328,10 @@ function triggerBossEncounter() {
     audioRow.style.display = 'block';
     areaListening.style.display = 'grid';
 
-    areaListening.style.display = 'flex';
-    areaListening.style.justifyContent = 'center';
-    areaListening.style.gap = '14px';
-    areaListening.style.flexWrap = 'wrap';
-
     areaListening.innerHTML = challenge.options.map((opt, idx) => `
-      <button class="audio-choice-btn" style="background:${opt.colorHex || '#312e81'}; border:3px solid #ffffff; min-width:115px; padding:16px 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); cursor:pointer;" onclick="selectListeningChoice(${idx})">
-        <span class="audio-choice-icon" style="font-size:2.8rem;">${opt.icon}</span>
-        <span style="font-size:1.15rem; font-weight:900; letter-spacing:1px; color:#ffffff; text-shadow:0 2px 4px rgba(0,0,0,0.6);">${opt.name}</span>
+      <button class="audio-choice-btn" onclick="selectListeningChoice(${idx})">
+        <span class="audio-choice-icon">${opt.icon}</span>
+        <span>${opt.name}</span>
       </button>
     `).join('');
 
@@ -1344,33 +1398,14 @@ function playBossChallengeAudio() {
 function selectListeningChoice(idx) {
   const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
   const challenge = world.boss.challenges[Boss.currentChallengeIndex];
-  if (!challenge) return;
   const chosen = challenge.options[idx];
 
   if (chosen && chosen.correct) {
-    // Correct! Spawn joyful friendly color cannon from hero to boss
-    Boss.projectiles.push({
-      x: Player.x + Player.w,
-      y: 280,
-      vx: 14,
-      radius: 16,
-      color: chosen.colorHex || '#ef4444',
-      isFriendly: true
-    });
-
-    // Play color praise audio
-    const colorVoice = new Audio(challenge.audioFile);
-    colorVoice.play().catch(() => {});
-
-    Player.celebratingTimer = 40;
-    executeBossAttack(25, `✨ Correct! Barnaby feeds yummy ${chosen.name} to The Color Monster! 🌈`);
+    executeBossAttack(25, "✨ Correct! Barnaby fires a Radiant Energy Blast!");
   } else {
     sfx.playError();
-    if (challenge.tryAgainAudio) {
-      const trySnd = new Audio(challenge.tryAgainAudio);
-      trySnd.play().catch(() => {});
-    }
-    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#fde047; font-weight:800; font-size:1.05rem;">Try again! Find ${challenge.audioText.toUpperCase()}! 🎨</span>`;
+    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171;">Oops! Listen closely and try again!</span>`;
+    playBossChallengeAudio();
   }
 }
 
@@ -1546,10 +1581,6 @@ function handleBossDefeat() {
   Boss.defeated = true;
   sfx.playApplause();
 
-  // Play triumphant completion audio!
-  const winAudio = new Audio('assets/games_interactive/audio/leo_hooray_you_mastered_all_color_le_f67c3e13.mp3');
-  winAudio.play().catch(() => {});
-
   // Open victory modal
   const vicModal = document.getElementById('worldVictoryModal');
   const title = document.getElementById('worldVictoryTitle');
@@ -1558,11 +1589,11 @@ function handleBossDefeat() {
 
   if (vicModal) {
     vicModal.style.display = 'flex';
-    title.innerHTML = `WORLD ${currentWorldId} CONQUERED! 🌈🏆`;
-    desc.textContent = `You restored all colors to Rainbow Color World and became best friends with ${WORLDS_DATA[currentWorldId - 1].boss.name}!`;
+    title.textContent = `WORLD ${currentWorldId} CONQUERED! 🏆`;
+    desc.textContent = `You defeated ${WORLDS_DATA[currentWorldId - 1].boss.name} with your English mastery!`;
 
     // Unlock next world
-    if (unlockedWorlds <= currentWorldId && currentWorldId < 8) {
+    if (unlockedWorlds <= currentWorldId && currentWorldId < 3) {
       unlockedWorlds = currentWorldId + 1;
       localStorage.setItem('bili_unlocked_worlds', unlockedWorlds.toString());
     }
@@ -1575,9 +1606,10 @@ function proceedToNextWorld() {
   const vicModal = document.getElementById('worldVictoryModal');
   if (vicModal) vicModal.style.display = 'none';
 
-  if (currentWorldId < 8) {
+  if (currentWorldId < 3) {
     selectWorld(currentWorldId + 1);
   } else {
+    // Loop or reset to World 1
     selectWorld(1);
     speakEnglish("Congratulations! You completed all Super Platformer Worlds!", "guide");
   }
@@ -2035,43 +2067,7 @@ function obbyGameLoop() {
       Player.isGrounded = true;
       Player.jumpsLeft = Player.maxJumps;
 
-      if (p.type === 'color_pad') {
-        if (stage.colorSequence && stage.currentColorIndex < stage.colorSequence.length) {
-          const targetCol = stage.colorSequence[stage.currentColorIndex];
-          if (p.color === targetCol) {
-            stage.currentColorIndex++;
-            sfx.playSuccess();
-            createRainbowSparkles(Player.x + Player.w / 2, Player.y + Player.h);
-            playColorAudio(p.color);
-            Player.vy = -10;
-            Player.celebratingTimer = 35;
-
-            if (stage.currentColorIndex >= stage.colorSequence.length) {
-              if (stage.gate) stage.gate.unlocked = true;
-              showObbyFloatingBanner("🌟 ALL COLORS RESTORED! ENTER THE PORTAL! 🌈");
-              setTimeout(() => {
-                const winSnd = new Audio('assets/games_interactive/audio/leo_awesome_job_level_1_completed_ne_b2ef1e9e.mp3');
-                winSnd.play().catch(() => {});
-              }, 400);
-            } else {
-              const nextCol = stage.colorSequence[stage.currentColorIndex];
-              showObbyFloatingBanner(`🎯 JUMP ON ${nextCol.toUpperCase()}! 🌈`);
-              setTimeout(() => {
-                playColorAudio(nextCol);
-              }, 600);
-            }
-            updateObbyHudChecklist();
-          }
-        }
-      } else if (p.type === 'rainbow_step') {
-        if (!p.steppedRecently) {
-          p.steppedRecently = true;
-          setTimeout(() => { p.steppedRecently = false; }, 350);
-          _rawSfx.playRainbowNote(p.noteFreq || 350);
-          createRainbowSparkles(Player.x + Player.w / 2, p.y);
-          Player.scaleY = 1.15;
-        }
-      } else if (p.type === 'trampoline') {
+      if (p.type === 'trampoline') {
         p.compression = 14;
         Player.vy = -16.0; // High bounce
         Player.scaleX = 0.7;
@@ -2107,16 +2103,7 @@ function obbyGameLoop() {
 
         if (!b.hit && !b.isPrompting) {
           sfx.playBlockHit();
-          if (b.type === 'paint_block') {
-            b.hit = true;
-            b.solved = true;
-            b.bumpY = -16;
-            stage.isPainted = true;
-            sfx.playSuccess();
-            createRainbowSparkles(b.x + b.w / 2, b.y);
-            showObbyFloatingBanner("🎨 PAINT THE WORLD! VIBRANT COLORS RESTORED! 🌈");
-            speakEnglish("Paint the world! Beautiful rainbow colors!", "guide");
-          } else if (b.challenge) {
+          if (b.challenge) {
             b.isPrompting = true;
             openMysteryBlockModal(b);
           } else {
@@ -2141,35 +2128,16 @@ function obbyGameLoop() {
         const dist = Math.hypot((Player.x + Player.w / 2) - it.x, (Player.y + Player.h / 2) - it.y);
         if (dist < 45) {
           it.collected = true;
-          if (it.type === 'color_star') {
-            stage.starsCollected = (stage.starsCollected || 0) + 1;
-            createCoinSparkle(it.x, it.y);
-            playCountingAudio(stage.starsCollected);
-            Player.celebratingTimer = 25;
-            showObbyFloatingBanner(`⭐ ${stage.starsCollected} / ${stage.totalStars || 3} STARS COLLECTED!`);
-            if (stage.starsCollected >= (stage.totalStars || 3)) {
-              if (stage.gate) {
-                stage.gate.unlocked = true;
-                setTimeout(() => {
-                  const winSnd = new Audio('assets/games_interactive/audio/leo_awesome_job_level_1_completed_ne_b2ef1e9e.mp3');
-                  winSnd.play().catch(() => {});
-                }, 500);
-                showObbyFloatingBanner("🌟 ALL 3 STARS COLLECTED! WARP PORTAL OPEN! 🌈");
-              }
-            }
-            updateObbyHudChecklist();
-          } else {
-            sfx.playChestOpen();
-            createCoinSparkle(it.x, it.y);
-            speakEnglish(it.name, 'guide');
+          sfx.playChestOpen();
+          createCoinSparkle(it.x, it.y);
+          speakEnglish(it.name, 'guide');
 
-            const allDone = stage.items.every(i => i.collected);
-            if (allDone && stage.gate) {
-              sfx.playSuccess();
-              showObbyFloatingBanner(`🎉 Collected ${it.name}! Approach the Gate!`);
-            }
-            updateObbyHudChecklist();
+          const allDone = stage.items.every(i => i.collected);
+          if (allDone && stage.gate) {
+            sfx.playSuccess();
+            showObbyFloatingBanner(`🎉 Collected ${it.name}! Approach the Gate!`);
           }
+          updateObbyHudChecklist();
         }
       }
     });
@@ -2213,8 +2181,8 @@ function obbyGameLoop() {
       }
     }
 
-    // Boss shoots dodgable projectile every ~4.5 seconds (Only in non-preschool worlds)
-    if (Boss.shootTimer > 260 && currentWorldId !== 1) {
+    // Boss shoots dodgable projectile every ~4.5 seconds
+    if (Boss.shootTimer > 260) {
       Boss.shootTimer = 0;
       Boss.projectiles.push({
         x: Boss.x - 20,
@@ -2230,69 +2198,32 @@ function obbyGameLoop() {
       const pr = Boss.projectiles[i];
       pr.x += pr.vx;
 
-      if (pr.isFriendly) {
-        // Friendly color cannon blast hits the monster
-        if (pr.x >= Boss.x + 20) {
-          Boss.hitFlashes = 25;
-          createRainbowSparkles(Boss.x + Boss.w / 2, Boss.y + Boss.h / 2);
-          sfx.playPop();
-          Boss.projectiles.splice(i, 1);
-        }
-      } else {
+      // Check collision with player
+      if (
+        Player.x + Player.w > pr.x - pr.radius &&
+        Player.x < pr.x + pr.radius &&
+        Player.y + Player.h > pr.y - pr.radius &&
+        Player.y < pr.y + pr.radius
+      ) {
         // Player hit by obstacle
-        if (
-          Player.x + Player.w > pr.x - pr.radius &&
-          Player.x < pr.x + pr.radius &&
-          Player.y + Player.h > pr.y - pr.radius &&
-          Player.y < pr.y + pr.radius
-        ) {
-          sfx.playError();
-          Player.hearts = Math.max(0, Player.hearts - 1);
-          updatePlayerHeartsUI();
-          Player.vy = -5;
-          Player.vx = -6;
-          Boss.projectiles.splice(i, 1);
+        sfx.playError();
+        Player.hearts = Math.max(0, Player.hearts - 1);
+        updatePlayerHeartsUI();
+        Player.vy = -6;
+        Player.vx = -8;
+        Boss.projectiles.splice(i, 1);
 
-          if (Player.hearts <= 0) {
-            Player.x = stage.checkpointX;
-            Player.y = 260;
-            Player.hearts = 3;
-            updatePlayerHeartsUI();
-          }
-        } else if (pr.x < -100) {
-          Boss.projectiles.splice(i, 1);
+        if (Player.hearts <= 0) {
+          // Respawn in arena
+          Player.x = stage.checkpointX;
+          Player.y = 260;
+          Player.hearts = 3;
+          updatePlayerHeartsUI();
         }
+      } else if (pr.x < -100) {
+        Boss.projectiles.splice(i, 1);
       }
     }
-  }
-
-  // Rainbow Color Doors Collision Check
-  if (stage.doors) {
-    stage.doors.forEach(d => {
-      const dist = Math.hypot((Player.x + Player.w / 2) - (d.x + d.w / 2), (Player.y + Player.h / 2) - (d.y + d.h / 2));
-      if (dist < 45 && !stage.doorWarping) {
-        if (d.isTarget) {
-          stage.doorWarping = true;
-          sfx.playSuccess();
-          createRainbowSparkles(d.x + d.w / 2, d.y + d.h / 2);
-          showObbyFloatingBanner("🚪 YELLOW DOOR OPEN! ENTERING BOSS ARENA! 🌈");
-          const doorSnd = new Audio('assets/games_interactive/audio/leo_yes_that_is_yellow_sun_awesome_c9d4747d.mp3');
-          doorSnd.play().catch(() => {});
-          setTimeout(() => {
-            currentStageIndex++;
-            loadCurrentWorldStage();
-          }, 900);
-        } else {
-          if (!d.lastWarn || now - d.lastWarn > 2500) {
-            d.lastWarn = now;
-            sfx.playError();
-            const trySnd = new Audio('assets/games_interactive/audio/leo_try_again_that_is_not_yellow_08544965.mp3');
-            trySnd.play().catch(() => speakEnglish("Try again! Find the yellow door!", "guide"));
-            showObbyFloatingBanner("🚪 Not this door! Find the YELLOW door!");
-          }
-        }
-      }
-    });
   }
 
   // Gate Exit Pass Through & Locked Barrier Collision
@@ -2353,17 +2284,7 @@ function obbyGameLoop() {
     const rx = p.x - cameraX;
     if (rx + p.w < -50 || rx > canvas.width + 50) return;
 
-    if (p.type === 'color_pad') {
-      const isTarget = stage.colorSequence && stage.colorSequence[stage.currentColorIndex] === p.color;
-      drawColorPadPlatform(ctx, rx, p.y, p.w, p.h, p, isTarget, now);
-    } else if (p.type === 'rainbow_step') {
-      drawRainbowStep(ctx, rx, p.y, p.w, p.h, p.colorHex, p.name, now);
-    } else if (p.type === 'rainbow_ground') {
-      drawRainbowGround(ctx, rx, p.y, p.w, p.h, now);
-      if (stage.gate) {
-        drawRainbowPortalGate(ctx, rx + 140, p.y - 85, 75, 85, stage.gate.unlocked, now);
-      }
-    } else if (p.type === 'grass') {
+    if (p.type === 'grass') {
       drawMarioGrassPlatform(ctx, rx, p.y, p.w, p.h);
     } else if (p.type === 'sand') {
       ctx.fillStyle = "#fde047";
@@ -2416,13 +2337,6 @@ function obbyGameLoop() {
     drawKeypadTerminalStation(ctx, tx, ty, isUnlocked, now);
   }
 
-  // Render Color Doors
-  if (stage.doors) {
-    stage.doors.forEach(d => {
-      drawColorDoor(ctx, d.x - cameraX, d.y, d.w, d.h, d, now);
-    });
-  }
-
   // Render Mystery Blocks [ ? ]
   if (stage.mysteryBlocks) {
     stage.mysteryBlocks.forEach(b => {
@@ -2430,9 +2344,7 @@ function obbyGameLoop() {
       const ry = b.y + b.bumpY;
       if (rx + b.w < -20 || rx > canvas.width + 20) return;
 
-      if (b.type === 'paint_block') {
-        drawPaintBlock(ctx, rx, ry, b.w, b.h, b.hit, b.bumpY, now);
-      } else if (!b.hit) {
+      if (!b.hit) {
         const bgGrad = ctx.createLinearGradient(rx, ry, rx, ry + b.h);
         bgGrad.addColorStop(0, "#fde047");
         bgGrad.addColorStop(0.5, "#f59e0b");
@@ -2482,18 +2394,15 @@ function obbyGameLoop() {
     });
   }
 
-  // Render Items (Floating stars / items)
+  // Render Items (Floating clothing cards)
   if (stage.items) {
     stage.items.forEach(it => {
       if (!it.collected) {
-        if (it.type === 'color_star') {
-          drawColorStar(ctx, it.x - cameraX, it.y, it.color, now);
-        } else {
-          const ix = it.x - cameraX;
-          const floatY = Math.sin(now * 0.005) * 6;
+        const ix = it.x - cameraX;
+        const floatY = Math.sin(now * 0.005) * 6;
 
-          ctx.font = "32px sans-serif";
-          ctx.fillText(it.icon, ix, it.y + floatY);
+        ctx.font = "32px sans-serif";
+        ctx.fillText(it.icon, ix, it.y + floatY);
 
         ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
         ctx.beginPath();
@@ -2503,7 +2412,6 @@ function obbyGameLoop() {
         ctx.fillStyle = "#fef08a";
         ctx.font = "bold 11px Outfit, sans-serif";
         ctx.fillText(it.name, ix - 30, it.y - 4 + floatY);
-        }
       }
     });
   }
@@ -2536,7 +2444,7 @@ function obbyGameLoop() {
     }
 
     if (currentWorldId === 1) {
-      drawBossColorMonster(ctx, bx, by, Boss.w, Boss.h, now);
+      drawBossClockworkMech(ctx, bx, by, Boss.w, Boss.h, now);
     } else if (currentWorldId === 2) {
       drawBossCaptainSquiddy(ctx, bx, by, Boss.w, Boss.h, now);
     } else {
@@ -2545,31 +2453,17 @@ function obbyGameLoop() {
 
     ctx.globalAlpha = 1.0;
 
-    // Render Projectiles
+    // Render Boss Projectiles
     Boss.projectiles.forEach(pr => {
       const px = pr.x - cameraX;
-      if (pr.isFriendly) {
-        ctx.fillStyle = pr.color || "#ef4444";
-        ctx.beginPath();
-        ctx.arc(px, pr.y, pr.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.beginPath();
-        ctx.arc(px - 4, pr.y - 4, pr.radius * 0.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      } else {
-        ctx.fillStyle = "#ef4444";
-        ctx.beginPath();
-        ctx.arc(px, pr.y, pr.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#fde047";
-        ctx.beginPath();
-        ctx.arc(px - 3, pr.y - 3, 4, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.arc(px, pr.y, pr.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#fde047";
+      ctx.beginPath();
+      ctx.arc(px - 3, pr.y - 3, 4, 0, Math.PI * 2);
+      ctx.fill();
     });
   }
 
@@ -2657,62 +2551,7 @@ function obbyGameLoop() {
 
 // Procedural World Renderers (Mario Bros)
 function renderMarioWorldBackdrop(ctx, W, H, theme, now) {
-  if (theme === 'rainbow') {
-    const isPainted = currentObbyStage && currentObbyStage.isPainted;
-    const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
-    if (isPainted) {
-      skyGrad.addColorStop(0, "#c084fc");
-      skyGrad.addColorStop(0.4, "#67e8f9");
-      skyGrad.addColorStop(0.8, "#fbcfe8");
-      skyGrad.addColorStop(1, "#fef08a");
-    } else {
-      skyGrad.addColorStop(0, "#d8b4fe");
-      skyGrad.addColorStop(0.5, "#bae6fd");
-      skyGrad.addColorStop(1, "#fed7aa");
-    }
-    ctx.fillStyle = skyGrad;
-    ctx.fillRect(0, 0, W, H);
-
-    // Giant Rainbow Arch in background
-    const rainbowColors = isPainted
-      ? ["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#8b5cf6", "#ec4899"]
-      : ["rgba(239, 68, 68, 0.4)", "rgba(249, 115, 22, 0.4)", "rgba(234, 179, 8, 0.4)", "rgba(34, 197, 94, 0.4)", "rgba(59, 130, 246, 0.4)", "rgba(139, 92, 246, 0.4)", "rgba(236, 72, 153, 0.4)"];
-
-    const archCenterX = W * 0.5;
-    const archCenterY = H * 0.95;
-    rainbowColors.forEach((col, idx) => {
-      ctx.strokeStyle = col;
-      ctx.lineWidth = 11;
-      ctx.beginPath();
-      ctx.arc(archCenterX, archCenterY, 270 - idx * 11, Math.PI, 0);
-      ctx.stroke();
-    });
-
-    // Golden sunshine
-    ctx.fillStyle = "#fef08a";
-    ctx.beginPath();
-    ctx.arc(80, 50, 34, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Kawaii Clouds
-    drawMarioCloud(ctx, 160, 55, 1.2);
-    drawMarioCloud(ctx, 480, 45, 1.4);
-    drawMarioCloud(ctx, 720, 65, 1.1);
-
-    // Rolling pastel hills
-    ctx.fillStyle = isPainted ? "#86efac" : "rgba(134, 239, 172, 0.65)";
-    ctx.beginPath();
-    ctx.arc(140, 360, 160, Math.PI, 0);
-    ctx.arc(460, 370, 180, Math.PI, 0);
-    ctx.fill();
-
-    ctx.fillStyle = isPainted ? "#4ade80" : "rgba(74, 222, 128, 0.65)";
-    ctx.beginPath();
-    ctx.arc(300, 370, 150, Math.PI, 0);
-    ctx.arc(680, 370, 160, Math.PI, 0);
-    ctx.fill();
-
-  } else if (theme === 'beach') {
+  if (theme === 'beach') {
     const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
     skyGrad.addColorStop(0, "#0284c7");
     skyGrad.addColorStop(0.6, "#38bdf8");
@@ -2787,370 +2626,6 @@ function drawMarioCloud(ctx, x, y, scale) {
   ctx.fillStyle = "#0f172a";
   ctx.fillRect(15, -4, 3, 8);
   ctx.fillRect(26, -4, 3, 8);
-  ctx.restore();
-}
-
-
-// ============================================================================
-// PRESCHOOL PROCEDURAL RENDERERS (BARNABY LITTLE EXPLORERS)
-// ============================================================================
-function drawColorPadPlatform(ctx, x, y, w, h, p, isTarget, now) {
-  const pulse = isTarget ? Math.sin((now || 0) * 0.008) * 4 : 0;
-  const col = p.colorHex || "#3b82f6";
-
-  // Base platform
-  ctx.fillStyle = col;
-  ctx.beginPath();
-  ctx.roundRect(x, y - (isTarget ? pulse : 0), w, h + (isTarget ? pulse : 0), 10);
-  ctx.fill();
-
-  // Glossy highlight
-  ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
-  ctx.beginPath();
-  ctx.roundRect(x + 4, y - (isTarget ? pulse : 0) + 3, w - 8, 8, 4);
-  ctx.fill();
-
-  // Border
-  ctx.strokeStyle = isTarget ? "#ffffff" : "rgba(0, 0, 0, 0.25)";
-  ctx.lineWidth = isTarget ? 3 : 2;
-  ctx.stroke();
-
-  // Color label text
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 12px Outfit, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText(p.label || p.color.toUpperCase(), x + w / 2, y + 20 - (isTarget ? pulse : 0));
-
-  // If active target, draw bouncy arrow indicator above
-  if (isTarget) {
-    ctx.font = "16px sans-serif";
-    ctx.fillText("⬇", x + w / 2, y - 12 - pulse);
-  }
-  ctx.textAlign = "start";
-}
-
-function drawRainbowStep(ctx, x, y, w, h, col, noteName, now) {
-  ctx.fillStyle = col;
-  ctx.beginPath();
-  ctx.roundRect(x, y, w, h, 8);
-  ctx.fill();
-
-  ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-  ctx.beginPath();
-  ctx.roundRect(x + 2, y + 2, w - 4, 6, 3);
-  ctx.fill();
-
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 11px Outfit, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText("🎵 " + (noteName || ""), x + w / 2, y + 16);
-  ctx.textAlign = "start";
-}
-
-function drawRainbowGround(ctx, x, y, w, h, now) {
-  const soilGrad = ctx.createLinearGradient(x, y, x, y + h);
-  soilGrad.addColorStop(0, "#7c3aed");
-  soilGrad.addColorStop(1, "#4c1d95");
-  ctx.fillStyle = soilGrad;
-  ctx.beginPath();
-  ctx.roundRect(x, y, w, h, 10);
-  ctx.fill();
-
-  const colors = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#8b5cf6", "#ec4899"];
-  const stripW = w / colors.length;
-  colors.forEach((col, idx) => {
-    ctx.fillStyle = col;
-    ctx.fillRect(x + idx * stripW, y, stripW + 1, 8);
-  });
-}
-
-function drawColorDoor(ctx, x, y, w, h, door, now) {
-  const pulse = door.isTarget ? Math.sin((now || 0) * 0.007) * 4 : 0;
-  const col = door.colorHex || "#ef4444";
-
-  // Door Frame
-  ctx.fillStyle = "#334155";
-  ctx.beginPath();
-  ctx.roundRect(x - 4, y - 4, w + 8, h + 4, [16, 16, 0, 0]);
-  ctx.fill();
-
-  // Arched Door Panel
-  ctx.fillStyle = col;
-  ctx.beginPath();
-  ctx.roundRect(x, y, w, h, [14, 14, 0, 0]);
-  ctx.fill();
-
-  // Door Knob
-  ctx.fillStyle = "#fbbf24";
-  ctx.beginPath();
-  ctx.arc(x + 10, y + h / 2, 5, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Gem on top
-  ctx.fillStyle = door.isTarget ? "#fde047" : "#ffffff";
-  ctx.beginPath();
-  ctx.arc(x + w / 2, y - 10, 8, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.strokeStyle = "#0f172a";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // Label above door
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 10px Outfit, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText(door.label || door.color.toUpperCase(), x + w / 2, y - 22 + (door.isTarget ? pulse : 0));
-  if (door.isTarget) {
-    ctx.font = "14px sans-serif";
-    ctx.fillText("🌟", x + w / 2, y - 36 + pulse);
-  }
-  ctx.textAlign = "start";
-}
-
-function drawRainbowPortalGate(ctx, x, y, w, h, isUnlocked, now) {
-  const pulse = Math.sin((now || 0) * 0.006) * 4;
-
-  const portalGrad = ctx.createLinearGradient(x, y, x + w, y + h);
-  portalGrad.addColorStop(0, "#f43f5e");
-  portalGrad.addColorStop(0.3, "#fbbf24");
-  portalGrad.addColorStop(0.6, "#22c55e");
-  portalGrad.addColorStop(1, "#3b82f6");
-
-  ctx.strokeStyle = isUnlocked ? portalGrad : "#475569";
-  ctx.lineWidth = 8;
-  ctx.beginPath();
-  ctx.arc(x + w / 2, y + 25, w / 2, Math.PI, 0);
-  ctx.lineTo(x + w, y + h);
-  ctx.lineTo(x, y + h);
-  ctx.closePath();
-  ctx.stroke();
-
-  if (isUnlocked) {
-    const vortexGrad = ctx.createRadialGradient(x + w / 2, y + 35, 4, x + w / 2, y + 35, w / 2);
-    vortexGrad.addColorStop(0, "rgba(255, 255, 255, 0.9)");
-    vortexGrad.addColorStop(0.5, "rgba(168, 85, 247, 0.6)");
-    vortexGrad.addColorStop(1, "rgba(59, 130, 246, 0.4)");
-    ctx.fillStyle = vortexGrad;
-    ctx.beginPath();
-    ctx.arc(x + w / 2, y + 25, w / 2 - 4, Math.PI, 0);
-    ctx.lineTo(x + w - 4, y + h);
-    ctx.lineTo(x + 4, y + h);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.font = "24px sans-serif";
-    ctx.fillText("🌈", x + w / 2 - 12, y - 10 + pulse);
-    ctx.fillStyle = "#34d399";
-    ctx.font = "bold 11px Outfit, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("ENTER ➔", x + w / 2, y - 28 + pulse);
-    ctx.textAlign = "start";
-  } else {
-    ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-    ctx.beginPath();
-    ctx.arc(x + w / 2, y + 25, w / 2 - 4, Math.PI, 0);
-    ctx.lineTo(x + w - 4, y + h);
-    ctx.lineTo(x + 4, y + h);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.font = "22px sans-serif";
-    ctx.fillText("🔒", x + w / 2 - 11, y - 8 + pulse);
-    ctx.fillStyle = "#f87171";
-    ctx.font = "bold 10px Outfit, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("LOCKED", x + w / 2, y - 26 + pulse);
-    ctx.textAlign = "start";
-  }
-}
-
-function drawPaintBlock(ctx, x, y, w, h, isHit, bumpY, now) {
-  const ry = y + bumpY;
-  const grad = ctx.createLinearGradient(x, ry, x, ry + h);
-  if (!isHit) {
-    grad.addColorStop(0, "#ec4899");
-    grad.addColorStop(0.5, "#a855f7");
-    grad.addColorStop(1, "#6366f1");
-  } else {
-    grad.addColorStop(0, "#64748b");
-    grad.addColorStop(1, "#334155");
-  }
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.roundRect(x, ry, w, h, 8);
-  ctx.fill();
-
-  ctx.strokeStyle = isHit ? "#475569" : "#fde047";
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-
-  ctx.font = isHit ? "18px sans-serif" : "20px sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText(isHit ? "✨" : "🎨", x + w / 2, ry + h / 2 + 7);
-  ctx.textAlign = "start";
-}
-
-function drawColorStar(ctx, x, y, color, now) {
-  const bob = Math.sin((now || 0) * 0.005 + x) * 6;
-  const sy = y + bob;
-  const pulse = Math.sin((now || 0) * 0.008) * 2;
-
-  ctx.save();
-  ctx.translate(x, sy);
-
-  ctx.fillStyle = color === 'red' ? "rgba(239, 68, 68, 0.4)" : "rgba(250, 204, 21, 0.4)";
-  ctx.beginPath();
-  ctx.arc(0, 0, 18 + pulse, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = color === 'red' ? "#ef4444" : "#facc15";
-  ctx.beginPath();
-  for (let i = 0; i < 5; i++) {
-    const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
-    const r = 14 + pulse;
-    const px = Math.cos(angle) * r;
-    const py = Math.sin(angle) * r;
-    if (i === 0) ctx.moveTo(px, py);
-    else ctx.lineTo(px, py);
-  }
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.fillStyle = "#ffffff";
-  ctx.beginPath();
-  ctx.arc(-3, -3, 3, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.restore();
-}
-
-function drawBossColorMonster(ctx, x, y, w, h, now) {
-  const bob = Math.sin((now || 0) * 0.005) * 6;
-  const my = y + bob;
-  const phase = Boss.currentChallengeIndex || 0;
-
-  let bodyColor = "#94a3b8";
-  let bellyColor = "#cbd5e1";
-
-  if (phase === 1) {
-    bodyColor = "#ef4444";
-    bellyColor = "#fca5a5";
-  } else if (phase === 2) {
-    bodyColor = "#3b82f6";
-    bellyColor = "#93c5fd";
-  } else if (phase === 3) {
-    bodyColor = "#eab308";
-    bellyColor = "#fef08a";
-  } else if (phase >= 4 || Boss.defeated) {
-    const hue = (now * 0.1) % 360;
-    bodyColor = `hsl(${hue}, 85%, 60%)`;
-    bellyColor = "#ffffff";
-  }
-
-  ctx.save();
-
-  // Gentle shadow
-  ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
-  ctx.beginPath();
-  ctx.ellipse(x + w / 2, y + h + 8, w / 2 + 10, 10, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Cute Little Horns / Antennae
-  ctx.fillStyle = "#fbbf24";
-  ctx.beginPath();
-  ctx.arc(x + 28, my + 6, 10, 0, Math.PI * 2);
-  ctx.arc(x + w - 28, my + 6, 10, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.strokeStyle = "#d97706";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Round chubby body
-  ctx.fillStyle = bodyColor;
-  ctx.beginPath();
-  ctx.roundRect(x, my + 14, w, h - 14, [40, 40, 26, 26]);
-  ctx.fill();
-  ctx.strokeStyle = "#1e293b";
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  // Soft belly
-  ctx.fillStyle = bellyColor;
-  ctx.beginPath();
-  ctx.ellipse(x + w / 2, my + 64, w * 0.32, h * 0.25, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Big Expressive Kawaii Eyes
-  const eyeBlink = Math.sin((now || 0) * 0.003) > 0.96;
-  const eyeY = my + 38;
-  const leftEyeX = x + w / 2 - 20;
-  const rightEyeX = x + w / 2 + 20;
-
-  if (eyeBlink) {
-    ctx.strokeStyle = "#0f172a";
-    ctx.lineWidth = 3.5;
-    ctx.beginPath();
-    ctx.arc(leftEyeX, eyeY, 8, Math.PI, 0);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(rightEyeX, eyeY, 8, Math.PI, 0);
-    ctx.stroke();
-  } else {
-    ctx.fillStyle = "#0f172a";
-    ctx.beginPath();
-    ctx.arc(leftEyeX, eyeY, 11, 0, Math.PI * 2);
-    ctx.arc(rightEyeX, eyeY, 11, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(leftEyeX - 3, eyeY - 3, 4, 0, Math.PI * 2);
-    ctx.arc(rightEyeX - 3, eyeY - 3, 4, 0, Math.PI * 2);
-    ctx.arc(leftEyeX + 3, eyeY + 3, 2, 0, Math.PI * 2);
-    ctx.arc(rightEyeX + 3, eyeY + 3, 2, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Rosy cheeks
-  ctx.fillStyle = "rgba(244, 63, 94, 0.45)";
-  ctx.beginPath();
-  ctx.ellipse(leftEyeX - 10, eyeY + 12, 7, 5, 0, 0, Math.PI * 2);
-  ctx.ellipse(rightEyeX + 10, eyeY + 12, 7, 5, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Cheerful Mouth
-  ctx.fillStyle = "#b91c1c";
-  ctx.beginPath();
-  ctx.arc(x + w / 2, my + 54, 9, 0, Math.PI);
-  ctx.fill();
-  ctx.strokeStyle = "#0f172a";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Little stubby feet
-  ctx.fillStyle = bodyColor;
-  ctx.beginPath();
-  ctx.ellipse(x + 24, my + h + 2, 14, 8, 0, 0, Math.PI * 2);
-  ctx.ellipse(x + w - 24, my + h + 2, 14, 8, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.strokeStyle = "#1e293b";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Crown when full
-  if (phase >= 4 || Boss.defeated) {
-    ctx.font = "24px sans-serif";
-    ctx.fillText("👑", x + w / 2 - 12, my - 6);
-  }
-
   ctx.restore();
 }
 
@@ -3482,12 +2957,7 @@ function drawBossGummyDragon(ctx, x, y, w, h, now) {
 
 function listenObbyPrompt() {
   if (currentObbyStage) {
-    if (currentObbyStage.colorSequence && currentObbyStage.currentColorIndex < currentObbyStage.colorSequence.length) {
-      const col = currentObbyStage.colorSequence[currentObbyStage.currentColorIndex];
-      playColorAudio(col);
-    } else {
-      speakEnglish(currentObbyStage.promptEn, 'guide');
-    }
+    speakEnglish(currentObbyStage.promptEn, 'guide');
   }
 }
 

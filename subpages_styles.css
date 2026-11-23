@@ -1383,13 +1383,22 @@ body {
   box-shadow: 0 5px 14px rgba(2, 132, 199, 0.3);
 }
 
-/* 2. Resources Grid (Biblioteca, Karaoke, Aprende con Bili, Puzzles, Writing Studio, Color Alchemy) */
+/* 2. Resources Grid (Biblioteca, Karaoke, Aprende con Bili, Puzzles, Writing Studio, Color Alchemy, Little Explorers) */
 .resource-cards-5-grid,
-.resource-cards-6-grid {
+.resource-cards-6-grid,
+.resource-cards-7-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.15rem;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
   margin-top: 1rem;
+}
+
+@media (max-width: 1280px) {
+  .resource-cards-5-grid,
+  .resource-cards-6-grid,
+  .resource-cards-7-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .resource-pill-card {
@@ -1557,7 +1566,8 @@ body {
     line-height: 1.35;
   }
   .resource-cards-5-grid,
-  .resource-cards-6-grid {
+  .resource-cards-6-grid,
+  .resource-cards-7-grid {
     grid-template-columns: repeat(3, 1fr);
   }
   .lab-interactive-4-grid {
@@ -1570,7 +1580,8 @@ body {
     grid-template-columns: 1fr;
   }
   .resource-cards-5-grid,
-  .resource-cards-6-grid {
+  .resource-cards-6-grid,
+  .resource-cards-7-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .lab-interactive-4-grid {
@@ -1776,5 +1787,141 @@ body.babies-page {
 @media (prefers-reduced-motion: reduce) {
   .babies-bg-orb {
     animation: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   FEATURED BANNER: BARNABY LITTLE EXPLORERS 2D (BABIES & TODDLERS)
+   ========================================================================== */
+.explorers-featured-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+  border-radius: 28px;
+  padding: 1.6rem 2.2rem;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 16px 36px rgba(124, 58, 237, 0.35);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.explorers-featured-banner:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 22px 48px rgba(124, 58, 237, 0.45);
+}
+
+.explorers-featured-banner.toddlers-variant {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
+}
+
+.explorers-banner-content {
+  max-width: 65%;
+  z-index: 2;
+}
+
+.explorers-banner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.explorers-tag-age {
+  background: #fde047;
+  color: #1e1b4b;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+.explorers-banner-title {
+  font-family: var(--font-display, 'Fredoka', sans-serif);
+  font-size: 1.95rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.explorers-banner-desc {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #f1f5f9;
+  margin: 0 0 16px 0;
+  max-width: 580px;
+}
+
+.explorers-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #facc15;
+  color: #0f172a;
+  font-weight: 900;
+  font-size: 1.05rem;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  box-shadow: 0 6px 18px rgba(250, 204, 21, 0.4);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.explorers-featured-banner:hover .explorers-banner-btn {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+
+.explorers-banner-trio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.explorers-trio-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease;
+  image-rendering: pixelated;
+}
+
+.explorers-featured-banner:hover .explorers-trio-img {
+  transform: translateY(-6px) scale(1.06);
+}
+
+@media (max-width: 768px) {
+  .explorers-featured-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.4rem 1.2rem;
+  }
+  .explorers-banner-content {
+    max-width: 100%;
+  }
+  .explorers-banner-title {
+    font-size: 1.45rem;
+  }
+  .explorers-banner-trio {
+    margin-top: 14px;
+    justify-content: center;
+  }
+  .explorers-trio-img {
+    width: 68px;
+    height: 68px;
   }
 }
