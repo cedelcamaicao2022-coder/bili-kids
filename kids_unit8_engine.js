@@ -352,7 +352,7 @@ const WORLDS_DATA = [
       {
         id: 0,
         title: "Stage 1 • The Sunny Hills & Mystery Blocks [ ? ] 👟",
-        promptEn: "Hit the [ ? ] blocks with Barnaby's head to find 'THIS' and 'THESE'!",
+        promptEn: "Hit the [ ? ] blocks with Barnaby's head to solve grammar challenges!",
         bgTheme: "meadow",
         requiredItems: ["blue_jacket"],
         checkpointX: 40,
@@ -360,16 +360,52 @@ const WORLDS_DATA = [
         platforms: [
           { x: 0, y: 340, w: 220, h: 60, type: 'grass' },
           { x: 260, y: 290, w: 120, h: 35, type: 'grass' },
-          { x: 420, y: 240, w: 110, h: 35, type: 'mushroom' },
+          { x: 420, y: 240, w: 110, h: 35, type: 'trampoline' },
           { x: 570, y: 270, w: 120, h: 35, type: 'grass' },
           { x: 740, y: 230, w: 130, h: 35, type: 'grass' },
-          { x: 920, y: 280, w: 110, h: 35, type: 'mushroom' },
+          { x: 920, y: 280, w: 110, h: 35, type: 'trampoline' },
           { x: 1080, y: 320, w: 260, h: 80, type: 'pipe_ground' }
         ],
         mysteryBlocks: [
-          { x: 300, y: 190, w: 42, h: 42, content: "THIS", hit: false, bumpY: 0, icon: "🧥" },
-          { x: 610, y: 170, w: 42, h: 42, content: "THESE", hit: false, bumpY: 0, icon: "👟" }
+          {
+            x: 300, y: 190, w: 42, h: 42, content: "THIS", hit: false, bumpY: 0, icon: "🧥",
+            challenge: {
+              title: "Grammar Mystery Block: THIS vs THESE",
+              promptEn: "Barnaby has ONE warm jacket in his hands. Which demonstrative word is correct for 1 item close to us?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+              audioText: "This blue jacket",
+              options: [
+                { text: "🧥 THIS (One item / Singular)", correct: true },
+                { text: "👟 THESE (Two or more / Plural)", correct: false }
+              ],
+              rule: "We use 'THIS' for ONE singular object near us!"
+            }
+          },
+          {
+            x: 610, y: 170, w: 42, h: 42, content: "THESE", hit: false, bumpY: 0, icon: "👟",
+            challenge: {
+              title: "Grammar Mystery Block: THESE vs THIS",
+              promptEn: "Look at the cool sneakers! There are TWO sneakers (Plural pair). Which word do we use for items close to us?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_white_sneakers.mp3",
+              audioText: "These white sneakers",
+              options: [
+                { text: "👟 THESE (Plural items close)", correct: true },
+                { text: "🧥 THIS (Only one item)", correct: false }
+              ],
+              rule: "We use 'THESE' for TWO or more plural objects near us!"
+            }
+          }
         ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Before entering the Warp Pipe, identify the item Barnaby is wearing:",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+          audioText: "This blue jacket",
+          options: [
+            { text: "🧥 This blue jacket is very warm and stylish", correct: true },
+            { text: "👢 These white boots are very warm and stylish", correct: false }
+          ]
+        },
         items: [
           { id: "blue_jacket", x: 780, y: 170, name: "This Blue Jacket", icon: "🧥", collected: false }
         ],
@@ -383,28 +419,43 @@ const WORLDS_DATA = [
       },
       {
         id: 1,
-        title: "Stage 2 • The Green Pipe Valley & Keyword Tree 💻",
-        promptEn: "Approach the golden keypad terminal to enter the password!",
+        title: "Stage 2 • The Green Pipe Valley & Keypad Terminal 💻",
+        promptEn: "Approach the cyber terminal or security gate to enter the password!",
         bgTheme: "meadow",
         hasTerminal: true,
         terminalX: 720,
         terminalY: 260,
         terminalTargetWord: "JACKET",
         terminalPromptEn: "Type the clothing word: J _ _ _ E T (Barnaby's warm clothes)",
+        terminalAudio: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+        terminalAudioText: "Jacket",
         requiredItems: [],
         checkpointX: 40,
         finishX: 1350,
         platforms: [
           { x: 0, y: 340, w: 200, h: 60, type: 'grass' },
           { x: 240, y: 300, w: 120, h: 35, type: 'grass' },
-          { x: 400, y: 250, w: 110, h: 35, type: 'mushroom' },
+          { x: 400, y: 250, w: 110, h: 35, type: 'trampoline' },
           { x: 550, y: 200, w: 130, h: 35, type: 'grass' },
           { x: 720, y: 290, w: 180, h: 35, type: 'grass' },
-          { x: 950, y: 250, w: 120, h: 35, type: 'mushroom' },
+          { x: 950, y: 250, w: 120, h: 35, type: 'trampoline' },
           { x: 1120, y: 320, w: 260, h: 80, type: 'pipe_ground' }
         ],
         mysteryBlocks: [
-          { x: 590, y: 120, w: 42, h: 42, content: "SNEAKERS", hit: false, bumpY: 0, icon: "👟" }
+          {
+            x: 590, y: 120, w: 42, h: 42, content: "SNEAKERS", hit: false, bumpY: 0, icon: "👟",
+            challenge: {
+              title: "Vocabulary Mystery Block: Footwear",
+              promptEn: "Which word describes Barnaby's comfortable running shoes?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_white_sneakers.mp3",
+              audioText: "These white sneakers",
+              options: [
+                { text: "👟 White Sneakers", correct: true },
+                { text: "🧣 Wool Scarf", correct: false }
+              ],
+              rule: "Sneakers are comfortable athletic shoes!"
+            }
+          }
         ],
         items: [],
         coins: [
@@ -426,7 +477,7 @@ const WORLDS_DATA = [
         platforms: [
           { x: 0, y: 340, w: 300, h: 60, type: 'grass' },
           { x: 340, y: 270, w: 140, h: 30, type: 'grass' },
-          { x: 520, y: 220, w: 130, h: 30, type: 'mushroom' },
+          { x: 520, y: 220, w: 130, h: 30, type: 'trampoline' },
           { x: 690, y: 270, w: 140, h: 30, type: 'grass' },
           { x: 860, y: 340, w: 540, h: 60, type: 'pipe_ground' }
         ],
@@ -494,16 +545,52 @@ const WORLDS_DATA = [
         platforms: [
           { x: 0, y: 340, w: 220, h: 60, type: 'sand' },
           { x: 260, y: 290, w: 130, h: 25, type: 'wood_pier' },
-          { x: 430, y: 240, w: 110, h: 35, type: 'mushroom_yellow' },
+          { x: 430, y: 240, w: 110, h: 35, type: 'trampoline' },
           { x: 580, y: 270, w: 120, h: 25, type: 'wood_pier' },
           { x: 740, y: 230, w: 130, h: 25, type: 'wood_pier' },
-          { x: 920, y: 280, w: 110, h: 35, type: 'mushroom_yellow' },
+          { x: 920, y: 280, w: 110, h: 35, type: 'trampoline' },
           { x: 1080, y: 320, w: 260, h: 80, type: 'sand' }
         ],
         mysteryBlocks: [
-          { x: 310, y: 190, w: 42, h: 42, content: "SOME", hit: false, bumpY: 0, icon: "🥛" },
-          { x: 620, y: 170, w: 42, h: 42, content: "AN", hit: false, bumpY: 0, icon: "🍎" }
+          {
+            x: 310, y: 190, w: 42, h: 42, content: "SOME", hit: false, bumpY: 0, icon: "🥛",
+            challenge: {
+              title: "Grammar Mystery Block: Quantifier SOME",
+              promptEn: "We want milk to drink. Which quantifier do we use for food and drinks?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_bottle_of_milk.mp3",
+              audioText: "Some fresh milk",
+              options: [
+                { text: "🥛 SOME milk (Quantifier)", correct: true },
+                { text: "❌ AN milk (Incorrect)", correct: false }
+              ],
+              rule: "We use 'SOME' with uncountable drinks like milk!"
+            }
+          },
+          {
+            x: 620, y: 170, w: 42, h: 42, content: "AN", hit: false, bumpY: 0, icon: "🍎",
+            challenge: {
+              title: "Grammar Mystery Block: Article AN vs A",
+              promptEn: "Apple starts with the vowel letter 'A'. Which article is correct?",
+              audioFile: "assets/kids_audio/keywords/bili_kw_u8_red_apple.mp3",
+              audioText: "An apple",
+              options: [
+                { text: "🍎 AN apple (Vowel sound)", correct: true },
+                { text: "❌ A apple (Incorrect)", correct: false }
+              ],
+              rule: "We use 'AN' before words starting with vowel sounds!"
+            }
+          }
         ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Before entering the Warp Pipe, what fruit did Barnaby find?",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_these_red_apples.mp3",
+          audioText: "These red apples",
+          options: [
+            { text: "🍎 These red apples are fresh and tasty", correct: true },
+            { text: "🥖 That dry bread is fresh and tasty", correct: false }
+          ]
+        },
         items: [
           { id: "red_apples", x: 790, y: 170, name: "These Red Apples", icon: "🍎", collected: false }
         ],
@@ -526,7 +613,7 @@ const WORLDS_DATA = [
         platforms: [
           { x: 0, y: 340, w: 300, h: 60, type: 'sand' },
           { x: 340, y: 270, w: 140, h: 25, type: 'wood_pier' },
-          { x: 520, y: 220, w: 130, h: 35, type: 'mushroom_yellow' },
+          { x: 520, y: 220, w: 130, h: 35, type: 'trampoline' },
           { x: 690, y: 270, w: 140, h: 25, type: 'wood_pier' },
           { x: 860, y: 340, w: 540, h: 60, type: 'sand' }
         ],
@@ -601,9 +688,43 @@ const WORLDS_DATA = [
           { x: 1090, y: 320, w: 260, h: 80, type: 'cloud' }
         ],
         mysteryBlocks: [
-          { x: 310, y: 190, w: 42, h: 42, content: "MUCH", hit: false, bumpY: 0, icon: "🪙" },
-          { x: 630, y: 170, w: 42, h: 42, content: "MANY", hit: false, bumpY: 0, icon: "⭐" }
+          {
+            x: 310, y: 190, w: 42, h: 42, content: "MUCH", hit: false, bumpY: 0, icon: "🪙",
+            challenge: {
+              title: "Shopping Mystery Block: HOW MUCH",
+              promptEn: "To ask the PRICE of a toy or souvenir at a shop, what question do we use?",
+              audioText: "How much is it?",
+              options: [
+                { text: "🪙 How MUCH is it? (Asking for price)", correct: true },
+                { text: "⭐ How MANY is it? (Counting objects)", correct: false }
+              ],
+              rule: "'How much' is used to ask for the price of something!"
+            }
+          },
+          {
+            x: 630, y: 170, w: 42, h: 42, content: "MANY", hit: false, bumpY: 0, icon: "⭐",
+            challenge: {
+              title: "Shopping Mystery Block: HOW MANY",
+              promptEn: "To COUNT how many toys or cookies are on the shelf, what do we ask?",
+              audioText: "How many toys are there?",
+              options: [
+                { text: "⭐ How MANY toys? (Countable count)", correct: true },
+                { text: "🪙 How MUCH toys? (Incorrect for counting)", correct: false }
+              ],
+              rule: "'How many' is used to count quantities of countable items!"
+            }
+          }
         ],
+        gatekeeperChallenge: {
+          title: "Stage 1 Gatekeeper Checkpoint",
+          promptEn: "Which warm winter accessory did Barnaby find in the clouds?",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_wool_scarf.mp3",
+          audioText: "This wool scarf",
+          options: [
+            { text: "🧣 This wool scarf keeps me cozy", correct: true },
+            { text: "🧢 This beach hat keeps me cozy", correct: false }
+          ]
+        },
         items: [
           { id: "wool_scarf", x: 790, y: 170, name: "This Wool Scarf", icon: "🧣", collected: false }
         ],
@@ -642,6 +763,7 @@ const WORLDS_DATA = [
     ]
   }
 ];
+window.WORLDS_DATA = WORLDS_DATA;
 
 // Active Game Engine Variables
 let currentObbyStage = null;
@@ -650,6 +772,7 @@ let obbyCtx = null;
 let obbyLoopId = null;
 let cameraX = 0;
 let isObbyRunning = false;
+var activeMysteryBlock = null;
 
 // Player Physics Entity
 const Player = {
@@ -673,6 +796,7 @@ const Player = {
   respawnX: 40,
   respawnY: 260
 };
+window.Player = Player;
 
 // Boss Entity State
 const Boss = {
@@ -690,12 +814,14 @@ const Boss = {
   bobTimer: 0,
   defeated: false
 };
+window.Boss = Boss;
 
 // Particles & FX
 let obbyParticles = [];
 
 // Input state
-const inputKeys = { left: false, right: false, jump: false };
+var inputKeys = { left: false, right: false, jump: false };
+window.inputKeys = inputKeys;
 
 // Sound instance already initialized in global scope
 // Sentence Builder dynamic state
@@ -766,6 +892,7 @@ function loadCurrentWorldStage() {
   const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
   const stage = world.stages[currentStageIndex] || world.stages[0];
   currentObbyStage = stage;
+  window.currentObbyStage = currentObbyStage;
 
   // Reset player
   Player.x = stage.checkpointX;
@@ -920,9 +1047,68 @@ function setupObbyEventListeners() {
   if (!window._obbyKeysBound) {
     window._obbyKeysBound = true;
     window.addEventListener('keydown', (e) => {
-      if (document.getElementById('obbyTerminalModal')?.style.display === 'flex') return;
-      if (document.getElementById('bossChallengeModal')?.style.display === 'flex') return;
+      // 1. Terminal modal active
+      const termModal = document.getElementById('obbyTerminalModal');
+      if (termModal && termModal.style.display === 'flex') {
+        if (e.key === 'Escape') {
+          closeTerminalModal();
+          return;
+        }
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitTerminalWord();
+          return;
+        }
+        if (e.key === 'Backspace') {
+          if (document.activeElement !== document.getElementById('terminalPhysicalInput')) {
+            e.preventDefault();
+            pressTerminalDelete();
+          }
+          return;
+        }
+        if (/^[a-zA-Z]$/.test(e.key)) {
+          if (document.activeElement !== document.getElementById('terminalPhysicalInput')) {
+            e.preventDefault();
+            pressTerminalKey(e.key.toUpperCase());
+          }
+          return;
+        }
+        return;
+      }
 
+      // 2. Mystery block modal or gatekeeper modal active
+      if (document.getElementById('obbyMysteryModal')?.style.display === 'flex') return;
+      if (document.getElementById('obbyGatekeeperModal')?.style.display === 'flex') return;
+
+      // 3. Boss challenge modal active
+      const bossModal = document.getElementById('bossChallengeModal');
+      if (bossModal && bossModal.style.display === 'flex') {
+        const areaWriting = document.getElementById('challengeWritingArea');
+        if (areaWriting && areaWriting.style.display === 'block') {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            submitBossWriting();
+            return;
+          }
+          if (e.key === 'Backspace') {
+            if (document.activeElement !== document.getElementById('bossPhysicalInput')) {
+              e.preventDefault();
+              pressBossWritingDel();
+            }
+            return;
+          }
+          if (/^[a-zA-Z]$/.test(e.key)) {
+            if (document.activeElement !== document.getElementById('bossPhysicalInput')) {
+              e.preventDefault();
+              pressBossWritingKey(e.key.toUpperCase());
+            }
+            return;
+          }
+        }
+        return;
+      }
+
+      // 4. In-Game Movement
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') inputKeys.left = true;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') inputKeys.right = true;
       if (e.key === 'ArrowUp' || e.key === ' ' || e.key === 'w' || e.key === 'W') {
@@ -995,8 +1181,13 @@ function triggerBossEncounter() {
 
     window._bossCurrentTargetWord = challenge.targetWord;
     window._bossTypedWord = "";
-    document.getElementById('bossWritingDisplay').textContent = challenge.hint || "_ _ _ _";
-    document.getElementById('bossPhysicalInput').value = "";
+    updateBossWritingDisplay();
+
+    const inp = document.getElementById('bossPhysicalInput');
+    if (inp) {
+      inp.value = "";
+      setTimeout(() => inp.focus(), 60);
+    }
 
     renderBossWritingKeypad();
 
@@ -1053,20 +1244,37 @@ function selectListeningChoice(idx) {
   }
 }
 
+function updateBossWritingDisplay() {
+  const disp = document.getElementById('bossWritingDisplay');
+  if (!disp) return;
+  const target = window._bossCurrentTargetWord || "MUCH";
+  const typed = window._bossTypedWord || "";
+
+  let html = "";
+  for (let i = 0; i < target.length; i++) {
+    const ch = typed[i] || "";
+    html += `<span class="terminal-slot ${ch ? 'filled' : ''}">${ch || '_'}</span>`;
+  }
+  disp.innerHTML = html;
+}
+
 function renderBossWritingKeypad() {
   const container = document.getElementById('bossWritingKeypad');
   if (!container) return;
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-  let html = letters.map(l => `<button class="terminal-key" onclick="pressBossWritingKey('${l}')">${l}</button>`).join('');
-  html += `<button class="terminal-key key-del" onclick="pressBossWritingDel()">⌫</button>`;
+  let html = letters.map(l => `<button type="button" class="terminal-key" onclick="pressBossWritingKey('${l}')">${l}</button>`).join('');
+  html += `<button type="button" class="terminal-key key-del" onclick="pressBossWritingDel()" title="Delete">⌫</button>`;
   container.innerHTML = html;
 }
 
 function pressBossWritingKey(char) {
   if (!window._bossTypedWord) window._bossTypedWord = "";
-  if (window._bossTypedWord.length < 12) {
-    window._bossTypedWord += char;
-    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord;
+  const targetLen = (window._bossCurrentTargetWord || "MUCH").length;
+  if (window._bossTypedWord.length < targetLen) {
+    window._bossTypedWord += char.toUpperCase();
+    const inp = document.getElementById('bossPhysicalInput');
+    if (inp) inp.value = window._bossTypedWord;
+    updateBossWritingDisplay();
     sfx.playPop();
   }
 }
@@ -1074,29 +1282,44 @@ function pressBossWritingKey(char) {
 function pressBossWritingDel() {
   if (window._bossTypedWord && window._bossTypedWord.length > 0) {
     window._bossTypedWord = window._bossTypedWord.slice(0, -1);
-    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord || "_ _ _ _";
+    const inp = document.getElementById('bossPhysicalInput');
+    if (inp) inp.value = window._bossTypedWord;
+    updateBossWritingDisplay();
     sfx.playPop();
   }
 }
 
+function clearBossWriting() {
+  window._bossTypedWord = "";
+  const inp = document.getElementById('bossPhysicalInput');
+  if (inp) inp.value = "";
+  updateBossWritingDisplay();
+  sfx.playPop();
+}
+
+function handleBossWritingInput(e) {
+  const targetLen = (window._bossCurrentTargetWord || "MUCH").length;
+  window._bossTypedWord = e.target.value.trim().toUpperCase().slice(0, targetLen);
+  e.target.value = window._bossTypedWord;
+  updateBossWritingDisplay();
+}
+
 function handleBossWritingKey(e) {
   if (e.key === 'Enter') {
+    e.preventDefault();
     submitBossWriting();
-  } else {
-    window._bossTypedWord = document.getElementById('bossPhysicalInput').value.trim().toUpperCase();
-    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord || "_ _ _ _";
   }
 }
 
 function submitBossWriting() {
-  const typed = (window._bossTypedWord || document.getElementById('bossPhysicalInput').value || "").trim().toUpperCase();
+  const typed = (window._bossTypedWord || document.getElementById('bossPhysicalInput')?.value || "").trim().toUpperCase();
   const target = (window._bossCurrentTargetWord || "").toUpperCase();
 
   if (typed === target) {
     executeBossAttack(25, "💥 BOOM! Keyword Spell triggers a Plasma Blast!");
   } else {
     sfx.playError();
-    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171;">Try again! Hint: ${target[0]}...</span>`;
+    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171; font-weight:800;">Try again! Hint: Begins with '${target[0]}'...</span>`;
   }
 }
 
@@ -1228,38 +1451,85 @@ function proceedToNextWorld() {
 }
 
 // ============================================================================
-// TERMINAL MODAL KEYPAD (STAGES WITH TERMINALS)
+// TERMINAL MODAL KEYPAD (STAGES WITH SECURITY TERMINALS)
 // ============================================================================
 function openTerminalGate(targetWord, promptEn, promptEs) {
   const modal = document.getElementById('obbyTerminalModal');
   if (!modal) return;
+  // Guard against multi-frame re-execution while open
+  if (modal.style.display === 'flex') return;
+
   modal.style.display = 'flex';
+
+  // Freeze player movement
+  inputKeys.left = false;
+  inputKeys.right = false;
+  Player.vx = 0;
 
   window._currentTerminalTargetWord = targetWord;
   window._currentTerminalTyped = "";
 
   document.getElementById('terminalTitle').textContent = "Security Keypad Terminal";
   document.getElementById('terminalPromptEn').textContent = promptEn;
-  document.getElementById('terminalInputDisplay').textContent = "_ _ _ _";
-  document.getElementById('terminalPhysicalInput').value = "";
-  document.getElementById('terminalFeedbackMsg').textContent = "";
+  document.getElementById('terminalFeedbackMsg').innerHTML = "";
 
+  updateTerminalDisplay();
   renderTerminalKeypad();
+
+  setTimeout(() => {
+    const inp = document.getElementById('terminalPhysicalInput');
+    if (inp) {
+      inp.value = "";
+      inp.focus();
+    }
+  }, 60);
+
+  listenTerminalHint();
+}
+
+function listenTerminalHint() {
+  const stage = currentObbyStage;
+  if (stage && stage.terminalAudio) {
+    const snd = new Audio(stage.terminalAudio);
+    snd.playbackRate = 1.0;
+    snd.play().catch(() => {
+      speakEnglish(stage.terminalAudioText || window._currentTerminalTargetWord || "jacket", 'guide');
+    });
+  } else {
+    speakEnglish(window._currentTerminalTargetWord || "jacket", 'guide');
+  }
+}
+
+function updateTerminalDisplay() {
+  const disp = document.getElementById('terminalInputDisplay');
+  if (!disp) return;
+  const target = window._currentTerminalTargetWord || "JACKET";
+  const typed = window._currentTerminalTyped || "";
+
+  let html = "";
+  for (let i = 0; i < target.length; i++) {
+    const ch = typed[i] || "";
+    html += `<span class="terminal-slot ${ch ? 'filled' : ''}">${ch || '_'}</span>`;
+  }
+  disp.innerHTML = html;
 }
 
 function renderTerminalKeypad() {
   const container = document.getElementById('terminalKeypadContainer');
   if (!container) return;
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-  let html = letters.map(l => `<button class="terminal-key" onclick="pressTerminalKey('${l}')">${l}</button>`).join('');
-  html += `<button class="terminal-key key-del" onclick="pressTerminalDelete()">⌫</button>`;
+  let html = letters.map(l => `<button type="button" class="terminal-key" onclick="pressTerminalKey('${l}')">${l}</button>`).join('');
+  html += `<button type="button" class="terminal-key key-del" onclick="pressTerminalDelete()" title="Delete">⌫</button>`;
   container.innerHTML = html;
 }
 
 function pressTerminalKey(char) {
   if (!window._currentTerminalTyped) window._currentTerminalTyped = "";
-  if (window._currentTerminalTyped.length < 12) {
-    window._currentTerminalTyped += char;
+  const targetLen = (window._currentTerminalTargetWord || "JACKET").length;
+  if (window._currentTerminalTyped.length < targetLen) {
+    window._currentTerminalTyped += char.toUpperCase();
+    const inp = document.getElementById('terminalPhysicalInput');
+    if (inp) inp.value = window._currentTerminalTyped;
     updateTerminalDisplay();
     sfx.playPop();
   }
@@ -1268,42 +1538,245 @@ function pressTerminalKey(char) {
 function pressTerminalDelete() {
   if (window._currentTerminalTyped && window._currentTerminalTyped.length > 0) {
     window._currentTerminalTyped = window._currentTerminalTyped.slice(0, -1);
+    const inp = document.getElementById('terminalPhysicalInput');
+    if (inp) inp.value = window._currentTerminalTyped;
     updateTerminalDisplay();
     sfx.playPop();
   }
 }
 
+function clearTerminalWord() {
+  window._currentTerminalTyped = "";
+  const inp = document.getElementById('terminalPhysicalInput');
+  if (inp) inp.value = "";
+  updateTerminalDisplay();
+  sfx.playPop();
+}
+
+function handleTerminalInputChange(e) {
+  const val = e.target.value.trim().toUpperCase();
+  const targetLen = (window._currentTerminalTargetWord || "JACKET").length;
+  window._currentTerminalTyped = val.slice(0, targetLen);
+  e.target.value = window._currentTerminalTyped;
+  updateTerminalDisplay();
+}
+
 function handleTerminalInputKey(e) {
   if (e.key === 'Enter') {
+    e.preventDefault();
     submitTerminalWord();
-  } else {
-    window._currentTerminalTyped = document.getElementById('terminalPhysicalInput').value.trim().toUpperCase();
-    updateTerminalDisplay();
   }
 }
 
-function updateTerminalDisplay() {
-  const disp = document.getElementById('terminalInputDisplay');
-  if (disp) disp.textContent = window._currentTerminalTyped || "_ _ _ _";
+function closeTerminalModal() {
+  const modal = document.getElementById('obbyTerminalModal');
+  if (modal) modal.style.display = 'none';
+  if (currentObbyStage && currentObbyStage.hasTerminal) {
+    if (Math.abs(Player.x - currentObbyStage.terminalX) < 60) {
+      Player.x = currentObbyStage.terminalX - 65;
+      Player.vx = -2;
+    }
+  }
 }
 
 function submitTerminalWord() {
-  const typed = (window._currentTerminalTyped || document.getElementById('terminalPhysicalInput').value || "").trim().toUpperCase();
+  const typed = (window._currentTerminalTyped || document.getElementById('terminalPhysicalInput')?.value || "").trim().toUpperCase();
   const target = (window._currentTerminalTargetWord || "").toUpperCase();
 
   if (typed === target) {
     sfx.playSuccess();
-    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#34d399;">✅ Correct Password! Gate Opening...</span>`;
+    AppState.addStars(20);
+    Player.coinsCollected += 20;
+    if (currentObbyStage && currentObbyStage.gate) {
+      currentObbyStage.gate.unlocked = true;
+      updateObbyHudChecklist();
+    }
+    document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
+    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#34d399; font-size:1.1rem; font-weight:800;">✅ ACCESS GRANTED! Gate Opening...</span>`;
+    
     setTimeout(() => {
-      document.getElementById('obbyTerminalModal').style.display = 'none';
-      if (currentObbyStage && currentObbyStage.gate) {
-        currentObbyStage.gate.unlocked = true;
-        updateObbyHudChecklist();
-      }
-    }, 900);
+      closeTerminalModal();
+      showObbyFloatingBanner("🔓 GATE UNLOCKED! RUN TO THE PIPE!");
+    }, 750);
   } else {
     sfx.playError();
-    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#f87171;">❌ Incorrect word. Try again!</span>`;
+    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#f87171; font-weight:800;">❌ Incorrect password. Hint: Begins with '${target[0]}'!</span>`;
+    const card = document.querySelector('#obbyTerminalModal .terminal-card');
+    if (card) {
+      card.classList.add('shake-anim');
+      setTimeout(() => card.classList.remove('shake-anim'), 400);
+    }
+  }
+}
+
+// ============================================================================
+// MYSTERY QUESTION BLOCK [ ? ] SYSTEM (PEDAGOGICAL RETENTION)
+// ============================================================================
+
+function openMysteryBlockModal(block) {
+  const modal = document.getElementById('obbyMysteryModal');
+  if (!modal || !block.challenge) return;
+
+  activeMysteryBlock = block;
+  modal.style.display = 'flex';
+
+  // Freeze player
+  inputKeys.left = false;
+  inputKeys.right = false;
+  Player.vx = 0;
+
+  document.getElementById('mysteryModalTitle').textContent = block.challenge.title || "Mystery Question Block [ ? ]";
+  document.getElementById('mysteryModalPromptEn').textContent = block.challenge.promptEn;
+  document.getElementById('mysteryModalFeedback').innerHTML = "";
+
+  const optsContainer = document.getElementById('mysteryModalOptions');
+  optsContainer.innerHTML = block.challenge.options.map((opt, idx) => `
+    <button type="button" class="mystery-choice-card" onclick="selectMysteryChoice(${idx})">
+      <span style="font-size:1.8rem;">${opt.icon || '⭐'}</span>
+      <span>${opt.text}</span>
+    </button>
+  `).join('');
+
+  playMysteryModalAudio();
+}
+
+function playMysteryModalAudio() {
+  if (!activeMysteryBlock || !activeMysteryBlock.challenge) return;
+  const ch = activeMysteryBlock.challenge;
+  if (ch.audioFile) {
+    const snd = new Audio(ch.audioFile);
+    snd.playbackRate = 1.0;
+    snd.play().catch(() => {
+      speakEnglish(ch.audioText || ch.promptEn, 'guide');
+    });
+  } else {
+    speakEnglish(ch.audioText || ch.promptEn, 'guide');
+  }
+}
+
+function selectMysteryChoice(idx) {
+  if (!activeMysteryBlock || !activeMysteryBlock.challenge) return;
+  const ch = activeMysteryBlock.challenge;
+  const chosen = ch.options[idx];
+  const cards = document.querySelectorAll('#mysteryModalOptions .mystery-choice-card');
+  const card = cards[idx];
+
+  if (chosen && chosen.correct) {
+    sfx.playSuccess();
+    if (card) card.classList.add('correct');
+    AppState.addStars(15);
+    Player.coinsCollected += 15;
+    document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
+    createCoinSparkle(activeMysteryBlock.x + activeMysteryBlock.w / 2, activeMysteryBlock.y);
+
+    document.getElementById('mysteryModalFeedback').innerHTML = `<span style="color:#34d399; font-size:1.05rem;">✨ EXCELLENT! ${ch.rule || 'Great job!'} (+15 ⭐)</span>`;
+
+    activeMysteryBlock.hit = true;
+    activeMysteryBlock.solved = true;
+
+    setTimeout(() => {
+      const modal = document.getElementById('obbyMysteryModal');
+      if (modal) modal.style.display = 'none';
+      const revealedWord = activeMysteryBlock ? activeMysteryBlock.content : 'KEYWORD';
+      activeMysteryBlock = null;
+      showObbyFloatingBanner(`⭐ Solved: "${revealedWord}"!`);
+    }, 1100);
+  } else {
+    sfx.playError();
+    if (card) {
+      card.classList.add('wrong');
+      card.classList.add('shake-anim');
+      setTimeout(() => card.classList.remove('shake-anim'), 400);
+    }
+    document.getElementById('mysteryModalFeedback').innerHTML = `<span style="color:#f87171;">Listen closely and try again! Hint: ${ch.rule || ''}</span>`;
+    playMysteryModalAudio();
+  }
+}
+
+// ============================================================================
+// GATEKEEPER CHECKPOINT SYSTEM (ACTIVE KNOWLEDGE CHECK BEFORE WARP)
+// ============================================================================
+function openGatekeeperChallenge() {
+  const modal = document.getElementById('obbyGatekeeperModal');
+  const stage = currentObbyStage;
+  if (!modal || !stage || !stage.gatekeeperChallenge) {
+    if (stage && stage.gate) {
+      stage.gate.unlocked = true;
+      updateObbyHudChecklist();
+    }
+    return;
+  }
+
+  if (modal.style.display === 'flex') return;
+
+  modal.style.display = 'flex';
+  inputKeys.left = false;
+  inputKeys.right = false;
+  Player.vx = 0;
+
+  const ch = stage.gatekeeperChallenge;
+  document.getElementById('gatekeeperModalTitle').textContent = ch.title || "Gatekeeper Checkpoint Challenge";
+  document.getElementById('gatekeeperModalPromptEn').textContent = ch.promptEn;
+  document.getElementById('gatekeeperModalFeedback').innerHTML = "";
+
+  const optsContainer = document.getElementById('gatekeeperModalOptions');
+  optsContainer.innerHTML = ch.options.map((opt, idx) => `
+    <button type="button" class="mystery-choice-card" style="text-align:left; flex-direction:row; justify-content:flex-start; padding:12px 18px;" onclick="selectGatekeeperChoice(${idx})">
+      <span style="font-size:1.5rem; margin-right:10px;">${opt.icon || '🔑'}</span>
+      <span style="font-size:1.05rem;">${opt.text}</span>
+    </button>
+  `).join('');
+
+  playGatekeeperAudio();
+}
+
+function playGatekeeperAudio() {
+  const stage = currentObbyStage;
+  if (!stage || !stage.gatekeeperChallenge) return;
+  const ch = stage.gatekeeperChallenge;
+  if (ch.audioFile) {
+    const snd = new Audio(ch.audioFile);
+    snd.playbackRate = 1.0;
+    snd.play().catch(() => {
+      speakEnglish(ch.audioText || ch.promptEn, 'guide');
+    });
+  } else {
+    speakEnglish(ch.audioText || ch.promptEn, 'guide');
+  }
+}
+
+function selectGatekeeperChoice(idx) {
+  const stage = currentObbyStage;
+  if (!stage || !stage.gatekeeperChallenge) return;
+  const ch = stage.gatekeeperChallenge;
+  const chosen = ch.options[idx];
+  const cards = document.querySelectorAll('#gatekeeperModalOptions .mystery-choice-card');
+  const card = cards[idx];
+
+  if (chosen && chosen.correct) {
+    sfx.playSuccess();
+    if (card) card.classList.add('correct');
+    AppState.addStars(20);
+    if (stage.gate) {
+      stage.gate.unlocked = true;
+      updateObbyHudChecklist();
+    }
+    document.getElementById('gatekeeperModalFeedback').innerHTML = `<span style="color:#34d399; font-size:1.1rem; font-weight:800;">🔓 CORRECT! The Warp Pipe is now unlocked! (+20 ⭐)</span>`;
+
+    setTimeout(() => {
+      const modal = document.getElementById('obbyGatekeeperModal');
+      if (modal) modal.style.display = 'none';
+      showObbyFloatingBanner("🔓 GATE UNLOCKED! JUMP IN THE PIPE!");
+    }, 1000);
+  } else {
+    sfx.playError();
+    if (card) {
+      card.classList.add('wrong');
+      card.classList.add('shake-anim');
+      setTimeout(() => card.classList.remove('shake-anim'), 400);
+    }
+    document.getElementById('gatekeeperModalFeedback').innerHTML = `<span style="color:#f87171;">Check the grammar rule and try again!</span>`;
+    playGatekeeperAudio();
   }
 }
 
@@ -1392,6 +1865,12 @@ function obbyGameLoop() {
   // Platform collisions
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
+    // Smoothly restore trampoline / mushroom bounce compression
+    if (p.compression) {
+      p.compression *= 0.72;
+      if (p.compression < 0.5) p.compression = 0;
+    }
+
     if (
       Player.x + Player.w > p.x &&
       Player.x < p.x + p.w &&
@@ -1404,7 +1883,16 @@ function obbyGameLoop() {
       Player.isGrounded = true;
       Player.jumpsLeft = Player.maxJumps;
 
-      if (p.type.includes('mushroom') || p.type.includes('bounce')) {
+      if (p.type === 'trampoline') {
+        p.compression = 14;
+        Player.vy = -16.0; // High bounce
+        Player.scaleX = 0.7;
+        Player.scaleY = 1.4;
+        sfx.playBoing();
+        createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, true);
+        showObbyFloatingBanner("⚡ SUPER BOING!");
+      } else if (p.type.includes('mushroom') || p.type.includes('bounce')) {
+        p.compression = 10;
         Player.vy = -14.0;
         Player.scaleX = 0.75;
         Player.scaleY = 1.35;
@@ -1425,17 +1913,23 @@ function obbyGameLoop() {
         Player.vy < 0
       ) {
         Player.y = b.y + b.h;
-        Player.vy = 2;
-        b.bumpY = -12;
+        Player.vy = 2.5;
+        b.bumpY = -14;
         Player.celebratingTimer = 30;
 
         if (!b.hit) {
-          b.hit = true;
-          Player.coinsCollected += 10;
-          sfx.playCoin();
-          createCoinSparkle(b.x + b.w / 2, b.y);
-          document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
-          showObbyFloatingBanner(`⭐ Revealed: "${b.content}"!`);
+          sfx.playBlockHit();
+          if (b.challenge) {
+            openMysteryBlockModal(b);
+          } else {
+            b.hit = true;
+            b.solved = true;
+            Player.coinsCollected += 10;
+            sfx.playCoin();
+            createCoinSparkle(b.x + b.w / 2, b.y);
+            document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
+            showObbyFloatingBanner(`⭐ Revealed: "${b.content}"!`);
+          }
         }
       }
       b.bumpY *= 0.8;
@@ -1451,11 +1945,12 @@ function obbyGameLoop() {
           it.collected = true;
           sfx.playChestOpen();
           createCoinSparkle(it.x, it.y);
+          speakEnglish(it.name, 'guide');
 
           const allDone = stage.items.every(i => i.collected);
           if (allDone && stage.gate) {
-            stage.gate.unlocked = true;
             sfx.playSuccess();
+            showObbyFloatingBanner(`🎉 Collected ${it.name}! Approach the Gate!`);
           }
           updateObbyHudChecklist();
         }
@@ -1479,10 +1974,11 @@ function obbyGameLoop() {
     });
   }
 
-  // Terminal Trigger
+  // Terminal Trigger (Protected against re-entry)
   if (stage.hasTerminal) {
     const distT = Math.hypot((Player.x + Player.w / 2) - stage.terminalX, (Player.y + Player.h / 2) - stage.terminalY);
-    if (distT < 50 && (!stage.gate || !stage.gate.unlocked)) {
+    const termModal = document.getElementById('obbyTerminalModal');
+    if (distT < 50 && (!stage.gate || !stage.gate.unlocked) && termModal && termModal.style.display !== 'flex') {
       openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, "");
     }
   }
@@ -1545,15 +2041,38 @@ function obbyGameLoop() {
     }
   }
 
-  // Gate Exit Pass Through
-  if (stage.gate && stage.gate.unlocked) {
-    if (Player.x > stage.gate.x) {
-      if (currentStageIndex < WORLDS_DATA[currentWorldId - 1].stages.length - 1) {
-        currentStageIndex++;
-        sfx.playSuccess();
-        loadCurrentWorldStage();
-      } else {
-        showObbyVictoryScreen();
+  // Gate Exit Pass Through & Locked Barrier Collision
+  if (stage.gate) {
+    if (stage.gate.unlocked) {
+      if (Player.x > stage.gate.x) {
+        if (currentStageIndex < WORLDS_DATA[currentWorldId - 1].stages.length - 1) {
+          currentStageIndex++;
+          sfx.playSuccess();
+          loadCurrentWorldStage();
+        } else {
+          showObbyVictoryScreen();
+        }
+      }
+    } else {
+      // Locked Gate Barrier: push back and give active feedback
+      if (Player.x + Player.w > stage.gate.x && Player.x < stage.gate.x + stage.gate.w + 40) {
+        Player.x = stage.gate.x - Player.w - 8;
+        Player.vx = -3;
+
+        if (stage.hasTerminal) {
+          sfx.playError();
+          openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, "");
+          showObbyFloatingBanner("🔒 GATE LOCKED! Enter Password to Open!");
+        } else if (stage.requiredItems && stage.requiredItems.length > 0) {
+          const allCollected = stage.items.every(it => it.collected);
+          if (!allCollected) {
+            sfx.playError();
+            const missing = stage.items.find(it => !it.collected);
+            showObbyFloatingBanner(`🔒 GATE LOCKED! Find: ${missing ? missing.icon + ' ' + missing.name : 'required item'} first!`);
+          } else {
+            openGatekeeperChallenge();
+          }
+        }
       }
     }
   }
@@ -1599,7 +2118,7 @@ function obbyGameLoop() {
     } else if (p.type === 'cloud' || p.type === 'cloud_bounce') {
       ctx.fillStyle = "#ffffff";
       ctx.beginPath();
-      ctx.roundRect(rx, p.y, p.w, p.h, 18);
+      ctx.roundRect(rx, p.y + (p.compression || 0), p.w, p.h, 18);
       ctx.fill();
       ctx.strokeStyle = "#fbcfe8";
       ctx.lineWidth = 3;
@@ -1611,16 +2130,26 @@ function obbyGameLoop() {
       ctx.fill();
       ctx.fillStyle = "#fef08a";
       ctx.fillRect(rx + 4, p.y + p.h / 2 - 2, p.w - 8, 4);
+    } else if (p.type === 'trampoline') {
+      drawSuperTrampoline(ctx, rx, p.y, p.w, p.h, p.compression || 0, now);
     } else if (p.type.includes('mushroom')) {
-      drawMarioMushroom(ctx, rx, p.y, p.w, p.h, p.type.includes('yellow') ? '#f59e0b' : '#ef4444');
+      drawMarioMushroom(ctx, rx, p.y, p.w, p.h, p.type.includes('yellow') ? '#f59e0b' : '#ef4444', p.compression || 0);
     } else if (p.type === 'pipe_ground') {
       drawMarioGrassPlatform(ctx, rx, p.y, p.w, p.h);
-      drawMarioWarpPipe(ctx, rx + 40, p.y - 75, 70, 75, stage.gate && stage.gate.unlocked);
+      drawMarioWarpPipe(ctx, rx + 40, p.y - 75, 70, 75, stage.gate && stage.gate.unlocked, now);
     } else {
       ctx.fillStyle = "#475569";
       ctx.fillRect(rx, p.y, p.w, p.h);
     }
   });
+
+  // Render Keypad Terminal Pod Station
+  if (stage.hasTerminal) {
+    const tx = stage.terminalX - cameraX;
+    const ty = stage.terminalY;
+    const isUnlocked = stage.gate && stage.gate.unlocked;
+    drawKeypadTerminalStation(ctx, tx, ty, isUnlocked, now);
+  }
 
   // Render Mystery Blocks [ ? ]
   if (stage.mysteryBlocks) {
@@ -1650,17 +2179,31 @@ function obbyGameLoop() {
         ctx.font = "900 22px Outfit, sans-serif";
         ctx.fillText("?", rx + 15, ry + 28);
       } else {
-        ctx.fillStyle = "#b45309";
+        // Solved golden block with star
+        const bgGrad = ctx.createLinearGradient(rx, ry, rx, ry + b.h);
+        bgGrad.addColorStop(0, "#fef08a");
+        bgGrad.addColorStop(1, "#ca8a04");
+        ctx.fillStyle = bgGrad;
         ctx.beginPath();
         ctx.roundRect(rx, ry, b.w, b.h, 6);
         ctx.fill();
-        ctx.strokeStyle = "#78350f";
+        ctx.strokeStyle = "#a16207";
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "900 13px Outfit, sans-serif";
-        ctx.fillText(b.icon + ' ' + b.content, rx - 8, ry - 12);
+        ctx.font = "18px sans-serif";
+        ctx.fillText("⭐", rx + 11, ry + 27);
+
+        // Floating keyword badge above block
+        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+        ctx.beginPath();
+        ctx.roundRect(rx - 14, ry - 22, b.w + 28, 18, 4);
+        ctx.fill();
+        ctx.fillStyle = "#fef08a";
+        ctx.font = "900 11px Outfit, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(b.icon + " " + b.content, rx + b.w / 2, ry - 9);
+        ctx.textAlign = "start";
       }
     });
   }
@@ -1924,28 +2467,143 @@ function drawMarioGrassPlatform(ctx, x, y, w, h) {
   }
 }
 
-function drawMarioMushroom(ctx, x, y, w, h, capColor) {
+function drawSuperTrampoline(ctx, x, y, w, h, compression, now) {
+  const comp = compression || 0;
+  const padY = y + comp;
+  const baseY = y + h;
+
+  // Base Legs & Frame (industrial dark steel with rubber safety pads)
+  ctx.fillStyle = "#0f172a";
+  ctx.beginPath();
+  ctx.roundRect(x + 6, baseY - 7, w - 12, 7, 3);
+  ctx.fill();
+
+  ctx.fillStyle = "#334155";
+  ctx.fillRect(x + 4, baseY - 5, 10, 6);
+  ctx.fillRect(x + w - 14, baseY - 5, 10, 6);
+  ctx.fillRect(x + w / 2 - 5, baseY - 5, 10, 6);
+
+  // Chrome Spring Coils (squash with comp)
+  const springCount = 4;
+  const springSpacing = (w - 32) / (springCount - 1);
+  for (let i = 0; i < springCount; i++) {
+    const sx = x + 16 + i * springSpacing;
+    const sTop = padY + 12;
+    const sBot = baseY - 7;
+    const sH = Math.max(4, sBot - sTop);
+
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(sx, sBot);
+    const coils = 3;
+    for (let c = 1; c <= coils; c++) {
+      const cy = sBot - (sH / coils) * (c - 0.5);
+      const xOffset = (c % 2 === 0) ? -7 : 7;
+      ctx.lineTo(sx + xOffset, cy);
+    }
+    ctx.lineTo(sx, sTop);
+    ctx.stroke();
+  }
+
+  // Trampoline Bouncy Bed (Pad)
+  const padGrad = ctx.createLinearGradient(x, padY, x, padY + 15);
+  padGrad.addColorStop(0, "#fb923c");
+  padGrad.addColorStop(0.5, "#ea580c");
+  padGrad.addColorStop(1, "#9a3412");
+  ctx.fillStyle = padGrad;
+  ctx.beginPath();
+  ctx.roundRect(x, padY, w, 15, 6);
+  ctx.fill();
+
+  ctx.strokeStyle = "#fde047";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Bouncy Bed Texture & Chevron Indicators
   ctx.fillStyle = "#fef08a";
-  ctx.fillRect(x + w / 2 - 14, y + 10, 28, h - 10);
+  ctx.font = "bold 10px Outfit, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("▲   ▲   SUPER BOING   ▲   ▲", x + w / 2, padY + 11);
+  ctx.textAlign = "start";
+}
+
+function drawKeypadTerminalStation(ctx, x, y, isUnlocked, now) {
+  const pulse = Math.sin((now || 0) * 0.006) * 4;
+
+  // Ground Holographic Base Ring
+  ctx.strokeStyle = isUnlocked ? "rgba(52, 211, 153, 0.7)" : "rgba(168, 85, 247, 0.75)";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.ellipse(x, y + 26, 34, 10, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Cyber Podium Column
+  const baseGrad = ctx.createLinearGradient(x - 16, y - 20, x + 16, y + 25);
+  baseGrad.addColorStop(0, "#312e81");
+  baseGrad.addColorStop(1, "#0f172a");
+  ctx.fillStyle = baseGrad;
+  ctx.beginPath();
+  ctx.roundRect(x - 14, y - 20, 28, 45, 6);
+  ctx.fill();
+  ctx.strokeStyle = isUnlocked ? "#34d399" : "#818cf8";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Slanted Terminal Monitor
+  ctx.fillStyle = "#1e1b4b";
+  ctx.beginPath();
+  ctx.roundRect(x - 30, y - 58, 60, 38, 8);
+  ctx.fill();
+  ctx.strokeStyle = isUnlocked ? "#10b981" : "#c084fc";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Screen Interior
+  ctx.fillStyle = isUnlocked ? "#065f46" : "#0284c7";
+  ctx.fillRect(x - 26, y - 54, 52, 30);
+
+  ctx.fillStyle = isUnlocked ? "#34d399" : "#fef08a";
+  ctx.font = "bold 9px monospace";
+  ctx.textAlign = "center";
+  ctx.fillText(isUnlocked ? "UNLOCKED" : "KEYPAD", x, y - 41);
+  ctx.font = "14px sans-serif";
+  ctx.fillText(isUnlocked ? "🔓" : "💻", x, y - 26);
+
+  // Floating Animated Indicator
+  if (!isUnlocked) {
+    ctx.fillStyle = "#facc15";
+    ctx.font = "bold 11px Outfit, sans-serif";
+    ctx.fillText("⬇ ENTER CODE", x, y - 66 + pulse);
+  }
+  ctx.textAlign = "start";
+}
+
+function drawMarioMushroom(ctx, x, y, w, h, capColor, compression) {
+  const comp = compression || 0;
+  const capY = y + comp;
+
+  ctx.fillStyle = "#fef08a";
+  ctx.fillRect(x + w / 2 - 14, capY + 10, 28, Math.max(4, h - 10 - comp));
 
   ctx.fillStyle = capColor;
   ctx.beginPath();
-  ctx.ellipse(x + w / 2, y + 12, w / 2, 14, 0, 0, Math.PI * 2);
+  ctx.ellipse(x + w / 2, capY + 12, w / 2, 14, 0, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.fillStyle = "#ffffff";
   ctx.beginPath();
-  ctx.arc(x + w / 2 - 20, y + 10, 6, 0, Math.PI * 2);
-  ctx.arc(x + w / 2, y + 8, 7, 0, Math.PI * 2);
-  ctx.arc(x + w / 2 + 20, y + 10, 6, 0, Math.PI * 2);
+  ctx.arc(x + w / 2 - 20, capY + 10, 6, 0, Math.PI * 2);
+  ctx.arc(x + w / 2, capY + 8, 7, 0, Math.PI * 2);
+  ctx.arc(x + w / 2 + 20, capY + 10, 6, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.fillStyle = "#ffffff";
   ctx.font = "900 11px Outfit, sans-serif";
-  ctx.fillText("⚡ BOING!", x + w / 2 - 24, y - 4);
+  ctx.fillText("⚡ BOING!", x + w / 2 - 24, capY - 4);
 }
 
-function drawMarioWarpPipe(ctx, x, y, w, h, isUnlocked) {
+function drawMarioWarpPipe(ctx, x, y, w, h, isUnlocked, now) {
   const pipeGrad = ctx.createLinearGradient(x, y, x + w, y);
   pipeGrad.addColorStop(0, "#15803d");
   pipeGrad.addColorStop(0.3, "#22c55e");
@@ -1964,8 +2622,24 @@ function drawMarioWarpPipe(ctx, x, y, w, h, isUnlocked) {
   ctx.fillRect(x, y + 20, w, h - 20);
   ctx.strokeRect(x, y + 20, w, h - 20);
 
-  ctx.font = "20px sans-serif";
-  ctx.fillText(isUnlocked ? "🏁" : "🔒", x + w / 2 - 10, y - 8);
+  const pulse = Math.sin((now || 0) * 0.006) * 3;
+  if (isUnlocked) {
+    ctx.font = "24px sans-serif";
+    ctx.fillText("🏁", x + w / 2 - 12, y - 8 + pulse);
+    ctx.fillStyle = "#34d399";
+    ctx.font = "bold 11px Outfit, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("ENTER ➔", x + w / 2, y - 28 + pulse);
+    ctx.textAlign = "start";
+  } else {
+    ctx.font = "24px sans-serif";
+    ctx.fillText("🔒", x + w / 2 - 12, y - 8 + pulse);
+    ctx.fillStyle = "#f87171";
+    ctx.font = "bold 10px Outfit, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("LOCKED", x + w / 2, y - 28 + pulse);
+    ctx.textAlign = "start";
+  }
 }
 
 // Procedural Boss Monster Renderers
