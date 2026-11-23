@@ -318,15 +318,145 @@ function switchTab(tabId, btnElement) {
 // Powered by Official BiliKids Pixel Art Mascot & Active English Combat
 // ============================================================================
 
-// MASCOT SPRITES ENGINE
+// ============================================================================
+// 16-BIT RETRO MASCOT SPRITES ENGINE & HERO SELECTION (LEO, BILI, LUNA)
+// ============================================================================
+const HEROES_CONFIG = {
+  leo: {
+    id: 'leo',
+    name: 'Leo',
+    title: 'El León Valiente',
+    icon: '🦁',
+    stripSrc: 'assets/mascot/leo_pixel_walk_strip.png',
+    celebrateSrc: 'assets/mascot/leo_pixel_celebrate.png',
+    walkGif: 'assets/mascot/official_leo_walk.gif',
+    celebrateGif: 'assets/mascot/official_leo_celebrate.gif',
+    color: '#38bdf8',
+    desc: '¡Rápido, audaz y valiente con su gorrita y sudadera azul!'
+  },
+  bili: {
+    id: 'bili',
+    name: 'Bili',
+    title: 'El Oso Explorador',
+    icon: '🐻',
+    stripSrc: 'assets/mascot/bili_pixel_walk_strip.png',
+    celebrateSrc: 'assets/mascot/bili_pixel_celebrate.png',
+    walkGif: 'assets/mascot/official_bili_walk.gif',
+    celebrateGif: 'assets/mascot/official_bili_celebrate.gif',
+    color: '#fbbf24',
+    desc: '¡Curioso y alegre con su gorrita azul y buzo amarillo!'
+  },
+  luna: {
+    id: 'luna',
+    name: 'Luna',
+    title: 'La Conejita Veloz',
+    icon: '🐰',
+    stripSrc: 'assets/mascot/luna_pixel_walk_strip.png',
+    celebrateSrc: 'assets/mascot/luna_pixel_celebrate.png',
+    walkGif: 'assets/mascot/official_luna_walk.gif',
+    celebrateGif: 'assets/mascot/official_luna_celebrate.gif',
+    color: '#f472b6',
+    desc: '¡Ágil y brillante con su lazo rosa, sudadera rosa y mochila morada!'
+  }
+};
+
+let currentHeroId = localStorage.getItem('bilikids_active_hero') || 'leo';
+let isHeroSelectOpen = true; // Empieza visible en la pantalla de inicio
+
 const PixelMascot = {
   strip: new Image(),
   celebrate: new Image(),
   isLoaded: false
 };
-PixelMascot.strip.src = 'assets/mascot/bili_pixel_walk_strip.png';
-PixelMascot.celebrate.src = 'assets/mascot/bili_pixel_celebrate.png';
 PixelMascot.strip.onload = () => { PixelMascot.isLoaded = true; };
+
+function applyHero(heroId) {
+  const hero = HEROES_CONFIG[heroId] || HEROES_CONFIG.leo;
+  currentHeroId = hero.id;
+  localStorage.setItem('bilikids_active_hero', hero.id);
+
+  PixelMascot.strip.src = hero.stripSrc;
+  PixelMascot.celebrate.src = hero.celebrateSrc;
+
+  // Actualizar HUD
+  const hudIcon = document.getElementById('hudHeroIcon');
+  const hudName = document.getElementById('hudHeroName');
+  if (hudIcon) hudIcon.textContent = hero.icon;
+  if (hudName) hudName.textContent = hero.name;
+
+  // Actualizar Boss player hearts HUD
+  const bossPlayerName = document.getElementById('bossPlayerHeroName');
+  if (bossPlayerName) bossPlayerName.textContent = hero.name;
+}
+
+function selectHero(heroId, playSound = true) {
+  applyHero(heroId);
+  updateHeroSelectionUI(heroId);
+  if (playSound) {
+    try { sfx.playPop(); } catch(e) {}
+  }
+}
+
+function updateHeroSelectionUI(heroId) {
+  const hero = HEROES_CONFIG[heroId] || HEROES_CONFIG.leo;
+  ['leo', 'bili', 'luna'].forEach(id => {
+    const card = document.getElementById('cardHero' + id.charAt(0).toUpperCase() + id.slice(1));
+    const btn = document.getElementById('btnPick' + id.charAt(0).toUpperCase() + id.slice(1));
+    if (card) {
+      if (id === heroId) {
+        card.classList.add('selected');
+        if (btn) btn.innerHTML = '<span class="pick-check">✓</span> <span class="pick-text">¡SELECCIONADO!</span>';
+      } else {
+        card.classList.remove('selected');
+        if (btn) btn.innerHTML = '<span class="pick-text">Seleccionar</span>';
+      }
+    }
+  });
+
+  const summary = document.getElementById('summaryHeroName');
+  if (summary) {
+    summary.innerHTML = hero.icon + ' <strong>' + hero.name + '</strong> • ' + hero.title;
+  }
+
+  const btnStart = document.getElementById('btnStartAdventure');
+  if (btnStart) {
+    btnStart.innerHTML = '<span>¡COMENZAR CON ' + hero.name.toUpperCase() + '! 🎮 🚀</span>';
+  }
+}
+
+function confirmHeroAndStart() {
+  try { sfx.playSuccess(); } catch(e) {}
+  closeHeroSelectOverlay();
+}
+
+function openHeroSelectOverlay() {
+  isHeroSelectOpen = true;
+  const modal = document.getElementById('heroSelectModal');
+  if (modal) {
+    modal.classList.add('active');
+  }
+  const closeBtn = document.getElementById('btnHeroClose');
+  if (closeBtn) {
+    closeBtn.style.display = 'flex';
+  }
+  updateHeroSelectionUI(currentHeroId);
+}
+
+function closeHeroSelectOverlay() {
+  isHeroSelectOpen = false;
+  const modal = document.getElementById('heroSelectModal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  if (obbyCanvas) {
+    obbyCanvas.focus();
+  }
+}
+
+window.openHeroSelectOverlay = openHeroSelectOverlay;
+window.closeHeroSelectOverlay = closeHeroSelectOverlay;
+window.selectHero = selectHero;
+window.confirmHeroAndStart = confirmHeroAndStart;
 
 // WORLDS & STAGES SPECIFICATION
 let currentWorldId = parseInt(localStorage.getItem('bili_current_world') || '1', 10);
@@ -864,6 +994,8 @@ function startObbyEngine() {
   obbyCtx = obbyCanvas.getContext('2d');
   obbyCtx.imageSmoothingEnabled = false;
 
+  applyHero(currentHeroId);
+  updateHeroSelectionUI(currentHeroId);
   updateWorldNavUI();
   loadCurrentWorldStage();
   setupObbyEventListeners();
@@ -1877,7 +2009,8 @@ function obbyGameLoop() {
 
   const now = Date.now();
 
-  // 1. UPDATE PHYSICS
+  // 1. UPDATE PHYSICS (Pausado mientras la pantalla de selección esté activa)
+  if (!isHeroSelectOpen) {
   // Horizontal movement
   if (inputKeys.left) {
     Player.vx = -4.8;
@@ -2136,6 +2269,7 @@ function obbyGameLoop() {
     Player.vy = 0;
     sfx.playError();
   }
+  } // Fin if (!isHeroSelectOpen)
 
   // =========================================================================
   // 2. RENDER STAGE (MARIO WORLDS AESTHETICS)

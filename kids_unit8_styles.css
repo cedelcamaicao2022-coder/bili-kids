@@ -1225,3 +1225,432 @@ body {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(251, 191, 36, 0.4);
   animation: popInCard 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+
+/* ============================================================================
+   PANTALLA DE INICIO: SELECCIÓN DE HÉROE (LEO, BILI, LUNA) - 16-BIT RETRO
+   ============================================================================ */
+.hero-select-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  background: radial-gradient(circle at 50% 25%, #1e1b4b 0%, #0a0e27 60%, #030712 96%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 999999 !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-select-modal.active {
+  display: flex;
+  animation: heroModalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroModalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hero-select-card {
+  position: relative;
+  background: linear-gradient(180deg, #161e38 0%, #0d1224 100%);
+  border: 3px solid #6366f1;
+  border-radius: 28px;
+  max-width: 1020px;
+  width: 100%;
+  max-height: 94vh;
+  overflow-y: auto;
+  padding: 24px 22px;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 50px rgba(99, 102, 241, 0.35);
+  margin: auto;
+}
+
+.btn-hero-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 20;
+}
+.btn-hero-close:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  transform: scale(1.1);
+}
+
+.hero-header-banner {
+  margin-bottom: 20px;
+}
+
+.hero-game-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid #818cf8;
+  border-radius: 50px;
+  padding: 5px 16px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #c7d2fe;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.hero-game-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: heroPulse 1.5s infinite;
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-main-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #facc15 60%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
+}
+
+.hero-sub-title {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* 3 Cards Roster Grid */
+.hero-grid-roster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 18px 0 22px;
+}
+
+@media (max-width: 860px) {
+  .hero-grid-roster {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.hero-pick-card {
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.hero-pick-badge {
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.hero-podium {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.hero-podium-glow {
+  position: absolute;
+  bottom: 8px;
+  width: 140px;
+  height: 28px;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.3;
+  transition: all 0.3s;
+}
+
+.hero-avatar-anim {
+  height: 185px;
+  max-width: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 5;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.6));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-info-box {
+  width: 100%;
+  text-align: center;
+}
+
+.hero-char-name {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.hero-char-role {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.hero-char-tags {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+}
+
+.hero-char-desc {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.35;
+  margin-top: 4px;
+  min-height: 34px;
+}
+
+.hero-pick-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* LEO THEME */
+.hero-card-leo .hero-char-role { color: #38bdf8; }
+.hero-card-leo .hero-podium-glow { background: #38bdf8; }
+.hero-card-leo:hover {
+  border-color: #38bdf8;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.4);
+}
+.hero-card-leo:hover .hero-podium-glow { opacity: 0.6; transform: scale(1.15); }
+.hero-card-leo.selected {
+  border: 3px solid #38bdf8;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(10, 15, 30, 0.98) 100%);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.6);
+}
+.hero-card-leo.selected .hero-podium-glow { opacity: 0.85; transform: scale(1.3); }
+.hero-card-leo.selected .hero-avatar-anim { transform: scale(1.08); filter: drop-shadow(0 14px 16px rgba(0,0,0,0.8)); }
+.hero-card-leo.selected .hero-pick-btn {
+  background: #38bdf8;
+  color: #0b1120;
+  font-weight: 900;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.5);
+}
+
+/* BILI THEME */
+.hero-card-bili .hero-char-role { color: #fbbf24; }
+.hero-card-bili .hero-podium-glow { background: #fbbf24; }
+.hero-card-bili:hover {
+  border-color: #fbbf24;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(251, 191, 36, 0.4);
+}
+.hero-card-bili:hover .hero-podium-glow { opacity: 0.6; transform: scale(1.15); }
+.hero-card-bili.selected {
+  border: 3px solid #fbbf24;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(10, 15, 30, 0.98) 100%);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(251, 191, 36, 0.6);
+}
+.hero-card-bili.selected .hero-podium-glow { opacity: 0.85; transform: scale(1.3); }
+.hero-card-bili.selected .hero-avatar-anim { transform: scale(1.08); filter: drop-shadow(0 14px 16px rgba(0,0,0,0.8)); }
+.hero-card-bili.selected .hero-pick-btn {
+  background: #fbbf24;
+  color: #0b1120;
+  font-weight: 900;
+  border-color: #fbbf24;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.5);
+}
+
+/* LUNA THEME */
+.hero-card-luna .hero-char-role { color: #f472b6; }
+.hero-card-luna .hero-podium-glow { background: #f472b6; }
+.hero-card-luna:hover {
+  border-color: #f472b6;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(244, 114, 182, 0.4);
+}
+.hero-card-luna:hover .hero-podium-glow { opacity: 0.6; transform: scale(1.15); }
+.hero-card-luna.selected {
+  border: 3px solid #f472b6;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(10, 15, 30, 0.98) 100%);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(244, 114, 182, 0.6);
+}
+.hero-card-luna.selected .hero-podium-glow { opacity: 0.85; transform: scale(1.3); }
+.hero-card-luna.selected .hero-avatar-anim { transform: scale(1.08); filter: drop-shadow(0 14px 16px rgba(0,0,0,0.8)); }
+.hero-card-luna.selected .hero-pick-btn {
+  background: #f472b6;
+  color: #0b1120;
+  font-weight: 900;
+  border-color: #f472b6;
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.5);
+}
+
+/* START ACTION BUTTONS */
+.hero-start-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.hero-selection-summary {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-hero-highlight {
+  color: #facc15;
+  font-weight: 800;
+}
+
+.btn-start-adventure {
+  padding: 16px 48px;
+  border-radius: 50px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.55), 0 0 0 4px rgba(34, 197, 94, 0.3);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  animation: heroPulseBtn 2s infinite;
+}
+
+@keyframes heroPulseBtn {
+  0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.55), 0 0 0 4px rgba(34, 197, 94, 0.3); }
+  50% { transform: scale(1.03); box-shadow: 0 14px 40px rgba(16, 185, 129, 0.75), 0 0 0 7px rgba(34, 197, 94, 0.45); }
+}
+
+.btn-start-adventure:hover {
+  transform: translateY(-3px) scale(1.06);
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+}
+
+.btn-start-adventure:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* HUD HERO SELECT BUTTON */
+.btn-hud-hero-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #4338ca 0%, #312e81 100%);
+  border: 1.5px solid #818cf8;
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3);
+}
+
+.btn-hud-hero-select:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+  border-color: #c7d2fe;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5);
+}
+
+.hud-hero-change-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}

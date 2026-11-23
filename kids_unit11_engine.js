@@ -9,7 +9,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-trex",
     "name": "Tyrannosaurus Rex",
-    "icon": "\ud83e\udd96",
+    "icon": "<img src=\"assets/dinosaurs/trex.webp\" alt=\"Tyrannosaurus Rex\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/trex.webp",
     "period": "Late Cretaceous",
     "fact": "The T-Rex had teeth as large as bananas and powerful jaws!",
     "speechText": "Fossil uncovered! The Tyrannosaurus Rex! The T-Rex had teeth as large as bananas and powerful jaws!",
@@ -69,7 +70,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-triceratops",
     "name": "Triceratops",
-    "icon": "<img src=\"assets/icons/triceratops.svg\" width=\"48\" height=\"48\" alt=\"Triceratops\" style=\"vertical-align:middle;display:inline-block;\">",
+    "icon": "<img src=\"assets/dinosaurs/triceratops.webp\" alt=\"Triceratops\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/triceratops.webp",
     "period": "Herbivore Giant",
     "fact": "It had three sharp horns on its head to defend against predators.",
     "speechText": "Fossil uncovered! The Triceratops! It had three sharp horns on its head to defend against predators.",
@@ -129,7 +131,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-pterodactyl",
     "name": "Pterodactyl",
-    "icon": "<img src=\"assets/icons/pterodactyl.svg\" width=\"48\" height=\"48\" alt=\"Pterodactyl\" style=\"vertical-align:middle;display:inline-block;\">",
+    "icon": "<img src=\"assets/dinosaurs/pterodactyl.webp\" alt=\"Pterodactyl\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/pterodactyl.webp",
     "period": "Flying Reptile",
     "fact": "It was not a dinosaur, but a flying reptile with leathery wings.",
     "speechText": "Fossil uncovered! The Pterodactyl! It was not a dinosaur, but a flying reptile with leathery wings.",
@@ -189,7 +192,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-mammoth",
     "name": "Woolly Mammoth",
-    "icon": "\ud83e\udda3",
+    "icon": "<img src=\"assets/dinosaurs/mammoth.webp\" alt=\"Woolly Mammoth\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/mammoth.webp",
     "period": "Ice Age",
     "fact": "Mammoths roamed frozen tundras with thick fur and curved tusks.",
     "speechText": "Fossil uncovered! The Woolly Mammoth! Mammoths roamed frozen tundras with thick fur and curved tusks.",
@@ -249,7 +253,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-velociraptor",
     "name": "Velociraptor",
-    "icon": "\ud83e\udd96",
+    "icon": "<img src=\"assets/dinosaurs/velociraptor.webp\" alt=\"Velociraptor\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/velociraptor.webp",
     "period": "Late Cretaceous",
     "fact": "A swift hunter with sharp curved claws on its feet.",
     "speechText": "Fossil uncovered! The Velociraptor! A swift hunter with sharp curved claws on its feet.",
@@ -309,7 +314,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-stegosaurus",
     "name": "Stegosaurus",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/stegosaurus.webp\" alt=\"Stegosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/stegosaurus.webp",
     "period": "Late Jurassic",
     "fact": "It had large bony plates on its back and sharp tail spikes.",
     "speechText": "Fossil uncovered! The Stegosaurus! It had large bony plates on its back and sharp tail spikes.",
@@ -369,7 +375,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-brachiosaurus",
     "name": "Brachiosaurus",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/brachiosaurus.webp\" alt=\"Brachiosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/brachiosaurus.webp",
     "period": "Late Jurassic",
     "fact": "A gentle giant with a long neck that reached tall trees.",
     "speechText": "Fossil uncovered! The Brachiosaurus! A gentle giant with a long neck that reached tall trees.",
@@ -429,7 +436,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-spinosaurus",
     "name": "Spinosaurus",
-    "icon": "\ud83d\udc0a",
+    "icon": "<img src=\"assets/dinosaurs/spinosaurus.webp\" alt=\"Spinosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/spinosaurus.webp",
     "period": "Cretaceous River Hunter",
     "fact": "A huge swimming dinosaur with a giant sail on its back.",
     "speechText": "Fossil uncovered! The Spinosaurus! A huge swimming dinosaur with a giant sail on its back.",
@@ -489,7 +497,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-ankylosaurus",
     "name": "Ankylosaurus",
-    "icon": "\ud83d\udee1\ufe0f",
+    "icon": "<img src=\"assets/dinosaurs/ankylosaurus.webp\" alt=\"Ankylosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/ankylosaurus.webp",
     "period": "Armored Herbivore",
     "fact": "An armored tank with a heavy bone club on its tail.",
     "speechText": "Fossil uncovered! The Ankylosaurus! An armored tank with a heavy bone club on its tail.",
@@ -549,7 +558,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-sabertooth",
     "name": "Saber-Toothed Cat",
-    "icon": "\ud83d\udc2f",
+    "icon": "<img src=\"assets/dinosaurs/sabertooth.webp\" alt=\"Saber-Toothed Cat\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/sabertooth.webp",
     "period": "Ice Age Mammal",
     "fact": "A powerful hunter with long curved canine teeth.",
     "speechText": "Fossil uncovered! The Saber-Toothed Cat! A powerful hunter with long curved canine teeth.",
@@ -609,7 +619,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-plesiosaurus",
     "name": "Plesiosaurus",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/plesiosaurus.webp\" alt=\"Plesiosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/plesiosaurus.webp",
     "period": "Prehistoric Ocean",
     "fact": "A sea creature with four flippers and a slender neck.",
     "speechText": "Fossil uncovered! The Plesiosaurus! A sea creature with four flippers and a slender neck.",
@@ -669,7 +680,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-allosaurus",
     "name": "Allosaurus",
-    "icon": "\ud83e\udd96",
+    "icon": "<img src=\"assets/dinosaurs/allosaurus.webp\" alt=\"Allosaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/allosaurus.webp",
     "period": "Jurassic Predator",
     "fact": "A fierce Jurassic hunter with sharp serrated teeth.",
     "speechText": "Fossil uncovered! The Allosaurus! A fierce Jurassic hunter with sharp serrated teeth.",
@@ -729,7 +741,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-parasaurolophus",
     "name": "Parasaurolophus",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/parasaurolophus.webp\" alt=\"Parasaurolophus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/parasaurolophus.webp",
     "period": "Crested Herbivore",
     "fact": "It used its long head crest to blow trumpeting sounds.",
     "speechText": "Fossil uncovered! The Parasaurolophus! It used its long head crest to blow trumpeting sounds.",
@@ -789,7 +802,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-archaeopteryx",
     "name": "Archaeopteryx",
-    "icon": "\ud83e\udd85",
+    "icon": "<img src=\"assets/dinosaurs/archaeopteryx.webp\" alt=\"Archaeopteryx\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/archaeopteryx.webp",
     "period": "Dino-Bird Transition",
     "fact": "The famous winged fossil linking dinosaurs and birds.",
     "speechText": "Fossil uncovered! The Archaeopteryx! The famous winged fossil linking dinosaurs and birds.",
@@ -849,7 +863,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-diplodocus",
     "name": "Diplodocus",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/diplodocus.webp\" alt=\"Diplodocus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/diplodocus.webp",
     "period": "Late Jurassic",
     "fact": "One of the longest creatures ever with a whip-like tail.",
     "speechText": "Fossil uncovered! The Diplodocus! One of the longest creatures ever with a whip-like tail.",
@@ -909,7 +924,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-dimetrodon",
     "name": "Dimetrodon",
-    "icon": "\ud83e\udd8e",
+    "icon": "<img src=\"assets/dinosaurs/dimetrodon.webp\" alt=\"Dimetrodon\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/dimetrodon.webp",
     "period": "Permian Apex",
     "fact": "It lived before dinosaurs with a sun-catching back sail.",
     "speechText": "Fossil uncovered! The Dimetrodon! It lived before dinosaurs with a sun-catching back sail.",
@@ -969,7 +985,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-megalodon",
     "name": "Megalodon",
-    "icon": "\ud83e\udd88",
+    "icon": "<img src=\"assets/dinosaurs/megalodon.webp\" alt=\"Megalodon\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/megalodon.webp",
     "period": "Cenozoic Apex",
     "fact": "A colossal ancient shark that ruled prehistoric oceans.",
     "speechText": "Fossil uncovered! The Megalodon! A colossal ancient shark that ruled prehistoric oceans.",
@@ -1029,7 +1046,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-iguanodon",
     "name": "Iguanodon",
-    "icon": "\ud83e\udd95",
+    "icon": "<img src=\"assets/dinosaurs/iguanodon.webp\" alt=\"Iguanodon\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/iguanodon.webp",
     "period": "Early Cretaceous",
     "fact": "A peaceful plant-eater with conical spikes on its thumbs.",
     "speechText": "Fossil uncovered! The Iguanodon! A peaceful plant-eater with conical spikes on its thumbs.",
@@ -1089,7 +1107,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-carnotaurus",
     "name": "Carnotaurus",
-    "icon": "\ud83e\udd96",
+    "icon": "<img src=\"assets/dinosaurs/carnotaurus.webp\" alt=\"Carnotaurus\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/carnotaurus.webp",
     "period": "Late Cretaceous",
     "fact": "A fast running predator with bull horns above its eyes.",
     "speechText": "Fossil uncovered! The Carnotaurus! A fast running predator with bull horns above its eyes.",
@@ -1149,7 +1168,8 @@ const U11_FOSSILS = [
   {
     "id": "fossil-megatherium",
     "name": "Megatherium",
-    "icon": "\ud83e\udda5",
+    "icon": "<img src=\"assets/dinosaurs/megatherium.webp\" alt=\"Megatherium\" class=\"kids-dino-card-thumb\">",
+    "image": "assets/dinosaurs/megatherium.webp",
     "period": "Pleistocene Ice Age",
     "fact": "A giant ground sloth that stood as tall as an elephant.",
     "speechText": "Fossil uncovered! The Megatherium! A giant ground sloth that stood as tall as an elephant.",

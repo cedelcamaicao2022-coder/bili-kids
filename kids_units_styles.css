@@ -364,11 +364,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
   background: #f1f5f9;
   flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+  border: 2px solid #e2e8f0;
+}
+
+.kids-dino-card-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.kids-unit11-card:hover .kids-dino-card-thumb {
+  transform: scale(1.1);
+}
+
+.kids-master-quiz-badge .kids-dino-card-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  vertical-align: middle;
+  display: inline-block;
+  object-fit: cover;
+  margin-right: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .kids-unit11-card-meta {
