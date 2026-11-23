@@ -71,6 +71,25 @@
     <section id="view-obby" class="activity-view active-view">
       <div class="obby-game-container">
 
+        <!-- WORLD SELECTION NAVIGATION (MARIO WORLDS PROGRESSION) -->
+        <nav class="obby-world-nav" id="obbyWorldNav">
+          <button class="world-nav-tab active" id="tabWorld1" onclick="selectWorld(1)">
+            <span>🌱</span>
+            <span>World 1 • Sunny Meadows</span>
+            <span class="world-badge-status" id="badgeWorld1" style="background:#059669; color:#fff;">UNLOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld2" onclick="selectWorld(2)">
+            <span>🏖️</span>
+            <span>World 2 • Tropical Beach</span>
+            <span class="world-badge-status" id="badgeWorld2" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+          <button class="world-nav-tab locked" id="tabWorld3" onclick="selectWorld(3)">
+            <span>☁️</span>
+            <span>World 3 • Sweet Cloud Kingdom</span>
+            <span class="world-badge-status" id="badgeWorld3" style="background:#475569; color:#cbd5e1;">🔒 LOCKED</span>
+          </button>
+        </nav>
+
         <div class="obby-stage-header">
           <div>
             <h2 id="obbyStageTitle" style="font-family:var(--font-display); font-size:1.35rem; color:#4c1d95;">
@@ -106,7 +125,7 @@
         </div>
 
         <!-- Barra HUD del Obby con Checklist en Vivo -->
-        <div class="obby-hud-bar">
+        <div class="obby-hud-bar" id="obbyHudBar">
           <div class="obby-hud-item">
             <span>🐻 Barnaby</span>
           </div>
@@ -121,9 +140,110 @@
           </div>
         </div>
 
+        <!-- BOSS BATTLE ARENA HUD (APARECE EN EL ENCUENTRO CON EL JEFE) -->
+        <div class="boss-hud-bar" id="bossHudBar">
+          <div class="boss-hud-header">
+            <div class="boss-avatar-box">
+              <span class="boss-avatar-icon" id="bossAvatarIcon">🤖</span>
+              <div>
+                <div class="boss-name" id="bossNameTitle">Giga Clockwork Mech</div>
+                <div style="font-size:0.75rem; color:#f472b6; font-weight:700;" id="bossSubtitle">World 1 Boss Guardian</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:0.85rem; font-weight:800; color:#cbd5e1;">Barnaby: <span id="playerHeartsDisplay">❤️❤️❤️</span></div>
+            </div>
+          </div>
+          <div class="boss-hp-track">
+            <div class="boss-hp-fill" id="bossHpFill" style="width:100%;"></div>
+            <div class="boss-hp-text" id="bossHpText">BOSS HP: 100 / 100</div>
+          </div>
+        </div>
+
         <!-- Canvas del Videojuego 2D -->
         <div class="obby-canvas-wrapper">
           <canvas id="obbyCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <!-- BOSS COMBAT CHALLENGE MODAL (EL INGLÉS ES EL ARMA DE COMBATE) -->
+        <div id="bossChallengeModal" class="boss-challenge-modal">
+          <div class="boss-challenge-card">
+            <div id="challengePhasePill" class="challenge-phase-pill phase-listening">
+              <span id="challengePhaseIcon">🎧</span>
+              <span id="challengePhaseName">Challenge 1: Listening Energy Blast</span>
+            </div>
+
+            <h3 id="challengeBossPrompt" style="font-family:var(--font-display); font-size:1.25rem; color:#fde047; margin-bottom:8px;">
+              "Listen and identify the correct item to blast the boss!"
+            </h3>
+
+            <!-- Audio button for Listening -->
+            <div id="challengeAudioRow" style="margin-bottom:12px;">
+              <button class="btn-back-map" style="background:#7c3aed; color:#fff; border-color:#a855f7; cursor:pointer;" onclick="playBossChallengeAudio()">
+                <span>🔊 Listen Clue</span>
+              </button>
+            </div>
+
+            <!-- Area 1: Listening 3 Cards Grid -->
+            <div id="challengeListeningArea" class="audio-choice-grid">
+              <!-- Injected dynamically: 3 choice buttons -->
+            </div>
+
+            <!-- Area 2: Writing Keypad (Same powerful terminal) -->
+            <div id="challengeWritingArea" style="display:none;">
+              <div class="terminal-input-display" id="bossWritingDisplay">_ _ _ _</div>
+              <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+                <input type="text" id="bossPhysicalInput" placeholder="Type letters..." style="background:#0f172a; border:1px solid #6366f1; border-radius:8px; padding:8px 12px; color:#ffffff; font-size:0.95rem; width:200px; text-align:center;" onkeyup="handleBossWritingKey(event)">
+                <button class="terminal-key key-action" onclick="submitBossWriting()">BLAST 💥</button>
+              </div>
+              <div class="terminal-keypad" id="bossWritingKeypad"></div>
+            </div>
+
+            <!-- Area 3: Sentence Builder Word Chips -->
+            <div id="challengeSentenceArea" style="display:none;">
+              <div style="font-size:0.85rem; color:#a5b4fc; margin-bottom:6px;">Tap the words in the correct order:</div>
+              <div class="sentence-builder-display" id="bossSentenceDisplay"></div>
+              <div class="word-bank" id="bossWordBank"></div>
+              <div style="margin-top:12px; display:flex; justify-content:center; gap:10px;">
+                <button class="terminal-key key-del" onclick="resetBossSentence()">CLEAR ↺</button>
+                <button class="terminal-key key-action" onclick="submitBossSentence()">STRIKE ⚡</button>
+              </div>
+            </div>
+
+            <!-- Area 4: Speaking Final Finisher -->
+            <div id="challengeSpeakingArea" style="display:none;">
+              <p id="bossSpeakingPrompt" style="font-size:1.1rem; font-weight:800; color:#38bdf8; margin:14px 0;">
+                "I like shopping in the mall!"
+              </p>
+              <button id="btnBossFinisher" class="btn-vlogger-mic" style="margin:8px auto;" onclick="triggerSpeakingFinisher()">
+                🎙️
+              </button>
+              <div style="font-size:0.85rem; color:#e0e7ff; margin-top:8px;">Tap the mic to unleash Barnaby's Final Attack!</div>
+            </div>
+
+            <div id="bossChallengeFeedback" style="margin-top:10px; font-weight:700; font-size:0.92rem; min-height:22px;"></div>
+          </div>
+        </div>
+
+        <!-- WORLD CONQUEST & VICTORY MODAL -->
+        <div id="worldVictoryModal" class="world-victory-modal">
+          <div class="world-victory-card">
+            <div style="font-size:3.5rem; margin-bottom:10px;">👑🏆✨</div>
+            <h2 id="worldVictoryTitle" style="font-family:var(--font-display); font-size:1.8rem; color:#fde047; margin-bottom:6px;">
+              WORLD 1 CONQUERED!
+            </h2>
+            <p id="worldVictoryDesc" style="font-size:1.05rem; color:#e0e7ff; margin-bottom:16px;">
+              You defeated the Giga Clockwork Mech with your English skills! The dimensional warp portal is now unlocked.
+            </p>
+            <div style="display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:9999px; background:#059669; color:#fff; font-weight:900; font-size:1.1rem; margin-bottom:20px;">
+              <span>⭐ +50 English Stars Earned!</span>
+            </div>
+            <div>
+              <button class="btn-back-map" id="btnNextWorldUnlock" style="background:#f59e0b; color:#0f172a; border-color:#fbbf24; font-size:1.1rem; padding:12px 28px; cursor:pointer;" onclick="proceedToNextWorld()">
+                <span>🚀 Enter Next World! ➔</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Terminal Password Modal -->

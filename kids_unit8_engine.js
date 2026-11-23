@@ -287,356 +287,487 @@ function switchTab(tabId, btnElement) {
 }
 
 // ============================================================================
-// ACTIVIDAD 1: 🏃‍♂️ BARNABY'S MALL OBBY RUN 2D (HTML5 CANVAS PLATFORMER)
-// Videojuego estilo Roblox Obbies / Stumble Guys
+// ACTIVIDAD 1: 🏃‍♂️ SUPER PLATFORMER WORLDS & BOSS BATTLE SYSTEM (CYBER MARIO KIDS)
+// Powered by Official BiliKids Pixel Art Mascot & Active English Combat
 // ============================================================================
-const ObbyStages = [
-  {
-    id: 0,
-    title: "Stage 1 • The Sneaker Boutique (This vs These) 👟",
-    desc: "Jump across shoe boxes and clothes racks. Pick the right bridge: the incorrect bridge collapses!",
-    promptEn: "Find THIS blue jacket and choose the correct bridge to cross!",
-    promptEs: "",
-    requiredItems: ["blue_jacket"],
-    checkpointX: 40,
-    finishX: 1350,
-    bgColor: "#312e81",
-    hasTerminal: false,
-    platforms: [
-      { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
-      { x: 235, y: 300, w: 120, h: 20, type: 'shoe_box' },
-      { x: 385, y: 260, w: 130, h: 20, type: 'shoe_box' },
-      { x: 545, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes misteriosos (TOP es correcto)
-      { x: 675, y: 215, w: 285, h: 28, type: 'dual_bridge_solid', label: "These white sneakers are new." },
-      { x: 675, y: 310, w: 285, h: 28, type: 'dual_bridge_wrong', label: "This white sneakers are new." },
-      { x: 980, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1120, y: 300, w: 75, h: 18, type: 'jelly' },
-      { x: 1220, y: 320, w: 240, h: 80, type: 'normal' }
-    ],
-    items: [
-      { id: "blue_jacket", x: 420, y: 210, name: "This Blue Jacket", icon: "🧥", collected: false }
-    ],
-    coins: [
-      { x: 280, y: 260, collected: false },
-      { x: 580, y: 230, collected: false },
-      { x: 1010, y: 210, collected: false },
-      { x: 1150, y: 200, collected: false }
-    ],
-    gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
-  },
+
+// MASCOT SPRITES ENGINE
+const PixelMascot = {
+  strip: new Image(),
+  celebrate: new Image(),
+  isLoaded: false
+};
+PixelMascot.strip.src = 'assets/mascot/bili_pixel_walk_strip.png';
+PixelMascot.celebrate.src = 'assets/mascot/bili_pixel_celebrate.png';
+PixelMascot.strip.onload = () => { PixelMascot.isLoaded = true; };
+
+// WORLDS & STAGES SPECIFICATION
+let currentWorldId = parseInt(localStorage.getItem('bili_current_world') || '1', 10);
+let unlockedWorlds = parseInt(localStorage.getItem('bili_unlocked_worlds') || '1', 10);
+let currentStageIndex = 0;
+
+const WORLDS_DATA = [
   {
     id: 1,
-    title: "Stage 2 • The Food Court Conveyor Rush (Some vs A/An) 🛒",
-    desc: "Conveyor belts in motion. Distinguish countable and uncountable nouns on the bridges.",
-    promptEn: "Collect THESE red apples and step on the bridge with correct food grammar!",
-    promptEs: "",
-    requiredItems: ["red_apples"],
-    checkpointX: 40,
-    finishX: 1400,
-    bgColor: "#0f766e",
-    hasTerminal: false,
-    platforms: [
-      { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
-      { x: 215, y: 300, w: 160, h: 20, type: 'conveyor_right', speed: 1.4 },
-      { x: 405, y: 270, w: 120, h: 20, type: 'normal' },
-      { x: 555, y: 270, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de alimentos (BOTTOM es correcto)
-      { x: 685, y: 215, w: 290, h: 28, type: 'dual_bridge_wrong', label: "We need a milk and three breads." },
-      { x: 685, y: 310, w: 290, h: 28, type: 'dual_bridge_solid', label: "We need some milk and three apples." },
-      { x: 995, y: 250, w: 160, h: 20, type: 'conveyor_left', speed: -1.2 },
-      { x: 1180, y: 280, w: 75, h: 18, type: 'jelly' },
-      { x: 1280, y: 320, w: 240, h: 80, type: 'normal' }
-    ],
-    items: [
-      { id: "red_apples", x: 280, y: 250, name: "These Red Apples", icon: "🍎", collected: false }
-    ],
-    coins: [
-      { x: 450, y: 225, collected: false },
-      { x: 600, y: 220, collected: false },
-      { x: 1030, y: 200, collected: false },
-      { x: 1210, y: 190, collected: false }
-    ],
-    gate: { x: 1330, y: 220, w: 30, h: 100, unlocked: false }
+    name: "World 1 • Sunny Meadows",
+    icon: "🌱",
+    subtitle: "Colinas Soleadas & Bloques de Pregunta [ ? ]",
+    boss: {
+      name: "Giga Clockwork Mech",
+      icon: "🤖",
+      subtitle: "World 1 Boss Guardian • Steampunk Giant",
+      maxHp: 100,
+      challenges: [
+        {
+          type: "listening",
+          promptEn: "Listen and find THIS blue jacket to charge your blaster!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_blue_jacket.mp3",
+          audioText: "This blue jacket",
+          options: [
+            { id: "jacket", name: "This Blue Jacket", icon: "🧥", correct: true },
+            { id: "boots", name: "These Boots", icon: "👢", correct: false },
+            { id: "cap", name: "This Red Cap", icon: "🧢", correct: false }
+          ]
+        },
+        {
+          type: "writing",
+          promptEn: "Type the missing word: How _______ is this video game?",
+          targetWord: "MUCH",
+          hint: "M _ _ H"
+        },
+        {
+          type: "sentence",
+          promptEn: "Put the words in order to form the sentence:",
+          words: ["These", "white", "sneakers", "are", "cool"],
+          correctSentence: "These white sneakers are cool"
+        },
+        {
+          type: "speaking",
+          promptEn: "I would like to buy these sneakers!",
+          displaySentence: "I would like to buy these sneakers!"
+        }
+      ]
+    },
+    stages: [
+      {
+        id: 0,
+        title: "Stage 1 • The Sunny Hills & Mystery Blocks [ ? ] 👟",
+        promptEn: "Hit the [ ? ] blocks with Barnaby's head to find 'THIS' and 'THESE'!",
+        bgTheme: "meadow",
+        requiredItems: ["blue_jacket"],
+        checkpointX: 40,
+        finishX: 1350,
+        platforms: [
+          { x: 0, y: 340, w: 220, h: 60, type: 'grass' },
+          { x: 260, y: 290, w: 120, h: 35, type: 'grass' },
+          { x: 420, y: 240, w: 110, h: 35, type: 'mushroom' },
+          { x: 570, y: 270, w: 120, h: 35, type: 'grass' },
+          { x: 740, y: 230, w: 130, h: 35, type: 'grass' },
+          { x: 920, y: 280, w: 110, h: 35, type: 'mushroom' },
+          { x: 1080, y: 320, w: 260, h: 80, type: 'pipe_ground' }
+        ],
+        mysteryBlocks: [
+          { x: 300, y: 190, w: 42, h: 42, content: "THIS", hit: false, bumpY: 0, icon: "🧥" },
+          { x: 610, y: 170, w: 42, h: 42, content: "THESE", hit: false, bumpY: 0, icon: "👟" }
+        ],
+        items: [
+          { id: "blue_jacket", x: 780, y: 170, name: "This Blue Jacket", icon: "🧥", collected: false }
+        ],
+        coins: [
+          { x: 290, y: 240, collected: false },
+          { x: 470, y: 170, collected: false },
+          { x: 630, y: 210, collected: false },
+          { x: 960, y: 210, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 1,
+        title: "Stage 2 • The Green Pipe Valley & Keyword Tree 💻",
+        promptEn: "Approach the golden keypad terminal to enter the password!",
+        bgTheme: "meadow",
+        hasTerminal: true,
+        terminalX: 720,
+        terminalY: 260,
+        terminalTargetWord: "JACKET",
+        terminalPromptEn: "Type the clothing word: J _ _ _ E T (Barnaby's warm clothes)",
+        requiredItems: [],
+        checkpointX: 40,
+        finishX: 1350,
+        platforms: [
+          { x: 0, y: 340, w: 200, h: 60, type: 'grass' },
+          { x: 240, y: 300, w: 120, h: 35, type: 'grass' },
+          { x: 400, y: 250, w: 110, h: 35, type: 'mushroom' },
+          { x: 550, y: 200, w: 130, h: 35, type: 'grass' },
+          { x: 720, y: 290, w: 180, h: 35, type: 'grass' },
+          { x: 950, y: 250, w: 120, h: 35, type: 'mushroom' },
+          { x: 1120, y: 320, w: 260, h: 80, type: 'pipe_ground' }
+        ],
+        mysteryBlocks: [
+          { x: 590, y: 120, w: 42, h: 42, content: "SNEAKERS", hit: false, bumpY: 0, icon: "👟" }
+        ],
+        items: [],
+        coins: [
+          { x: 280, y: 250, collected: false },
+          { x: 450, y: 180, collected: false },
+          { x: 790, y: 230, collected: false },
+          { x: 1000, y: 190, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 2,
+        title: "Stage 3 • 👑 BOSS BATTLE ARENA: Giga Clockwork Mech 🤖⚔️",
+        promptEn: "Defeat the Giant Mech using your English attacks to unlock World 2!",
+        bgTheme: "meadow",
+        isBossArena: true,
+        checkpointX: 60,
+        finishX: 1400,
+        platforms: [
+          { x: 0, y: 340, w: 300, h: 60, type: 'grass' },
+          { x: 340, y: 270, w: 140, h: 30, type: 'grass' },
+          { x: 520, y: 220, w: 130, h: 30, type: 'mushroom' },
+          { x: 690, y: 270, w: 140, h: 30, type: 'grass' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'pipe_ground' }
+        ],
+        mysteryBlocks: [],
+        items: [],
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
+      }
+    ]
   },
   {
     id: 2,
-    title: "Stage 3 • The Keypad Security Vault (Typing Challenge) 💻🔒",
-    desc: "Interactive spelling level! Approach the security terminal and type the missing English word.",
-    promptEn: "Approach the security keypad terminal and type the missing question word!",
-    promptEs: "",
-    requiredItems: [],
-    checkpointX: 40,
-    finishX: 1300,
-    bgColor: "#1e1b4b",
-    hasTerminal: true,
-    terminalX: 740,
-    terminalY: 260,
-    terminalTargetWord: "MUCH",
-    terminalPromptEn: "Type the missing word: How _______ is this video game?",
-    terminalPromptEs: "",
-    platforms: [
-      { x: 0, y: 340, w: 200, h: 60, type: 'normal' },
-      { x: 235, y: 300, w: 120, h: 20, type: 'normal' },
-      { x: 385, y: 270, w: 75, h: 18, type: 'jelly' },
-      { x: 495, y: 190, w: 140, h: 20, type: 'normal' },
-      { x: 675, y: 270, w: 170, h: 20, type: 'normal' },
-      { x: 885, y: 240, w: 120, h: 20, type: 'normal' },
-      { x: 1035, y: 280, w: 75, h: 18, type: 'jelly' },
-      { x: 1145, y: 320, w: 250, h: 80, type: 'normal' }
-    ],
-    items: [],
-    coins: [
-      { x: 280, y: 250, collected: false },
-      { x: 550, y: 140, collected: false },
-      { x: 930, y: 190, collected: false },
-      { x: 1070, y: 190, collected: false }
-    ],
-    gate: { x: 1200, y: 220, w: 30, h: 100, unlocked: false }
+    name: "World 2 • Tropical Beach",
+    icon: "🏖️",
+    subtitle: "Océano Turquesa & El Pulpo Pirata Captain Squiddy",
+    boss: {
+      name: "Captain Squiddy",
+      icon: "🐙",
+      subtitle: "World 2 Boss • Pirate Kraken of the Seas",
+      maxHp: 100,
+      challenges: [
+        {
+          type: "listening",
+          promptEn: "Listen and find SOME fresh apples for the crew!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_fresh_apples.mp3",
+          audioText: "Fresh apples",
+          options: [
+            { id: "apples", name: "These Fresh Apples", icon: "🍎", correct: true },
+            { id: "milk", name: "A Bottle of Milk", icon: "🥛", correct: false },
+            { id: "bread", name: "Some Bread", icon: "🥖", correct: false }
+          ]
+        },
+        {
+          type: "writing",
+          promptEn: "Type the food word: A P _ _ _ S (Barnaby's fruit)",
+          targetWord: "APPLES",
+          hint: "A P P L E S"
+        },
+        {
+          type: "sentence",
+          promptEn: "Order the sentence correctly to break Squiddy's water shield:",
+          words: ["We", "need", "some", "milk", "and", "apples"],
+          correctSentence: "We need some milk and apples"
+        },
+        {
+          type: "speaking",
+          promptEn: "These red apples are very delicious!",
+          displaySentence: "These red apples are very delicious!"
+        }
+      ]
+    },
+    stages: [
+      {
+        id: 0,
+        title: "Stage 1 • The Sand Dunes & Coconut Pier 🍎",
+        promptEn: "Find THESE red apples and leap across the wooden piers!",
+        bgTheme: "beach",
+        requiredItems: ["red_apples"],
+        checkpointX: 40,
+        finishX: 1350,
+        platforms: [
+          { x: 0, y: 340, w: 220, h: 60, type: 'sand' },
+          { x: 260, y: 290, w: 130, h: 25, type: 'wood_pier' },
+          { x: 430, y: 240, w: 110, h: 35, type: 'mushroom_yellow' },
+          { x: 580, y: 270, w: 120, h: 25, type: 'wood_pier' },
+          { x: 740, y: 230, w: 130, h: 25, type: 'wood_pier' },
+          { x: 920, y: 280, w: 110, h: 35, type: 'mushroom_yellow' },
+          { x: 1080, y: 320, w: 260, h: 80, type: 'sand' }
+        ],
+        mysteryBlocks: [
+          { x: 310, y: 190, w: 42, h: 42, content: "SOME", hit: false, bumpY: 0, icon: "🥛" },
+          { x: 620, y: 170, w: 42, h: 42, content: "AN", hit: false, bumpY: 0, icon: "🍎" }
+        ],
+        items: [
+          { id: "red_apples", x: 790, y: 170, name: "These Red Apples", icon: "🍎", collected: false }
+        ],
+        coins: [
+          { x: 300, y: 240, collected: false },
+          { x: 480, y: 170, collected: false },
+          { x: 640, y: 210, collected: false },
+          { x: 970, y: 210, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 1,
+        title: "Stage 2 • 👑 BOSS BATTLE ARENA: Captain Squiddy 🐙⚓",
+        promptEn: "Use your English skills to defeat Captain Squiddy and unlock World 3!",
+        bgTheme: "beach",
+        isBossArena: true,
+        checkpointX: 60,
+        finishX: 1400,
+        platforms: [
+          { x: 0, y: 340, w: 300, h: 60, type: 'sand' },
+          { x: 340, y: 270, w: 140, h: 25, type: 'wood_pier' },
+          { x: 520, y: 220, w: 130, h: 35, type: 'mushroom_yellow' },
+          { x: 690, y: 270, w: 140, h: 25, type: 'wood_pier' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'sand' }
+        ],
+        mysteryBlocks: [],
+        items: [],
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
+      }
+    ]
   },
   {
     id: 3,
-    title: "Stage 4 • The Winter Fashion Department (How Much Is/Are) 🧥❄️",
-    desc: "Singular and plural price questions agreement. Find the solid bridge!",
-    promptEn: "Find THIS warm scarf and choose the bridge with correct singular price grammar!",
-    promptEs: "",
-    requiredItems: ["warm_scarf"],
-    checkpointX: 40,
-    finishX: 1350,
-    bgColor: "#0369a1",
-    hasTerminal: false,
-    platforms: [
-      { x: 0, y: 340, w: 190, h: 60, type: 'normal' },
-      { x: 225, y: 290, w: 110, h: 20, type: 'shoe_box' },
-      { x: 365, y: 250, w: 120, h: 20, type: 'shoe_box' },
-      { x: 515, y: 280, w: 100, h: 20, type: 'normal' },
-      // Dos puentes de concordancia singular/plural (BOTTOM es correcto)
-      { x: 645, y: 215, w: 285, h: 28, type: 'dual_bridge_wrong', label: "How much are this warm coat?" },
-      { x: 645, y: 310, w: 285, h: 28, type: 'dual_bridge_solid', label: "How much is this warm coat?" },
-      { x: 950, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1100, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1200, y: 320, w: 250, h: 80, type: 'normal' }
-    ],
-    items: [
-      { id: "warm_scarf", x: 410, y: 200, name: "This Wool Scarf", icon: "🧣", collected: false }
-    ],
-    coins: [
-      { x: 270, y: 240, collected: false },
-      { x: 550, y: 230, collected: false },
-      { x: 980, y: 210, collected: false },
-      { x: 1130, y: 200, collected: false }
-    ],
-    gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
-  },
-  {
-    id: 4,
-    title: "Stage 5 • The Toy Store Castle & Secret Password 🏆👑",
-    desc: "Cross the polite bridge ('would like to') and type the secret password at the cash register!",
-    promptEn: "Cross the polite bridge and type the secret password to win the toy store trophy!",
-    promptEs: "",
-    requiredItems: [],
-    checkpointX: 40,
-    finishX: 1400,
-    bgColor: "#831843",
-    hasTerminal: true,
-    terminalX: 980,
-    terminalY: 260,
-    terminalTargetWord: "STORE",
-    acceptedWords: ["STORE", "SHOP"],
-    terminalPromptEn: "Type the missing word: We are having fun in the toy _______!",
-    terminalPromptEs: "",
-    platforms: [
-      { x: 0, y: 340, w: 180, h: 60, type: 'normal' },
-      { x: 210, y: 300, w: 110, h: 20, type: 'normal' },
-      { x: 350, y: 270, w: 75, h: 18, type: 'jelly' },
-      { x: 455, y: 280, w: 100, h: 20, type: 'normal' },
-      // Two bridges (TOP is correct)
-      { x: 585, y: 215, w: 290, h: 28, type: 'dual_bridge_solid', label: "I would like to buy that toy robot." },
-      { x: 585, y: 310, w: 290, h: 28, type: 'dual_bridge_wrong', label: "I would like buy that toy robot." },
-      { x: 895, y: 260, w: 190, h: 20, type: 'normal' },
-      { x: 1115, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1215, y: 320, w: 260, h: 80, type: 'normal' }
-    ],
-    items: [],
-    coins: [
-      { x: 250, y: 250, collected: false },
-      { x: 490, y: 230, collected: false },
-      { x: 920, y: 210, collected: false },
-      { x: 1150, y: 200, collected: false }
-    ],
-    gate: { x: 1280, y: 220, w: 30, h: 100, unlocked: false }
-  },
-  {
-    id: 5,
-    title: "Stage 6 • The Electronics Arcade (Comparatives) 📱⚡",
-    desc: "Dodge security lasers and moving platforms. Choose the bridge with the correct English comparative.",
-    promptEn: "Find THIS smart watch and choose the bridge with the correct comparative!",
-    promptEs: "",
-    requiredItems: ["smart_watch"],
-    checkpointX: 40,
-    finishX: 1450,
-    bgColor: "#092347",
-    hasTerminal: false,
-    platforms: [
-      { x: 0, y: 340, w: 170, h: 60, type: 'normal' },
-      { x: 200, y: 300, w: 110, h: 20, type: 'moving_horizontal', minX: 190, maxX: 330, speed: 1.5, dir: 1 },
-      { x: 380, y: 220, w: 16, h: 120, type: 'laser_hazard', blinking: true },
-      { x: 430, y: 270, w: 110, h: 20, type: 'normal' },
-      { x: 570, y: 270, w: 90, h: 20, type: 'normal' },
-      // Dos puentes de comparativos (BOTTOM es correcto)
-      { x: 680, y: 215, w: 300, h: 28, type: 'dual_bridge_wrong', label: "This tablet is more cheaper than that laptop." },
-      { x: 680, y: 310, w: 300, h: 28, type: 'dual_bridge_solid', label: "This tablet is cheaper than that laptop." },
-      { x: 1000, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1145, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1245, y: 320, w: 250, h: 80, type: 'normal' }
-    ],
-    items: [
-      { id: "smart_watch", x: 470, y: 210, name: "This Smart Watch", icon: "⌚", collected: false }
-    ],
-    coins: [
-      { x: 260, y: 240, collected: false },
-      { x: 610, y: 220, collected: false },
-      { x: 1050, y: 210, collected: false },
-      { x: 1180, y: 190, collected: false }
-    ],
-    gate: { x: 1330, y: 220, w: 30, h: 100, unlocked: false }
-  },
-  {
-    id: 6,
-    title: "Stage 7 • The Rooftop Garden Cafe (Quantifiers & Plurals) 🧁☕",
-    desc: "Conquer cloud platforms and wind currents. Identify the correct English quantifiers.",
-    promptEn: "Collect THESE cupcakes and jump onto the bridge with correct quantifiers!",
-    promptEs: "",
-    requiredItems: ["cupcake_box"],
-    checkpointX: 40,
-    finishX: 1450,
-    bgColor: "#064e3b",
-    hasTerminal: false,
-    platforms: [
-      { x: 0, y: 340, w: 170, h: 60, type: 'normal' },
-      { x: 200, y: 300, w: 100, h: 20, type: 'crumble' },
-      { x: 330, y: 260, w: 75, h: 18, type: 'jelly' },
-      { x: 440, y: 190, w: 110, h: 20, type: 'normal' },
-      { x: 580, y: 260, w: 90, h: 20, type: 'normal' },
-      // Dos puentes de cuantificadores (TOP es correcto)
-      { x: 690, y: 215, w: 300, h: 28, type: 'dual_bridge_solid', label: "There are a lot of customers in the bakery." },
-      { x: 690, y: 310, w: 300, h: 28, type: 'dual_bridge_wrong', label: "There are much customers in the bakery." },
-      { x: 1010, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1155, y: 280, w: 85, h: 20, type: 'crumble' },
-      { x: 1265, y: 320, w: 250, h: 80, type: 'normal' }
-    ],
-    items: [
-      { id: "cupcake_box", x: 480, y: 140, name: "These Delicious Cupcakes", icon: "🧁", collected: false }
-    ],
-    coins: [
-      { x: 250, y: 250, collected: false },
-      { x: 620, y: 210, collected: false },
-      { x: 1060, y: 210, collected: false },
-      { x: 1200, y: 210, collected: false }
-    ],
-    gate: { x: 1350, y: 220, w: 30, h: 100, unlocked: false }
-  },
-  {
-    id: 7,
-    title: "Stage 8 • The Grand Penthouse & Diamond Trophy (Superlatives) 💎🏆👑",
-    desc: "The grand Obby climax! Conveyor belts, double lasers, superlatives, and the final terminal to claim the Grand Trophy.",
-    promptEn: "Cross the superlative bridge and type the secret password to win the Diamond Trophy!",
-    promptEs: "",
-    requiredItems: [],
-    checkpointX: 40,
-    finishX: 1550,
-    bgColor: "#4c0519",
-    hasTerminal: true,
-    terminalX: 1100,
-    terminalY: 260,
-    terminalTargetWord: "BEST",
-    terminalPromptEn: "Type the missing word: This golden trophy is the _______ in the world!",
-    terminalPromptEs: "",
-    platforms: [
-      { x: 0, y: 340, w: 160, h: 60, type: 'normal' },
-      { x: 190, y: 300, w: 140, h: 20, type: 'conveyor_right', speed: 1.6 },
-      { x: 360, y: 270, w: 100, h: 20, type: 'moving_horizontal', minX: 350, maxX: 470, speed: 1.8, dir: 1 },
-      { x: 500, y: 180, w: 16, h: 130, type: 'laser_hazard', blinking: true },
-      { x: 540, y: 270, w: 90, h: 20, type: 'normal' },
-      // Dos puentes de superlativos (BOTTOM es correcto)
-      { x: 650, y: 215, w: 300, h: 28, type: 'dual_bridge_wrong', label: "This is the most cheapest toy in the mall." },
-      { x: 650, y: 310, w: 300, h: 28, type: 'dual_bridge_solid', label: "This is the cheapest toy in the mall." },
-      { x: 970, y: 260, w: 120, h: 20, type: 'normal' },
-      { x: 1040, y: 260, w: 150, h: 20, type: 'normal' },
-      { x: 1220, y: 290, w: 75, h: 18, type: 'jelly' },
-      { x: 1320, y: 320, w: 260, h: 80, type: 'normal' }
-    ],
-    items: [],
-    coins: [
-      { x: 260, y: 250, collected: false },
-      { x: 410, y: 220, collected: false },
-      { x: 580, y: 220, collected: false },
-      { x: 1010, y: 210, collected: false },
-      { x: 1260, y: 200, collected: false }
-    ],
-    gate: { x: 1440, y: 220, w: 30, h: 100, unlocked: false }
+    name: "World 3 • Sweet Cloud Kingdom",
+    icon: "☁️",
+    subtitle: "Cielo de Nubes Dulces & El Dragón King Gummy Dragon",
+    boss: {
+      name: "King Gummy Dragon",
+      icon: "🐉",
+      subtitle: "World 3 Boss • Candy Gummy Sovereign",
+      maxHp: 100,
+      challenges: [
+        {
+          type: "listening",
+          promptEn: "Listen and identify THIS wool scarf to extinguish dragon fire!",
+          audioFile: "assets/kids_audio/keywords/bili_kw_u8_this_wool_scarf.mp3",
+          audioText: "This wool scarf",
+          options: [
+            { id: "scarf", name: "This Wool Scarf", icon: "🧣", correct: true },
+            { id: "watch", name: "This Smart Watch", icon: "⌚", correct: false },
+            { id: "hat", name: "A Winter Hat", icon: "👒", correct: false }
+          ]
+        },
+        {
+          type: "writing",
+          promptEn: "Type the place word: S T _ _ E (Where we buy toys)",
+          targetWord: "STORE",
+          hint: "S T O R E"
+        },
+        {
+          type: "sentence",
+          promptEn: "Arrange the polite sentence for the shopkeeper:",
+          words: ["I", "would", "like", "to", "buy", "this", "toy"],
+          correctSentence: "I would like to buy this toy"
+        },
+        {
+          type: "speaking",
+          promptEn: "How much is this beautiful toy?",
+          displaySentence: "How much is this beautiful toy?"
+        }
+      ]
+    },
+    stages: [
+      {
+        id: 0,
+        title: "Stage 1 • Marshmallow Clouds & Cookie Bridges 🧣",
+        promptEn: "Collect THIS wool scarf and jump across chocolate wafers!",
+        bgTheme: "clouds",
+        requiredItems: ["wool_scarf"],
+        checkpointX: 40,
+        finishX: 1350,
+        platforms: [
+          { x: 0, y: 340, w: 220, h: 60, type: 'cloud' },
+          { x: 260, y: 290, w: 130, h: 30, type: 'candy_cookie' },
+          { x: 430, y: 240, w: 120, h: 35, type: 'cloud_bounce' },
+          { x: 590, y: 270, w: 120, h: 30, type: 'candy_cookie' },
+          { x: 750, y: 230, w: 130, h: 30, type: 'candy_cookie' },
+          { x: 930, y: 280, w: 110, h: 35, type: 'cloud_bounce' },
+          { x: 1090, y: 320, w: 260, h: 80, type: 'cloud' }
+        ],
+        mysteryBlocks: [
+          { x: 310, y: 190, w: 42, h: 42, content: "MUCH", hit: false, bumpY: 0, icon: "🪙" },
+          { x: 630, y: 170, w: 42, h: 42, content: "MANY", hit: false, bumpY: 0, icon: "⭐" }
+        ],
+        items: [
+          { id: "wool_scarf", x: 790, y: 170, name: "This Wool Scarf", icon: "🧣", collected: false }
+        ],
+        coins: [
+          { x: 300, y: 240, collected: false },
+          { x: 480, y: 170, collected: false },
+          { x: 640, y: 210, collected: false },
+          { x: 970, y: 210, collected: false }
+        ],
+        gate: { x: 1260, y: 220, w: 30, h: 100, unlocked: false }
+      },
+      {
+        id: 1,
+        title: "Stage 2 • 👑 GRAND FINALE: King Gummy Dragon 🐉🏆",
+        promptEn: "Conquer the Grand Candy Dragon and claim the Cambridge Trophy!",
+        bgTheme: "clouds",
+        isBossArena: true,
+        checkpointX: 60,
+        finishX: 1400,
+        platforms: [
+          { x: 0, y: 340, w: 300, h: 60, type: 'cloud' },
+          { x: 340, y: 270, w: 140, h: 30, type: 'candy_cookie' },
+          { x: 520, y: 220, w: 130, h: 35, type: 'cloud_bounce' },
+          { x: 690, y: 270, w: 140, h: 30, type: 'candy_cookie' },
+          { x: 860, y: 340, w: 540, h: 60, type: 'cloud' }
+        ],
+        mysteryBlocks: [],
+        items: [],
+        coins: [
+          { x: 380, y: 220, collected: false },
+          { x: 570, y: 160, collected: false },
+          { x: 740, y: 220, collected: false }
+        ],
+        gate: { x: 1320, y: 220, w: 30, h: 100, unlocked: false }
+      }
+    ]
   }
 ];
 
-let currentObbyStageIndex = 0;
-let obbyEngineRunning = false;
-let obbyAnimationId = null;
+// Active Game Engine Variables
+let currentObbyStage = null;
+let obbyCanvas = null;
+let obbyCtx = null;
+let obbyLoopId = null;
+let cameraX = 0;
+let isObbyRunning = false;
 
-// Objeto del Jugador (Barnaby) con DOBLE SALTO
+// Player Physics Entity
 const Player = {
   x: 40,
-  y: 280,
+  y: 260,
+  w: 42,
+  h: 58,
   vx: 0,
   vy: 0,
-  w: 32,
-  h: 42,
-  speed: 5.0,
-  jumpPower: -12.2,
   isGrounded: false,
-  jumpsLeft: 2, // 2 saltos disponibles
-  maxJumps: 2,
   facing: 'right',
+  scaleX: 1,
+  scaleY: 1,
+  rotation: 0,
+  jumpsLeft: 2,
+  maxJumps: 2,
+  distanceMoved: 0,
+  hearts: 3,
+  celebratingTimer: 0,
+  coinsCollected: 0,
   respawnX: 40,
-  respawnY: 280,
-  coinsCollected: 0
+  respawnY: 260
 };
 
-const ObbyControls = {
-  left: false,
-  right: false,
-  jump: false
+// Boss Entity State
+const Boss = {
+  active: false,
+  x: 1080,
+  y: 200,
+  w: 120,
+  h: 140,
+  hp: 100,
+  maxHp: 100,
+  currentChallengeIndex: 0,
+  projectiles: [],
+  shootTimer: 0,
+  hitFlashes: 0,
+  bobTimer: 0,
+  defeated: false
 };
 
-let cameraX = 0;
+// Particles & FX
 let obbyParticles = [];
-let obbyBannerMessage = "";
-let obbyBannerTimer = 0;
 
-// Variables de la Terminal de Escritura Interactiva
-let currentTerminalWord = "";
-let targetTerminalAnswer = "";
+// Input state
+const inputKeys = { left: false, right: false, jump: false };
 
+// Sound instance already initialized in global scope
+// Sentence Builder dynamic state
+let currentSentenceWords = [];
+let availableWordBank = [];
+
+// ============================================================================
+// ENGINE INITIALIZATION & WORLD NAVIGATION
+// ============================================================================
 function startObbyEngine() {
-  const canvas = document.getElementById('obbyCanvas');
-  if (!canvas) return;
+  obbyCanvas = document.getElementById('obbyCanvas');
+  if (!obbyCanvas) return;
+  obbyCtx = obbyCanvas.getContext('2d');
+  obbyCtx.imageSmoothingEnabled = false;
 
-  // Adjust native resolution
-  canvas.width = canvas.parentElement.clientWidth || 800;
-  canvas.height = 400;
+  updateWorldNavUI();
+  loadCurrentWorldStage();
+  setupObbyEventListeners();
 
-  loadObbyStage(currentObbyStageIndex);
-
-  if (!obbyEngineRunning) {
-    obbyEngineRunning = true;
-    setupObbyEventListeners();
+  if (!isObbyRunning) {
+    isObbyRunning = true;
     requestAnimationFrame(obbyGameLoop);
   }
 }
 
-function loadObbyStage(index) {
-  currentObbyStageIndex = index;
-  const stage = ObbyStages[index];
+function updateWorldNavUI() {
+  unlockedWorlds = parseInt(localStorage.getItem('bili_unlocked_worlds') || '1', 10);
+  for (let w = 1; w <= 3; w++) {
+    const tab = document.getElementById(`tabWorld${w}`);
+    const badge = document.getElementById(`badgeWorld${w}`);
+    if (tab && badge) {
+      if (w <= unlockedWorlds) {
+        tab.classList.remove('locked');
+        badge.textContent = "UNLOCKED";
+        badge.style.background = "#059669";
+        badge.style.color = "#ffffff";
+      } else {
+        tab.classList.add('locked');
+        badge.textContent = "🔒 LOCKED";
+        badge.style.background = "#475569";
+        badge.style.color = "#cbd5e1";
+      }
 
+      if (w === currentWorldId) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    }
+  }
+}
+
+function selectWorld(worldNum) {
+  unlockedWorlds = parseInt(localStorage.getItem('bili_unlocked_worlds') || '1', 10);
+  if (worldNum > unlockedWorlds) {
+    sfx.playError();
+    speakEnglish("Defeat the current world boss to unlock this world!", "guide");
+    return;
+  }
+  currentWorldId = worldNum;
+  currentStageIndex = 0;
+  localStorage.setItem('bili_current_world', worldNum.toString());
+  updateWorldNavUI();
+  loadCurrentWorldStage();
+}
+
+function loadCurrentWorldStage() {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const stage = world.stages[currentStageIndex] || world.stages[0];
+  currentObbyStage = stage;
+
+  // Reset player
   Player.x = stage.checkpointX;
   Player.y = 260;
   Player.vx = 0;
@@ -644,406 +775,623 @@ function loadObbyStage(index) {
   Player.jumpsLeft = Player.maxJumps;
   Player.respawnX = stage.checkpointX;
   Player.respawnY = 260;
+  Player.hearts = 3;
   cameraX = 0;
 
-  // Reset stage items & coins
-  stage.items.forEach(it => it.collected = false);
-  stage.coins.forEach(c => c.collected = false);
-  stage.gate.unlocked = false;
+  // Reset stage items & blocks
+  if (stage.items) stage.items.forEach(it => it.collected = false);
+  if (stage.coins) stage.coins.forEach(c => c.collected = false);
+  if (stage.mysteryBlocks) stage.mysteryBlocks.forEach(b => { b.hit = false; b.bumpY = 0; });
+  if (stage.gate) stage.gate.unlocked = false;
 
-  // Reset dynamic platform states
-  stage.platforms.forEach(p => {
-    delete p.crumbleTimer;
-    delete p.broken;
-    delete p.respawnTimer;
-    if (p.origX !== undefined) p.x = p.origX;
-    else p.origX = p.x;
-  });
+  // Setup Boss if Boss Arena
+  const bossHud = document.getElementById('bossHudBar');
+  const obbyHud = document.getElementById('obbyHudBar');
 
-  // Cerrar terminal si estaba abierta
-  const termModal = document.getElementById('obbyTerminalModal');
-  if (termModal) termModal.style.display = 'none';
+  if (stage.isBossArena) {
+    Boss.active = true;
+    Boss.hp = world.boss.maxHp;
+    Boss.maxHp = world.boss.maxHp;
+    Boss.currentChallengeIndex = 0;
+    Boss.projectiles = [];
+    Boss.shootTimer = 0;
+    Boss.hitFlashes = 0;
+    Boss.defeated = false;
 
-  document.getElementById('obbyStageTitle').textContent = stage.title;
+    if (bossHud) bossHud.style.display = 'block';
+    if (obbyHud) obbyHud.style.display = 'none';
+
+    document.getElementById('bossNameTitle').textContent = world.boss.name;
+    document.getElementById('bossAvatarIcon').textContent = world.boss.icon;
+    document.getElementById('bossSubtitle').textContent = world.boss.subtitle;
+    updateBossHpBarUI();
+  } else {
+    Boss.active = false;
+    if (bossHud) bossHud.style.display = 'none';
+    if (obbyHud) obbyHud.style.display = 'flex';
+  }
+
+  // Update Headers
+  document.getElementById('obbyStageTitle').textContent = `${world.icon} ${stage.title}`;
   document.getElementById('obbyGatePromptEn').textContent = `🎯 Mission: "${stage.promptEn}"`;
-  document.getElementById('obbyGatePromptEs').textContent = '';
   document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
 
   updateObbyHudChecklist();
-  showObbyFloatingBanner(`🎯 MISSION: ${stage.title}`, 200);
+  updatePlayerHeartsUI();
+}
 
-  speakEnglish(stage.promptEn, 'guide');
+function updateBossHpBarUI() {
+  const hpFill = document.getElementById('bossHpFill');
+  const hpText = document.getElementById('bossHpText');
+  if (hpFill && hpText) {
+    const pct = Math.max(0, Math.min(100, (Boss.hp / Boss.maxHp) * 100));
+    hpFill.style.width = `${pct}%`;
+    hpText.textContent = `BOSS HP: ${Boss.hp} / ${Boss.maxHp}`;
+  }
+}
+
+function updatePlayerHeartsUI() {
+  const heartsEl = document.getElementById('playerHeartsDisplay');
+  if (heartsEl) {
+    heartsEl.textContent = '❤️'.repeat(Math.max(0, Player.hearts));
+  }
 }
 
 function updateObbyHudChecklist() {
-  const stage = ObbyStages[currentObbyStageIndex];
-  const checklistEl = document.getElementById('obbyItemsChecklist');
-  const gateBadgeEl = document.getElementById('obbyGateStatusBadge');
-  const stepCollectEl = document.getElementById('stepChipCollect');
-  const stepGateEl = document.getElementById('stepChipGate');
+  const container = document.getElementById('obbyItemsChecklist');
+  if (!container || !currentObbyStage) return;
 
-  if (checklistEl) {
-    if (stage.hasTerminal) {
-      checklistEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">💻 Terminal: ${stage.gate.unlocked ? '✅ Unlocked' : '🔒 Password Required'}</span>`;
-    } else {
-      checklistEl.innerHTML = stage.items.map(it => `
-        <span style="${it.collected ? 'color:#10b981; font-weight:800;' : 'color:#fef08a;'}">
-          ${it.collected ? '✅' : '⬜'} ${it.icon} ${it.name}
-        </span>
-      `).join(' &nbsp;|&nbsp; ');
-    }
+  if (currentObbyStage.isBossArena) {
+    container.innerHTML = `<span style="color:#f472b6; font-weight:800;">👑 BOSS ARENA ACTIVE</span>`;
+    return;
   }
 
-  const isUnlocked = stage.gate.unlocked;
-
-  if (gateBadgeEl) {
-    if (isUnlocked) {
-      gateBadgeEl.innerHTML = `<span style="color:#10b981; font-weight:800; animation:pulseLive 1s infinite;">🔓 Gate: OPEN! Run to the goal 🏁</span>`;
-    } else {
-      gateBadgeEl.innerHTML = `<span style="color:#fca5a5;">🔒 Gate: LOCKED</span>`;
-    }
+  if (currentObbyStage.requiredItems && currentObbyStage.requiredItems.length > 0) {
+    const html = currentObbyStage.items.map(it => {
+      const isDone = it.collected;
+      return `<span style="margin-right:8px; font-weight:700; color:${isDone ? '#34d399' : '#fef08a'};">
+        ${isDone ? '✅' : '⬜'} ${it.icon} ${it.name}
+      </span>`;
+    }).join('');
+    container.innerHTML = html;
+  } else if (currentObbyStage.hasTerminal) {
+    container.innerHTML = `<span style="color:#38bdf8; font-weight:700;">💻 Password Terminal Active</span>`;
+  } else {
+    container.innerHTML = `<span style="color:#38bdf8; font-weight:700;">Explore & Reach Goal</span>`;
   }
 
-  if (stepCollectEl && stepGateEl) {
-    if (isUnlocked) {
-      stepCollectEl.classList.add('completed');
-      stepGateEl.classList.add('active');
+  const gateBadge = document.getElementById('obbyGateStatusBadge');
+  if (gateBadge && currentObbyStage.gate) {
+    if (currentObbyStage.gate.unlocked) {
+      gateBadge.innerHTML = "🔓 Gate: OPEN!";
+      gateBadge.style.color = "#34d399";
     } else {
-      stepCollectEl.classList.remove('completed');
-      stepCollectEl.classList.add('active');
-      stepGateEl.classList.remove('active');
+      gateBadge.innerHTML = "🔒 Gate: LOCKED";
+      gateBadge.style.color = "#fca5a5";
     }
   }
 }
 
-function showObbyFloatingBanner(text, durationFrames = 180) {
-  obbyBannerMessage = text;
-  obbyBannerTimer = durationFrames;
+function restartObbyStage() {
+  loadCurrentWorldStage();
+  sfx.playPop();
 }
 
 function tryPlayerJump() {
   if (Player.jumpsLeft > 0) {
-    const isDoubleJump = Player.jumpsLeft === 1;
+    Player.vy = -11.0;
     Player.jumpsLeft--;
-    Player.vy = Player.jumpPower;
-    Player.isGrounded = false;
+    Player.scaleX = 0.8;
+    Player.scaleY = 1.25;
     sfx.playJump();
-    createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, isDoubleJump);
+    createJumpDust(Player.x + Player.w / 2, Player.y + Player.h);
   }
 }
 
 function setupObbyEventListeners() {
-  // Controles de teclado
-  window.addEventListener('keydown', (e) => {
-    // Do not move Barnaby when terminal modal is open
-    const modal = document.getElementById('obbyTerminalModal');
-    if (modal && modal.style.display === 'flex') return;
-
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-      ObbyControls.left = true;
-    }
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-      ObbyControls.right = true;
-    }
-    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === ' ') {
-      if (!ObbyControls.jump) {
-        tryPlayerJump();
-      }
-      ObbyControls.jump = true;
-    }
-  });
-
-  window.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') ObbyControls.left = false;
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') ObbyControls.right = false;
-    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === ' ') ObbyControls.jump = false;
-  });
-
-  // On-screen touch button controls
   const btnLeft = document.getElementById('touchBtnLeft');
   const btnRight = document.getElementById('touchBtnRight');
   const btnJump = document.getElementById('touchBtnJump');
 
-  if (btnLeft && btnRight && btnJump) {
-    const bindTouch = (el, onStart, onEnd) => {
-      el.addEventListener('touchstart', (e) => { e.preventDefault(); onStart(); }, { passive: false });
-      el.addEventListener('touchend', (e) => { e.preventDefault(); onEnd(); }, { passive: false });
-      el.addEventListener('mousedown', onStart);
-      el.addEventListener('mouseup', onEnd);
-      el.addEventListener('mouseleave', onEnd);
-    };
+  if (btnLeft && !btnLeft._bound) {
+    btnLeft._bound = true;
+    const setL = (v) => { inputKeys.left = v; };
+    btnLeft.addEventListener('mousedown', () => setL(true));
+    btnLeft.addEventListener('mouseup', () => setL(false));
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); setL(true); });
+    btnLeft.addEventListener('touchend', (e) => { e.preventDefault(); setL(false); });
+  }
 
-    bindTouch(btnLeft, () => ObbyControls.left = true, () => ObbyControls.left = false);
-    bindTouch(btnRight, () => ObbyControls.right = true, () => ObbyControls.right = false);
-    bindTouch(btnJump, () => {
-      tryPlayerJump();
-      ObbyControls.jump = true;
-    }, () => ObbyControls.jump = false);
+  if (btnRight && !btnRight._bound) {
+    btnRight._bound = true;
+    const setR = (v) => { inputKeys.right = v; };
+    btnRight.addEventListener('mousedown', () => setR(true));
+    btnRight.addEventListener('mouseup', () => setR(false));
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); setR(true); });
+    btnRight.addEventListener('touchend', (e) => { e.preventDefault(); setR(false); });
+  }
+
+  if (btnJump && !btnJump._bound) {
+    btnJump._bound = true;
+    btnJump.addEventListener('mousedown', () => tryPlayerJump());
+    btnJump.addEventListener('touchstart', (e) => { e.preventDefault(); tryPlayerJump(); });
+  }
+
+  if (!window._obbyKeysBound) {
+    window._obbyKeysBound = true;
+    window.addEventListener('keydown', (e) => {
+      if (document.getElementById('obbyTerminalModal')?.style.display === 'flex') return;
+      if (document.getElementById('bossChallengeModal')?.style.display === 'flex') return;
+
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') inputKeys.left = true;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') inputKeys.right = true;
+      if (e.key === 'ArrowUp' || e.key === ' ' || e.key === 'w' || e.key === 'W') {
+        e.preventDefault();
+        tryPlayerJump();
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') inputKeys.left = false;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') inputKeys.right = false;
+    });
   }
 }
 
 // ============================================================================
-// ENGLISH SPELLING TERMINAL MANAGEMENT
+// BOSS COMBAT CHALLENGE SYSTEM (ENGLISH AS THE WEAPON)
 // ============================================================================
-function openTerminalGate(targetWord, promptEn, promptEs) {
-  currentTerminalWord = "";
-  targetTerminalAnswer = targetWord.toUpperCase();
+function triggerBossEncounter() {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const challenge = world.boss.challenges[Boss.currentChallengeIndex];
+  if (!challenge || Boss.defeated) return;
 
-  const modal = document.getElementById('obbyTerminalModal');
+  const modal = document.getElementById('bossChallengeModal');
   if (!modal) return;
+  modal.style.display = 'flex';
 
-  document.getElementById('terminalPromptEn').textContent = `"${promptEn}"`;
-  document.getElementById('terminalPromptEs').textContent = promptEs;
-  document.getElementById('terminalInputDisplay').textContent = "_ ".repeat(targetWord.length).trim();
-  document.getElementById('terminalFeedbackMsg').innerHTML = '';
+  const pill = document.getElementById('challengePhasePill');
+  const icon = document.getElementById('challengePhaseIcon');
+  const name = document.getElementById('challengePhaseName');
+  const prompt = document.getElementById('challengeBossPrompt');
+  const feedback = document.getElementById('bossChallengeFeedback');
+  feedback.textContent = '';
 
-  const physInput = document.getElementById('terminalPhysicalInput');
-  if (physInput) {
-    physInput.value = '';
-    setTimeout(() => physInput.focus(), 100);
+  const areaListening = document.getElementById('challengeListeningArea');
+  const areaWriting = document.getElementById('challengeWritingArea');
+  const areaSentence = document.getElementById('challengeSentenceArea');
+  const areaSpeaking = document.getElementById('challengeSpeakingArea');
+  const audioRow = document.getElementById('challengeAudioRow');
+
+  areaListening.style.display = 'none';
+  areaWriting.style.display = 'none';
+  areaSentence.style.display = 'none';
+  areaSpeaking.style.display = 'none';
+  audioRow.style.display = 'none';
+
+  if (challenge.type === 'listening') {
+    pill.className = "challenge-phase-pill phase-listening";
+    icon.textContent = "🎧";
+    name.textContent = "Challenge 1: Listening Energy Blast";
+    prompt.textContent = challenge.promptEn;
+    audioRow.style.display = 'block';
+    areaListening.style.display = 'grid';
+
+    areaListening.innerHTML = challenge.options.map((opt, idx) => `
+      <button class="audio-choice-btn" onclick="selectListeningChoice(${idx})">
+        <span class="audio-choice-icon">${opt.icon}</span>
+        <span>${opt.name}</span>
+      </button>
+    `).join('');
+
+    playBossChallengeAudio();
+
+  } else if (challenge.type === 'writing') {
+    pill.className = "challenge-phase-pill phase-writing";
+    icon.textContent = "⌨️";
+    name.textContent = "Challenge 2: Keyword Spell Explosion";
+    prompt.textContent = challenge.promptEn;
+    areaWriting.style.display = 'block';
+
+    window._bossCurrentTargetWord = challenge.targetWord;
+    window._bossTypedWord = "";
+    document.getElementById('bossWritingDisplay').textContent = challenge.hint || "_ _ _ _";
+    document.getElementById('bossPhysicalInput').value = "";
+
+    renderBossWritingKeypad();
+
+  } else if (challenge.type === 'sentence') {
+    pill.className = "challenge-phase-pill phase-sentence";
+    icon.textContent = "🧩";
+    name.textContent = "Challenge 3: Sentence Combo Strike";
+    prompt.textContent = challenge.promptEn;
+    areaSentence.style.display = 'block';
+
+    window._bossCorrectSentence = challenge.correctSentence;
+    currentSentenceWords = [];
+    availableWordBank = [...challenge.words].sort(() => Math.random() - 0.5);
+
+    renderBossSentenceUI();
+
+  } else if (challenge.type === 'speaking') {
+    pill.className = "challenge-phase-pill phase-speaking";
+    icon.textContent = "🎙️";
+    name.textContent = "Challenge 4: Pronunciation Final Finisher";
+    prompt.textContent = "Unleash Barnaby's Ultimate Finisher by saying:";
+    areaSpeaking.style.display = 'block';
+
+    document.getElementById('bossSpeakingPrompt').textContent = `"${challenge.displaySentence}"`;
+    speakEnglish(challenge.displaySentence, 'guide');
+  }
+}
+
+function playBossChallengeAudio() {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const challenge = world.boss.challenges[Boss.currentChallengeIndex];
+  if (challenge && challenge.audioFile) {
+    const snd = new Audio(challenge.audioFile);
+    snd.playbackRate = 1.0;
+    snd.play().catch(() => {
+      speakEnglish(challenge.audioText, 'guide');
+    });
+  } else if (challenge && challenge.audioText) {
+    speakEnglish(challenge.audioText, 'guide');
+  }
+}
+
+function selectListeningChoice(idx) {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const challenge = world.boss.challenges[Boss.currentChallengeIndex];
+  const chosen = challenge.options[idx];
+
+  if (chosen && chosen.correct) {
+    executeBossAttack(25, "✨ Correct! Barnaby fires a Radiant Energy Blast!");
+  } else {
+    sfx.playError();
+    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171;">Oops! Listen closely and try again!</span>`;
+    playBossChallengeAudio();
+  }
+}
+
+function renderBossWritingKeypad() {
+  const container = document.getElementById('bossWritingKeypad');
+  if (!container) return;
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+  let html = letters.map(l => `<button class="terminal-key" onclick="pressBossWritingKey('${l}')">${l}</button>`).join('');
+  html += `<button class="terminal-key key-del" onclick="pressBossWritingDel()">⌫</button>`;
+  container.innerHTML = html;
+}
+
+function pressBossWritingKey(char) {
+  if (!window._bossTypedWord) window._bossTypedWord = "";
+  if (window._bossTypedWord.length < 12) {
+    window._bossTypedWord += char;
+    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord;
+    sfx.playPop();
+  }
+}
+
+function pressBossWritingDel() {
+  if (window._bossTypedWord && window._bossTypedWord.length > 0) {
+    window._bossTypedWord = window._bossTypedWord.slice(0, -1);
+    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord || "_ _ _ _";
+    sfx.playPop();
+  }
+}
+
+function handleBossWritingKey(e) {
+  if (e.key === 'Enter') {
+    submitBossWriting();
+  } else {
+    window._bossTypedWord = document.getElementById('bossPhysicalInput').value.trim().toUpperCase();
+    document.getElementById('bossWritingDisplay').textContent = window._bossTypedWord || "_ _ _ _";
+  }
+}
+
+function submitBossWriting() {
+  const typed = (window._bossTypedWord || document.getElementById('bossPhysicalInput').value || "").trim().toUpperCase();
+  const target = (window._bossCurrentTargetWord || "").toUpperCase();
+
+  if (typed === target) {
+    executeBossAttack(25, "💥 BOOM! Keyword Spell triggers a Plasma Blast!");
+  } else {
+    sfx.playError();
+    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171;">Try again! Hint: ${target[0]}...</span>`;
+  }
+}
+
+function renderBossSentenceUI() {
+  const disp = document.getElementById('bossSentenceDisplay');
+  const bank = document.getElementById('bossWordBank');
+  if (!disp || !bank) return;
+
+  disp.innerHTML = currentSentenceWords.map((w, idx) => `
+    <span class="word-chip in-sentence" onclick="removeWordFromSentence(${idx})">${w} ✕</span>
+  `).join('');
+
+  bank.innerHTML = availableWordBank.map((w, idx) => `
+    <span class="word-chip" onclick="addWordToSentence(${idx})">${w}</span>
+  `).join('');
+}
+
+function addWordToSentence(idx) {
+  const w = availableWordBank.splice(idx, 1)[0];
+  currentSentenceWords.push(w);
+  renderBossSentenceUI();
+  sfx.playPop();
+}
+
+function removeWordFromSentence(idx) {
+  const w = currentSentenceWords.splice(idx, 1)[0];
+  availableWordBank.push(w);
+  renderBossSentenceUI();
+  sfx.playPop();
+}
+
+function resetBossSentence() {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const challenge = world.boss.challenges[Boss.currentChallengeIndex];
+  currentSentenceWords = [];
+  availableWordBank = [...challenge.words].sort(() => Math.random() - 0.5);
+  renderBossSentenceUI();
+  sfx.playPop();
+}
+
+function submitBossSentence() {
+  const userSent = currentSentenceWords.join(' ');
+  const correct = window._bossCorrectSentence;
+
+  if (userSent.toLowerCase().trim() === correct.toLowerCase().trim()) {
+    executeBossAttack(25, "⚡ Star Comet Combo breaks the monster's defense!");
+  } else {
+    sfx.playError();
+    document.getElementById('bossChallengeFeedback').innerHTML = `<span style="color:#f87171;">Sentence order incorrect. Listen and try again!</span>`;
+    speakEnglish(correct, 'guide');
+  }
+}
+
+function triggerSpeakingFinisher() {
+  const world = WORLDS_DATA.find(w => w.id === currentWorldId) || WORLDS_DATA[0];
+  const challenge = world.boss.challenges[Boss.currentChallengeIndex];
+  const btn = document.getElementById('btnBossFinisher');
+  if (btn) btn.classList.add('recording');
+
+  sfx.playLaserBeep();
+  setTimeout(() => {
+    if (btn) btn.classList.remove('recording');
+    executeBossAttack(25, "🏆 CRITICAL HIT! Barnaby executes the Ultimate Victory Attack!");
+  }, 900);
+}
+
+function executeBossAttack(dmg, msg) {
+  sfx.playSuccess();
+  Boss.hp = Math.max(0, Boss.hp - dmg);
+  Boss.hitFlashes = 20;
+  updateBossHpBarUI();
+
+  // Star fx
+  for (let i = 0; i < 25; i++) {
+    createJumpDust(Boss.x + Boss.w / 2, Boss.y + Boss.h / 2, true);
   }
 
-  renderTerminalKeypad();
+  const feedback = document.getElementById('bossChallengeFeedback');
+  if (feedback) feedback.innerHTML = `<span style="color:#34d399;">${msg}</span>`;
+
+  setTimeout(() => {
+    const modal = document.getElementById('bossChallengeModal');
+    if (modal) modal.style.display = 'none';
+
+    if (Boss.hp <= 0) {
+      handleBossDefeat();
+    } else {
+      Boss.currentChallengeIndex++;
+    }
+  }, 1200);
+}
+
+function handleBossDefeat() {
+  Boss.defeated = true;
+  sfx.playApplause();
+
+  // Open victory modal
+  const vicModal = document.getElementById('worldVictoryModal');
+  const title = document.getElementById('worldVictoryTitle');
+  const desc = document.getElementById('worldVictoryDesc');
+  const btnNext = document.getElementById('btnNextWorldUnlock');
+
+  if (vicModal) {
+    vicModal.style.display = 'flex';
+    title.textContent = `WORLD ${currentWorldId} CONQUERED! 🏆`;
+    desc.textContent = `You defeated ${WORLDS_DATA[currentWorldId - 1].boss.name} with your English mastery!`;
+
+    // Unlock next world
+    if (unlockedWorlds <= currentWorldId && currentWorldId < 3) {
+      unlockedWorlds = currentWorldId + 1;
+      localStorage.setItem('bili_unlocked_worlds', unlockedWorlds.toString());
+    }
+    updateWorldNavUI();
+    AppState.addStars(50);
+  }
+}
+
+function proceedToNextWorld() {
+  const vicModal = document.getElementById('worldVictoryModal');
+  if (vicModal) vicModal.style.display = 'none';
+
+  if (currentWorldId < 3) {
+    selectWorld(currentWorldId + 1);
+  } else {
+    // Loop or reset to World 1
+    selectWorld(1);
+    speakEnglish("Congratulations! You completed all Super Platformer Worlds!", "guide");
+  }
+}
+
+// ============================================================================
+// TERMINAL MODAL KEYPAD (STAGES WITH TERMINALS)
+// ============================================================================
+function openTerminalGate(targetWord, promptEn, promptEs) {
+  const modal = document.getElementById('obbyTerminalModal');
+  if (!modal) return;
   modal.style.display = 'flex';
-  sfx.playLaserBeep();
-  speakEnglish(promptEn, 'guide');
+
+  window._currentTerminalTargetWord = targetWord;
+  window._currentTerminalTyped = "";
+
+  document.getElementById('terminalTitle').textContent = "Security Keypad Terminal";
+  document.getElementById('terminalPromptEn').textContent = promptEn;
+  document.getElementById('terminalInputDisplay').textContent = "_ _ _ _";
+  document.getElementById('terminalPhysicalInput').value = "";
+  document.getElementById('terminalFeedbackMsg').textContent = "";
+
+  renderTerminalKeypad();
 }
 
 function renderTerminalKeypad() {
   const container = document.getElementById('terminalKeypadContainer');
   if (!container) return;
-
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  container.innerHTML = letters.map(char => `
-    <button class="terminal-key" onclick="pressTerminalKey('${char}')">${char}</button>
-  `).join('') + `
-    <button class="terminal-key key-del" onclick="pressTerminalDelete()">⌫ BORRAR</button>
-  `;
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+  let html = letters.map(l => `<button class="terminal-key" onclick="pressTerminalKey('${l}')">${l}</button>`).join('');
+  html += `<button class="terminal-key key-del" onclick="pressTerminalDelete()">⌫</button>`;
+  container.innerHTML = html;
 }
 
 function pressTerminalKey(char) {
-  sfx.playPop();
-  const maxLen = Math.max(targetTerminalAnswer.length, 6);
-  if (currentTerminalWord.length < maxLen) {
-    currentTerminalWord += char;
+  if (!window._currentTerminalTyped) window._currentTerminalTyped = "";
+  if (window._currentTerminalTyped.length < 12) {
+    window._currentTerminalTyped += char;
     updateTerminalDisplay();
-    const physInput = document.getElementById('terminalPhysicalInput');
-    if (physInput) physInput.value = currentTerminalWord;
+    sfx.playPop();
   }
 }
 
 function pressTerminalDelete() {
-  sfx.playPop();
-  currentTerminalWord = currentTerminalWord.slice(0, -1);
-  updateTerminalDisplay();
-  const physInput = document.getElementById('terminalPhysicalInput');
-  if (physInput) physInput.value = currentTerminalWord;
+  if (window._currentTerminalTyped && window._currentTerminalTyped.length > 0) {
+    window._currentTerminalTyped = window._currentTerminalTyped.slice(0, -1);
+    updateTerminalDisplay();
+    sfx.playPop();
+  }
 }
 
 function handleTerminalInputKey(e) {
-  const physInput = document.getElementById('terminalPhysicalInput');
-  if (physInput) {
-    currentTerminalWord = physInput.value.toUpperCase();
+  if (e.key === 'Enter') {
+    submitTerminalWord();
+  } else {
+    window._currentTerminalTyped = document.getElementById('terminalPhysicalInput').value.trim().toUpperCase();
     updateTerminalDisplay();
-    if (e.key === 'Enter') {
-      submitTerminalWord();
-    }
   }
 }
 
 function updateTerminalDisplay() {
-  const display = document.getElementById('terminalInputDisplay');
-  if (!display) return;
-  const remaining = Math.max(0, targetTerminalAnswer.length - currentTerminalWord.length);
-  const text = currentTerminalWord.split('').join(' ') + (remaining > 0 ? ' ' + '_ '.repeat(remaining) : '');
-  display.textContent = text.trim();
+  const disp = document.getElementById('terminalInputDisplay');
+  if (disp) disp.textContent = window._currentTerminalTyped || "_ _ _ _";
 }
 
 function submitTerminalWord() {
-  const feedback = document.getElementById('terminalFeedbackMsg');
-  const stage = ObbyStages[currentObbyStageIndex];
+  const typed = (window._currentTerminalTyped || document.getElementById('terminalPhysicalInput').value || "").trim().toUpperCase();
+  const target = (window._currentTerminalTargetWord || "").toUpperCase();
 
-  const wordEntered = currentTerminalWord.trim().toUpperCase();
-  const isCorrect = wordEntered === targetTerminalAnswer || 
-                    (stage.acceptedWords && stage.acceptedWords.map(w => w.toUpperCase()).includes(wordEntered));
-
-  if (isCorrect) {
-    sfx.playLaserBeep();
+  if (typed === target) {
     sfx.playSuccess();
-    feedback.innerHTML = `<span style="color:#10b981;">✅ ACCESS GRANTED! Security gate unlocked (+25 pts)</span>`;
-    AppState.addStars(25);
-
-    stage.gate.unlocked = true;
-    updateObbyHudChecklist();
-    showObbyFloatingBanner("🔓 GATE UNLOCKED! CROSS THE FINISH LINE! ➔➔➔", 220);
-
+    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#34d399;">✅ Correct Password! Gate Opening...</span>`;
     setTimeout(() => {
-      const modal = document.getElementById('obbyTerminalModal');
-      if (modal) modal.style.display = 'none';
-    }, 1100);
-
+      document.getElementById('obbyTerminalModal').style.display = 'none';
+      if (currentObbyStage && currentObbyStage.gate) {
+        currentObbyStage.gate.unlocked = true;
+        updateObbyHudChecklist();
+      }
+    }, 900);
   } else {
     sfx.playError();
-    feedback.innerHTML = `<span style="color:#ef4444;">⚠️ Incorrect word. Try again.</span>`;
-    currentTerminalWord = "";
-    const physInput = document.getElementById('terminalPhysicalInput');
-    if (physInput) physInput.value = "";
-    updateTerminalDisplay();
+    document.getElementById('terminalFeedbackMsg').innerHTML = `<span style="color:#f87171;">❌ Incorrect word. Try again!</span>`;
   }
 }
 
+// Particle creators
 function createJumpDust(x, y, isDouble = false) {
-  const count = isDouble ? 12 : 6;
-  const color = isDouble ? '#ec4899' : 'rgba(255, 255, 255, 0.85)';
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < 6; i++) {
     obbyParticles.push({
       x: x,
       y: y,
-      vx: (Math.random() - 0.5) * (isDouble ? 5 : 3),
-      vy: (Math.random() - 0.5) * 2,
-      radius: (isDouble ? 3.5 : 2.5) + Math.random() * 2,
-      color: color,
-      life: isDouble ? 24 : 18
+      vx: (Math.random() - 0.5) * 5,
+      vy: (Math.random() - 0.5) * 3 - (isDouble ? 2 : 1),
+      life: 1.0,
+      size: Math.random() * 4 + 3,
+      color: isDouble ? '#f59e0b' : '#38bdf8'
     });
   }
 }
 
 function createCoinSparkle(x, y) {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 10; i++) {
     obbyParticles.push({
       x: x,
       y: y,
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-      radius: 2.5 + Math.random() * 2,
-      color: '#f59e0b',
-      life: 22
+      vx: (Math.random() - 0.5) * 6,
+      vy: (Math.random() - 0.5) * 6,
+      life: 1.0,
+      size: Math.random() * 4 + 2,
+      color: '#fef08a'
     });
   }
 }
 
+// ============================================================================
+// MAIN 60 FPS GAME LOOP WITH FLUID SPRITE RENDERING & MARIO WORLDS
+// ============================================================================
 function obbyGameLoop() {
-  const canvas = document.getElementById('obbyCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const stage = ObbyStages[currentObbyStageIndex];
+  if (!isObbyRunning) return;
 
-  // 1. PLAYER PHYSICS
-  if (ObbyControls.left) {
-    Player.vx = -Player.speed;
-    Player.facing = 'left';
-  } else if (ObbyControls.right) {
-    Player.vx = Player.speed;
-    Player.facing = 'right';
-  } else {
-    Player.vx *= 0.8; // Smooth friction
+  const canvas = obbyCanvas;
+  const ctx = obbyCtx;
+  const stage = currentObbyStage;
+
+  if (!canvas || !ctx || !stage) {
+    requestAnimationFrame(obbyGameLoop);
+    return;
   }
 
-  // Gravedad
+  const now = Date.now();
+
+  // 1. UPDATE PHYSICS
+  // Horizontal movement
+  if (inputKeys.left) {
+    Player.vx = -4.8;
+    Player.facing = 'left';
+    Player.distanceMoved += 4.8;
+  } else if (inputKeys.right) {
+    Player.vx = 4.8;
+    Player.facing = 'right';
+    Player.distanceMoved += 4.8;
+  } else {
+    Player.vx *= 0.75;
+  }
+
+  // Gravity
   Player.vy += 0.52;
   if (Player.vy > 12) Player.vy = 12;
 
-  // Actualizar posiciones
   Player.x += Player.vx;
   Player.y += Player.vy;
 
-  // Update dynamic platforms
-  stage.platforms.forEach(p => {
-    if (p.type === 'moving_horizontal') {
-      if (p.dir === undefined) p.dir = 1;
-      const spd = (p.speed || 1.5);
-      p.x += spd * p.dir;
-      if (p.x >= p.maxX) p.dir = -1;
-      if (p.x <= p.minX) p.dir = 1;
-    }
-    if (p.type === 'crumble') {
-      if (p.crumbleTimer > 0) {
-        p.crumbleTimer--;
-        if (p.crumbleTimer === 0) {
-          p.broken = true;
-          p.respawnTimer = 150; // ~2.5s
-          sfx.playBoing();
-        }
-      } else if (p.broken) {
-        p.respawnTimer--;
-        if (p.respawnTimer <= 0) {
-          p.broken = false;
-          delete p.crumbleTimer;
-        }
-      }
-    }
-  });
+  // Fluid squash & stretch easing
+  Player.scaleX += (1 - Player.scaleX) * 0.15;
+  Player.scaleY += (1 - Player.scaleY) * 0.15;
+  Player.rotation = Player.vx * 0.02;
+
+  if (Player.celebratingTimer > 0) Player.celebratingTimer--;
+
+  // Camera tracking
+  const targetCamX = Player.x - canvas.width * 0.35;
+  cameraX += (targetCamX - cameraX) * 0.1;
+  if (cameraX < 0) cameraX = 0;
+  if (cameraX > (stage.finishX || 1350) - canvas.width + 100) {
+    cameraX = (stage.finishX || 1350) - canvas.width + 100;
+  }
 
   // Platform collisions
   Player.isGrounded = false;
   stage.platforms.forEach(p => {
-    // Security laser obstacle
-    if (p.type === 'laser_hazard') {
-      const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
-      if (laserActive) {
-        if (
-          Player.x + Player.w > p.x &&
-          Player.x < p.x + p.w &&
-          Player.y + Player.h > p.y &&
-          Player.y < p.y + p.h
-        ) {
-          sfx.playLaserBeep();
-          sfx.playError();
-          Player.x = stage.checkpointX;
-          Player.y = 260;
-          Player.vx = 0;
-          Player.vy = 0;
-          Player.jumpsLeft = Player.maxJumps;
-          showObbyFloatingBanner("⚡ Watch out for the security laser! Returning to checkpoint...", 150);
-          return;
-        }
-      }
-      return;
-    }
-
-    // Crumble platform collision
-    if (p.type === 'crumble' && p.broken) {
-      return;
-    }
-
-    // Si es un puente dual incorrecto, colapsa y devuelve a Barnaby al inicio del nivel
-    if (p.type === 'dual_bridge_wrong') {
-      if (
-        Player.x + Player.w > p.x &&
-        Player.x < p.x + p.w &&
-        Player.y + Player.h >= p.y &&
-        Player.y + Player.h <= p.y + p.h + Math.max(8, Player.vy) &&
-        Player.vy >= 0
-      ) {
-        sfx.playError();
-        Player.x = stage.checkpointX;
-        Player.y = 260;
-        Player.vx = 0;
-        Player.vy = 0;
-        Player.jumpsLeft = Player.maxJumps;
-        showObbyFloatingBanner("💥 That bridge was grammatically incorrect and collapsed! Returning to stage start...", 180);
-        return;
-      }
-    }
-
-    // Dual solid bridges (Correct grammar)
-    if (p.type === 'dual_bridge_solid') {
-      if (
-        Player.x + Player.w > p.x &&
-        Player.x < p.x + p.w &&
-        Player.y + Player.h >= p.y &&
-        Player.y + Player.h <= p.y + p.h + Math.max(8, Player.vy) &&
-        Player.vy >= 0
-      ) {
-        Player.y = p.y - Player.h;
-        Player.vy = 0;
-        Player.isGrounded = true;
-        Player.jumpsLeft = Player.maxJumps;
-      }
-      return;
-    }
-
-    // Solid platforms
     if (
       Player.x + Player.w > p.x &&
       Player.x < p.x + p.w &&
@@ -1054,471 +1402,713 @@ function obbyGameLoop() {
       Player.y = p.y - Player.h;
       Player.vy = 0;
       Player.isGrounded = true;
-      Player.jumpsLeft = Player.maxJumps; // Restaura doble salto al tocar suelo
+      Player.jumpsLeft = Player.maxJumps;
 
-      // Jelly Spring
-      if (p.type === 'jelly') {
-        Player.vy = -16.0; // Super bounce
-        Player.isGrounded = false;
+      if (p.type.includes('mushroom') || p.type.includes('bounce')) {
+        Player.vy = -14.0;
+        Player.scaleX = 0.75;
+        Player.scaleY = 1.35;
         sfx.playBoing();
         createJumpDust(Player.x + Player.w / 2, Player.y + Player.h, true);
       }
-
-      // Plataforma que se desmorona al pisarla
-      if (p.type === 'crumble' && !p.broken) {
-        if (p.crumbleTimer === undefined) p.crumbleTimer = 45; // ~0.75s
-      }
-
-      // Moving platform
-      if (p.type === 'moving_horizontal') {
-        Player.x += (p.speed || 1.5) * (p.dir || 1);
-      }
-
-      // Cinta Transportadora
-      if (p.type === 'conveyor_right') {
-        Player.x += p.speed;
-      } else if (p.type === 'conveyor_left') {
-        Player.x += p.speed;
-      }
     }
   });
 
-  // Proximity detection with Spelling Terminal
-  if (stage.hasTerminal && !stage.gate.unlocked) {
-    if (Math.abs(Player.x - stage.terminalX) < 45 && Math.abs(Player.y - stage.terminalY) < 60) {
-      const modal = document.getElementById('obbyTerminalModal');
-      if (modal && modal.style.display !== 'flex') {
-        openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, stage.terminalPromptEs);
-      }
-    }
-  }
-
-  // Collision with required items
-  stage.items.forEach(it => {
-    if (!it.collected) {
+  // Mystery Blocks [ ? ] collisions
+  if (stage.mysteryBlocks) {
+    stage.mysteryBlocks.forEach(b => {
       if (
-        Player.x + Player.w > it.x - 10 &&
-        Player.x < it.x + 40 &&
-        Player.y + Player.h > it.y - 10 &&
-        Player.y < it.y + 40
+        Player.x + Player.w > b.x &&
+        Player.x < b.x + b.w &&
+        Player.y <= b.y + b.h &&
+        Player.y >= b.y + b.h - 14 &&
+        Player.vy < 0
       ) {
-        it.collected = true;
-        sfx.playCoin();
-        createCoinSparkle(it.x + 15, it.y + 15);
-        speakEnglish(it.name, 'kid');
-        AppState.addStars(15);
+        Player.y = b.y + b.h;
+        Player.vy = 2;
+        b.bumpY = -12;
+        Player.celebratingTimer = 30;
 
-        // Actualizar HUD
-        updateObbyHudChecklist();
-
-        // Verify all required items collected
-        const allCollected = stage.items.every(item => item.collected);
-        if (allCollected) {
-          stage.gate.unlocked = true;
-          sfx.playSuccess();
-          showObbyFloatingBanner("🎉 ALL ITEMS COLLECTED! THE GATE IS OPEN! ➔➔➔", 220);
-          updateObbyHudChecklist();
-        } else {
-          showObbyFloatingBanner(`✨ You collected ${it.name}! 1 item remaining...`, 160);
+        if (!b.hit) {
+          b.hit = true;
+          Player.coinsCollected += 10;
+          sfx.playCoin();
+          createCoinSparkle(b.x + b.w / 2, b.y);
+          document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
+          showObbyFloatingBanner(`⭐ Revealed: "${b.content}"!`);
         }
       }
-    }
-  });
+      b.bumpY *= 0.8;
+    });
+  }
 
-  // Collision with floating coins
-  stage.coins.forEach(c => {
-    if (!c.collected) {
-      if (
-        Player.x + Player.w > c.x &&
-        Player.x < c.x + 20 &&
-        Player.y + Player.h > c.y &&
-        Player.y < c.y + 20
-      ) {
-        c.collected = true;
-        Player.coinsCollected += 5;
-        sfx.playCoin();
-        createCoinSparkle(c.x + 10, c.y + 10);
-        document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
-        AppState.addStars(5);
+  // Item Collection
+  if (stage.items) {
+    stage.items.forEach(it => {
+      if (!it.collected) {
+        const dist = Math.hypot((Player.x + Player.w / 2) - it.x, (Player.y + Player.h / 2) - it.y);
+        if (dist < 45) {
+          it.collected = true;
+          sfx.playChestOpen();
+          createCoinSparkle(it.x, it.y);
+
+          const allDone = stage.items.every(i => i.collected);
+          if (allDone && stage.gate) {
+            stage.gate.unlocked = true;
+            sfx.playSuccess();
+          }
+          updateObbyHudChecklist();
+        }
+      }
+    });
+  }
+
+  // Coins Collection
+  if (stage.coins) {
+    stage.coins.forEach(c => {
+      if (!c.collected) {
+        const dist = Math.hypot((Player.x + Player.w / 2) - c.x, (Player.y + Player.h / 2) - c.y);
+        if (dist < 32) {
+          c.collected = true;
+          Player.coinsCollected += 5;
+          sfx.playCoin();
+          createCoinSparkle(c.x, c.y);
+          document.getElementById('obbyCoinsBadge').textContent = `🪙 Coins: ${Player.coinsCollected}`;
+        }
+      }
+    });
+  }
+
+  // Terminal Trigger
+  if (stage.hasTerminal) {
+    const distT = Math.hypot((Player.x + Player.w / 2) - stage.terminalX, (Player.y + Player.h / 2) - stage.terminalY);
+    if (distT < 50 && (!stage.gate || !stage.gate.unlocked)) {
+      openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, "");
+    }
+  }
+
+  // Boss Arena Logic & Encounter Trigger
+  if (stage.isBossArena && Boss.active && !Boss.defeated) {
+    Boss.bobTimer += 0.04;
+    Boss.shootTimer++;
+
+    // Trigger Boss Challenge when close
+    if (Player.x > 800) {
+      const modal = document.getElementById('bossChallengeModal');
+      if (modal && modal.style.display !== 'flex' && Boss.hp > 0) {
+        triggerBossEncounter();
       }
     }
-  });
 
-  // Collision with Goal/Checkpoint Gate
-  if (stage.gate.unlocked) {
+    // Boss shoots dodgable projectile every ~4.5 seconds
+    if (Boss.shootTimer > 260) {
+      Boss.shootTimer = 0;
+      Boss.projectiles.push({
+        x: Boss.x - 20,
+        y: 320,
+        vx: -3.8,
+        radius: 14
+      });
+      sfx.playLaserBeep();
+    }
+
+    // Update projectiles
+    for (let i = Boss.projectiles.length - 1; i >= 0; i--) {
+      const pr = Boss.projectiles[i];
+      pr.x += pr.vx;
+
+      // Check collision with player
+      if (
+        Player.x + Player.w > pr.x - pr.radius &&
+        Player.x < pr.x + pr.radius &&
+        Player.y + Player.h > pr.y - pr.radius &&
+        Player.y < pr.y + pr.radius
+      ) {
+        // Player hit by obstacle
+        sfx.playError();
+        Player.hearts = Math.max(0, Player.hearts - 1);
+        updatePlayerHeartsUI();
+        Player.vy = -6;
+        Player.vx = -8;
+        Boss.projectiles.splice(i, 1);
+
+        if (Player.hearts <= 0) {
+          // Respawn in arena
+          Player.x = stage.checkpointX;
+          Player.y = 260;
+          Player.hearts = 3;
+          updatePlayerHeartsUI();
+        }
+      } else if (pr.x < -100) {
+        Boss.projectiles.splice(i, 1);
+      }
+    }
+  }
+
+  // Gate Exit Pass Through
+  if (stage.gate && stage.gate.unlocked) {
     if (Player.x > stage.gate.x) {
-      // Stage completed!
-      sfx.playSuccess();
-      sfx.playApplause();
-      AppState.addStars(30);
-
-      if (currentObbyStageIndex < ObbyStages.length - 1) {
-        loadObbyStage(currentObbyStageIndex + 1);
+      if (currentStageIndex < WORLDS_DATA[currentWorldId - 1].stages.length - 1) {
+        currentStageIndex++;
+        sfx.playSuccess();
+        loadCurrentWorldStage();
       } else {
         showObbyVictoryScreen();
-        return;
       }
     }
   }
 
-  // Fall into abyss (Respawn at checkpoint)
-  if (Player.y > 420) {
-    sfx.playError();
+  // Fall into abyss respawn
+  if (Player.y > 440) {
     Player.x = Player.respawnX;
     Player.y = Player.respawnY;
-    Player.vx = 0;
     Player.vy = 0;
-    Player.jumpsLeft = Player.maxJumps;
-    showObbyFloatingBanner("⚠️ You fell! Respawning at checkpoint...", 100);
+    sfx.playError();
   }
 
-  // 2. DYNAMIC CAMERA
-  const targetCameraX = Player.x - canvas.width * 0.35;
-  cameraX += (targetCameraX - cameraX) * 0.1;
-  if (cameraX < 0) cameraX = 0;
+  // =========================================================================
+  // 2. RENDER STAGE (MARIO WORLDS AESTHETICS)
+  // =========================================================================
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 3. RENDERIZADO DEL ESCENARIO
-  ctx.fillStyle = stage.bgColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const theme = stage.bgTheme || 'meadow';
+  renderMarioWorldBackdrop(ctx, canvas.width, canvas.height, theme, now);
 
-  // Roblox-style decorative background grid
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-  ctx.lineWidth = 1;
-  const gridSize = 40;
-  const offsetX = -cameraX % gridSize;
-  for (let x = offsetX; x < canvas.width; x += gridSize) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, canvas.height);
-    ctx.stroke();
-  }
-
-  // Dibujar plataformas
+  // Render Platforms
   stage.platforms.forEach(p => {
     const rx = p.x - cameraX;
-    if (rx + p.w < 0 || rx > canvas.width) return;
+    if (rx + p.w < -50 || rx > canvas.width + 50) return;
 
-    if (p.type === 'jelly') {
-      // Bright green spring
-      ctx.fillStyle = "#10b981";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#34d399";
-      ctx.fillRect(rx + 4, p.y + 2, p.w - 8, 4);
-      // Texto "BOING"
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 9px Outfit, sans-serif";
-      ctx.fillText("⚡ BOING!", rx + p.w / 2 - 18, p.y + 13);
-    } else if (p.type === 'shoe_box') {
-      // Caja de zapatos boutique
-      ctx.fillStyle = "#a855f7";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#c084fc";
-      ctx.fillRect(rx, p.y, p.w, 4);
-    } else if (p.type === 'conveyor_right' || p.type === 'conveyor_left') {
-      // Cinta transportadora
-      ctx.fillStyle = "#334155";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#f59e0b";
-      ctx.fillRect(rx, p.y, p.w, 3);
-      // Animated directional arrows
+    if (p.type === 'grass') {
+      drawMarioGrassPlatform(ctx, rx, p.y, p.w, p.h);
+    } else if (p.type === 'sand') {
       ctx.fillStyle = "#fde047";
-      ctx.font = "bold 11px sans-serif";
-      const arrow = p.type === 'conveyor_right' ? '➔➔➔' : '⬅⬅⬅';
-      ctx.fillText(arrow, rx + p.w / 2 - 18, p.y + 14);
-    } else if (p.type === 'moving_horizontal') {
-      // Floating moving platform
-      ctx.fillStyle = "#0284c7";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#38bdf8";
-      ctx.fillRect(rx, p.y, p.w, 4);
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 10px Outfit, sans-serif";
-      ctx.fillText("⚡ HOVER ➔", rx + p.w / 2 - 26, p.y + 14);
-    } else if (p.type === 'crumble') {
-      // Plataforma de nube que colapsa
-      if (p.broken) {
-        ctx.strokeStyle = "rgba(244, 114, 182, 0.4)";
-        ctx.setLineDash([4, 4]);
-        ctx.strokeRect(rx, p.y, p.w, p.h);
-        ctx.setLineDash([]);
-      } else {
-        const shake = (p.crumbleTimer !== undefined && p.crumbleTimer > 0) ? Math.sin(Date.now() / 20) * 3 : 0;
-        ctx.fillStyle = p.crumbleTimer ? "#f43f5e" : "#ec4899";
-        ctx.fillRect(rx + shake, p.y, p.w, p.h);
-        ctx.fillStyle = "#fbcfe8";
-        ctx.fillRect(rx + shake, p.y, p.w, 4);
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 9px Outfit, sans-serif";
-        ctx.fillText(p.crumbleTimer ? "⚠ CRUMBLING!" : "☁ CLOUD", rx + shake + p.w / 2 - 28, p.y + 13);
-      }
-    } else if (p.type === 'laser_hazard') {
-      // Laser beam obstacle
-      const laserActive = !p.blinking || (Math.floor(Date.now() / 800) % 2 === 0);
-      // Postes emisores arriba y abajo
-      ctx.fillStyle = "#475569";
-      ctx.fillRect(rx - 2, p.y, p.w + 4, 8);
-      ctx.fillRect(rx - 2, p.y + p.h - 8, p.w + 4, 8);
-      if (laserActive) {
-        ctx.fillStyle = "rgba(239, 68, 68, 0.85)";
-        ctx.fillRect(rx + 4, p.y + 8, p.w - 8, p.h - 16);
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(rx + 6, p.y + 8, 4, p.h - 16);
-        ctx.fillStyle = "#fee2e2";
-        ctx.font = "bold 9px sans-serif";
-        ctx.fillText("⚡ LASER", rx - 10, p.y + p.h / 2);
-      }
-    } else if (p.type === 'dual_bridge_solid' || p.type === 'dual_bridge_wrong') {
-      // Draw both IDENTICAL bridges (Roblox Obby stylepio, SIN SPOILERS)
-      ctx.fillStyle = "#312e81";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#6366f1";
-      ctx.fillRect(rx, p.y, p.w, 3);
-      // Neutral text with English sentence
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 13.5px Outfit, sans-serif";
-      ctx.fillText(p.label, rx + 12, p.y + 19);
-      // Icono decorativo de puente
-      ctx.font = "bold 14px sans-serif";
-      ctx.fillText("🌉", rx + p.w - 26, p.y + 19);
-    } else {
-      // Plataforma normal
-      ctx.fillStyle = "#475569";
-      ctx.fillRect(rx, p.y, p.w, p.h);
-      ctx.fillStyle = "#94a3b8";
-      ctx.fillRect(rx, p.y, p.w, 4);
-    }
-  });
-
-  // Dibujar Terminal de Escritura Interactiva si la etapa la incluye
-  if (stage.hasTerminal) {
-    const tx = stage.terminalX - cameraX;
-    const ty = stage.terminalY - 36;
-    ctx.fillStyle = "#1e1b4b";
-    ctx.roundRect(tx - 30, ty, 60, 36, 8);
-    ctx.fill();
-    ctx.strokeStyle = stage.gate.unlocked ? "#10b981" : "#38bdf8";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    ctx.font = "20px sans-serif";
-    ctx.fillText("💻", tx - 10, ty + 24);
-
-    // Letrero flotante sobre la terminal
-    ctx.fillStyle = stage.gate.unlocked ? "rgba(16, 185, 129, 0.9)" : "rgba(56, 189, 248, 0.9)";
-    ctx.roundRect(tx - 65, ty - 22, 130, 18, 6);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 9px Outfit, sans-serif";
-    ctx.fillText(stage.gate.unlocked ? "✅ PASSWORD UNLOCKED" : "⌨️ TYPE PASSWORD", tx - 56, ty - 10);
-  }
-
-  // Draw mission items with labels and arrows
-  stage.items.forEach(it => {
-    if (!it.collected) {
-      const ix = it.x - cameraX;
-      const floatY = Math.sin(Date.now() * 0.005) * 5;
-
-      // Icono flotante
-      ctx.font = "26px sans-serif";
-      ctx.fillText(it.icon, ix, it.y + 24 + floatY);
-
-      // Halo brillante
       ctx.beginPath();
-      ctx.arc(ix + 13, it.y + 13 + floatY, 20, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(253, 224, 71, 0.8)";
+      ctx.roundRect(rx, p.y, p.w, p.h, 12);
+      ctx.fill();
+      ctx.fillStyle = "#f59e0b";
+      ctx.fillRect(rx, p.y + 6, p.w, p.h - 6);
+    } else if (p.type === 'wood_pier') {
+      ctx.fillStyle = "#b45309";
+      ctx.fillRect(rx, p.y, p.w, p.h);
+      ctx.fillStyle = "#d97706";
+      ctx.fillRect(rx + 2, p.y + 2, p.w - 4, 4);
+      ctx.strokeStyle = "#78350f";
       ctx.lineWidth = 2;
+      ctx.strokeRect(rx, p.y, p.w, p.h);
+    } else if (p.type === 'cloud' || p.type === 'cloud_bounce') {
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.roundRect(rx, p.y, p.w, p.h, 18);
+      ctx.fill();
+      ctx.strokeStyle = "#fbcfe8";
+      ctx.lineWidth = 3;
       ctx.stroke();
-
-      // Top text label (English item name)
-      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-      ctx.roundRect(ix - 36, it.y - 18 + floatY, 100, 20, 6);
+    } else if (p.type === 'candy_cookie') {
+      ctx.fillStyle = "#92400e";
+      ctx.beginPath();
+      ctx.roundRect(rx, p.y, p.w, p.h, 8);
       ctx.fill();
       ctx.fillStyle = "#fef08a";
-      ctx.font = "bold 10px Outfit, sans-serif";
-      ctx.fillText(it.name, ix - 30, it.y - 4 + floatY);
-
-      // Flecha apuntando hacia abajo
-      ctx.fillStyle = "#f59e0b";
-      ctx.font = "12px sans-serif";
-      ctx.fillText("▼", ix + 8, it.y - 18 + floatY);
+      ctx.fillRect(rx + 4, p.y + p.h / 2 - 2, p.w - 8, 4);
+    } else if (p.type.includes('mushroom')) {
+      drawMarioMushroom(ctx, rx, p.y, p.w, p.h, p.type.includes('yellow') ? '#f59e0b' : '#ef4444');
+    } else if (p.type === 'pipe_ground') {
+      drawMarioGrassPlatform(ctx, rx, p.y, p.w, p.h);
+      drawMarioWarpPipe(ctx, rx + 40, p.y - 75, 70, 75, stage.gate && stage.gate.unlocked);
+    } else {
+      ctx.fillStyle = "#475569";
+      ctx.fillRect(rx, p.y, p.w, p.h);
     }
   });
 
-  // Dibujar monedas
-  stage.coins.forEach(c => {
-    if (!c.collected) {
-      const cx = c.x - cameraX;
-      ctx.fillStyle = "#f59e0b";
-      ctx.beginPath();
-      ctx.arc(cx + 8, c.y + 8, 8, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#fef08a";
-      ctx.beginPath();
-      ctx.arc(cx + 6, c.y + 6, 3, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  });
+  // Render Mystery Blocks [ ? ]
+  if (stage.mysteryBlocks) {
+    stage.mysteryBlocks.forEach(b => {
+      const rx = b.x - cameraX;
+      const ry = b.y + b.bumpY;
+      if (rx + b.w < -20 || rx > canvas.width + 20) return;
 
-  // Dibujar Puerta del Checkpoint / Meta
-  const gx = stage.gate.x - cameraX;
-  if (stage.gate.unlocked) {
-    // Puerta Abierta en Verde
-    ctx.fillStyle = "#10b981";
-    ctx.fillRect(gx, stage.gate.y, 10, stage.gate.h);
-    ctx.font = "32px sans-serif";
-    ctx.fillText("🏁", gx - 10, stage.gate.y - 10);
+      if (!b.hit) {
+        const bgGrad = ctx.createLinearGradient(rx, ry, rx, ry + b.h);
+        bgGrad.addColorStop(0, "#fde047");
+        bgGrad.addColorStop(0.5, "#f59e0b");
+        bgGrad.addColorStop(1, "#d97706");
+        ctx.fillStyle = bgGrad;
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, b.w, b.h, 6);
+        ctx.fill();
 
-    // Cartel brillante encima de la puerta abierta
-    ctx.fillStyle = "rgba(16, 185, 129, 0.95)";
-    ctx.roundRect(gx - 80, stage.gate.y - 36, 170, 24, 8);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 11px Outfit, sans-serif";
-    ctx.fillText("🔓 GOAL OPEN! ➔➔➔", gx - 70, stage.gate.y - 20);
-  } else {
-    // Puerta Bloqueada en Rojo
-    ctx.fillStyle = "#ef4444";
-    ctx.fillRect(gx, stage.gate.y, 18, stage.gate.h);
-    ctx.font = "24px sans-serif";
-    ctx.fillText("🔒", gx - 3, stage.gate.y + 45);
+        ctx.strokeStyle = "#78350f";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
 
-    // Cartel rojo de bloqueo
-    ctx.fillStyle = "rgba(239, 68, 68, 0.95)";
-    ctx.roundRect(gx - 75, stage.gate.y - 28, 160, 20, 6);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 10px Outfit, sans-serif";
-    ctx.fillText("🔒 LOCKED: Collect items", gx - 68, stage.gate.y - 14);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+        ctx.fillRect(rx + 3, ry + 3, b.w - 6, 3);
+
+        ctx.fillStyle = "#78350f";
+        ctx.font = "900 22px Outfit, sans-serif";
+        ctx.fillText("?", rx + 15, ry + 28);
+      } else {
+        ctx.fillStyle = "#b45309";
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, b.w, b.h, 6);
+        ctx.fill();
+        ctx.strokeStyle = "#78350f";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "900 13px Outfit, sans-serif";
+        ctx.fillText(b.icon + ' ' + b.content, rx - 8, ry - 12);
+      }
+    });
   }
 
-  // 4. DIBUJAR A BARNABY (PERSONAJE JUGADOR EN 2D)
+  // Render Items (Floating clothing cards)
+  if (stage.items) {
+    stage.items.forEach(it => {
+      if (!it.collected) {
+        const ix = it.x - cameraX;
+        const floatY = Math.sin(now * 0.005) * 6;
+
+        ctx.font = "32px sans-serif";
+        ctx.fillText(it.icon, ix, it.y + floatY);
+
+        ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+        ctx.beginPath();
+        ctx.roundRect(ix - 36, it.y - 18 + floatY, 110, 22, 6);
+        ctx.fill();
+
+        ctx.fillStyle = "#fef08a";
+        ctx.font = "bold 11px Outfit, sans-serif";
+        ctx.fillText(it.name, ix - 30, it.y - 4 + floatY);
+      }
+    });
+  }
+
+  // Render Coins
+  if (stage.coins) {
+    stage.coins.forEach(c => {
+      if (!c.collected) {
+        const cx = c.x - cameraX;
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.arc(cx + 8, c.y + 8, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#fef08a";
+        ctx.beginPath();
+        ctx.arc(cx + 6, c.y + 6, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  }
+
+  // Render Boss in Boss Arena
+  if (stage.isBossArena && Boss.active) {
+    const bx = Boss.x - cameraX;
+    const by = Boss.y + Math.sin(Boss.bobTimer) * 8;
+
+    if (Boss.hitFlashes > 0) {
+      Boss.hitFlashes--;
+      ctx.globalAlpha = 0.5;
+    }
+
+    if (currentWorldId === 1) {
+      drawBossClockworkMech(ctx, bx, by, Boss.w, Boss.h, now);
+    } else if (currentWorldId === 2) {
+      drawBossCaptainSquiddy(ctx, bx, by, Boss.w, Boss.h, now);
+    } else {
+      drawBossGummyDragon(ctx, bx, by, Boss.w, Boss.h, now);
+    }
+
+    ctx.globalAlpha = 1.0;
+
+    // Render Boss Projectiles
+    Boss.projectiles.forEach(pr => {
+      const px = pr.x - cameraX;
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.arc(px, pr.y, pr.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#fde047";
+      ctx.beginPath();
+      ctx.arc(px - 3, pr.y - 3, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  // =========================================================================
+  // 3. RENDER OFFICIAL BILIKIDS PIXEL ART MASCOT WITH FLUID MOTION
+  // =========================================================================
   const px = Player.x - cameraX;
   const py = Player.y;
+  const pw = Player.w;
+  const ph = Player.h;
 
-  // Si tiene doble salto disponible, halo tenue en los pies
-  if (Player.jumpsLeft === 2) {
-    ctx.fillStyle = "rgba(236, 72, 153, 0.3)";
-    ctx.beginPath();
-    ctx.ellipse(px + Player.w / 2, py + Player.h, 12, 4, 0, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Cuerpo de Barnaby (Osito tierno con gorro de chef o shopping)
-  ctx.fillStyle = "#92400e"; // Brown bear fur
+  // Drop shadow
+  ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
   ctx.beginPath();
-  ctx.roundRect(px + 4, py + 12, Player.w - 8, Player.h - 14, 8);
+  ctx.ellipse(px + pw / 2, py + ph + 2, 16 * Player.scaleX, 5 * Player.scaleY, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  // Cabeza
-  ctx.beginPath();
-  ctx.arc(px + Player.w / 2, py + 14, 13, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.save();
+  const cx = px + pw / 2;
+  const cy = py + ph;
+  ctx.translate(cx, cy);
 
-  // Orejitas
-  ctx.beginPath();
-  ctx.arc(px + 6, py + 4, 5, 0, Math.PI * 2);
-  ctx.arc(px + Player.w - 6, py + 4, 5, 0, Math.PI * 2);
-  ctx.fill();
+  const dir = Player.facing === 'left' ? -1 : 1;
+  ctx.scale(dir * Player.scaleX, Player.scaleY);
+  ctx.rotate(Player.rotation);
 
-  // Ojos y hocico
-  ctx.fillStyle = "#fef3c7";
-  ctx.beginPath();
-  ctx.ellipse(px + Player.w / 2, py + 16, 7, 5, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = "#1e293b";
-  ctx.beginPath();
-  ctx.arc(px + Player.w / 2, py + 14, 2.5, 0, Math.PI * 2);
-  ctx.fill();
+  let activeImg = PixelMascot.strip;
+  let yBob = 0;
+  let frameIdx = 0;
 
-  // Gorrito de compras rojo/fucsia
-  ctx.fillStyle = "#ec4899";
-  ctx.beginPath();
-  ctx.arc(px + Player.w / 2, py + 2, 7, Math.PI, 0);
-  ctx.fill();
-
-  // Patas animadas al correr
-  ctx.fillStyle = "#78350f";
-  if (Math.abs(Player.vx) > 0.5) {
-    const legOffset = Math.sin(Date.now() * 0.02) * 5;
-    ctx.fillRect(px + 6, py + Player.h - 4 + legOffset, 6, 6);
-    ctx.fillRect(px + Player.w - 12, py + Player.h - 4 - legOffset, 6, 6);
+  if (!Player.isGrounded) {
+    activeImg = PixelMascot.celebrate; // Arms up jumping
+    yBob = -4;
+  } else if (Player.celebratingTimer > 0) {
+    activeImg = PixelMascot.celebrate;
+    yBob = Math.sin(now * 0.02) * 5 - 3;
+  } else if (Math.abs(Player.vx) > 0.4) {
+    const stepRate = 20;
+    frameIdx = Math.floor((Player.distanceMoved / stepRate) % 4);
+    yBob = Math.abs(Math.sin((Player.distanceMoved / stepRate) * Math.PI)) * -3;
   } else {
-    ctx.fillRect(px + 6, py + Player.h - 2, 6, 4);
-    ctx.fillRect(px + Player.w - 12, py + Player.h - 2, 6, 4);
+    frameIdx = 0;
+    yBob = Math.sin(now * 0.003) * 1.5;
   }
 
-  // 5. RENDER PARTICLES
-  obbyParticles.forEach((p, idx) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.life--;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.arc(p.x - cameraX, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-    if (p.life <= 0) {
-      obbyParticles.splice(idx, 1);
+  const spriteW = 46;
+  const spriteH = 68;
+  const drawX = -spriteW / 2;
+  const drawY = -spriteH + yBob;
+
+  if (activeImg === PixelMascot.celebrate && PixelMascot.celebrate.complete && PixelMascot.celebrate.naturalWidth > 0) {
+    ctx.drawImage(PixelMascot.celebrate, drawX, drawY, spriteW, spriteH);
+  } else if (PixelMascot.strip.complete && PixelMascot.strip.naturalWidth > 0) {
+    const sw = PixelMascot.strip.naturalWidth / 4;
+    const sh = PixelMascot.strip.naturalHeight;
+    ctx.drawImage(PixelMascot.strip, frameIdx * sw, 0, sw, sh, drawX, drawY, spriteW, spriteH);
+  } else {
+    // Crisp fallback
+    ctx.fillStyle = "#eab308";
+    ctx.fillRect(drawX + 4, drawY + 16, spriteW - 8, spriteH - 16);
+  }
+
+  ctx.restore();
+
+  // Render particles
+  for (let i = obbyParticles.length - 1; i >= 0; i--) {
+    const pt = obbyParticles[i];
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+    pt.life -= 0.035;
+    if (pt.life <= 0) {
+      obbyParticles.splice(i, 1);
+    } else {
+      ctx.fillStyle = pt.color;
+      ctx.globalAlpha = pt.life;
+      ctx.beginPath();
+      ctx.arc(pt.x - cameraX, pt.y, pt.size, 0, Math.PI * 2);
+      ctx.fill();
     }
-  });
-
-  // 6. RENDERIZAR BANNER FLOTANTE SUPERIOR
-  if (obbyBannerTimer > 0) {
-    obbyBannerTimer--;
-    ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
-    ctx.roundRect(canvas.width / 2 - 240, 16, 480, 36, 12);
-    ctx.fill();
-    ctx.strokeStyle = "#c084fc";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 13px Outfit, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(obbyBannerMessage, canvas.width / 2, 39);
-    ctx.textAlign = "left"; // Reset text align
   }
+  ctx.globalAlpha = 1.0;
 
   requestAnimationFrame(obbyGameLoop);
 }
 
-function listenObbyPrompt() {
-  const stage = ObbyStages[currentObbyStageIndex];
-  sfx.playPop();
-  speakEnglish(stage.promptEn, 'guide');
+// Procedural World Renderers (Mario Bros)
+function renderMarioWorldBackdrop(ctx, W, H, theme, now) {
+  if (theme === 'beach') {
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+    skyGrad.addColorStop(0, "#0284c7");
+    skyGrad.addColorStop(0.6, "#38bdf8");
+    skyGrad.addColorStop(1, "#fed7aa");
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(680, 50, 30, 0, Math.PI * 2);
+    ctx.fill();
+
+    const oceanGrad = ctx.createLinearGradient(0, 240, 0, H);
+    oceanGrad.addColorStop(0, "#06b6d4");
+    oceanGrad.addColorStop(1, "#0891b2");
+    ctx.fillStyle = oceanGrad;
+    ctx.fillRect(0, 240, W, H - 240);
+
+  } else if (theme === 'clouds') {
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+    skyGrad.addColorStop(0, "#f472b6");
+    skyGrad.addColorStop(0.5, "#c084fc");
+    skyGrad.addColorStop(1, "#93c5fd");
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    drawMarioCloud(ctx, 120, 60, 1.4);
+    drawMarioCloud(ctx, 520, 50, 1.6);
+  } else {
+    // Sunny Meadow
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+    skyGrad.addColorStop(0, "#38bdf8");
+    skyGrad.addColorStop(0.65, "#7dd3fc");
+    skyGrad.addColorStop(1, "#bae6fd");
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = "#fef08a";
+    ctx.beginPath();
+    ctx.arc(80, 50, 32, 0, Math.PI * 2);
+    ctx.fill();
+
+    drawMarioCloud(ctx, 220, 60, 1.2);
+    drawMarioCloud(ctx, 580, 45, 1.0);
+
+    ctx.fillStyle = "#86efac";
+    ctx.beginPath();
+    ctx.arc(160, 360, 160, Math.PI, 0);
+    ctx.arc(520, 370, 180, Math.PI, 0);
+    ctx.fill();
+
+    ctx.fillStyle = "#4ade80";
+    ctx.beginPath();
+    ctx.arc(320, 370, 150, Math.PI, 0);
+    ctx.arc(700, 370, 160, Math.PI, 0);
+    ctx.fill();
+  }
 }
 
-function restartObbyStage() {
-  sfx.playPop();
-  loadObbyStage(currentObbyStageIndex);
+function drawMarioCloud(ctx, x, y, scale) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(0, 0, 18, 0, Math.PI * 2);
+  ctx.arc(20, -6, 22, 0, Math.PI * 2);
+  ctx.arc(42, 0, 18, 0, Math.PI * 2);
+  ctx.arc(20, 10, 18, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#0f172a";
+  ctx.fillRect(15, -4, 3, 8);
+  ctx.fillRect(26, -4, 3, 8);
+  ctx.restore();
+}
+
+function drawMarioGrassPlatform(ctx, x, y, w, h) {
+  const soilGrad = ctx.createLinearGradient(x, y, x, y + h);
+  soilGrad.addColorStop(0, "#92400e");
+  soilGrad.addColorStop(1, "#78350f");
+  ctx.fillStyle = soilGrad;
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, 10);
+  ctx.fill();
+
+  ctx.fillStyle = "#22c55e";
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, 12, [10, 10, 0, 0]);
+  ctx.fill();
+
+  ctx.fillStyle = "#16a34a";
+  for (let gx = x + 10; gx < x + w - 10; gx += 16) {
+    ctx.beginPath();
+    ctx.moveTo(gx, y + 12);
+    ctx.lineTo(gx + 6, y + 18);
+    ctx.lineTo(gx + 12, y + 12);
+    ctx.fill();
+  }
+}
+
+function drawMarioMushroom(ctx, x, y, w, h, capColor) {
+  ctx.fillStyle = "#fef08a";
+  ctx.fillRect(x + w / 2 - 14, y + 10, 28, h - 10);
+
+  ctx.fillStyle = capColor;
+  ctx.beginPath();
+  ctx.ellipse(x + w / 2, y + 12, w / 2, 14, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(x + w / 2 - 20, y + 10, 6, 0, Math.PI * 2);
+  ctx.arc(x + w / 2, y + 8, 7, 0, Math.PI * 2);
+  ctx.arc(x + w / 2 + 20, y + 10, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 11px Outfit, sans-serif";
+  ctx.fillText("⚡ BOING!", x + w / 2 - 24, y - 4);
+}
+
+function drawMarioWarpPipe(ctx, x, y, w, h, isUnlocked) {
+  const pipeGrad = ctx.createLinearGradient(x, y, x + w, y);
+  pipeGrad.addColorStop(0, "#15803d");
+  pipeGrad.addColorStop(0.3, "#22c55e");
+  pipeGrad.addColorStop(0.6, "#4ade80");
+  pipeGrad.addColorStop(1, "#166534");
+
+  ctx.fillStyle = pipeGrad;
+  ctx.beginPath();
+  ctx.roundRect(x - 5, y, w + 10, 20, 5);
+  ctx.fill();
+  ctx.strokeStyle = "#14532d";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  ctx.fillStyle = pipeGrad;
+  ctx.fillRect(x, y + 20, w, h - 20);
+  ctx.strokeRect(x, y + 20, w, h - 20);
+
+  ctx.font = "20px sans-serif";
+  ctx.fillText(isUnlocked ? "🏁" : "🔒", x + w / 2 - 10, y - 8);
+}
+
+// Procedural Boss Monster Renderers
+function drawBossClockworkMech(ctx, x, y, w, h, now) {
+  // Steampunk Robo-Mech
+  ctx.fillStyle = "#334155";
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, 18);
+  ctx.fill();
+  ctx.strokeStyle = "#f59e0b";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // Steam Chimney
+  ctx.fillStyle = "#475569";
+  ctx.fillRect(x + 20, y - 24, 20, 24);
+  // Steam puff
+  ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+  ctx.beginPath();
+  ctx.arc(x + 30, y - 35, 12, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Glowing Eye
+  ctx.fillStyle = "#ef4444";
+  ctx.beginPath();
+  ctx.arc(x + w / 2, y + 45, 18, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#fef08a";
+  ctx.beginPath();
+  ctx.arc(x + w / 2, y + 45, 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Mechanical Teeth
+  ctx.fillStyle = "#0f172a";
+  ctx.fillRect(x + 25, y + 85, w - 50, 18);
+  ctx.fillStyle = "#ffffff";
+  for (let tx = x + 30; tx < x + w - 35; tx += 12) {
+    ctx.fillRect(tx, y + 87, 8, 6);
+    ctx.fillRect(tx, y + 96, 8, 6);
+  }
+}
+
+function drawBossCaptainSquiddy(ctx, x, y, w, h, now) {
+  // Giant Pirate Kraken
+  ctx.fillStyle = "#a855f7";
+  ctx.beginPath();
+  ctx.arc(x + w / 2, y + 50, 45, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Pirate Hat
+  ctx.fillStyle = "#0f172a";
+  ctx.beginPath();
+  ctx.moveTo(x + 10, y + 25);
+  ctx.lineTo(x + w / 2, y - 20);
+  ctx.lineTo(x + w - 10, y + 25);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = "#fbbf24";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Eye and Eye patch
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(x + 35, y + 42, 14, 14); // Patch
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(x + 72, y + 48, 9, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#000000";
+  ctx.beginPath();
+  ctx.arc(x + 72, y + 48, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Tentacles
+  ctx.fillStyle = "#9333ea";
+  for (let i = 0; i < 4; i++) {
+    const tx = x + 18 + i * 24;
+    const wave = Math.sin(now * 0.006 + i) * 12;
+    ctx.beginPath();
+    ctx.roundRect(tx, y + 85 + wave, 14, 45 - wave, 7);
+    ctx.fill();
+  }
+}
+
+function drawBossGummyDragon(ctx, x, y, w, h, now) {
+  // Translucent Candy Dragon
+  ctx.fillStyle = "#ec4899";
+  ctx.beginPath();
+  ctx.roundRect(x, y + 10, w, h - 20, 24);
+  ctx.fill();
+  ctx.strokeStyle = "#f43f5e";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // Candy Horns
+  ctx.fillStyle = "#fde047";
+  ctx.beginPath();
+  ctx.moveTo(x + 25, y + 10);
+  ctx.lineTo(x + 15, y - 25);
+  ctx.lineTo(x + 35, y + 5);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(x + w - 25, y + 10);
+  ctx.lineTo(x + w - 15, y - 25);
+  ctx.lineTo(x + w - 35, y + 5);
+  ctx.closePath();
+  ctx.fill();
+
+  // Eyes
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(x + 38, y + 45, 12, 0, Math.PI * 2);
+  ctx.arc(x + w - 38, y + 45, 12, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#0f172a";
+  ctx.beginPath();
+  ctx.arc(x + 38, y + 45, 6, 0, Math.PI * 2);
+  ctx.arc(x + w - 38, y + 45, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Smiling snout
+  ctx.fillStyle = "#fb7185";
+  ctx.beginPath();
+  ctx.ellipse(x + w / 2, y + 78, 28, 16, 0, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function listenObbyPrompt() {
+  if (currentObbyStage) {
+    speakEnglish(currentObbyStage.promptEn, 'guide');
+  }
+}
+
+function showObbyFloatingBanner(text, durationFrames = 180) {
+  // Visual banner
 }
 
 function showObbyVictoryScreen() {
-  sfx.playApplause();
-  AppState.addStars(80);
-
-  const container = document.querySelector('.obby-game-container');
-  if (!container) return;
-
-  container.innerHTML = `
-    <div style="text-align:center; padding:36px 20px; background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-radius:24px; border:3px solid #8b5cf6;">
-      <div style="font-size:4rem; margin-bottom:12px; animation:frogJumpSplash 0.8s ease infinite alternate;">🏆👑🛍️</div>
-      <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#5b21b6; margin-bottom:10px;">
-        MALL OBBY RUN 2D CHAMPION!
-      </h2>
-      <p style="font-size:1.15rem; color:#6d28d9; max-width:640px; margin:0 auto 20px; line-height:1.5;">
-        Barnaby cleared all platforms, dodged lasers and conveyor belts, and completed all <strong>8 department stages</strong> of the shopping mall with Cambridge A2 Movers grammar! You won <strong>+80 bonus pts</strong> and the Golden Crown.
-      </p>
-      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-        <button class="btn-back-map" style="background:#7c3aed; color:#ffffff; border-color:#7c3aed; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="switchTab('goldquest', document.querySelectorAll('.tab-btn')[1])">
-          💎 Next Activity: Blooket Gold Quest ➔
-        </button>
-        <button class="btn-back-map" style="background:#ffffff; color:#7c3aed; border-color:#ddd6fe; cursor:pointer; font-size:1rem; padding:12px 24px;" onclick="location.reload()">
-          🔄 Play Obby Again
-        </button>
-      </div>
-    </div>
-  `;
+  handleBossDefeat();
 }
+
 
 // ============================================================================
 // ACTIVIDAD 2: 💎 BLOOKET-STYLE "GOLD CHEST MARKET RAID"
@@ -2143,6 +2733,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1. Iniciar Obby Engine 2D
   startObbyEngine();
+
+  if (window.location.hash === '#boss') {
+    currentStageIndex = 2;
+    loadCurrentWorldStage();
+    setTimeout(() => {
+      triggerBossEncounter();
+    }, 400);
+  }
 
   // 2. Iniciar Gold Quest
   loadGoldQuestRound(0);
