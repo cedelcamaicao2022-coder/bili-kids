@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="kids_unit8_styles.css?v=20261123_hero_select">
+  <link rel="stylesheet" href="kids_unit8_styles.css?v=20261123_hero_incanvas">
   <link rel="stylesheet" href="kids_responsive.css?v=20261102_navfix">
   <link rel="stylesheet" href="bilikids_mascot.css?v=20261102">
 </head>
@@ -167,6 +167,87 @@
         <!-- Canvas del Videojuego 2D -->
         <div class="obby-canvas-wrapper">
           <canvas id="obbyCanvas" width="800" height="400"></canvas>
+
+          <!-- HERO SELECT IN-CANVAS OVERLAY (SOLO DENTRO DE LA PANTALLA DEL JUEGO) -->
+          <div id="heroSelectModal" class="hero-select-modal active" role="dialog" aria-modal="true" aria-labelledby="heroMainTitle">
+            <div class="hero-canvas-inner">
+              <button type="button" class="btn-hero-close" id="btnHeroClose" onclick="closeHeroSelectOverlay()" title="Cerrar y continuar jugando" style="display:none;">✕</button>
+
+              <div class="hero-canvas-header">
+                <div class="hero-mini-badge">
+                  <span class="pulse-dot"></span>
+                  <span>16-BIT RETRO HEROES</span>
+                </div>
+                <h3 class="hero-canvas-title" id="heroMainTitle">¡Elige a tu Personaje!</h3>
+                <p class="hero-canvas-sub">Selecciona con quién jugar la aventura</p>
+              </div>
+
+              <!-- 3 HERO COMPACT CARDS -->
+              <div class="hero-canvas-grid">
+                <!-- LEO -->
+                <div class="hero-mini-card hero-card-leo selected" id="cardHeroLeo" onclick="selectHero('leo')">
+                  <div class="hero-mini-header">🦁 LEO</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_leo_walk.gif" alt="Leo" class="hero-mini-avatar" id="heroAnimLeo">
+                  </div>
+                  <div class="hero-mini-title">El León Valiente</div>
+                  <div class="hero-mini-tags">
+                    <span>Gorra 'L'</span>
+                    <span>Hoodie Azul</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickLeo">
+                    <span class="pick-check">✓</span> <span class="pick-text">LISTO</span>
+                  </button>
+                </div>
+
+                <!-- BILI -->
+                <div class="hero-mini-card hero-card-bili" id="cardHeroBili" onclick="selectHero('bili')">
+                  <div class="hero-mini-header">🐻 BILI</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_bili_walk.gif" alt="Bili" class="hero-mini-avatar" id="heroAnimBili">
+                  </div>
+                  <div class="hero-mini-title">El Oso Explorador</div>
+                  <div class="hero-mini-tags">
+                    <span>Gorra 'B'</span>
+                    <span>Hoodie Amarillo</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickBili">
+                    <span class="pick-text">Elegir</span>
+                  </button>
+                </div>
+
+                <!-- LUNA -->
+                <div class="hero-mini-card hero-card-luna" id="cardHeroLuna" onclick="selectHero('luna')">
+                  <div class="hero-mini-header">🐰 LUNA</div>
+                  <div class="hero-mini-podium">
+                    <div class="hero-mini-glow"></div>
+                    <img src="assets/mascot/official_luna_walk.gif" alt="Luna" class="hero-mini-avatar" id="heroAnimLuna">
+                  </div>
+                  <div class="hero-mini-title">La Conejita Veloz</div>
+                  <div class="hero-mini-tags">
+                    <span>Lazo Rosa</span>
+                    <span>Mochila Morada</span>
+                  </div>
+                  <button type="button" class="hero-mini-btn" id="btnPickLuna">
+                    <span class="pick-text">Elegir</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- FOOTER ACTION BAR -->
+              <div class="hero-canvas-footer">
+                <div class="hero-summary-inline" id="heroSelectionSummary">
+                  <span>Héroe:</span> <strong id="summaryHeroName">🦁 Leo • El León Valiente</strong>
+                </div>
+                <button type="button" class="btn-canvas-start" id="btnStartAdventure" onclick="confirmHeroAndStart()">
+                  <span>¡JUGAR CON LEO! 🚀</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         <!-- BOSS COMBAT CHALLENGE MODAL (EL INGLÉS ES EL ARMA DE COMBATE) -->
@@ -569,105 +650,12 @@
     </section>
 
 
-    <!-- PANTALLA DE INICIO: SELECCIÓN DE PERSONAJE (LEO, BILI, LUNA) - 16-BIT RETRO -->
-    <div id="heroSelectModal" class="hero-select-modal active" role="dialog" aria-modal="true" aria-labelledby="heroMainTitle">
-      <div class="hero-select-card">
-        <button type="button" class="btn-hero-close" id="btnHeroClose" onclick="closeHeroSelectOverlay()" title="Cerrar y continuar jugando" style="display:none;">✕</button>
-
-        <div class="hero-header-banner">
-          <div class="hero-game-badge">
-            <span class="pulse-dot"></span>
-            <span>BILIKIDS COLOR ADVENTURE • 16-BIT RETRO EDITION</span>
-          </div>
-          <h1 class="hero-main-title" id="heroMainTitle">¡Elige a tu Héroe!</h1>
-          <p class="hero-sub-title">Selecciona con qué personaje quieres jugar la aventura 🎮</p>
-        </div>
-
-        <!-- GRID CON LOS 3 PERSONAJES RETRO PIXEL ART -->
-        <div class="hero-grid-roster">
-          <!-- LEO -->
-          <div class="hero-pick-card hero-card-leo selected" id="cardHeroLeo" onclick="selectHero('leo')">
-            <div class="hero-pick-badge">⚡ VALOR & FUERZA</div>
-            <div class="hero-podium">
-              <div class="hero-podium-glow"></div>
-              <img src="assets/mascot/official_leo_walk.gif" alt="Leo el León" class="hero-avatar-anim" id="heroAnimLeo">
-            </div>
-            <div class="hero-info-box">
-              <div class="hero-char-name">🦁 Leo</div>
-              <div class="hero-char-role">El León Valiente</div>
-              <div class="hero-char-tags">
-                <span class="hero-tag">Gorra Azul 'L'</span>
-                <span class="hero-tag">Sudadera Azul</span>
-              </div>
-              <p class="hero-char-desc">¡Rápido, audaz y valiente! Domina los saltos altos y los desafíos más intensos.</p>
-            </div>
-            <button type="button" class="hero-pick-btn" id="btnPickLeo">
-              <span class="pick-check">✓</span> <span class="pick-text">¡SELECCIONADO!</span>
-            </button>
-          </div>
-
-          <!-- BILI -->
-          <div class="hero-pick-card hero-card-bili" id="cardHeroBili" onclick="selectHero('bili')">
-            <div class="hero-pick-badge">🌟 AMISTAD & EXPLORACIÓN</div>
-            <div class="hero-podium">
-              <div class="hero-podium-glow"></div>
-              <img src="assets/mascot/official_bili_walk.gif" alt="Bili el Osito" class="hero-avatar-anim" id="heroAnimBili">
-            </div>
-            <div class="hero-info-box">
-              <div class="hero-char-name">🐻 Bili</div>
-              <div class="hero-char-role">El Oso Explorador</div>
-              <div class="hero-char-tags">
-                <span class="hero-tag">Gorra Azul 'B'</span>
-                <span class="hero-tag">Sudadera Amarilla</span>
-              </div>
-              <p class="hero-char-desc">¡El clásico explorador de BiliKids! Alegre, entusiasta y con un corazón bondadoso.</p>
-            </div>
-            <button type="button" class="hero-pick-btn" id="btnPickBili">
-              <span class="pick-check">✓</span> <span class="pick-text">Seleccionar</span>
-            </button>
-          </div>
-
-          <!-- LUNA -->
-          <div class="hero-pick-card hero-card-luna" id="cardHeroLuna" onclick="selectHero('luna')">
-            <div class="hero-pick-badge">🎀 VELOCIDAD & AGILIDAD</div>
-            <div class="hero-podium">
-              <div class="hero-podium-glow"></div>
-              <img src="assets/mascot/official_luna_walk.gif" alt="Luna la Conejita" class="hero-avatar-anim" id="heroAnimLuna">
-            </div>
-            <div class="hero-info-box">
-              <div class="hero-char-name">🐰 Luna</div>
-              <div class="hero-char-role">La Conejita Veloz</div>
-              <div class="hero-char-tags">
-                <span class="hero-tag">Lazo Rosa</span>
-                <span class="hero-tag">Mochila Morada</span>
-              </div>
-              <p class="hero-char-desc">¡Ágil, mágica y brillante! Con su ligereza esquiva obstáculos a toda velocidad.</p>
-            </div>
-            <button type="button" class="hero-pick-btn" id="btnPickLuna">
-              <span class="pick-check">✓</span> <span class="pick-text">Seleccionar</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- BARRA DE ACCIÓN INFERIOR -->
-        <div class="hero-start-actions">
-          <div class="hero-selection-summary" id="heroSelectionSummary">
-            <span>Héroe seleccionado:</span>
-            <span id="summaryHeroName" class="summary-hero-highlight">🦁 <strong>Leo</strong> • El León Valiente</span>
-          </div>
-          <button type="button" class="btn-start-adventure" id="btnStartAdventure" onclick="confirmHeroAndStart()">
-            <span>¡COMENZAR CON LEO! 🎮 🚀</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
   </main>
 
   <script src="assets/games_interactive/interactive_audio_manifest.js?v=20261118_bili"></script>
   <script src="assets/kids_audio/kids_audio_manifest.js?v=20261120_keywords_v1"></script>
   <script src="assets/kids_audio/kids_audio_player.js?v=20261120_keywords_v1"></script>
-  <script src="kids_unit8_engine.js?v=20261123_hero_select"></script>
+  <script src="kids_unit8_engine.js?v=20261123_hero_incanvas"></script>
   <script src="bilikids_mascot.js?v=20261102"></script>
 </body>
 </html>
