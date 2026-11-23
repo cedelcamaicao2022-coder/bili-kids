@@ -105,6 +105,24 @@ class SoundEffects {
     osc.stop(this.ctx.currentTime + 0.3);
   }
 
+  playBlockHit() {
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(380, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(160, this.ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.14);
+    } catch(e) {}
+  }
+
   playLaserBeep() {
     this.init();
     // Supermarket scanner laser beep
@@ -188,7 +206,16 @@ class SoundEffects {
   }
 }
 
-const sfx = new SoundEffects();
+const _rawSfx = new SoundEffects();
+const sfx = new Proxy(_rawSfx, {
+  get(target, prop) {
+    if (prop in target) {
+      const val = target[prop];
+      return typeof val === 'function' ? val.bind(target) : val;
+    }
+    return () => {};
+  }
+});
 
 // ============================================================================
 // SPEECH SYNTHESIS ENGINE (Safe Callback + Timeout Fallback)
@@ -1077,8 +1104,14 @@ function setupObbyEventListeners() {
       }
 
       // 2. Mystery block modal or gatekeeper modal active
-      if (document.getElementById('obbyMysteryModal')?.style.display === 'flex') return;
-      if (document.getElementById('obbyGatekeeperModal')?.style.display === 'flex') return;
+      if (document.getElementById('obbyMysteryModal')?.style.display === 'flex') {
+        if (e.key === 'Escape') closeMysteryBlockModal();
+        return;
+      }
+      if (document.getElementById('obbyGatekeeperModal')?.style.display === 'flex') {
+        if (e.key === 'Escape') closeGatekeeperModal();
+        return;
+      }
 
       // 3. Boss challenge modal active
       const bossModal = document.getElementById('bossChallengeModal');
@@ -1616,14 +1649,17 @@ function submitTerminalWord() {
 function openMysteryBlockModal(block) {
   const modal = document.getElementById('obbyMysteryModal');
   if (!modal || !block.challenge) return;
+  if (modal.style.display === 'flex') return;
 
   activeMysteryBlock = block;
+  block.isPrompting = true;
   modal.style.display = 'flex';
 
-  // Freeze player
+  // Freeze player velocity cleanly
   inputKeys.left = false;
   inputKeys.right = false;
   Player.vx = 0;
+  Player.vy = 0;
 
   document.getElementById('mysteryModalTitle').textContent = block.challenge.title || "Mystery Question Block [ ? ]";
   document.getElementById('mysteryModalPromptEn').textContent = block.challenge.promptEn;
@@ -1638,6 +1674,20 @@ function openMysteryBlockModal(block) {
   `).join('');
 
   playMysteryModalAudio();
+}
+
+function closeMysteryBlockModal() {
+  const modal = document.getElementById('obbyMysteryModal');
+  if (modal) modal.style.display = 'none';
+  if (activeMysteryBlock) {
+    activeMysteryBlock.isPrompting = false;
+    activeMysteryBlock = null;
+  }
+}
+
+function closeGatekeeperModal() {
+  const modal = document.getElementById('obbyGatekeeperModal');
+  if (modal) modal.style.display = 'none';
 }
 
 function playMysteryModalAudio() {
@@ -1673,6 +1723,7 @@ function selectMysteryChoice(idx) {
 
     activeMysteryBlock.hit = true;
     activeMysteryBlock.solved = true;
+    activeMysteryBlock.isPrompting = false;
 
     setTimeout(() => {
       const modal = document.getElementById('obbyMysteryModal');
@@ -1912,14 +1963,15 @@ function obbyGameLoop() {
         Player.y >= b.y + b.h - 14 &&
         Player.vy < 0
       ) {
-        Player.y = b.y + b.h;
+        Player.y = b.y + b.h + 2;
         Player.vy = 2.5;
         b.bumpY = -14;
         Player.celebratingTimer = 30;
 
-        if (!b.hit) {
+        if (!b.hit && !b.isPrompting) {
           sfx.playBlockHit();
           if (b.challenge) {
+            b.isPrompting = true;
             openMysteryBlockModal(b);
           } else {
             b.hit = true;
