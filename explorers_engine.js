@@ -260,6 +260,28 @@ function playColorAudio(colorName) {
   }
 }
 
+function playColorInstruction(colorName) {
+  try {
+    const jumpSnd = new Audio('assets/games_interactive/audio/leo_jump_101f693f.mp3');
+    jumpSnd.play().then(() => {
+      jumpSnd.onended = () => {
+        playColorAudio(colorName);
+      };
+    }).catch(() => {
+      playColorAudio(colorName);
+    });
+  } catch(e) {
+    playColorAudio(colorName);
+  }
+}
+
+function playGreatJumpAudio() {
+  try {
+    const greatSnd = new Audio('assets/games_interactive/audio/leo_great_jump_0238aca1.mp3');
+    greatSnd.play().catch(() => {});
+  } catch(e) {}
+}
+
 function playCountingAudio(num) {
   const countMap = {
     1: 'assets/kids_audio/keywords/bili_kw_u1_one.mp3',
@@ -501,6 +523,25 @@ function updateHeroSelectionUI(heroId) {
 function confirmHeroAndStart() {
   try { sfx.playSuccess(); } catch(e) {}
   closeHeroSelectOverlay();
+
+  // Trigger spoken English mission instructions on first user gesture
+  setTimeout(() => {
+    if (currentObbyStage) {
+      if (currentObbyStage.colorSequence && currentObbyStage.colorSequence.length > 0) {
+        const col = currentObbyStage.colorSequence[currentObbyStage.currentColorIndex || 0];
+        playColorInstruction(col);
+        showObbyFloatingBanner(`🎯 JUMP ON ${col.toUpperCase()}! 🌈`);
+      } else if (currentObbyStage.items && currentObbyStage.items.length > 0) {
+        const starSnd = new Audio('assets/games_interactive/audio/leo_star_26f93e6e.mp3');
+        starSnd.play().catch(() => speakEnglish("Collect three red stars!", "guide"));
+        showObbyFloatingBanner("⭐ COLLECT THREE RED STARS! 🔴");
+      } else if (currentObbyStage.doors) {
+        const yellowSnd = new Audio('assets/games_interactive/audio/leo_yellow_51e6cd92.mp3');
+        yellowSnd.play().catch(() => speakEnglish("Find the yellow door!", "guide"));
+        showObbyFloatingBanner("🚪 FIND THE YELLOW DOOR! 🌟");
+      }
+    }
+  }, 400);
 }
 
 function openHeroSelectOverlay() {
@@ -610,23 +651,40 @@ const WORLDS_DATA = [
         checkpointX: 40,
         finishX: 1350,
         platforms: [
-          { x: 0, y: 340, w: 220, h: 60, type: 'grass' },
-          { x: 260, y: 280, w: 120, h: 35, type: 'color_pad', color: 'blue', colorHex: '#3b82f6', label: 'BLUE' },
-          { x: 480, y: 280, w: 120, h: 35, type: 'color_pad', color: 'yellow', colorHex: '#eab308', label: 'YELLOW' },
-          { x: 640, y: 300, w: 100, h: 35, type: 'trampoline' },
-          { x: 780, y: 240, w: 120, h: 35, type: 'color_pad', color: 'red', colorHex: '#ef4444', label: 'RED' },
-          { x: 940, y: 270, w: 120, h: 35, type: 'color_pad', color: 'green', colorHex: '#22c55e', label: 'GREEN' },
-          { x: 1100, y: 320, w: 260, h: 80, type: 'rainbow_ground' }
+          // 1. Continuous child-friendly meadow floor (Zero fall/death penalty)
+          { x: 0, y: 350, w: 1100, h: 50, type: 'grass' },
+          // 2. Spring mushroom bounce up to Blue
+          { x: 170, y: 315, w: 60, h: 35, type: 'mushroom_red' },
+          // 3. BLUE Color Pad
+          { x: 250, y: 250, w: 140, h: 35, type: 'color_pad', color: 'blue', colorHex: '#3b82f6', label: 'BLUE' },
+          // 4. Super Trampoline right under the Paint Block!
+          { x: 415, y: 315, w: 80, h: 35, type: 'trampoline' },
+          // 5. YELLOW Color Pad
+          { x: 530, y: 250, w: 140, h: 35, type: 'color_pad', color: 'yellow', colorHex: '#eab308', label: 'YELLOW' },
+          // 6. Spring mushroom bounce up to Red
+          { x: 700, y: 315, w: 60, h: 35, type: 'mushroom_yellow' },
+          // 7. RED Color Pad
+          { x: 770, y: 230, w: 140, h: 35, type: 'color_pad', color: 'red', colorHex: '#ef4444', label: 'RED' },
+          // 8. Spring mushroom bounce up to Green
+          { x: 920, y: 315, w: 60, h: 35, type: 'mushroom_red' },
+          // 9. GREEN Color Pad (Exploration & reward)
+          { x: 970, y: 250, w: 130, h: 35, type: 'color_pad', color: 'green', colorHex: '#22c55e', label: 'GREEN' },
+          // 10. Rainbow ground with warp portal
+          { x: 1100, y: 320, w: 300, h: 80, type: 'rainbow_ground' }
         ],
         mysteryBlocks: [
-          { x: 420, y: 170, w: 45, h: 45, type: 'paint_block', content: 'PAINT 🎨', hit: false, bumpY: 0 }
+          { x: 430, y: 155, w: 50, h: 50, type: 'paint_block', content: 'PAINT 🎨', hit: false, bumpY: 0 }
         ],
         coins: [
-          { x: 300, y: 220, collected: false },
-          { x: 520, y: 220, collected: false },
-          { x: 820, y: 180, collected: false }
+          { x: 100, y: 300, collected: false },
+          { x: 320, y: 190, collected: false },
+          { x: 455, y: 95, collected: false },
+          { x: 600, y: 190, collected: false },
+          { x: 840, y: 170, collected: false },
+          { x: 1035, y: 190, collected: false },
+          { x: 1180, y: 260, collected: false }
         ],
-        gate: { x: 1240, y: 215, w: 40, h: 105, unlocked: false }
+        gate: { x: 1250, y: 215, w: 60, h: 105, unlocked: false }
       },
       {
         id: 1,
@@ -638,24 +696,26 @@ const WORLDS_DATA = [
         checkpointX: 40,
         finishX: 1350,
         platforms: [
-          { x: 0, y: 340, w: 200, h: 60, type: 'grass' },
-          { x: 240, y: 290, w: 120, h: 35, type: 'cloud_bounce' },
-          { x: 410, y: 250, w: 130, h: 35, type: 'grass' },
-          { x: 580, y: 280, w: 110, h: 35, type: 'mushroom_red' },
+          // Safe ground floor
+          { x: 0, y: 350, w: 1100, h: 50, type: 'grass' },
+          { x: 240, y: 280, w: 120, h: 35, type: 'cloud_bounce' },
+          { x: 410, y: 240, w: 130, h: 35, type: 'grass' },
+          { x: 580, y: 270, w: 110, h: 35, type: 'mushroom_red' },
           { x: 740, y: 220, w: 130, h: 35, type: 'cloud_bounce' },
-          { x: 920, y: 270, w: 130, h: 35, type: 'grass' },
-          { x: 1100, y: 320, w: 260, h: 80, type: 'rainbow_ground' }
+          { x: 920, y: 260, w: 130, h: 35, type: 'grass' },
+          { x: 1100, y: 320, w: 300, h: 80, type: 'rainbow_ground' }
         ],
         items: [
-          { id: "star_1", type: "color_star", color: "red", x: 475, y: 190, name: "Red Star", icon: "⭐", collected: false },
+          { id: "star_1", type: "color_star", color: "red", x: 475, y: 180, name: "Red Star", icon: "⭐", collected: false },
           { id: "star_2", type: "color_star", color: "red", x: 805, y: 160, name: "Red Star", icon: "⭐", collected: false },
-          { id: "star_3", type: "color_star", color: "red", x: 985, y: 210, name: "Red Star", icon: "⭐", collected: false }
+          { id: "star_3", type: "color_star", color: "red", x: 985, y: 200, name: "Red Star", icon: "⭐", collected: false }
         ],
         coins: [
-          { x: 280, y: 240, collected: false },
-          { x: 630, y: 210, collected: false }
+          { x: 280, y: 230, collected: false },
+          { x: 630, y: 200, collected: false },
+          { x: 1180, y: 260, collected: false }
         ],
-        gate: { x: 1240, y: 215, w: 40, h: 105, unlocked: false }
+        gate: { x: 1250, y: 215, w: 60, h: 105, unlocked: false }
       },
       {
         id: 2,
@@ -667,19 +727,20 @@ const WORLDS_DATA = [
         checkpointX: 40,
         finishX: 1400,
         platforms: [
-          { x: 0, y: 340, w: 150, h: 60, type: 'grass' },
-          { x: 180, y: 310, w: 85, h: 25, type: 'rainbow_step', colorHex: '#ef4444', noteFreq: 261.63, name: 'RED' },
-          { x: 285, y: 270, w: 85, h: 25, type: 'rainbow_step', colorHex: '#f97316', noteFreq: 293.66, name: 'ORANGE' },
-          { x: 390, y: 230, w: 85, h: 25, type: 'rainbow_step', colorHex: '#eab308', noteFreq: 329.63, name: 'YELLOW' },
-          { x: 495, y: 230, w: 85, h: 25, type: 'rainbow_step', colorHex: '#22c55e', noteFreq: 349.23, name: 'GREEN' },
-          { x: 600, y: 270, w: 85, h: 25, type: 'rainbow_step', colorHex: '#3b82f6', noteFreq: 392.00, name: 'BLUE' },
-          { x: 705, y: 310, w: 85, h: 25, type: 'rainbow_step', colorHex: '#a855f7', noteFreq: 440.00, name: 'PURPLE' },
-          { x: 820, y: 340, w: 560, h: 60, type: 'rainbow_ground' }
+          // Safe ground floor
+          { x: 0, y: 350, w: 1400, h: 50, type: 'grass' },
+          { x: 180, y: 290, w: 85, h: 25, type: 'rainbow_step', colorHex: '#ef4444', noteFreq: 261.63, name: 'RED' },
+          { x: 285, y: 255, w: 85, h: 25, type: 'rainbow_step', colorHex: '#f97316', noteFreq: 293.66, name: 'ORANGE' },
+          { x: 390, y: 220, w: 85, h: 25, type: 'rainbow_step', colorHex: '#eab308', noteFreq: 329.63, name: 'YELLOW' },
+          { x: 495, y: 220, w: 85, h: 25, type: 'rainbow_step', colorHex: '#22c55e', noteFreq: 349.23, name: 'GREEN' },
+          { x: 600, y: 255, w: 85, h: 25, type: 'rainbow_step', colorHex: '#3b82f6', noteFreq: 392.00, name: 'BLUE' },
+          { x: 705, y: 290, w: 85, h: 25, type: 'rainbow_step', colorHex: '#a855f7', noteFreq: 440.00, name: 'PURPLE' },
+          { x: 820, y: 320, w: 580, h: 80, type: 'rainbow_ground' }
         ],
         doors: [
-          { x: 910, y: 255, w: 55, h: 85, color: 'red', colorHex: '#ef4444', label: 'RED DOOR', icon: '🔴', isTarget: false },
-          { x: 1040, y: 255, w: 55, h: 85, color: 'yellow', colorHex: '#eab308', label: 'YELLOW DOOR', icon: '🟡', isTarget: true },
-          { x: 1170, y: 255, w: 55, h: 85, color: 'blue', colorHex: '#3b82f6', label: 'BLUE DOOR', icon: '🔵', isTarget: false }
+          { x: 910, y: 235, w: 55, h: 85, color: 'red', colorHex: '#ef4444', label: 'RED DOOR', icon: '🔴', isTarget: false },
+          { x: 1040, y: 235, w: 55, h: 85, color: 'yellow', colorHex: '#eab308', label: 'YELLOW DOOR', icon: '🟡', isTarget: true },
+          { x: 1170, y: 235, w: 55, h: 85, color: 'blue', colorHex: '#3b82f6', label: 'BLUE DOOR', icon: '🔵', isTarget: false }
         ],
         gate: null
       },
@@ -1125,8 +1186,10 @@ function setupObbyEventListeners() {
     const setL = (v) => { inputKeys.left = v; };
     btnLeft.addEventListener('mousedown', () => setL(true));
     btnLeft.addEventListener('mouseup', () => setL(false));
+    btnLeft.addEventListener('mouseleave', () => setL(false));
     btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); setL(true); });
     btnLeft.addEventListener('touchend', (e) => { e.preventDefault(); setL(false); });
+    btnLeft.addEventListener('touchcancel', (e) => { e.preventDefault(); setL(false); });
   }
 
   if (btnRight && !btnRight._bound) {
@@ -1134,8 +1197,10 @@ function setupObbyEventListeners() {
     const setR = (v) => { inputKeys.right = v; };
     btnRight.addEventListener('mousedown', () => setR(true));
     btnRight.addEventListener('mouseup', () => setR(false));
+    btnRight.addEventListener('mouseleave', () => setR(false));
     btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); setR(true); });
     btnRight.addEventListener('touchend', (e) => { e.preventDefault(); setR(false); });
+    btnRight.addEventListener('touchcancel', (e) => { e.preventDefault(); setR(false); });
   }
 
   if (btnJump && !btnJump._bound) {
@@ -1143,6 +1208,11 @@ function setupObbyEventListeners() {
     btnJump.addEventListener('mousedown', () => tryPlayerJump());
     btnJump.addEventListener('touchstart', (e) => { e.preventDefault(); tryPlayerJump(); });
   }
+
+  window.addEventListener('blur', () => {
+    inputKeys.left = false;
+    inputKeys.right = false;
+  });
 
   if (!window._obbyKeysBound) {
     window._obbyKeysBound = true;
@@ -1992,6 +2062,16 @@ function obbyGameLoop() {
     Player.vx *= 0.75;
   }
 
+  // Clamping within stage boundaries
+  if (Player.x < 10) {
+    Player.x = 10;
+    Player.vx = 0;
+  }
+  if (Player.x > (stage.finishX || 1350) + 120) {
+    Player.x = (stage.finishX || 1350) + 120;
+    Player.vx = 0;
+  }
+
   // Gravity
   Player.vy += 0.52;
   if (Player.vy > 12) Player.vy = 12;
@@ -2042,6 +2122,7 @@ function obbyGameLoop() {
             stage.currentColorIndex++;
             sfx.playSuccess();
             createRainbowSparkles(Player.x + Player.w / 2, Player.y + Player.h);
+            playGreatJumpAudio();
             playColorAudio(p.color);
             Player.vy = -10;
             Player.celebratingTimer = 35;
@@ -2052,15 +2133,48 @@ function obbyGameLoop() {
               setTimeout(() => {
                 const winSnd = new Audio('assets/games_interactive/audio/leo_awesome_job_level_1_completed_ne_b2ef1e9e.mp3');
                 winSnd.play().catch(() => {});
-              }, 400);
+              }, 500);
             } else {
               const nextCol = stage.colorSequence[stage.currentColorIndex];
               showObbyFloatingBanner(`🎯 JUMP ON ${nextCol.toUpperCase()}! 🌈`);
               setTimeout(() => {
-                playColorAudio(nextCol);
-              }, 600);
+                playColorInstruction(nextCol);
+              }, 800);
             }
             updateObbyHudChecklist();
+          } else {
+            // Landed on wrong color pad! Gentle educational feedback
+            if (!p.lastWrongSound || now - p.lastWrongSound > 2200) {
+              p.lastWrongSound = now;
+              sfx.playBoing();
+              Player.vy = -6;
+              showObbyFloatingBanner(`Try again! Jump on ${targetCol.toUpperCase()}! 🎯`);
+              const tryAgainMap = {
+                'blue': 'assets/games_interactive/audio/leo_try_again_that_is_not_blue_41cdb59f.mp3',
+                'yellow': 'assets/games_interactive/audio/leo_try_again_that_is_not_yellow_08544965.mp3',
+                'red': 'assets/games_interactive/audio/leo_try_again_that_is_not_red_2250513d.mp3'
+              };
+              const errAudio = tryAgainMap[p.color];
+              if (errAudio) {
+                const snd = new Audio(errAudio);
+                snd.play().catch(() => {});
+                snd.onended = () => {
+                  setTimeout(() => playColorInstruction(targetCol), 300);
+                };
+              } else {
+                setTimeout(() => playColorInstruction(targetCol), 400);
+              }
+            }
+          }
+        } else {
+          // Extra color fun (e.g. Green or free exploration)
+          if (!p.lastFunSound || now - p.lastFunSound > 1500) {
+            p.lastFunSound = now;
+            sfx.playSuccess();
+            createRainbowSparkles(Player.x + Player.w / 2, Player.y + Player.h);
+            playColorAudio(p.color);
+            Player.vy = -10;
+            showObbyFloatingBanner(`✨ ${p.label || p.color.toUpperCase()}! 🌈`);
           }
         }
       } else if (p.type === 'rainbow_step') {
@@ -2093,16 +2207,13 @@ function obbyGameLoop() {
   // Mystery Blocks [ ? ] collisions
   if (stage.mysteryBlocks) {
     stage.mysteryBlocks.forEach(b => {
-      if (
-        Player.x + Player.w > b.x &&
-        Player.x < b.x + b.w &&
-        Player.y <= b.y + b.h &&
-        Player.y >= b.y + b.h - 14 &&
-        Player.vy < 0
-      ) {
+      const overlapsX = (Player.x + Player.w > b.x + 4) && (Player.x < b.x + b.w - 4);
+
+      // Hit from below
+      if (overlapsX && Player.y <= b.y + b.h + 8 && Player.y >= b.y + b.h - 28 && Player.vy < 0) {
         Player.y = b.y + b.h + 2;
         Player.vy = 2.5;
-        b.bumpY = -14;
+        b.bumpY = -16;
         Player.celebratingTimer = 30;
 
         if (!b.hit && !b.isPrompting) {
@@ -2110,7 +2221,7 @@ function obbyGameLoop() {
           if (b.type === 'paint_block') {
             b.hit = true;
             b.solved = true;
-            b.bumpY = -16;
+            b.bumpY = -18;
             stage.isPainted = true;
             sfx.playSuccess();
             createRainbowSparkles(b.x + b.w / 2, b.y);
@@ -2129,6 +2240,12 @@ function obbyGameLoop() {
             showObbyFloatingBanner(`⭐ Revealed: "${b.content}"!`);
           }
         }
+      } else if (overlapsX && Player.y + Player.h >= b.y && Player.y + Player.h <= b.y + 18 && Player.vy >= 0) {
+        // Land on top of block
+        Player.y = b.y - Player.h;
+        Player.vy = 0;
+        Player.isGrounded = true;
+        Player.jumpsLeft = Player.maxJumps;
       }
       b.bumpY *= 0.8;
     });
@@ -2317,6 +2434,14 @@ function obbyGameLoop() {
           sfx.playError();
           openTerminalGate(stage.terminalTargetWord, stage.terminalPromptEn, "");
           showObbyFloatingBanner("🔒 GATE LOCKED! Enter Password to Open!");
+        } else if (stage.colorSequence && stage.currentColorIndex < stage.colorSequence.length) {
+          sfx.playBoing();
+          const targetCol = stage.colorSequence[stage.currentColorIndex];
+          showObbyFloatingBanner(`🔒 PORTAL LOCKED! Jump on ${targetCol.toUpperCase()} first! 🌈`);
+          if (!stage.gate.lastWarn || now - stage.gate.lastWarn > 3000) {
+            stage.gate.lastWarn = now;
+            playColorInstruction(targetCol);
+          }
         } else if (stage.requiredItems && stage.requiredItems.length > 0) {
           const allCollected = stage.items.every(it => it.collected);
           if (!allCollected) {
@@ -2331,12 +2456,13 @@ function obbyGameLoop() {
     }
   }
 
-  // Fall into abyss respawn
-  if (Player.y > 440) {
-    Player.x = Player.respawnX;
-    Player.y = Player.respawnY;
-    Player.vy = 0;
-    sfx.playError();
+  // Fall into abyss soft safety bounce (Ages 4-5 friendly, zero death penalty)
+  if (Player.y > 420) {
+    Player.y = 280;
+    Player.vy = -11;
+    sfx.playBoing();
+    createRainbowSparkles(Player.x + Player.w / 2, Player.y);
+    showObbyFloatingBanner("🌈 BOING! Keep exploring! 🌟");
   }
   } // Fin if (!isHeroSelectOpen)
 
@@ -2431,7 +2557,7 @@ function obbyGameLoop() {
       if (rx + b.w < -20 || rx > canvas.width + 20) return;
 
       if (b.type === 'paint_block') {
-        drawPaintBlock(ctx, rx, ry, b.w, b.h, b.hit, b.bumpY, now);
+        drawPaintBlock(ctx, rx, b.y, b.w, b.h, b.hit, b.bumpY, now);
       } else if (!b.hit) {
         const bgGrad = ctx.createLinearGradient(rx, ry, rx, ry + b.h);
         bgGrad.addColorStop(0, "#fde047");
@@ -2651,6 +2777,43 @@ function obbyGameLoop() {
     }
   }
   ctx.globalAlpha = 1.0;
+
+  // Render In-Canvas Floating Message Banner
+  if (activeFloatingBanner && activeFloatingBanner.framesLeft > 0) {
+    activeFloatingBanner.framesLeft--;
+    ctx.save();
+    ctx.font = "900 15px 'Plus Jakarta Sans', Outfit, sans-serif";
+    const textMetrics = ctx.measureText(activeFloatingBanner.text);
+    const bw = Math.max(280, textMetrics.width + 48);
+    const bh = 36;
+    const bx = (canvas.width - bw) / 2;
+    const by = 14;
+
+    // Glowing shadow
+    ctx.shadowColor = "rgba(250, 204, 21, 0.6)";
+    ctx.shadowBlur = 12;
+
+    // Pill background
+    const pillGrad = ctx.createLinearGradient(bx, by, bx + bw, by);
+    pillGrad.addColorStop(0, "#4c1d95");
+    pillGrad.addColorStop(0.5, "#7c3aed");
+    pillGrad.addColorStop(1, "#ec4899");
+    ctx.fillStyle = pillGrad;
+    ctx.beginPath();
+    ctx.roundRect(bx, by, bw, bh, 18);
+    ctx.fill();
+
+    ctx.strokeStyle = "#fde047";
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(activeFloatingBanner.text, canvas.width / 2, by + bh / 2 + 1);
+    ctx.restore();
+  }
 
   requestAnimationFrame(obbyGameLoop);
 }
@@ -3484,15 +3647,25 @@ function listenObbyPrompt() {
   if (currentObbyStage) {
     if (currentObbyStage.colorSequence && currentObbyStage.currentColorIndex < currentObbyStage.colorSequence.length) {
       const col = currentObbyStage.colorSequence[currentObbyStage.currentColorIndex];
-      playColorAudio(col);
+      playColorInstruction(col);
+      showObbyFloatingBanner(`🎯 JUMP ON ${col.toUpperCase()}! 🌈`);
     } else {
       speakEnglish(currentObbyStage.promptEn, 'guide');
+      showObbyFloatingBanner(`🎯 ${currentObbyStage.promptEn}`);
     }
   }
 }
 
+let activeFloatingBanner = { text: "", framesLeft: 0 };
+
 function showObbyFloatingBanner(text, durationFrames = 180) {
-  // Visual banner
+  activeFloatingBanner.text = text || "";
+  activeFloatingBanner.framesLeft = durationFrames;
+
+  const promptEl = document.getElementById('obbyGatePromptEn');
+  if (promptEl) promptEl.textContent = `🎯 Mission: "${text}"`;
+  const stepChip = document.getElementById('stepChipText');
+  if (stepChip) stepChip.textContent = text;
 }
 
 function showObbyVictoryScreen() {
