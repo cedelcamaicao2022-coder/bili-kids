@@ -2639,28 +2639,35 @@ body.toddler-body {
    UNIT 1: SHAPES – TREN GEOMÉTRICO (Find the Shape activity)
    ========================================================================== */
 
-/* Train SVG interactive zones */
+/* Train SVG interactive pieces & zones */
+.train-piece,
 .train-zone {
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.18s ease;
   transform-box: fill-box;
   transform-origin: center;
+  pointer-events: all;
 }
 
+.train-piece:hover:not(.is-painted),
 .train-zone:hover:not(.is-painted) {
   filter: drop-shadow(0 0 12px #f59e0b) brightness(1.05);
   transform: scale(1.04);
 }
 
+.train-piece.is-painted,
 .train-zone.is-painted {
-  cursor: default;
+  cursor: pointer;
 }
 
+.train-piece.is-painted:hover,
 .train-zone.is-painted:hover {
-  filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.6));
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.7));
+  transform: scale(1.03);
 }
 
-/* Zone Pop animation when correctly found & painted */
+/* Piece & Zone Pop animation when tapped & painted */
+.train-piece-popping,
 .train-zone-popping {
   animation: trainZonePop 0.65s ease forwards;
   transform-box: fill-box;
