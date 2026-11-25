@@ -323,7 +323,7 @@
     const cHt = col('heart');
     const cDia = col('diamond');
     const outline = '#1e293b';
-    const sw = '4';
+    const sw = '4.5';
 
     let ties = '';
     for (let x = 15; x < 910; x += 48) {
@@ -331,12 +331,12 @@
     }
 
     return `
-    <svg viewBox="0 0 920 330" class="find-scene-svg" id="trainSVG" style="max-width:100%; display:block; margin:0 auto; background:#f0f9ff; border-radius:16px;" aria-label="Tren Geométrico">
-      <!-- Sky & Soft rolling hills -->
+    <svg viewBox="0 0 920 330" class="find-scene-svg" id="trainSVG" style="max-width:100%; display:block; margin:0 auto; background:#f0f9ff; border-radius:18px;" aria-label="Tren Geométrico">
+      <!-- Sky & Soft Hills -->
       <rect width="920" height="330" fill="#f0f9ff"/>
-      <path d="M 0 240 Q 460 220 920 240 L 920 330 L 0 330 Z" fill="#dcfce7"/>
+      <path d="M 0 240 Q 460 215 920 240 L 920 330 L 0 330 Z" fill="#dcfce7"/>
 
-      <!-- Wooden Railroad Ties -->
+      <!-- Wooden Ties -->
       <g fill="#78350f" opacity="0.65">
         ${ties}
       </g>
@@ -344,159 +344,100 @@
       <rect x="0" y="258" width="920" height="6" fill="#64748b" rx="2"/>
       <rect x="0" y="274" width="920" height="5" fill="#475569" rx="2"/>
 
-      <!-- ═══════════════════════════════════════════
-           WAGON 1: SAILBOAT ON FLATBED (x: 30–265)
-           ═══════════════════════════════════════════ -->
-      <!-- Coupler to Wagon 2 -->
+      <!-- Couplers -->
       <rect x="255" y="226" width="40" height="10" rx="3" fill="#334155" stroke="${outline}" stroke-width="2"/>
+      <rect x="535" y="226" width="40" height="10" rx="3" fill="#334155" stroke="${outline}" stroke-width="2"/>
 
-      <!-- Flatbed Chassis (RECTANGLE) -->
-      <g class="train-interactive-part ${painted.rectangle ? 'is-painted' : ''}" data-shape="rectangle" style="cursor:pointer;" id="train-part-rectangle-1" title="Rectangle (Chassis)">
-        <rect x="30" y="215" width="230" height="28" rx="6" fill="${cRec.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <line x1="35" y1="229" x2="255" y2="229" stroke="${cRec.stroke}" stroke-width="2" opacity="0.6"/>
-      </g>
+      <!-- Wagon 1 Flatbed Base (Neutral Chassis) -->
+      <rect x="30" y="215" width="230" height="28" rx="6" fill="#cbd5e1" stroke="${outline}" stroke-width="${sw}"/>
+      <line x1="35" y1="229" x2="255" y2="229" stroke="#94a3b8" stroke-width="2"/>
 
-      <!-- Boat Hull (OVAL) sitting on wagon -->
-      <g class="train-interactive-part ${painted.oval ? 'is-painted' : ''}" data-shape="oval" style="cursor:pointer;" id="train-part-oval-boat" title="Oval (Boat Hull)">
+      <!-- 1. ZONE: OVAL (Boat Hull) -->
+      <g class="train-zone ${painted.oval ? 'is-painted' : 'is-unpainted'}" data-shape="oval" id="train-zone-oval" title="Oval (Boat Hull)">
         <path d="M 48 165 C 65 215 225 215 242 165 Z" fill="${cOv.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
-      </g>
-
-      <!-- Portholes on Boat (CIRCLES) -->
-      <g class="train-interactive-part ${painted.circle ? 'is-painted' : ''}" data-shape="circle" style="cursor:pointer;" id="train-part-circle-portholes" title="Circle (Portholes)">
-        <circle cx="105" cy="182" r="13" fill="${cCir.fill}" stroke="${outline}" stroke-width="3.5"/>
-        <circle cx="105" cy="182" r="5" fill="#ffffff" stroke="${outline}" stroke-width="2"/>
-        <circle cx="185" cy="182" r="13" fill="${cCir.fill}" stroke="${outline}" stroke-width="3.5"/>
-        <circle cx="185" cy="182" r="5" fill="#ffffff" stroke="${outline}" stroke-width="2"/>
+        <path d="M 44 165 L 246 165" stroke="${outline}" stroke-width="3" stroke-linecap="round"/>
       </g>
 
       <!-- Mast -->
       <line x1="145" y1="165" x2="145" y2="45" stroke="${outline}" stroke-width="5" stroke-linecap="round"/>
       <circle cx="145" cy="42" r="5" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
 
-      <!-- Boat Sails (TRIANGLES) -->
-      <g class="train-interactive-part ${painted.triangle ? 'is-painted' : ''}" data-shape="triangle" style="cursor:pointer;" id="train-part-triangle-sails" title="Triangle (Sails)">
+      <!-- 2. ZONE: TRIANGLE (Sailboat Sails) -->
+      <g class="train-zone ${painted.triangle ? 'is-painted' : 'is-unpainted'}" data-shape="triangle" id="train-zone-triangle" title="Triangle (Sails)">
         <polygon points="153,55 225,160 153,160" fill="${cTri.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
         <polygon points="137,70 70,160 137,160" fill="${cTri.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
       </g>
 
-      <!-- Star Flag on Mast (STAR) -->
-      <g class="train-interactive-part ${painted.star ? 'is-painted' : ''}" data-shape="star" style="cursor:pointer;" id="train-part-star-flag" title="Star (Flag)">
-        <polygon points="145,20 150,32 163,33 153,42 156,54 145,47 134,54 137,42 127,33 140,32" fill="${cSt.fill}" stroke="${outline}" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- 3. ZONE: STAR (Mast Star Flag) -->
+      <g class="train-zone ${painted.star ? 'is-painted' : 'is-unpainted'}" data-shape="star" id="train-zone-star" title="Star (Flag)">
+        <polygon points="145,18 150,30 163,31 153,40 156,52 145,45 134,52 137,40 127,31 140,30" fill="${cSt.fill}" stroke="${outline}" stroke-width="2.5" stroke-linejoin="round"/>
       </g>
 
-      <!-- Wagon 1 Wheels (CIRCLES) -->
-      <g class="train-interactive-part ${painted.circle ? 'is-painted' : ''}" data-shape="circle" style="cursor:pointer;" id="train-part-circle-wheels1" title="Circle (Wheels)">
-        <circle cx="75" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <circle cx="75" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
-        <circle cx="215" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <circle cx="215" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
-      </g>
+      <!-- Wagon 2 Flatbed Base -->
+      <rect x="290" y="215" width="250" height="28" rx="6" fill="#cbd5e1" stroke="${outline}" stroke-width="${sw}"/>
 
-      <!-- ═══════════════════════════════════════════
-           WAGON 2: CARGO & PASSENGER (x: 290–540)
-           ═══════════════════════════════════════════ -->
-      <!-- Coupler to Locomotive -->
-      <rect x="535" y="226" width="40" height="10" rx="3" fill="#334155" stroke="${outline}" stroke-width="2"/>
-
-      <!-- Cargo Chassis (RECTANGLE) -->
-      <g class="train-interactive-part ${painted.rectangle ? 'is-painted' : ''}" data-shape="rectangle" style="cursor:pointer;" id="train-part-rectangle-2" title="Rectangle (Chassis)">
-        <rect x="290" y="215" width="250" height="28" rx="6" fill="${cRec.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <line x1="295" y1="229" x2="535" y2="229" stroke="${cRec.stroke}" stroke-width="2" opacity="0.6"/>
-      </g>
-
-      <!-- Cargo Cube (SQUARE) -->
-      <g class="train-interactive-part ${painted.square ? 'is-painted' : ''}" data-shape="square" style="cursor:pointer;" id="train-part-square-cargo" title="Square (Cargo)">
+      <!-- 4. ZONE: SQUARE (Cargo Cube on Wagon 2) -->
+      <g class="train-zone ${painted.square ? 'is-painted' : 'is-unpainted'}" data-shape="square" id="train-zone-square" title="Square (Cargo Cube)">
         <rect x="305" y="115" width="100" height="100" rx="8" fill="${cSq.fill}" stroke="${outline}" stroke-width="${sw}"/>
         <rect x="317" y="127" width="76" height="76" rx="4" fill="none" stroke="${cSq.stroke}" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
-        <line x1="305" y1="115" x2="405" y2="215" stroke="${cSq.stroke}" stroke-width="2" opacity="0.4"/>
-        <line x1="405" y1="115" x2="305" y2="215" stroke="${cSq.stroke}" stroke-width="2" opacity="0.4"/>
+        <line x1="305" y1="115" x2="405" y2="215" stroke="${cSq.stroke}" stroke-width="2" opacity="0.35"/>
+        <line x1="405" y1="115" x2="305" y2="215" stroke="${cSq.stroke}" stroke-width="2" opacity="0.35"/>
       </g>
 
-      <!-- Passenger Coach Body (RECTANGLE) -->
-      <g class="train-interactive-part ${painted.rectangle ? 'is-painted' : ''}" data-shape="rectangle" style="cursor:pointer;" id="train-part-rectangle-coach" title="Rectangle (Coach)">
+      <!-- 5. ZONE: RECTANGLE (Passenger Coach Body & Boiler) -->
+      <g class="train-zone ${painted.rectangle ? 'is-painted' : 'is-unpainted'}" data-shape="rectangle" id="train-zone-rectangle" title="Rectangle (Coach & Boiler)">
         <rect x="415" y="130" width="120" height="85" rx="8" fill="${cRec.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <rect x="410" y="120" width="130" height="14" rx="6" fill="#cbd5e1" stroke="${outline}" stroke-width="3"/>
+        <rect x="410" y="120" width="130" height="14" rx="6" fill="#64748b" stroke="${outline}" stroke-width="3"/>
+        <!-- Boiler -->
+        <rect x="685" y="145" width="155" height="70" rx="8" fill="${cRec.fill}" stroke="${outline}" stroke-width="${sw}"/>
+        <line x1="735" y1="145" x2="735" y2="215" stroke="${cRec.stroke}" stroke-width="2" opacity="0.5"/>
+        <line x1="785" y1="145" x2="785" y2="215" stroke="${cRec.stroke}" stroke-width="2" opacity="0.5"/>
       </g>
 
-      <!-- Heart Emblem on Passenger Coach (HEART) -->
-      <g class="train-interactive-part ${painted.heart ? 'is-painted' : ''}" data-shape="heart" style="cursor:pointer;" id="train-part-heart-emblem" title="Heart (Emblem)">
+      <!-- 6. ZONE: HEART (Heart Emblem on Coach) -->
+      <g class="train-zone ${painted.heart ? 'is-painted' : 'is-unpainted'}" data-shape="heart" id="train-zone-heart" title="Heart (Emblem)">
         <path d="M 475 186 C 450 162 435 142 443 125 C 450 110 468 110 475 124 C 482 110 500 110 507 125 C 515 142 500 162 475 186 Z" fill="${cHt.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
       </g>
 
-      <!-- Wagon 2 Wheels (CIRCLES) -->
-      <g class="train-interactive-part ${painted.circle ? 'is-painted' : ''}" data-shape="circle" style="cursor:pointer;" id="train-part-circle-wheels2" title="Circle (Wheels)">
-        <circle cx="345" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <circle cx="345" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
-        <circle cx="485" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <circle cx="485" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
-      </g>
-
-      <!-- ═══════════════════════════════════════════
-           LOCOMOTIVE (ENGINE) (x: 570–895)
-           ═══════════════════════════════════════════ -->
-      <!-- Engine Cabin Body (SQUARE) -->
-      <g class="train-interactive-part ${painted.square ? 'is-painted' : ''}" data-shape="square" style="cursor:pointer;" id="train-part-square-cab" title="Square (Engine Cab)">
-        <rect x="570" y="110" width="115" height="105" rx="8" fill="${cSq.fill}" stroke="${outline}" stroke-width="${sw}"/>
-      </g>
-      <!-- Cabin Roof -->
+      <!-- Locomotive Cab Body (Grey neutral) -->
+      <rect x="570" y="110" width="115" height="105" rx="8" fill="#cbd5e1" stroke="${outline}" stroke-width="${sw}"/>
       <rect x="560" y="98" width="135" height="15" rx="6" fill="#64748b" stroke="${outline}" stroke-width="3"/>
 
-      <!-- Diamond Window on Cab (DIAMOND) -->
-      <g class="train-interactive-part ${painted.diamond ? 'is-painted' : ''}" data-shape="diamond" style="cursor:pointer;" id="train-part-diamond-window" title="Diamond (Window)">
+      <!-- 7. ZONE: DIAMOND (Diamond Window on Locomotive Cab) -->
+      <g class="train-zone ${painted.diamond ? 'is-painted' : 'is-unpainted'}" data-shape="diamond" id="train-zone-diamond" title="Diamond (Window)">
         <polygon points="627,130 655,160 627,190 599,160" fill="${cDia.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
         <line x1="627" y1="130" x2="627" y2="190" stroke="${outline}" stroke-width="2"/>
         <line x1="599" y1="160" x2="655" y2="160" stroke="${outline}" stroke-width="2"/>
       </g>
 
-      <!-- Engine Boiler (RECTANGLE) -->
-      <g class="train-interactive-part ${painted.rectangle ? 'is-painted' : ''}" data-shape="rectangle" style="cursor:pointer;" id="train-part-rectangle-boiler" title="Rectangle (Boiler)">
-        <rect x="685" y="145" width="155" height="70" rx="8" fill="${cRec.fill}" stroke="${outline}" stroke-width="${sw}"/>
-        <line x1="735" y1="145" x2="735" y2="215" stroke="${cRec.stroke}" stroke-width="2" opacity="0.6"/>
-        <line x1="785" y1="145" x2="785" y2="215" stroke="${cRec.stroke}" stroke-width="2" opacity="0.6"/>
-      </g>
-
-      <!-- Front Nose Slope (decorative) -->
-      <polygon points="840,145 875,178 875,215 840,215" fill="#cbd5e1" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
-
-      <!-- Smokestack Pipe -->
+      <!-- Locomotive Details (Nose, Smokestack, Cowcatcher) -->
+      <polygon points="840,145 875,178 875,215 840,215" fill="#94a3b8" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
       <rect x="738" y="102" width="24" height="43" rx="3" fill="#64748b" stroke="${outline}" stroke-width="3"/>
-      <!-- Smokestack Funnel Cap (TRIANGLE) -->
-      <g class="train-interactive-part ${painted.triangle ? 'is-painted' : ''}" data-shape="triangle" style="cursor:pointer;" id="train-part-triangle-funnel" title="Triangle (Funnel)">
-        <polygon points="726,102 774,102 750,78" fill="${cTri.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
-      </g>
+      <polygon points="726,102 774,102 750,78" fill="#64748b" stroke="${outline}" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="875,255 915,255 875,215" fill="#64748b" stroke="${outline}" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="865" y="160" width="14" height="22" rx="3" fill="#fbbf24" stroke="${outline}" stroke-width="2"/>
 
-      <!-- Steam Puffs (OVALS) -->
-      <g class="train-interactive-part ${painted.oval ? 'is-painted' : ''}" data-shape="oval" style="cursor:pointer;" id="train-part-oval-steam" title="Oval (Steam)">
-        <ellipse cx="750" cy="52" rx="26" ry="16" fill="${cOv.fill}" stroke="${outline}" stroke-width="3"/>
-        <ellipse cx="722" cy="38" rx="19" ry="13" fill="${cOv.fill}" stroke="${outline}" stroke-width="3"/>
-        <ellipse cx="778" cy="34" rx="17" ry="11" fill="${cOv.fill}" stroke="${outline}" stroke-width="2.5"/>
-      </g>
-
-      <!-- Cowcatcher Wedge (TRIANGLE) -->
-      <g class="train-interactive-part ${painted.triangle ? 'is-painted' : ''}" data-shape="triangle" style="cursor:pointer;" id="train-part-triangle-cowcatcher" title="Triangle (Cowcatcher)">
-        <polygon points="875,255 915,255 875,215" fill="${cTri.fill}" stroke="${outline}" stroke-width="${sw}" stroke-linejoin="round"/>
-        <line x1="875" y1="235" x2="895" y2="255" stroke="${cTri.stroke}" stroke-width="2"/>
-      </g>
-
-      <!-- Front Headlight & Star Badge (STAR) -->
-      <g class="train-interactive-part ${painted.star ? 'is-painted' : ''}" data-shape="star" style="cursor:pointer;" id="train-part-star-badge" title="Star (Front Badge)">
-        <rect x="865" y="160" width="14" height="22" rx="3" fill="${painted.star ? '#fbbf24' : '#ffffff'}" stroke="${outline}" stroke-width="2"/>
-        <polygon points="872,138 877,150 890,151 880,160 883,172 872,165 861,172 864,160 854,151 867,150" fill="${cSt.fill}" stroke="${outline}" stroke-width="2.5" stroke-linejoin="round"/>
-      </g>
-
-      <!-- Locomotive Wheels (CIRCLES) × 3 Large -->
-      <g class="train-interactive-part ${painted.circle ? 'is-painted' : ''}" data-shape="circle" style="cursor:pointer;" id="train-part-circle-engine" title="Circle (Engine Wheels)">
+      <!-- 8. ZONE: CIRCLE (All Train Wheels) -->
+      <g class="train-zone ${painted.circle ? 'is-painted' : 'is-unpainted'}" data-shape="circle" id="train-zone-circle" title="Circle (Wheels)">
+        <!-- Wagon 1 Wheels -->
+        <circle cx="75" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
+        <circle cx="75" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
+        <circle cx="215" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
+        <circle cx="215" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
+        <!-- Wagon 2 Wheels -->
+        <circle cx="345" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
+        <circle cx="345" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
+        <circle cx="485" cy="254" r="22" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
+        <circle cx="485" cy="254" r="8" fill="#ffffff" stroke="${outline}" stroke-width="3"/>
+        <!-- Locomotive Wheels × 3 -->
         <circle cx="620" cy="250" r="26" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
         <circle cx="620" cy="250" r="10" fill="#ffffff" stroke="${outline}" stroke-width="3.5"/>
         <circle cx="710" cy="250" r="26" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
         <circle cx="710" cy="250" r="10" fill="#ffffff" stroke="${outline}" stroke-width="3.5"/>
         <circle cx="800" cy="250" r="26" fill="${cCir.fill}" stroke="${outline}" stroke-width="${sw}"/>
         <circle cx="800" cy="250" r="10" fill="#ffffff" stroke="${outline}" stroke-width="3.5"/>
-        <!-- Driver rod -->
+        <!-- Driver Rod -->
         <rect x="615" y="246" width="190" height="8" rx="4" fill="#64748b" stroke="${outline}" stroke-width="2"/>
-        <circle cx="620" cy="250" r="4" fill="#ffffff"/>
-        <circle cx="710" cy="250" r="4" fill="#ffffff"/>
-        <circle cx="800" cy="250" r="4" fill="#ffffff"/>
       </g>
     </svg>`;
   }
@@ -510,7 +451,7 @@
         <div class="colors-panel-card" style="text-align:center;">
           <div style="font-size:3.5rem; animation:trainWhistle 1s ease infinite alternate;">🚂🎉</div>
           <h3 style="color:#166534; font-size:1.6rem; margin:6px 0 2px;">¡El tren geométrico está completo!</h3>
-          <p style="font-weight:800; color:#334155; margin:0 0 14px;">¡Encontraste y pintaste las 8 figuras geométricas!</p>
+          <p style="font-weight:800; color:#334155; margin:0 0 14px;">¡Ubicaste y pintaste las 8 figuras geométricas en el tren!</p>
           <div class="find-scene-box" style="padding:4px 0 8px; margin-bottom:16px;">
             ${buildTrainSVG(trainPainted)}
           </div>
@@ -541,7 +482,7 @@
       return;
     }
 
-    // Find current unpainted shape prompt
+    // Current target prompt
     let current = TRAIN_PARTS[trainPromptIdx] || TRAIN_PARTS[0];
     if (trainPainted[current.key]) {
       const remaining = TRAIN_PARTS.findIndex(p => !trainPainted[p.key]);
@@ -554,7 +495,7 @@
     body.innerHTML = `
       <div class="colors-panel-card" id="trainActivityCard">
         <div class="mini-quiz-meta">
-          <span id="trainMetaCount">🎨 ${totalPainted} / ${TRAIN_PARTS.length} pintadas</span>
+          <span id="trainMetaCount">🎨 ${totalPainted} / ${TRAIN_PARTS.length} figuras ubicadas</span>
           <span id="trainMetaStars">⭐ ${totalPainted * 10}</span>
         </div>
 
@@ -562,48 +503,48 @@
         <div class="bili-find-banner" style="margin-bottom:12px;">
           <img src="assets/mascot/bili_pixel_idle.png" alt="Bili" class="bili-find-avatar">
           <div style="flex:1;">
-            <div style="font-weight:900; color:#78350f; font-size:1.15rem;" id="trainPromptLabel">
+            <div style="font-weight:900; color:#78350f; font-size:1.2rem;" id="trainPromptLabel">
               🚂 "${current.label}"
             </div>
-            <div style="font-size:0.88rem; color:#64748b; margin-top:2px;" id="trainPromptHint">
-              Pista: busca en <em>${current.hint}</em>
+            <div style="font-size:0.92rem; color:#64748b; margin-top:3px;" id="trainPromptHint">
+              👆 <strong>Toca la figura dentro del tren</strong> para pintarla (Pista: <em>${current.hint}</em>)
             </div>
             <button type="button" class="toddler-nav-pill active" id="btnHearTrainShape"
-              style="margin-top:6px; padding:6px 14px; font-size:0.86rem;">
+              style="margin-top:8px; padding:6px 16px; font-size:0.88rem;">
               🔊 Escuchar Instrucción
             </button>
           </div>
         </div>
 
-        <!-- TRAIN SVG (Interactive!) -->
+        <!-- TRAIN SVG BOARD (Child touches shapes directly here!) -->
         <div class="find-scene-box" id="trainSvgContainer" style="padding:4px 0 8px;">
           ${buildTrainSVG(trainPainted)}
         </div>
 
-        <!-- SHAPE PICKER — 8 buttons -->
-        <div style="margin:14px 0 6px; text-align:center; font-weight:800; color:#334155; font-size:0.95rem;">
-          Toca la figura en el panel o directamente en el tren:
+        <p class="mini-quiz-feedback" id="trainFeedback" style="min-height:1.6em; margin:10px 0 6px; font-size:1rem;"></p>
+
+        <!-- Checklist of shapes (Visual progress, clicking only plays pronunciation audio) -->
+        <div style="margin:8px 0 6px; text-align:center; font-weight:800; color:#475569; font-size:0.9rem;">
+          📋 Figuras por ubicar en el tren:
         </div>
-        <div class="train-shape-picker" id="trainPicker">
+        <div class="train-shapes-checklist" id="trainChecklist">
           ${TRAIN_PARTS.map(p => {
             const shapeObj = SHAPES_DATA.find(s => s.key === p.key);
             const done = !!trainPainted[p.key];
+            const isTarget = (!done && current.key === p.key);
             return `
-              <button type="button"
-                class="train-pick-btn ${done ? 'train-pick-done' : ''}"
-                data-key="${p.key}"
-                ${done ? 'disabled' : ''}
-                aria-label="${shapeObj.en}"
-                title="${shapeObj.en}">
-                <div class="train-pick-svg">${shapeObj.svg(done ? shapeObj.color : '#cbd5e1', done ? shapeObj.stroke : '#94a3b8', 'shape-svg-sm')}</div>
-                <div class="train-pick-label" style="color:${done ? shapeObj.color : '#64748b'};">${shapeObj.en}</div>
-                ${done ? '<div class="train-pick-check">✅</div>' : ''}
-              </button>
+              <div class="train-check-card ${done ? 'done' : ''} ${isTarget ? 'target' : ''}" data-key="${p.key}" title="Toca para escuchar: ${shapeObj.en}">
+                <div class="train-check-svg">
+                  ${shapeObj.svg(done ? shapeObj.color : (isTarget ? shapeObj.color : '#cbd5e1'), done ? shapeObj.stroke : (isTarget ? shapeObj.stroke : '#94a3b8'), 'shape-svg-xs')}
+                </div>
+                <div class="train-check-text">
+                  <span class="train-check-name" style="color:${done ? shapeObj.color : (isTarget ? '#b45309' : '#64748b')};">${shapeObj.en}</span>
+                  <span class="train-check-status">${done ? '✅ Pintado' : (isTarget ? '🎯 ¡Búscalo!' : '⏳ Por ubicar')}</span>
+                </div>
+              </div>
             `;
           }).join('')}
         </div>
-
-        <p class="mini-quiz-feedback" id="trainFeedback" style="min-height:1.5em;"></p>
       </div>
     `;
 
@@ -613,62 +554,76 @@
       engine.playAudio(current.audio);
     });
 
+    // Clicking checklist cards plays audio sample
+    body.querySelectorAll('.train-check-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const k = card.dataset.key;
+        const sh = SHAPES_DATA.find(s => s.key === k);
+        if (sh) engine.playAudio(sh.en);
+      });
+    });
+
     const fb = body.querySelector('#trainFeedback');
     let locked = false;
 
-    // Handler when child chooses a shape (via picker button OR clicking train)
-    const handleShapeChoice = (chosenKey) => {
+    // Handle touch on train shape zone
+    const handleTrainZoneClick = (tappedShapeKey, zoneEl) => {
       if (locked) return;
-      if (trainPainted[chosenKey]) return; // already done
-
       const targetKey = TRAIN_PARTS[trainPromptIdx].key;
-      const chosenShape = SHAPES_DATA.find(s => s.key === chosenKey);
+      const tappedShape = SHAPES_DATA.find(s => s.key === tappedShapeKey);
 
-      if (chosenKey === targetKey) {
-        // ✅ CORRECT!
+      // If already painted:
+      if (trainPainted[tappedShapeKey]) {
+        fb.style.color = '#3b82f6';
+        fb.textContent = `ℹ️ El ${tappedShape.en} ya fue pintado. ¡Ahora busca: ${TRAIN_PARTS[trainPromptIdx].label}!`;
+        engine.playAudio(tappedShape.en);
+        return;
+      }
+
+      if (tappedShapeKey === targetKey) {
+        // ✅ CORRECT! Child tapped the requested shape inside the train drawing!
         locked = true;
-        trainPainted[chosenKey] = true;
+        trainPainted[tappedShapeKey] = true;
         engine.addStars(10);
-        engine.playAudio(chosenShape.en);
+        engine.playAudio(tappedShape.en);
 
-        // Repaint the train SVG
+        // Repaint train SVG to apply color to the zone
         const container = body.querySelector('#trainSvgContainer');
         if (container) {
           container.innerHTML = buildTrainSVG(trainPainted);
-          attachTrainPartListeners();
-          // Pop animation on the newly painted elements
-          container.querySelectorAll(`[data-shape="${chosenKey}"]`).forEach(el => {
-            el.classList.add('train-part-popping');
-          });
-        }
+          attachTrainZoneListeners();
 
-        // Update picker button
-        const pickBtn = body.querySelector(`.train-pick-btn[data-key="${chosenKey}"]`);
-        if (pickBtn) {
-          pickBtn.classList.add('train-pick-done');
-          pickBtn.disabled = true;
-          pickBtn.innerHTML = `
-            <div class="train-pick-svg">${chosenShape.svg(chosenShape.color, chosenShape.stroke, 'shape-svg-sm')}</div>
-            <div class="train-pick-label" style="color:${chosenShape.color};">${chosenShape.en}</div>
-            <div class="train-pick-check">✅</div>
-          `;
+          // Trigger pop animation on the newly painted zone
+          const newlyPaintedZone = container.querySelector(`[data-shape="${tappedShapeKey}"]`);
+          if (newlyPaintedZone) {
+            newlyPaintedZone.classList.add('train-zone-popping');
+          }
         }
 
         // Update meta counters
         const newCount = Object.keys(trainPainted).length;
         const countEl = body.querySelector('#trainMetaCount');
-        if (countEl) countEl.textContent = `🎨 ${newCount} / ${TRAIN_PARTS.length} pintadas`;
+        if (countEl) countEl.textContent = `🎨 ${newCount} / ${TRAIN_PARTS.length} figuras ubicadas`;
         const starEl = body.querySelector('#trainMetaStars');
         if (starEl) starEl.textContent = `⭐ ${newCount * 10}`;
 
+        // Feedback
         fb.style.color = '#166534';
-        fb.textContent = `✅ ¡Correcto! ${chosenShape.en} (${chosenShape.es})`;
+        fb.textContent = `✅ ¡Correcto! Ubicaste y pintaste: ${tappedShape.en} (${tappedShape.es})`;
 
-        // Check if all completed
+        // Update checklist
+        const checkCard = body.querySelector(`.train-check-card[data-key="${tappedShapeKey}"]`);
+        if (checkCard) {
+          checkCard.className = 'train-check-card done';
+          checkCard.querySelector('.train-check-name').style.color = tappedShape.color;
+          checkCard.querySelector('.train-check-status').textContent = '✅ Pintado';
+          checkCard.querySelector('.train-check-svg').innerHTML = tappedShape.svg(tappedShape.color, tappedShape.stroke, 'shape-svg-xs');
+        }
+
+        // Check completion
         if (newCount >= TRAIN_PARTS.length) {
           setTimeout(() => {
             renderFindShape(body, engine);
-            // Also update top subtabs bar to show checkmark and unlock
             const wrap = body.closest('.shapes-studio-wrap');
             if (wrap) {
               const outer = wrap.parentElement;
@@ -694,44 +649,50 @@
           const lbl = body.querySelector('#trainPromptLabel');
           if (lbl) lbl.textContent = `🚂 "${nextPart.label}"`;
           const hintEl = body.querySelector('#trainPromptHint');
-          if (hintEl) hintEl.innerHTML = `Pista: busca en <em>${nextPart.hint}</em>`;
+          if (hintEl) hintEl.innerHTML = `👆 <strong>Toca la figura dentro del tren</strong> para pintarla (Pista: <em>${nextPart.hint}</em>)`;
+
+          // Highlight target in checklist
+          body.querySelectorAll('.train-check-card').forEach(c => {
+            if (!trainPainted[c.dataset.key]) {
+              if (c.dataset.key === nextPart.key) {
+                c.className = 'train-check-card target';
+                c.querySelector('.train-check-status').textContent = '🎯 ¡Búscalo!';
+              } else {
+                c.className = 'train-check-card';
+                c.querySelector('.train-check-status').textContent = '⏳ Por ubicar';
+              }
+            }
+          });
+
           engine.playAudio(nextPart.audio);
           const hearBtn = body.querySelector('#btnHearTrainShape');
           if (hearBtn) hearBtn.onclick = () => engine.playAudio(nextPart.audio);
-        }, 900);
+        }, 950);
 
       } else {
-        // ❌ WRONG
-        fb.style.color = '#b91c1c';
-        fb.textContent = `❌ Eso es ${chosenShape.en}. ¡Busca: ${TRAIN_PARTS[trainPromptIdx].label}!`;
-        const pickBtn = body.querySelector(`.train-pick-btn[data-key="${chosenKey}"]`);
-        if (pickBtn) {
-          pickBtn.classList.add('train-pick-wrong');
-          setTimeout(() => pickBtn.classList.remove('train-pick-wrong'), 600);
+        // ❌ WRONG ZONE PRESSED
+        if (zoneEl) {
+          zoneEl.classList.add('train-zone-shake');
+          setTimeout(() => zoneEl.classList.remove('train-zone-shake'), 600);
         }
+        fb.style.color = '#b91c1c';
+        fb.textContent = `❌ Esa figura es un ${tappedShape.en} (${tappedShape.es}). ¡Busca: ${TRAIN_PARTS[trainPromptIdx].label}!`;
+        engine.playAudio(tappedShape.en);
       }
     };
 
-    // Attach listeners to bottom picker buttons
-    body.querySelectorAll('.train-pick-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        handleShapeChoice(btn.dataset.key);
-      });
-    });
-
-    // Attach listeners to SVG train parts
-    function attachTrainPartListeners() {
+    function attachTrainZoneListeners() {
       const container = body.querySelector('#trainSvgContainer');
       if (!container) return;
-      container.querySelectorAll('.train-interactive-part').forEach(part => {
-        part.addEventListener('click', (e) => {
+      container.querySelectorAll('.train-zone').forEach(zone => {
+        zone.addEventListener('click', (e) => {
           e.stopPropagation();
-          const sh = part.dataset.shape;
-          if (sh) handleShapeChoice(sh);
+          const sh = zone.dataset.shape;
+          if (sh) handleTrainZoneClick(sh, zone);
         });
       });
     }
-    attachTrainPartListeners();
+    attachTrainZoneListeners();
   }
 
   /* --------------------------------------------------------------------------

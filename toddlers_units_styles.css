@@ -2639,109 +2639,132 @@ body.toddler-body {
    UNIT 1: SHAPES – TREN GEOMÉTRICO (Find the Shape activity)
    ========================================================================== */
 
-/* Shape picker grid at bottom of train activity */
-.train-shape-picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  padding: 8px 4px;
-}
-
-.train-pick-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  width: 76px;
-  padding: 8px 4px 6px;
-  border-radius: 14px;
-  border: 2.5px solid #cbd5e1;
-  background: #f8fafc;
+/* Train SVG interactive zones */
+.train-zone {
   cursor: pointer;
-  transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
-  position: relative;
-}
-
-.train-pick-btn:hover:not([disabled]) {
-  transform: translateY(-3px) scale(1.07);
-  border-color: #f59e0b;
-  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.28);
-}
-
-.train-pick-btn[disabled] {
-  cursor: not-allowed;
-  opacity: 0.75;
-}
-
-.train-pick-btn.train-pick-done {
-  border-color: #22c55e;
-  background: #f0fdf4;
-}
-
-.train-pick-btn.train-pick-wrong {
-  border-color: #ef4444;
-  background: #fef2f2;
-  animation: trainPickShake 0.5s ease;
-}
-
-@keyframes trainPickShake {
-  0%,100% { transform: translateX(0); }
-  25%      { transform: translateX(-5px); }
-  75%      { transform: translateX(5px); }
-}
-
-.train-pick-svg {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.train-pick-label {
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.1;
-}
-
-.train-pick-check {
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-/* Train part pop animation when painted */
-.train-part-popping {
-  animation: trainPartPop 0.6s ease forwards;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.18s ease;
   transform-box: fill-box;
   transform-origin: center;
 }
 
-@keyframes trainPartPop {
+.train-zone:hover:not(.is-painted) {
+  filter: drop-shadow(0 0 12px #f59e0b) brightness(1.05);
+  transform: scale(1.04);
+}
+
+.train-zone.is-painted {
+  cursor: default;
+}
+
+.train-zone.is-painted:hover {
+  filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.6));
+}
+
+/* Zone Pop animation when correctly found & painted */
+.train-zone-popping {
+  animation: trainZonePop 0.65s ease forwards;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes trainZonePop {
   0%   { transform: scale(1); filter: brightness(1); }
-  40%  { transform: scale(1.18); filter: brightness(1.4) drop-shadow(0 0 10px gold); }
+  35%  { transform: scale(1.15); filter: brightness(1.3) drop-shadow(0 0 16px gold); }
   70%  { transform: scale(0.96); }
   100% { transform: scale(1); filter: brightness(1); }
 }
 
-/* Train SVG hover on parts */
-.train-interactive-part {
-  cursor: pointer;
-  transition: transform 0.16s ease, filter 0.16s ease;
+/* Zone wrong shake animation */
+.train-zone-shake {
+  animation: trainZoneShake 0.5s ease;
   transform-box: fill-box;
   transform-origin: center;
 }
 
-.train-interactive-part:hover:not(.is-painted) {
-  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.75));
-  transform: scale(1.04);
+@keyframes trainZoneShake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); filter: drop-shadow(0 0 10px #ef4444); }
+  40%      { transform: translateX(8px); filter: drop-shadow(0 0 10px #ef4444); }
+  60%      { transform: translateX(-5px); filter: drop-shadow(0 0 6px #ef4444); }
+  80%      { transform: translateX(5px); }
 }
 
-.train-interactive-part.is-painted {
-  cursor: default;
+/* Shapes Checklist below the train (Visual progress only, no cheat buttons) */
+.train-shapes-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px 4px 6px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
+.train-check-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.train-check-card.target {
+  background: #fffbeb;
+  border: 2.5px solid #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+  animation: trainTargetPulse 1.6s infinite alternate;
+}
+
+@keyframes trainTargetPulse {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.04); }
+}
+
+.train-check-card.done {
+  background: #f0fdf4;
+  border: 2px solid #22c55e;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+}
+
+.train-check-svg {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.train-check-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.train-check-name {
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.train-check-status {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.train-check-card.target .train-check-status {
+  color: #b45309;
+}
+
+.train-check-card.done .train-check-status {
+  color: #166534;
+}
+
+/* Advance button animation */
 .train-advance-btn {
   animation: trainBtnPulse 1.8s infinite alternate;
 }
@@ -2756,10 +2779,12 @@ body.toddler-body {
   100% { transform: rotate(5deg) scale(1.12); }
 }
 
-@media (max-width: 540px) {
-  .train-pick-btn { width: 62px; padding: 6px 2px 5px; }
-  .train-pick-svg { width: 36px; height: 36px; }
-  .train-pick-label { font-size: 0.65rem; }
+@media (max-width: 600px) {
+  .train-shapes-checklist { gap: 6px; }
+  .train-check-card { padding: 6px 10px; }
+  .train-check-svg { width: 22px; height: 22px; }
+  .train-check-name { font-size: 0.78rem; }
+  .train-check-status { font-size: 0.68rem; }
 }
 
 /* ==========================================================================
