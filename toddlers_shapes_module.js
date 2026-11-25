@@ -90,33 +90,195 @@
       id: 'house',
       title: 'A House 🏠',
       instruction: 'Drag and drop the shapes to build a House!',
+      bgSvg: `
+        <svg viewBox="0 0 320 240" style="position:absolute; left:0; top:0; width:320px; height:240px; pointer-events:none; z-index:1;">
+          <rect width="320" height="240" fill="#f8fafc"/>
+          <!-- Ground and grass -->
+          <path d="M 0 205 Q 160 200 320 205 L 320 240 L 0 240 Z" fill="#dcfce7"/>
+          <line x1="0" y1="205" x2="320" y2="205" stroke="#86efac" stroke-width="3"/>
+          <path d="M 35 205 L 38 195 L 41 205 M 43 205 L 46 193 L 49 205" stroke="#16a34a" stroke-width="2" fill="none"/>
+          <path d="M 275 205 L 278 195 L 281 205 M 283 205 L 286 193 L 289 205" stroke="#16a34a" stroke-width="2" fill="none"/>
+          <!-- Chimney -->
+          <rect x="182" y="30" width="22" height="48" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2"/>
+          <rect x="178" y="26" width="30" height="6" rx="2" fill="#94a3b8"/>
+          <!-- Smoke puffs -->
+          <circle cx="193" cy="18" r="6" fill="#e2e8f0" opacity="0.8"/>
+          <circle cx="202" cy="8" r="8" fill="#e2e8f0" opacity="0.7"/>
+          <!-- Sun -->
+          <circle cx="38" cy="38" r="18" fill="#fef08a" stroke="#facc15" stroke-width="2"/>
+          <line x1="38" y1="14" x2="38" y2="8" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+          <line x1="38" y1="62" x2="38" y2="68" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="38" x2="8" y2="38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+          <line x1="62" y1="38" x2="68" y2="38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+          <!-- Window cross guide -->
+          <line x1="187" y1="125" x2="187" y2="163" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2,2"/>
+          <line x1="168" y1="144" x2="206" y2="144" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2,2"/>
+          <!-- Doorknob -->
+          <circle cx="147" cy="180" r="3" fill="#f59e0b" stroke="#78350f" stroke-width="1.5"/>
+        </svg>
+      `,
       slots: [
-        { slotId: 'roof', shapeKey: 'triangle', x: 85, y: 20, w: 150, h: 90, label: 'Roof (Triangle)' },
-        { slotId: 'walls', shapeKey: 'square', x: 100, y: 110, w: 120, h: 110, label: 'Walls (Square)' },
-        { slotId: 'door', shapeKey: 'rectangle', x: 138, y: 155, w: 44, h: 65, label: 'Door (Rectangle)', rotate90: true },
-        { slotId: 'window', shapeKey: 'circle', x: 140, y: 62, w: 40, h: 40, label: 'Window (Circle)' }
+        {
+          slotId: 'roof', shapeKey: 'triangle', x: 90, y: 20, w: 140, h: 75, zIndex: 3, label: 'Roof (Triangle)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <polygon points="50,0 100,100 0,100" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'walls', shapeKey: 'square', x: 105, y: 95, w: 110, h: 110, zIndex: 2, label: 'Walls (Square)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <rect x="2" y="2" width="96" height="96" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'door', shapeKey: 'rectangle', x: 120, y: 150, w: 34, h: 55, zIndex: 4, label: 'Door (Rectangle)',
+          renderSvg: (fill, stroke, sw = 3, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <rect x="2" y="2" width="96" height="96" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="4,3"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'window', shapeKey: 'circle', x: 168, y: 125, w: 38, h: 38, zIndex: 4, label: 'Window (Circle)',
+          renderSvg: (fill, stroke, sw = 3, dashed = false) => `
+            <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block;">
+              <circle cx="50" cy="50" r="46" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="4,3"' : ''}/>
+            </svg>
+          `
+        }
       ]
     },
     {
       id: 'robot',
       title: 'A Robot 🤖',
       instruction: 'Drag and drop the shapes to build a Robot!',
+      bgSvg: `
+        <svg viewBox="0 0 320 240" style="position:absolute; left:0; top:0; width:320px; height:240px; pointer-events:none; z-index:1;">
+          <rect width="320" height="240" fill="#f8fafc"/>
+          <!-- Grid dots -->
+          <pattern id="robotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="#cbd5e1"/>
+          </pattern>
+          <rect width="320" height="240" fill="url(#robotGrid)" opacity="0.6"/>
+          <!-- Antenna -->
+          <line x1="160" y1="35" x2="160" y2="14" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="160" cy="10" r="7" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+          <path d="M 148 10 A 14 14 0 0 1 172 10" stroke="#f59e0b" stroke-width="2" fill="none"/>
+          <!-- Ears -->
+          <rect x="115" y="55" width="10" height="20" rx="3" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+          <rect x="195" y="55" width="10" height="20" rx="3" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+          <!-- Neck -->
+          <rect x="148" y="102" width="24" height="6" rx="2" fill="#64748b"/>
+          <!-- Left Arm -->
+          <path d="M 105 125 L 75 140 L 75 165" stroke="#64748b" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="75" cy="165" r="6" fill="#fbbf24" stroke="#78350f" stroke-width="2"/>
+          <path d="M 68 170 C 68 180 82 180 82 170" stroke="#64748b" stroke-width="3" fill="none"/>
+          <!-- Right Arm -->
+          <path d="M 215 125 L 245 140 L 245 165" stroke="#64748b" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="245" cy="165" r="6" fill="#fbbf24" stroke="#78350f" stroke-width="2"/>
+          <path d="M 238 170 C 238 180 252 180 252 170" stroke="#64748b" stroke-width="3" fill="none"/>
+          <!-- Legs -->
+          <rect x="125" y="185" width="20" height="28" rx="3" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+          <rect x="115" y="210" width="34" height="12" rx="4" fill="#64748b" stroke="#334155" stroke-width="2"/>
+          <rect x="175" y="185" width="20" height="28" rx="3" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+          <rect x="171" y="210" width="34" height="12" rx="4" fill="#64748b" stroke="#334155" stroke-width="2"/>
+          <!-- Robot smile -->
+          <path d="M 152 90 Q 160 97 168 90" stroke="#64748b" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      `,
       slots: [
-        { slotId: 'head', shapeKey: 'square', x: 120, y: 25, w: 80, h: 75, label: 'Head (Square)' },
-        { slotId: 'body', shapeKey: 'rectangle', x: 100, y: 106, w: 120, h: 95, label: 'Body (Rectangle)' },
-        { slotId: 'badge', shapeKey: 'diamond', x: 140, y: 132, w: 40, h: 44, label: 'Badge (Diamond)' },
-        { slotId: 'eye', shapeKey: 'circle', x: 142, y: 45, w: 36, h: 36, label: 'Visor (Circle)' }
+        {
+          slotId: 'head', shapeKey: 'square', x: 125, y: 35, w: 70, h: 70, zIndex: 2, label: 'Head (Square)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <rect x="2" y="2" width="96" height="96" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'eye', shapeKey: 'circle', x: 143, y: 50, w: 34, h: 34, zIndex: 3, label: 'Visor (Circle)',
+          renderSvg: (fill, stroke, sw = 3, dashed = false) => `
+            <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block;">
+              <circle cx="50" cy="50" r="46" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="4,3"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'body', shapeKey: 'rectangle', x: 105, y: 108, w: 110, h: 78, zIndex: 2, label: 'Body (Rectangle)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <rect x="2" y="2" width="96" height="96" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'badge', shapeKey: 'diamond', x: 140, y: 127, w: 40, h: 40, zIndex: 3, label: 'Power Core (Diamond)',
+          renderSvg: (fill, stroke, sw = 3, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <polygon points="50,2 98,50 50,98 2,50" stroke-linejoin="round" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="4,3"' : ''}/>
+            </svg>
+          `
+        }
       ]
     },
     {
       id: 'boat',
       title: 'A Boat ⛵',
       instruction: 'Drag and drop the shapes to build a Boat!',
+      bgSvg: `
+        <svg viewBox="0 0 320 240" style="position:absolute; left:0; top:0; width:320px; height:240px; pointer-events:none; z-index:1;">
+          <rect width="320" height="240" fill="#f0f9ff"/>
+          <!-- Seagulls -->
+          <path d="M 40 45 Q 46 38 52 45 Q 58 38 64 45" stroke="#94a3b8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 250 35 Q 256 28 262 35 Q 268 28 274 35" stroke="#94a3b8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Ocean Waves -->
+          <path d="M 0 195 C 40 190 80 200 120 195 C 160 190 200 200 240 195 C 280 190 320 200 320 195 L 320 240 L 0 240 Z" fill="#bae6fd"/>
+          <path d="M 0 210 C 50 205 100 215 150 210 C 200 205 250 215 320 210 L 320 240 L 0 240 Z" fill="#7dd3fc"/>
+          <!-- Mast Pole -->
+          <line x1="160" y1="42" x2="160" y2="165" stroke="#78350f" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="160" cy="40" r="4" fill="#f59e0b"/>
+          <!-- Bow and Stern -->
+          <polygon points="235,165 272,165 235,203" fill="#cbd5e1" stroke="#64748b" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="85,165 55,165 85,203" fill="#cbd5e1" stroke="#64748b" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+      `,
       slots: [
-        { slotId: 'sail', shapeKey: 'triangle', x: 110, y: 35, w: 110, h: 110, label: 'Sail (Triangle)' },
-        { slotId: 'hull', shapeKey: 'rectangle', x: 65, y: 150, w: 190, h: 60, label: 'Hull (Rectangle)' },
-        { slotId: 'porthole', shapeKey: 'circle', x: 142, y: 162, w: 36, h: 36, label: 'Porthole (Circle)' },
-        { slotId: 'flag', shapeKey: 'star', x: 144, y: 8, w: 34, h: 34, label: 'Flag (Star)' }
+        {
+          slotId: 'flag', shapeKey: 'star', x: 144, y: 15, w: 32, h: 32, zIndex: 3, label: 'Flag (Star)',
+          renderSvg: (fill, stroke, sw = 2.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block;">
+              <polygon points="50,5 62,36 95,38 68,58 77,90 50,72 23,90 32,58 5,38 38,36" stroke-linejoin="round" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="4,3"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'sail', shapeKey: 'triangle', x: 105, y: 55, w: 100, h: 110, zIndex: 2, label: 'Sail (Triangle)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <polygon points="55,0 100,100 0,100" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'hull', shapeKey: 'rectangle', x: 85, y: 165, w: 150, h: 38, zIndex: 2, label: 'Hull (Rectangle)',
+          renderSvg: (fill, stroke, sw = 3.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <rect x="2" y="2" width="96" height="96" rx="4" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="5,4"' : ''}/>
+            </svg>
+          `
+        },
+        {
+          slotId: 'porthole', shapeKey: 'circle', x: 148, y: 172, w: 24, h: 24, zIndex: 3, label: 'Porthole (Circle)',
+          renderSvg: (fill, stroke, sw = 2.5, dashed = false) => `
+            <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block;">
+              <circle cx="50" cy="50" r="46" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dashed ? 'stroke-dasharray="3,2"' : ''}/>
+            </svg>
+          `
+        }
       ]
     }
   ];
@@ -852,7 +1014,7 @@
   }
 
   /* --------------------------------------------------------------------------
-     ACTIVITY 4 – BUILD WITH SHAPES (REAL POINTER DRAG & DROP)
+     ACTIVITY 4 – BUILD WITH SHAPES (REAL POINTER DRAG & DROP + TAP TO PLACE)
      -------------------------------------------------------------------------- */
   function renderBuildShapes(body, engine) {
     const bp = BUILD_BLUEPRINTS[buildIndex % BUILD_BLUEPRINTS.length];
@@ -872,17 +1034,21 @@
         </div>
 
         <p style="text-align:center; font-weight:800; color:#334155; margin:0 0 12px;">
-          ${bp.instruction} (Arrastra cada figura a su silueta)
+          ${bp.instruction} (Arrastra cada figura a su silueta o tócala)
         </p>
 
         <div class="build-arena-grid">
           <div class="build-blueprint-stage" id="buildStage">
+            ${bp.bgSvg || ''}
             ${bp.slots.map(sl => {
               const sh = SHAPES_DATA.find(s => s.key === sl.shapeKey);
+              const svgHtml = sl.renderSvg
+                ? sl.renderSvg('#ffffff', '#94a3b8', 3, true)
+                : sh.svg('#e2e8f0', '#94a3b8', 'build-slot-svg');
               return `
                 <div class="build-slot-zone" data-slot="${sl.slotId}" data-shape="${sl.shapeKey}"
-                  style="left:${sl.x}px; top:${sl.y}px; width:${sl.w}px; height:${sl.h}px;">
-                  ${sh.svg('#e2e8f0', '#94a3b8', 'build-slot-svg')}
+                  style="left:${sl.x}px; top:${sl.y}px; width:${sl.w}px; height:${sl.h}px; z-index:${sl.zIndex || 2};">
+                  ${svgHtml}
                 </div>
               `;
             }).join('')}
@@ -926,8 +1092,12 @@
       if (placedSlots.has(slotId)) return;
       placedSlots.add(slotId);
 
+      const slDef = bp.slots.find(s => s.slotId === slotId);
+
       slotEl.classList.add('snapped');
-      slotEl.innerHTML = shapeObj.svg(shapeObj.color, shapeObj.stroke, 'build-slot-svg');
+      slotEl.innerHTML = (slDef && slDef.renderSvg)
+        ? slDef.renderSvg(shapeObj.color, shapeObj.stroke, 3.5, false)
+        : shapeObj.svg(shapeObj.color, shapeObj.stroke, 'build-slot-svg');
       pieceEl.classList.add('used');
       pieceEl.style.pointerEvents = 'none';
 
@@ -937,30 +1107,57 @@
       if (placedSlots.size === bp.slots.length) {
         engine.addStars(20);
         fb.style.color = '#166534';
-        fb.textContent = `🎉 ¡Construcción completada: ${bp.title}!`;
+        fb.innerHTML = `🎉 ¡Construcción completada: <strong>${bp.title}</strong>!`;
         if (buildIndex + 1 < BUILD_BLUEPRINTS.length) {
           const next = document.createElement('button');
           next.type = 'button';
           next.className = 'toddler-quiz-launch-btn';
-          next.style.cssText = 'display:block; margin:8px auto 0; padding:10px 22px;';
+          next.style.cssText = 'display:block; margin:10px auto 0; padding:10px 24px; font-size:1.05rem; background:linear-gradient(135deg,#059669,#047857); box-shadow:0 6px 18px rgba(5,150,105,0.35);';
           next.textContent = 'Siguiente Objeto ➔';
           next.addEventListener('click', () => {
             buildIndex++;
             renderBuildShapes(body, engine);
           });
           fb.after(next);
+        } else {
+          const allDone = document.createElement('div');
+          allDone.style.cssText = 'margin-top:12px; padding:12px; background:#ecfdf5; border:2px solid #10b981; border-radius:14px; text-align:center;';
+          allDone.innerHTML = `
+            <div style="font-size:1.8rem;">🏆🌟</div>
+            <div style="font-weight:900; color:#065f46; font-size:1.15rem; margin-top:4px;">¡Completaste las 3 construcciones!</div>
+            <p style="color:#047857; font-size:0.95rem; margin:4px 0 10px;">¡Construiste la Casa, el Robot y el Barco con figuras geométricas!</p>
+            <button type="button" class="toddler-quiz-launch-btn" id="btnGoToEval" style="background:#2563eb; font-size:1rem; padding:10px 22px;">
+              5. 🏆 Ir a la Evaluación Final ➔
+            </button>
+          `;
+          fb.after(allDone);
+          allDone.querySelector('#btnGoToEval')?.addEventListener('click', () => {
+            activeSubTab = 'eval';
+            const wrap = body.closest('.shapes-studio-wrap');
+            const outer = wrap ? wrap.parentElement : body.parentElement;
+            window.renderToddlersShapesStudio(outer, engine);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
         }
       } else {
         fb.style.color = '#166534';
-        fb.textContent = `✅ ¡Encajó! ${shapeObj.en}`;
+        fb.innerHTML = `✅ ¡Encajó! <strong>${shapeObj.en}</strong> (${shapeObj.es})`;
       }
     };
 
-    // Real Pointer Events Drag & Drop (Mouse + Touch + Stylus)
+    // Real Pointer Events Drag & Drop + Tap to Place
     body.querySelectorAll('.build-drag-piece').forEach(piece => {
+      let startX = 0;
+      let startY = 0;
+      let dragged = false;
+
       piece.addEventListener('pointerdown', (e) => {
         if (piece.classList.contains('used')) return;
         e.preventDefault();
+
+        startX = e.clientX;
+        startY = e.clientY;
+        dragged = false;
 
         const shapeKey = piece.dataset.shape;
         const shapeObj = SHAPES_DATA.find(s => s.key === shapeKey);
@@ -975,6 +1172,8 @@
         piece.style.opacity = '0.35';
 
         const onMove = (ev) => {
+          const dist = Math.hypot(ev.clientX - startX, ev.clientY - startY);
+          if (dist > 6) dragged = true;
           ghost.style.left = `${ev.clientX - rect.width / 2}px`;
           ghost.style.top = `${ev.clientY - rect.height / 2}px`;
         };
@@ -986,12 +1185,23 @@
           ghost.remove();
           piece.style.opacity = '';
 
-          // Check hit against unplaced slots
-          const slots = Array.from(stageEl.querySelectorAll('.build-slot-zone:not(.snapped)'));
+          // If child simply tapped the piece (no significant drag):
+          if (!dragged) {
+            const matchedSlot = stageEl.querySelector(`.build-slot-zone[data-shape="${shapeKey}"]:not(.snapped)`);
+            if (matchedSlot) {
+              placeSlot(matchedSlot, piece, shapeObj);
+              return;
+            }
+          }
+
+          // If dragged: Check hit against unplaced slots (sorted by z-index descending so inner slots win)
+          const slots = Array.from(stageEl.querySelectorAll('.build-slot-zone:not(.snapped)'))
+            .sort((a, b) => (Number(b.style.zIndex) || 0) - (Number(a.style.zIndex) || 0));
+
           let matchedSlot = null;
           for (const sl of slots) {
             const sr = sl.getBoundingClientRect();
-            const pad = 26;
+            const pad = 24;
             if (
               ev.clientX >= sr.left - pad && ev.clientX <= sr.right + pad &&
               ev.clientY >= sr.top - pad && ev.clientY <= sr.bottom + pad
