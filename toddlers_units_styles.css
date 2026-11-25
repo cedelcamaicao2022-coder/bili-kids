@@ -2634,3 +2634,269 @@ body.toddler-body {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
   transform: scale(1.08);
 }
+
+/* ==========================================================================
+   UNIT 1: NUMBERS 1-5 STUDIO (CARDS, PROPORTIONAL COUNT, TRACE & FALLING)
+   ========================================================================== */
+.toddler-tab-btn.tab-numbers.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-color: #047857;
+}
+
+.numbers-meet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 14px;
+}
+
+.number-meet-card {
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number-meet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.number-big-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.9rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.number-en-title {
+  margin: 6px 0 2px;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.number-es-sub {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.number-card-visual-box {
+  width: 100%;
+  min-height: 92px;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Proportional harmonious image clusters for 1-5 items */
+.num-items-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.num-items-cluster.cluster-count-4 {
+  max-width: 190px;
+}
+
+.num-items-cluster.cluster-count-5 {
+  max-width: 240px;
+}
+
+.num-card-mini-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2px;
+  border: 1px solid #e2e8f0;
+}
+
+.num-match-stage {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 18px 14px;
+  min-height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.num-hd-item-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 5px;
+  border: 2px solid #fef3c7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.num-choice-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 560px) {
+  .num-choice-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.num-choice-pill {
+  background: #ffffff;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.num-choice-pill:hover:not(:disabled) {
+  border-color: var(--num-col, #3b82f6);
+  transform: translateY(-2px);
+}
+
+.num-choice-pill.correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.num-choice-pill.wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.num-pill-digit {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--num-col, #0f172a);
+}
+
+.num-pill-word {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #475569;
+}
+
+/* Tracing Canvas */
+.trace-workspace-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.number-trace-canvas {
+  width: 300px;
+  height: 300px;
+  max-width: 100%;
+  border: 3px solid #cbd5e1;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.trace-tools-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.trace-colors-row {
+  display: flex;
+  gap: 10px;
+}
+
+.trace-color-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.trace-color-dot.active {
+  outline: 3px solid #0f172a;
+  transform: scale(1.12);
+}
+
+/* Falling Numbers Game */
+.falling-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.falling-target-pill {
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+  color: #78350f;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.falling-progress-pill {
+  background: #dcfce7;
+  border: 2px solid #22c55e;
+  color: #166534;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.falling-canvas-wrap {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid #bfdbfe;
+  background: #eff6ff;
+}
+
+.falling-numbers-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  touch-action: none;
+  cursor: pointer;
+}

@@ -423,7 +423,8 @@ class ToddlersUnitsEngine {
       { id: 'explore', label: '🌟 Explore', className: '' },
       ...(this.currentUnitId === 1 ? [
         { id: 'colors', label: '🎨 Colors', className: 'tab-colors' },
-        { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' }
+        { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' },
+        { id: 'numbers', label: '🔢 Numbers 1–5', className: 'tab-numbers' }
       ] : []),
       { id: 'listening', label: '🎧 Listening (6)', className: 'tab-listening' },
       { id: 'reading', label: '📖 Reading (6)', className: 'tab-reading' },
@@ -479,6 +480,13 @@ class ToddlersUnitsEngine {
       case 'shapes':
         if (typeof window.renderToddlersShapesStudio === 'function') {
           window.renderToddlersShapesStudio(ws, this);
+        } else {
+          this.renderExplore(ws);
+        }
+        break;
+      case 'numbers':
+        if (typeof window.renderToddlersNumbersStudio === 'function') {
+          window.renderToddlersNumbersStudio(ws, this);
         } else {
           this.renderExplore(ws);
         }
