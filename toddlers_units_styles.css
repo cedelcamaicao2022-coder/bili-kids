@@ -2406,3 +2406,231 @@ body.toddler-body {
 .eval-write-input:focus {
   border-color: #f59e0b;
 }
+
+/* ==========================================================================
+   UNIT 1: SHAPES STUDIO (MEET, MATCH, FIND, BUILD DRAG-AND-DROP & EVAL)
+   ========================================================================== */
+.toddler-tab-btn.tab-shapes.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.shape-focus-panel {
+  background: #ffffff;
+  border: 3px solid #3b82f6;
+  border-radius: 22px;
+  padding: 16px 22px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.12);
+}
+
+.shape-focus-svg {
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape-svg-lg { width: 105px; height: 105px; }
+.shape-svg-md { width: 88px; height: 88px; }
+.shape-svg-sm { width: 64px; height: 64px; }
+
+.shapes-meet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.shape-meet-card {
+  background: #ffffff;
+  border: 2.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.shape-meet-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.shape-meet-card.selected {
+  background: #eff6ff;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.18);
+}
+
+.shape-meet-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.shape-meet-en {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.shape-meet-es {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.shape-match-target-box {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape-silhouettes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.shape-silhouette-btn {
+  background: #f8fafc;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 18px;
+  padding: 14px;
+  min-height: 105px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.shape-silhouette-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+}
+
+.shape-silhouette-btn.correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+}
+
+.shape-silhouette-btn.wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+/* Build with Shapes Drag & Drop */
+.build-arena-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.build-blueprint-stage {
+  position: relative;
+  width: 320px;
+  height: 240px;
+  background: #f8fafc;
+  border: 3px dashed #94a3b8;
+  border-radius: 22px;
+  overflow: hidden;
+  flex-shrink: 0;
+  touch-action: none;
+}
+
+.build-slot-zone {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.build-slot-zone.snapped {
+  animation: popSnap 0.28s ease;
+}
+
+@keyframes popSnap {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.build-slot-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.build-tray-col {
+  flex: 1;
+  min-width: 220px;
+  max-width: 280px;
+}
+
+.build-pieces-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.build-drag-piece {
+  background: #ffffff;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.build-drag-piece:active {
+  cursor: grabbing;
+}
+
+.build-drag-piece.used {
+  opacity: 0.28;
+  border-style: dashed;
+  cursor: default;
+}
+
+.build-piece-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.build-drag-ghost {
+  position: fixed;
+  z-index: 3000;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2.5px solid #3b82f6;
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+  transform: scale(1.08);
+}

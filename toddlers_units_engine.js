@@ -421,7 +421,10 @@ class ToddlersUnitsEngine {
 
     const tabs = [
       { id: 'explore', label: '🌟 Explore', className: '' },
-      ...(this.currentUnitId === 1 ? [{ id: 'colors', label: '🎨 Colors', className: 'tab-colors' }] : []),
+      ...(this.currentUnitId === 1 ? [
+        { id: 'colors', label: '🎨 Colors', className: 'tab-colors' },
+        { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' }
+      ] : []),
       { id: 'listening', label: '🎧 Listening (6)', className: 'tab-listening' },
       { id: 'reading', label: '📖 Reading (6)', className: 'tab-reading' },
       { id: 'speaking', label: '🗣️ Speaking (6)', className: 'tab-speaking' },
@@ -469,6 +472,13 @@ class ToddlersUnitsEngine {
       case 'colors':
         if (typeof window.renderToddlersColorsStudio === 'function') {
           window.renderToddlersColorsStudio(ws, this);
+        } else {
+          this.renderExplore(ws);
+        }
+        break;
+      case 'shapes':
+        if (typeof window.renderToddlersShapesStudio === 'function') {
+          window.renderToddlersShapesStudio(ws, this);
         } else {
           this.renderExplore(ws);
         }
