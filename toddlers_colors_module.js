@@ -298,8 +298,7 @@
           btns.forEach(b => { b.disabled = true; });
           fb.style.color = '#166534';
           fb.textContent = `✅ ${current.name} → ${targetColor.en}!`;
-          engine.playCheerSound();
-          setTimeout(() => engine.playAudio(targetColor.en), 250);
+          engine.playAudio(targetColor.en);
           const next = document.createElement('button');
           next.type = 'button';
           next.className = 'toddler-quiz-launch-btn';
@@ -413,7 +412,7 @@
         if (allTargetsCorrect) {
           completed = true;
           engine.addStars(15);
-          engine.playCheerSound();
+          engine.playAudio(task.targetColor);
           fb.style.color = '#166534';
           fb.textContent = `🎉 ¡Excelente! ${task.instruction}!`;
           const next = document.createElement('button');
@@ -563,7 +562,7 @@
           findScore++;
           engine.addStars(10);
           obj.classList.add('found-pulse');
-          engine.playCheerSound();
+          engine.playAudio(prompt.colorKey);
           fb.style.color = '#166534';
           fb.textContent = `🎉 ¡Correcto! Encontraste: ${obj.dataset.name}!`;
           const next = document.createElement('button');
@@ -667,7 +666,7 @@
             btns.forEach(b => { b.disabled = true; });
             fb.style.color = '#166534';
             fb.textContent = `✅ ¡Correcto! Es ${target.en}.`;
-            engine.playCheerSound();
+            engine.playAudio(target.en);
             appendEvalNext(fb, st, body, engine);
           } else {
             btn.classList.add('wrong');
@@ -721,7 +720,7 @@
               micBtn.disabled = true;
               fb.style.color = '#166534';
               fb.textContent = `✅ ¡Muy bien! Dijiste "${target.en}".`;
-              engine.playCheerSound();
+              engine.playAudio(target.en);
               appendEvalNext(fb, st, body, engine);
             } else {
               fb.style.color = '#b91c1c';
@@ -820,7 +819,7 @@
           checkBtn.disabled = true;
           fb.style.color = '#166534';
           fb.textContent = `🎉 ¡Ortografía perfecta! "${target.en}"`;
-          engine.playCheerSound();
+          engine.playAudio(target.en);
           appendEvalNext(fb, st, body, engine);
         } else {
           fb.style.color = '#b91c1c';
