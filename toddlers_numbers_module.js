@@ -385,13 +385,21 @@
   /* --------------------------------------------------------------------------
      ACTIVIDAD 4 – JUEGO: ATRAPA LOS NÚMEROS QUE CAEN SUAVEMENTE (1 AL 5)
      -------------------------------------------------------------------------- */
+  let fallingLevel = 1;
+
   function renderFallingNumbersGame(body, engine) {
     stopFallingGameLoop();
 
+    const LEVEL_CONFIGS = {
+      1: { level: 1, title: 'Nivel 1 • Suave', minVy: 1.05, maxVy: 1.65, spawnFrames: 54, maxBubbles: 6, goalPerNum: 3, maxLives: 4 },
+      2: { level: 2, title: 'Nivel 2 • Rápido', minVy: 1.75, maxVy: 2.35, spawnFrames: 40, maxBubbles: 7, goalPerNum: 3, maxLives: 3 },
+      3: { level: 3, title: 'Nivel 3 • Súper Rápido', minVy: 2.55, maxVy: 3.25, spawnFrames: 30, maxBubbles: 8, goalPerNum: 3, maxLives: 3 }
+    };
+
+    const cfg = LEVEL_CONFIGS[fallingLevel] || LEVEL_CONFIGS[1];
     let currentTarget = 1;
-    let caughtInRound = 0;
-    const goalPerNumber = 3;
-    let totalCaught = 0;
+    const caughtMap = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    let livesLeft = cfg.maxLives;
     let gameOver = false;
 
     const bubbles = [];
@@ -399,37 +407,84 @@
     let spawnTimer = 0;
 
     body.innerHTML = `
-      <div class="colors-panel-card">
+      <div class="colors-panel-card" style="max-width: 820px;">
+        <div class="quiz-mode-tabs" style="margin-bottom:10px;">
+          ${[1, 2, 3].map(lvl => `
+            <button type="button" class="quiz-mode-tab ${fallingLevel === lvl ? 'active' : ''}" data-falllvl="${lvl}">
+              ${LEVEL_CONFIGS[lvl].title}
+            </button>
+          `).join('')}
+        </div>
+
         <div class="falling-hud-bar">
           <div class="falling-target-pill" id="fallingTargetBadge">
-            🎯 Toca los: <strong id="fallingTargetNum" style="font-size:1.35rem; margin-left:4px;">1 (One)</strong>
+            🎯 Atrapa los: <strong id="fallingTargetNum" style="font-size:1.3rem; margin-left:4px;">1 (One)</strong>
           </div>
-          <div class="falling-progress-pill" id="fallingProgressText">
-            0 / ${goalPerNumber}
+          <div class="falling-lives-pill" id="fallingLivesText">
+            ${'❤️'.repeat(livesLeft)} (${livesLeft} vidas)
           </div>
           <button type="button" class="toddler-nav-pill active" id="btnFallingHear" style="padding:6px 14px; font-size:0.85rem;">
             🔊 Escuchar
           </button>
         </div>
 
-        <div class="falling-canvas-wrap">
-          <canvas id="fallingNumbersCanvas" width="560" height="360" class="falling-numbers-canvas"></canvas>
+        <div class="falling-game-layout">
+          <div class="falling-canvas-wrap">
+            <canvas id="fallingNumbersCanvas" width="520" height="360" class="falling-numbers-canvas"></canvas>
+          </div>
+
+          <aside class="falling-side-panel" aria-label="Metas del nivel">
+            <h4 class="falling-side-title">📋 Por Atrapar (${cfg.title})</h4>
+            <div class="falling-goals-list" id="fallingGoalsList"></div>
+            <div class="falling-side-note">
+              Si dejas caer ${cfg.maxLives} números objetivo sin atraparlos, pierdes el nivel.
+            </div>
+          </aside>
         </div>
 
         <p class="mini-quiz-feedback" id="fallingFeedback"></p>
+        <div id="fallingActionRow" style="text-align:center;"></div>
       </div>
     `;
+
+    body.querySelectorAll('.quiz-mode-tab[data-falllvl]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        fallingLevel = Number(btn.dataset.falllvl);
+        renderFallingNumbersGame(body, engine);
+      });
+    });
 
     const canvas = body.querySelector('#fallingNumbersCanvas');
     const ctx = canvas.getContext('2d');
     const targetEl = body.querySelector('#fallingTargetNum');
-    const progEl = body.querySelector('#fallingProgressText');
+    const livesEl = body.querySelector('#fallingLivesText');
+    const goalsListEl = body.querySelector('#fallingGoalsList');
     const fbEl = body.querySelector('#fallingFeedback');
+    const actionRow = body.querySelector('#fallingActionRow');
+
+    const updateSidePanel = () => {
+      livesEl.textContent = livesLeft > 0
+        ? `${'❤️'.repeat(livesLeft)} (${livesLeft} ${livesLeft === 1 ? 'vida' : 'vidas'})`
+        : '💔 0 vidas';
+
+      goalsListEl.innerHTML = NUMBERS_DATA.map(n => {
+        const count = caughtMap[n.num] || 0;
+        const done = count >= cfg.goalPerNum;
+        const isCurrent = !gameOver && n.num === currentTarget;
+        return `
+          <div class="falling-goal-row ${isCurrent ? 'active' : ''} ${done ? 'done' : ''}" style="--goal-col:${n.color};">
+            <span class="falling-goal-num" style="background:${n.color};">${n.num}</span>
+            <span class="falling-goal-word">${n.en}</span>
+            <span class="falling-goal-count">${done ? '✅' : `${count}/${cfg.goalPerNum}`}</span>
+          </div>
+        `;
+      }).join('');
+    };
 
     const announceTarget = () => {
       const nObj = NUMBERS_DATA.find(n => n.num === currentTarget);
       targetEl.textContent = `${nObj.num} (${nObj.en})`;
-      progEl.textContent = `${caughtInRound} / ${goalPerNumber}`;
+      updateSidePanel();
       engine.playAudio(`Find number ${nObj.en.toLowerCase()}`);
     };
 
@@ -439,7 +494,6 @@
     });
 
     const spawnBubble = () => {
-      // Ensure target number spawns frequently (~45% chance)
       const isTarget = Math.random() < 0.48;
       const numVal = isTarget ? currentTarget : (1 + Math.floor(Math.random() * 5));
       const nObj = NUMBERS_DATA.find(n => n.num === numVal);
@@ -450,15 +504,60 @@
         x: r + 14 + Math.random() * (canvas.width - (r + 14) * 2),
         y: -r,
         r,
-        vy: 1.05 + Math.random() * 0.65, // Gentle smooth fall
+        vy: cfg.minVy + Math.random() * (cfg.maxVy - cfg.minVy),
         wobblePhase: Math.random() * Math.PI * 2
       });
     };
 
-    // Initial bubbles
-    spawnBubble();
-    setTimeout(spawnBubble, 350);
+    const endLevel = (won) => {
+      gameOver = true;
+      stopFallingGameLoop();
+      updateSidePanel();
+      actionRow.innerHTML = '';
 
+      if (won) {
+        engine.addStars(25);
+        fbEl.style.color = '#166534';
+        if (fallingLevel < 3) {
+          fbEl.textContent = `🏆 ¡Completaste el Nivel ${fallingLevel}! ¡Prepárate para el Nivel ${fallingLevel + 1}!`;
+          const nextBtn = document.createElement('button');
+          nextBtn.type = 'button';
+          nextBtn.className = 'toddler-quiz-launch-btn';
+          nextBtn.style.cssText = 'padding:10px 22px;';
+          nextBtn.textContent = `🚀 Pasar al Nivel ${fallingLevel + 1}`;
+          nextBtn.addEventListener('click', () => {
+            fallingLevel++;
+            renderFallingNumbersGame(body, engine);
+          });
+          actionRow.appendChild(nextBtn);
+        } else {
+          fbEl.textContent = '🏆 ¡Campeón Total! Superaste los 3 niveles de Atrapa los Números.';
+          const replayBtn = document.createElement('button');
+          replayBtn.type = 'button';
+          replayBtn.className = 'toddler-quiz-launch-btn';
+          replayBtn.style.cssText = 'padding:10px 22px;';
+          replayBtn.textContent = '🔄 Jugar desde Nivel 1';
+          replayBtn.addEventListener('click', () => {
+            fallingLevel = 1;
+            renderFallingNumbersGame(body, engine);
+          });
+          actionRow.appendChild(replayBtn);
+        }
+      } else {
+        fbEl.style.color = '#b91c1c';
+        fbEl.textContent = `😢 ¡Perdiste el Nivel ${fallingLevel}! Se escaparon demasiados números ${currentTarget}.`;
+        const retryBtn = document.createElement('button');
+        retryBtn.type = 'button';
+        retryBtn.className = 'toddler-quiz-launch-btn';
+        retryBtn.style.cssText = 'padding:10px 22px;';
+        retryBtn.textContent = `🔄 Reintentar Nivel ${fallingLevel}`;
+        retryBtn.addEventListener('click', () => renderFallingNumbersGame(body, engine));
+        actionRow.appendChild(retryBtn);
+      }
+    };
+
+    spawnBubble();
+    setTimeout(() => { if (!gameOver) spawnBubble(); }, 350);
     announceTarget();
 
     const handleCanvasTap = (e) => {
@@ -470,11 +569,10 @@
       for (let i = bubbles.length - 1; i >= 0; i--) {
         const b = bubbles[i];
         const dist = Math.hypot(tx - b.x, ty - b.y);
-        if (dist <= b.r + 10) {
+        if (dist <= b.r + 12) {
           if (b.num === currentTarget) {
             bubbles.splice(i, 1);
-            caughtInRound++;
-            totalCaught++;
+            caughtMap[currentTarget]++;
             engine.addStars(10);
 
             for (let s = 0; s < 10; s++) {
@@ -490,32 +588,22 @@
 
             const nObj = NUMBERS_DATA.find(n => n.num === currentTarget);
             engine.playAudio(nObj.en);
-            progEl.textContent = `${caughtInRound} / ${goalPerNumber}`;
+            updateSidePanel();
             fbEl.style.color = '#166534';
             fbEl.textContent = `✅ ¡Bien! Atrapaste el ${currentTarget} (${nObj.en})`;
 
-            if (caughtInRound >= goalPerNumber) {
+            if (caughtMap[currentTarget] >= cfg.goalPerNum) {
               if (currentTarget < 5) {
                 currentTarget++;
-                caughtInRound = 0;
-                setTimeout(announceTarget, 650);
+                setTimeout(() => { if (!gameOver) announceTarget(); }, 600);
               } else {
-                gameOver = true;
-                stopFallingGameLoop();
-                fbEl.textContent = `🏆 ¡Completaste del 1 al 5! Total atrapados: ${totalCaught}`;
-                const replay = document.createElement('button');
-                replay.type = 'button';
-                replay.className = 'toddler-quiz-launch-btn';
-                replay.style.cssText = 'display:block; margin:8px auto 0; padding:9px 20px;';
-                replay.textContent = '🔄 Jugar otra vez';
-                replay.addEventListener('click', () => renderFallingNumbersGame(body, engine));
-                fbEl.after(replay);
+                endLevel(true);
               }
             }
           } else {
-            b.vy = -1.2; // Gentle bounce upward feedback
+            b.vy = -1.2;
             fbEl.style.color = '#b45309';
-            fbEl.textContent = `Ese es el ${b.num}. ¡Busca el número ${currentTarget}!`;
+            fbEl.textContent = `Ese es el ${b.num}. ¡Atrapa el número ${currentTarget}!`;
           }
           break;
         }
@@ -532,7 +620,6 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Soft sky gradient
       const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
       bg.addColorStop(0, '#eff6ff');
       bg.addColorStop(1, '#fefce8');
@@ -541,20 +628,19 @@
 
       if (!gameOver) {
         spawnTimer++;
-        if (spawnTimer >= 52) {
+        if (spawnTimer >= cfg.spawnFrames) {
           spawnTimer = 0;
-          if (bubbles.length < 7) spawnBubble();
+          if (bubbles.length < cfg.maxBubbles) spawnBubble();
         }
       }
 
       for (let i = bubbles.length - 1; i >= 0; i--) {
         const b = bubbles[i];
         b.y += b.vy;
-        if (b.vy < 1.0) b.vy += 0.08;
+        if (b.vy < cfg.minVy) b.vy += 0.08;
         b.wobblePhase += 0.04;
         const drawX = b.x + Math.sin(b.wobblePhase) * 6;
 
-        // Bubble shadow + body
         ctx.save();
         ctx.beginPath();
         ctx.arc(drawX, b.y, b.r, 0, Math.PI * 2);
@@ -564,13 +650,11 @@
         ctx.strokeStyle = '#ffffff';
         ctx.stroke();
 
-        // Highlight ring
         ctx.beginPath();
         ctx.arc(drawX - 10, b.y - 10, 7, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255,255,255,0.45)';
         ctx.fill();
 
-        // Number text
         ctx.fillStyle = '#ffffff';
         ctx.font = '900 28px Outfit, sans-serif';
         ctx.textAlign = 'center';
@@ -580,10 +664,20 @@
 
         if (b.y - b.r > canvas.height + 10) {
           bubbles.splice(i, 1);
+          if (!gameOver && b.num === currentTarget) {
+            livesLeft--;
+            updateSidePanel();
+            if (livesLeft <= 0) {
+              endLevel(false);
+              return;
+            } else {
+              fbEl.style.color = '#b91c1c';
+              fbEl.textContent = `⚠️ ¡Se escapó un ${currentTarget}! Te quedan ${livesLeft} ${livesLeft === 1 ? 'vida' : 'vidas'}.`;
+            }
+          }
         }
       }
 
-      // Sparkles
       for (let i = sparkles.length - 1; i >= 0; i--) {
         const sp = sparkles[i];
         sp.x += sp.vx;
