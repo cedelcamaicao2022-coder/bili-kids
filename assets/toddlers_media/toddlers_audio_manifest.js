@@ -18268,5 +18268,10 @@ window.ToddlersAudioManifest = {
   "set square": "assets/toddlers_media/audio/bili_toddler_w_set_square.mp3",
   "setsquare": "assets/toddlers_media/audio/bili_toddler_w_set_square.mp3",
   "water bottle": "assets/toddlers_media/audio/bili_toddler_w_water_bottle.mp3",
-  "waterbottle": "assets/toddlers_media/audio/bili_toddler_w_water_bottle.mp3"
+  "waterbottle": "assets/toddlers_media/audio/bili_toddler_w_water_bottle.mp3",
+  "crayons": "assets/toddlers_media/audio/bili_toddler_w_crayons.mp3",
+  "glue": "assets/toddlers_media/audio/bili_toddler_w_glue.mp3",
+  "welcome to school objects! let us explore together.": "assets/toddlers_media/audio/bili_toddler_welcome_u1_explore.mp3",
+  "welcome to school objects let us explore together": "assets/toddlers_media/audio/bili_toddler_welcome_u1_explore.mp3",
+  "welcometoschoolobjectsletusexploretogether": "assets/toddlers_media/audio/bili_toddler_welcome_u1_explore.mp3"
 };
