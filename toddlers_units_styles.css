@@ -2636,6 +2636,107 @@ body.toddler-body {
 }
 
 /* ==========================================================================
+   UNIT 1: SHAPES – TREN GEOMÉTRICO (Find the Shape activity)
+   ========================================================================== */
+
+/* Shape picker grid at bottom of train activity */
+.train-shape-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 4px;
+}
+
+.train-pick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 76px;
+  padding: 8px 4px 6px;
+  border-radius: 14px;
+  border: 2.5px solid #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+  position: relative;
+}
+
+.train-pick-btn:hover:not([disabled]) {
+  transform: translateY(-3px) scale(1.07);
+  border-color: #f59e0b;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.28);
+}
+
+.train-pick-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.train-pick-btn.train-pick-done {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.train-pick-btn.train-pick-wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+  animation: trainPickShake 0.5s ease;
+}
+
+@keyframes trainPickShake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+.train-pick-svg {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.train-pick-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.train-pick-check {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* Train part pop animation when painted */
+.train-part-popping {
+  animation: trainPartPop 0.6s ease forwards;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes trainPartPop {
+  0%   { transform: scale(1); filter: brightness(1); }
+  40%  { transform: scale(1.18); filter: brightness(1.4) drop-shadow(0 0 10px gold); }
+  70%  { transform: scale(0.96); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Train SVG hover on parts */
+.train-part {
+  cursor: default;
+}
+
+@media (max-width: 540px) {
+  .train-pick-btn { width: 62px; padding: 6px 2px 5px; }
+  .train-pick-svg { width: 36px; height: 36px; }
+  .train-pick-label { font-size: 0.65rem; }
+}
+
+/* ==========================================================================
    UNIT 1: NUMBERS 1-5 STUDIO (CARDS, PROPORTIONAL COUNT, TRACE & FALLING)
    ========================================================================== */
 .toddler-tab-btn.tab-numbers.active {
