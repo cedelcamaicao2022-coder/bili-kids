@@ -2726,8 +2726,34 @@ body.toddler-body {
 }
 
 /* Train SVG hover on parts */
-.train-part {
+.train-interactive-part {
+  cursor: pointer;
+  transition: transform 0.16s ease, filter 0.16s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.train-interactive-part:hover:not(.is-painted) {
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.75));
+  transform: scale(1.04);
+}
+
+.train-interactive-part.is-painted {
   cursor: default;
+}
+
+.train-advance-btn {
+  animation: trainBtnPulse 1.8s infinite alternate;
+}
+
+@keyframes trainBtnPulse {
+  0%   { transform: scale(1); box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4); }
+  100% { transform: scale(1.06); box-shadow: 0 8px 26px rgba(5, 150, 105, 0.7); }
+}
+
+@keyframes trainWhistle {
+  0%   { transform: rotate(-5deg) scale(1); }
+  100% { transform: rotate(5deg) scale(1.12); }
 }
 
 @media (max-width: 540px) {
