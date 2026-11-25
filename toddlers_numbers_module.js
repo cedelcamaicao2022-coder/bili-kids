@@ -8,19 +8,22 @@
  */
 (function () {
   const NUMBERS_DATA = [
-    { num: 1, en: 'One', es: 'Uno', color: '#ef4444', img: 'assets/toddlers_units/school_objects/backpack.jpeg', label: 'Backpack' },
-    { num: 2, en: 'Two', es: 'Dos', color: '#3b82f6', img: 'assets/toddlers_units/school_objects/book.jpeg', label: 'Books' },
-    { num: 3, en: 'Three', es: 'Tres', color: '#eab308', img: 'assets/toddlers_units/school_objects/crayons.jpeg', label: 'Crayons' },
-    { num: 4, en: 'Four', es: 'Cuatro', color: '#22c55e', img: 'assets/toddlers_units/school_objects/eraser.jpeg', label: 'Erasers' },
-    { num: 5, en: 'Five', es: 'Cinco', color: '#a855f7', img: 'assets/toddlers_units/school_objects/ruler.jpeg', label: 'Rulers' }
+    { num: 1, en: 'One', es: 'Uno', color: '#ef4444', img: 'assets/toddlers_units/animals_hd/lion.png', label: 'Lion' },
+    { num: 2, en: 'Two', es: 'Dos', color: '#3b82f6', img: 'assets/toddlers_units/animals_hd/elephant.png', label: 'Elephants' },
+    { num: 3, en: 'Three', es: 'Tres', color: '#eab308', img: 'assets/toddlers_units/animals_hd/giraffe.png', label: 'Giraffes' },
+    { num: 4, en: 'Four', es: 'Cuatro', color: '#22c55e', img: 'assets/toddlers_units/animals_hd/fox.png', label: 'Foxes' },
+    { num: 5, en: 'Five', es: 'Cinco', color: '#a855f7', img: 'assets/toddlers_units/animals_hd/bear.png', label: 'Bears' }
   ];
 
   const COUNT_CHALLENGES = [
-    { num: 3, img: 'assets/toddlers_units/school_objects/book.jpeg', name: 'Books' },
-    { num: 1, img: 'assets/toddlers_units/school_objects/lunch_box.jpeg', name: 'Lunch box' },
-    { num: 4, img: 'assets/toddlers_units/school_objects/scissors.jpeg', name: 'Scissors' },
-    { num: 2, img: 'assets/toddlers_units/school_objects/water_bottle.jpeg', name: 'Water bottles' },
-    { num: 5, img: 'assets/toddlers_units/school_objects/calculator.jpeg', name: 'Calculators' }
+    { num: 3, img: 'assets/toddlers_units/animals_hd/lion.png', name: 'Lions' },
+    { num: 1, img: 'assets/toddlers_units/animals_hd/elephant.png', name: 'Elephant' },
+    { num: 4, img: 'assets/toddlers_units/animals_hd/giraffe.png', name: 'Giraffes' },
+    { num: 2, img: 'assets/toddlers_units/animals_hd/zebra.png', name: 'Zebras' },
+    { num: 5, img: 'assets/toddlers_units/animals_hd/bear.png', name: 'Bears' },
+    { num: 2, img: 'assets/toddlers_units/animals_hd/hippo.png', name: 'Hippos' },
+    { num: 4, img: 'assets/toddlers_units/animals_hd/tiger.png', name: 'Tigers' },
+    { num: 3, img: 'assets/toddlers_units/animals_hd/fox.png', name: 'Foxes' }
   ];
 
   let activeSubTab = 'meet';
