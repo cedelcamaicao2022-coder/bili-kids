@@ -522,7 +522,7 @@ class ToddlersUnitsEngine {
       html += `
         <div class="explore-card" onclick="toddlersEngine.playAudio('${cleanWord}')">
           <div>
-            <div class="explore-icon">${this.renderVisual(item.icon, item.word || item.name)}</div>
+            <div class="explore-icon">${this.renderItemVisual(item, 'explore-photo-img')}</div>
             <h3 class="explore-word">${item.word || item.name}</h3>
             ${item.phonics ? `<div style="font-size:0.85rem; color:#f59e0b; font-weight:800; margin-bottom:6px;">Phonics: ${item.phonics}</div>` : ''}
             <p class="explore-fact">${item.fact || 'Listen and repeat to master this word!'}</p>
@@ -541,67 +541,398 @@ class ToddlersUnitsEngine {
     this.setupExploreRecall(container, items);
   }
 
+  renderItemVisual(item, imgClass = 'explore-photo-img') {
+    const label = item.word || item.name || 'Item';
+    if (item.image) {
+      return `<img src="${item.image}" alt="${this.escapeHtmlAttr(label)}" class="${imgClass}">`;
+    }
+    return this.renderVisual(item.icon, label);
+  }
+
   setupExploreRecall(container, items) {
-    const cards = container.querySelector('.explore-grid');
-    const quiz = document.createElement('section');
-    quiz.style.cssText = 'margin-top:22px;padding:18px;border-radius:18px;background:#fffbeb;border:2px solid #fcd34d;';
-    quiz.setAttribute('aria-labelledby', 'toddlerRecallTitle');
-    quiz.innerHTML = `<h3 id="toddlerRecallTitle" style="margin:0 0 6px;color:#78350f;">🧠 Picture-to-word recall</h3><p style="margin:0 0 12px;color:#6b7280;">Review the cards first, then hide them and choose each English word from memory.</p><button type="button" class="toddler-nav-pill toddler-recall-start">Start recall check</button><div class="toddler-recall-question" aria-live="polite"></div>`;
-    container.appendChild(quiz);
-    const questionBox = quiz.querySelector('.toddler-recall-question');
-    const pool = items.filter(item => (item.word || item.name) && item.icon);
-    const questions = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(3, pool.length));
-    let index = 0;
+    const pool = items.filter(item => (item.word || item.name) && (item.image || item.icon));
+    if (pool.length === 0) return;
+
+    const launcher = document.createElement('section');
+    launcher.className = 'toddler-quiz-launcher-bar';
+    launcher.setAttribute('aria-labelledby', 'toddlerRecallTitle');
+    launcher.innerHTML = `
+      <div>
+        <h3 id="toddlerRecallTitle" style="margin:0 0 4px; color:#78350f; font-size:1.15rem;">🎯 Quiz Interactivo • 3 Modos</h3>
+        <p style="margin:0; color:#92400e; font-size:0.9rem; font-weight:600;">
+          Practica escribiendo letra por letra, escuchando el audio y con opción múltiple en una ventana pequeña.
+        </p>
+      </div>
+      <button type="button" class="toddler-quiz-launch-btn" id="btnOpenMiniQuiz">
+        🚀 Abrir Quiz (Ventana Pequeña)
+      </button>
+    `;
+    container.appendChild(launcher);
+
+    launcher.querySelector('#btnOpenMiniQuiz').addEventListener('click', () => {
+      this.openMiniQuizModal(pool);
+    });
+  }
+
+  openMiniQuizModal(pool) {
+    document.getElementById('toddlerMiniQuizBackdrop')?.remove();
+    if (this._miniQuizKeyHandler) {
+      document.removeEventListener('keydown', this._miniQuizKeyHandler);
+      this._miniQuizKeyHandler = null;
+    }
+
+    const backdrop = document.createElement('div');
+    backdrop.id = 'toddlerMiniQuizBackdrop';
+    backdrop.className = 'toddler-mini-quiz-backdrop';
+
+    const win = document.createElement('div');
+    win.className = 'toddler-mini-quiz-window';
+    win.setAttribute('role', 'dialog');
+    win.setAttribute('aria-modal', 'true');
+    win.setAttribute('aria-label', 'Quiz de Útiles Escolares');
+
+    backdrop.appendChild(win);
+    document.body.appendChild(backdrop);
+
+    let activeMode = 'mixed'; // 'mixed' | 'spell' | 'listen' | 'choice'
+    let questions = [];
+    let qIndex = 0;
     let score = 0;
-    const render = () => {
-      if (index >= questions.length) {
-        questionBox.innerHTML = `<p role="status" style="font-weight:800;color:#166534;">Recall check complete: ${score}/${questions.length} correct.</p><button type="button" class="toddler-nav-pill toddler-recall-review">Review vocabulary cards</button>`;
-        questionBox.querySelector('.toddler-recall-review').addEventListener('click', () => {
-          if (cards) cards.hidden = false;
-          index = 0;
-          score = 0;
-          questionBox.innerHTML = '';
-          const start = quiz.querySelector('.toddler-recall-start');
-          start.disabled = false;
+
+    const closeModal = () => {
+      if (this._miniQuizKeyHandler) {
+        document.removeEventListener('keydown', this._miniQuizKeyHandler);
+        this._miniQuizKeyHandler = null;
+      }
+      backdrop.remove();
+    };
+
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    const buildQuestions = (mode) => {
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      if (mode === 'mixed') {
+        const count = Math.min(9, shuffled.length);
+        const types = ['choice', 'listen', 'spell'];
+        return shuffled.slice(0, count).map((item, i) => ({
+          item,
+          type: types[i % 3]
+        }));
+      }
+      const count = Math.min(6, shuffled.length);
+      return shuffled.slice(0, count).map(item => ({ item, type: mode }));
+    };
+
+    const startQuiz = (mode) => {
+      activeMode = mode;
+      questions = buildQuestions(mode);
+      qIndex = 0;
+      score = 0;
+      renderQuestion();
+    };
+
+    const renderQuestion = () => {
+      if (this._miniQuizKeyHandler) {
+        document.removeEventListener('keydown', this._miniQuizKeyHandler);
+        this._miniQuizKeyHandler = null;
+      }
+
+      const tabsHtml = `
+        <div class="quiz-mode-tabs">
+          <button type="button" class="quiz-mode-tab ${activeMode === 'mixed' ? 'active' : ''}" data-mode="mixed">🌐 Mixto (3 Modos)</button>
+          <button type="button" class="quiz-mode-tab ${activeMode === 'spell' ? 'active' : ''}" data-mode="spell">⌨️ Letra por letra</button>
+          <button type="button" class="quiz-mode-tab ${activeMode === 'listen' ? 'active' : ''}" data-mode="listen">🎧 Escuchar</button>
+          <button type="button" class="quiz-mode-tab ${activeMode === 'choice' ? 'active' : ''}" data-mode="choice">📝 Opción múltiple</button>
+        </div>
+      `;
+
+      const headerHtml = `
+        <div class="mini-quiz-header">
+          <h3 class="mini-quiz-title">🎯 Quiz de Útiles Escolares</h3>
+          <button type="button" class="mini-quiz-close-btn" id="btnCloseMiniQuiz" aria-label="Cerrar">✕</button>
+        </div>
+        ${tabsHtml}
+      `;
+
+      if (qIndex >= questions.length) {
+        const pct = Math.round((score / Math.max(1, questions.length)) * 100);
+        win.innerHTML = `
+          ${headerHtml}
+          <div style="text-align:center; padding:18px 8px;">
+            <div style="font-size:3rem; margin-bottom:8px;">${pct >= 70 ? '🏆' : '🌟'}</div>
+            <h4 style="margin:0 0 6px; font-size:1.25rem; color:#78350f;">¡Quiz Completado!</h4>
+            <p style="margin:0 0 14px; font-size:1rem; font-weight:800; color:#166534;">
+              Resultado: ${score} de ${questions.length} correctas (${pct}%)
+            </p>
+            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+              <button type="button" class="toddler-quiz-launch-btn" id="btnRestartMiniQuiz" style="padding:10px 18px; font-size:0.95rem;">🔄 Jugar de nuevo</button>
+              <button type="button" class="toddler-nav-pill" id="btnExitMiniQuiz">Cerrar</button>
+            </div>
+          </div>
+        `;
+        win.querySelector('#btnCloseMiniQuiz').addEventListener('click', closeModal);
+        win.querySelector('#btnExitMiniQuiz').addEventListener('click', closeModal);
+        win.querySelector('#btnRestartMiniQuiz').addEventListener('click', () => startQuiz(activeMode));
+        win.querySelectorAll('.quiz-mode-tab').forEach(btn => {
+          btn.addEventListener('click', () => startQuiz(btn.dataset.mode));
         });
         return;
       }
-      const target = questions[index];
+
+      const current = questions[qIndex];
+      const target = current.item;
       const targetWord = target.word || target.name;
-      const options = [target, ...pool.filter(item => item !== target).sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
-      questionBox.innerHTML = `<div style="display:flex;align-items:center;gap:10px;margin:10px 0 14px;"><span style="font-size:2.5rem;" aria-hidden="true">${this.renderVisual(target.icon, targetWord)}</span><strong>Picture ${index + 1} of ${questions.length}</strong></div><div style="display:flex;flex-wrap:wrap;gap:8px;" class="toddler-recall-options"></div><p class="toddler-recall-feedback" role="status" aria-live="polite"></p><p style="font-size:.9rem;color:#6b7280;">Correct: ${score}/${questions.length}</p>`;
-      const buttons = questionBox.querySelector('.toddler-recall-options');
-      options.forEach(option => {
-        const word = option.word || option.name;
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'toddler-nav-pill';
-        button.textContent = word;
-        button.addEventListener('click', () => {
-          const feedback = questionBox.querySelector('.toddler-recall-feedback');
-          if (word === targetWord) {
-            score++;
-            feedback.textContent = `Correct: ${targetWord}. Listen and say it aloud.`;
-            this.playAudio(targetWord);
-            buttons.querySelectorAll('button').forEach(choice => { choice.disabled = true; });
-            const next = document.createElement('button');
-            next.type = 'button';
-            next.className = 'toddler-nav-pill';
-            next.textContent = index + 1 === questions.length ? 'Finish recall check' : 'Next picture';
-            next.addEventListener('click', () => { index++; render(); });
-            buttons.after(next);
-          } else {
-            feedback.textContent = 'Not this word. Look at the picture and try another choice.';
-          }
-        });
-        buttons.appendChild(button);
+      const modeLabels = {
+        choice: '📝 Opción múltiple',
+        listen: '🎧 Escucha y adivina',
+        spell: '⌨️ Escribe letra por letra'
+      };
+
+      const metaHtml = `
+        <div class="mini-quiz-meta">
+          <span>Pregunta ${qIndex + 1} de ${questions.length} • ${modeLabels[current.type]}</span>
+          <span>⭐ ${score}</span>
+        </div>
+      `;
+
+      let bodyHtml = '';
+
+      if (current.type === 'choice') {
+        const distractors = pool.filter(it => it !== target).sort(() => Math.random() - 0.5).slice(0, 2);
+        const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+        bodyHtml = `
+          <div class="mini-quiz-visual-box">${this.renderItemVisual(target, 'mini-quiz-visual-img')}</div>
+          <p style="text-align:center; font-weight:800; color:#334155; margin:0 0 10px; font-size:0.95rem;">
+            ¿Qué útil escolar ves en la imagen?
+          </p>
+          <div class="quiz-mc-options-grid" id="miniQuizMcOptions">
+            ${options.map(opt => {
+              const w = opt.word || opt.name;
+              return `<button type="button" class="quiz-mc-btn" data-word="${this.escapeHtmlAttr(w)}">${w}</button>`;
+            }).join('')}
+          </div>
+          <p class="mini-quiz-feedback" id="miniQuizFeedback" aria-live="polite"></p>
+        `;
+      } else if (current.type === 'listen') {
+        const distractors = pool.filter(it => it !== target).sort(() => Math.random() - 0.5).slice(0, 2);
+        const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+        bodyHtml = `
+          <div style="text-align:center; margin:8px 0 12px;">
+            <button type="button" class="toddler-quiz-launch-btn" id="btnMiniQuizReplay" style="padding:10px 20px; font-size:0.95rem;">
+              🔊 Escuchar Audio
+            </button>
+            <p style="margin:8px 0 0; font-weight:800; color:#334155; font-size:0.92rem;">
+              Escucha el audio y toca la imagen correcta:
+            </p>
+          </div>
+          <div class="quiz-img-options-grid" id="miniQuizImgOptions">
+            ${options.map(opt => {
+              const w = opt.word || opt.name;
+              return `<button type="button" class="quiz-img-choice-btn" data-word="${this.escapeHtmlAttr(w)}" aria-label="${this.escapeHtmlAttr(w)}">${this.renderItemVisual(opt, 'mini-quiz-visual-img')}</button>`;
+            }).join('')}
+          </div>
+          <p class="mini-quiz-feedback" id="miniQuizFeedback" aria-live="polite"></p>
+        `;
+      } else if (current.type === 'spell') {
+        bodyHtml = `
+          <div class="mini-quiz-visual-box" style="width:118px; height:118px; margin-bottom:8px;">
+            ${this.renderItemVisual(target, 'mini-quiz-visual-img')}
+          </div>
+          <div style="text-align:center;">
+            <button type="button" class="toddler-nav-pill" id="btnSpellAudioHint" style="padding:4px 12px; font-size:0.8rem;">
+              🔊 Pista de audio
+            </button>
+          </div>
+          <div class="spell-boxes-row" id="spellBoxesRow"></div>
+          <div class="spell-keyboard-grid" id="spellKeyboardGrid"></div>
+          <p class="mini-quiz-feedback" id="miniQuizFeedback" aria-live="polite"></p>
+        `;
+      }
+
+      win.innerHTML = `${headerHtml}${metaHtml}${bodyHtml}`;
+
+      win.querySelector('#btnCloseMiniQuiz').addEventListener('click', closeModal);
+      win.querySelectorAll('.quiz-mode-tab').forEach(btn => {
+        btn.addEventListener('click', () => startQuiz(btn.dataset.mode));
       });
+
+      const feedbackEl = win.querySelector('#miniQuizFeedback');
+
+      const showNextButton = () => {
+        const nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.className = 'toddler-quiz-launch-btn';
+        nextBtn.style.cssText = 'display:block; margin:8px auto 0; padding:9px 20px; font-size:0.92rem;';
+        nextBtn.textContent = qIndex + 1 === questions.length ? '🏆 Ver Resultado' : 'Siguiente ➔';
+        nextBtn.addEventListener('click', () => {
+          qIndex++;
+          renderQuestion();
+        });
+        feedbackEl.after(nextBtn);
+      };
+
+      if (current.type === 'choice') {
+        const btns = win.querySelectorAll('.quiz-mc-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const chosen = btn.dataset.word;
+            if (chosen === targetWord) {
+              score++;
+              this.addStars(10);
+              btn.classList.add('correct');
+              btns.forEach(b => { b.disabled = true; });
+              feedbackEl.style.color = '#166534';
+              feedbackEl.textContent = `✅ ¡Correcto! "${targetWord}"`;
+              this.playAudio(targetWord);
+              showNextButton();
+            } else {
+              btn.classList.add('wrong');
+              btn.disabled = true;
+              feedbackEl.style.color = '#b91c1c';
+              feedbackEl.textContent = '❌ Intenta otra opción.';
+            }
+          });
+        });
+      } else if (current.type === 'listen') {
+        setTimeout(() => this.playAudio(targetWord), 180);
+        win.querySelector('#btnMiniQuizReplay').addEventListener('click', () => {
+          this.playAudio(targetWord);
+        });
+        const imgBtns = win.querySelectorAll('.quiz-img-choice-btn');
+        imgBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const chosen = btn.dataset.word;
+            if (chosen === targetWord) {
+              score++;
+              this.addStars(10);
+              btn.classList.add('correct');
+              imgBtns.forEach(b => { b.disabled = true; });
+              feedbackEl.style.color = '#166534';
+              feedbackEl.textContent = `✅ ¡Muy bien! Es "${targetWord}"`;
+              this.playAudio(targetWord);
+              showNextButton();
+            } else {
+              btn.classList.add('wrong');
+              btn.disabled = true;
+              feedbackEl.style.color = '#b91c1c';
+              feedbackEl.textContent = '❌ Ese no es. Escucha de nuevo e intenta otra imagen.';
+            }
+          });
+        });
+      } else if (current.type === 'spell') {
+        win.querySelector('#btnSpellAudioHint').addEventListener('click', () => {
+          this.playAudio(targetWord);
+        });
+
+        const upperChars = targetWord.toUpperCase().split('');
+        const letterIndices = [];
+        upperChars.forEach((ch, idx) => {
+          if (/[A-Z]/.test(ch)) letterIndices.push(idx);
+        });
+        const cleanLetters = letterIndices.map(idx => upperChars[idx]);
+        let typedLetters = [];
+        let solved = false;
+
+        const boxesRow = win.querySelector('#spellBoxesRow');
+        const keyboardGrid = win.querySelector('#spellKeyboardGrid');
+
+        const extraAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+          .filter(l => !cleanLetters.includes(l))
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 4);
+        const keyPool = [...new Set([...cleanLetters, ...extraAlphabet])].sort();
+
+        const renderSpellBoxes = (stateClass = '') => {
+          boxesRow.innerHTML = '';
+          let letterCursor = 0;
+          upperChars.forEach(ch => {
+            if (ch === ' ') {
+              const gap = document.createElement('span');
+              gap.className = 'spell-space-gap';
+              boxesRow.appendChild(gap);
+            } else {
+              const box = document.createElement('span');
+              const val = typedLetters[letterCursor] || '';
+              const isActive = !solved && letterCursor === typedLetters.length;
+              box.className = `spell-letter-box ${val ? 'filled' : ''} ${isActive ? 'active' : ''} ${stateClass}`;
+              box.textContent = val;
+              boxesRow.appendChild(box);
+              letterCursor++;
+            }
+          });
+        };
+
+        const checkSpellCompletion = () => {
+          if (typedLetters.length < cleanLetters.length) return;
+          const attempt = typedLetters.join('');
+          const expected = cleanLetters.join('');
+          if (attempt === expected) {
+            solved = true;
+            score++;
+            this.addStars(15);
+            renderSpellBoxes('correct');
+            feedbackEl.style.color = '#166534';
+            feedbackEl.textContent = `🎉 ¡Excelente! Escribiste "${targetWord}"`;
+            this.playAudio(targetWord);
+            keyboardGrid.querySelectorAll('button').forEach(b => { b.disabled = true; });
+            showNextButton();
+          } else {
+            renderSpellBoxes('wrong');
+            feedbackEl.style.color = '#b91c1c';
+            feedbackEl.textContent = '❌ Revisa las letras. Usa ⌫ para corregir.';
+          }
+        };
+
+        const pushLetter = (letter) => {
+          if (solved || typedLetters.length >= cleanLetters.length) return;
+          typedLetters.push(letter.toUpperCase());
+          feedbackEl.textContent = '';
+          renderSpellBoxes();
+          checkSpellCompletion();
+        };
+
+        const popLetter = () => {
+          if (solved || typedLetters.length === 0) return;
+          typedLetters.pop();
+          feedbackEl.textContent = '';
+          renderSpellBoxes();
+        };
+
+        keyPool.forEach(letter => {
+          const kBtn = document.createElement('button');
+          kBtn.type = 'button';
+          kBtn.className = 'spell-key-btn';
+          kBtn.textContent = letter;
+          kBtn.addEventListener('click', () => pushLetter(letter));
+          keyboardGrid.appendChild(kBtn);
+        });
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'spell-key-btn action-btn';
+        delBtn.textContent = '⌫ Borrar';
+        delBtn.addEventListener('click', popLetter);
+        keyboardGrid.appendChild(delBtn);
+
+        this._miniQuizKeyHandler = (e) => {
+          if (solved) return;
+          if (e.key === 'Backspace') {
+            e.preventDefault();
+            popLetter();
+          } else if (/^[a-zA-Z]$/.test(e.key)) {
+            e.preventDefault();
+            pushLetter(e.key.toUpperCase());
+          }
+        };
+        document.addEventListener('keydown', this._miniQuizKeyHandler);
+
+        renderSpellBoxes();
+      }
     };
-    quiz.querySelector('.toddler-recall-start').addEventListener('click', event => {
-      if (cards) cards.hidden = true;
-      event.currentTarget.disabled = true;
-      render();
-    });
+
+    startQuiz('mixed');
   }
 
   /* ==========================================================================
