@@ -219,8 +219,8 @@ class ToddlersUnitsEngine {
     // Priority candidates for manifest audio lookup
     const candidates = [];
     const rawTrim = text.trim();
-    candidates.push(rawTrim);
     candidates.push(rawTrim.toLowerCase());
+    candidates.push(rawTrim);
 
     // 1. Standard alphanumeric normalizations
     const normKey = rawTrim.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
