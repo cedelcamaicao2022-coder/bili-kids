@@ -105,7 +105,7 @@ class ToddlersUnitsEngine {
     }
 
     const tabParam = urlParams.get('tab');
-    if (tabParam && ['hub', 'explore', 'colors', 'shapes', 'numbers', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
+    if (tabParam && ['hub', 'explore', 'colors', 'shapes', 'numbers', 'hello', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
       this.currentTab = tabParam;
     } else {
       this.currentTab = 'hub';
@@ -406,6 +406,10 @@ class ToddlersUnitsEngine {
       if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'Interactive Academy'}`;
       if (titleElem) titleElem.innerHTML = `📱 ${unit.title} • Learning Apps`;
       if (descElem) descElem.innerText = 'Selecciona una app para comenzar tu aventura de aprendizaje en inglés:';
+    } else if (this.currentTab === 'hello') {
+      if (tagElem) tagElem.innerText = `Unit 2 • Activity 1`;
+      if (titleElem) titleElem.innerHTML = `👋 Hello, It's Me!`;
+      if (descElem) descElem.innerText = 'Aprende a saludar, decir tu nombre y expresar cómo te sientes en inglés.';
     } else {
       if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'English Adventure'}`;
       if (titleElem) titleElem.innerHTML = `${unit.icon || '🌟'} ${unit.title}`;
@@ -431,12 +435,16 @@ class ToddlersUnitsEngine {
 
     const tabs = [
       { id: 'hub', label: '📱 Apps Hub', className: 'tab-hub' },
-      { id: 'explore', label: (this.currentUnitId === 1 ? '🎒 School Objects' : '🌟 Explore'), className: '' },
       ...(this.currentUnitId === 1 ? [
+        { id: 'explore', label: '🎒 School Objects', className: '' },
         { id: 'colors', label: '🎨 Colors', className: 'tab-colors' },
         { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' },
         { id: 'numbers', label: '🔢 Numbers 1–5', className: 'tab-numbers' }
-      ] : []),
+      ] : this.currentUnitId === 2 ? [
+        { id: 'hello', label: "👋 Hello, It's Me!", className: 'tab-hello' }
+      ] : [
+        { id: 'explore', label: '🌟 Explore', className: '' }
+      ]),
       { id: 'listening', label: '🎧 Listening (6)', className: 'tab-listening' },
       { id: 'reading', label: '📖 Reading (6)', className: 'tab-reading' },
       { id: 'speaking', label: '🗣️ Speaking (6)', className: 'tab-speaking' },
@@ -553,6 +561,69 @@ class ToddlersUnitsEngine {
             fallbackEmoji: '🔢'
           },
           // Row 2: The 4 Core English Skills
+          {
+            id: 'listening',
+            title: 'Listening',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_listening.png',
+            fallbackEmoji: '🎧'
+          },
+          {
+            id: 'reading',
+            title: 'Reading',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_reading.png',
+            fallbackEmoji: '📖'
+          },
+          {
+            id: 'speaking',
+            title: 'Speaking',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_speaking.png',
+            fallbackEmoji: '🗣️'
+          },
+          {
+            id: 'writing',
+            title: 'Writing',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_writing.png',
+            fallbackEmoji: '✍️'
+          }
+        ],
+        dock: [
+          {
+            id: 'game',
+            title: 'Arcade Games',
+            icon: 'assets/toddlers_units/ios_icons/icon_games.png',
+            fallbackEmoji: '🎮'
+          },
+          {
+            id: 'finalChallenge',
+            title: 'Final Challenge',
+            icon: 'assets/toddlers_units/ios_icons/icon_final_challenge.png',
+            fallbackEmoji: '🏆'
+          },
+          {
+            id: 'videos',
+            title: 'Videos & Music',
+            icon: 'assets/toddlers_units/ios_icons/icon_videos.png',
+            fallbackEmoji: '🎬'
+          }
+        ]
+      };
+    }
+
+    if (unitId === 2) {
+      return {
+        header: 'Welcome to Unit 2!',
+        apps: [
+          {
+            id: 'hello',
+            title: "Hello, It's Me!",
+            badge: 'Act 1',
+            icon: 'assets/toddlers_units/ios_icons/icon_hello_its_me.png',
+            fallbackEmoji: '👋'
+          },
           {
             id: 'listening',
             title: 'Listening',
@@ -763,6 +834,13 @@ class ToddlersUnitsEngine {
       case 'numbers':
         if (typeof window.renderToddlersNumbersStudio === 'function') {
           window.renderToddlersNumbersStudio(ws, this);
+        } else {
+          this.renderExplore(ws);
+        }
+        break;
+      case 'hello':
+        if (typeof window.renderToddlersHelloModule === 'function') {
+          window.renderToddlersHelloModule(ws, this);
         } else {
           this.renderExplore(ws);
         }
