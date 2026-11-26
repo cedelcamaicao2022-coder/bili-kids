@@ -54,7 +54,7 @@ const TODDLER_VIDEO_RECALL = {
 class ToddlersUnitsEngine {
   constructor() {
     this.currentUnitId = 1;
-    this.currentTab = 'explore'; // 'explore', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'
+    this.currentTab = 'hub'; // 'hub', 'explore', 'colors', 'shapes', 'numbers', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'
     this.currentActivityIndex = 0; // 0 to 5
     this.currentExerciseIndex = 0; // 0 to 4
     this.currentGameLevel = 1; // 1 to 12
@@ -93,7 +93,7 @@ class ToddlersUnitsEngine {
      INITIALIZATION & URL ROUTING
      ========================================================================== */
   init() {
-    console.log('[ToddlersUnitsEngine] Initializing with rich interactive mechanics...');
+    console.log('[ToddlersUnitsEngine] Initializing with rich interactive mechanics & iOS Apps Launcher Hub...');
 
     const urlParams = new URLSearchParams(window.location.search);
     const unitParam = urlParams.get('unit');
@@ -105,8 +105,10 @@ class ToddlersUnitsEngine {
     }
 
     const tabParam = urlParams.get('tab');
-    if (tabParam && ['explore', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
+    if (tabParam && ['hub', 'explore', 'colors', 'shapes', 'numbers', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
       this.currentTab = tabParam;
+    } else {
+      this.currentTab = 'hub';
     }
 
     const actParam = urlParams.get('act') || urlParams.get('activity');
@@ -374,9 +376,11 @@ class ToddlersUnitsEngine {
     this.currentExerciseIndex = 0;
     this.currentChallengeStep = 0;
     this.selectedLetters = [];
+    this.currentTab = 'hub';
 
     const url = new URL(window.location.href);
     url.searchParams.set('unit', unitId);
+    url.searchParams.delete('tab');
     window.history.replaceState({}, '', url.toString());
 
     this.renderUnitsSelector();
@@ -398,9 +402,15 @@ class ToddlersUnitsEngine {
     const titleElem = document.getElementById('toddlerUnitTitle');
     const descElem = document.getElementById('toddlerUnitDesc');
 
-    if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'English Adventure'}`;
-    if (titleElem) titleElem.innerHTML = `${unit.icon || '🌟'} ${unit.title}`;
-    if (descElem) descElem.innerText = unit.desc || 'Explore vocabulary, practice listening, reading, writing, and speaking, play levels, and complete the final challenge!';
+    if (this.currentTab === 'hub') {
+      if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'Interactive Academy'}`;
+      if (titleElem) titleElem.innerHTML = `📱 ${unit.title} • Learning Apps`;
+      if (descElem) descElem.innerText = 'Selecciona una app para comenzar tu aventura de aprendizaje en inglés:';
+    } else {
+      if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'English Adventure'}`;
+      if (titleElem) titleElem.innerHTML = `${unit.icon || '🌟'} ${unit.title}`;
+      if (descElem) descElem.innerText = unit.desc || 'Explore vocabulary, practice listening, reading, writing, and speaking, play levels, and complete the final challenge!';
+    }
 
     this.updateScoreDisplay();
   }
@@ -420,7 +430,8 @@ class ToddlersUnitsEngine {
     }
 
     const tabs = [
-      { id: 'explore', label: '🌟 Explore', className: '' },
+      { id: 'hub', label: '📱 Apps Hub', className: 'tab-hub' },
+      { id: 'explore', label: (this.currentUnitId === 1 ? '🎒 School Objects' : '🌟 Explore'), className: '' },
       ...(this.currentUnitId === 1 ? [
         { id: 'colors', label: '🎨 Colors', className: 'tab-colors' },
         { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' },
@@ -455,8 +466,270 @@ class ToddlersUnitsEngine {
     this.currentActivityIndex = 0;
     this.currentExerciseIndex = 0;
     this.selectedLetters = [];
+
+    const url = new URL(window.location.href);
+    if (tabId === 'hub') {
+      url.searchParams.delete('tab');
+    } else {
+      url.searchParams.set('tab', tabId);
+    }
+    window.history.replaceState({}, '', url.toString());
+
+    this.playTapChime();
+    this.renderHeader();
     this.renderTabs();
     this.renderWorkspace();
+  }
+
+  /* ==========================================================================
+     AUDIO FX: CRISP TAP CHIME FOR iOS SQUIRCLE ICONS
+     ========================================================================== */
+  playTapChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      if (!this.tapAudioCtx) {
+        this.tapAudioCtx = new AudioCtx();
+      }
+      if (this.tapAudioCtx.state === 'suspended') {
+        this.tapAudioCtx.resume();
+      }
+      const osc = this.tapAudioCtx.createOscillator();
+      const gain = this.tapAudioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, this.tapAudioCtx.currentTime); // D5
+      osc.frequency.exponentialRampToValueAtTime(880, this.tapAudioCtx.currentTime + 0.12); // A5
+
+      gain.gain.setValueAtTime(0.14, this.tapAudioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.tapAudioCtx.currentTime + 0.22);
+
+      osc.connect(gain);
+      gain.connect(this.tapAudioCtx.destination);
+
+      osc.start();
+      osc.stop(this.tapAudioCtx.currentTime + 0.23);
+    } catch (e) {
+      // Graceful fallback
+    }
+  }
+
+  /* ==========================================================================
+     REGISTRY: UNIT APPS HUB CONFIGURATION (SCALABLE TO ALL 15 UNITS)
+     ========================================================================== */
+  getUnitHubConfig(unitId) {
+    const unit = this.getCurrentUnit() || { id: unitId, title: `Unit ${unitId}` };
+
+    if (unitId === 1) {
+      return {
+        header: 'Welcome to Unit 1!',
+        apps: [
+          // Row 1: The 4 Thematic Modules
+          {
+            id: 'explore',
+            title: 'School Objects',
+            badge: '',
+            icon: 'assets/toddlers_units/ios_icons/icon_school_objects.png',
+            fallbackEmoji: '🎒'
+          },
+          {
+            id: 'colors',
+            title: 'Colors',
+            badge: '',
+            icon: 'assets/toddlers_units/ios_icons/icon_colors.png',
+            fallbackEmoji: '🎨'
+          },
+          {
+            id: 'shapes',
+            title: 'Shapes & Train',
+            badge: '',
+            icon: 'assets/toddlers_units/ios_icons/icon_shapes.png',
+            fallbackEmoji: '🚂'
+          },
+          {
+            id: 'numbers',
+            title: 'Numbers 1-5',
+            badge: '',
+            icon: 'assets/toddlers_units/ios_icons/icon_numbers.png',
+            fallbackEmoji: '🔢'
+          },
+          // Row 2: The 4 Core English Skills
+          {
+            id: 'listening',
+            title: 'Listening',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_listening.png',
+            fallbackEmoji: '🎧'
+          },
+          {
+            id: 'reading',
+            title: 'Reading',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_reading.png',
+            fallbackEmoji: '📖'
+          },
+          {
+            id: 'speaking',
+            title: 'Speaking',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_speaking.png',
+            fallbackEmoji: '🗣️'
+          },
+          {
+            id: 'writing',
+            title: 'Writing',
+            badge: '6 act.',
+            icon: 'assets/toddlers_units/ios_icons/icon_writing.png',
+            fallbackEmoji: '✍️'
+          }
+        ],
+        dock: [
+          {
+            id: 'game',
+            title: 'Arcade Games',
+            icon: 'assets/toddlers_units/ios_icons/icon_games.png',
+            fallbackEmoji: '🎮'
+          },
+          {
+            id: 'finalChallenge',
+            title: 'Final Challenge',
+            icon: 'assets/toddlers_units/ios_icons/icon_final_challenge.png',
+            fallbackEmoji: '🏆'
+          },
+          {
+            id: 'videos',
+            title: 'Videos & Music',
+            icon: 'assets/toddlers_units/ios_icons/icon_videos.png',
+            fallbackEmoji: '🎬'
+          }
+        ]
+      };
+    }
+
+    // Dynamic, future-proof configuration for Units 2 through 15
+    return {
+      header: `Welcome to Unit ${unitId}!`,
+      apps: [
+        {
+          id: 'explore',
+          title: unit.title || 'Vocabulary',
+          badge: '',
+          icon: `assets/toddlers_units/ios_icons/unit_${unitId}_icon.png`,
+          fallbackEmoji: unit.icon || '📘'
+        },
+        {
+          id: 'listening',
+          title: 'Listening',
+          badge: '6 act.',
+          icon: 'assets/toddlers_units/ios_icons/icon_listening.png',
+          fallbackEmoji: '🎧'
+        },
+        {
+          id: 'reading',
+          title: 'Reading',
+          badge: '6 act.',
+          icon: 'assets/toddlers_units/ios_icons/icon_reading.png',
+          fallbackEmoji: '📖'
+        },
+        {
+          id: 'speaking',
+          title: 'Speaking',
+          badge: '6 act.',
+          icon: 'assets/toddlers_units/ios_icons/icon_speaking.png',
+          fallbackEmoji: '🗣️'
+        },
+        {
+          id: 'writing',
+          title: 'Writing',
+          badge: '6 act.',
+          icon: 'assets/toddlers_units/ios_icons/icon_writing.png',
+          fallbackEmoji: '✍️'
+        }
+      ],
+      dock: [
+        {
+          id: 'game',
+          title: 'Arcade Games',
+          icon: 'assets/toddlers_units/ios_icons/icon_games.png',
+          fallbackEmoji: '🎮'
+        },
+        {
+          id: 'finalChallenge',
+          title: 'Final Challenge',
+          icon: 'assets/toddlers_units/ios_icons/icon_final_challenge.png',
+          fallbackEmoji: '🏆'
+        },
+        {
+          id: 'videos',
+          title: 'Videos & Music',
+          icon: 'assets/toddlers_units/ios_icons/icon_videos.png',
+          fallbackEmoji: '🎬'
+        }
+      ]
+    };
+  }
+
+  /* ==========================================================================
+     RENDER: iPHONE / iPAD APPS LAUNCHER HUB
+     ========================================================================== */
+  renderAppsHub(ws) {
+    const config = this.getUnitHubConfig(this.currentUnitId);
+
+    let appsHtml = '';
+    config.apps.forEach(app => {
+      const badgeHtml = app.badge ? `<span class="toddler-ios-badge-count">${app.badge}</span>` : '';
+      const iconHtml = app.icon
+        ? `<img src="${app.icon}" alt="${app.title}" class="toddler-ios-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';">
+           <span class="toddler-ios-fallback-emoji" style="display:none; font-size:3.2rem; line-height:112px;">${app.fallbackEmoji || '✨'}</span>`
+        : `<span class="toddler-ios-fallback-emoji" style="font-size:3.2rem; line-height:112px;">${app.fallbackEmoji || '✨'}</span>`;
+
+      appsHtml += `
+        <button class="toddler-ios-app-card" onclick="toddlersEngine.switchTab('${app.id}')" title="${app.title}" aria-label="${app.title}">
+          <div class="toddler-ios-squircle">
+            ${iconHtml}
+          </div>
+          <span class="toddler-ios-label">${app.title}</span>
+          ${badgeHtml}
+        </button>
+      `;
+    });
+
+    let dockHtml = '';
+    config.dock.forEach(dockApp => {
+      const iconHtml = dockApp.icon
+        ? `<img src="${dockApp.icon}" alt="${dockApp.title}" class="toddler-dock-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';">
+           <span class="toddler-dock-fallback-emoji" style="display:none; font-size:2.2rem; line-height:78px;">${dockApp.fallbackEmoji || '⭐'}</span>`
+        : `<span class="toddler-dock-fallback-emoji" style="font-size:2.2rem; line-height:78px;">${dockApp.fallbackEmoji || '⭐'}</span>`;
+
+      dockHtml += `
+        <button class="toddler-dock-app-card" onclick="toddlersEngine.switchTab('${dockApp.id}')" title="${dockApp.title}" aria-label="${dockApp.title}">
+          <div class="toddler-dock-squircle">
+            ${iconHtml}
+          </div>
+          <span class="toddler-dock-label">${dockApp.title}</span>
+        </button>
+      `;
+    });
+
+    ws.innerHTML = `
+      <div class="toddlers-ios-hub-wrapper">
+        <!-- HEADER PILL: WELCOME TO UNIT X! (TEXT ONLY, NO MASCOT) -->
+        <div class="toddlers-hub-pill-widget">
+          <span class="toddlers-hub-pill-text">${config.header}</span>
+        </div>
+
+        <!-- APP SQUIRCLES GRID -->
+        <div class="toddlers-hub-apps-grid">
+          ${appsHtml}
+        </div>
+
+        <!-- FROSTED-GLASS BOTTOM DOCK -->
+        <div class="toddlers-hub-dock-container">
+          <div class="toddlers-hub-dock-glass">
+            ${dockHtml}
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   /* ==========================================================================
@@ -467,6 +740,9 @@ class ToddlersUnitsEngine {
     if (!ws) return;
 
     switch (this.currentTab) {
+      case 'hub':
+        this.renderAppsHub(ws);
+        break;
       case 'explore':
         this.renderExplore(ws);
         break;
