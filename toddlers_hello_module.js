@@ -13,14 +13,14 @@
 (function () {
   'use strict';
 
-  // 8 Core Expressions
+  // 13 Expressions & Feelings Cards (Official User Artwork)
   const EXPRESSIONS = [
     {
       id: 'hello',
       en: 'Hello!',
       es: '¡Hola!',
       icon: '👋',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#dbeafe"/><text x="50" y="62" font-size="44" text-anchor="middle">👋</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_hello.webp',
       audio: 'Hello!'
     },
     {
@@ -28,7 +28,7 @@
       en: 'Hi!',
       es: '¡Hola! (Informal)',
       icon: '💬',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#fef3c7"/><text x="50" y="62" font-size="44" text-anchor="middle">💬</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_hi.webp',
       audio: 'Hi!'
     },
     {
@@ -36,7 +36,7 @@
       en: "What's your name?",
       es: '¿Cómo te llamas?',
       icon: '❓',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#e0e7ff"/><text x="50" y="62" font-size="44" text-anchor="middle">❓👦</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_whats_your_name.webp',
       audio: "What's your name?"
     },
     {
@@ -44,7 +44,7 @@
       en: 'My name is...',
       es: 'Mi nombre es...',
       icon: '🪪',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#fce7f3"/><text x="50" y="62" font-size="44" text-anchor="middle">🪪✨</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_my_name_is.webp',
       audio: 'My name is...'
     },
     {
@@ -52,7 +52,7 @@
       en: 'How are you?',
       es: '¿Cómo estás?',
       icon: '🤝',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#ccfbf1"/><text x="50" y="62" font-size="44" text-anchor="middle">🤝🗣️</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_how_are_you.webp',
       audio: 'How are you?'
     },
     {
@@ -60,7 +60,7 @@
       en: "I'm happy.",
       es: 'Estoy feliz.',
       icon: '😄',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#fef08a"/><text x="50" y="62" font-size="44" text-anchor="middle">😄🌟</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_happy.webp',
       audio: "I'm happy."
     },
     {
@@ -68,7 +68,7 @@
       en: "I'm fine.",
       es: 'Estoy bien.',
       icon: '👍',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#dcfce7"/><text x="50" y="62" font-size="44" text-anchor="middle">👍😊</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_fine.webp',
       audio: "I'm fine."
     },
     {
@@ -76,8 +76,48 @@
       en: "I'm sad.",
       es: 'Estoy triste.',
       icon: '😢',
-      svg: `<svg viewBox="0 0 100 100" class="hello-svg-art"><circle cx="50" cy="50" r="44" fill="#e0f2fe"/><text x="50" y="62" font-size="44" text-anchor="middle">😢🌧️</text></svg>`,
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_sad.webp',
       audio: "I'm sad."
+    },
+    {
+      id: 'im_excited',
+      en: "I'm excited!",
+      es: '¡Estoy emocionado!',
+      icon: '🤩',
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_excited.webp',
+      audio: "I'm excited!"
+    },
+    {
+      id: 'im_angry',
+      en: "I'm angry.",
+      es: 'Estoy enojado.',
+      icon: '😠',
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_angry.webp',
+      audio: "I'm angry."
+    },
+    {
+      id: 'im_scared',
+      en: "I'm scared.",
+      es: 'Tengo miedo / Estoy asustado.',
+      icon: '😨',
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_scared.webp',
+      audio: "I'm scared."
+    },
+    {
+      id: 'im_surprised',
+      en: "I'm surprised!",
+      es: '¡Estoy sorprendido!',
+      icon: '😲',
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_surprised.webp',
+      audio: "I'm surprised!"
+    },
+    {
+      id: 'im_tired',
+      en: "I'm tired.",
+      es: 'Estoy cansado.',
+      icon: '🥱',
+      image: 'assets/toddlers_units/u2_hello/u2_card_im_tired.webp',
+      audio: "I'm tired."
     }
   ];
 
@@ -211,7 +251,12 @@
     feelings: [
       { id: 'happy', text: "I'm happy.", icon: '😄', color: '#f59e0b' },
       { id: 'fine', text: "I'm fine.", icon: '👍', color: '#10b981' },
-      { id: 'sad', text: "I'm sad.", icon: '😢', color: '#0ea5e9' }
+      { id: 'sad', text: "I'm sad.", icon: '😢', color: '#0ea5e9' },
+      { id: 'excited', text: "I'm excited!", icon: '🤩', color: '#ec4899' },
+      { id: 'angry', text: "I'm angry.", icon: '😠', color: '#ef4444' },
+      { id: 'scared', text: "I'm scared.", icon: '😨', color: '#8b5cf6' },
+      { id: 'surprised', text: "I'm surprised!", icon: '😲', color: '#06b6d4' },
+      { id: 'tired', text: "I'm tired.", icon: '🥱', color: '#64748b' }
     ]
   };
 
@@ -397,7 +442,7 @@
     }
 
     /* ==========================================================================
-       PANTALLA 2: LISTEN
+       PANTALLA 2: LISTEN (13 Cards with Real Illustrations)
        ========================================================================== */
     renderScreen2Listen(body) {
       let cardsHtml = '';
@@ -406,7 +451,9 @@
         cardsHtml += `
           <div class="hello-exp-card ${isListened ? 'listened' : ''}" id="card_${exp.id}" onclick="window.toddlersHelloModule.listenExpression('${exp.id}')">
             <div class="exp-card-badge">${isListened ? '✅ Heard' : '🔊 Tap to Hear'}</div>
-            <div class="exp-card-visual">${exp.svg}</div>
+            <div class="exp-card-visual">
+              <img src="${exp.image}" alt="${exp.en}" class="exp-card-img" />
+            </div>
             <div class="exp-card-en">${exp.en}</div>
             <div class="exp-card-es">${exp.es}</div>
             <button class="exp-repeat-btn" onclick="event.stopPropagation(); window.toddlersHelloModule.listenExpression('${exp.id}')">
@@ -420,7 +467,7 @@
         <div class="hello-listen-view">
           <div class="hello-section-header">
             <span class="section-badge">PANTALLA 2 • LISTEN</span>
-            <h2 class="section-title">Listen & Repeat • Las 8 Expresiones</h2>
+            <h2 class="section-title">Listen & Repeat • Expresiones y Emociones</h2>
             <p class="section-desc">Toca cada tarjeta para escuchar su pronunciación pausada y clara en inglés:</p>
           </div>
 
@@ -1001,9 +1048,18 @@
 
       const g = (this.builderState.greeting || '').toLowerCase().includes('hi') ? 'hi' : 'hello';
       const rawName = (this.builderState.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, '');
-      const f = (this.builderState.feeling || '').toLowerCase().includes('fine') ? 'fine' : ((this.builderState.feeling || '').toLowerCase().includes('sad') ? 'sad' : 'happy');
+      let f = 'happy';
+      const feelLower = (this.builderState.feeling || '').toLowerCase();
+      if (feelLower.includes('fine')) f = 'fine';
+      else if (feelLower.includes('sad')) f = 'sad';
+      else if (feelLower.includes('excited')) f = 'excited';
+      else if (feelLower.includes('angry')) f = 'angry';
+      else if (feelLower.includes('scared')) f = 'scared';
+      else if (feelLower.includes('surprised')) f = 'surprised';
+      else if (feelLower.includes('tired')) f = 'tired';
+      else f = 'happy';
 
-      // Preset names have pre-rendered full combos (all 30 combinations in Studio ElevenLabs)
+      // Preset names have pre-rendered full combos (Studio ElevenLabs)
       if (!this.builderState.isCustom) {
         const comboKey = `bili_toddler_u2_intro_${g}_${rawName}_${f}`;
         const manifestKey = `assets/toddlers_media/audio/${comboKey}.mp3`;
@@ -1061,7 +1117,17 @@
       }
 
       // Step 4: Feeling
-      const f = (this.builderState.feeling || '').toLowerCase().includes('fine') ? 'fine' : ((this.builderState.feeling || '').toLowerCase().includes('sad') ? 'sad' : 'happy');
+      let f = 'happy';
+      const feelLower = (this.builderState.feeling || '').toLowerCase();
+      if (feelLower.includes('fine')) f = 'fine';
+      else if (feelLower.includes('sad')) f = 'sad';
+      else if (feelLower.includes('excited')) f = 'excited';
+      else if (feelLower.includes('angry')) f = 'angry';
+      else if (feelLower.includes('scared')) f = 'scared';
+      else if (feelLower.includes('surprised')) f = 'surprised';
+      else if (feelLower.includes('tired')) f = 'tired';
+      else f = 'happy';
+
       const feelAudio = `assets/toddlers_media/audio/bili_toddler_u2_im_${f}.mp3`;
       queue.push({ type: 'audio', src: feelAudio });
 
@@ -1403,30 +1469,33 @@
 
         .hello-exp-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 16px;
-          margin-bottom: 28px;
+          grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+          gap: 20px;
+          margin-bottom: 32px;
         }
         .hello-exp-card {
           background: #ffffff;
-          border-radius: 24px;
-          padding: 20px 16px;
+          border-radius: 26px;
+          padding: 16px 14px 20px;
           text-align: center;
           border: 2px solid #e2e8f0;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.04);
           cursor: pointer;
-          transition: all 0.22s ease;
+          transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
         .hello-exp-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-5px);
           border-color: #38bdf8;
-          box-shadow: 0 8px 24px rgba(56,189,248,0.18);
+          box-shadow: 0 14px 30px rgba(56,189,248,0.22);
         }
         .hello-exp-card.playing {
-          transform: scale(1.04);
+          transform: scale(1.03);
           border-color: #0284c7;
-          box-shadow: 0 0 0 4px rgba(2,132,199,0.2);
+          box-shadow: 0 0 0 4px rgba(2,132,199,0.25);
         }
         .hello-exp-card.listened {
           border-color: #86efac;
@@ -1435,7 +1504,7 @@
           display: inline-block;
           font-size: 0.75rem;
           font-weight: 800;
-          padding: 3px 10px;
+          padding: 3px 12px;
           border-radius: 12px;
           background: #f1f5f9;
           color: #475569;
@@ -1446,14 +1515,27 @@
           color: #15803d;
         }
         .exp-card-visual {
-          width: 80px;
-          height: 80px;
+          width: 100%;
+          max-width: 195px;
+          aspect-ratio: 1054 / 1492;
           margin: 0 auto 12px;
+          border-radius: 18px;
+          overflow: hidden;
+          background: #f8fafc;
+          box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .hello-svg-art {
+        .exp-card-img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
           display: block;
+          transition: transform 0.25s ease;
+        }
+        .hello-exp-card:hover .exp-card-img {
+          transform: scale(1.03);
         }
         .exp-card-en {
           font-size: 1.25rem;
