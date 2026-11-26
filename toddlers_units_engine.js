@@ -265,7 +265,9 @@ class ToddlersUnitsEngine {
         }
         const audio = new Audio(audioSrc);
         this._currentAudio = audio;
-        audio.playbackRate = 1.0;
+        // Pacing: Toddlers learn best with clear, relaxed articulation
+        const isInstruction = text.length > 25 || text.includes('?') || text.includes('...') || text.includes('!');
+        audio.playbackRate = isInstruction ? 0.90 : 0.94;
         console.log('[ToddlersAudio] Playing Studio MP3:', audioSrc, 'for text:', text);
         audio.play().catch((err) => {
           console.warn('[ToddlersAudio] HTML5 audio.play() blocked or aborted:', err);

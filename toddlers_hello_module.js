@@ -2,12 +2,12 @@
  * Bilikids Toddlers Academy - Unit 2 Activity 1: "Hello, It's Me!"
  * Modular, self-contained interactive engine.
  * 6 Pedagogical Screens:
- * 1. WELCOME (Speech bubbles hero, START button, welcome audio)
+ * 1. WELCOME (Speech bubbles hero, START button, gentle-paced welcome audio)
  * 2. LISTEN (8 Core Expressions cards with individual repeatable audio)
  * 3. LEARN (Matching questions to answers, drag&drop + tap-to-match, immediate feedback)
- * 4. CHOOSE (6 Audio questions, 3 options, retry on error, no penalties)
- * 5. COMPLETE (Step-by-step interactive builder of personal presentation)
- * 6. MY INTRODUCTION (Full presentation card, audio playback, congratulations & rewards)
+ * 4. CHOOSE (6 Audio questions, 3 options, retry on error, no penalties, speaks all options)
+ * 5. COMPLETE (Step-by-step interactive builder of personal presentation, Erik + custom names support)
+ * 6. MY INTRODUCTION (Full presentation card, studio audio playback, congratulations & rewards)
  */
 
 (function () {
@@ -81,7 +81,7 @@
     }
   ];
 
-  // Screen 3: Learn Matching Pairs
+  // Screen 3: Learn Matching Pairs (Strictly the 8 target expressions)
   const MATCH_PAIRS = [
     {
       id: 'pair_name',
@@ -107,7 +107,7 @@
       id: 'pair_happy',
       question: 'How are you?',
       qAudio: 'How are you?',
-      qIcon: '🤝',
+      qIcon: '🤝😄',
       answer: "I'm happy.",
       aAudio: "I'm happy.",
       aIcon: '😄🌟',
@@ -115,9 +115,9 @@
     },
     {
       id: 'pair_fine',
-      question: 'Are you okay?',
+      question: 'How are you?',
       qAudio: 'How are you?',
-      qIcon: '❓😊',
+      qIcon: '🤝👍',
       answer: "I'm fine.",
       aAudio: "I'm fine.",
       aIcon: '👍✨',
@@ -173,8 +173,8 @@
     },
     {
       id: 'q5',
-      question: "If a friend asks 'How are you?' and you feel okay, you say:",
-      audioPrompt: 'If a friend asks how are you, and you feel okay, you say:',
+      question: "How are you feeling today?",
+      audioPrompt: 'How are you feeling today?',
       subPrompt: 'Si te sientes bien y tranquilo, respondes:',
       options: [
         { text: "I'm fine.", icon: '👍', correct: true },
@@ -203,8 +203,9 @@
     ],
     names: [
       { id: 'leo', text: 'Leo', avatar: '🦁', color: '#f59e0b' },
+      { id: 'erik', text: 'Erik', avatar: '👦', color: '#3b82f6' },
       { id: 'luna', text: 'Luna', avatar: '👧', color: '#ec4899' },
-      { id: 'bili', text: 'Bili', avatar: '🐻', color: '#3b82f6' },
+      { id: 'bili', text: 'Bili', avatar: '🐻', color: '#f97316' },
       { id: 'matias', text: 'Matías', avatar: '👦', color: '#10b981' }
     ],
     feelings: [
@@ -234,10 +235,13 @@
       // Screen 5 & 6 State (Builder)
       this.builderState = {
         greeting: 'Hello!',
-        name: 'Leo',
-        avatar: '🦁',
-        feeling: "I'm happy."
+        name: 'Erik',
+        avatar: '👦',
+        feeling: "I'm happy.",
+        isCustom: false
       };
+
+      this._currentIntroAudio = null;
     }
 
     render(container, engine) {
@@ -328,10 +332,6 @@
 
     /* ==========================================================================
        PANTALLA 1: WELCOME
-       • Título: Hello, It's Me!
-       • Ilustración decorativa de burbujas de conversación
-       • Botón START
-       • Audio de bienvenida: "Hello! Let's learn how to introduce ourselves!"
        ========================================================================== */
     renderScreen1Welcome(body) {
       const welcomeAudioText = "Hello! Let's learn how to introduce ourselves!";
@@ -382,10 +382,9 @@
         </div>
       `;
 
-      // Auto play welcome audio softly on first arrival
       setTimeout(() => {
         this.play(welcomeAudioText);
-      }, 350);
+      }, 400);
     }
 
     startActivity() {
@@ -395,12 +394,6 @@
 
     /* ==========================================================================
        PANTALLA 2: LISTEN
-       • Presentar las ocho expresiones
-       • Una expresión por tarjeta
-       • Incorporar audio individual
-       • Permitir repetir cada audio
-       • Mostrar el texto en inglés
-       • Incorporar ilustraciones relacionadas
        ========================================================================== */
     renderScreen2Listen(body) {
       let cardsHtml = '';
@@ -424,7 +417,7 @@
           <div class="hello-section-header">
             <span class="section-badge">PANTALLA 2 • LISTEN</span>
             <h2 class="section-title">Listen & Repeat • Las 8 Expresiones</h2>
-            <p class="section-desc">Toca cada tarjeta para escuchar su pronunciación en inglés y repite en voz alta con Leo:</p>
+            <p class="section-desc">Toca cada tarjeta para escuchar su pronunciación pausada y clara en inglés:</p>
           </div>
 
           <div class="hello-exp-grid">
@@ -459,7 +452,6 @@
         setTimeout(() => card.classList.remove('playing'), 800);
       }
 
-      // Update counter
       const footerCounter = document.querySelector('.listen-counter-pill span');
       if (footerCounter) {
         footerCounter.innerHTML = `Practicadas: <strong>${this.listenedSet.size}</strong> de ${EXPRESSIONS.length}`;
@@ -468,16 +460,9 @@
 
     /* ==========================================================================
        PANTALLA 3: LEARN (Match Questions with Answers)
-       • Actividad para relacionar preguntas con respuestas
-       • Utilizar tarjetas interactivas
-       • Permitir arrastrar y soltar o seleccionar ambas tarjetas
-       • Mostrar retroalimentación inmediata
        ========================================================================== */
     renderScreen3Learn(body) {
       const isComplete = this.matchedPairs.size === MATCH_PAIRS.length;
-
-      // Render Left Column (Questions) and Right Column (Answers shuffled or arranged)
-      // To keep it friendly for toddlers, let's arrange right column in an alternate order
       const rightPairs = [...MATCH_PAIRS].sort((a, b) => b.answer.localeCompare(a.answer));
 
       let leftHtml = '';
@@ -524,7 +509,7 @@
             <span class="section-badge">PANTALLA 3 • LEARN</span>
             <h2 class="section-title">Relaciona Pregunta y Respuesta</h2>
             <p class="section-desc">
-              Selecciona una pregunta de la izquierda y luego toca su respuesta correspondiente a la derecha (¡también puedes arrastrar y soltar!):
+              Selecciona una tarjeta de la izquierda y luego toca su respuesta correspondiente a la derecha:
             </p>
           </div>
 
@@ -553,7 +538,7 @@
 
           <div id="matchFeedbackBanner" class="match-feedback-banner ${isComplete ? 'show-win' : ''}">
             ${isComplete 
-              ? `<span style="font-size:1.4rem;">🎉 ¡Excelente trabajo! Has conectado todas las parejas con éxito.</span>` 
+              ? `<span style="font-size:1.3rem;">🎉 ¡Excelente! Has conectado todas las parejas con éxito.</span>` 
               : `<span>Selecciona una tarjeta para comenzar.</span>`}
           </div>
 
@@ -577,11 +562,7 @@
       const pair = MATCH_PAIRS.find(p => p.id === pairId);
       if (pair) this.play(pair.qAudio);
 
-      if (this.selectedQuestion === pairId) {
-        this.selectedQuestion = null;
-      } else {
-        this.selectedQuestion = pairId;
-      }
+      this.selectedQuestion = (this.selectedQuestion === pairId) ? null : pairId;
       this.renderScreen3Learn(document.getElementById('helloScreenBody'));
     }
 
@@ -589,7 +570,6 @@
       if (this.matchedPairs.has(pairId)) return;
 
       if (!this.selectedQuestion) {
-        // Just play audio of this answer
         const pair = MATCH_PAIRS.find(p => p.id === pairId);
         if (pair) this.play(pair.aAudio);
 
@@ -601,9 +581,7 @@
         return;
       }
 
-      // Check if match
       if (this.selectedQuestion === pairId) {
-        // MATCH!
         this.matchedPairs.add(pairId);
         const pair = MATCH_PAIRS.find(p => p.id === pairId);
         if (pair) this.play(pair.aAudio);
@@ -619,7 +597,6 @@
           banner.innerHTML = `<span>🌟 ¡Correcto! "${pair.question}" ➔ "${pair.answer}"</span>`;
         }
       } else {
-        // MISMATCH
         const cardA = document.getElementById(`a_${pairId}`);
         if (cardA) {
           cardA.classList.add('shake-wrong');
@@ -668,13 +645,7 @@
     }
 
     /* ==========================================================================
-       PANTALLA 4: CHOOSE (6 Questions, 3 Options, 1 Correct)
-       • Crear seis preguntas
-       • Tres opciones por pregunta
-       • Una respuesta correcta
-       • Reproducir las preguntas mediante audio
-       • Permitir nuevos intentos
-       • No penalizar los errores
+       PANTALLA 4: CHOOSE (Speaks all options, retry on error, no penalties)
        ========================================================================== */
     renderScreen4Choose(body) {
       const q = CHOOSE_QUESTIONS[this.chooseIndex] || CHOOSE_QUESTIONS[0];
@@ -719,7 +690,7 @@
           </div>
 
           <div id="chooseFeedbackBox" class="choose-feedback-box">
-            <span>Toca la opción que creas correcta. Si fallas, ¡puedes intentar de nuevo!</span>
+            <span>Toca una opción para escucharla. Si fallas, ¡puedes intentar de nuevo!</span>
           </div>
 
           <div class="hello-nav-footer">
@@ -733,10 +704,9 @@
         </div>
       `;
 
-      // Auto-play question audio softly
       setTimeout(() => {
         this.play(q.audioPrompt);
-      }, 300);
+      }, 400);
     }
 
     handleChooseOption(optionIdx) {
@@ -746,16 +716,16 @@
       const feedback = document.getElementById('chooseFeedbackBox');
       const btnNext = document.getElementById('btnNextChoose');
 
+      // Always play the pronunciation of the clicked option so the child hears it!
+      this.play(opt.text);
+
       if (opt.correct) {
-        // CORRECT!
-        this.play(opt.text);
         if (this.engine) this.engine.addStars(10);
 
         btn.classList.add('correct');
         const status = btn.querySelector('.option-status-icon');
         if (status) status.innerText = '✅';
 
-        // Disable other options to prevent multi-tapping
         q.options.forEach((_, i) => {
           const b = document.getElementById(`opt_${this.chooseIndex}_${i}`);
           if (b && i !== optionIdx) b.style.opacity = '0.55';
@@ -771,17 +741,16 @@
           btnNext.classList.add('glow-btn');
         }
       } else {
-        // WRONG: DO NOT PENALIZE! Just allow retry
+        // Wrong option: No penalty, friendly retry!
         btn.classList.add('wrong');
         const status = btn.querySelector('.option-status-icon');
         if (status) status.innerText = '❌';
 
         if (feedback) {
           feedback.className = 'choose-feedback-box retry';
-          feedback.innerHTML = `<span>Casi, pero esa no es. ¡Intenta con otra opción! 😊</span>`;
+          feedback.innerHTML = `<span>Escuchaste "${opt.text}". ¡Prueba otra opción! 😊</span>`;
         }
 
-        // Allow retry after gentle animation
         setTimeout(() => {
           btn.classList.remove('wrong');
           if (status) status.innerText = '';
@@ -806,11 +775,7 @@
     }
 
     /* ==========================================================================
-       PANTALLA 5: COMPLETE
-       • El aprendiz construye su presentación
-       • Selecciona una opción para completar su nombre de ejemplo
-       • Selecciona una expresión emocional
-       • Mostrar la presentación construida
+       PANTALLA 5: COMPLETE (Seamless Erik & Custom Name Support)
        ========================================================================== */
     renderScreen5Complete(body) {
       body.innerHTML = `
@@ -829,7 +794,8 @@
                 <div class="group-label">1. Elige tu Saludo:</div>
                 <div class="preset-pills-row">
                   ${BUILDER_PRESETS.greetings.map(g => `
-                    <button class="preset-pill ${this.builderState.greeting === g.text ? 'active' : ''}" 
+                    <button class="preset-pill preset-pill-greet ${this.builderState.greeting === g.text ? 'active' : ''}" 
+                            data-greet="${g.text}"
                             onclick="window.toddlersHelloModule.setGreeting('${g.text}')">
                       <span>${g.icon}</span> <span>${g.text}</span>
                     </button>
@@ -839,17 +805,19 @@
 
               <!-- Step 2: Name -->
               <div class="builder-group">
-                <div class="group-label">2. Elige tu Nombre (o escribe el tuyo):</div>
-                <div class="preset-pills-row">
+                <div class="group-label">2. Elige tu Nombre de Ejemplo (o escribe el tuyo):</div>
+                <div class="preset-pills-row" id="presetNamesRow">
                   ${BUILDER_PRESETS.names.map(n => `
-                    <button class="preset-pill ${this.builderState.name === n.text ? 'active' : ''}" 
+                    <button class="preset-pill preset-pill-name ${(!this.builderState.isCustom && this.builderState.name.toLowerCase() === n.text.toLowerCase()) ? 'active' : ''}" 
+                            data-name="${n.text}"
                             onclick="window.toddlersHelloModule.setName('${n.text}', '${n.avatar}')">
                       <span>${n.avatar}</span> <span>${n.text}</span>
                     </button>
                   `).join('')}
                 </div>
                 <div class="custom-name-box">
-                  <input type="text" id="customNameInput" placeholder="Escribe tu propio nombre..." value="${this.builderState.name}" oninput="window.toddlersHelloModule.setCustomName(this.value)" class="name-text-input">
+                  <div style="font-size:0.85rem; color:#64748b; font-weight:700; margin:10px 0 4px;">O escribe tu nombre:</div>
+                  <input type="text" id="customNameInput" placeholder="Ej: Erik, Sofia, Leo..." value="${this.builderState.isCustom ? this.builderState.name : ''}" oninput="window.toddlersHelloModule.setCustomName(this.value)" class="name-text-input">
                 </div>
               </div>
 
@@ -858,7 +826,8 @@
                 <div class="group-label">3. ¿Cómo te sientes hoy?:</div>
                 <div class="preset-pills-row">
                   ${BUILDER_PRESETS.feelings.map(f => `
-                    <button class="preset-pill ${this.builderState.feeling === f.text ? 'active' : ''}" 
+                    <button class="preset-pill preset-pill-feel ${this.builderState.feeling === f.text ? 'active' : ''}" 
+                            data-feel="${f.text}"
                             onclick="window.toddlersHelloModule.setFeeling('${f.text}')">
                       <span>${f.icon}</span> <span>${f.text}</span>
                     </button>
@@ -907,27 +876,68 @@
     setGreeting(greeting) {
       this.builderState.greeting = greeting;
       this.play(greeting);
-      this.renderScreen5Complete(document.getElementById('helloScreenBody'));
+      document.querySelectorAll('.preset-pill-greet').forEach(b => {
+        b.classList.toggle('active', b.dataset.greet === greeting);
+      });
+      this.updatePreviewCard();
     }
 
     setName(name, avatar) {
+      this.builderState.isCustom = false;
       this.builderState.name = name;
       this.builderState.avatar = avatar;
       this.play(name);
-      this.renderScreen5Complete(document.getElementById('helloScreenBody'));
+
+      const input = document.getElementById('customNameInput');
+      if (input) input.value = '';
+
+      document.querySelectorAll('.preset-pill-name').forEach(p => {
+        p.classList.toggle('active', p.dataset.name === name);
+      });
+
+      this.updatePreviewCard();
     }
 
     setCustomName(name) {
-      if (!name || name.trim() === '') return;
-      this.builderState.name = name.trim();
-      const el = document.querySelector('.preview-line-name strong');
-      if (el) el.innerText = this.builderState.name;
+      const trimmed = (name || '').trim();
+      if (!trimmed) {
+        this.builderState.isCustom = false;
+        this.builderState.name = 'Erik';
+        this.builderState.avatar = '👦';
+      } else {
+        this.builderState.isCustom = true;
+        this.builderState.name = trimmed;
+        this.builderState.avatar = '👦';
+      }
+
+      document.querySelectorAll('.preset-pill-name').forEach(p => {
+        p.classList.toggle('active', !this.builderState.isCustom && p.dataset.name.toLowerCase() === this.builderState.name.toLowerCase());
+      });
+
+      this.updatePreviewCard();
     }
 
     setFeeling(feeling) {
       this.builderState.feeling = feeling;
       this.play(feeling);
-      this.renderScreen5Complete(document.getElementById('helloScreenBody'));
+      document.querySelectorAll('.preset-pill-feel').forEach(b => {
+        b.classList.toggle('active', b.dataset.feel === feeling);
+      });
+      this.updatePreviewCard();
+    }
+
+    updatePreviewCard() {
+      const avatarEl = document.querySelector('.intro-preview-card .preview-avatar');
+      if (avatarEl) avatarEl.innerText = this.builderState.avatar;
+
+      const greetEl = document.querySelector('.preview-line-greeting .tag-greeting');
+      if (greetEl) greetEl.innerText = this.builderState.greeting;
+
+      const nameEl = document.querySelector('.preview-line-name strong');
+      if (nameEl) nameEl.innerText = this.builderState.name;
+
+      const feelEl = document.querySelector('.preview-line-feeling');
+      if (feelEl) feelEl.innerText = this.builderState.feeling;
     }
 
     getIntroFullText() {
@@ -935,19 +945,23 @@
     }
 
     playIntroAudio() {
-      // Check if we have pre-rendered combo in manifest
+      if (this._currentIntroAudio) {
+        try {
+          this._currentIntroAudio.pause();
+          this._currentIntroAudio.currentTime = 0;
+        } catch (e) {}
+      }
+
       const g = (this.builderState.greeting || '').toLowerCase().includes('hi') ? 'hi' : 'hello';
-      const n = (this.builderState.name || '').toLowerCase().replace(/[^a-z]/g, '');
+      const rawName = (this.builderState.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, '');
       const f = (this.builderState.feeling || '').toLowerCase().includes('fine') ? 'fine' : ((this.builderState.feeling || '').toLowerCase().includes('sad') ? 'sad' : 'happy');
 
-      const manifestKey = `assets/toddlers_media/audio/bili_toddler_u2_intro_${g}_${n}_${f}.mp3`;
-      const fullText = this.getIntroFullText();
+      const manifestKey = `assets/toddlers_media/audio/bili_toddler_u2_intro_${g}_${rawName}_${f}.mp3`;
+      const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
 
-      // Check if file exists in manifest
-      const manifest = window.ToddlersAudioManifest || {};
       let audioPath = null;
       for (const [k, v] of Object.entries(manifest)) {
-        if (v === manifestKey || k === fullText.toLowerCase()) {
+        if (v === manifestKey || k === `bili_toddler_u2_intro_${g}_${rawName}_${f}`) {
           audioPath = v;
           break;
         }
@@ -955,22 +969,35 @@
 
       if (audioPath) {
         const audio = new Audio(audioPath);
-        audio.play().catch(() => this.play(fullText));
+        this._currentIntroAudio = audio;
+        audio.playbackRate = 0.90;
+        audio.play().catch(() => this.playSequentialIntro());
       } else {
-        this.play(fullText);
+        this.playSequentialIntro();
       }
+    }
+
+    playSequentialIntro() {
+      // Step 1: Greeting
+      this.play(this.builderState.greeting);
+      setTimeout(() => {
+        // Step 2: "My name is..."
+        this.play("My name is...");
+        setTimeout(() => {
+          // Step 3: Speak the name
+          if (this.engine) this.engine.fallbackSpeechSynthesis(this.builderState.name);
+          setTimeout(() => {
+            // Step 4: Feeling
+            this.play(this.builderState.feeling);
+          }, 1100);
+        }, 1100);
+      }, 1000);
     }
 
     /* ==========================================================================
        PANTALLA 6: MY INTRODUCTION
-       • Mostrar la presentación completa
-       • Reproducirla mediante audio en inglés
-       • Permitir repetir
-       • Mostrar mensaje de felicitación al finalizar
        ========================================================================== */
     renderScreen6Introduction(body) {
-      const fullIntroText = this.getIntroFullText();
-
       body.innerHTML = `
         <div class="hello-intro-final-view">
           <!-- CONGRATS RIBBON -->
@@ -1036,23 +1063,21 @@
         </div>
       `;
 
-      // Award completion points
       if (this.engine) {
         this.engine.addStars(30);
       }
 
-      // Play intro and celebration audio
       setTimeout(() => {
         this.playIntroAudio();
-      }, 350);
+      }, 400);
 
       setTimeout(() => {
         this.play("Congratulations! You can now introduce yourself in English! Super job!");
-      }, 3200);
+      }, 3600);
     }
 
     /* ==========================================================================
-       SCOPED STYLES FOR HELLO, IT'S ME!
+       SCOPED STYLES
        ========================================================================== */
     injectStyles() {
       if (document.getElementById('toddlers-hello-module-styles')) return;
@@ -1060,7 +1085,6 @@
       const style = document.createElement('style');
       style.id = 'toddlers-hello-module-styles';
       style.textContent = `
-        /* Top Stepper Bar */
         .hello-module-wrap {
           max-width: 1040px;
           margin: 0 auto;
@@ -1122,7 +1146,6 @@
           background: rgba(255,255,255,0.25);
         }
 
-        /* Screen 1: Welcome */
         .hello-welcome-card {
           text-align: center;
           padding: 40px 24px;
@@ -1237,7 +1260,6 @@
           100% { box-shadow: 0 0 0 0 rgba(2,132,199,0); }
         }
 
-        /* Screen Headers & Shared Styles */
         .hello-section-header {
           text-align: center;
           margin-bottom: 24px;
@@ -1265,7 +1287,6 @@
           margin: 0 auto;
         }
 
-        /* Screen 2: Listen Grid */
         .hello-exp-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1351,7 +1372,6 @@
           border-color: #0284c7;
         }
 
-        /* Screen 3: Learn Matching Arena */
         .matching-arena {
           display: flex;
           align-items: stretch;
@@ -1481,7 +1501,6 @@
           75% { transform: translateX(6px); }
         }
 
-        /* Screen 4: Choose */
         .choose-prompt-card {
           background: #ffffff;
           border-radius: 24px;
@@ -1602,7 +1621,6 @@
           background: #22c55e;
         }
 
-        /* Screen 5: Complete (Builder) */
         .complete-layout {
           display: flex;
           gap: 24px;
@@ -1743,7 +1761,6 @@
           cursor: pointer;
         }
 
-        /* Screen 6: Final Passport */
         .hello-intro-final-view {
           max-width: 760px;
           margin: 0 auto;
@@ -1901,7 +1918,6 @@
           line-height: 1.5;
         }
 
-        /* Nav Footer Buttons */
         .hello-nav-footer {
           display: flex;
           align-items: center;
