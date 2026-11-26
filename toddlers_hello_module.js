@@ -1060,26 +1060,18 @@
       else f = 'happy';
 
       // Preset names have pre-rendered full combos (Studio ElevenLabs)
-      if (!this.builderState.isCustom) {
+      const knownPresets = ['matias', 'luna', 'bili', 'leo', 'erik'];
+      if (!this.builderState.isCustom || knownPresets.includes(rawName)) {
         const comboKey = `bili_toddler_u2_intro_${g}_${rawName}_${f}`;
-        const manifestKey = `assets/toddlers_media/audio/${comboKey}.mp3`;
-        const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
-
-        let audioPath = null;
-        for (const [k, v] of Object.entries(manifest)) {
-          if (v === manifestKey || k === comboKey) {
-            audioPath = v;
-            break;
-          }
-        }
-
-        if (audioPath) {
-          const audio = new Audio(audioPath);
-          this._currentIntroAudio = audio;
-          audio.playbackRate = 0.85; // Calm, relaxed toddler pacing
-          audio.play().catch(() => this.playSequentialIntro());
-          return;
-        }
+        const comboPath = `assets/toddlers_media/audio/${comboKey}.mp3`;
+        const audio = new Audio(comboPath);
+        this._currentIntroAudio = audio;
+        audio.playbackRate = 0.85; // Calm, relaxed toddler pacing
+        audio.onerror = () => {
+          this.playSequentialIntro();
+        };
+        audio.play().catch(() => this.playSequentialIntro());
+        return;
       }
 
       // If custom typed name or fallback, play sequential queue with onended
@@ -1100,20 +1092,24 @@
 
       // Step 3: Name
       const rawName = (this.builderState.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, '');
-      const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
-      const nameAudioKey = `assets/toddlers_media/audio/bili_toddler_u2_name_${rawName}.mp3`;
-      let nameAudioSrc = null;
-      for (const [k, v] of Object.entries(manifest)) {
-        if (v === nameAudioKey || k === `bili_toddler_u2_name_${rawName}`) {
-          nameAudioSrc = v;
-          break;
-        }
-      }
-
-      if (nameAudioSrc) {
-        queue.push({ type: 'audio', src: nameAudioSrc });
+      const knownPresets = ['matias', 'luna', 'bili', 'leo', 'erik'];
+      if (knownPresets.includes(rawName)) {
+        queue.push({ type: 'audio', src: `assets/toddlers_media/audio/bili_toddler_u2_name_${rawName}.mp3` });
       } else {
-        queue.push({ type: 'speech', text: this.builderState.name || 'Friend' });
+        const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
+        const nameAudioKey = `assets/toddlers_media/audio/bili_toddler_u2_name_${rawName}.mp3`;
+        let nameAudioSrc = null;
+        for (const [k, v] of Object.entries(manifest)) {
+          if (v === nameAudioKey || k === `bili_toddler_u2_name_${rawName}`) {
+            nameAudioSrc = v;
+            break;
+          }
+        }
+        if (nameAudioSrc) {
+          queue.push({ type: 'audio', src: nameAudioSrc });
+        } else {
+          queue.push({ type: 'speech', text: this.builderState.name || 'Friend' });
+        }
       }
 
       // Step 4: Feeling
@@ -1158,12 +1154,16 @@
             const u = new SpeechSynthesisUtterance(item.text);
             u.lang = 'en-US';
             u.rate = 0.82; // Gentle, natural toddler pace
-            u.onend = () => {
+            let finished = false;
+            const finishOnce = () => {
+              if (finished) return;
+              finished = true;
               setTimeout(() => this.executeAudioQueue(queue), 150);
             };
-            u.onerror = () => {
-              setTimeout(() => this.executeAudioQueue(queue), 100);
-            };
+            u.onend = finishOnce;
+            u.onerror = finishOnce;
+            // Fallback timeout in case speech synthesis is blocked or silent
+            setTimeout(finishOnce, 1400);
             window.speechSynthesis.speak(u);
           } catch (e) {
             setTimeout(() => this.executeAudioQueue(queue), 100);
