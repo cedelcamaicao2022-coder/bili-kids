@@ -265,9 +265,9 @@ class ToddlersUnitsEngine {
         }
         const audio = new Audio(audioSrc);
         this._currentAudio = audio;
-        // Pacing: Toddlers learn best with clear, relaxed articulation
-        const isInstruction = text.length > 25 || text.includes('?') || text.includes('...') || text.includes('!');
-        audio.playbackRate = isInstruction ? 0.90 : 0.94;
+        // Pacing: Toddlers learn best with clear, calm, relaxed articulation
+        const isInstruction = text.length > 20 || text.includes('?') || text.includes('...') || text.includes('!') || text.toLowerCase().includes('welcome') || text.toLowerCase().includes('how') || text.toLowerCase().includes('say');
+        audio.playbackRate = isInstruction ? 0.82 : 0.88;
         console.log('[ToddlersAudio] Playing Studio MP3:', audioSrc, 'for text:', text);
         audio.play().catch((err) => {
           console.warn('[ToddlersAudio] HTML5 audio.play() blocked or aborted:', err);
@@ -286,16 +286,18 @@ class ToddlersUnitsEngine {
   }
 
   fallbackSpeechSynthesis(text) {
-    if (this._currentAudio && !this._currentAudio.paused && !this._currentAudio.ended) {
-      console.warn('[ToddlersAudio] Speech synthesis skipped because studio audio is currently playing.');
-      return;
+    if (this._currentAudio) {
+      try {
+        this._currentAudio.pause();
+        this._currentAudio.currentTime = 0;
+      } catch (e) {}
     }
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'en-US';
-        u.rate = 0.85;
+        u.rate = 0.82;
         window.speechSynthesis.speak(u);
       } catch (err) {}
     }

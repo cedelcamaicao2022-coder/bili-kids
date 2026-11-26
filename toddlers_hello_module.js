@@ -366,9 +366,9 @@
 
           <!-- Audio Welcome Button -->
           <div class="hello-audio-welcome-wrap">
-            <button class="hello-hear-btn" onclick="window.toddlersHelloModule.play('${welcomeAudioText}')">
+            <button class="hello-hear-btn" onclick="window.toddlersHelloModule.playWelcomeAudio()">
               <span class="hear-icon">🔊</span>
-              <span>Listen Welcome: <em>"${welcomeAudioText}"</em></span>
+              <span>Listen Welcome: <em>"Hello! Let's learn how to introduce ourselves!"</em></span>
             </button>
           </div>
 
@@ -383,8 +383,12 @@
       `;
 
       setTimeout(() => {
-        this.play(welcomeAudioText);
+        this.playWelcomeAudio();
       }, 400);
+    }
+
+    playWelcomeAudio() {
+      this.play("Hello! Let's learn how to introduce ourselves!");
     }
 
     startActivity() {
@@ -480,7 +484,7 @@
               <span class="match-en">${p.question}</span>
               <span class="match-sub">${p.category}</span>
             </div>
-            <button class="match-audio-mini" onclick="event.stopPropagation(); window.toddlersHelloModule.play('${p.qAudio}')">🔊</button>
+            <button class="match-audio-mini" onclick="event.stopPropagation(); window.toddlersHelloModule.playMatchAudio('${p.id}', 'q')">🔊</button>
           </div>
         `;
       });
@@ -498,7 +502,7 @@
               <span class="match-en">${p.answer}</span>
               <span class="match-sub">${isMatched ? '¡Pareja Correcta! ✨' : 'Toca para emparejar'}</span>
             </div>
-            <button class="match-audio-mini" onclick="event.stopPropagation(); window.toddlersHelloModule.play('${p.aAudio}')">🔊</button>
+            <button class="match-audio-mini" onclick="event.stopPropagation(); window.toddlersHelloModule.playMatchAudio('${p.id}', 'a')">🔊</button>
           </div>
         `;
       });
@@ -644,6 +648,12 @@
       });
     }
 
+    playMatchAudio(pairId, type) {
+      const p = MATCH_PAIRS.find(x => x.id === pairId);
+      if (!p) return;
+      this.play(type === 'q' ? p.qAudio : p.aAudio);
+    }
+
     /* ==========================================================================
        PANTALLA 4: CHOOSE (Speaks all options, retry on error, no penalties)
        ========================================================================== */
@@ -676,7 +686,7 @@
 
           <div class="choose-prompt-card">
             <div class="prompt-speaker-badge">
-              <button class="choose-hear-question-btn" onclick="window.toddlersHelloModule.play('${q.audioPrompt}')">
+              <button class="choose-hear-question-btn" onclick="window.toddlersHelloModule.playCurrentQuestionAudio()">
                 <span class="pulse-icon">🔊</span>
                 <span>Escuchar Pregunta en Inglés</span>
               </button>
@@ -705,8 +715,13 @@
       `;
 
       setTimeout(() => {
-        this.play(q.audioPrompt);
+        this.playCurrentQuestionAudio();
       }, 400);
+    }
+
+    playCurrentQuestionAudio() {
+      const q = CHOOSE_QUESTIONS[this.chooseIndex];
+      if (q) this.play(q.audioPrompt);
     }
 
     handleChooseOption(optionIdx) {
@@ -795,8 +810,8 @@
                 <div class="preset-pills-row">
                   ${BUILDER_PRESETS.greetings.map(g => `
                     <button class="preset-pill preset-pill-greet ${this.builderState.greeting === g.text ? 'active' : ''}" 
-                            data-greet="${g.text}"
-                            onclick="window.toddlersHelloModule.setGreeting('${g.text}')">
+                            data-greet-id="${g.id}"
+                            onclick="window.toddlersHelloModule.setGreetingById('${g.id}')">
                       <span>${g.icon}</span> <span>${g.text}</span>
                     </button>
                   `).join('')}
@@ -809,8 +824,8 @@
                 <div class="preset-pills-row" id="presetNamesRow">
                   ${BUILDER_PRESETS.names.map(n => `
                     <button class="preset-pill preset-pill-name ${(!this.builderState.isCustom && this.builderState.name.toLowerCase() === n.text.toLowerCase()) ? 'active' : ''}" 
-                            data-name="${n.text}"
-                            onclick="window.toddlersHelloModule.setName('${n.text}', '${n.avatar}')">
+                            data-name-id="${n.id}"
+                            onclick="window.toddlersHelloModule.setNameById('${n.id}')">
                       <span>${n.avatar}</span> <span>${n.text}</span>
                     </button>
                   `).join('')}
@@ -827,8 +842,8 @@
                 <div class="preset-pills-row">
                   ${BUILDER_PRESETS.feelings.map(f => `
                     <button class="preset-pill preset-pill-feel ${this.builderState.feeling === f.text ? 'active' : ''}" 
-                            data-feel="${f.text}"
-                            onclick="window.toddlersHelloModule.setFeeling('${f.text}')">
+                            data-feel-id="${f.id}"
+                            onclick="window.toddlersHelloModule.setFeelingById('${f.id}')">
                       <span>${f.icon}</span> <span>${f.text}</span>
                     </button>
                   `).join('')}
@@ -873,13 +888,32 @@
       `;
     }
 
+    setGreetingById(greetId) {
+      const g = BUILDER_PRESETS.greetings.find(x => x.id === greetId);
+      if (!g) return;
+      this.builderState.greeting = g.text;
+      this.play(g.text);
+      document.querySelectorAll('.preset-pill-greet').forEach(b => {
+        b.classList.toggle('active', b.dataset.greetId === greetId);
+      });
+      this.updatePreviewCard();
+    }
+
     setGreeting(greeting) {
       this.builderState.greeting = greeting;
       this.play(greeting);
+      const gObj = BUILDER_PRESETS.greetings.find(x => x.text === greeting);
+      const greetId = gObj ? gObj.id : '';
       document.querySelectorAll('.preset-pill-greet').forEach(b => {
-        b.classList.toggle('active', b.dataset.greet === greeting);
+        b.classList.toggle('active', b.dataset.greetId === greetId);
       });
       this.updatePreviewCard();
+    }
+
+    setNameById(nameId) {
+      const n = BUILDER_PRESETS.names.find(x => x.id === nameId);
+      if (!n) return;
+      this.setName(n.text, n.avatar);
     }
 
     setName(name, avatar) {
@@ -891,8 +925,10 @@
       const input = document.getElementById('customNameInput');
       if (input) input.value = '';
 
+      const nObj = BUILDER_PRESETS.names.find(x => x.text.toLowerCase() === name.toLowerCase());
+      const nameId = nObj ? nObj.id : '';
       document.querySelectorAll('.preset-pill-name').forEach(p => {
-        p.classList.toggle('active', p.dataset.name === name);
+        p.classList.toggle('active', p.dataset.nameId === nameId);
       });
 
       this.updatePreviewCard();
@@ -911,17 +947,25 @@
       }
 
       document.querySelectorAll('.preset-pill-name').forEach(p => {
-        p.classList.toggle('active', !this.builderState.isCustom && p.dataset.name.toLowerCase() === this.builderState.name.toLowerCase());
+        p.classList.remove('active');
       });
 
       this.updatePreviewCard();
     }
 
+    setFeelingById(feelId) {
+      const f = BUILDER_PRESETS.feelings.find(x => x.id === feelId);
+      if (!f) return;
+      this.setFeeling(f.text);
+    }
+
     setFeeling(feeling) {
       this.builderState.feeling = feeling;
       this.play(feeling);
+      const fObj = BUILDER_PRESETS.feelings.find(x => x.text === feeling);
+      const feelId = fObj ? fObj.id : '';
       document.querySelectorAll('.preset-pill-feel').forEach(b => {
-        b.classList.toggle('active', b.dataset.feel === feeling);
+        b.classList.toggle('active', b.dataset.feelId === feelId);
       });
       this.updatePreviewCard();
     }
@@ -951,47 +995,117 @@
           this._currentIntroAudio.currentTime = 0;
         } catch (e) {}
       }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
 
       const g = (this.builderState.greeting || '').toLowerCase().includes('hi') ? 'hi' : 'hello';
       const rawName = (this.builderState.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, '');
       const f = (this.builderState.feeling || '').toLowerCase().includes('fine') ? 'fine' : ((this.builderState.feeling || '').toLowerCase().includes('sad') ? 'sad' : 'happy');
 
-      const manifestKey = `assets/toddlers_media/audio/bili_toddler_u2_intro_${g}_${rawName}_${f}.mp3`;
-      const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
+      // Preset names have pre-rendered full combos (all 30 combinations in Studio ElevenLabs)
+      if (!this.builderState.isCustom) {
+        const comboKey = `bili_toddler_u2_intro_${g}_${rawName}_${f}`;
+        const manifestKey = `assets/toddlers_media/audio/${comboKey}.mp3`;
+        const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
 
-      let audioPath = null;
+        let audioPath = null;
+        for (const [k, v] of Object.entries(manifest)) {
+          if (v === manifestKey || k === comboKey) {
+            audioPath = v;
+            break;
+          }
+        }
+
+        if (audioPath) {
+          const audio = new Audio(audioPath);
+          this._currentIntroAudio = audio;
+          audio.playbackRate = 0.85; // Calm, relaxed toddler pacing
+          audio.play().catch(() => this.playSequentialIntro());
+          return;
+        }
+      }
+
+      // If custom typed name or fallback, play sequential queue with onended
+      this.playSequentialIntro();
+    }
+
+    playSequentialIntro() {
+      const queue = [];
+
+      // Step 1: Greeting
+      const gAudio = (this.builderState.greeting || '').toLowerCase().includes('hi')
+        ? 'assets/toddlers_media/audio/bili_toddler_u2_hi.mp3'
+        : 'assets/toddlers_media/audio/bili_toddler_u2_hello.mp3';
+      queue.push({ type: 'audio', src: gAudio });
+
+      // Step 2: "My name is..."
+      queue.push({ type: 'audio', src: 'assets/toddlers_media/audio/bili_toddler_u2_my_name_is.mp3' });
+
+      // Step 3: Name
+      const rawName = (this.builderState.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, '');
+      const manifest = Object.assign({}, window.ToddlersAudioManifest || {}, window.BilikidsAudioManifest || {});
+      const nameAudioKey = `assets/toddlers_media/audio/bili_toddler_u2_name_${rawName}.mp3`;
+      let nameAudioSrc = null;
       for (const [k, v] of Object.entries(manifest)) {
-        if (v === manifestKey || k === `bili_toddler_u2_intro_${g}_${rawName}_${f}`) {
-          audioPath = v;
+        if (v === nameAudioKey || k === `bili_toddler_u2_name_${rawName}`) {
+          nameAudioSrc = v;
           break;
         }
       }
 
-      if (audioPath) {
-        const audio = new Audio(audioPath);
-        this._currentIntroAudio = audio;
-        audio.playbackRate = 0.90;
-        audio.play().catch(() => this.playSequentialIntro());
+      if (nameAudioSrc) {
+        queue.push({ type: 'audio', src: nameAudioSrc });
       } else {
-        this.playSequentialIntro();
+        queue.push({ type: 'speech', text: this.builderState.name || 'Friend' });
       }
+
+      // Step 4: Feeling
+      const f = (this.builderState.feeling || '').toLowerCase().includes('fine') ? 'fine' : ((this.builderState.feeling || '').toLowerCase().includes('sad') ? 'sad' : 'happy');
+      const feelAudio = `assets/toddlers_media/audio/bili_toddler_u2_im_${f}.mp3`;
+      queue.push({ type: 'audio', src: feelAudio });
+
+      this.executeAudioQueue(queue);
     }
 
-    playSequentialIntro() {
-      // Step 1: Greeting
-      this.play(this.builderState.greeting);
-      setTimeout(() => {
-        // Step 2: "My name is..."
-        this.play("My name is...");
-        setTimeout(() => {
-          // Step 3: Speak the name
-          if (this.engine) this.engine.fallbackSpeechSynthesis(this.builderState.name);
-          setTimeout(() => {
-            // Step 4: Feeling
-            this.play(this.builderState.feeling);
-          }, 1100);
-        }, 1100);
-      }, 1000);
+    executeAudioQueue(queue) {
+      if (!queue || queue.length === 0) return;
+      const item = queue.shift();
+
+      if (item.type === 'audio') {
+        const audio = new Audio(item.src);
+        this._currentIntroAudio = audio;
+        audio.playbackRate = 0.85; // Calm, relaxed natural tempo
+        audio.onended = () => {
+          setTimeout(() => this.executeAudioQueue(queue), 150);
+        };
+        audio.onerror = () => {
+          setTimeout(() => this.executeAudioQueue(queue), 100);
+        };
+        audio.play().catch(() => {
+          setTimeout(() => this.executeAudioQueue(queue), 100);
+        });
+      } else if (item.type === 'speech') {
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(item.text);
+            u.lang = 'en-US';
+            u.rate = 0.82; // Gentle, natural toddler pace
+            u.onend = () => {
+              setTimeout(() => this.executeAudioQueue(queue), 150);
+            };
+            u.onerror = () => {
+              setTimeout(() => this.executeAudioQueue(queue), 100);
+            };
+            window.speechSynthesis.speak(u);
+          } catch (e) {
+            setTimeout(() => this.executeAudioQueue(queue), 100);
+          }
+        } else {
+          setTimeout(() => this.executeAudioQueue(queue), 100);
+        }
+      }
     }
 
     /* ==========================================================================
@@ -1069,11 +1183,11 @@
 
       setTimeout(() => {
         this.playIntroAudio();
-      }, 400);
+      }, 500);
 
       setTimeout(() => {
         this.play("Congratulations! You can now introduce yourself in English! Super job!");
-      }, 3600);
+      }, 4500);
     }
 
     /* ==========================================================================
