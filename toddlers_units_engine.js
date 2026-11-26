@@ -105,7 +105,7 @@ class ToddlersUnitsEngine {
     }
 
     const tabParam = urlParams.get('tab');
-    if (tabParam && ['hub', 'explore', 'colors', 'shapes', 'numbers', 'hello', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
+    if (tabParam && ['hub', 'explore', 'colors', 'shapes', 'numbers', 'hello', 'birthday', 'listening', 'reading', 'writing', 'speaking', 'videos', 'game', 'finalChallenge', 'progress'].includes(tabParam)) {
       this.currentTab = tabParam;
     } else {
       this.currentTab = 'hub';
@@ -414,6 +414,10 @@ class ToddlersUnitsEngine {
       if (tagElem) tagElem.innerText = `Unit 2 • Activity 1`;
       if (titleElem) titleElem.innerHTML = `👋 Hello, It's Me!`;
       if (descElem) descElem.innerText = 'Aprende a saludar, decir tu nombre y expresar cómo te sientes en inglés.';
+    } else if (this.currentTab === 'birthday') {
+      if (tagElem) tagElem.innerText = `Unit 2 • Activity 2`;
+      if (titleElem) titleElem.innerHTML = `🎂 Birthday Vocabulary`;
+      if (descElem) descElem.innerText = 'Conoce, escucha, relaciona y aprende el vocabulario de fiestas de cumpleaños en inglés.';
     } else {
       if (tagElem) tagElem.innerText = `Unit ${unit.id} • ${unit.theme || 'English Adventure'}`;
       if (titleElem) titleElem.innerHTML = `${unit.icon || '🌟'} ${unit.title}`;
@@ -445,7 +449,8 @@ class ToddlersUnitsEngine {
         { id: 'shapes', label: '🔷 Shapes', className: 'tab-shapes' },
         { id: 'numbers', label: '🔢 Numbers 1–5', className: 'tab-numbers' }
       ] : this.currentUnitId === 2 ? [
-        { id: 'hello', label: "👋 Hello, It's Me!", className: 'tab-hello' }
+        { id: 'hello', label: "👋 Hello, It's Me!", className: 'tab-hello' },
+        { id: 'birthday', label: "🎂 Birthday Vocabulary", className: 'tab-birthday' }
       ] : [
         { id: 'explore', label: '🌟 Explore', className: '' }
       ]),
@@ -627,6 +632,13 @@ class ToddlersUnitsEngine {
             badge: 'Act 1',
             icon: 'assets/toddlers_units/ios_icons/icon_hello_its_me.png',
             fallbackEmoji: '👋'
+          },
+          {
+            id: 'birthday',
+            title: 'Birthday Vocabulary',
+            badge: 'Act 2',
+            icon: 'assets/toddlers_units/ios_icons/icon_birthday_vocab.png',
+            fallbackEmoji: '🎂'
           },
           {
             id: 'listening',
@@ -845,6 +857,13 @@ class ToddlersUnitsEngine {
       case 'hello':
         if (typeof window.renderToddlersHelloModule === 'function') {
           window.renderToddlersHelloModule(ws, this);
+        } else {
+          this.renderExplore(ws);
+        }
+        break;
+      case 'birthday':
+        if (typeof window.renderToddlersBirthdayModule === 'function') {
+          window.renderToddlersBirthdayModule(ws, this);
         } else {
           this.renderExplore(ws);
         }
